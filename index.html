@@ -1,64 +1,83 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Digitales und mobil Deutschland</title>
-    
-    <meta name="description" content="RU: Путеводитель по цифровой безопасности в Германии. DE: Leitfaden für digitale Sicherheit. EN: Guide to digital security and mobility in Germany.">
-    
+    <title>Digital-Mobil DE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="container">
-            <span class="logo">Digital-Mobil 🇩🇪</span>
-            <div class="lang-nav">
-                <span>RU | DE | EN</span>
-            </div>
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showTab('home')">Главная</button>
+            <button class="nav-btn" onclick="showTab('pdf')">PDF Сжатие</button>
+            <button class="nav-btn" onclick="showTab('security')">Безопасность</button>
+            <button class="nav-btn" onclick="showTab('mobile')">Транспорт</button>
+            <button class="nav-btn" onclick="showTab('about')">Инфо</button>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <h1>Digitales und mobil Deutschland</h1>
-            <p>Ваш путеводитель по цифровой безопасности и мобильности</p>
-            <p class="subtitle">A guide to digital security and IT technologies in Germany</p>
-        </div>
-    </header>
-
     <main class="container">
         
-        <section class="card">
-    <h2 style="text-align: center;">📄 PDF Compressor Online</h2>
-    <p class="status-msg" style="text-align: center; font-size: 0.9rem; color: #555;">
-        ⏳ <strong>Запуск сервиса:</strong> Бесплатный сервер на Render просыпается около 30-50 секунд при первом обращении.
-    </p>
+        <section id="home" class="tab-content active">
+            <div class="card hero-card">
+                <h1>Willkommen! 🇩🇪</h1>
+                <p>Добро пожаловать в путеводитель по цифровой Германии.</p>
+                <button class="btn-main" onclick="showTab('pdf')">Перейти к инструментам</button>
+            </div>
+        </section>
 
-    <div class="iframe-wrapper" style="height: 700px; border-radius: 20px; overflow: hidden; background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.4);">
-        <iframe 
-            src="https://pdf-compressor-web.onrender.com" 
-            style="width: 100%; height: 100%; border: none;"
-            allow="downloads"
-            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-        ></iframe>
-    </div>
+        <section id="pdf" class="tab-content">
+            <div class="card">
+                <h2>📄 PDF Compressor</h2>
+                <p class="status-msg">Приложение на Render загружается (30-50 сек)...</p>
+                <div class="iframe-wrapper">
+                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+                </div>
+            </div>
+        </section>
 
-    <p style="font-size: 0.8rem; color: #777; text-align: center; margin-top: 15px;">
-        Приложение работает на мощностях <strong>Render.com</strong>. <br>
-        Если окно долго остается пустым, <a href="https://pdf-compressor-web.onrender.com" target="_blank" style="color: #007aff; text-decoration: none; font-weight: bold;">откройте его напрямую</a>.
-    </p>
-</section>
+        <section id="security" class="tab-content">
+            <div class="card">
+                <h2>🛡️ Цифровая безопасность</h2>
+                <p>Советы по защите данных в немецких сетях.</p>
+            </div>
+        </section>
 
+        <section id="mobile" class="tab-content">
+            <div class="card">
+                <h2>🚲 Мобильность</h2>
+                <p>Как работают транспортные приложения в Германии.</p>
+            </div>
+        </section>
+
+        <section id="about" class="tab-content">
+            <div class="card">
+                <h2>ℹ️ О проекте</h2>
+                <p>Создано для помощи в интеграции и обучении IT.</p>
+            </div>
+        </section>
 
     </main>
 
-    <footer class="container">
-        <div class="footer-line"></div>
-        <p>© 2026 Digitales und mobil Deutschland</p>
-        <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
-    </footer>
+    <script>
+        function showTab(tabId) {
+            // Скрываем все вкладки
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Деактивируем все кнопки
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Показываем нужную вкладку и активируем кнопку
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            // Прокрутка наверх при смене вкладки (удобно для iPhone)
+            window.scrollTo(0,0);
+        }
+    </script>
 
 </body>
 </html>

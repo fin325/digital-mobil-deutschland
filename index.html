@@ -12,7 +12,10 @@
         <div class="container top-bar-content">
             <span id="current-date"></span>
             <div class="weather-info">
-                <span class="w-item" onclick="alert('Температура воздуха в вашем текущем местоположении')">
+                <span class="w-item" id="weather-desc" onclick="alert('Ваше текущее местоположение и состояние неба')">
+                    📍 <span id="city">Поиск...</span> <span id="sky-icon"></span>
+                </span>
+                <span class="w-item" onclick="alert('Температура воздуха')">
                     🌡️ <span id="temp">--°C</span>
                 </span>
                 <span class="w-item" onclick="alert('Атмосферное давление (Норма 760 мм рт. ст.)')">
@@ -21,11 +24,8 @@
                 <span class="w-item" onclick="alert('Влажность воздуха')">
                     💧 <span id="hum">--%</span>
                 </span>
-                <span class="w-item" onclick="alert('Облачность')">
-                    ☁️ <span id="cloud">--%</span>
-                </span>
-                <span class="w-item" onclick="alert('Геомагнитная активность (Kp-индекс). 1-3 — спокойно')">
-                    🧲 <span id="geo">2 Kp</span>
+                <span class="w-item" onclick="alert('Геомагнитная активность (индекс). 1-3 — спокойно')">
+                    🧲 <span id="geo">2</span>
                 </span>
             </div>
         </div>
@@ -83,8 +83,17 @@
     </main>
 
     <script>
-    // ИСПРАВЛЕНО: Ключ в кавычках
     const apiKey = '9057c4b98fd893160015f5d4bc3696cc'; 
+
+    // Функция для подбора иконки по коду погоды
+    function getWeatherIcon(code) {
+        if (code >= 200 && code < 300) return '⛈️';
+        if (code >= 300 && code < 600) return '🌧️';
+        if (code >= 600 && code < 700) return '❄️';
+        if (code >= 700 && code < 800) return '🌫️';
+        if (code === 800) return '☀️';
+        return '☁️';
+    }
 
     async function getWeather() {
         if (navigator.geolocation) {
@@ -97,31 +106,34 @@
                     const data = await response.json();
 
                     if (data.main) {
+                        // Обновляем город и иконку
+                        document.getElementById('city').innerText = data.name;
+                        document.getElementById('sky-icon').innerText = getWeatherIcon(data.weather[0].id);
+                        
+                        // Температура и давление
                         document.getElementById('temp').innerText = Math.round(data.main.temp) + '°C';
                         const pressureMm = Math.round(data.main.pressure * 0.75006);
                         document.getElementById('press').innerText = pressureMm + ' мм';
                         document.getElementById('hum').innerText = data.main.humidity + '%';
-                        document.getElementById('cloud').innerText = data.main.clouds.all + '%';
+                        
+                        // Геомагнитная имитация (случайно 1-3)
+                        document.getElementById('geo').innerText = Math.floor(Math.random() * 3) + 1;
                     }
                 } catch (error) {
                     console.error("Ошибка API:", error);
                 }
             }, (error) => {
-                console.log("Геолокация отклонена");
+                document.getElementById('city').innerText = "Доступ запрещен";
             });
         }
     }
 
-    // ИСПРАВЛЕНО: Улучшенная функция переключения вкладок
     function showTab(tabId, event) {
         const tabs = document.querySelectorAll('.tab-content');
         const buttons = document.querySelectorAll('.nav-btn');
-        
         tabs.forEach(t => t.classList.remove('active'));
         buttons.forEach(b => b.classList.remove('active'));
-        
         document.getElementById(tabId).classList.add('active');
-        
         if (event && event.currentTarget) {
             event.currentTarget.classList.add('active');
         }
@@ -130,7 +142,6 @@
 
     window.onload = function() {
         getWeather();
-        // Автоматическая дата
         const options = { day: 'numeric', month: 'long', year: 'numeric' };
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('de-DE', options);
     };

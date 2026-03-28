@@ -8,6 +8,13 @@
 </head>
 <body>
 
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <span id="current-date">28. März 2026</span>
+            <span class="weather-widget">☁️ Berlin: +12°C</span>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <button class="nav-btn active" onclick="showTab('home')">Главная</button>
@@ -73,8 +80,12 @@
             });
             // Показываем нужную вкладку и активируем кнопку
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-            // Прокрутка наверх при смене вкладки (удобно для iPhone)
+            
+            // Важное исправление для iPhone: обработка события клика
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+            
             window.scrollTo(0,0);
         }
     </script>

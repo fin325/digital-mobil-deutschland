@@ -9,11 +9,29 @@
 <body>
 
     <div class="top-bar">
-        <div class="container top-bar-content">
-            <span id="current-date">28. März 2026</span>
-            <span class="weather-widget">☁️ Berlin: +12°C</span>
+    <div class="container top-bar-content">
+        <span id="current-date">28. März 2026</span>
+        
+        <div class="weather-info">
+            <span class="w-item" onclick="alert('Температура воздуха в вашем текущем местоположении')">
+                🌡️ <span id="temp">--°C</span>
+            </span>
+            <span class="w-item" onclick="alert('Атмосферное давление в миллиметрах ртутного столба (Норма 760 мм)')">
+                ⏲️ <span id="press">-- мм</span>
+            </span>
+            <span class="w-item" onclick="alert('Влажность воздуха в процентах')">
+                💧 <span id="hum">--%</span>
+            </span>
+            <span class="w-item" onclick="alert('Облачность: какой процент неба закрыт облаками')">
+                ☁️ <span id="cloud">--%</span>
+            </span>
+            <span class="w-item" onclick="alert('Геомагнитная активность (Kp-индекс). 1-3 — спокойно, выше 5 — буря')">
+                🧲 <span id="geo">2 Kp</span>
+            </span>
         </div>
     </div>
+</div>
+
 
     <nav class="navbar">
         <div class="nav-container">

@@ -1,160 +1,82 @@
-/* Основные цвета проекта */
 :root {
-    --primary-blue: #00529b; /* Классический синий (Германия) */
-    --dark-blue: #003366;
-    --accent-yellow: #ffcc00; /* Цвет акцента (золото) */
-    --bg-light: #f4f7f9;
-    --text-dark: #333333;
-    --white: #ffffff;
-}
-
-/* Настройки для мобильных устройств */
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+    --glass-bg: rgba(255, 255, 255, 0.7); /* Прозрачный белый */
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --primary-blue: #00529b;
+    --text-dark: #1d1d1f; /* Цвет текста Apple */
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: var(--bg-light);
     color: var(--text-dark);
-    line-height: 1.6;
+    /* ГРАДИЕНТНЫЙ ФОН */
+    background: linear-gradient(-45deg, #e3f2fd, #bbdefb, #e1f5fe, #e8eaf6);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* Анимация фона */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* Навигация */
+/* ЭФФЕКТ СТЕКЛА ДЛЯ ШАПКИ */
 .navbar {
-    background: var(--white);
-    padding: 15px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px); /* РАЗМЫТИЕ */
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    padding: 15px 0;
 }
 
-.logo {
-    font-weight: 800;
-    color: var(--primary-blue);
-    font-size: 1.2rem;
-}
-
-.lang-nav {
-    float: right;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: var(--primary-blue);
-}
-
-/* Главный блок (Hero) */
-.hero {
-    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-    color: var(--white);
-    text-align: center;
-    padding: 50px 20px;
-}
-
-.hero h1 {
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-.subtitle {
-    opacity: 0.8;
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
-
-/* Карточки контента */
+/* ЭФФЕКТ СТЕКЛА ДЛЯ КАРТОЧЕК */
 .card {
-    background: var(--white);
-    border-radius: 15px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
     padding: 25px;
     margin: 25px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    
+    /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
-.card h2 {
-    color: var(--primary-blue);
-    margin-top: 0;
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Окно для Streamlit (Render) */
-.iframe-wrapper {
-    position: relative;
-    width: 100%;
-    height: 600px; /* Фиксированная высота для мобильных */
-    background: #eee;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-}
-
-.iframe-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.status-msg {
-    font-size: 0.85rem;
-    color: #666;
-    background: #fff9e6;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-/* Кнопки */
+/* Красивая кнопка с откликом */
 .btn-main {
-    background-color: var(--accent-yellow);
-    color: #000;
+    background: linear-gradient(90deg, #00529b, #007aff);
+    color: white;
     border: none;
-    padding: 15px 30px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 10px;
-    width: 100%; /* На мобильном кнопка на всю ширину */
-    cursor: pointer;
-    box-shadow: 0 4px 0 #ccaa00;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 74, 155, 0.3);
 }
 
 .btn-main:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 #ccaa00;
+    transform: scale(0.96); /* Эффект нажатия на iPhone */
 }
 
-.secondary-link {
-    display: inline-block;
-    margin-top: 15px;
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-weight: bold;
+/* Окно Streamlit тоже делаем аккуратным */
+.iframe-wrapper {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
 }
-
-/* Футер */
-footer {
-    text-align: center;
-    padding: 40px 0;
-    color: #888;
-    font-size: 0.8rem;
-}
-
-.footer-line {
-    height: 1px;
-    background: #ddd;
-    margin-bottom: 20px;
-}
-
-footer a {
-    color: #666;
-    margin: 0 10px;
-    text-decoration: none;
-}
-

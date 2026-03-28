@@ -1,52 +1,149 @@
+/* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.7); /* Прозрачный белый */
+    --glass-bg: rgba(255, 255, 255, 0.6); 
     --glass-border: rgba(255, 255, 255, 0.3);
     --primary-blue: #00529b;
-    --text-dark: #1d1d1f; /* Цвет текста Apple */
+    --text-dark: #1d1d1f; 
 }
 
+/* --- ОБЩИЕ СТИЛИ --- */
 body {
-    font-family: -apple-system, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     color: var(--text-dark);
-    /* ГРАДИЕНТНЫЙ ФОН */
     background: linear-gradient(-45deg, #e3f2fd, #bbdefb, #e1f5fe, #e8eaf6);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     min-height: 100vh;
+    overflow-x: hidden; /* Защита от лишней встряски экрана */
 }
 
-/* Анимация фона */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* ЭФФЕКТ СТЕКЛА ДЛЯ ШАПКИ */
-.navbar {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(20px); /* РАЗМЫТИЕ */
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 15px 0;
-}
-
-/* ЭФФЕКТ СТЕКЛА ДЛЯ КАРТОЧЕК */
-.card {
-    background: var(--glass-bg);
+/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ (СКРОЛЛ-ЛИНИЯ) --- */
+.top-bar {
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#current-date {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+/* Контейнер для прокрутки значков */
+.weather-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Плавность для iPhone */
+    flex-grow: 1;
+}
+
+.weather-scroll-container::-webkit-scrollbar {
+    display: none; /* Прячем некрасивую полосу скролла */
+}
+
+.weather-info {
+    display: flex;
+    gap: 10px;
+    padding-right: 20px;
+}
+
+.w-item {
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.w-item:active {
+    transform: scale(0.95);
+}
+
+/* --- НАВИГАЦИЯ (ВКЛАДКИ) --- */
+.navbar {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 12px 0;
+    position: sticky;
+    top: 45px; /* С учетом высоты top-bar */
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 15px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-container::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
+    padding: 10px 18px;
+    border-radius: 14px;
+    white-space: nowrap;
+    color: var(--primary-blue);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+}
+
+/* --- КОНТЕНТ И КАРТОЧКИ --- */
+.container {
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
     padding: 25px;
-    margin: 25px 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    
-    /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+    margin-bottom: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
@@ -55,92 +152,58 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Красивая кнопка с откликом */
 .btn-main {
-    background: linear-gradient(90deg, #00529b, #007aff);
+    background: linear-gradient(135deg, #00529b, #007aff);
     color: white;
     border: none;
     padding: 18px;
     font-size: 1.1rem;
     font-weight: 600;
-    border-radius: 16px;
+    border-radius: 18px;
     width: 100%;
+    cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 74, 155, 0.3);
 }
 
 .btn-main:active {
-    transform: scale(0.96); /* Эффект нажатия на iPhone */
+    transform: scale(0.97);
 }
 
-/* Окно Streamlit тоже делаем аккуратным */
-.iframe-wrapper {
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-}
-/* Настройки вкладок */
-.nav-container {
-    display: flex;
-    overflow-x: auto; /* Скролл вкладок на iPhone, если не влезают */
-    gap: 10px;
-    padding: 5px 15px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.nav-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 8px 15px;
-    border-radius: 12px;
-    white-space: nowrap;
-    color: var(--primary-blue);
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.nav-btn.active {
-    background: var(--primary-blue);
-    color: white;
-}
-
-/* Скрытие контента */
+/* --- ВКЛАДКИ (TAB CONTENT) --- */
 .tab-content {
     display: none;
-    animation: fadeIn 0.5s ease;
 }
 
 .tab-content.active {
     display: block;
+    animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Скрыть полосу прокрутки меню на iPhone */
-.nav-container::-webkit-scrollbar {
-    display: none;
-}
-.top-bar {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 0;
-    font-size: 0.8rem;
-    color: #00529b;
+/* --- ПРИЛОЖЕНИЕ (IFRAME) --- */
+.iframe-wrapper {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    height: 650px;
+    width: 100%;
 }
 
-.top-bar-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
-.weather-widget {
-    font-weight: bold;
+/* Сообщения о статусе */
+.status-msg {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
 }

@@ -125,3 +125,22 @@ body {
 .nav-container::-webkit-scrollbar {
     display: none;
 }
+.top-bar {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 0;
+    font-size: 0.8rem;
+    color: #00529b;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.weather-widget {
+    font-weight: bold;
+}

@@ -4,68 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>Сжать PDF онлайн - фото в Pdf | Новости Германии | Помощь в NRW — Digital-Mobil DE</title>
+    <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
     
-    <meta name="description" content="Бесплатный PDF компрессор и фото в PDF. Свежие новости Германии,забастовка транспорта NRW (Hattingen,Bochum,Essen) , погода для метеозависимых и поиск врачей в NRW. Полезные ресурсы для интеграции, признания диплома и перевода документов.">
-    
-    <meta name="keywords" content="сжать pdf онлайн, сделать pdf из фото, новости германии на русском, забастовки в германии сегодня, русскоязычные врачи NRW">
-
-    <meta property="og:title" content="Digital-Mobil DE: Твой цифровой помощник в Германии">
-    <meta property="og:description" content="Полезные инструменты для документов онлайн, актуальные новости, графики забастовок и база помощи для жизни в NRW.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ru_RU">
-
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Бесплатный PDF компрессор и фото в PDF. Новости Германии, забастовки в NRW (Hattingen, Bochum, Essen), погода и поиск врачей.">
+    <meta name="keywords" content="сжать pdf онлайн, сделать pdf из фото, новости германии, забастовки NRW, врачи бохум, anabin">
 
     <link rel="stylesheet" href="style.css">
     
     <style>
+        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); }
+        .top-bar-content { display: flex; justify-content: space-between; align-items: center; }
+        
+        .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; }
+        #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
+        
+        .weather-info { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 15px; font-size: 0.85rem; }
+        .w-item { white-space: nowrap; font-weight: 500; }
+
         .news-item {
             background: rgba(255, 255, 255, 0.4);
             border-left: 4px solid #00529b;
             padding: 12px;
             margin-bottom: 15px;
             border-radius: 0 12px 12px 0;
-            transition: 0.3s;
         }
-        .news-item:active { background: rgba(255, 255, 255, 0.6); }
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
-        .news-desc { font-size: 0.85rem; color: #444; margin: 0; }
+        .iframe-wrapper { height: 700px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.3); background: #fff; }
         
-        .iframe-wrapper { 
-            height: 700px; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.3); 
-            background: #fff; 
-        }
-        
-        /* Улучшенные стили для YouTube видео */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 15px;
-            background: #000;
             margin: 15px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.25);
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Чтобы погода не переносилась на iPhone */
-        .w-item { white-space: nowrap; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
-            .video-wrapper { margin: 10px 0; }
+            .top-bar-content { flex-direction: row; }
         }
     </style>
 </head>
@@ -74,21 +53,17 @@
 
     <div class="top-bar">
         <div class="container top-bar-content">
-            <span id="current-date"></span>
+            <div class="date-time-block">
+                <span id="current-date"></span>
+                <span id="current-time"></span>
+            </div>
+
             <div class="weather-scroll-container">
                 <div class="weather-info">
-                    <span class="w-item" onclick="alert('Погода в вашем городе')">
-                        📍 <span id="city-weather">Поиск...</span>
-                    </span>
-                    <span class="w-item" onclick="alert('Давление (мм рт. ст.)')">
-                        ⏲️ <span id="press">-- мм</span>
-                    </span>
-                    <span class="w-item" onclick="alert('Влажность')">
-                        💧 <span id="hum">--%</span>
-                    </span>
-                    <span class="w-item" onclick="alert('Магнитная активность (Kp)')">
-                        🧲 <span id="geo">2</span>
-                    </span>
+                    <span class="w-item" id="city-weather">Загрузка...</span>
+                    <span class="w-item">⏲️ <span id="press">--</span> мм рт.ст.</span>
+                    <span class="w-item">💧 <span id="hum">--</span>%</span>
+                    <span class="w-item">🧲 : <span id="geo">2</span></span>
                 </div>
             </div>
         </div>
@@ -116,9 +91,7 @@
                 <div class="video-wrapper">
                     <iframe 
                         src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&amp;rel=0"
-                        title="Misha Bur News - Последнее видео"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        title="Misha Bur News"
                         allowfullscreen>
                     </iframe>
                 </div>
@@ -133,9 +106,17 @@
         <section id="img2pdf" class="tab-content">
             <div class="card">
                 <h2>🖼️ Создать PDF из фото</h2>
-                <p class="status-msg">Конвертируйте изображения в документ прямо здесь.</p>
                 <div class="iframe-wrapper">
                     <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="pdf" class="tab-content">
+            <div class="card">
+                <h2>📄 PDF Compressor</h2>
+                <div class="iframe-wrapper">
+                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
                 </div>
             </div>
         </section>
@@ -143,74 +124,46 @@
         <section id="news" class="tab-content">
             <div class="card">
                 <h2>🗞️ Последние события</h2>
-                <div id="news-container">
-                    <p class="status-msg">Загрузка ленты новостей...</p>
-                </div>
-                <p style="font-size: 0.75rem; color: #888; text-align: center;">Источник: Tagesschau RSS</p>
+                <div id="news-container"><p class="status-msg">Загрузка...</p></div>
             </div>
         </section>
 
-        <section id="pdf" class="tab-content">
-            <div class="card">
-                <h2>📄 PDF Compressor</h2>
-                <p class="status-msg">Приложение загружается с Render (до 45 сек)...</p>
-                <div class="iframe-wrapper">
-                    <iframe src="https://pdf-compressor-web.onrender.com" 
-                            allow="downloads" 
-                            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="security" class="tab-content">
-            <div class="card">
-                <h2>🛡️ Цифровая защита</h2>
-                <p>Советы по кибербезопасности и защите данных в Германии (DSGVO).</p>
-            </div>
-        </section>
-
-        <section id="mobile" class="tab-content">
-            <div class="card">
-                <h2>🚲 Мобильность</h2>
-                <p>Приложения для поездов (DB), автобусов и аренды велосипедов.</p>
-            </div>
-        </section>
-
-        <section id="about" class="tab-content">
-            <div class="card">
-                <h2>ℹ️ О проекте</h2>
-                <p>Создано для быстрой адаптации и удобного доступа к IT-сервисам.</p>
-            </div>
-        </section>
+        <section id="security" class="tab-content"><div class="card"><h2>🛡️ Безопасность</h2></div></section>
+        <section id="mobile" class="tab-content"><div class="card"><h2>🚲 Транспорт</h2></div></section>
+        <section id="about" class="tab-content"><div class="card"><h2>ℹ️ О проекте</h2></div></section>
 
     </main>
 
     <script>
     const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
 
+    function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        document.getElementById('current-time').innerText = timeStr;
+    }
+
     async function getWeather() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 try {
-                    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=ru`);
+                    // Изменено lang=ru на lang=de для названий на немецком
+                    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=de`);
                     const d = await res.json();
                     if (d.main) {
                         const temp = Math.round(d.main.temp);
                         const city = d.name;
                         const code = d.weather[0].id;
-                        
                         let icon = '☁️';
                         if (code === 800) icon = '☀️';
                         else if (code > 800) icon = '☁️';
                         else if (code >= 600) icon = '❄️';
                         else if (code >= 300) icon = '🌧️';
 
-                        // Выводим все в один элемент
+                        // Формат: Hattingen ☀️ 18°C (без булавки)
                         document.getElementById('city-weather').innerText = `${city} ${icon} ${temp}°C`;
-                        
-                        document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006) + ' мм';
-                        document.getElementById('hum').innerText = d.main.humidity + '%';
+                        document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006);
+                        document.getElementById('hum').innerText = d.main.humidity;
                     }
                 } catch (e) { console.error(e); }
             });
@@ -221,7 +174,6 @@
         const container = document.getElementById('news-container');
         const rssUrl = 'https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml';
         const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
         try {
             const res = await fetch(apiUrl);
             const data = await res.json();
@@ -230,16 +182,11 @@
                 data.items.slice(0, 5).forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'news-item';
-                    div.innerHTML = `
-                        <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
-                        <p class="news-desc">${item.description.split('.')[0]}...</p>
-                    `;
+                    div.innerHTML = `<a href="${item.link}" target="_blank" class="news-title">${item.title}</a><p class="news-desc">${item.description.split('.')[0]}...</p>`;
                     container.appendChild(div);
                 });
             }
-        } catch (e) { 
-            container.innerHTML = '<p class="status-msg">Не удалось загрузить новости.</p>'; 
-        }
+        } catch (e) { container.innerHTML = 'Ошибка загрузки.'; }
     }
 
     function showTab(tabId, event) {
@@ -255,6 +202,8 @@
         loadNews();
         const options = { day: 'numeric', month: 'long' };
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('de-DE', options);
+        updateClock();
+        setInterval(updateClock, 1000);
     };
     </script>
 

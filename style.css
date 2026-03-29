@@ -14,7 +14,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    padding: 0;
 }
 
 /* ✅ ФИКСИРОВАННЫЙ ФОН (НОВЫЙ СПОСОБ) */
@@ -309,7 +308,14 @@ iframe {
     transform: scale(0.98);
 }
 /* Фиксированный фон */
-        
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
         .top-bar { 
             padding: 12px 0; 
             background: rgba(255, 255, 255, 0.15); 

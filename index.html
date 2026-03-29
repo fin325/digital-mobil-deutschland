@@ -18,15 +18,72 @@
             min-height: 100vh;
         }
 
-        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
-        .top-bar-content { display: flex; justify-content: space-between; align-items: center; }
+        .top-bar { 
+            padding: 10px 0; 
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+        }
+        .top-bar-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
         
-        .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; min-width: 80px; }
-        #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
+        .date-time-block { 
+            display: flex; 
+            flex-direction: column; 
+            line-height: 1.2; 
+            font-weight: bold; 
+            min-width: 80px; 
+        }
+        #current-time { 
+            font-size: 0.8rem; 
+            color: #00529b; 
+            opacity: 0.8; 
+        }
         
-        .weather-info { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; font-size: 0.85rem; align-items: center; }
-        .w-item { white-space: nowrap; font-weight: 500; display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; }
-        .divider { color: rgba(0,0,0,0.2); margin: 0 2px; }
+        .weather-info { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            gap: 12px; 
+            font-size: 0.85rem; 
+            align-items: center; 
+        }
+        .w-item { 
+            white-space: nowrap; 
+            font-weight: 500; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            background: rgba(255,255,255,0.2); 
+            padding: 4px 8px; 
+            border-radius: 10px; 
+        }
+        .divider { 
+            color: rgba(0,0,0,0.2); 
+            margin: 0 2px; 
+        }
+
+        /* Добавленные стили для заголовка */
+        .site-title {
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin: 8px 0 4px 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .site-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.95);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+        }
 
         /* Прозрачные карточки */
         .card { 
@@ -86,6 +143,8 @@
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
             .weather-info { font-size: 0.78rem; gap: 8px; }
+            .site-title { font-size: 1.1rem; }
+            .site-subtitle { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -111,6 +170,10 @@
                 </div>
             </div>
         </div>
+
+        <!-- Добавленный блок с названием сайта и городом -->
+        <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 
     <nav class="navbar">
@@ -137,32 +200,54 @@
     <main class="container">
         
         <section id="home" class="tab-content active">
-            <div class="card hero-card">
-                <h1>Willkommen! 🇩🇪</h1>
-                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-                
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&amp;rel=0"
-                        title="Misha Bur News 1"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+    <div class="card hero-card">
+        <h1>Willkommen! 🇩🇪</h1>
+        <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+        
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0"
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
 
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/ScMzIvxBSi4" 
-                        title="Полезное видео 2"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0"
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
 
-                <div style="display: grid; gap: 10px; margin-top: 15px;">
-                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
-                </div>
-            </div>
-        </section>
+<!-- Миша Бур -->
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&rel=0"
+        title="Misha Bur News"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/videoseries?list=PL5rBbYZrC6VNPG6Rb2uWKaNkhekI09wbW&rel=0"
+        title="Мой плейлист"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+
+        <div style="display: grid; gap: 10px; margin-top: 15px;">
+            <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+            <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+        </div>
+    </div>
+</section>
+
 
         <section id="img2pdf" class="tab-content">
             <div class="card">

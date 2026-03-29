@@ -109,7 +109,7 @@ function updateClock() {
 
 /* Время (часы и минуты) */
 #current-time {
-    font-size: 0.85rem; 
+    font-size: 0.65rem; 
     letter-spacing: -0.2px;
 }
 

@@ -10,13 +10,26 @@
     
     <style>
         .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
-        .top-bar-content { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        
+        /* Изменено: flex-start прижимает погоду влево к дате */
+        .top-bar-content { 
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 15px; 
+        }
         
         .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; min-width: 85px; }
         #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
         
         /* Единая строка-кнопка погоды */
-        .weather-scroll-container { flex-grow: 1; overflow-x: auto; scrollbar-width: none; }
+        .weather-scroll-container { 
+            flex-grow: 0; /* Чтобы контейнер не растягивался на всю ширину */
+            overflow-x: auto; 
+            scrollbar-width: none; 
+            /* Добавлена анимация появления */
+            animation: fadeInSlide 1s ease-out forwards;
+        }
         .weather-scroll-container::-webkit-scrollbar { display: none; }
 
         .weather-info-btn { 
@@ -24,7 +37,7 @@
             align-items: center; 
             white-space: nowrap; 
             background: rgba(255, 255, 255, 0.3); 
-            padding: 6px 12px; 
+            padding: 6px 14px; 
             border-radius: 20px; 
             font-size: 0.82rem; 
             font-weight: 500; 
@@ -32,6 +45,19 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
             gap: 10px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Эффект нажатия */
+        .weather-info-btn:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Ключевые кадры анимации появления */
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ ДЛЯ ПРОБЕЛОВ */
@@ -44,7 +70,8 @@
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         @media (max-width: 480px) {
-            .weather-info-btn { font-size: 0.75rem; padding: 5px 10px; }
+            .weather-info-btn { font-size: 0.75rem; padding: 5px 12px; }
+            .top-bar-content { gap: 10px; }
         }
     </style>
 </head>
@@ -107,6 +134,10 @@
     }
 
     async function getWeather() {
+        // Добавим визуальный эффект обновления
+        const btn = document.querySelector('.weather-info-btn');
+        btn.style.opacity = '0.5';
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 try {
@@ -124,17 +155,18 @@
                         else if (code >= 600) icon = '❄️';
                         else if (code >= 300) icon = '🌧️';
 
-                        // Используем \u00A0 для создания гарантированных отступов (неразрывный пробел)
-                        const s = "\u00A0\u00A0\u00A0"; // Блок из 3 пробелов
+                        const s = "\u00A0\u00A0\u00A0"; 
                         const weatherStr = `${city} ${icon} ${temp}°C${s}|${s}💧${hum}%${s}|${s}⏲️${press}mmHg${s}|${s}🧲Kp-Index: 2 Punkte`;
                         
                         document.getElementById('weather-string').innerText = weatherStr;
                     }
                 } catch (e) { console.error(e); }
+                btn.style.opacity = '1';
             });
         }
     }
 
+    // Все остальные функции (loadNews, showTab и т.д.) остаются прежними
     async function loadNews() {
         const container = document.getElementById('news-container');
         try {

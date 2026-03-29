@@ -60,6 +60,9 @@ body::before {
     padding: 0 15px;
     max-width: 100%;
     overflow: hidden;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
 }
 
 /* Блок обертка для выравнивания */

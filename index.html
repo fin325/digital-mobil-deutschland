@@ -19,7 +19,7 @@
         }
 
         .top-bar { 
-            padding: 10px 0; 
+            padding: 12px 0; 
             background: rgba(255, 255, 255, 0.15); 
             backdrop-filter: blur(10px); 
             -webkit-backdrop-filter: blur(10px); 
@@ -67,22 +67,25 @@
             margin: 0 2px; 
         }
 
-        /* Добавленные стили для заголовка */
+        /* Увеличенный и красивый заголовок */
         .site-title {
             text-align: center;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            margin: 8px 0 4px 0;
-            font-size: 1.25rem;
+            color: #f0f8ff;                    /* красивый белый с лёгким голубым оттенком */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+                         0 0 15px rgba(100, 180, 255, 0.5); /* мягкое свечение */
+            margin: 10px 0 6px 0;
+            font-size: 1.55rem;                /* увеличенный шрифт */
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
         
         .site-subtitle {
             text-align: center;
-            color: rgba(255,255,255,0.95);
-            font-size: 0.95rem;
+            color: #e6f0ff;                    /* чуть более светлый оттенок */
+            font-size: 1.05rem;                /* увеличенный шрифт */
             font-weight: 500;
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
         }
 
         /* Прозрачные карточки */
@@ -143,8 +146,8 @@
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
             .weather-info { font-size: 0.78rem; gap: 8px; }
-            .site-title { font-size: 1.1rem; }
-            .site-subtitle { font-size: 0.85rem; }
+            .site-title { font-size: 1.35rem; }
+            .site-subtitle { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -171,8 +174,9 @@
             </div>
         </div>
 
-        <!-- Добавленный блок с названием сайта и городом -->
+        <!-- Название сайта -->
         <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 
     <nav class="navbar">
@@ -199,54 +203,53 @@
     <main class="container">
         
         <section id="home" class="tab-content active">
-    <div class="card hero-card">
-        <h1>Willkommen! 🇩🇪 in Hattingen</h1>
-        <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-        
-<div class="video-wrapper">
-    <iframe 
-        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0"
-        title="YouTube video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</div>
+            <div class="card hero-card">
+                <h1>Willkommen! 🇩🇪</h1>
+                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+                
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0"
+                        title="YouTube video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-<div class="video-wrapper">
-    <iframe 
-        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0"
-        title="YouTube video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</div>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0"
+                        title="YouTube video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-<!-- Миша Бур -->
-<div class="video-wrapper">
-    <iframe 
-        src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&rel=0"
-        title="Misha Bur News"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</div>
+                <!-- Миша Бур -->
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&rel=0"
+                        title="Misha Bur News"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-<div class="video-wrapper">
-    <iframe 
-        src="https://www.youtube.com/embed/videoseries?list=PL5rBbYZrC6VNPG6Rb2uWKaNkhekI09wbW&rel=0"
-        title="Мой плейлист"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-</div>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=PL5rBbYZrC6VNPG6Rb2uWKaNkhekI09wbW&rel=0"
+                        title="Мой плейлист"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-        <div style="display: grid; gap: 10px; margin-top: 15px;">
-            <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-            <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
-        </div>
-    </div>
-</section>
-
+                <div style="display: grid; gap: 10px; margin-top: 15px;">
+                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+                </div>
+            </div>
+        </section>
 
         <section id="img2pdf" class="tab-content">
             <div class="card">

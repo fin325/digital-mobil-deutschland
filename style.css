@@ -1,6 +1,7 @@
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.6); 
+    /* Сделали фон карточек более прозрачным (0.2), чтобы видеть фото */
+    --glass-bg: rgba(255, 255, 255, 0.2); 
     --glass-border: rgba(255, 255, 255, 0.3);
     --primary-blue: #00529b;
     --text-dark: #1d1d1f; 
@@ -12,27 +13,18 @@ body {
     margin: 0;
     color: var(--text-dark);
     
-    /* УСТАНОВКА ФОНА ИЗ ПАПКИ IMG */
+    /* ФОН: Фиксированный (fixed), чтобы контент скользил сверху */
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), 
                 url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
-    background-size: cover; /* Растягивает фото на весь экран */
-    
-    /* Старая анимация градиента отключена для видимости фото, но сохранена ниже */
-    /* animation: gradientBG 15s ease infinite; */
+    background-size: cover;
     
     min-height: 100vh;
-    overflow-x: hidden; /* Защита от лишней встряски экрана */
+    overflow-x: hidden;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ (СКРОЛЛ-ЛИНИЯ) --- */
+/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ --- */
 .top-bar {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
@@ -47,7 +39,6 @@ body {
     align-items: center;
     padding: 0 15px;
     max-width: 100%;
-    overflow: hidden;
 }
 
 #current-date {
@@ -58,49 +49,36 @@ body {
     white-space: nowrap;
 }
 
-/* Контейнер для прокрутки значков */
 .weather-scroll-container {
     display: flex;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Плавность для iPhone */
+    -webkit-overflow-scrolling: touch;
     flex-grow: 1;
+    scrollbar-width: none;
 }
 
-.weather-scroll-container::-webkit-scrollbar {
-    display: none; /* Прячем некрасивую полосу скролла */
-}
-
-.weather-info {
-    display: flex;
-    gap: 10px;
-    padding-right: 20px;
-}
+.weather-scroll-container::-webkit-scrollbar { display: none; }
 
 .w-item {
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--glass-border);
     padding: 6px 12px;
     border-radius: 12px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
-    transition: transform 0.2s ease;
 }
 
-.w-item:active {
-    transform: scale(0.95);
-}
-
-/* --- НАВИГАЦИЯ (ВКЛАДКИ) --- */
+/* --- НАВИГАЦИЯ --- */
 .navbar {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     position: sticky;
-    top: 45px; /* С учетом высоты top-bar */
+    top: 48px; /* Подстраивается под высоту top-bar */
     z-index: 1000;
 }
 
@@ -109,15 +87,20 @@ body {
     overflow-x: auto;
     gap: 10px;
     padding: 0 15px;
-    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.nav-container::-webkit-scrollbar {
-    display: none;
+.nav-container::-webkit-scrollbar { display: none; }
+
+/* Стиль для второго ряда кнопок */
+.nav-row-2 {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-btn {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
@@ -125,16 +108,16 @@ body {
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
 }
 
 .nav-btn.active {
     background: var(--primary-blue);
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* --- КОНТЕНТ И КАРТОЧКИ --- */
+/* --- КАРТОЧКИ (СТЕКЛЯННЫЙ ЭФФЕКТ) --- */
 .container {
     padding: 15px;
     max-width: 800px;
@@ -149,7 +132,7 @@ body {
     border-radius: 28px;
     padding: 25px;
     margin-bottom: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
@@ -158,10 +141,12 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- КНОПКИ (ПРОЗРАЧНЫЕ) --- */
 .btn-main {
-    background: linear-gradient(135deg, #00529b, #007aff);
+    background: rgba(0, 82, 155, 0.7); /* Синий с прозрачностью */
+    backdrop-filter: blur(10px);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 18px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -171,55 +156,40 @@ body {
     transition: all 0.3s ease;
 }
 
-.btn-main:active {
-    transform: scale(0.97);
+.btn-main:active { transform: scale(0.97); }
+
+/* --- ВИДЕО И ПРИЛОЖЕНИЯ --- */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 15px 0;
+    background: rgba(0, 0, 0, 0.1); /* Прозрачная подложка для YouTube */
 }
 
-/* --- ВКЛАДКИ (TAB CONTENT) --- */
-.tab-content {
-    display: none;
-}
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-.tab-content.active {
-    display: block;
-    animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* --- ПРИЛОЖЕНИЕ (IFRAME) --- */
 .iframe-wrapper {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Убрали белый фон */
+    backdrop-filter: blur(5px);
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
-    height: 650px;
-    width: 100%;
+    height: 700px;
 }
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Сообщения о статусе */
-.status-msg {
-    font-size: 0.9rem;
-    color: #666;
-    text-align: center;
+/* --- НОВОСТИ --- */
+.news-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px;
     margin-bottom: 15px;
+    border-radius: 0 12px 12px 0;
 }
-.news-card-mini {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    transition: transform 0.2s;
-}
-.news-card-mini:active {
-    transform: scale(0.98);
-}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

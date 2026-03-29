@@ -43,7 +43,7 @@ body::before {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 12px 0;
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1100;
@@ -66,6 +66,19 @@ body::before {
 }
 
 /* Блок обертка для выравнивания */
+function updateClock() {
+    const now = new Date();
+    
+    // Дата: 29 МАР (максимально коротко)
+    const dateStr = now.toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })
+                       .replace('.', '').substring(0, 6).toUpperCase();
+    
+    // Время: 19:45 (без секунд, чтобы влезло в узкий блок)
+    const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById('current-date').innerText = dateStr;
+    document.getElementById('current-time').innerText = timeStr;
+}
 
 .date-time-block {
     position: relative; 
@@ -78,17 +91,16 @@ body::before {
     background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
     border: 1px solid rgba(0, 51, 80, 0.15); /* тонкая рамка */
     border-radius: 6px;
+
     width: 45px;  /* чуть уже, как просил */
     height: 40px;
     padding: 2px;
     box-sizing: border-box;
-    line-height: 1.2;
+    line-height: 1.1;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
-    font-weight: bold; 
-    min-width: 80px; 
 }
-.date-time-block { 
-    
+
+
 /* Общий стиль текста для даты, времени и секунд */
 #current-date, #current-time, #current-seconds {
     color: #003366;       /* одинаковый темно-синий цвет */
@@ -139,28 +151,20 @@ body::before {
 
 .weather-info {
     display: flex;
+    gap: 10px;
     padding-right: 20px;
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    gap: 12px; 
-    font-size: 0.85rem; 
-    align-items: center; 
 }
 
 .w-item {
     white-space: nowrap;
+    background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
+    padding: 6px 12px;
+    border-radius: 12px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
     transition: transform 0.2s ease;
-    font-weight: 500; 
-    display: flex; 
-    align-items: center; 
-    gap: 4px; 
-    background: rgba(255,255,255,0.2); 
-    padding: 4px 8px; 
-    border-radius: 10px; 
 }
 
 .w-item:active {
@@ -306,6 +310,40 @@ iframe {
 }
 /* Фиксированный фон */
         
+        .top-bar { 
+            padding: 12px 0; 
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+        }
+        
+        .date-time-block { 
+            display: flex; 
+            flex-direction: column; 
+            line-height: 1.2; 
+            font-weight: bold; 
+            min-width: 80px; 
+        }
+        
+        .weather-info { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            gap: 12px; 
+            font-size: 0.85rem; 
+            align-items: center; 
+        }
+        .w-item { 
+            white-space: nowrap; 
+            font-weight: 500; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            background: rgba(255,255,255,0.2); 
+            padding: 4px 8px; 
+            border-radius: 10px; 
+        }
         .divider { 
             color: rgba(0,0,0,0.2); 
             margin: 0 2px; 

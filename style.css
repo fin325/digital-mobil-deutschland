@@ -78,7 +78,7 @@ function updateClock() {
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
-    border: 1px solid rgba(0, 51, 102, 0.15); /* тонкая рамка */
+    border: 1px solid rgba(0, 51, 80, 0.15); /* тонкая рамка */
     border-radius: 6px;
 
     width: 45px;  /* чуть уже, как просил */

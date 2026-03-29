@@ -78,16 +78,17 @@ body::before {
     background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
     border: 1px solid rgba(0, 51, 80, 0.15); /* тонкая рамка */
     border-radius: 6px;
-
     width: 45px;  /* чуть уже, как просил */
     height: 40px;
     padding: 2px;
     box-sizing: border-box;
-    line-height: 1.1;
+    line-height: 1.2;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
+    font-weight: bold; 
+    min-width: 80px; 
 }
-
-
+.date-time-block { 
+    
 /* Общий стиль текста для даты, времени и секунд */
 #current-date, #current-time, #current-seconds {
     color: #003366;       /* одинаковый темно-синий цвет */
@@ -296,14 +297,6 @@ iframe {
     transform: scale(0.98);
 }
 /* Фиксированный фон */
-        
-        .date-time-block { 
-            display: flex; 
-            flex-direction: column; 
-            line-height: 1.2; 
-            font-weight: bold; 
-            min-width: 80px; 
-        }
         
         .weather-info { 
             display: flex; 

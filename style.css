@@ -11,20 +11,33 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     color: var(--text-dark);
-    background: linear-gradient(-45deg, #e3f2fd, #bbdefb, #e1f5fe, #e8eaf6);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+
     min-height: 100vh;
-    overflow-x: hidden; /* Защита от лишней встряски экрана */
+    overflow-x: hidden;
+    position: relative;
 }
 
+/* ✅ ФИКСИРОВАННЫЙ ФОН (НОВЫЙ СПОСОБ) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+                url('img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
+
+    background-size: cover;
+}
+
+/* --- АНИМАЦИЯ (оставил) --- */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ (СКРОЛЛ-ЛИНИЯ) --- */
+/* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
 .top-bar {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
@@ -52,16 +65,16 @@ body {
     white-space: nowrap;
 }
 
-/* Контейнер для прокрутки значков */
+/* --- ПОГОДА --- */
 .weather-scroll-container {
     display: flex;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Плавность для iPhone */
+    -webkit-overflow-scrolling: touch;
     flex-grow: 1;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
-    display: none; /* Прячем некрасивую полосу скролла */
+    display: none;
 }
 
 .weather-info {
@@ -86,7 +99,7 @@ body {
     transform: scale(0.95);
 }
 
-/* --- НАВИГАЦИЯ (ВКЛАДКИ) --- */
+/* --- НАВИГАЦИЯ --- */
 .navbar {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(20px);
@@ -94,7 +107,7 @@ body {
     border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     position: sticky;
-    top: 45px; /* С учетом высоты top-bar */
+    top: 45px;
     z-index: 1000;
 }
 
@@ -128,11 +141,13 @@ body {
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* --- КОНТЕНТ И КАРТОЧКИ --- */
+/* --- КОНТЕНТ --- */
 .container {
     padding: 15px;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .card {
@@ -145,6 +160,8 @@ body {
     margin-bottom: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     animation: fadeInUp 0.8s ease-out forwards;
+    position: relative;
+    z-index: 1;
 }
 
 @keyframes fadeInUp {
@@ -169,7 +186,7 @@ body {
     transform: scale(0.97);
 }
 
-/* --- ВКЛАДКИ (TAB CONTENT) --- */
+/* --- ВКЛАДКИ --- */
 .tab-content {
     display: none;
 }
@@ -184,7 +201,7 @@ body {
     to { opacity: 1; }
 }
 
-/* --- ПРИЛОЖЕНИЕ (IFRAME) --- */
+/* --- IFRAME --- */
 .iframe-wrapper {
     background: #fff;
     border-radius: 20px;
@@ -200,16 +217,22 @@ iframe {
     border: none;
 }
 
-/* Сообщения о статусе */
+/* --- ПРОЧЕЕ --- */
 .status-msg {
     font-size: 0.9rem;
     color: #666;
     text-align: center;
     margin-bottom: 15px;
 }
+
 .news-card-mini {
     background: rgba(255, 255, 255, 0.3);
     padding: 10px;
     border-radius: 12px;
     margin-bottom: 10px;
     transition: transform 0.2s;
+}
+
+.news-card-mini:active {
+    transform: scale(0.98);
+}

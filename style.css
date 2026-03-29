@@ -61,35 +61,33 @@ body::before {
 .date-time-block {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Выравнивание по левому краю */
+    align-items: center;    /* Центрируем текст внутри квадрата */
     justify-content: center;
-    line-height: 1.2;
-    padding-left: 0;
-    min-width: fit-content;
-}
-
-#current-date, #current-time {
-    color: #003366; /* Одинаковый глубокий темно-синий */
-    font-family: inherit;
-    text-shadow: none; /* Полностью убираем свечение */
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.5); /* Полупрозрачный светлый фон */
+    border: 1px solid rgba(0, 65, 122, 0.2); /* Тонкая темная рамка */
+    border-radius: 8px;     /* Слегка закругленные углы */
+    padding: 5px;           /* Внутренние отступы */
+    min-width: 65px;        /* Делаем его узким/квадратным */
+    height: 50px;           /* Фиксированная высота для формы квадрата */
+    line-height: 1.1;
 }
 
 #current-date {
-    font-size: 0.85rem;
+    font-size: 0.7rem;      /* Чуть меньше, чтобы влезло в узкое окно */
     font-weight: 700;
+    color: #00417a;         /* Темно-синий (темнее, чем primary) */
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    opacity: 0.8; /* Чуть приглушим дату, чтобы не спорила со временем */
+    white-space: nowrap;
+    margin-bottom: 2px;
 }
 
 #current-time {
-    font-size: 1.1rem; /* Размер почти как у даты, чуть крупнее для читаемости */
+    font-size: 1rem;
     font-weight: 800;
-    letter-spacing: 0;
+    color: #00417a;         /* Тот же темно-синий */
+    letter-spacing: -0.5px;
 }
+
 
 
 

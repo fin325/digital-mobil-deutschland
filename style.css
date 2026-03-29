@@ -24,7 +24,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
+/* --- ВЕРХНЯЯ ПАНЕЛЬ (ОБНОВЛЕНО) --- */
 .top-bar {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
@@ -43,11 +43,12 @@ body {
     max-width: 100%;
 }
 
+/* Блок для даты сверху и времени снизу */
 .date-time-block {
     display: flex;
     flex-direction: column;
     margin-right: 15px;
-    min-width: 95px;
+    min-width: 95px; /* фиксируем ширину чтобы не прыгало */
 }
 
 #current-date {
@@ -64,6 +65,7 @@ body {
     font-weight: 600;
 }
 
+/* Контейнер для прокрутки погоды */
 .weather-scroll-container {
     display: flex;
     overflow-x: auto;
@@ -75,29 +77,40 @@ body {
     display: none;
 }
 
+.weather-info {
+    display: flex;
+    gap: 10px;
+}
+
 .w-item {
-    /* nowrap гарантирует, что спец-пробелы &nbsp; будут работать корректно */
-    white-space: nowrap; 
+    /* ИСПРАВЛЕНО: pre-wrap гарантирует отображение всех пробелов из JS */
+    white-space: pre-wrap; 
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
-    padding: 8px 16px;
+    padding: 6px 15px;
     border-radius: 12px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
     font-weight: 500;
+    transition: transform 0.2s ease;
     display: flex;
     align-items: center;
+}
+
+.w-item:active {
+    transform: scale(0.95);
 }
 
 /* --- НАВИГАЦИЯ --- */
 .navbar {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     position: sticky;
-    top: 55px;
+    top: 55px; /* Высота подстроена под новый top-bar */
     z-index: 1000;
 }
 
@@ -108,7 +121,9 @@ body {
     padding: 0 15px;
 }
 
-.nav-container::-webkit-scrollbar { display: none; }
+.nav-container::-webkit-scrollbar {
+    display: none;
+}
 
 .nav-btn {
     background: rgba(255, 255, 255, 0.3);
@@ -119,6 +134,7 @@ body {
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .nav-btn.active {
@@ -127,7 +143,11 @@ body {
 }
 
 /* --- КОНТЕНТ --- */
-.container { padding: 15px; max-width: 800px; margin: 0 auto; }
+.container {
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+}
 
 .card {
     background: var(--glass-bg);
@@ -137,6 +157,24 @@ body {
     padding: 25px;
     margin-bottom: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-main {
+    background: linear-gradient(135deg, #00529b, #007aff);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 18px;
+    width: 100%;
+    cursor: pointer;
 }
 
 .tab-content { display: none; }
@@ -146,6 +184,8 @@ body {
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
+    border: 1px solid var(--glass-border);
     height: 650px;
 }
+
 iframe { width: 100%; height: 100%; border: none; }

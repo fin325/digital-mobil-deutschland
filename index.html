@@ -120,8 +120,9 @@
                         else if (code >= 300) icon = '🌧️';
 
                         // Формируем единую строку без разделителей
-                        const weatherStr = `${city} ${icon} ${temp}°C  |💧${hum}%  |⏲️${press}mmHg  |🧲: 2 Punkte`;
-                        document.getElementById('weather-string').innerText = weatherStr;
+                        const weatherStr = `${city} ${icon} ${temp}°C     💧${hum}%     ⏲️${press}mmHg     🧲 Kp-Index: 2 Punkte`;
+document.getElementById('weather-string').innerText = weatherStr;
+
                     }
                 } catch (e) { console.error(e); }
             });

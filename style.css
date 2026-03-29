@@ -72,40 +72,44 @@ function updateClock() {
     document.getElementById('current-time').innerText = timeStr;
 }
 
-.time-block {
+.date-time-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7); /* такой же полупрозрачный фон */
-    border: 1px solid rgba(0, 51, 102, 0.2); /* тонкая рамка как у даты */
-    border-radius: 4px; /* углы как у даты */
+    background: rgba(255, 255, 255, 0.6); /* Чуть плотнее фон для читаемости */
+    border: 1px solid rgba(0, 51, 102, 0.15);
+    border-radius: 6px;
     
-    /* чуть уменьшенная ширина по твоей просьбе */
+    /* Делаем блок маленьким и почти квадратным */
     width: 50px; 
-    padding: 2px 0; 
-    line-height: 1;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* мягкая тень */
+    height: 45px;
+    padding: 2px;
+    box-sizing: border-box;
+    line-height: 1.1;
 }
 
-#current-hours, #current-minutes, #current-seconds {
-    color: #003366; /* темно-синий, как у даты */
-    font-weight: 700;
-    text-align: center;
+#current-date, #current-time {
+    /* Одинаковый цвет для обоих элементов */
+    color: #003366; 
     text-shadow: none;
-    margin: 0;
+    font-family: inherit;
+    text-align: center;
 }
 
-#current-hours, #current-minutes {
-    font-size: 0.85rem; /* как у #current-time */
-    letter-spacing: -0.2px;
+#current-date {
+    font-size: 0.65rem; /* Уменьшили, чтобы влезло в квадрат */
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1px;
 }
 
-#current-seconds {
-    font-size: 0.75rem; /* секунды чуть меньше времени */
-    letter-spacing: -0.2px;
-    opacity: 0.9;
+#current-time {
+    font-size: 0.9rem; /* Оптимальный размер для узкого окна */
+    font-weight: 800;
+    letter-spacing: -0.3px;
 }
+
 
 
 

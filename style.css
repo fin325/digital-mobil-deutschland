@@ -74,8 +74,8 @@ function updateClock() {
 
 .date-time-block {
     position: relative; 
-    left: -17px;  /* влево */
-    top: -20px;   /* вверх */
+    left: -10px;  /* влево */
+    top: -15px;   /* вверх */
     display: flex;
     flex-direction: column;
     align-items: center;

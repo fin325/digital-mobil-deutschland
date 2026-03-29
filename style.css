@@ -1,7 +1,7 @@
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.6); 
-    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-bg: rgba(255, 255, 255, 0.10);      /* очень прозрачный фон */
+    --glass-border: rgba(255, 255, 255, 0.22);  /* лёгкая граница */
     --primary-blue: #00529b;
     --text-dark: #1d1d1f; 
 }
@@ -12,27 +12,17 @@ body {
     margin: 0;
     color: var(--text-dark);
     
-    /* УСТАНОВКА ФОНА ИЗ ПАПКИ IMG */
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), 
                 url('img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center fixed;
-    background-size: cover; /* Растягивает фото на весь экран */
-    
-    /* Старая анимация градиента отключена для видимости фото, но сохранена ниже */
-    /* animation: gradientBG 15s ease infinite; */
+    background-size: cover;
     
     min-height: 100vh;
-    overflow-x: hidden; /* Защита от лишней встряски экрана */
+    overflow-x: hidden;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ (СКРОЛЛ-ЛИНИЯ) --- */
+/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ --- */
 .top-bar {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
@@ -42,86 +32,23 @@ body {
     z-index: 1100;
 }
 
-.top-bar-content {
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-#current-date {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    margin-right: 15px;
-    white-space: nowrap;
-}
-
-/* Контейнер для прокрутки значков */
-.weather-scroll-container {
-    display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Плавность для iPhone */
-    flex-grow: 1;
-}
-
-.weather-scroll-container::-webkit-scrollbar {
-    display: none; /* Прячем некрасивую полосу скролла */
-}
-
-.weather-info {
-    display: flex;
-    gap: 10px;
-    padding-right: 20px;
-}
-
-.w-item {
-    white-space: nowrap;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid var(--glass-border);
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    color: var(--primary-blue);
-    flex-shrink: 0;
-    transition: transform 0.2s ease;
-}
-
-.w-item:active {
-    transform: scale(0.95);
-}
-
 /* --- НАВИГАЦИЯ (ВКЛАДКИ) --- */
 .navbar {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     position: sticky;
-    top: 45px; /* С учетом высоты top-bar */
+    top: 45px;
     z-index: 1000;
 }
 
-.nav-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 0 15px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.nav-container::-webkit-scrollbar {
-    display: none;
-}
-
 .nav-btn {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
-    white-space: nowrap;
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
@@ -141,6 +68,7 @@ body {
     margin: 0 auto;
 }
 
+/* Основные карточки */
 .card {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
@@ -149,15 +77,42 @@ body {
     border-radius: 28px;
     padding: 25px;
     margin-bottom: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* --- ВКЛАДКИ (TAB CONTENT) — ОСНОВНОЕ ИЗМЕНЕНИЕ --- */
+.tab-content {
+    display: none;
+    
+    /* Почти полностью прозрачное стекло */
+    background: rgba(255, 255, 255, 0.09);        /* очень низкая непрозрачность */
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 28px;
+    padding: 25px;
+    margin-bottom: 20px;
+    
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+    animation: fadeIn 0.4s ease-out;
 }
 
+.tab-content.active {
+    display: block;
+}
+
+/* Если внутри вкладок есть .card — делаем их тоже очень прозрачными */
+.tab-content .card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+}
+
+/* --- КНОПКИ И ДРУГИЕ ЭЛЕМЕНТЫ --- */
 .btn-main {
     background: linear-gradient(135deg, #00529b, #007aff);
     color: white;
@@ -175,51 +130,26 @@ body {
     transform: scale(0.97);
 }
 
-/* --- ВКЛАДКИ (TAB CONTENT) --- */
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-    animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* --- ПРИЛОЖЕНИЕ (IFRAME) --- */
-.iframe-wrapper {
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-    height: 650px;
-    width: 100%;
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Сообщения о статусе */
-.status-msg {
-    font-size: 0.9rem;
-    color: #666;
-    text-align: center;
-    margin-bottom: 15px;
-}
+/* Дополнительные классы */
 .news-card-mini {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
     padding: 10px;
     border-radius: 12px;
     margin-bottom: 10px;
     transition: transform 0.2s;
 }
+
 .news-card-mini:active {
     transform: scale(0.98);
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

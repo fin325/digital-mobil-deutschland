@@ -1,9 +1,8 @@
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.2); 
+    --glass-bg: rgba(255, 255, 255, 0.6); 
     --glass-border: rgba(255, 255, 255, 0.3);
     --primary-blue: #00529b;
-    --deep-blue: #003366;
     --text-dark: #1d1d1f; 
 }
 
@@ -11,18 +10,36 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    padding: 0;
     color: var(--text-dark);
+
     min-height: 100vh;
     overflow-x: hidden;
-    /* Фоновое изображение */
-    background: url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
+    position: relative;
+}
+
+/* ✅ ФИКСИРОВАННЫЙ ФОН (НОВЫЙ СПОСОБ) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+                url('img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
+
     background-size: cover;
+}
+
+/* --- АНИМАЦИЯ (оставил) --- */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
 .top-bar {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
@@ -35,87 +52,139 @@ body {
 .top-bar-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 15px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
-/* ✅ ТО САМОЕ КВАДРАТНОЕ ОКОШКО (ИСПРАВЛЕНО) */
+/* Блок обертка для выравнивания */
+function updateClock() {
+    const now = new Date();
+    
+    // Дата: 29 МАР (максимально коротко)
+    const dateStr = now.toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })
+                       .replace('.', '').substring(0, 6).toUpperCase();
+    
+    // Время: 19:45 (без секунд, чтобы влезло в узкий блок)
+    const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById('current-date').innerText = dateStr;
+    document.getElementById('current-time').innerText = timeStr;
+}
+
 .date-time-block {
+    position: relative; 
+    left: -10px;  /* влево */
+    top: -15px;   /* вверх */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 51, 102, 0.2);
+    background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
+    border: 1px solid rgba(0, 51, 80, 0.15); /* тонкая рамка */
     border-radius: 6px;
-    width: 48px;  
-    height: 42px;
+
+    width: 45px;  /* чуть уже, как просил */
+    height: 40px;
     padding: 2px;
     box-sizing: border-box;
-    line-height: 1;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    line-height: 1.1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
 }
 
-#current-date, #current-time {
-    color: var(--deep-blue) !important;
+
+/* Общий стиль текста для даты, времени и секунд */
+#current-date, #current-time, #current-seconds {
+    color: #003366;       /* одинаковый темно-синий цвет */
+    font-family: inherit; 
     text-align: center;
+    text-shadow: 0 0 1px rgba(0,51,102,0.25); /* мягкая тень для одинакового визуального веса */
     margin: 0;
-    font-weight: 700;
-    text-shadow: none;
+    font-weight: 700;     /* одинаковая жирность */
 }
 
+/* Дата */
 #current-date {
-    font-size: 0.55rem; 
+    font-size: 0.65rem; 
     text-transform: uppercase;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
+    letter-spacing: 0.3px;
 }
 
+/* Время (часы и минуты) */
 #current-time {
-    font-size: 0.85rem; 
-    letter-spacing: -0.3px;
+    font-size: 0.65rem; 
+    letter-spacing: -0.2px;
 }
+
+/* Секунды чуть меньше, но с тем же цветом и тенью */
+#current-seconds {
+    font-size: 0.75rem;
+    letter-spacing: -0.2px;
+    opacity: 0.9;
+}
+
+
+
+
+
 
 /* --- ПОГОДА --- */
+.weather-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-grow: 1;
+}
+
+.weather-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
 .weather-info {
     display: flex;
     gap: 10px;
-    font-size: 0.85rem;
-    align-items: center;
-    overflow-x: auto;
+    padding-right: 20px;
 }
 
 .w-item {
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
     color: var(--primary-blue);
-    font-weight: 500;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
 }
 
-/* --- ЗАГОЛОВКИ --- */
-.site-title {
-    text-align: center;
-    color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    margin: 15px 0 5px;
-    font-size: 1.6rem;
-}
-
-.site-subtitle {
-    text-align: center;
-    color: #e6f0ff;
-    font-size: 1.05rem;
-    margin-bottom: 15px;
+.w-item:active {
+    transform: scale(0.95);
 }
 
 /* --- НАВИГАЦИЯ --- */
+.navbar {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 12px 0;
+    position: sticky;
+    top: 45px;
+    z-index: 1000;
+}
+
 .nav-container {
     display: flex;
     overflow-x: auto;
     gap: 10px;
-    padding: 10px 15px;
+    padding: 0 15px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-container::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-btn {
@@ -123,45 +192,241 @@ body {
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
+    white-space: nowrap;
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
-    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-btn.active {
     background: var(--primary-blue);
     color: white;
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* --- КАРТОЧКИ И КОНТЕНТ --- */
+/* --- КОНТЕНТ --- */
+.container {
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
 .card {
-    background: rgba(255, 255, 255, 0.25) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 20px;
+    border-radius: 28px;
+    padding: 25px;
     margin-bottom: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    animation: fadeInUp 0.8s ease-out forwards;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .btn-main {
-    background: rgba(0, 82, 155, 0.8);
+    background: linear-gradient(135deg, #00529b, #007aff);
     color: white;
     border: none;
-    padding: 15px;
-    border-radius: 15px;
-    width: 100%;
+    padding: 18px;
+    font-size: 1.1rem;
     font-weight: 600;
+    border-radius: 18px;
+    width: 100%;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+.btn-main:active {
+    transform: scale(0.97);
+}
+
+/* --- ВКЛАДКИ --- */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- IFRAME --- */
 .iframe-wrapper {
-    height: 600px;
+    background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    background: white;
+    border: 1px solid var(--glass-border);
+    height: 650px;
+    width: 100%;
 }
 
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- ПРОЧЕЕ --- */
+.status-msg {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.news-card-mini {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+
+.news-card-mini:active {
+    transform: scale(0.98);
+}
+/* Фиксированный фон */
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .top-bar { 
+            padding: 12px 0; 
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+        }
+        .top-bar-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .date-time-block { 
+            display: flex; 
+            flex-direction: column; 
+            line-height: 1.2; 
+            font-weight: bold; 
+            min-width: 80px; 
+        }
+        
+        .weather-info { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            gap: 12px; 
+            font-size: 0.85rem; 
+            align-items: center; 
+        }
+        .w-item { 
+            white-space: nowrap; 
+            font-weight: 500; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            background: rgba(255,255,255,0.2); 
+            padding: 4px 8px; 
+            border-radius: 10px; 
+        }
+        .divider { 
+            color: rgba(0,0,0,0.2); 
+            margin: 0 2px; 
+        }
+
+        /* Увеличенный и красивый заголовок */
+        .site-title {
+            text-align: center;
+            color: #f0f8ff;                    /* красивый белый с лёгким голубым оттенком */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+                         0 0 15px rgba(100, 180, 255, 0.5); /* мягкое свечение */
+            margin: 10px 0 6px 0;
+            font-size: 1.55rem;                /* увеличенный шрифт */
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .site-subtitle {
+            text-align: center;
+            color: #e6f0ff;                    /* чуть более светлый оттенок */
+            font-size: 1.05rem;                /* увеличенный шрифт */
+            font-weight: 500;
+            margin: 0 0 10px 0;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Прозрачные карточки */
+        .card { 
+            background: rgba(255, 255, 255, 0.2) !important; 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 28px; 
+            padding: 25px; 
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
+        .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
+        
+        .iframe-wrapper { 
+            height: 700px; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            background: rgba(255, 255, 255, 0.1); 
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 15px 0;
+            background: rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .btn-main {
+            background: rgba(0, 82, 155, 0.7) !important;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            color: white;
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 18px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-row-2 {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 480px) {

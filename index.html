@@ -6,28 +6,28 @@
     
     <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
     
-    <meta name="description" content="Бесплатный PDF компрессор и фото в PDF. Новости Германии, забастовки в NRW (Hattingen, Bochum, Essen), погода и поиск врачей.">
-    <meta name="keywords" content="сжать pdf онлайн, сделать pdf из фото, новости германии, забастовки NRW, врачи бохум, anabin">
-
     <link rel="stylesheet" href="style.css">
     
     <style>
-        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); }
+        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
         .top-bar-content { display: flex; justify-content: space-between; align-items: center; }
         
-        .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; }
+        .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; min-width: 80px; }
         #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
         
-        .weather-info { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 15px; font-size: 0.85rem; }
-        .w-item { white-space: nowrap; font-weight: 500; }
-
-        .news-item {
-            background: rgba(255, 255, 255, 0.4);
-            border-left: 4px solid #00529b;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 0 12px 12px 0;
+        /* Единая полоска погоды */
+        .weather-info { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            gap: 12px; 
+            font-size: 0.85rem; 
+            align-items: center;
         }
+        .w-item { white-space: nowrap; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+        .divider { color: rgba(0,0,0,0.2); margin: 0 2px; }
+
+        .news-item { background: rgba(255, 255, 255, 0.4); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
         .iframe-wrapper { height: 700px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.3); background: #fff; }
         
@@ -44,7 +44,7 @@
 
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
-            .top-bar-content { flex-direction: row; }
+            .weather-info { font-size: 0.78rem; gap: 8px; }
         }
     </style>
 </head>
@@ -59,11 +59,14 @@
             </div>
 
             <div class="weather-scroll-container">
-                <div class="weather-info">
-                    <span class="w-item" id="city-weather">Загрузка...</span>
-                    <span class="w-item">⏲️ <span id="press">--</span> мм рт.ст.</span>
+                <div class="weather-info" id="full-weather-bar">
+                    <span class="w-item" id="city-temp">Laden...</span>
+                    <span class="divider">|</span>
                     <span class="w-item">💧 <span id="hum">--</span>%</span>
-                    <span class="w-item">🧲 : <span id="geo">2</span></span>
+                    <span class="divider">|</span>
+                    <span class="w-item">⏲️ <span id="press">--</span> mmHg</span>
+                    <span class="divider">|</span>
+                    <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
                 </div>
             </div>
         </div>
@@ -124,13 +127,16 @@
         <section id="news" class="tab-content">
             <div class="card">
                 <h2>🗞️ Последние события</h2>
-                <div id="news-container"><p class="status-msg">Загрузка...</p></div>
+                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
             </div>
         </section>
 
-        <section id="security" class="tab-content"><div class="card"><h2>🛡️ Безопасность</h2></div></section>
-        <section id="mobile" class="tab-content"><div class="card"><h2>🚲 Транспорт</h2></div></section>
-        <section id="about" class="tab-content"><div class="card"><h2>ℹ️ О проекте</h2></div></section>
+        <section id="about" class="tab-content">
+            <div class="card">
+                <h2>ℹ️ О проекте</h2>
+                <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
+            </div>
+        </section>
 
     </main>
 
@@ -147,7 +153,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 try {
-                    // Изменено lang=ru на lang=de для названий на немецком
+                    // lang=de для немецких названий городов
                     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=de`);
                     const d = await res.json();
                     if (d.main) {
@@ -160,9 +166,11 @@
                         else if (code >= 600) icon = '❄️';
                         else if (code >= 300) icon = '🌧️';
 
-                        // Формат: Hattingen ☀️ 18°C (без булавки)
-                        document.getElementById('city-weather').innerText = `${city} ${icon} ${temp}°C`;
+                        // Вывод Город + Температура
+                        document.getElementById('city-temp').innerText = `${city} ${icon} ${temp}°C`;
+                        // Давление в mmHg (немецкий стандарт mmHg)
                         document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006);
+                        // Влажность
                         document.getElementById('hum').innerText = d.main.humidity;
                     }
                 } catch (e) { console.error(e); }
@@ -186,7 +194,7 @@
                     container.appendChild(div);
                 });
             }
-        } catch (e) { container.innerHTML = 'Ошибка загрузки.'; }
+        } catch (e) { container.innerHTML = 'Fehler beim Laden.'; }
     }
 
     function showTab(tabId, event) {

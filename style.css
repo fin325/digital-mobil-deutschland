@@ -10,25 +10,16 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
+    padding: 0;
     color: var(--text-dark);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    padding: 0;
-    background: url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
-    background-size: cover;
-}
 
-/* ✅ ФИКСИРОВАННЫЙ ФОН (НОВЫЙ СПОСОБ) */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-
+    /* Оставляем только ту картинку, которая у тебя есть */
+    /* Добавляем легкий градиент-фильтр прямо сюда, чтобы текст лучше читался */
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-                url('img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
-
+                url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
     background-size: cover;
 }
 

@@ -65,31 +65,33 @@ body::before {
 }
 
 /* Стили для даты */
-#current-date {
-    font-size: 0.8rem;
-    color: #00529b;
-    font-weight: 700;
-    opacity: 0.9;
-    /* Тень как у заголовка, но под синий цвет */
-    text-shadow: 0 1px 4px rgba(0, 82, 155, 0.2);
+.date-time-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+    min-width: 90px;
 }
 
-/* Стили для времени */
-#current-time {
-    font-size: 1.25rem;
-    font-weight: 850; /* Максимальная жирность */
-    
-    /* Сочетание твоего синего и нового небесно-голубого */
-    background: linear-gradient(135deg, #00529b, #00aaff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #0529b;
-    
-    /* Тройная тень для эффекта "заголовка" */
-    text-shadow: 0 2px 10px rgba(0, 82, 155, 0.2), 
-                 0 0 20px rgba(0, 170, 255, 0.3);
-    
-    letter-spacing: 0.5px;
+#current-date {
+    font-size: 0.75rem;
+    color: #00529b;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.8;
+    /* Легкая тень для четкости */
+    text-shadow: 0 3px 5px rgba(0, 82, 155, 0.2);
 }
+
+#current-time {
+    font-size: 1.25rem; /* Крупнее, чтобы выделялось */
+    color: #00529b;
+    font-weight: 800;
+    /* Тот самый эффект как в заголовке: тень + свечение */
+    text-shadow: 0 2px 8px rgba(0, 82, 155, 0.3), 
+                 0 0 12px rgba(100, 180, 255, 0.4);
+}
+
 
 
 

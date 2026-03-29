@@ -82,7 +82,7 @@ body::before {
     /* Сочетание твоего синего и нового небесно-голубого */
     background: linear-gradient(135deg, #00529b, #00aaff);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #0529b;
     
     /* Тройная тень для эффекта "заголовка" */
     text-shadow: 0 2px 10px rgba(0, 82, 155, 0.2), 

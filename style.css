@@ -139,20 +139,28 @@ body::before {
 
 .weather-info {
     display: flex;
-    gap: 10px;
     padding-right: 20px;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 12px; 
+    font-size: 0.85rem; 
+    align-items: center; 
 }
 
 .w-item {
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
-    padding: 6px 12px;
-    border-radius: 12px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
     transition: transform 0.2s ease;
+    font-weight: 500; 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+    background: rgba(255,255,255,0.2); 
+    padding: 4px 8px; 
+    border-radius: 10px; 
 }
 
 .w-item:active {
@@ -298,24 +306,6 @@ iframe {
 }
 /* Фиксированный фон */
         
-        .weather-info { 
-            display: flex; 
-            flex-wrap: nowrap; 
-            overflow-x: auto; 
-            gap: 12px; 
-            font-size: 0.85rem; 
-            align-items: center; 
-        }
-        .w-item { 
-            white-space: nowrap; 
-            font-weight: 500; 
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            background: rgba(255,255,255,0.2); 
-            padding: 4px 8px; 
-            border-radius: 10px; 
-        }
         .divider { 
             color: rgba(0,0,0,0.2); 
             margin: 0 2px; 

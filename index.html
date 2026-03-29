@@ -60,6 +60,9 @@
             border: none;
         }
 
+        /* Чтобы погода не переносилась на iPhone */
+        .w-item { white-space: nowrap; }
+
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
             .video-wrapper { margin: 10px 0; }
@@ -74,11 +77,8 @@
             <span id="current-date"></span>
             <div class="weather-scroll-container">
                 <div class="weather-info">
-                    <span class="w-item" onclick="alert('Ваше местоположение')">
-                        📍 <span id="city">Поиск...</span> <span id="sky-icon"></span>
-                    </span>
-                    <span class="w-item" onclick="alert('Температура воздуха')">
-                        🌡️ <span id="temp">--°C</span>
+                    <span class="w-item" onclick="alert('Погода в вашем городе')">
+                        📍 <span id="city-weather">Поиск...</span>
                     </span>
                     <span class="w-item" onclick="alert('Давление (мм рт. ст.)')">
                         ⏲️ <span id="press">-- мм</span>
@@ -113,7 +113,6 @@
                 <h1>Willkommen! 🇩🇪</h1>
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
                 
-                <!-- Обновлённый блок YouTube -->
                 <div class="video-wrapper">
                     <iframe 
                         src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&amp;rel=0"
@@ -131,7 +130,6 @@
             </div>
         </section>
 
-        <!-- Остальные секции без изменений -->
         <section id="img2pdf" class="tab-content">
             <div class="card">
                 <h2>🖼️ Создать PDF из фото</h2>
@@ -198,17 +196,21 @@
                     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=ru`);
                     const d = await res.json();
                     if (d.main) {
-                        document.getElementById('city').innerText = d.name;
-                        document.getElementById('temp').innerText = Math.round(d.main.temp) + '°C';
-                        document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006) + ' мм';
-                        document.getElementById('hum').innerText = d.main.humidity + '%';
+                        const temp = Math.round(d.main.temp);
+                        const city = d.name;
                         const code = d.weather[0].id;
+                        
                         let icon = '☁️';
                         if (code === 800) icon = '☀️';
                         else if (code > 800) icon = '☁️';
                         else if (code >= 600) icon = '❄️';
                         else if (code >= 300) icon = '🌧️';
-                        document.getElementById('sky-icon').innerText = icon;
+
+                        // Выводим все в один элемент
+                        document.getElementById('city-weather').innerText = `${city} ${icon} ${temp}°C`;
+                        
+                        document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006) + ' мм';
+                        document.getElementById('hum').innerText = d.main.humidity + '%';
                     }
                 } catch (e) { console.error(e); }
             });

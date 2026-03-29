@@ -422,16 +422,3 @@ iframe {
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .nav-row-2 {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.4rem; }
-            .weather-info { font-size: 0.78rem; gap: 8px; }
-            .site-title { font-size: 1.35rem; }
-            .site-subtitle { font-size: 0.95rem; }
-        }

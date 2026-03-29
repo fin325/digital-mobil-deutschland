@@ -15,7 +15,7 @@ body {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Защита от лишней встряски экрана */
 }
 
 @keyframes gradientBG {
@@ -24,7 +24,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* --- ВЕРХНЯЯ ПАНЕЛЬ (ОБНОВЛЕНО) --- */
+/* --- ВЕРХНЯЯ ПАНЕЛЬ ПОГОДЫ (СКРОЛЛ-ЛИНИЯ) --- */
 .top-bar {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
@@ -41,68 +41,52 @@ body {
     align-items: center;
     padding: 0 15px;
     max-width: 100%;
-}
-
-/* Блок для даты сверху и времени снизу */
-.date-time-block {
-    display: flex;
-    flex-direction: column;
-    margin-right: 15px;
-    min-width: 95px; /* фиксируем ширину чтобы не прыгало */
+    overflow: hidden;
 }
 
 #current-date {
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--primary-blue);
+    margin-right: 15px;
     white-space: nowrap;
 }
 
-#current-time {
-    font-size: 0.75rem;
-    color: var(--primary-blue);
-    opacity: 0.8;
-    font-weight: 600;
-}
-
-/* Контейнер для прокрутки погоды */
+/* Контейнер для прокрутки значков */
 .weather-scroll-container {
     display: flex;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch; /* Плавность для iPhone */
     flex-grow: 1;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
-    display: none;
+    display: none; /* Прячем некрасивую полосу скролла */
 }
 
 .weather-info {
     display: flex;
     gap: 10px;
+    padding-right: 20px;
 }
 
 .w-item {
-    /* ИСПРАВЛЕНО: pre-wrap гарантирует отображение всех пробелов из JS */
-    white-space: pre-wrap; 
+    white-space: nowrap;
     background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
-    padding: 6px 15px;
+    padding: 6px 12px;
     border-radius: 12px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
-    font-weight: 500;
     transition: transform 0.2s ease;
-    display: flex;
-    align-items: center;
 }
 
 .w-item:active {
     transform: scale(0.95);
 }
 
-/* --- НАВИГАЦИЯ --- */
+/* --- НАВИГАЦИЯ (ВКЛАДКИ) --- */
 .navbar {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(20px);
@@ -110,7 +94,7 @@ body {
     border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     position: sticky;
-    top: 55px; /* Высота подстроена под новый top-bar */
+    top: 45px; /* С учетом высоты top-bar */
     z-index: 1000;
 }
 
@@ -119,6 +103,7 @@ body {
     overflow-x: auto;
     gap: 10px;
     padding: 0 15px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .nav-container::-webkit-scrollbar {
@@ -134,15 +119,16 @@ body {
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-btn.active {
     background: var(--primary-blue);
     color: white;
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* --- КОНТЕНТ --- */
+/* --- КОНТЕНТ И КАРТОЧКИ --- */
 .container {
     padding: 15px;
     max-width: 800px;
@@ -152,6 +138,7 @@ body {
 .card {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 28px;
     padding: 25px;
@@ -175,17 +162,58 @@ body {
     border-radius: 18px;
     width: 100%;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+.btn-main:active {
+    transform: scale(0.97);
+}
 
+/* --- ВКЛАДКИ (TAB CONTENT) --- */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- ПРИЛОЖЕНИЕ (IFRAME) --- */
 .iframe-wrapper {
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
     height: 650px;
+    width: 100%;
 }
 
-iframe { width: 100%; height: 100%; border: none; }
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Сообщения о статусе */
+.status-msg {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.news-card-mini {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+.news-card-mini:active {
+    transform: scale(0.98);
+}

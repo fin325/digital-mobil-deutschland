@@ -9,51 +9,28 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* Фиксируем фон, чтобы он не двигался при скролле */
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('img/IMG_2676.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
         .top-bar-content { display: flex; justify-content: space-between; align-items: center; }
         
         .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; min-width: 80px; }
         #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
         
-        .weather-info { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; font-size: 0.85rem; align-items: center; }
-        .w-item { white-space: nowrap; font-weight: 500; display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; }
+        /* Единая полоска погоды */
+        .weather-info { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            gap: 12px; 
+            font-size: 0.85rem; 
+            align-items: center;
+        }
+        .w-item { white-space: nowrap; font-weight: 500; display: flex; align-items: center; gap: 4px; }
         .divider { color: rgba(0,0,0,0.2); margin: 0 2px; }
 
-        /* Эффект прозрачности для КАРТОЧЕК */
-        .card { 
-            background: rgba(255, 255, 255, 0.25) !important; 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.3); 
-            border-radius: 28px; 
-            padding: 25px; 
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
+        .news-item { background: rgba(255, 255, 255, 0.4); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
+        .iframe-wrapper { height: 700px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.3); background: #fff; }
         
-        /* Прозрачная обертка для фреймов (PDF и прочее) */
-        .iframe-wrapper { 
-            height: 700px; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.3); 
-            background: rgba(255, 255, 255, 0.1); /* Прозрачный фон */
-        }
-        
-        /* Прозрачный Youtube */
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
@@ -61,23 +38,9 @@
             overflow: hidden;
             border-radius: 15px;
             margin: 15px 0;
-            background: rgba(0,0,0,0.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        /* Кнопки тоже делаем "стеклянными" */
-        .btn-main {
-            background: rgba(0, 82, 155, 0.7) !important;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.2) !important;
-        }
-
-        .nav-row-2 {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
 
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
@@ -119,15 +82,6 @@
             <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
             <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
         </div>
-        <div class="nav-container nav-row-2">
-            <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-            <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
-            <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-            <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
-            <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-            <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-            <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
-        </div>
     </nav>
 
     <main class="container">
@@ -147,7 +101,7 @@
 
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
                     <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+                    <button class="btn-main" style="background: #007aff;" onclick="showTab('news', event)">Читать текстовые новости</button>
                 </div>
             </div>
         </section>
@@ -177,16 +131,6 @@
             </div>
         </section>
 
-        <section id="security" class="tab-content"><div class="card"><h2>🛡️ Безопасность</h2></div></section>
-        <section id="mobile" class="tab-content"><div class="card"><h2>🚆 Транспорт</h2></div></section>
-        <section id="maps" class="tab-content"><div class="card"><h2>📍 Карты</h2></div></section>
-        <section id="translate" class="tab-content"><div class="card"><h2>🗣️ Перевод</h2></div></section>
-        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
-        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
-        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
-        <section id="laws" class="tab-content"><div class="card"><h2>⚖️ Законы</h2></div></section>
-        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
-
         <section id="about" class="tab-content">
             <div class="card">
                 <h2>ℹ️ О проекте</h2>
@@ -209,6 +153,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 try {
+                    // lang=de для немецких названий городов
                     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=de`);
                     const d = await res.json();
                     if (d.main) {
@@ -221,8 +166,11 @@
                         else if (code >= 600) icon = '❄️';
                         else if (code >= 300) icon = '🌧️';
 
+                        // Вывод Город + Температура
                         document.getElementById('city-temp').innerText = `${city} ${icon} ${temp}°C`;
+                        // Давление в mmHg (немецкий стандарт mmHg)
                         document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006);
+                        // Влажность
                         document.getElementById('hum').innerText = d.main.humidity;
                     }
                 } catch (e) { console.error(e); }

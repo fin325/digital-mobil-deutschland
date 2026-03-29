@@ -49,6 +49,9 @@ body::before {
     position: sticky;
     top: 0;
     z-index: 1100;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
             
 }
 
@@ -304,13 +307,7 @@ iframe {
     transform: scale(0.98);
 }
 /* Фиксированный фон */
-        
-        .top-bar-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        
+
         .date-time-block { 
             display: flex; 
             flex-direction: column; 

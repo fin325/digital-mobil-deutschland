@@ -87,7 +87,10 @@ function updateClock() {
     box-sizing: border-box;
     line-height: 1.1;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
+    margin-left: -20px;
+    margin-top: -10px;
 }
+
 
 /* Общий стиль текста для даты, времени и секунд */
 #current-date, #current-time, #current-seconds {

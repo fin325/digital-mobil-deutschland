@@ -72,7 +72,40 @@ function updateClock() {
     document.getElementById('current-time').innerText = timeStr;
 }
 
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.7); /* такой же полупрозрачный фон */
+    border: 1px solid rgba(0, 51, 102, 0.2); /* тонкая рамка как у даты */
+    border-radius: 4px; /* углы как у даты */
+    
+    /* чуть уменьшенная ширина по твоей просьбе */
+    width: 50px; 
+    padding: 2px 0; 
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* мягкая тень */
+}
 
+#current-hours, #current-minutes, #current-seconds {
+    color: #003366; /* темно-синий, как у даты */
+    font-weight: 700;
+    text-align: center;
+    text-shadow: none;
+    margin: 0;
+}
+
+#current-hours, #current-minutes {
+    font-size: 0.85rem; /* как у #current-time */
+    letter-spacing: -0.2px;
+}
+
+#current-seconds {
+    font-size: 0.75rem; /* секунды чуть меньше времени */
+    letter-spacing: -0.2px;
+    opacity: 0.9;
+}
 
 
 

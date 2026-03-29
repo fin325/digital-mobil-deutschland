@@ -11,30 +11,20 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     color: var(--text-dark);
-
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
 }
 
-/* ✅ ФИКСИРОВАННЫЙ ФОН (НОВЫЙ СПОСОБ) */
+/* ✅ ФИКСИРОВАННЫЙ ФОН */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: -1;
-
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
                 url('img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
-
     background-size: cover;
-}
-
-/* --- АНИМАЦИЯ (оставил) --- */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
@@ -43,7 +33,7 @@ body::before {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 10px 0;
+    padding: 8px 0; /* Чуть уменьшил отступ для компактности */
     position: sticky;
     top: 0;
     z-index: 1100;
@@ -54,15 +44,34 @@ body::before {
     align-items: center;
     padding: 0 15px;
     max-width: 100%;
-    overflow: hidden;
+    gap: 15px; /* Добавил отступ между блоками */
+}
+
+/* ✅ НОВЫЙ БЛОК ВРЕМЕНИ И ДАТЫ */
+.date-time-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    min-width: fit-content;
 }
 
 #current-date {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: var(--primary-blue);
-    margin-right: 15px;
-    white-space: nowrap;
+    color: var(--text-dark);
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#current-time {
+    font-size: 1.1rem;
+    font-weight: 800;
+    /* Красивый градиентный оттенок */
+    background: linear-gradient(135deg, var(--primary-blue), #007aff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 2px rgba(0, 82, 155, 0.1));
 }
 
 /* --- ПОГОДА --- */
@@ -95,10 +104,6 @@ body::before {
     transition: transform 0.2s ease;
 }
 
-.w-item:active {
-    transform: scale(0.95);
-}
-
 /* --- НАВИГАЦИЯ --- */
 .navbar {
     background: rgba(255, 255, 255, 0.3);
@@ -107,7 +112,7 @@ body::before {
     border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     position: sticky;
-    top: 45px;
+    top: 55px; /* Подправил под новую высоту top-bar */
     z-index: 1000;
 }
 
@@ -159,14 +164,6 @@ body::before {
     padding: 25px;
     margin-bottom: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-    animation: fadeInUp 0.8s ease-out forwards;
-    position: relative;
-    z-index: 1;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .btn-main {
@@ -179,27 +176,13 @@ body::before {
     border-radius: 18px;
     width: 100%;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-main:active {
-    transform: scale(0.97);
 }
 
 /* --- ВКЛАДКИ --- */
-.tab-content {
-    display: none;
-}
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
 
-.tab-content.active {
-    display: block;
-    animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* --- IFRAME --- */
 .iframe-wrapper {
@@ -208,31 +191,4 @@ body::before {
     overflow: hidden;
     border: 1px solid var(--glass-border);
     height: 650px;
-    width: 100%;
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* --- ПРОЧЕЕ --- */
-.status-msg {
-    font-size: 0.9rem;
-    color: #666;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.news-card-mini {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    transition: transform 0.2s;
-}
-
-.news-card-mini:active {
-    transform: scale(0.98);
 }

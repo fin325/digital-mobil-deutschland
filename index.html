@@ -8,10 +8,10 @@
     
     <meta name="description" content="Бесплатный PDF компрессор и фото в PDF. Свежие новости Германии,забастовка транспорта NRW (Hattingen,Bochum,Essen) , погода для метеозависимых и поиск врачей в NRW. Полезные ресурсы для интеграции, признания диплома и перевода документов.">
     
-    <meta name="keywords" content="сжать pdf онлайн, сделать pdf из фото, новости германии на русском, забастовки в германии сегодня, русскоязычные врачи NRW (Бохум,Дюссельдорф,Дортмунд,Гельзенкирхен, признание диплома в германии anabin, ZAB, Bund ID, найти перевод документов, атмосферное давление погода германия">
+    <meta name="keywords" content="сжать pdf онлайн, сделать pdf из фото, новости германии на русском, забастовки в германии сегодня, русскоязычные врачи NRW">
 
     <meta property="og:title" content="Digital-Mobil DE: Твой цифровой помощник в Германии">
-    <meta property="og:description" content="Полезные инструменты для документов онлайн, актуальные новости, графики забастовок и база помощи для жизни в NRW. Цифровая безопасность и мобильность. Все сервисы в одном месте.">
+    <meta property="og:description" content="Полезные инструменты для документов онлайн, актуальные новости, графики забастовок и база помощи для жизни в NRW.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
 
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* Твои стили для новостей */
         .news-item {
             background: rgba(255, 255, 255, 0.4);
             border-left: 4px solid #00529b;
@@ -33,7 +32,6 @@
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
         .news-desc { font-size: 0.85rem; color: #444; margin: 0; }
         
-        /* Стили для фреймов инструментов */
         .iframe-wrapper { 
             height: 700px; 
             border-radius: 20px; 
@@ -42,16 +40,16 @@
             background: #fff; 
         }
         
-        /* Стили для YouTube контейнера */
+        /* Улучшенные стили для YouTube видео */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+            padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             overflow: hidden;
             border-radius: 15px;
             background: #000;
             margin: 15px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
         }
         .video-wrapper iframe {
             position: absolute;
@@ -62,10 +60,9 @@
             border: none;
         }
 
-        iframe { width: 100%; height: 100%; border: none; }
-
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
+            .video-wrapper { margin: 10px 0; }
         }
     </style>
 </head>
@@ -116,16 +113,16 @@
                 <h1>Willkommen! 🇩🇪</h1>
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
                 
+                <!-- Обновлённый блок YouTube -->
                 <div class="video-wrapper">
-    <iframe 
-        src="https://www.youtube.com/embed?listType=user_uploads&list=mishaburnews" 
-        title="Misha Bur News - Последнее видео" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-    </iframe>
-</div>
-
-
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&amp;rel=0"
+                        title="Misha Bur News - Последнее видео"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
                     <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
@@ -134,6 +131,7 @@
             </div>
         </section>
 
+        <!-- Остальные секции без изменений -->
         <section id="img2pdf" class="tab-content">
             <div class="card">
                 <h2>🖼️ Создать PDF из фото</h2>
@@ -159,7 +157,10 @@
                 <h2>📄 PDF Compressor</h2>
                 <p class="status-msg">Приложение загружается с Render (до 45 сек)...</p>
                 <div class="iframe-wrapper">
-                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+                    <iframe src="https://pdf-compressor-web.onrender.com" 
+                            allow="downloads" 
+                            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads">
+                    </iframe>
                 </div>
             </div>
         </section>
@@ -234,7 +235,9 @@
                     container.appendChild(div);
                 });
             }
-        } catch (e) { container.innerHTML = 'Не удалось загрузить новости.'; }
+        } catch (e) { 
+            container.innerHTML = '<p class="status-msg">Не удалось загрузить новости.</p>'; 
+        }
     }
 
     function showTab(tabId, event) {

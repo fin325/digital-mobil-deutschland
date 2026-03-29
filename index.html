@@ -33,7 +33,16 @@
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
         .news-desc { font-size: 0.85rem; color: #444; margin: 0; }
         
-        /* Добавка для мобильности: чтобы длинный титул не ломал верстку */
+        /* Стили для фреймов */
+        .iframe-wrapper { 
+            height: 700px; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            background: #fff; 
+        }
+        iframe { width: 100%; height: 100%; border: none; }
+
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
         }
@@ -70,8 +79,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
-            <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
+            <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
             <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
+            <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
             <button class="nav-btn" onclick="showTab('security', event)">Безопасность</button>
             <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
             <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
@@ -84,7 +94,20 @@
             <div class="card hero-card">
                 <h1>Willkommen! 🇩🇪</h1>
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-                <button class="btn-main" onclick="showTab('news', event)">Смотреть новости</button>
+                <div style="display: grid; gap: 10px; margin-top: 15px;">
+                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+                    <button class="btn-main" style="background: #007aff;" onclick="showTab('news', event)">Смотреть новости</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="img2pdf" class="tab-content">
+            <div class="card">
+                <h2>🖼️ Создать PDF из фото</h2>
+                <p class="status-msg">Конвертируйте изображения в документ прямо здесь.</p>
+                <div class="iframe-wrapper">
+                    <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
+                </div>
             </div>
         </section>
 
@@ -134,7 +157,6 @@
     <script>
     const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
 
-    // 1. Погода и город
     async function getWeather() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -159,7 +181,6 @@
         }
     }
 
-    // 2. Загрузка новостей (RSS to JSON)
     async function loadNews() {
         const container = document.getElementById('news-container');
         const rssUrl = 'https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml';
@@ -183,7 +204,6 @@
         } catch (e) { container.innerHTML = 'Не удалось загрузить новости.'; }
     }
 
-    // 3. Переключение вкладок
     function showTab(tabId, event) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -192,7 +212,6 @@
         window.scrollTo(0,0);
     }
 
-    // Старт проекта
     window.onload = function() {
         getWeather();
         loadNews();

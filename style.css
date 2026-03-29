@@ -77,39 +77,48 @@ function updateClock() {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.6); /* Чуть плотнее фон для читаемости */
-    border: 1px solid rgba(0, 51, 102, 0.15);
+    background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
+    border: 1px solid rgba(0, 51, 102, 0.15); /* тонкая рамка */
     border-radius: 6px;
-    
-    /* Делаем блок маленьким и почти квадратным */
-    width: 50px; 
-    height: 45px;
+
+    width: 45px;  /* чуть уже, как просил */
+    height: 40px;
     padding: 2px;
     box-sizing: border-box;
     line-height: 1.1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
 }
 
-#current-date, #current-time {
-    /* Одинаковый цвет для обоих элементов */
-    color: #003366; 
-    text-shadow: none;
-    font-family: inherit;
+/* Общий стиль текста для даты, времени и секунд */
+#current-date, #current-time, #current-seconds {
+    color: #003366;       /* одинаковый темно-синий цвет */
+    font-family: inherit; 
     text-align: center;
+    text-shadow: 0 0 1px rgba(0,51,102,0.25); /* мягкая тень для одинакового визуального веса */
+    margin: 0;
+    font-weight: 700;     /* одинаковая жирность */
 }
 
+/* Дата */
 #current-date {
-    font-size: 0.65rem; /* Уменьшили, чтобы влезло в квадрат */
-    font-weight: 700;
+    font-size: 0.65rem; 
     text-transform: uppercase;
     margin-bottom: 1px;
+    letter-spacing: 0.3px;
 }
 
+/* Время (часы и минуты) */
 #current-time {
-    font-size: 0.9rem; /* Оптимальный размер для узкого окна */
-    font-weight: 800;
-    letter-spacing: -0.3px;
+    font-size: 0.85rem; 
+    letter-spacing: -0.2px;
 }
 
+/* Секунды чуть меньше, но с тем же цветом и тенью */
+#current-seconds {
+    font-size: 0.75rem;
+    letter-spacing: -0.2px;
+    opacity: 0.9;
+}
 
 
 

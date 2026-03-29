@@ -3,368 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
-    
-    <link rel="stylesheet" href="style.css">
+    <title>Digital-Mobil DE | Hattingen</title>
     
     <style>
-        /* Фиксированный фон */
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background: url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        .top-bar { 
-            padding: 12px 0; 
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
-        }
-        .top-bar-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        
-        .date-time-block { 
-            display: flex; 
-            flex-direction: column; 
-            line-height: 1.2; 
-            font-weight: bold; 
-            min-width: 80px; 
-        }
-        #current-time { 
-            font-size: 0.8rem; 
-            color: #00529b; 
-            opacity: 0.8; 
-        }
-        
-        .weather-info { 
-            display: flex; 
-            flex-wrap: nowrap; 
-            overflow-x: auto; 
-            gap: 12px; 
-            font-size: 0.85rem; 
-            align-items: center; 
-        }
-        .w-item { 
-            white-space: nowrap; 
-            font-weight: 500; 
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            background: rgba(255,255,255,0.2); 
-            padding: 4px 8px; 
-            border-radius: 10px; 
-        }
-        .divider { 
-            color: rgba(0,0,0,0.2); 
-            margin: 0 2px; 
-        }
+        /* Заголовок сайта */
+        .site-header { padding: 25px 20px 10px 20px; color: #00529b; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
+        .site-title { font-size: 1.8rem; font-weight: 800; margin: 0; line-height: 1.1; }
+        .site-subtitle { font-size: 1.1rem; font-weight: 600; opacity: 0.9; margin-top: 4px; }
 
-        /* Увеличенный и красивый заголовок */
-        .site-title {
-            text-align: center;
-            color: #f0f8ff;                    /* красивый белый с лёгким голубым оттенком */
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
-                         0 0 15px rgba(100, 180, 255, 0.5); /* мягкое свечение */
-            margin: 10px 0 6px 0;
-            font-size: 1.55rem;                /* увеличенный шрифт */
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
+        /* Верхняя панель */
+        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .top-bar-content { display: flex; justify-content: space-between; align-items: center; padding: 0 15px; }
         
-        .site-subtitle {
-            text-align: center;
-            color: #e6f0ff;                    /* чуть более светлый оттенок */
-            font-size: 1.05rem;                /* увеличенный шрифт */
-            font-weight: 500;
-            margin: 0 0 10px 0;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-        }
+        .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; }
+        #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
 
-        /* Прозрачные карточки */
-        .card { 
-            background: rgba(255, 255, 255, 0.2) !important; 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.3); 
-            border-radius: 28px; 
-            padding: 25px; 
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        /* Переключатель языка */
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-btn { 
+            background: rgba(255,255,255,0.4); border: 1px solid #00529b; 
+            border-radius: 8px; padding: 6px 12px; cursor: pointer; font-weight: bold; color: #00529b;
         }
+        .lang-btn.active { background: #00529b; color: white; }
 
-        .news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
-        .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
+        /* Навигация */
+        .navbar { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.2); padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
+        .nav-container { display: flex; overflow-x: auto; gap: 8px; padding: 0 15px; scrollbar-width: none; }
+        .nav-btn { background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255,255,255,0.3); padding: 10px 15px; border-radius: 12px; white-space: nowrap; color: #00529b; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .nav-btn.active { background: #00529b; color: white; }
+        .nav-row-2 { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        /* Контент */
+        .container { padding: 15px; max-width: 800px; margin: 0 auto; }
+        .card { background: rgba(255, 255, 255, 0.2) !important; backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 28px; padding: 25px; margin-bottom: 20px; }
         
-        .iframe-wrapper { 
-            height: 700px; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.3); 
-            background: rgba(255, 255, 255, 0.1); 
-        }
-        
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 15px;
-            margin: 15px 0;
-            background: rgba(0,0,0,0.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; margin: 15px 0; background: rgba(0,0,0,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .btn-main {
-            background: rgba(0, 82, 155, 0.7) !important;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.2) !important;
-            color: white;
-            padding: 18px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 18px;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+        .btn-main { background: rgba(0, 82, 155, 0.7) !important; color: white; border: none; padding: 18px; font-size: 1.1rem; font-weight: 600; border-radius: 18px; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        .nav-row-2 {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.4rem; }
-            .weather-info { font-size: 0.78rem; gap: 8px; }
-            .site-title { font-size: 1.35rem; }
-            .site-subtitle { font-size: 0.95rem; }
-        }
+        @media (max-width: 480px) { .site-title { font-size: 1.4rem; } }
     </style>
 </head>
-
 <body>
 
+    <header class="site-header">
+        <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
+    </header>
+
     <div class="top-bar">
-        <div class="container top-bar-content">
+        <div class="top-bar-content">
             <div class="date-time-block">
                 <span id="current-date"></span>
                 <span id="current-time"></span>
             </div>
-
-            <div class="weather-scroll-container">
-                <div class="weather-info" id="full-weather-bar">
-                    <span class="w-item" id="city-temp">Laden...</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">💧 <span id="hum">--</span>%</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">⏲️ <span id="press">--</span> mmHg</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
-                </div>
+            
+            <div class="lang-switch">
+                <button class="lang-btn" onclick="changeLanguage('ru')" id="btn-ru">RU</button>
+                <button class="lang-btn" onclick="changeLanguage('de')" id="btn-de">DE</button>
             </div>
         </div>
-
-        <!-- Название сайта -->
-        <div class="site-title">Digital & Mobil in Deutschland</div>
-        <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 
     <nav class="navbar">
         <div class="nav-container">
-            <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
-            <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-            <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
-            <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-            <button class="nav-btn" onclick="showTab('security', event)">Безопасность</button>
-            <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
-            <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+            <button class="nav-btn active" onclick="showTab('home', event)" data-i18n="nav_home">Главная</button>
+            <button class="nav-btn" onclick="showTab('img2pdf', event)" data-i18n="nav_img2pdf">Фото в PDF</button>
+            <button class="nav-btn" onclick="showTab('pdf', event)" data-i18n="nav_pdf">Сжатие</button>
+            <button class="nav-btn" onclick="showTab('news', event)" data-i18n="nav_news">Новости</button>
+            <button class="nav-btn" onclick="showTab('security', event)" data-i18n="nav_security">Безопасность</button>
         </div>
         <div class="nav-container nav-row-2">
-            <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-            <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
-            <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-            <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
-            <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-            <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-            <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
+            <button class="nav-btn" onclick="showTab('mobile', event)" data-i18n="nav_mobile">Транспорт</button>
+            <button class="nav-btn" onclick="showTab('health', event)" data-i18n="nav_health">Здоровье</button>
+            <button class="nav-btn" onclick="showTab('laws', event)" data-i18n="nav_laws">Законы</button>
+            <button class="nav-btn" onclick="showTab('jobs', event)" data-i18n="nav_jobs">Работа</button>
+            <button class="nav-btn" onclick="showTab('contacts', event)" data-i18n="nav_contacts">Контакты</button>
         </div>
     </nav>
 
     <main class="container">
-        
         <section id="home" class="tab-content active">
-            <div class="card hero-card">
-                <h1>Willkommen! 🇩🇪</h1>
-                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+            <div class="card">
+                <h1 data-i18n="welcome_title">Willkommen! 🇩🇪</h1>
+                <p data-i18n="welcome_text">Ваш гид по цифровой экосистеме Германии.</p>
                 
                 <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0"
-                        title="YouTube video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" allowfullscreen></iframe>
                 </div>
-
                 <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0"
-                        title="YouTube video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" allowfullscreen></iframe>
                 </div>
-
-                <!-- Миша Бур -->
                 <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&rel=0"
-                        title="Misha Bur News"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&rel=0" allowfullscreen></iframe>
                 </div>
-
                 <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PL5rBbYZrC6VNPG6Rb2uWKaNkhekI09wbW&rel=0"
-                        title="Мой плейлист"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.youtube.com/embed/videoseries?list=PL5rBbYZrC6VNPG6Rb2uWKaNkhekI09wbW&rel=0" allowfullscreen></iframe>
                 </div>
 
-                <div style="display: grid; gap: 10px; margin-top: 15px;">
-                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
-                </div>
+                <button class="btn-main" onclick="showTab('img2pdf', event)" data-i18n="btn_create_pdf">🖼️ Создать PDF из фото</button>
+                <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)" data-i18n="btn_read_news">Читать новости</button>
             </div>
         </section>
 
+        <section id="mobile" class="tab-content">
+            <div class="card">
+                <h2 data-i18n="title_mobile">Транспорт</h2>
+                <p data-i18n="desc_mobile">Билеты DB и навигация.</p>
+            </div>
+        </section>
+
+        <section id="health" class="tab-content">
+            <div class="card">
+                <h2 data-i18n="title_health">Здоровье</h2>
+                <p data-i18n="desc_health">Запись к врачу.</p>
+            </div>
+        </section>
+
+        <section id="laws" class="tab-content">
+            <div class="card">
+                <h2 data-i18n="title_laws">Законы</h2>
+                <p data-i18n="desc_laws">Права и обязанности.</p>
+            </div>
+        </section>
+
+        <section id="jobs" class="tab-content">
+            <div class="card">
+                <h2 data-i18n="title_jobs">Работа</h2>
+                <p data-i18n="desc_jobs">Поиск вакансий.</p>
+            </div>
+        </section>
+
+        <section id="security" class="tab-content">
+            <div class="card">
+                <h2 data-i18n="title_security">Безопасность</h2>
+                <p data-i18n="desc_security">Службы спасения.</p>
+            </div>
+        </section>
+
+        <section id="contacts" class="tab-content">
+            <div class="card">
+                <h2 data-i18n="title_contacts">Контакты</h2>
+                <p data-i18n="desc_contacts">Связь с нами.</p>
+            </div>
+        </section>
+        
         <section id="img2pdf" class="tab-content">
             <div class="card">
-                <h2>🖼️ Создать PDF из фото</h2>
-                <div class="iframe-wrapper">
-                    <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
-                </div>
+                <h2 data-i18n="nav_img2pdf">Фото в PDF</h2>
+                <p data-i18n="pdf_desc">Конвертируйте изображения быстро и безопасно.</p>
             </div>
         </section>
-
-        <section id="pdf" class="tab-content">
-            <div class="card">
-                <h2>📄 PDF Compressor</h2>
-                <div class="iframe-wrapper">
-                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="news" class="tab-content">
-            <div class="card">
-                <h2>🗞️ Последние события</h2>
-                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
-            </div>
-        </section>
-
-        <section id="security" class="tab-content"><div class="card"><h2>🛡️ Безопасность</h2></div></section>
-        <section id="mobile" class="tab-content"><div class="card"><h2>🚆 Транспорт</h2></div></section>
-        <section id="maps" class="tab-content"><div class="card"><h2>📍 Карты</h2></div></section>
-        <section id="translate" class="tab-content"><div class="card"><h2>🗣️ Перевод</h2></div></section>
-        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
-        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
-        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
-        <section id="laws" class="tab-content"><div class="card"><h2>⚖️ Законы</h2></div></section>
-        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
-
-        <section id="about" class="tab-content">
-            <div class="card">
-                <h2>ℹ️ О проекте</h2>
-                <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
-            </div>
-        </section>
-
     </main>
 
     <script>
-    const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
-
-    function updateClock() {
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('current-time').innerText = timeStr;
-    }
-
-    async function getWeather() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                try {
-                    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=de`);
-                    const d = await res.json();
-                    if (d.main) {
-                        const temp = Math.round(d.main.temp);
-                        const city = d.name;
-                        const code = d.weather[0].id;
-                        let icon = '☁️';
-                        if (code === 800) icon = '☀️';
-                        else if (code > 800) icon = '☁️';
-                        else if (code >= 600) icon = '❄️';
-                        else if (code >= 300) icon = '🌧️';
-
-                        document.getElementById('city-temp').innerText = `${city} ${icon} ${temp}°C`;
-                        document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006);
-                        document.getElementById('hum').innerText = d.main.humidity;
-                    }
-                } catch (e) { console.error(e); }
-            });
-        }
-    }
-
-    async function loadNews() {
-        const container = document.getElementById('news-container');
-        const rssUrl = 'https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml';
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-        try {
-            const res = await fetch(apiUrl);
-            const data = await res.json();
-            if (data.status === 'ok') {
-                container.innerHTML = '';
-                data.items.slice(0, 5).forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'news-item';
-                    div.innerHTML = `<a href="${item.link}" target="_blank" class="news-title">${item.title}</a><p class="news-desc">${item.description.split('.')[0]}...</p>`;
-                    container.appendChild(div);
-                });
+        const translations = {
+            ru: {
+                nav_home: "Главная", nav_img2pdf: "Фото в PDF", nav_pdf: "Сжатие", nav_news: "Новости", nav_security: "Безопасность",
+                nav_mobile: "Транспорт", nav_health: "Здоровье", nav_laws: "Законы", nav_jobs: "Работа", nav_contacts: "Контакты",
+                welcome_title: "Willkommen! 🇩🇪", welcome_text: "Ваш персональный гид по цифровой экосистеме Германии.",
+                btn_create_pdf: "🖼️ Создать PDF из фото", btn_read_news: "Читать новости",
+                title_mobile: "🚆 Транспорт", desc_mobile: "Билеты DB, расписание автобусов и навигация VRR.",
+                title_health: "⚕️ Здоровье", desc_health: "Запись к врачу (Doctolib) и поиск дежурных аптек.",
+                title_laws: "⚖️ Законы", desc_laws: "Краткий справочник прав и обязанностей в Германии.",
+                title_jobs: "💼 Работа", desc_jobs: "Поиск вакансий, составление резюме и Jobcenter.",
+                title_security: "🛡️ Безопасность", desc_security: "Важные контакты служб спасения и советы по защите данных.",
+                title_contacts: "📞 Контакты", desc_contacts: "Связь с администрацией и поддержка.",
+                pdf_desc: "Конвертируйте ваши изображения быстро и безопасно."
+            },
+            de: {
+                nav_home: "Startseite", nav_img2pdf: "Foto zu PDF", nav_pdf: "Komprimieren", nav_news: "Nachrichten", nav_security: "Sicherheit",
+                nav_mobile: "Verkehr", nav_health: "Gesundheit", nav_laws: "Gesetze", nav_jobs: "Arbeit", nav_contacts: "Kontakte",
+                welcome_title: "Willkommen! 🇩🇪", welcome_text: "Ihr persönlicher Leitfaden für das digitale Ökosystem Deutschlands.",
+                btn_create_pdf: "🖼️ PDF aus Fotos erstellen", btn_read_news: "Nachrichten lesen",
+                title_mobile: "🚆 Verkehr & Mobilität", desc_mobile: "DB-Tickets, Busfahrpläne und VRR-Navigation.",
+                title_health: "⚕️ Gesundheit", desc_health: "Arzttermine (Doctolib) und Apothekensuche.",
+                title_laws: "⚖️ Gesetze", desc_laws: "Kurzer Leitfaden zu Rechten und Pflichten in Deutschland.",
+                title_jobs: "💼 Arbeit", desc_jobs: "Jobsuche, Lebenslauf-Erstellung und Jobcenter-Infos.",
+                title_security: "🛡️ Sicherheit", desc_security: "Notrufnummern und Tipps zum Datenschutz.",
+                title_contacts: "📞 Kontakte", desc_contacts: "Kontakt zur Verwaltung und Benutzersupport.",
+                pdf_desc: "Konvertieren Sie Ihre Bilder schnell und sicher."
             }
-        } catch (e) { container.innerHTML = 'Fehler beim Laden.'; }
-    }
+        };
 
-    function showTab(tabId, event) {
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        if (event && event.currentTarget) event.currentTarget.classList.add('active');
-        window.scrollTo(0,0);
-    }
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerText = translations[lang][key];
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+        }
 
-    window.onload = function() {
-        getWeather();
-        loadNews();
-        const options = { day: 'numeric', month: 'long' };
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('de-DE', options);
-        updateClock();
-        setInterval(updateClock, 1000);
-    };
+        function showTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (event) event.currentTarget.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'ru';
+            changeLanguage(savedLang);
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('current-time').innerText = now.toLocaleTimeString('de-DE');
+                document.getElementById('current-date').innerText = now.toLocaleDateString('de-DE', {day:'numeric', month:'long'});
+            }, 1000);
+        };
     </script>
-
 </body>
 </html>

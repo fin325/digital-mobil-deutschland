@@ -57,13 +57,33 @@ body::before {
     overflow: hidden;
 }
 
-#current-date {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    margin-right: 15px;
-    white-space: nowrap;
+/* Блок обертка для выравнивания */
+.date-time-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
 }
+
+/* Стили для даты */
+#current-date {
+    font-size: 0.8rem;
+    color: #00529b;
+    font-weight: 700;
+    opacity: 0.9;
+    /* Тень как у заголовка, но под синий цвет */
+    text-shadow: 0 1px 4px rgba(0, 82, 155, 0.2);
+}
+
+/* Стили для времени */
+#current-time {
+    font-size: 1.1rem;
+    color: #00529b;
+    font-weight: 800;
+    /* Сильное свечение (glow), как у основного заголовка */
+    text-shadow: 0 2px 8px rgba(0, 82, 155, 0.3), 
+                 0 0 10px rgba(100, 180, 255, 0.4);
+}
+
 
 /* --- ПОГОДА --- */
 .weather-scroll-container {

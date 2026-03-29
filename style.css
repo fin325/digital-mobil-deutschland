@@ -58,42 +58,20 @@ body::before {
 }
 
 /* Блок обертка для выравнивания */
-.date-time-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.7); /* Чуть плотнее для четкости */
-    border: 1px solid rgba(0, 51, 102, 0.2); /* Тонкая рамка цвета текста */
-    border-radius: 4px; /* Более строгие углы */
+function updateClock() {
+    const now = new Date();
     
-    /* Минимальные размеры */
-    width: 55px; 
-    padding: 2px 0; 
-    line-height: 1;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Едва заметная тень для объема */
+    // Дата: 29 МАР (максимально коротко)
+    const dateStr = now.toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })
+                       .replace('.', '').substring(0, 6).toUpperCase();
+    
+    // Время: 19:45 (без секунд, чтобы влезло в узкий блок)
+    const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById('current-date').innerText = dateStr;
+    document.getElementById('current-time').innerText = timeStr;
 }
 
-#current-date, #current-time {
-    color: #003366; /* Единый темно-синий оттенок */
-    font-weight: 700; /* Одинаковая жирность */
-    text-align: center;
-    text-shadow: none;
-    margin: 0;
-}
-
-#current-date {
-    font-size: 0.6rem; /* Совсем маленький шрифт для даты */
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    margin-bottom: 2px;
-    opacity: 0.9;
-}
-
-#current-time {
-    font-size: 0.85rem; /* Время чуть крупнее, но в том же стиле */
-    letter-spacing: -0.2px;
-}
 
 
 

@@ -42,6 +42,13 @@
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
+        /* Стиль для второго ряда навигации */
+        .nav-row-2 {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
         @media (max-width: 480px) {
             h1 { font-size: 1.4rem; }
             .weather-info { font-size: 0.78rem; gap: 8px; }
@@ -81,6 +88,15 @@
             <button class="nav-btn" onclick="showTab('security', event)">Безопасность</button>
             <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
             <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+        </div>
+        <div class="nav-container nav-row-2">
+            <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
+            <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
+            <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
+            <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
+            <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
+            <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
+            <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
         </div>
     </nav>
 
@@ -131,6 +147,16 @@
             </div>
         </section>
 
+        <section id="security" class="tab-content"><div class="card"><h2>🛡️ Безопасность</h2></div></section>
+        <section id="mobile" class="tab-content"><div class="card"><h2>🚆 Транспорт</h2></div></section>
+        <section id="maps" class="tab-content"><div class="card"><h2>📍 Карты</h2></div></section>
+        <section id="translate" class="tab-content"><div class="card"><h2>🗣️ Перевод</h2></div></section>
+        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
+        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
+        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
+        <section id="laws" class="tab-content"><div class="card"><h2>⚖️ Законы</h2></div></section>
+        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
+
         <section id="about" class="tab-content">
             <div class="card">
                 <h2>ℹ️ О проекте</h2>
@@ -153,7 +179,6 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 try {
-                    // lang=de для немецких названий городов
                     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=de`);
                     const d = await res.json();
                     if (d.main) {
@@ -166,11 +191,8 @@
                         else if (code >= 600) icon = '❄️';
                         else if (code >= 300) icon = '🌧️';
 
-                        // Вывод Город + Температура
                         document.getElementById('city-temp').innerText = `${city} ${icon} ${temp}°C`;
-                        // Давление в mmHg (немецкий стандарт mmHg)
                         document.getElementById('press').innerText = Math.round(d.main.pressure * 0.75006);
-                        // Влажность
                         document.getElementById('hum').innerText = d.main.humidity;
                     }
                 } catch (e) { console.error(e); }

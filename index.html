@@ -1,49 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>Digital-Mobil DE | Помощь и инструменты в NRW</title>
-    
+    <title>Digital-Mobil DE</title>
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
-        .top-bar-content { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-        
-        .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; min-width: 85px; }
-        #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
-        
-        /* Единая строка-кнопка погоды */
-        .weather-scroll-container { flex-grow: 1; overflow-x: auto; scrollbar-width: none; }
-        .weather-scroll-container::-webkit-scrollbar { display: none; }
-
-        .weather-info-btn { 
-            display: inline-flex; 
-            align-items: center; 
-            white-space: nowrap; 
-            background: rgba(255, 255, 255, 0.3); 
-            padding: 6px 12px; 
-            border-radius: 20px; 
-            font-size: 0.82rem; 
-            font-weight: 500; 
-            color: #1d1d1f;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .news-item { background: rgba(255, 255, 255, 0.4); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; margin: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.25); }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        @media (max-width: 480px) {
-            .weather-info-btn { font-size: 0.75rem; padding: 5px 10px; }
-        }
-    </style>
 </head>
-
 <body>
 
     <div class="top-bar">
@@ -52,11 +14,8 @@
                 <span id="current-date"></span>
                 <span id="current-time"></span>
             </div>
-
             <div class="weather-scroll-container">
-                <div class="weather-info-btn" onclick="getWeather()">
-                    <span id="weather-string">Laden...</span>
-                </div>
+                <div class="w-item" id="full-weather">Laden...</div>
             </div>
         </div>
     </div>
@@ -65,41 +24,31 @@
         <div class="nav-container">
             <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
             <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-            <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
             <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-            <button class="nav-btn" onclick="showTab('security', event)">Безопасность</button>
-            <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
             <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
         </div>
     </nav>
 
     <main class="container">
         <section id="home" class="tab-content active">
-            <div class="card hero-card">
+            <div class="card">
                 <h1>Willkommen! 🇩🇪</h1>
-                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&amp;rel=0" allowfullscreen></iframe>
-                </div>
-                <div style="display: grid; gap: 10px; margin-top: 15px;">
-                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: #007aff;" onclick="showTab('news', event)">Читать текстовые новости</button>
-                </div>
+                <p>Ваш цифровой помощник в Германии.</p>
             </div>
         </section>
 
-        <section id="img2pdf" class="tab-content"><div class="card"><h2>🖼️ Фото в PDF</h2></div></section>
-        <section id="news" class="tab-content"><div class="card"><h2>🗞️ Новости</h2><div id="news-container"></div></div></section>
-        <section id="about" class="tab-content"><div class="card"><h2>ℹ️ О проекте</h2></div></section>
+        <section id="img2pdf" class="tab-content">
+            <div class="card">
+                <h2>🖼️ Фото в PDF</h2>
+                <div class="iframe-wrapper">
+                    <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
     const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
-
-    function updateClock() {
-        const now = new Date();
-        document.getElementById('current-time').innerText = now.toLocaleTimeString('de-DE');
-    }
 
     async function getWeather() {
         if (navigator.geolocation) {
@@ -112,37 +61,24 @@
                         const city = d.name;
                         const hum = d.main.humidity;
                         const press = Math.round(d.main.pressure * 0.75006);
-                        const code = d.weather[0].id;
-                        let icon = '☁️';
-                        if (code === 800) icon = '☀️';
-                        else if (code > 800) icon = '☁️';
-                        else if (code >= 600) icon = '❄️';
-                        else if (code >= 300) icon = '🌧️';
+                        
+                        // &nbsp; - это принудительный пробел. 5 штук создадут большой отступ.
+                        const sp = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; 
+                        const divider = '<span style="opacity:0.2">|</span>';
 
-                        // Формируем единую строку без разделителей
-                        const weatherStr = `${city} ${icon} ${temp}°C     💧${hum}%     ⏲️${press}mmHg     🧲 Kp-Index: 2 Punkte`;
-document.getElementById('weather-string').innerText = weatherStr;
-
+                        const weatherStr = `${city} ${temp}°C ${sp}${divider}${sp}💧 ${hum}% ${sp}${divider}${sp}⏲️ ${press}mmHg ${sp}${divider}${sp}🧲 Kp-Index: 2 Punkte`;
+                        
+                        // Используем innerHTML для обработки &nbsp;
+                        document.getElementById('full-weather').innerHTML = weatherStr;
                     }
                 } catch (e) { console.error(e); }
             });
         }
     }
 
-    async function loadNews() {
-        const container = document.getElementById('news-container');
-        try {
-            const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.tagesschau.de%2Finfoservices%2Falle-meldungen-100~rss2.xml`);
-            const data = await res.json();
-            if (data.status === 'ok') {
-                container.innerHTML = data.items.slice(0, 5).map(item => `
-                    <div class="news-item">
-                        <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
-                        <p style="font-size:0.85rem; margin:0;">${item.description.split('.')[0]}...</p>
-                    </div>
-                `).join('');
-            }
-        } catch (e) { container.innerHTML = 'Fehler.'; }
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('current-time').innerText = now.toLocaleTimeString('de-DE');
     }
 
     function showTab(tabId, event) {
@@ -155,8 +91,7 @@ document.getElementById('weather-string').innerText = weatherStr;
 
     window.onload = function() {
         getWeather();
-        loadNews();
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('de-DE', { day: 'numeric', month: 'long' });
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('de-DE', {day:'numeric', month:'long'});
         updateClock();
         setInterval(updateClock, 1000);
     };

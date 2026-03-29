@@ -61,32 +61,41 @@ body::before {
 .date-time-block {
     display: flex;
     flex-direction: column;
-    align-items: center;    /* Центрируем текст внутри квадрата */
+    align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.5); /* Полупрозрачный светлый фон */
-    border: 1px solid rgba(0, 65, 122, 0.2); /* Тонкая темная рамка */
-    border-radius: 8px;     /* Слегка закругленные углы */
-    padding: 5px;           /* Внутренние отступы */
-    min-width: 65px;        /* Делаем его узким/квадратным */
-    height: 50px;           /* Фиксированная высота для формы квадрата */
+    background: rgba(255, 255, 255, 0.6); /* Чуть плотнее фон для читаемости */
+    border: 1px solid rgba(0, 51, 102, 0.15);
+    border-radius: 6px;
+    
+    /* Делаем блок маленьким и почти квадратным */
+    width: 60px; 
+    height: 45px;
+    padding: 2px;
+    box-sizing: border-box;
     line-height: 1.1;
 }
 
+#current-date, #current-time {
+    /* Одинаковый цвет для обоих элементов */
+    color: #003366; 
+    text-shadow: none;
+    font-family: inherit;
+    text-align: center;
+}
+
 #current-date {
-    font-size: 0.7rem;      /* Чуть меньше, чтобы влезло в узкое окно */
+    font-size: 0.65rem; /* Уменьшили, чтобы влезло в квадрат */
     font-weight: 700;
-    color: #00417a;         /* Темно-синий (темнее, чем primary) */
     text-transform: uppercase;
-    white-space: nowrap;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 #current-time {
-    font-size: 1rem;
+    font-size: 0.9rem; /* Оптимальный размер для узкого окна */
     font-weight: 800;
-    color: #00417a;         /* Тот же темно-синий */
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
+
 
 
 

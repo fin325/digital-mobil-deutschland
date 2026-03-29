@@ -47,8 +47,13 @@ body::before {
     position: sticky;
     top: 0;
     z-index: 1100;
-}
-
+    padding: 12px 0; 
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-bottom: 1px solid rgba(255,255,255,0.2); 
+    }
+    
 .top-bar-content {
     display: flex;
     align-items: center;

@@ -33,7 +33,7 @@
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
         .news-desc { font-size: 0.85rem; color: #444; margin: 0; }
         
-        /* Стили для фреймов */
+        /* Стили для фреймов инструментов */
         .iframe-wrapper { 
             height: 700px; 
             border-radius: 20px; 
@@ -41,6 +41,27 @@
             border: 1px solid rgba(255,255,255,0.3); 
             background: #fff; 
         }
+        
+        /* Стили для YouTube контейнера */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         iframe { width: 100%; height: 100%; border: none; }
 
         @media (max-width: 480px) {
@@ -94,9 +115,19 @@
             <div class="card hero-card">
                 <h1>Willkommen! 🇩🇪</h1>
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+                
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/live_stream?channel=UC52X5DMQD_m49cE7enBy_UA" 
+                        title="News Live" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
                     <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: #007aff;" onclick="showTab('news', event)">Смотреть новости</button>
+                    <button class="btn-main" style="background: #007aff;" onclick="showTab('news', event)">Читать текстовые новости</button>
                 </div>
             </div>
         </section>

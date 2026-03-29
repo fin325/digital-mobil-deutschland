@@ -39,10 +39,6 @@ body::before {
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
 .top-bar {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--glass-border);
     padding: 10px 0;
     position: sticky;
     top: 0;
@@ -55,8 +51,6 @@ body::before {
     }
     
 .top-bar-content {
-    display: flex;
-    align-items: center;
     padding: 0 15px;
     max-width: 100%;
     overflow: hidden;
@@ -66,19 +60,6 @@ body::before {
 }
 
 /* Блок обертка для выравнивания */
-function updateClock() {
-    const now = new Date();
-    
-    // Дата: 29 МАР (максимально коротко)
-    const dateStr = now.toLocaleDateString('de-DE', { day: 'numeric', month: 'short' })
-                       .replace('.', '').substring(0, 6).toUpperCase();
-    
-    // Время: 19:45 (без секунд, чтобы влезло в узкий блок)
-    const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
-
-    document.getElementById('current-date').innerText = dateStr;
-    document.getElementById('current-time').innerText = timeStr;
-}
 
 .date-time-block {
     position: relative; 
@@ -91,7 +72,6 @@ function updateClock() {
     background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
     border: 1px solid rgba(0, 51, 80, 0.15); /* тонкая рамка */
     border-radius: 6px;
-
     width: 45px;  /* чуть уже, как просил */
     height: 40px;
     padding: 2px;
@@ -99,7 +79,6 @@ function updateClock() {
     line-height: 1.1;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
 }
-
 
 /* Общий стиль текста для даты, времени и секунд */
 #current-date, #current-time, #current-seconds {
@@ -131,11 +110,6 @@ function updateClock() {
     letter-spacing: -0.2px;
     opacity: 0.9;
 }
-
-
-
-
-
 
 /* --- ПОГОДА --- */
 .weather-scroll-container {
@@ -309,14 +283,6 @@ iframe {
     transform: scale(0.98);
 }
 /* Фиксированный фон */
-        
-        .top-bar { 
-            padding: 12px 0; 
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
-        }
         
         .date-time-block { 
             display: flex; 

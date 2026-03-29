@@ -43,6 +43,15 @@
             color: #00529b; 
             opacity: 0.8; 
         }
+
+        /* Кнопки переключения языка */
+        .lang-switch { display: flex; gap: 8px; margin-left: 10px; }
+        .lang-btn { 
+            background: rgba(255,255,255,0.3); border: 1px solid #00529b; 
+            border-radius: 8px; padding: 5px 10px; cursor: pointer; 
+            font-size: 0.8rem; font-weight: bold; color: #00529b;
+        }
+        .lang-btn.active { background: #00529b; color: white; }
         
         .weather-info { 
             display: flex; 
@@ -70,19 +79,18 @@
         /* Увеличенный и красивый заголовок */
         .site-title {
             text-align: center;
-            color: #f0f8ff;                    /* красивый белый с лёгким голубым оттенком */
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
-                         0 0 15px rgba(100, 180, 255, 0.5); /* мягкое свечение */
+            color: #f0f8ff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
             margin: 10px 0 6px 0;
-            font-size: 1.55rem;                /* увеличенный шрифт */
+            font-size: 1.55rem;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
         
         .site-subtitle {
             text-align: center;
-            color: #e6f0ff;                    /* чуть более светлый оттенок */
-            font-size: 1.05rem;                /* увеличенный шрифт */
+            color: #e6f0ff;
+            font-size: 1.05rem;
             font-weight: 500;
             margin: 0 0 10px 0;
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
@@ -172,31 +180,35 @@
                     <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
                 </div>
             </div>
+
+            <div class="lang-switch">
+                <button class="lang-btn" onclick="changeLanguage('ru')" id="btn-ru">RU</button>
+                <button class="lang-btn" onclick="changeLanguage('de')" id="btn-de">DE</button>
+            </div>
         </div>
 
-        <!-- Название сайта -->
         <div class="site-title">Digital & Mobil in Deutschland</div>
-        <div class="site-subtitle">Stadt Hattingen</div>
+        <div class="site-subtitle" data-i18n="subtitle">Stadt Hattingen</div>
     </div>
 
     <nav class="navbar">
         <div class="nav-container">
-            <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
-            <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-            <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
-            <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-            <button class="nav-btn" onclick="showTab('security', event)">Безопасность</button>
-            <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
-            <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+            <button class="nav-btn active" onclick="showTab('home', event)" data-i18n="nav_home">Главная</button>
+            <button class="nav-btn" onclick="showTab('img2pdf', event)" data-i18n="nav_img2pdf">Фото в PDF</button>
+            <button class="nav-btn" onclick="showTab('pdf', event)" data-i18n="nav_pdf">PDF Сжатие</button>
+            <button class="nav-btn" onclick="showTab('news', event)" data-i18n="nav_news">Новости DE</button>
+            <button class="nav-btn" onclick="showTab('security', event)" data-i18n="nav_security">Безопасность</button>
+            <button class="nav-btn" onclick="showTab('mobile', event)" data-i18n="nav_mobile">Транспорт</button>
+            <button class="nav-btn" onclick="showTab('about', event)" data-i18n="nav_about">Инфо</button>
         </div>
         <div class="nav-container nav-row-2">
-            <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-            <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
-            <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-            <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
-            <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-            <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-            <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
+            <button class="nav-btn" onclick="showTab('maps', event)" data-i18n="nav_maps">Карты</button>
+            <button class="nav-btn" onclick="showTab('translate', event)" data-i18n="nav_translate">Перевод</button>
+            <button class="nav-btn" onclick="showTab('jobs', event)" data-i18n="nav_jobs">Работа</button>
+            <button class="nav-btn" onclick="showTab('docs', event)" data-i18n="nav_docs">Документы</button>
+            <button class="nav-btn" onclick="showTab('health', event)" data-i18n="nav_health">Здоровье</button>
+            <button class="nav-btn" onclick="showTab('laws', event)" data-i18n="nav_laws">Законы</button>
+            <button class="nav-btn" onclick="showTab('contacts', event)" data-i18n="nav_contacts">Контакты</button>
         </div>
     </nav>
 
@@ -204,14 +216,13 @@
         
         <section id="home" class="tab-content active">
             <div class="card hero-card">
-                <h1>Willkommen! 🇩🇪</h1>
-                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+                <h1 data-i18n="welcome_h1">Willkommen! 🇩🇪</h1>
+                <p data-i18n="welcome_p">Ваш персональный гид по цифровой экосистеме Германии.</p>
                 
                 <div class="video-wrapper">
                     <iframe 
                         src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0"
                         title="YouTube video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
@@ -220,17 +231,14 @@
                     <iframe 
                         src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0"
                         title="YouTube video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
 
-                <!-- Миша Бур -->
                 <div class="video-wrapper">
                     <iframe 
                         src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&rel=0"
                         title="Misha Bur News"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
@@ -239,21 +247,20 @@
                     <iframe 
                         src="https://www.youtube.com/embed/videoseries?list=PL5rBbYZrC6VNPG6Rb2uWKaNkhekI09wbW&rel=0"
                         title="Мой плейлист"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
 
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
-                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+                    <button class="btn-main" onclick="showTab('img2pdf', event)" data-i18n="btn_pdf">🖼️ Создать PDF из фото</button>
+                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)" data-i18n="btn_news">Читать текстовые новости</button>
                 </div>
             </div>
         </section>
 
         <section id="img2pdf" class="tab-content">
             <div class="card">
-                <h2>🖼️ Создать PDF из фото</h2>
+                <h2 data-i18n="nav_img2pdf">🖼️ Создать PDF из фото</h2>
                 <div class="iframe-wrapper">
                     <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
                 </div>
@@ -262,7 +269,7 @@
 
         <section id="pdf" class="tab-content">
             <div class="card">
-                <h2>📄 PDF Compressor</h2>
+                <h2 data-i18n="nav_pdf">📄 PDF Compressor</h2>
                 <div class="iframe-wrapper">
                     <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
                 </div>
@@ -271,31 +278,68 @@
 
         <section id="news" class="tab-content">
             <div class="card">
-                <h2>🗞️ Последние события</h2>
+                <h2 data-i18n="nav_news">🗞️ Последние события</h2>
                 <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
             </div>
         </section>
 
-        <section id="security" class="tab-content"><div class="card"><h2>🛡️ Безопасность</h2></div></section>
-        <section id="mobile" class="tab-content"><div class="card"><h2>🚆 Транспорт</h2></div></section>
-        <section id="maps" class="tab-content"><div class="card"><h2>📍 Карты</h2></div></section>
-        <section id="translate" class="tab-content"><div class="card"><h2>🗣️ Перевод</h2></div></section>
-        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
-        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
-        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
-        <section id="laws" class="tab-content"><div class="card"><h2>⚖️ Законы</h2></div></section>
-        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
+        <section id="security" class="tab-content"><div class="card"><h2 data-i18n="nav_security">🛡️ Безопасность</h2></div></section>
+        <section id="mobile" class="tab-content"><div class="card"><h2 data-i18n="nav_mobile">🚆 Транспорт</h2></div></section>
+        <section id="maps" class="tab-content"><div class="card"><h2 data-i18n="nav_maps">📍 Карты</h2></div></section>
+        <section id="translate" class="tab-content"><div class="card"><h2 data-i18n="nav_translate">🗣️ Перевод</h2></div></section>
+        <section id="jobs" class="tab-content"><div class="card"><h2 data-i18n="nav_jobs">💼 Работа</h2></div></section>
+        <section id="docs" class="tab-content"><div class="card"><h2 data-i18n="nav_docs">📂 Документы</h2></div></section>
+        <section id="health" class="tab-content"><div class="card"><h2 data-i18n="nav_health">⚕️ Здоровье</h2></div></section>
+        <section id="laws" class="tab-content"><div class="card"><h2 data-i18n="nav_laws">⚖️ Законы</h2></div></section>
+        <section id="contacts" class="tab-content"><div class="card"><h2 data-i18n="nav_contacts">📞 Контакты</h2></div></section>
 
         <section id="about" class="tab-content">
             <div class="card">
-                <h2>ℹ️ О проекте</h2>
-                <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
+                <h2 data-i18n="nav_about">ℹ️ О проекте</h2>
+                <p data-i18n="about_p">Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
             </div>
         </section>
 
     </main>
 
     <script>
+    // --- ОБЪЕКТ ПЕРЕВОДОВ ---
+    const translations = {
+        ru: {
+            subtitle: "Город Хаттинген",
+            nav_home: "Главная", nav_img2pdf: "Фото в PDF", nav_pdf: "PDF Сжатие", 
+            nav_news: "Новости DE", nav_security: "Безопасность", nav_mobile: "Транспорт", 
+            nav_about: "Инфо", nav_maps: "Карты", nav_translate: "Перевод", 
+            nav_jobs: "Работа", nav_docs: "Документы", nav_health: "Здоровье", 
+            nav_laws: "Законы", nav_contacts: "Контакты",
+            welcome_h1: "Willkommen! 🇩🇪", welcome_p: "Ваш персональный гид по цифровой экосистеме Германии.",
+            btn_pdf: "🖼️ Создать PDF из фото", btn_news: "Читать текстовые новости",
+            about_p: "Digital-Mobil DE — вспомогательный ресурс для жителей Германии."
+        },
+        de: {
+            subtitle: "Stadt Hattingen",
+            nav_home: "Startseite", nav_img2pdf: "Foto zu PDF", nav_pdf: "PDF Kompression", 
+            nav_news: "Nachrichten DE", nav_security: "Sicherheit", nav_mobile: "Verkehr", 
+            nav_about: "Info", nav_maps: "Karten", nav_translate: "Übersetzer", 
+            nav_jobs: "Arbeit", nav_docs: "Dokumente", nav_health: "Gesundheit", 
+            nav_laws: "Gesetze", nav_contacts: "Kontakte",
+            welcome_h1: "Willkommen! 🇩🇪", welcome_p: "Ihr persönlicher Leitfaden für das digitale Ökosystem Deutschlands.",
+            btn_pdf: "🖼️ PDF aus Fotos erstellen", btn_news: "Textnachrichten lesen",
+            about_p: "Digital-Mobil DE — eine Hilfsressource für Einwohner Deutschlands."
+        }
+    };
+
+    function changeLanguage(lang) {
+        localStorage.setItem('selectedLang', lang);
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) el.innerText = translations[lang][key];
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`btn-${lang}`).classList.add('active');
+    }
+
+    // --- ТВОИ ОРИГИНАЛЬНЫЕ СКРИПТЫ ---
     const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
 
     function updateClock() {
@@ -357,6 +401,10 @@
     }
 
     window.onload = function() {
+        // Установка языка при загрузке
+        const savedLang = localStorage.getItem('selectedLang') || 'ru';
+        changeLanguage(savedLang);
+
         getWeather();
         loadNews();
         const options = { day: 'numeric', month: 'long' };

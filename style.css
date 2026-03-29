@@ -39,14 +39,15 @@ body::before {
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
 .top-bar {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: 1100;
+            
 }
 
 .top-bar-content {
@@ -308,13 +309,7 @@ iframe {
             background-size: cover;
             min-height: 100vh;
         }
-
-        .top-bar { 
-            padding: 12px 0; 
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
+ 
         }
         .top-bar-content { 
             display: flex; 

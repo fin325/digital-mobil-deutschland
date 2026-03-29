@@ -9,27 +9,47 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
+        /* Фиксированный фон */
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('img/a9bcb0c3-65ff-4500-8ff8-922a50c280c4.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .top-bar { padding: 10px 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2); }
         .top-bar-content { display: flex; justify-content: space-between; align-items: center; }
         
         .date-time-block { display: flex; flex-direction: column; line-height: 1.2; font-weight: bold; min-width: 80px; }
         #current-time { font-size: 0.8rem; color: #00529b; opacity: 0.8; }
         
-        /* Единая полоска погоды */
-        .weather-info { 
-            display: flex; 
-            flex-wrap: nowrap; 
-            overflow-x: auto; 
-            gap: 12px; 
-            font-size: 0.85rem; 
-            align-items: center;
-        }
-        .w-item { white-space: nowrap; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+        .weather-info { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; font-size: 0.85rem; align-items: center; }
+        .w-item { white-space: nowrap; font-weight: 500; display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 10px; }
         .divider { color: rgba(0,0,0,0.2); margin: 0 2px; }
 
-        .news-item { background: rgba(255, 255, 255, 0.4); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
+        /* Прозрачные карточки */
+        .card { 
+            background: rgba(255, 255, 255, 0.2) !important; 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 28px; 
+            padding: 25px; 
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
         .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
-        .iframe-wrapper { height: 700px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.3); background: #fff; }
+        
+        .iframe-wrapper { 
+            height: 700px; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            background: rgba(255, 255, 255, 0.1); 
+        }
         
         .video-wrapper {
             position: relative;
@@ -38,11 +58,25 @@
             overflow: hidden;
             border-radius: 15px;
             margin: 15px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            background: rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Стиль для второго ряда навигации */
+        .btn-main {
+            background: rgba(0, 82, 155, 0.7) !important;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            color: white;
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 18px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
         .nav-row-2 {
             margin-top: 8px;
             padding-top: 8px;
@@ -110,14 +144,22 @@
                 <div class="video-wrapper">
                     <iframe 
                         src="https://www.youtube.com/embed/videoseries?list=UUup5WcJANJgdNLL_ek3qyUw&amp;rel=0"
-                        title="Misha Bur News"
+                        title="Misha Bur News 1"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/ScMzIvxBSi4" 
+                        title="Полезное видео 2"
                         allowfullscreen>
                     </iframe>
                 </div>
 
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
                     <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: #007aff;" onclick="showTab('news', event)">Читать текстовые новости</button>
+                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
                 </div>
             </div>
         </section>

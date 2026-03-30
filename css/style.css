@@ -69,11 +69,13 @@ no-repeat center center;
     font-weight: 700;  
     min-width: 80px; 
     background: rgba(255,255,255,0.7);
-    border-radius: 8px;
+    border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     position: relative; 
     left: -15px;  /* влево */
     top: -10px;   /* вверх */
+    width: 70px;
+    height: 55px;
 }
 
 #current-date, #current-time, #current-seconds {

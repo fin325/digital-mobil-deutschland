@@ -60,53 +60,30 @@ no-repeat center center;
     justify-content: space-between; 
 }
    /* Дата и время */
-.date-time-block {
-    display: flex;
-    flex-direction: column;
+.date-time-block { 
+    display: flex; 
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7); /* чуть плотнее фон для читаемости */
-    border: 1px solid rgba(0, 51, 102, 0.15); /* тонкая рамка */
+    line-height: 1.2; 
+    font-weight: 700; 
+    min-width: 80px; 
+    background: rgba(255,255,255,0.7);
     border-radius: 6px;
-
-    width: 55px;  /* чуть уже, как просил */
-    height: 45px;
-    padding: 2px;
-    box-sizing: border-box;
-    line-height: 1.1;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* лёгкая тень для объёма */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/* Общий стиль текста для даты, времени и секунд */
 #current-date, #current-time, #current-seconds {
-    color: #003366;       /* одинаковый темно-синий цвет */
-    font-family: inherit; 
-    text-align: center;
+    color: #003366; /* единый цвет */
     text-shadow: 0 0 1px rgba(0,51,102,0.25); /* мягкая тень для одинакового визуального веса */
     margin: 0;
-    font-weight: 700;     /* одинаковая жирность */
+    font-weight: 700;
+    text-align: center;
 }
 
-/* Дата */
-#current-date {
-    font-size: 0.70rem; 
-    text-transform: uppercase;
-    margin-bottom: 1px;
-    letter-spacing: 0.3px;
-}
-
-/* Время (часы и минуты) */
-#current-time {
-    font-size: 0.65rem; 
-    letter-spacing: -0.2px;
-}
-
-/* Секунды чуть меньше, но с тем же цветом и тенью */
-#current-seconds {
-    font-size: 0.65rem;
-    letter-spacing: -0.2px;
-    opacity: 0.9;
-}
+#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
+#current-time { font-size: 0.85rem; letter-spacing: -0.2px; }
+#current-seconds { font-size: 0.75rem; letter-spacing: -0.2px; opacity: 0.9; }
 
 /* --- ПОГОДА --- */
 .weather-scroll-container {

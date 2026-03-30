@@ -65,36 +65,37 @@ no-repeat center center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7); /* Чуть плотнее для четкости */
-    border: 1px solid rgba(0, 51, 102, 0.2); /* Тонкая рамка цвета текста */
-    border-radius: 4px; /* Более строгие углы */
+    background: rgba(255, 255, 255, 0.6); /* Чуть плотнее фон для читаемости */
+    border: 1px solid rgba(0, 51, 102, 0.15);
+    border-radius: 6px;
     
-    /* Минимальные размеры */
-    width: 55px; 
-    padding: 3px 0; 
-    line-height: 1;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Едва заметная тень для объема */
+    /* Делаем блок маленьким и почти квадратным */
+    width: 60px; 
+    height: 45px;
+    padding: 2px;
+    box-sizing: border-box;
+    line-height: 1.1;
 }
 
 #current-date, #current-time {
-    color: #003366; /* Единый темно-синий оттенок */
-    font-weight: 700; /* Одинаковая жирность */
-    text-align: center;
+    /* Одинаковый цвет для обоих элементов */
+    color: #003366; 
     text-shadow: none;
-    margin: 0;
+    font-family: inherit;
+    text-align: center;
 }
 
 #current-date {
-    font-size: 0.6rem; /* Совсем маленький шрифт для даты */
+    font-size: 0.65rem; /* Уменьшили, чтобы влезло в квадрат */
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
-    margin-bottom: 2px;
-    opacity: 0.9;
+    margin-bottom: 1px;
 }
 
 #current-time {
-    font-size: 0.6rem; /* Время чуть крупнее, но в том же стиле */
-    letter-spacing: -0.2px;
+    font-size: 0.65rem; /* Оптимальный размер для узкого окна */
+    font-weight: 800;
+    letter-spacing: -0.3px;
 }
 
 /* --- ПОГОДА --- */

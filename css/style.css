@@ -69,10 +69,12 @@ no-repeat center center;
     /* Рамка теперь точно такого же цвета, как текст, но прозрачнее */
     border: 1px solid rgba(0, 51, 102, 0.25); 
     border-radius: 3px;
-    
-    /* Максимально узкая ширина */
-    width: 48px; 
-    padding: 1px 0;
+    position: relative; 
+    left: -12px;  /* влево */
+    top: -10px;   /* вверх */
+    width: 60px;
+    height: 45px;
+    padding: 4px 0;
     line-height: 0.9;
     box-sizing: border-box;
 }
@@ -90,14 +92,14 @@ no-repeat center center;
 }
 
 #current-date {
-    font-size: 0.55rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.2px;
     margin-bottom: 1px !important;
 }
 
 #current-time {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     letter-spacing: -0.3px;
 }
 

@@ -6,155 +6,16 @@
     --text-dark: #1d1d1f; 
 }
 
-/* Фиксированный фон */
-        body {
-            margin: 0;
-            padding: 0;
-            background-size: cover;
-            min-height: 100vh;
-        }
-
-        .top-bar { 
-            padding: 12px 0; 
-            background: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
-        }
-        .top-bar-content { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        
-        .date-time-block { 
-            display: flex; 
-            flex-direction: column; 
-            line-height: 1.2; 
-            font-weight: bold; 
-            min-width: 80px; 
-        }
-        #current-time { 
-            font-size: 0.8rem; 
-            color: #00529b; 
-            opacity: 0.8; 
-        }
-        
-        .weather-info { 
-            display: flex; 
-            flex-wrap: nowrap; 
-            overflow-x: auto; 
-            gap: 12px; 
-            font-size: 0.85rem; 
-            align-items: center; 
-        }
-        .w-item { 
-            white-space: nowrap; 
-            font-weight: 500; 
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            background: rgba(255,255,255,0.2); 
-            padding: 4px 8px; 
-            border-radius: 10px; 
-        }
-        .divider { 
-            color: rgba(0,0,0,0.2); 
-            margin: 0 2px; 
-        }
-
-        /* Увеличенный и красивый заголовок */
-        .site-title {
-            text-align: center;
-            color: #f0f8ff;                    /* красивый белый с лёгким голубым оттенком */
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
-                         0 0 15px rgba(100, 180, 255, 0.5); /* мягкое свечение */
-            margin: 10px 0 6px 0;
-            font-size: 1.55rem;                /* увеличенный шрифт */
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        .site-subtitle {
-            text-align: center;
-            color: #e6f0ff;                    /* чуть более светлый оттенок */
-            font-size: 1.05rem;                /* увеличенный шрифт */
-            font-weight: 500;
-            margin: 0 0 10px 0;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Прозрачные карточки */
-        .card { 
-            background: rgba(255, 255, 255, 0.2) !important; 
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.3); 
-            border-radius: 28px; 
-            padding: 25px; 
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
-        .news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
-        
-        .iframe-wrapper { 
-            height: 700px; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.3); 
-            background: rgba(255, 255, 255, 0.1); 
-        }
-        
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 15px;
-            margin: 15px 0;
-            background: rgba(0,0,0,0.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        .btn-main {
-            background: rgba(0, 82, 155, 0.7) !important;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.2) !important;
-            color: white;
-            padding: 18px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 18px;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .nav-row-2 {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.4rem; }
-            .weather-info { font-size: 0.78rem; gap: 8px; }
-            .site-title { font-size: 1.35rem; }
-            .site-subtitle { font-size: 0.95rem; }
-        }
-
 /* --- ОБЩИЕ СТИЛИ --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     color: var(--text-dark);
-
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    padding: 0;
+    background-size: cover;
 }
 
 /* ✅ ФИКСИРОВАННЫЙ ФОН (НОВЫЙ СПОСОБ) */
@@ -179,14 +40,16 @@ body::before {
 
 /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
 .top-bar {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--glass-border);
     padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1100;
+    padding: 12px 0; 
+        
 }
 
 .top-bar-content {
@@ -195,8 +58,23 @@ body::before {
     padding: 0 15px;
     max-width: 100%;
     overflow: hidden;
+    justify-content: space-between; 
 }
 
+.date-time-block { 
+    display: flex; 
+    flex-direction: column; 
+    line-height: 1.2; 
+    font-weight: bold; 
+    min-width: 80px; 
+}
+
+#current-time { 
+    font-size: 0.8rem; 
+    color: #00529b; 
+    opacity: 0.8; 
+}
+        
 #current-date {
     font-size: 0.85rem;
     font-weight: 700;
@@ -219,24 +97,59 @@ body::before {
 
 .weather-info {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     padding-right: 20px;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    font-size: 0.85rem; 
+    align-items: center; 
 }
 
 .w-item {
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid var(--glass-border);
-    padding: 6px 12px;
-    border-radius: 12px;
+    padding: 4px 8px;
+    border-radius: 10px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
     transition: transform 0.2s ease;
+    font-weight: 500; 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+}
+
+.divider { 
+    color: rgba(0,0,0,0.2); 
+    margin: 0 2px; 
 }
 
 .w-item:active {
     transform: scale(0.95);
+}
+
+/* Увеличенный и красивый заголовок */
+
+.site-title {
+    text-align: center;
+    color: #f0f8ff;                    /* красивый белый с лёгким голубым оттенком */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+                 0 0 15px rgba(100, 180, 255, 0.5); /* мягкое свечение */
+    margin: 10px 0 6px 0;
+    font-size: 1.55rem;                /* увеличенный шрифт */
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.site-subtitle {
+    text-align: center;
+    color: #e6f0ff;                    /* чуть более светлый оттенок */
+    font-size: 1.05rem;                /* увеличенный шрифт */
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 /* --- НАВИГАЦИЯ --- */
@@ -281,6 +194,19 @@ body::before {
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
+nav-row-2 {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.4rem; }
+    .weather-info { font-size: 0.78rem; gap: 8px; }
+    .site-title { font-size: 1.35rem; }
+    .site-subtitle { font-size: 0.95rem; }
+}
+
 /* --- КОНТЕНТ --- */
 .container {
     padding: 15px;
@@ -290,15 +216,16 @@ body::before {
     z-index: 1;
 }
 
+/* Прозрачные карточки */
 .card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     border-radius: 28px;
     padding: 25px;
     margin-bottom: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
@@ -310,9 +237,9 @@ body::before {
 }
 
 .btn-main {
-    background: linear-gradient(135deg, #00529b, #007aff);
+    background: rgba(0, 82, 155, 0.7) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
     color: white;
-    border: none;
     padding: 18px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -320,6 +247,7 @@ body::before {
     width: 100%;
     cursor: pointer;
     transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .btn-main:active {
@@ -343,19 +271,31 @@ body::before {
 
 /* --- IFRAME --- */
 .iframe-wrapper {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); 
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
-    height: 650px;
+    height: 700px;
     width: 100%;
 }
-
 iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 15px 0;
+    background: rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
 /* --- ПРОЧЕЕ --- */
 .status-msg {
@@ -377,6 +317,9 @@ iframe {
     transform: scale(0.98);
 }
 
+.news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
+.news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
+        
 /* --- СТИЛИ ДЛЯ GOOGLE TRANSLATE --- */
 
 /* Контейнер для переводчика */

@@ -78,12 +78,20 @@ no-repeat center center;
     height: 45px;
 }
 
-#current-date, #current-time, #current-seconds {
-    color: #003366; /* единый цвет */
-    text-shadow: 0 0 1px rgba(0,51,102,0.25); /* мягкая тень для одинакового визуального веса */
-    margin: 0;
+#current-date {
+    font-size: 0.7rem;      /* Чуть меньше, чтобы влезло в узкое окно */
     font-weight: 700;
-    text-align: center;
+    color: #00417a;         /* Темно-синий (темнее, чем primary) */
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: 2px;
+}
+
+#current-time {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #00417a;         /* Тот же темно-синий */
+    letter-spacing: -0.5px;
 }
 
 #current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }

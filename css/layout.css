@@ -37,4 +37,9 @@
     z-index: 1000;
 }
 
+main.container {
+    padding-top: 20px; /* Дополнительный зазор сверху */
+    margin-top: 10px;
+}
+
 

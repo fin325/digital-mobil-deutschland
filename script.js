@@ -83,3 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock();
     setInterval(updateClock, 1000);
 });
+
+// Эта функция ДОЛЖНА называться именно так, как указано в ссылке Google (cb=...)
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'de',
+        // Список языков: русский, украинский, английский, турецкий, арабский
+        includedLanguages: 'ru,uk,en,tr,ar', 
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+

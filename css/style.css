@@ -60,47 +60,30 @@ no-repeat center center;
     justify-content: space-between; 
 }
    /* Дата и время */
-.date-time-block {
-    display: flex;
-    flex-direction: column;
+date-time-block { 
+    display: flex; 
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.8);
-    /* Рамка теперь точно такого же цвета, как текст, но прозрачнее */
-    border: 1px solid rgba(0, 51, 102, 0.25); 
-    border-radius: 3px;
+    line-height: 1.3; 
+    font-weight: 700;  
+    min-width: 80px; 
+    background: rgba(255,255,255,0.7);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     position: relative; 
-    left: -12px;  /* влево */
-    top: -10px;   /* вверх */
-    width: 60px;
-    height: 45px;
-    padding: 4px 0;
-    line-height: 0.9;
-    box-sizing: border-box;
+    left: -10px;  /* влево */
+    top: -12px;   /* вверх */
+    width: 55px;
+    height: 40px;
 }
 
-#current-date, #current-time {
-    /* Принудительно задаем один и тот же цвет и стиль */
-    color: #003366 !important; 
-    font-family: sans-serif !important;
-    font-weight: 700 !important;
-    text-shadow: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block;
+#current-date, #current-time, #current-seconds {
+    color: #003366; /* единый цвет */
+    text-shadow: 0 0 1px rgba(0,51,102,0.25); /* мягкая тень для одинакового визуального веса */
+    margin: 0;
+    font-weight: 700;
     text-align: center;
-}
-
-#current-date {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    margin-bottom: 1px !important;
-}
-
-#current-time {
-    font-size: 0.65rem;
-    letter-spacing: -0.3px;
 }
 
 #current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }

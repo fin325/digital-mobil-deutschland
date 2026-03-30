@@ -66,46 +66,35 @@ no-repeat center center;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px); /* Добавим легкое размытие для стиля */
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 51, 102, 0.15);
-    border-radius: 6px;
+    border-radius: 8px;
     
-    /* 1. Увеличиваем ширину */
-    width: 90px;         /* Было 60px, сделали 90px — теперь оно шире */
-    height: 45px;
+    /* 1. Делаем шире */
+    width: 85px; 
+    height: 48px;
     padding: 2px;
     box-sizing: border-box;
-    line-height: 1.1;
-
-    /* 2. Смещение ВВЕРХ и ВЛЕВО */
-    /* Если блок находится внутри flex-контейнера (top-bar), 
-       используем отрицательные отступы: */
-    margin-top: -5px;    /* Смещает вверх (отрицательное значение тянет вверх) */
-    margin-left: -10px;  /* Смещает влево */
     
-    /* Дополнительно: чтобы текст внутри не прилипал к краям */
-    font-size: 0.85rem;
+    /* 2. Двигаем ТОЛЬКО этот блок, не трогая погоду */
+    /* Первое число (-10px) — влево, второе (-5px) — вверх */
+    transform: translate(-8px, -4px); 
+    
+    /* 3. Убираем старые margin, если они были, чтобы не мешать */
+    margin: 0; 
 }
 
-#current-date, #current-time {
-    /* Одинаковый цвет для обоих элементов */
-    color: #003366; 
-    text-shadow: none;
-    font-family: inherit;
-    text-align: center;
+/* Настраиваем шрифт внутри, чтобы в широком окне всё влезло */
+#current-time {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #003366;
 }
 
 #current-date {
-    font-size: 0.65rem; /* Уменьшили, чтобы влезло в квадрат */
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 1px;
-}
-
-#current-time {
-    font-size: 0.65rem; /* Оптимальный размер для узкого окна */
-    font-weight: 800;
-    letter-spacing: -0.3px;
+    font-size: 0.7rem;
+    margin: 0;
+    opacity: 0.9;
 }
 
 /* --- ПОГОДА --- */

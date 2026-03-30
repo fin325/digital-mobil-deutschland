@@ -1,14 +1,14 @@
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ (Перенесены в theme.css, здесь только база) --- */
+/* base.css */
 body {
     margin: 0;
     padding: 0;
+    padding-top: 0; /* Гарантируем отсутствие зазора сверху */
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    background-size: cover;
 }
 
-/* ✅ ФИКСИРОВАННЫЙ ФОН */
 body::before {
     content: "";
     position: fixed;

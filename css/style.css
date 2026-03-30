@@ -25,8 +25,7 @@ body::before {
     inset: 0;
     z-index: -1;
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-                url('../img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg')
-no-repeat center center;
+                url('../img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg')no-repeat center center;
     background-size: cover;
 }
 

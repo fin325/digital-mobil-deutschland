@@ -1,1 +1,43 @@
+.card {
+    border-radius: 28px;
+    padding: 25px;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease-out forwards;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-main {
+    background: rgba(0, 82, 155, 0.7) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: white;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 18px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.btn-main:active {
+    transform: scale(0.97);
+}
+
+.news-card-mini {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+
+.news-item { 
+    background: rgba(255, 255, 255, 0.3); 
+    border-left: 4px solid var(--primary-blue); 
+    padding: 12px; 
+    margin-bottom: 15px; 
+    border-radius: 0 12px 12px 0; 
+}
 

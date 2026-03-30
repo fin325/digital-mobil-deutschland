@@ -27,15 +27,14 @@ iframe {
     overflow: hidden;
     box-sizing: border-box;
 }
-
-/* Дополнительно: чтобы заголовок "Digital & Mobil" не прилипал к шапке */
-/* layout.css */
+/* --- КОНТЕНТ --- */
 .container {
-    /* Увеличь это значение, чтобы заголовок ушел ниже под шапку */
-    margin-top: 20px; 
-    padding-top: 20px; 
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
-
 /* Дата и время */
 .date-time-block { 
     display: flex; 

@@ -1,1 +1,27 @@
+#google_translate_element {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.goog-te-gadget-simple {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    border: 1px solid var(--glass-border) !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+}
+
+.goog-te-gadget img, .goog-te-gadget span {
+    display: none !important;
+}
+
+body { top: 0 !important; }
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+.goog-te-menu-value span {
+    color: var(--primary-blue) !important;
+    font-weight: 600 !important;
+}
 

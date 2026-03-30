@@ -1,1 +1,40 @@
+.container {
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    padding: 12px 0;
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    max-width: 100%;
+    overflow: hidden;
+    justify-content: space-between; 
+}
+
+.navbar {
+    padding: 12px 0;
+    position: sticky;
+    top: 45px;
+    z-index: 1000;
+}
 

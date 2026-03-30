@@ -193,7 +193,7 @@ no-repeat center center;
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-nav-row-2 {
+.nav-row-2 {
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid rgba(255,255,255,0.1);

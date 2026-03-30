@@ -71,7 +71,7 @@ no-repeat center center;
     
     /* Минимальные размеры */
     width: 55px; 
-    padding: 2px 0; 
+    padding: 3px 0; 
     line-height: 1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Едва заметная тень для объема */
 }

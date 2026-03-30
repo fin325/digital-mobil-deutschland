@@ -65,16 +65,26 @@ no-repeat center center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.6); /* Чуть плотнее фон для читаемости */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px); /* Добавим легкое размытие для стиля */
     border: 1px solid rgba(0, 51, 102, 0.15);
     border-radius: 6px;
     
-    /* Делаем блок маленьким и почти квадратным */
-    width: 60px; 
+    /* 1. Увеличиваем ширину */
+    width: 90px;         /* Было 60px, сделали 90px — теперь оно шире */
     height: 45px;
     padding: 2px;
     box-sizing: border-box;
     line-height: 1.1;
+
+    /* 2. Смещение ВВЕРХ и ВЛЕВО */
+    /* Если блок находится внутри flex-контейнера (top-bar), 
+       используем отрицательные отступы: */
+    margin-top: -5px;    /* Смещает вверх (отрицательное значение тянет вверх) */
+    margin-left: -10px;  /* Смещает влево */
+    
+    /* Дополнительно: чтобы текст внутри не прилипал к краям */
+    font-size: 0.85rem;
 }
 
 #current-date, #current-time {

@@ -82,11 +82,14 @@
 
 /* Видео и Iframe */
 .iframe-wrapper {
-    background: rgba(255, 255, 255, 0.1); 
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
-    height: 700px;
+    /* Это критично: */
+    height: 75vh !important; /* 75% от высоты экрана телефона */
+    min-height: 500px;
+    width: 100%;
 }
 
 .video-wrapper {

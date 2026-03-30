@@ -212,7 +212,6 @@ no-repeat center center;
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-
 @media (max-width: 480px) {
     h1 { font-size: 1.4rem; }
     .weather-info { font-size: 0.78rem; gap: 8px; }

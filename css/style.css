@@ -43,12 +43,10 @@ no-repeat center center;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1100;
-    padding: 12px 0; 
-        
+    padding: 12px 0;
 }
 
 .top-bar-content {
@@ -160,19 +158,7 @@ no-repeat center center;
 }
 
 /* --- НАВИГАЦИЯ --- */
-/* 1. Общий контейнер навигации */
-.navbar {
-    background: rgba(255, 255, 255, 0.15); /* Чуть меньше белого для лучшего блюра */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 10px 0; /* Уменьшили вертикальный отступ всей панели */
-    position: sticky;
-    top: 45px;
-    z-index: 1000;
-}
-
-/* 2. Базовый контейнер для СТРОК (общий для 1 и 2 ряда) */
+/* 1. Базовый контейнер для СТРОК (общий для 1 и 2 ряда) */
 .navbar {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(20px);

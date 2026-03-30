@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateEl = document.getElementById('current-date');
     if (dateEl) {
         const options = { day: 'numeric', month: 'long' };
-        dateEl.innerText = new Date().toLocaleDateString('de-DE', options);
+        dateEl.innerText = new Date().toLocaleDateString('de-DE', options).replace('.', '');
     }
     
     updateClock();

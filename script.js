@@ -84,14 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateClock, 1000);
 });
 
-// Эта функция ДОЛЖНА называться именно так, как указано в ссылке Google (cb=...)
+// --- ЛОГИКА GOOGLE TRANSLATE ---
+
+// 1. Создаем функцию настроек
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'de',
-        // Список языков: русский, украинский, английский, турецкий, арабский
-        includedLanguages: 'ru,uk,en,tr,ar', 
+        includedLanguages: 'ru,uk,en,tr,ar',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
     }, 'google_translate_element');
 }
+
+// 2. Динамически загружаем сам скрипт Google
+(function loadGoogleTranslate() {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+})();
 

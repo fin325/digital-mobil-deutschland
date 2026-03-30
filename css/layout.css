@@ -32,9 +32,9 @@
 }
 
 .navbar {
-    padding: 12px 0;
     position: sticky;
-    top: 45px;
+    top: 60px; /* Увеличьте это значение (было 45), чтобы навбар не лип к дате */
     z-index: 1000;
 }
+
 

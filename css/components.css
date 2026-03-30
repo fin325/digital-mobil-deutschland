@@ -29,8 +29,11 @@ iframe {
 }
 
 /* Дополнительно: чтобы заголовок "Digital & Mobil" не прилипал к шапке */
+/* layout.css */
 .container {
-    padding-top: 20px !important;
+    /* Увеличь это значение, чтобы заголовок ушел ниже под шапку */
+    margin-top: 20px; 
+    padding-top: 20px; 
 }
 
 /* Дата и время */

@@ -4,6 +4,39 @@ iframe {
     height: 100%;
 }
 
+/* --- ВЕРХНЯЯ ПАНЕЛЬ (Шапка) --- */
+.top-bar {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    
+    /* Фиксируем высоту, чтобы контент под шапкой не «улетал» вверх */
+    height: 65px; 
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+    /* Расталкиваем Дату влево, а Погоду вправо */
+    justify-content: space-between; 
+    padding: 0 15px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Дополнительно: чтобы заголовок "Digital & Mobil" не прилипал к шапке */
+.container {
+    padding-top: 20px !important;
+}
+
 /* Дата и время */
 .date-time-block { 
     display: flex; 

@@ -60,7 +60,7 @@ no-repeat center center;
     justify-content: space-between; 
 }
    /* Дата и время */
-date-time-block { 
+.date-time-block { 
     display: flex; 
     flex-direction: column; 
     align-items: center;

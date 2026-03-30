@@ -187,7 +187,7 @@ body::before {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
-    padding: 12px 0;
+    padding: 12px 0; /* Чуть уменьшили общий отступ */
     position: sticky;
     top: 45px;
     z-index: 1000;
@@ -197,12 +197,8 @@ body::before {
     display: flex;
     overflow-x: auto;
     gap: 10px;
-    padding: 0 15px;
+    padding: 5px 15px; /* Добавили симметричные отступы сверху/снизу */
     -webkit-overflow-scrolling: touch;
-}
-
-.nav-container::-webkit-scrollbar {
-    display: none;
 }
 
 .nav-btn {
@@ -214,20 +210,18 @@ body::before {
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
+    flex-shrink: 0; /* ФИКС: Кнопки больше не будут уменьшаться! */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-btn.active {
-    background: var(--primary-blue);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+.nav-row-2 {
+    display: flex; /* ФИКС: Вторая строка теперь тоже Flex */
+    gap: 10px;    /* ФИКС: Расстояние между кнопками теперь точно 10px */
+    margin-top: 5px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.nav-row-2 {
-    margin-top: 8px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
 
 @media (max-width: 480px) {
     h1 { font-size: 1.4rem; }

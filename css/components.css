@@ -1,3 +1,9 @@
+iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 /* Дата и время */
 .date-time-block { 
     display: flex; 

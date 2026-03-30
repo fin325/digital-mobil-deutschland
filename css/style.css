@@ -93,7 +93,7 @@ no-repeat center center;
 }
 
 #current-time {
-    font-size: 0.85rem; /* Время чуть крупнее, но в том же стиле */
+    font-size: 0.6rem; /* Время чуть крупнее, но в том же стиле */
     letter-spacing: -0.2px;
 }
 

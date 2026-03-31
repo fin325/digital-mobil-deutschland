@@ -1,13 +1,15 @@
 const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
 
+// --- ЧАСЫ ---
 function updateClock() {
     const now = new Date();
-    // Мы оставили формат ЧЧ:ММ:СС как в оригинале
+    // Формат ЧЧ:ММ:СС
     const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const timeElement = document.getElementById('current-time');
     if (timeElement) timeElement.innerText = timeStr;
 }
 
+// --- ПОГОДА ---
 async function getWeather() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -18,6 +20,7 @@ async function getWeather() {
                     const temp = Math.round(d.main.temp);
                     const city = d.name;
                     const code = d.weather[0].id;
+                    
                     let icon = '☁️';
                     if (code === 800) icon = '☀️';
                     else if (code > 800) icon = '☁️';
@@ -33,60 +36,49 @@ async function getWeather() {
                     if (humEl) humEl.innerText = d.main.humidity;
                 }
             } catch (e) { console.error("Ошибка погоды:", e); }
-        });
+        }, (err) => console.log("Геолокация отклонена или недоступна"));
     }
 }
 
-async function loadNews() {
-    const container = document.getElementById('news-container');
-    if (!container) return;
-    
-    const rssUrl = 'https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml';
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-    try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        if (data.status === 'ok') {
-            container.innerHTML = '';
-            data.items.slice(0, 5).forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'news-item';
-                div.innerHTML = `<a href="${item.link}" target="_blank" class="news-title">${item.title}</a><p class="news-desc">${item.description.split('.')[0]}...</p>`;
-                container.appendChild(div);
-            });
-        }
-    } catch (e) { container.innerHTML = 'Fehler beim Laden.'; }
-}
-
+// --- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ---
 function showTab(tabId, event) {
+    // Скрываем все вкладки
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    // Убираем активный класс у всех кнопок
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     
+    // Показываем нужную вкладку
     const targetTab = document.getElementById(tabId);
     if (targetTab) targetTab.classList.add('active');
     
-    if (event && event.currentTarget) event.currentTarget.classList.add('active');
-    window.scrollTo(0,0);
+    // Делаем нажатую кнопку активной (из любого ряда навигации)
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+    
+    // Прокрутка наверх при смене вкладки
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Запуск всех функций при загрузке страницы
+// --- ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Запускаем погоду
     getWeather();
-    loadNews();
     
+    // Устанавливаем текущую дату
     const dateEl = document.getElementById('current-date');
     if (dateEl) {
         const options = { day: 'numeric', month: 'long' };
-        dateEl.innerText = new Date().toLocaleDateString('de-DE', options).replace('.', '');
+        // Формат: "31 März"
+        dateEl.innerText = new Date().toLocaleDateString('de-DE', options);
     }
     
+    // Запускаем часы
     updateClock();
     setInterval(updateClock, 1000);
 });
 
-// --- ЛОГИКА GOOGLE TRANSLATE ---
-
-// 1. Создаем функцию настроек
+// --- GOOGLE TRANSLATE ---
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'de',
@@ -96,11 +88,9 @@ function googleTranslateElementInit() {
     }, 'google_translate_element');
 }
 
-// 2. Динамически загружаем сам скрипт Google
 (function loadGoogleTranslate() {
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     document.body.appendChild(script);
 })();
-

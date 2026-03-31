@@ -1,50 +1,277 @@
+/* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.6); 
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --primary-blue: #00529b;
+    --text-dark: #1d1d1f; 
+}
+
+/* --- ОБЩИЕ СТИЛИ --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    padding: 0;
+}
+
+/* ✅ ФИКСИРОВАННЫЙ ФОН */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+                url('../img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
+    background-size: cover;
+}
+
+/* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
+.top-bar {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    padding: 12px 0;
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    max-width: 100%;
+    justify-content: space-between; 
+}
+
+/* Дата и время */
+.date-time-block { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+    font-weight: 700;  
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative; 
+    transform: translate(-10px, -12px); 
+    width: 65px;
+    height: 40px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+#current-date, #current-time {
+    color: #003366; 
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+#current-date { font-size: 0.90rem; text-transform: uppercase; }
+#current-time { font-size: 0.90rem; }
+
+/* --- ПОГОДА --- */
+.weather-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-grow: 1;
+}
+.weather-scroll-container::-webkit-scrollbar { display: none; }
+
+.weather-info {
+    display: flex;
+    gap: 12px;
+    padding-right: 20px;
+    align-items: center; 
+}
+
+.w-item {
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+    flex-shrink: 0;
+    font-weight: 500; 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+}
+
+/* Заголовки сайта */
+.site-title {
+    text-align: center;
+    color: #f0f8ff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
+    margin: 10px 0 6px 0;
+    font-size: 1.55rem;
+    font-weight: 700;
+}
+
+.site-subtitle {
+    text-align: center;
+    color: #e6f0ff;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* --- НАВИГАЦИЯ --- */
+.navbar {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 12px 0;
+    position: sticky;
+    top: 45px;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 15px;
+    -webkit-overflow-scrolling: touch;
+}
+.nav-container::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
+    padding: 10px 18px;
+    border-radius: 14px;
+    white-space: nowrap;
+    color: var(--primary-blue);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+}
+
+.nav-row-2 { margin-top: 8px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* --- КОНТЕНТ --- */
+.container {
+    padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-main {
+    background: rgba(0, 82, 155, 0.7) !important;
+    color: white;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 18px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* --- НОВОСТИ (Специальный блок) --- */
+#news .card {
+    padding: 0; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 85vh; 
+}
+
+.news-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.news-header h2 { margin: 0; font-size: 1.2rem; color: var(--primary-blue); }
+
+.news-iframe-container {
+    flex-grow: 1;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; 
+    overflow-y: auto;
+}
+
+.news-iframe-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* --- ВИДЕО И IFRAME --- */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+/* --- АДАПТИВНОСТЬ (Моб. версия) --- */
 @media (max-width: 480px) {
-    /* --- ШРИФТЫ И ЗАГОЛОВКИ --- */
     h1 { font-size: 1.3rem; }
     h2 { font-size: 1.15rem; }
-    .site-title { font-size: 1.25rem; margin: 8px 0 4px 0; }
+    .site-title { font-size: 1.25rem; }
     .site-subtitle { font-size: 0.9rem; }
+    
+    .weather-info { font-size: 0.75rem; gap: 6px; }
+    
+    .container { padding: 10px; }
+    .card { padding: 15px; border-radius: 20px; }
+    
+    .btn-main { padding: 15px; font-size: 1rem; }
+    .nav-btn { padding: 8px 14px; font-size: 0.85rem; }
 
-    /* --- ПОГОДА --- */
-    .weather-info { 
-        font-size: 0.75rem; 
-        gap: 6px; 
-    }
-    .w-item {
-        padding: 3px 6px; /* Чуть компактнее на узких экранах */
-    }
-
-    /* --- КОНТЕНТ И КАРТОЧКИ --- */
-    .container {
-        padding: 10px; /* Уменьшаем боковые поля, чтобы контент был шире */
-    }
-    .card {
-        padding: 15px; /* Меньше внутренних отступов в карточках */
-        border-radius: 20px; /* Немного меньше радиус для гармонии */
-    }
-
-    /* --- КНОПКИ --- */
-    .btn-main {
-        padding: 15px;
-        font-size: 1rem;
-    }
-    .nav-btn {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-    }
-
-    /* --- СПЕЦИАЛЬНО ДЛЯ НОВОСТЕЙ (IFRAME) --- */
     #news .card {
-        height: 75vh; /* Оптимальная высота, чтобы оставалось место для навигации */
+        height: 75vh;
         margin-bottom: 5px;
     }
-    
-    .news-header {
-        padding: 10px 15px;
-    }
-
-    /* --- ВИДЕО --- */
-    .video-wrapper {
-        margin: 10px 0;
-    }
 }
+
+/* --- GOOGLE TRANSLATE --- */
+#google_translate_element { margin: 20px 0; text-align: center; }
+.goog-te-gadget-simple {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    border: 1px solid var(--glass-border) !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+}
+.goog-te-gadget img, .goog-te-gadget span { display: none !important; }
+.goog-te-menu-value span { color: var(--primary-blue) !important; font-weight: 600 !important; }

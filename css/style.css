@@ -48,34 +48,38 @@ body::before {
     justify-content: space-between; 
 }
 
-/* Дата и время */
+/* Дата и время (Стабильная версия) */
 .date-time-block { 
     display: flex; 
     flex-direction: column; 
     align-items: center;
     justify-content: center;
-    line-height: 1.1;
+    line-height: 1.1; 
     font-weight: 700;  
     background: rgba(255, 255, 255, 0.7);
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: relative; 
-    transform: translate(-10px, -12px); 
-    width: 65px;
-    height: 40px;
-    flex-shrink: 0;
+    transform: translate(-10px, -12px); /* Твое положение */
+    width: 65px; /* Зафиксировано */
+    height: 40px; /* Твой размер */
+    flex-shrink: 0; 
     box-sizing: border-box;
 }
 
-#current-date, #current-time {
+#current-date, #current-time, #current-seconds {
     color: #003366; 
+    text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
     margin: 0;
-    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    text-align: center;
+    font-variant-numeric: tabular-nums; /* Магия против тряски */
     white-space: nowrap;
 }
 
-#current-date { font-size: 0.90rem; text-transform: uppercase; }
-#current-time { font-size: 0.90rem; }
+#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
+#current-time { font-size: 0.65rem; letter-spacing: -0.2px; }
+#current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; opacity: 0.9; }
 
 /* --- ПОГОДА --- */
 .weather-scroll-container {
@@ -84,12 +88,14 @@ body::before {
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
 }
+
 .weather-scroll-container::-webkit-scrollbar { display: none; }
 
 .weather-info {
     display: flex;
     gap: 12px;
     padding-right: 20px;
+    flex-wrap: nowrap; 
     align-items: center; 
 }
 
@@ -102,13 +108,12 @@ body::before {
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
-    font-weight: 500; 
     display: flex; 
     align-items: center; 
     gap: 4px; 
 }
 
-/* Заголовки сайта */
+/* --- ЗАГОЛОВКИ --- */
 .site-title {
     text-align: center;
     color: #f0f8ff;
@@ -116,6 +121,7 @@ body::before {
     margin: 10px 0 6px 0;
     font-size: 1.55rem;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .site-subtitle {
@@ -146,6 +152,7 @@ body::before {
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
 }
+
 .nav-container::-webkit-scrollbar { display: none; }
 
 .nav-btn {
@@ -156,24 +163,29 @@ body::before {
     white-space: nowrap;
     color: var(--primary-blue);
     font-weight: 600;
-    transition: all 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0; /* Чтобы кнопки во втором ряду не сжимались */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-btn.active {
     background: var(--primary-blue);
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-.nav-row-2 { margin-top: 8px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+.nav-row-2 {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
 
 /* --- КОНТЕНТ --- */
 .container {
     padding: 15px;
     max-width: 800px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
 }
 
 .card {
@@ -185,54 +197,16 @@ body::before {
     padding: 25px;
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 0.8s ease-out forwards;
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.btn-main {
-    background: rgba(0, 82, 155, 0.7) !important;
-    color: white;
-    padding: 18px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 18px;
-    width: 100%;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* --- НОВОСТИ (Специальный блок) --- */
-#news .card {
-    padding: 0; 
+.iframe-wrapper {
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 85vh; 
-}
-
-.news-header {
-    padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.news-header h2 { margin: 0; font-size: 1.2rem; color: var(--primary-blue); }
-
-.news-iframe-container {
-    flex-grow: 1;
+    height: 700px;
     width: 100%;
-    -webkit-overflow-scrolling: touch; 
-    overflow-y: auto;
 }
 
-.news-iframe-container iframe { width: 100%; height: 100%; border: none; display: block; }
-
-/* --- ВИДЕО И IFRAME --- */
 .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -240,38 +214,18 @@ body::before {
     overflow: hidden;
     border-radius: 15px;
     margin: 15px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
+
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-/* --- АДАПТИВНОСТЬ (Моб. версия) --- */
-@media (max-width: 480px) {
-    h1 { font-size: 1.3rem; }
-    h2 { font-size: 1.15rem; }
-    .site-title { font-size: 1.25rem; }
-    .site-subtitle { font-size: 0.9rem; }
-    
-    .weather-info { font-size: 0.75rem; gap: 6px; }
-    
-    .container { padding: 10px; }
-    .card { padding: 15px; border-radius: 20px; }
-    
-    .btn-main { padding: 15px; font-size: 1rem; }
-    .nav-btn { padding: 8px 14px; font-size: 0.85rem; }
+/* --- ВКЛАДКИ --- */
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    #news .card {
-        height: 75vh;
-        margin-bottom: 5px;
-    }
+/* Скрытие скроллбара для мобильных в навигации */
+.nav-row-2 {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
-
-/* --- GOOGLE TRANSLATE --- */
-#google_translate_element { margin: 20px 0; text-align: center; }
-.goog-te-gadget-simple {
-    background-color: rgba(255, 255, 255, 0.4) !important;
-    border: 1px solid var(--glass-border) !important;
-    padding: 8px !important;
-    border-radius: 12px !important;
-}
-.goog-te-gadget img, .goog-te-gadget span { display: none !important; }
-.goog-te-menu-value span { color: var(--primary-blue) !important; font-weight: 600 !important; }
+.nav-row-2::-webkit-scrollbar { display: none; }

@@ -3,6 +3,4 @@
     .weather-info { font-size: 0.78rem; gap: 8px; }
     .site-title { font-size: 1.35rem; }
     .site-subtitle { font-size: 0.95rem; }
-    .iframe-wrapper { height: 500px; } /* Немного уменьшим высоту на мобилках */
 }
-

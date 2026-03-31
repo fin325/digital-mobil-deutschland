@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
     <link rel="stylesheet" href="css/style.css">
-    
+    <style>
+        iframe { border: none; }
+    </style>
 </head>
 
 <body>
@@ -59,20 +61,133 @@
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
                 
                 <div class="video-wrapper">
-                    <iframe loading="lazy" 
+                    <iframe 
                         src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" 
                         title="YouTube video" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
+                        allowfullscreen>
+                    </iframe>
                 </div>
 
                 <div class="video-wrapper">
-                    <iframe loading="lazy" 
+                    <iframe 
                         src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" 
                         title="YouTube video" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
+                        allowfullscreen>
+                    </iframe>
                 </div>
 
-                <!-- Исправленные плейлисты -->
-                <div class="
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
+                        title="Мой плейлист" 
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
+                        title="Новый плейлист" 
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div style="display: grid; gap: 10px; margin-top: 15px;">
+                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+                </div>
+            </div> 
+        </section>
+
+        <section id="img2pdf" class="tab-content">
+            <div class="card">
+                <h2>🖼️ Создать PDF из фото</h2>
+                <div class="iframe-wrapper">
+                    <iframe 
+                        src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
+                    </iframe>
+                </div>
+            </div> 
+        </section>
+
+        <section id="pdf" class="tab-content">
+            <div class="card">
+                <h2>📄 PDF Compressor</h2>
+                <div class="iframe-wrapper">
+                    <iframe 
+                        src="https://pdf-compressor-web.onrender.com" 
+                        allow="downloads" 
+                        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads">
+                    </iframe>
+                </div>
+            </div> 
+        </section>
+
+        <section id="news" class="tab-content">
+            <div class="card">
+                <h2>🗞️ Последние события</h2>
+                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
+            </div>
+        </section>
+
+        <section id="security" class="tab-content">
+            <div class="card">
+                <h2>🛡️ Безопасность</h2>
+                <p>Ваша цифровая защита в Германии.</p>
+            </div>
+        </section>
+
+        <section id="mobile" class="tab-content">
+            <div class="card">
+                <h2>🚆 Транспорт</h2>
+                <p>Актуальное расписание поездов и автобусов.</p>
+            </div>
+        </section>
+
+        <section id="maps" class="tab-content">
+            <div class="card">
+                <h2>📍 Карты</h2>
+                <p>Навигация по городу Хаттинген.</p>
+            </div>
+        </section>
+
+        <section id="translate" class="tab-content">
+            <div class="card">
+                <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
+                <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
+                <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
+                <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
+            </div>
+        </section>
+
+        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
+        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
+        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
+        <section id="laws" class="tab-content"><div class="card"><h2>⚖️ Законы</h2></div></section>
+        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
+        
+        <section id="about" class="tab-content">
+            <div class="card">
+                <h2>ℹ️ О проекте</h2>
+                <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
+            </div>
+        </section>
+    </main>
+    <script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'ru',
+        includedLanguages: 'de,en,ru,uk,tr', // добавь нужные языки
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>

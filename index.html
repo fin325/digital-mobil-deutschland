@@ -2,20 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital-Mobil DE</title>
-    <link rel="stylesheet" href="css/external.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
+    
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media.css">
+    
 </head>
 
 <body>
+
     <div class="top-bar">
         <div class="container top-bar-content">
             <div class="date-time-block">
                 <span id="current-date"></span>
                 <span id="current-time"></span>
             </div>
+
             <div class="weather-scroll-container">
                 <div class="weather-info" id="full-weather-bar">
                     <span class="w-item" id="city-temp">Laden...</span>
@@ -28,6 +31,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Название сайта -->
         <div class="site-title">Digital & Mobil in Deutschland</div>
         <div class="site-subtitle">Stadt Hattingen</div>
     </div>
@@ -54,77 +59,70 @@
     </nav>
 
     <main class="container">
+        
         <section id="home" class="tab-content active">
             <div class="card hero-card">
                 <h1>Willkommen! 🇩🇪</h1>
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
                 
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" 
-                        title="YouTube video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0"
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+</iframe>
+</div>
 
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" 
-                        title="YouTube video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0"
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+               <!-- Миша Бур -->
+<div class="video-wrapper">
+    <iframe  
+        src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
+        title="Мой плейлист"
+        frameborder="0"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
 
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
-                        title="Мой плейлист" 
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
-                        title="Новый плейлист" 
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+<div class="video-wrapper">
+    <iframe  
+        src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
+        title="Новый плейлист"
+        frameborder="0"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
 
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
                     <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
                     <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
                 </div>
-            </div> 
-        </section>
 
+        </section>
         <section id="img2pdf" class="tab-content">
             <div class="card">
                 <h2>🖼️ Создать PDF из фото</h2>
                 <div class="iframe-wrapper">
-                    <iframe 
-                        src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
-                    </iframe>
-                </div>
-            </div> 
+                    <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
+            </div>
         </section>
 
         <section id="pdf" class="tab-content">
             <div class="card">
                 <h2>📄 PDF Compressor</h2>
                 <div class="iframe-wrapper">
-                    <iframe 
-    src="https://pdf-compressor-web.onrender.com" 
-    allow="downloads" 
-    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-downloads">
-</iframe>
-
-                </div>
-            </div> 
+                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+            </div>
         </section>
 
         <section id="news" class="tab-content">
@@ -159,23 +157,27 @@
             <div class="card">
                 <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
                 <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
+                
                 <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
-                <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
+                
+                <p style="font-size: 0.8rem; color: #666; text-align: center;">
+                    * Der Service wird von Google Translate bereitgestellt.
+                </p>
             </div>
+            
         </section>
-
         <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
         <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
         <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
         <section id="laws" class="tab-content"><div class="card"><h2>⚖️ Законы</h2></div></section>
         <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
-        
         <section id="about" class="tab-content">
             <div class="card">
                 <h2>ℹ️ О проекте</h2>
                 <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
             </div>
         </section>
+
     </main>
 
     <script src="script.js"></script>

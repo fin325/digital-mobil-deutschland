@@ -2,7 +2,6 @@ const apiKey = '9057c4b98fd893160015f5d4bc3696cc';
 
 function updateClock() {
     const now = new Date();
-    // Мы оставили формат ЧЧ:ММ:СС как в оригинале
     const timeStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const timeElement = document.getElementById('current-time');
     if (timeElement) timeElement.innerText = timeStr;
@@ -58,18 +57,28 @@ async function loadNews() {
     } catch (e) { container.innerHTML = 'Fehler beim Laden.'; }
 }
 
+// --- ОБНОВЛЕННАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ---
 function showTab(tabId, event) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     
     const targetTab = document.getElementById(tabId);
-    if (targetTab) targetTab.classList.add('active');
+    if (targetTab) {
+        targetTab.classList.add('active');
+        
+        // Дополнительная логика для Iframe новостей Hattingen
+        if (tabId === 'news-hattingen') {
+            const ifr = targetTab.querySelector('iframe');
+            if (ifr && !ifr.getAttribute('src')) {
+                ifr.setAttribute('src', 'https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/');
+            }
+        }
+    }
     
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
     window.scrollTo(0,0);
 }
 
-// Запуск всех функций при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     getWeather();
     loadNews();
@@ -85,8 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- ЛОГИКА GOOGLE TRANSLATE ---
-
-// 1. Создаем функцию настроек
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'de',
@@ -96,11 +103,9 @@ function googleTranslateElementInit() {
     }, 'google_translate_element');
 }
 
-// 2. Динамически загружаем сам скрипт Google
 (function loadGoogleTranslate() {
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     document.body.appendChild(script);
 })();
-

@@ -29,6 +29,18 @@ body::before {
     background-size: cover;
 }
 
+.law-link {
+    display: block;
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    text-decoration: none;
+    color: #00529b;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
 /* --- АНИМАЦИЯ (оставил) --- */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }

@@ -336,20 +336,44 @@ iframe {
     margin-bottom: 15px;
 }
 
-.news-card-mini {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    transition: transform 0.2s;
+/* Специальный стиль для карточки новостей */
+#news .card {
+    padding: 0; /* Убираем внутренние отступы, чтобы iframe прилегал к краям */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 85vh; /* Высота почти на весь экран мобильного */
 }
 
-.news-card-mini:active {
-    transform: scale(0.98);
+/* Заголовок внутри карточки новостей */
+.news-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid var(--glass-border);
 }
 
-.news-item { background: rgba(255, 255, 255, 0.3); border-left: 4px solid #00529b; padding: 12px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
-.news-title { font-weight: bold; font-size: 0.95rem; display: block; margin-bottom: 5px; color: #1d1d1f; text-decoration: none; }
+.news-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+}
+
+/* Контейнер для самого iframe с плавной прокруткой */
+.news-iframe-container {
+    flex-grow: 1;
+    width: 100%;
+    /* Включаем плавную прокрутку на iOS */
+    -webkit-overflow-scrolling: touch; 
+    overflow-y: auto;
+}
+
+.news-iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
         
 /* --- СТИЛИ ДЛЯ GOOGLE TRANSLATE --- */
 

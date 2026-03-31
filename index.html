@@ -36,7 +36,7 @@
             <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
             <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
             <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-            <button class="nav-btn" onclick="showTab('security', event)">Безопасность</button>
+            <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
             <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
             <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
         </div>
@@ -125,27 +125,38 @@
         </section>
 
         <section id="news" class="tab-content">
-    <div class="card" style="padding: 0; overflow: hidden; height: 80vh;">
-        <div style="padding: 15px;">
-            <h2 style="margin: 0;">🗞️ Официальные новости</h2>
-            <p style="font-size: 0.8rem; color: #666;">Источник: Stadt Hattingen</p>
-        </div>
+            <div class="card">
+                <h2>🗞️ Последние события</h2>
+                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
+            </div>
+        </section>
+
+        <section id="security" class="tab-content">
+            <div id="news-hattingen" class="tab-content">
+    <div class="card">
+        <h2 class="site-title" style="color: var(--primary-blue); text-shadow: none; margin-bottom: 20px;">
+            Городские новости Хаттингена
+        </h2>
+        <p class="status-msg">Официальные события и объявления администрации города.</p>
         
-        <div style="width: 100%; height: 100%; -webkit-overflow-scrolling: touch; overflow-y: auto;">
+        <div class="iframe-wrapper" style="height: 80vh;">
             <iframe 
                 src="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" 
-                style="width: 100%; height: 100%; border: none;"
+                title="Hattingen News"
                 loading="lazy">
             </iframe>
         </div>
+        
+        <div style="margin-top: 15px; text-align: center;">
+            <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" 
+               target="_blank" 
+               class="btn-main" 
+               style="text-decoration: none; display: inline-block; width: auto; padding: 10px 25px;">
+               Открыть на официальном сайте
+            </a>
+        </div>
     </div>
-</section>
-
-        <section id="security" class="tab-content">
-            <div class="card">
-                <h2>🛡️ Безопасность</h2>
-                <p>Ваша цифровая защита в Германии.</p>
-            </div>
+</div>
         </section>
 
         <section id="mobile" class="tab-content">

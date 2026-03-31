@@ -1,6 +1,0 @@
-@media (max-width: 480px) {
-    h1 { font-size: 1.4rem; }
-    .weather-info { font-size: 0.78rem; gap: 8px; }
-    .site-title { font-size: 1.35rem; }
-    .site-subtitle { font-size: 0.95rem; }
-}

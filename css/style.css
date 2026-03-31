@@ -225,7 +225,7 @@ body::before {
 
 .nav-row-2 {
     margin-top: 8px;
-    displey : flex;
+    display : flex;
     gap : 10px;
     padding-top: 10px;
     border-top: 1px solid rgba(255,255,255,0.1);

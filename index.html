@@ -125,11 +125,21 @@
         </section>
 
         <section id="news" class="tab-content">
-            <div class="card">
-                <h2>🗞️ Последние события</h2>
-                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
-            </div>
-        </section>
+    <div class="card" style="padding: 0; overflow: hidden; height: 80vh;">
+        <div style="padding: 15px;">
+            <h2 style="margin: 0;">🗞️ Официальные новости</h2>
+            <p style="font-size: 0.8rem; color: #666;">Источник: Stadt Hattingen</p>
+        </div>
+        
+        <div style="width: 100%; height: 100%; -webkit-overflow-scrolling: touch; overflow-y: auto;">
+            <iframe 
+                src="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" 
+                style="width: 100%; height: 100%; border: none;"
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</section>
 
         <section id="security" class="tab-content">
             <div class="card">

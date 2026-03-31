@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
     <link rel="stylesheet" href="css/style.css">
+    
     <style>
-        iframe { border: none; }
+        /* Базовые стили для видео и iframe (можно перенести в style.css) */
+        .video-wrapper, .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .video-wrapper iframe, .iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .btn-main {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            margin: 8px 0;
+        }
     </style>
 </head>
 
@@ -61,39 +87,36 @@
                 <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
                 
                 <div class="video-wrapper">
-                    <iframe 
+                    <iframe loading="lazy" 
                         src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" 
                         title="YouTube video" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                        allowfullscreen></iframe>
                 </div>
 
                 <div class="video-wrapper">
-                    <iframe 
+                    <iframe loading="lazy" 
                         src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" 
                         title="YouTube video" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                        allowfullscreen></iframe>
                 </div>
 
+                <!-- Исправленные плейлисты -->
                 <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
+                    <iframe loading="lazy" 
+                        src="https://www.youtube.com/embed/playlist?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
                         title="Мой плейлист" 
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                        allowfullscreen></iframe>
                 </div>
 
                 <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
+                    <iframe loading="lazy" 
+                        src="https://www.youtube.com/embed/playlist?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT&rel=0" 
                         title="Новый плейлист" 
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                        allowfullscreen></iframe>
                 </div>
 
                 <div style="display: grid; gap: 10px; margin-top: 15px;">
@@ -107,9 +130,9 @@
             <div class="card">
                 <h2>🖼️ Создать PDF из фото</h2>
                 <div class="iframe-wrapper">
-                    <iframe 
-                        src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
-                    </iframe>
+                    <iframe loading="lazy" 
+                        src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"
+                        allowfullscreen></iframe>
                 </div>
             </div> 
         </section>
@@ -118,7 +141,7 @@
             <div class="card">
                 <h2>📄 PDF Compressor</h2>
                 <div class="iframe-wrapper">
-                    <iframe 
+                    <iframe loading="lazy" 
                         src="https://pdf-compressor-web.onrender.com" 
                         allow="downloads" 
                         sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads">
@@ -134,25 +157,15 @@
             </div>
         </section>
 
+        <!-- Остальные секции без изменений -->
         <section id="security" class="tab-content">
-            <div class="card">
-                <h2>🛡️ Безопасность</h2>
-                <p>Ваша цифровая защита в Германии.</p>
-            </div>
+            <div class="card"><h2>🛡️ Безопасность</h2><p>Ваша цифровая защита в Германии.</p></div>
         </section>
-
         <section id="mobile" class="tab-content">
-            <div class="card">
-                <h2>🚆 Транспорт</h2>
-                <p>Актуальное расписание поездов и автобусов.</p>
-            </div>
+            <div class="card"><h2>🚆 Транспорт</h2><p>Актуальное расписание поездов и автобусов.</p></div>
         </section>
-
         <section id="maps" class="tab-content">
-            <div class="card">
-                <h2>📍 Карты</h2>
-                <p>Навигация по городу Хаттинген.</p>
-            </div>
+            <div class="card"><h2>📍 Карты</h2><p>Навигация по городу Хаттинген.</p></div>
         </section>
 
         <section id="translate" class="tab-content">
@@ -177,16 +190,21 @@
             </div>
         </section>
     </main>
+
+    <!-- Google Translate -->
     <script type="text/javascript">
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'ru',
-        includedLanguages: 'de,en,ru,uk,tr', // добавь нужные языки
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ru',
+                includedLanguages: 'de,en,ru,uk,tr,pl',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" 
+            src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
     <script src="script.js"></script>
 </body>

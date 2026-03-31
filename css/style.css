@@ -230,14 +230,6 @@ body::before {
     padding-top: 10px;
     border-top: 1px solid rgba(255,255,255,0.1);
 }
-
-@media (max-width: 480px) {
-    h1 { font-size: 1.4rem; }
-    .weather-info { font-size: 0.78rem; gap: 8px; }
-    .site-title { font-size: 1.35rem; }
-    .site-subtitle { font-size: 0.95rem; }
-}
-
 /* --- КОНТЕНТ --- */
 .container {
     padding: 15px;

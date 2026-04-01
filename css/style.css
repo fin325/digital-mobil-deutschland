@@ -220,7 +220,6 @@ body::before {
 
 .nav-btn {
     background: rgba(255, 255, 255, 0.3);
-    font-size: 1.0rem;
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
@@ -233,7 +232,6 @@ body::before {
 
 .nav-btn.active {
     background: var(--primary-blue);
-    font-size: 1.0rem;
     color: white;
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
@@ -282,60 +280,46 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 1. ГЛАВНЫЕ КНОПКИ (Меню) */
+/* 1. ОБЩИЙ СТИЛЬ КНОПКИ (внешний вид) */
 .btn-main {
     background: rgba(0, 82, 155, 0.7) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
-    font-size: 1.0rem; /* Регулируй размер ТЕКСТА МЕНЮ здесь */
+    font-size: 1.1rem;
     font-weight: 600;
     border-radius: 18px;
     width: 100%;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
     backdrop-filter: blur(5px);
-    margin-bottom: 15px;
+    
+    /* Добавляем эти свойства внутрь, чтобы не вылезало за края */
     display: block;
     box-sizing: border-box;
     white-space: normal;
     text-align: center;
     text-decoration: none;
     line-height: 1.4;
-    overflow: hidden;
 }
 
 .btn-main:active {
-    font-size: 1.0rem
     transform: scale(0.97);
 }
 
-/* 2. ВКЛАДКИ (Контейнеры) */
+/* 2. ПРАВИЛО ДЛЯ ОТСТУПОВ (чтобы кнопки не слипались во вкладках) */
+.tab-content .btn-main {
+    margin-bottom: 15px; 
+}
+
+/* 3. ТВОИ ВКЛАДКИ (логика их показа) */
 .tab-content {
     display: none;
-    width: 100%;
-    font-size: 1.1rem
 }
 
 .tab-content.active {
-    font-size: 1.0rem
     display: block;
     animation: fadeIn 0.4s ease-out;
-}
-
-/* 3. КНОПКИ ВНУТРИ ВКЛАДОК (Законы, Новости) */
-.tab-content .btn-main {
-    font-size: 0.95rem !important;  /* Маленький текст для вкладок */
-    padding: 12px 15px !important; /* Компактная высота */
-    line-height: 1.0 !important;
-    margin-bottom: 10px !important;
-    font-weight: 500;
-}
-
-/* Анимация появления */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {

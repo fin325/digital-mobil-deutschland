@@ -292,6 +292,7 @@ body::before {
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    margin-bottom: 15px; /* Создает отступ снизу у каждой кнопки во вкладках */
 
     /* --- КРИТИЧЕСКИЕ ПРАВКИ ДЛЯ МОБИЛЬНЫХ --- */
     display: block;          /* Чтобы ссылка вела себя как кнопка */
@@ -310,6 +311,7 @@ body::before {
 /* --- ВКЛАДКИ --- */
 .tab-content {
     display: none;
+    margin-bottom: 15px; /* Создает отступ снизу у каждой кнопки во вкладках */
 }
 
 .tab-content.active {

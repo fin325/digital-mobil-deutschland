@@ -227,12 +227,13 @@ body::before {
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-btn.active {
     background: var(--primary-blue);
+    font-size: 1.0rem;
     color: white;
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
@@ -310,11 +311,13 @@ body::before {
 
 /* 2. ПРАВИЛО ДЛЯ ОТСТУПОВ (чтобы кнопки не слипались во вкладках) */
 .tab-content .btn-main {
+    font-size: 1.0rem;
     margin-bottom: 15px; 
 }
 
 /* 3. ТВОИ ВКЛАДКИ (логика их показа) */
 .tab-content {
+    font-size: 1.0rem;
     display: none;
 }
 

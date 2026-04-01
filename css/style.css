@@ -285,7 +285,7 @@ body::before {
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
-    font-size: 1.0rem;
+    font-size: 1.4rem;
     font-weight: 600;
     border-radius: 18px;
     width: 100%;
@@ -311,8 +311,17 @@ body::before {
 /* --- ВКЛАДКИ --- */
 .tab-content {
     display: none;
-    font-size: 1.6rem !important; /Размер текста кнопок меню/
+    font-size: 1.0rem !important; /Размер текста кнопок меню/
     margin-bottom: 15px; /* Создает отступ снизу у каждой кнопки во вкладках */
+}
+
+/* Специальный стиль для кнопок ВНУТРИ вкладок */
+.tab-content .btn-main {
+    font-size: 0.9rem !important;  /* Уменьшаем текст (было 1.1) */
+    padding: 12px 15px !important; /* Уменьшаем высоту кнопки */
+    min-height: auto !important;   /* Убираем лишнюю высоту */
+    line-height: 1.3;              /* Компактное расстояние между строк */
+    margin-bottom: 10px;           /* Отступ между кнопками */
 }
 
 .tab-content.active {

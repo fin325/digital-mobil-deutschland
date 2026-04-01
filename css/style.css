@@ -311,7 +311,7 @@ body::before {
 /* --- ВКЛАДКИ --- */
 .tab-content {
     display: none;
-    font-size: 1.2rem !important; /Размер текста кнопок меню/
+    font-size: 1.6rem !important; /Размер текста кнопок меню/
     margin-bottom: 15px; /* Создает отступ снизу у каждой кнопки во вкладках */
 }
 

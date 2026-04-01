@@ -280,61 +280,58 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* 1. ГЛАВНЫЕ КНОПКИ (Меню) */
 .btn-main {
     background: rgba(0, 82, 155, 0.7) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
-    font-size: 1.0rem;
+    font-size: 1.6rem; /* Регулируй размер ТЕКСТА МЕНЮ здесь */
     font-weight: 600;
     border-radius: 18px;
     width: 100%;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease;
     backdrop-filter: blur(5px);
-    margin-bottom: 15px; /* Создает отступ снизу у каждой кнопки во вкладках */
-
-    /* --- КРИТИЧЕСКИЕ ПРАВКИ ДЛЯ МОБИЛЬНЫХ --- */
-    display: block;          /* Чтобы ссылка вела себя как кнопка */
-    box-sizing: border-box;  /* Паддинги не расширяют кнопку за экран */
-    white-space: normal;     /* Текст переносится на новую строку */
-    text-align: center;      /* Текст всегда по центру */
-    text-decoration: none;   /* Убирает подчеркивание у ссылок */
-    line-height: 1.4;        /* Чтобы строки текста не слипались */
-    overflow: hidden;        /* Гарантирует, что ничего не вылезет */
-}
-
-/* ПРИНУДИТЕЛЬНЫЙ РАЗМЕР ТОЛЬКО ДЛЯ КНОПОК МЕНЮ */
-#main-menu .btn-main, 
-header .btn-main, 
-.menu-container .btn-main {
-    font-size: 1.6rem !important; /* Попробуй поставить 1.1 или 1.2 */
-    padding: 15px !important;    /* Немного уменьшим высоту, если кнопка слишком большая */
+    margin-bottom: 15px;
+    display: block;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.4;
+    overflow: hidden;
 }
 
 .btn-main:active {
     transform: scale(0.97);
 }
 
-/* --- ВКЛАДКИ --- */
+/* 2. ВКЛАДКИ (Контейнеры) */
 .tab-content {
     display: none;
-    font-size: 1.0rem !important; /Размер текста во вкладке/
-    margin-bottom: 15px; /* Создает отступ снизу у каждой кнопки во вкладках */
-}
-
-/* Специальный стиль для кнопок ВНУТРИ вкладок */
-.tab-content .btn-main {
-    font-size: 0.9rem !important;  /* Уменьшаем текст (было 1.1) */
-    padding: 12px 15px !important; /* Уменьшаем высоту кнопки */
-    min-height: auto !important;   /* Убираем лишнюю высоту */
-    line-height: 1.8;              /* Компактное расстояние между строк */
-    margin-bottom: 10px;           /* Отступ между кнопками */
+    width: 100%;
+    font-size: 0.4rem
 }
 
 .tab-content.active {
     display: block;
     animation: fadeIn 0.4s ease-out;
+}
+
+/* 3. КНОПКИ ВНУТРИ ВКЛАДОК (Законы, Новости) */
+.tab-content .btn-main {
+    font-size: 0.95rem !important;  /* Маленький текст для вкладок */
+    padding: 12px 15px !important; /* Компактная высота */
+    line-height: 1.3 !important;
+    margin-bottom: 10px !important;
+    font-weight: 500;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {

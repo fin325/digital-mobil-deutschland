@@ -304,6 +304,14 @@ body::before {
     overflow: hidden;        /* Гарантирует, что ничего не вылезет */
 }
 
+/* ПРИНУДИТЕЛЬНЫЙ РАЗМЕР ТОЛЬКО ДЛЯ КНОПОК МЕНЮ */
+#main-menu .btn-main, 
+header .btn-main, 
+.menu-container .btn-main {
+    font-size: 1.1rem !important; /* Попробуй поставить 1.1 или 1.2 */
+    padding: 15px !important;    /* Немного уменьшим высоту, если кнопка слишком большая */
+}
+
 .btn-main:active {
     transform: scale(0.97);
 }

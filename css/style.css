@@ -286,7 +286,7 @@ body::before {
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
-    font-size: 1.6rem; /* Регулируй размер ТЕКСТА МЕНЮ здесь */
+    font-size: 0.6rem; /* Регулируй размер ТЕКСТА МЕНЮ здесь */
     font-weight: 600;
     border-radius: 18px;
     width: 100%;
@@ -311,7 +311,7 @@ body::before {
 .tab-content {
     display: none;
     width: 100%;
-    font-size: 0.4rem
+    font-size: 1.4rem
 }
 
 .tab-content.active {
@@ -323,7 +323,7 @@ body::before {
 .tab-content .btn-main {
     font-size: 0.95rem !important;  /* Маленький текст для вкладок */
     padding: 12px 15px !important; /* Компактная высота */
-    line-height: 1.3 !important;
+    line-height: 1.0 !important;
     margin-bottom: 10px !important;
     font-weight: 500;
 }

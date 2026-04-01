@@ -283,7 +283,7 @@ body::before {
 .btn-main {
     background: rgba(0, 82, 155, 0.7) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
-    color: white;
+    color: white !important;
     padding: 18px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -292,6 +292,15 @@ body::before {
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+
+    /* --- КРИТИЧЕСКИЕ ПРАВКИ ДЛЯ МОБИЛЬНЫХ --- */
+    display: block;          /* Чтобы ссылка вела себя как кнопка */
+    box-sizing: border-box;  /* Паддинги не расширяют кнопку за экран */
+    white-space: normal;     /* Текст переносится на новую строку */
+    text-align: center;      /* Текст всегда по центру */
+    text-decoration: none;   /* Убирает подчеркивание у ссылок */
+    line-height: 1.4;        /* Чтобы строки текста не слипались */
+    overflow: hidden;        /* Гарантирует, что ничего не вылезет */
 }
 
 .btn-main:active {

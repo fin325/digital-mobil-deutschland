@@ -1,4 +1,4 @@
-/* === TOPBAR.CSS — Верхняя панель, дата/время, погода === */
+/* === TOPBAR.CSS === */
 
 .top-bar {
     background: rgba(255, 255, 255, 0.15);
@@ -14,10 +14,10 @@
 .top-bar-content {
     display: flex;
     align-items: center;
+    gap: 10px;
     padding: 0 15px;
     max-width: 100%;
     overflow: hidden;
-    justify-content: space-between;
 }
 
 .date-time-block {
@@ -30,9 +30,8 @@
     background: rgba(255, 255, 255, 0.7);
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    position: relative;
-    transform: translate(-10px, -12px);
     width: 65px;
+    min-width: 65px;
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -72,7 +71,7 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    transform: translateY(-10px);
+    align-items: center;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -84,7 +83,6 @@
     gap: 12px;
     padding-right: 20px;
     flex-wrap: nowrap;
-    overflow-x: auto;
     font-size: 0.85rem;
     align-items: center;
 }

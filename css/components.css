@@ -24,8 +24,8 @@
 
 .btn-main {
     background: rgba(0, 82, 155, 0.7) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: white;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: white !important;
     padding: 18px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -34,13 +34,29 @@
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    
+    /* Добавляем эти свойства внутрь, чтобы не вылезало за края */
+    display: block;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.4;
 }
 
 .btn-main:active {
     transform: scale(0.97);
 }
 
+/* 2. ПРАВИЛО ДЛЯ ОТСТУПОВ (чтобы кнопки не слипались во вкладках) */
+.tab-content .btn-main {
+    font-size: 1.0rem;
+    margin-bottom: 15px; 
+}
+
+/* 3. ТВОИ ВКЛАДКИ (логика их показа) */
 .tab-content {
+    font-size: 1.0rem;
     display: none;
 }
 

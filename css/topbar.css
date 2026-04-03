@@ -51,7 +51,7 @@
 #current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
 #current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
 
-/* 1. КОНТЕЙНЕР ПРОКРУТКИ */
+/* 1. КОНТЕЙНЕР ПРОКРУТКИ (Четкие границы) */
 .weather-scroll-container {
     display: flex;
     align-items: center;
@@ -60,26 +60,30 @@
     flex-grow: 1;
     scroll-behavior: smooth;
     padding: 5px 0;
+    /* Маска (мягкость) удалена */
 }
 
+/* Скрываем стандартный скроллбар */
 .weather-scroll-container::-webkit-scrollbar {
     display: none;
 }
 
-/* 2. ЕДИНАЯ ПАНЕЛЬ ПОГОДЫ */
+/* 2. ЕДИНАЯ ИНФОРМАЦИОННАЯ ПАНЕЛЬ */
 .weather-info {
     display: flex;
     gap: 15px;
     padding: 6px 15px;
-    margin-left: 8px; 
+    margin-left: 8px; /* Отступ от блока даты */
     flex-wrap: nowrap;
     align-items: center;
+    
+    /* Стили единого "стеклянного" виджета */
     background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
 }
 
-/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ */
+/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ (Текст и иконки) */
 .w-item {
     white-space: nowrap;
     font-size: 0.85rem;
@@ -90,11 +94,19 @@
     align-items: center;
     gap: 4px;
     transition: opacity 0.2s ease;
-    cursor: pointer;
-    user-select: none;
 }
 
-.w-item:active { opacity: 0.6; }
+/* Легкий эффект при клике */
+.w-item:active {
+    opacity: 0.6;
+}
+
+/* 4. РАЗДЕЛИТЕЛИ ВНУТРИ БЛОКА */
+.divider {
+    color: rgba(0, 51, 102, 0.15);
+    margin: 0 2px;
+    font-weight: 300;
+}
 
 /* СКРЫТЫЕ ПОДПИСИ */
 .w-label {
@@ -115,19 +127,12 @@
     to { opacity: 0.9; }
 }
 
-/* 4. РАЗДЕЛИТЕЛИ */
-.divider {
-    color: rgba(0, 51, 102, 0.15);
-    margin: 0 2px;
-    font-weight: 300;
-}
-
-/* 5. КНОПКА СТРЕЛКА */
+/* Стили для нашей новой кнопки погоды */
 .weather-arrow-btn {
     position: absolute;
-    top: 11px; /* Скорректировано, чтобы не упиралась в края */
+    top: 10px;
     right: 8px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     padding: 4px 10px;
@@ -140,6 +145,7 @@
     justify-content: center;
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: translateY(+3px);
     transition: transform 0.2s ease, background 0.2s ease;
 }
 

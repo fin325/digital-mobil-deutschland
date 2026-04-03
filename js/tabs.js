@@ -11,3 +11,19 @@ function showTab(tabId, event) {
 
     window.scrollTo(0, 0);
 }
+
+function scrollTabs(direction) {
+    // Находим наш контейнер со скроллом
+    const scrollContainer = document.querySelector('.scrollable-grid');
+    
+    // Задаем шаг прокрутки в пикселях (можно изменить по желанию)
+    const scrollStep = 150; 
+    
+    // Прокручиваем контейнер
+    if (scrollContainer) {
+        scrollContainer.scrollBy({
+            left: direction * scrollStep, 
+            behavior: 'smooth' // Плавная анимация прокрутки
+        });
+    }
+}

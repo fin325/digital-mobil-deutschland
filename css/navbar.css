@@ -76,7 +76,6 @@
 .scroll-arrows {
     display: flex;
     gap: 8px;
-    margin-top: 15x;
 }
 
 .arrow-btn {

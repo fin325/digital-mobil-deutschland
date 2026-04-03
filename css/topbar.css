@@ -66,46 +66,78 @@
     opacity: 0.9;
 }
 
+/* 1. КОНТЕЙНЕР ПРОКРУТКИ
+   Маска создает эффект плавного "растворения" текста по бокам 
+*/
 .weather-scroll-container {
     display: flex;
     align-items: center;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    /* transform убран полностью */
+    scroll-behavior: smooth;
+    padding: 5px 0;
+
+    /* Плавный переход в прозрачность слева и справа */
+    -webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 20px, 
+        black calc(100% - 40px), 
+        transparent 100%);
+    mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 20px, 
+        black calc(100% - 40px), 
+        transparent 100%);
 }
 
+/* Скрываем стандартный скроллбар */
 .weather-scroll-container::-webkit-scrollbar {
     display: none;
 }
 
+/* 2. ЕДИНАЯ ИНФОРМАЦИОННАЯ ПАНЕЛЬ
+   Теперь это один сплошной "стеклянный" блок 
+*/
 .weather-info {
     display: flex;
-    gap: 12px;
-    padding-right: 20px;
+    gap: 15px;
+    padding: 6px 15px;
+    margin-left: 8px; /* Отступ от блока даты */
     flex-wrap: nowrap;
-    font-size: 0.85rem;
     align-items: center;
+    
+    /* Стили единого виджета */
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
 }
 
+/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ
+   Чистый текст и иконки без индивидуальных рамок 
+*/
 .w-item {
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid var(--glass-border);
-    padding: 4px 8px;
-    border-radius: 10px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
-    transition: transform 0.2s ease;
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 4px;
+    transition: opacity 0.2s ease;
 }
 
+/* Легкий эффект при клике на конкретный показатель */
 .w-item:active {
-    transform: scale(0.95);
+    opacity: 0.6;
+}
+
+/* 4. РАЗДЕЛИТЕЛИ ВНУТРИ БЛОКА */
+.divider {
+    color: rgba(0, 51, 102, 0.15);
+    margin: 0 2px;
+    font-weight: 300;
 }
 
 /* Стили для нашей новой кнопки погоды */

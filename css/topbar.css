@@ -109,11 +109,36 @@
     align-items: center;
     gap: 4px;
     transition: opacity 0.2s ease;
+    
+    /* Добавлено для кликабельности */
+    cursor: pointer;
+    user-select: none; /* Чтобы текст не выделялся синим при нажатии */
 }
 
-/* Легкий эффект при клике */
+/* Скрытая подпись по умолчанию */
+.w-label {
+    display: none;
+    font-size: 0.8rem;
+    margin-left: 4px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Состояние, когда текст показан (после клика) */
+.w-item.show-text .w-label {
+    display: inline;
+    /* Можно добавить легкую анимацию появления */
+    animation: fadeIn 0.2s ease-in-out;
+}
+
 .w-item:active {
     opacity: 0.6;
+}
+
+/* Анимация для плавного появления текста */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.9; }
 }
 
 /* 4. РАЗДЕЛИТЕЛИ ВНУТРИ БЛОКА */

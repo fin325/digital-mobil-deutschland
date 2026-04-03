@@ -13,17 +13,17 @@ function showTab(tabId, event) {
 }
 
 function scrollTabs(direction) {
-    // Находим наш контейнер со скроллом
     const scrollContainer = document.querySelector('.scrollable-grid');
     
     if (scrollContainer) {
-        // Если нажали "влево" (-1), крутим к 0. Если "вправо" (1), крутим на всю ширину (scrollWidth)
-        const targetScroll = direction === -1 ? 0 : scrollContainer.scrollWidth;
-        
-        // Прокручиваем контейнер
-        scrollContainer.scrollTo({
-            left: targetScroll, 
-            behavior: 'smooth' // Плавная анимация прокрутки
-        });
+        if (direction === -1) {
+            // Влево (в самое начало)
+            scrollContainer.scrollLeft = 0; 
+        } else {
+            // Вправо (в самый конец)
+            // Берем всю ширину контента и крутим туда
+            scrollContainer.scrollLeft = scrollContainer.scrollWidth; 
+        }
     }
 }
+

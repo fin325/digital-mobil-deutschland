@@ -48,3 +48,46 @@
     padding-top: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* --- Стили для подсказки и стрелок --- */
+.scroll-hint-container {
+    display: flex;
+    justify-content: space-between; /* Текст слева, стрелки справа */
+    align-items: center;
+    margin-bottom: 8px; /* Отступ до кнопок */
+    padding: 0 5px;
+}
+
+.scroll-hint-text {
+    font-size: 0.85rem;
+    color: #6c757d; /* Приглушенный серый цвет */
+    font-style: italic;
+}
+
+.scroll-arrows {
+    display: flex;
+    gap: 5px;
+}
+
+.arrow-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    padding: 2px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.arrow-btn:hover {
+    background-color: #e2e6ea;
+}
+
+.arrow-btn:active {
+    background-color: #d3d9df;
+}
+

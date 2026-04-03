@@ -63,7 +63,7 @@
     align-items: center;
     margin-bottom: 5px;
     padding: 0 15px;
-    margin-top: 15
+    margin-top: 15x;
     transform: translateY(10px);
 }
 
@@ -76,6 +76,7 @@
 .scroll-arrows {
     display: flex;
     gap: 8px;
+    margin-top: 15x;
 }
 
 .arrow-btn {

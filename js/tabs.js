@@ -16,13 +16,13 @@ function scrollTabs(direction) {
     // Находим наш контейнер со скроллом
     const scrollContainer = document.querySelector('.scrollable-grid');
     
-    // Задаем шаг прокрутки в пикселях (можно изменить по желанию)
-    const scrollStep = 150; 
-    
-    // Прокручиваем контейнер
     if (scrollContainer) {
-        scrollContainer.scrollBy({
-            left: direction * scrollStep, 
+        // Если нажали "влево" (-1), крутим к 0. Если "вправо" (1), крутим на всю ширину (scrollWidth)
+        const targetScroll = direction === -1 ? 0 : scrollContainer.scrollWidth;
+        
+        // Прокручиваем контейнер
+        scrollContainer.scrollTo({
+            left: targetScroll, 
             behavior: 'smooth' // Плавная анимация прокрутки
         });
     }

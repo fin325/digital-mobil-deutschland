@@ -8,15 +8,14 @@
     position: sticky;
     top: 0;
     z-index: 1100;
-    padding: 12px 0;
+    padding: 8px 15px;
 }
 
 .top-bar-content {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 15px;
-    max-width: 100%;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -35,6 +34,7 @@
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;
+    /* transform убран полностью */
 }
 
 #current-date,
@@ -68,10 +68,11 @@
 
 .weather-scroll-container {
     display: flex;
+    align-items: center;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    align-items: center;
+    /* transform убран полностью */
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -117,7 +118,7 @@
     color: #f0f8ff;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
                  0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 10px 0 6px 0;
+    margin: 8px 0 4px 0;
     font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -128,6 +129,6 @@
     color: #e6f0ff;
     font-size: 1.05rem;
     font-weight: 500;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }

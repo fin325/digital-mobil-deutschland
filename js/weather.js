@@ -1,25 +1,22 @@
 /* === weather.js — Погода OpenWeatherMap === */
 
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
-let currentCity = 'Hattingen'; // Устанавливаем город по умолчанию
+let currentCity = 'Hattingen'; 
 
 async function getWeather() {
     try {
-        // Делаем запрос по названию города (q=${currentCity}) вместо координат
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
         );
         const d = await res.json();
 
-        // Если город не найден или API вернуло ошибку
         if (!d.main) {
-            console.error('Город не найден или произошла ошибка:', d.message);
-            alert('Город не найден! Возвращаем предыдущий.');
+            console.error('Город не найден:', d.message);
             return;
         }
 
         const temp = Math.round(d.main.temp);
-        const city = d.name; // Используем официальное название от API
+        const city = d.name;
         const code = d.weather[0].id;
 
         let icon = '☁️';
@@ -32,22 +29,19 @@ async function getWeather() {
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
+        // Обновляем температуру и город
         if (tempEl) {
-            tempEl.innerText  = `${city} ${icon} ${temp}°C`;
-            tempEl.style.cursor = 'pointer'; // Добавляем курсор-указатель, чтобы было понятно, что можно кликнуть
-            tempEl.title = 'Нажмите, чтобы изменить город'; // Подсказка при наведении
-            
-            // Назначаем действие при клике
+            tempEl.innerText = `${city} ${icon} ${temp}°C`;
             tempEl.onclick = () => {
                 const newCity = prompt('Введите название города:', currentCity);
-                // Если пользователь ввел что-то и не нажал "Отмена"
                 if (newCity && newCity.trim() !== '') {
-                    currentCity = newCity.trim(); // Обновляем текущий город
-                    getWeather(); // Загружаем погоду для нового города
+                    currentCity = newCity.trim();
+                    getWeather();
                 }
             };
         }
         
+        // Обновляем только числа, чтобы не стереть иконки и скрытые подписи
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
@@ -56,30 +50,31 @@ async function getWeather() {
     }
 }
 
+/**
+ * Функция для показа/скрытия текстовых описаний (Влажность, Давление и т.д.)
+ * Вызывается через onclick="toggleLabel(this)" в HTML
+ */
+function toggleLabel(element) {
+    if (element) {
+        element.classList.toggle('show-text');
+    }
+}
+
+/**
+ * Функция прокрутки всей ленты погоды в начало или конец
+ */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
-
     if (scrollContainer) {
-        // Вычисляем, насколько вообще можно прокрутить блок вправо
         const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-        // Если ползунок находится ближе к началу (прокручено меньше половины)
+        
         if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
-            // Крутим в самый конец
-            scrollContainer.scrollTo({
-                left: scrollContainer.scrollWidth,
-                behavior: 'smooth'
-            });
+            scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
         } else {
-            // Иначе (мы уже в конце) — крутим обратно в самое начало
-            scrollContainer.scrollTo({
-                left: 0,
-                behavior: 'smooth'
-            });
+            scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
         }
     }
 }
 
-
-// Запускаем функцию при загрузке скрипта
+// Запуск при загрузке
 getWeather();

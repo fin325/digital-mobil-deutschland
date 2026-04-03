@@ -1,16 +1,24 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
 
-    <!-- CSS модули -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/topbar.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/translate.css">
+<title>Digital & Mobil in Deutschland</title>
+<meta name="description" content="Ваш персональный гид по цифровой экосистеме Германии. Помощь в Хаттингене и NRW.">
+
+<meta property="og:title" content="Digital & Mobil in Deutschland">
+<meta property="og:description" content="Инструменты, новости и помощь для жителей Германии.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Digital & Mobil in Deutschland">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/topbar.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/translate.css">
+
 </head>
 
 <body>
@@ -36,178 +44,392 @@
         <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
-            <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-            <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
-            <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-            <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
-            <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+<nav class="navbar">
+    <div class="nav-container">
+        <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
+        <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
+        <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
+        <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
+        <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
+        <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+    </div>
+    <div class="nav-container nav-row-2">
+        <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
+        <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
+        <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
+        <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
+        <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
+        <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
+        <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
+        <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
+    </div>
+    
+</nav>
+
+<main class="container">
+    <section id="home" class="tab-content active">
+        <div class="card hero-card">
+            <h1>Willkommen! 🇩🇪</h1>
+            <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+            
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" 
+                    title="YouTube video" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" 
+                    title="YouTube video" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
+                    title="Мой плейлист" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
+                    title="Новый плейлист" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div style="display: grid; gap: 10px; margin-top: 15px;">
+                <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+                <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+            </div>
+        </div> 
+    </section>
+
+    <section id="img2pdf" class="tab-content">
+        <div class="card">
+            <h2>🖼️ Создать PDF из фото</h2>
+            <div class="iframe-wrapper">
+                <iframe 
+                    src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
+                </iframe>
+            </div>
+        </div> 
+    </section>
+
+    <section id="pdf" class="tab-content">
+        <div class="card">
+            <h2>📄 PDF Compressor</h2>
+            <div class="iframe-wrapper">
+                <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+            </div>
         </div>
-        <div class="nav-container nav-row-2">
-            <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
-            <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-            <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-            <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-            <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
-            <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-            <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
-            <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
+    </section>
+
+    <section id="news" class="tab-content">
+        <div class="card">
+            <h2>🗞️ Последние события</h2>
+            <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
         </div>
-    </nav>
+    </section>
 
-    <main class="container">
-        <section id="home" class="tab-content active">
-            <div class="card hero-card">
-                <h1>Willkommen! 🇩🇪</h1>
-                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-                
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" 
-                        title="YouTube video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" 
-                        title="YouTube video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
-                        title="Мой плейлист" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
-                        title="Новый плейлист" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-
-                <div style="display: grid; gap: 10px; margin-top: 15px;">
-                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
-                </div>
-            </div> 
-        </section>
-
-        <section id="img2pdf" class="tab-content">
-            <div class="card">
-                <h2>🖼️ Создать PDF из фото</h2>
-                <div class="iframe-wrapper">
-                    <iframe 
-                        src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
-                    </iframe>
-                </div>
-            </div> 
-        </section>
-
-        <section id="pdf" class="tab-content">
-            <div class="card">
-                <h2>📄 PDF Compressor</h2>
-                <div class="iframe-wrapper">
-                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="news" class="tab-content">
-            <div class="card">
-                <h2>🗞️ Последние события</h2>
-                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
-            </div>
-        </section>
-
-        <section id="news-hattingen" class="tab-content">
-            <div class="card">
-                <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 10px;">🏙️ Жизнь Хаттингена</h2>
-                <p class="status-msg" style="text-align: center;">Официальные разделы города для жителей и гостей:</p>
-                
-                <div style="display: grid; gap: 12px; margin-top: 20px;">
-                    <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;">
-                        📰 Все новости города
-                    </a>
-                    <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;">
-                        🏰 Туризм и Досуг
-                    </a>
-                    <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(255, 152, 0, 0.7) !important;">
-                        🎓 Образование и Культура
-                    </a>
-                    <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;">
-                        📅 Мероприятия и события
-                    </a>
-                </div>
-
-                <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
-                    <strong>💡 Информация:</strong> Все ссылки ведут на официальный портал города. Чтобы перевести страницы на русский язык, используйте функцию «Перевод» в меню нашего сайта.
-                </div>
-            </div>
-        </section>
-
-        <section id="mobile" class="tab-content">
-            <div class="card">
-                <h2>🚆 Транспорт</h2>
-                <p>Актуальное расписание поездов и автобусов.</p>
-            </div>
-        </section>
-
-        <section id="maps" class="tab-content">
-            <div class="card">
-                <h2>📍 Карты</h2>
-                <p>Навигация по городу Хаттинген.</p>
-            </div>
-        </section>
-
-        <section id="translate" class="tab-content">
-            <div class="card">
-                <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
-                <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
-                <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
-                <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
-            </div>
-        </section>
-
-        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
-        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
-        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
-
-        <section id="laws" class="tab-content">
-            <div class="card">
-                <h2>⚖️ Законы</h2>
-                <a href="/img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center;">
-                    📄 Переходное постановление о пребывании для граждан Украины UkraineAufenthÄndFGV
-                </a>
-            </div>
-        </section>
-
-        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
+    <section id="news-hattingen" class="tab-content">
+<div class="card">
+    <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 10px;">🏙️ Жизнь Хаттингена</h2>
+    <p class="status-msg" style="text-align: center;">Официальные разделы города для жителей и гостей:</p>
+    
+    <div style="display: grid; gap: 12px; margin-top: 20px;">
+        <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;">
+            📰 Все новости города
+        </a>
         
-        <section id="about" class="tab-content">
-            <div class="card">
-                <h2>ℹ️ О проекте</h2>
-                <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
-            </div>
-        </section>
-    </main>
+        <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;">
+            🏰 Туризм и Досуг
+        </a>
+        
+        <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(255, 152, 0, 0.7) !important;">
+            🎓 Образование и Культура
+        </a>
+        
+        <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;">
+            📅 Мероприятия и события
+        </a>
+    </div>
 
-    <!-- JS модули -->
-    <script src="js/tabs.js"></script>
-    <script src="js/clock.js"></script>
-    <script src="js/weather.js"></script>
-    <script src="js/news.js"></script>
-    <script src="js/translate.js"></script>
-    <script src="js/main.js"></script>
+    <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
+        <strong>💡 Информация:</strong> Все ссылки ведут на официальный портал города. Чтобы перевести страницы на русский язык, используйте функцию «Перевод» в меню нашего сайта.
+    </div>
+</div>
+
+</section>
+
+   <section id="mobile" class="tab-content">
+<div class="card">
+    <h2>🚆 Транспорт</h2>
+    <p>Актуальное расписание поездов и автобусов.</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            
+            <a href="https://www.bahn.de/buchung/fahrplan/suche" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: #cc0000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">
+                🌐 Расписание DB
+            </a>
+            
+            <a href="https://apps.apple.com/de/app/db-navigator/id343555245" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: rgba(255,255,255,0.5); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">
+                🍎 App для iPhone
+            </a>
+
+            <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: rgba(255,255,255,0.5); border: 1px solid #3ddc84; color: #2a7a50; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">
+                🤖 App для Android
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+</section>
+
+    <section id="maps" class="tab-content">
+<div class="card">
+    <h2>🗺️ Карты</h2>
+    <p>Удобная навигация и поиск нужных мест в Хаттингене.</p>
+    
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+        
+        <a href="https://maps.google.com/?q=Hattingen" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #4285F4; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2); transition: transform 0.2s;">
+            📍 Google Maps
+        </a>
+        
+        <a href="https://maps.apple.com/?q=Hattingen" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #000000; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">
+            🍎 Apple Maps
+        </a>
+        
+    </div>
+</div>
+
+</section>
+
+    <section id="translate" class="tab-content">
+        <div class="card">
+            <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
+            <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
+            <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
+            <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
+        </div>
+    </section>
+
+    <section id="jobs" class="tab-content">
+<div class="card">
+    <h2>💼 Работа</h2>
+    <p>Популярные порталы для поиска работы и вакансий в Германии.</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+        
+        <a href="https://www.arbeitsagentur.de/jobsuche/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">
+            🇩🇪 Jobsuche (Arbeitsagentur)
+        </a>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            
+            <a href="https://de.indeed.com/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">
+                🔍 Indeed
+            </a>
+            
+            <a href="https://www.stepstone.de/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
+                📈 StepStone
+            </a>
+
+            <a href="https://www.xing.com/jobs" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: #016567; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);">
+                🤝 XING
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+</section>
+
+    <section id="docs" class="tab-content">
+<div class="card">
+    <h2>🤖 Помощники ИИ</h2>
+    <p>Ваши персональные ассистенты для перевода документов, написания писем и решения любых задач.</p>
+    
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+
+    <div style="margin-bottom: 25px;">
+        <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Мультимодальный ИИ от Google. Идеально подходит для работы с сервисами Google, картами и быстрого поиска актуальной информации.</p>
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" 
+           style="background: linear-gradient(90deg, #4285f4, #9b72cb); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">
+            Запустить Gemini
+        </a>
+    </div>
+
+    <div style="margin-bottom: 25px;">
+        <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Лидер в написании текстов и сложном программировании. Отлично справляется с глубоким анализом данных и творческими задачами.</p>
+        <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" 
+           style="background: #10a37f; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">
+            Открыть ChatGPT
+        </a>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">ИИ от Илона Маска (xAI), интегрированный в сеть X. Отличается остроумием и доступом к мировым новостям в режиме реального времени.</p>
+        <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" 
+           style="background: #000000; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">
+            Попробовать Grok
+        </a>
+    </div>
+
+</div>
+
+</section>
+
+    <section id="health" class="tab-content">
+<div class="card">
+    <h2>🏥 Здоровье</h2>
+    <p>Поиск врачей, чтение отзывов и онлайн-запись на прием.</p>
+    
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+        
+        <a href="https://www.doctolib.de/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #0596de; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(5, 150, 222, 0.2); transition: transform 0.2s;">
+            🩺 Doctolib
+        </a>
+        
+        <a href="https://www.jameda.de/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #00b3a6; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 179, 166, 0.2); transition: transform 0.2s;">
+            ⚕️ Jameda
+        </a>
+        
+    </div>
+</div>
+
+</section>
+
+    <section id="laws" class="tab-content">
+<div class="card">
+    <h2>⚖️ Законы</h2>
+    <a href="/img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center;">
+        📄 Переходное постановление о пребывании для граждан Украины UkraineAufenthÄndFGV
+    </a>
+</div>
+    </section>
+
+    <section id="contacts" class="tab-content">
+<div class="card">
+    <h2>📩 Контакты</h2>
+    <p>Свяжитесь с нами по любым вопросам или предложениям.</p>
+    
+    <div style="margin-top: 15px;">
+        
+        <a href="mailto:hattingen325@gmail.com" 
+           style="background: #ea4335; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(234, 67, 53, 0.2); transition: transform 0.2s;">
+            📧 Написать нам письмо
+        </a>
+
+        <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">
+            hattingen325@gmail.com
+        </p>
+        
+    </div>
+</div>
+
+</section>
+
+    <section id="about" class="tab-content">
+<div class="card">
+    <h2>ℹ️ О проекте</h2>
+    <p><strong>Digital & Mobil in Deutschland</strong> — вспомогательный ресурс для жителей Германии.</p>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+
+    <div style="font-size: 0.85rem; line-height: 1.4; opacity: 0.9;">
+        <h3 style="margin-bottom: 10px; color: var(--primary-blue);">Impressum</h3>
+        
+        <p style="margin-bottom: 15px;">
+            <strong>Angaben gemäß § 5 DDG:</strong><br>
+            Artem Finevych<br>
+            Digital & Mobil in Deutschland<br>
+            Pannhütter Str. 72<br> 
+            45525 Hattingen, Deutschland<br><br>
+            
+            <strong>Kontakt:</strong><br>
+            E-Mail: <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>
+        </p>
+
+        <h3 style="margin-bottom: 10px; color: var(--primary-blue);">Haftungsausschluss (Disclaimer)</h3>
+        
+        <p style="margin-bottom: 10px;">
+            <strong>Haftung für Inhalte:</strong><br>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. 
+        </p>
+
+        <p style="margin-bottom: 10px;">
+            <strong>Haftung für Links:</strong><br>
+            Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+        </p>
+
+        <div style="font-style: italic; font-size: 0.8rem; border-left: 2px solid rgba(255,255,255,0.3); padding-left: 10px; margin-top: 20px; color: rgba(255,255,255,0.7);">
+            <p><strong>Примечание:</strong> Согласно законам Германии, данный раздел содержит контактные данные владельца ресурса и отказ от ответственности за содержание внешних ссылок.</p>
+        </div>
+    </div>
+</div>
+
+</section>
+
+</main>
+
+<!-- JS модули -->
+<script src="js/tabs.js"></script>
+<script src="js/clock.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/news.js"></script>
+<script src="js/translate.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>

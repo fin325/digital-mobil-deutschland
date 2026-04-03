@@ -1,16 +1,24 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital-Mobil DE | Инструменты PDF и Помощь в NRW</title>
 
-    <!-- CSS модули -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/topbar.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/translate.css">
+<title>Digital & Mobil in Deutschland</title>
+<meta name="description" content="Ваш персональный гид по цифровой экосистеме Германии. Помощь в Хаттингене и NRW.">
+
+<meta property="og:title" content="Digital & Mobil in Deutschland">
+<meta property="og:description" content="Инструменты, новости и помощь для жителей Германии.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Digital & Mobil in Deutschland">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/topbar.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/translate.css">
+
 </head>
 
 <body>
@@ -36,178 +44,608 @@
         <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
-            <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-            <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
-            <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-            <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
-            <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+<nav class="navbar">
+    <div class="nav-container">
+        <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
+        <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
+        <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
+        <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
+        <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
+        <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+    </div>
+    <div class="nav-container nav-row-2">
+        <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
+        <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
+        <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
+        <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
+        <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
+        <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
+        <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
+        <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
+        <button class="nav-btn" onclick="showTab('datenschutz', event)">Datenschutz</button>
+    </div>
+
+</nav>
+
+<main class="container">
+    <section id="home" class="tab-content active">
+        <div class="card hero-card">
+            <h1>Willkommen! 🇩🇪</h1>
+            <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
+
+
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/j7wLBpAhn_g?rel=0" 
+                title="YouTube video" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
         </div>
-        <div class="nav-container nav-row-2">
-            <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
-            <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-            <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-            <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-            <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
-            <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-            <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
-            <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
+
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/tIxvgYC0K44?rel=0" 
+                title="YouTube video" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
         </div>
-    </nav>
 
-    <main class="container">
-        <section id="home" class="tab-content active">
-            <div class="card hero-card">
-                <h1>Willkommen! 🇩🇪</h1>
-                <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-                
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/j7wLBpAhn_g?rel=0" 
-                        title="YouTube video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/tIxvgYC0K44?rel=0" 
-                        title="YouTube video" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
-                        title="Мой плейлист" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
-                        title="Новый плейлист" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/videoseries?list=PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ&rel=0" 
+                title="Мой плейлист" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
 
-                <div style="display: grid; gap: 10px; margin-top: 15px;">
-                    <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
-                    <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
-                </div>
-            </div> 
-        </section>
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/videoseries?list=PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT" 
+                title="Новый плейлист" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
 
-        <section id="img2pdf" class="tab-content">
-            <div class="card">
-                <h2>🖼️ Создать PDF из фото</h2>
-                <div class="iframe-wrapper">
-                    <iframe 
-                        src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
-                    </iframe>
-                </div>
-            </div> 
-        </section>
+        <div style="display: grid; gap: 10px; margin-top: 15px;">
+            <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+            <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
+        </div>
+    </div> 
+</section>
 
-        <section id="pdf" class="tab-content">
-            <div class="card">
-                <h2>📄 PDF Compressor</h2>
-                <div class="iframe-wrapper">
-                    <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
-                </div>
-            </div>
-        </section>
+<section id="img2pdf" class="tab-content">
+    <div class="card">
+        <h2>🖼️ Создать PDF из фото</h2>
+        <div class="iframe-wrapper">
+            <iframe 
+                src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
+            </iframe>
+        </div>
+    </div> 
+</section>
 
-        <section id="news" class="tab-content">
-            <div class="card">
-                <h2>🗞️ Последние события</h2>
-                <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
-            </div>
-        </section>
+<section id="pdf" class="tab-content">
+    <div class="card">
+        <h2>📄 PDF Compressor</h2>
+        <div class="iframe-wrapper">
+            <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+        </div>
+    </div>
+</section>
 
-        <section id="news-hattingen" class="tab-content">
-            <div class="card">
-                <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 10px;">🏙️ Жизнь Хаттингена</h2>
-                <p class="status-msg" style="text-align: center;">Официальные разделы города для жителей и гостей:</p>
-                
-                <div style="display: grid; gap: 12px; margin-top: 20px;">
-                    <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;">
-                        📰 Все новости города
-                    </a>
-                    <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;">
-                        🏰 Туризм и Досуг
-                    </a>
-                    <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(255, 152, 0, 0.7) !important;">
-                        🎓 Образование и Культура
-                    </a>
-                    <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;">
-                        📅 Мероприятия и события
-                    </a>
-                </div>
+<section id="news" class="tab-content">
+    <div class="card">
+        <h2>🗞️ Последние события</h2>
+        <div id="news-container"><p class="status-msg">Wird geladen...</p></div>
+    </div>
+</section>
 
-                <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
-                    <strong>💡 Информация:</strong> Все ссылки ведут на официальный портал города. Чтобы перевести страницы на русский язык, используйте функцию «Перевод» в меню нашего сайта.
-                </div>
-            </div>
-        </section>
+<section id="news-hattingen" class="tab-content">
 
-        <section id="mobile" class="tab-content">
-            <div class="card">
-                <h2>🚆 Транспорт</h2>
-                <p>Актуальное расписание поездов и автобусов.</p>
-            </div>
-        </section>
+<div class="card">
+    <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 10px;">🏙️ Жизнь Хаттингена</h2>
+    <p class="status-msg" style="text-align: center;">Официальные разделы города для жителей и гостей:</p>
 
-        <section id="maps" class="tab-content">
-            <div class="card">
-                <h2>📍 Карты</h2>
-                <p>Навигация по городу Хаттинген.</p>
-            </div>
-        </section>
+<div style="display: grid; gap: 12px; margin-top: 20px;">
+    <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;">
+        📰 Все новости города
+    </a>
+    
+    <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;">
+        🏰 Туризм и Досуг
+    </a>
+    
+    <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(255, 152, 0, 0.7) !important;">
+        🎓 Образование и Культура
+    </a>
+    
+    <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;">
+        📅 Мероприятия и события
+    </a>
+</div>
 
-        <section id="translate" class="tab-content">
-            <div class="card">
-                <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
-                <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
-                <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
-                <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
-            </div>
-        </section>
+<div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
+    <strong>💡 Информация:</strong> Все ссылки ведут на официальный портал города. Чтобы перевести страницы на русский язык, используйте функцию «Перевод» в меню нашего сайта.
+</div>
 
-        <section id="jobs" class="tab-content"><div class="card"><h2>💼 Работа</h2></div></section>
-        <section id="docs" class="tab-content"><div class="card"><h2>📂 Документы</h2></div></section>
-        <section id="health" class="tab-content"><div class="card"><h2>⚕️ Здоровье</h2></div></section>
+</div>
 
-        <section id="laws" class="tab-content">
-            <div class="card">
-                <h2>⚖️ Законы</h2>
-                <a href="/img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center;">
-                    📄 Переходное постановление о пребывании для граждан Украины UkraineAufenthÄndFGV
-                </a>
-            </div>
-        </section>
+</section>
 
-        <section id="contacts" class="tab-content"><div class="card"><h2>📞 Контакты</h2></div></section>
+  <section id="mobile" class="tab-content">
+<div class="card">
+    <h2>🚆 Транспорт</h2>
+    <p>Актуальное расписание поездов и автобусов.</p>
+
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         
-        <section id="about" class="tab-content">
-            <div class="card">
-                <h2>ℹ️ О проекте</h2>
-                <p>Digital-Mobil DE — вспомогательный ресурс для жителей Германии.</p>
-            </div>
-        </section>
-    </main>
+        <a href="https://www.bahn.de/buchung/fahrplan/suche" 
+           style="background: #cc0000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">
+            🌐 Расписание DB
+        </a>
+        
+        <a href="https://apps.apple.com/de/app/db-navigator/id343555245" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: rgba(255,255,255,0.5); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">
+            🍎 App для iPhone
+        </a>
 
-    <!-- JS модули -->
-    <script src="js/tabs.js"></script>
-    <script src="js/clock.js"></script>
-    <script src="js/weather.js"></script>
-    <script src="js/news.js"></script>
-    <script src="js/translate.js"></script>
-    <script src="js/main.js"></script>
+        <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: rgba(255,255,255,0.5); border: 1px solid #3ddc84; color: #2a7a50; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">
+            🤖 App для Android
+        </a>
+        
+    </div>
+</div>
+
+</div>
+</section>
+
+</section>
+
+<section id="maps" class="tab-content">
+
+<div class="card">
+    <h2>🗺️ Карты</h2>
+    <p>Удобная навигация и поиск нужных мест в Хаттингене.</p>
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+    
+    <a href="https://maps.google.com/?q=Hattingen" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       style="background: #4285F4; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2); transition: transform 0.2s;">
+        📍 Google Maps
+    </a>
+    
+    <a href="https://maps.apple.com/?q=Hattingen" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       style="background: #000000; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">
+        🍎 Apple Maps
+    </a>
+    
+</div>
+
+</div>
+
+</section>
+
+<section id="translate" class="tab-content">
+    <div class="card">
+        <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
+        <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
+        <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
+        <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
+    </div>
+</section>
+
+<section id="jobs" class="tab-content">
+
+<div class="card">
+    <h2>💼 Работа</h2>
+    <p>Популярные порталы для поиска работы и вакансий в Германии.</p>
+
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+    
+    <a href="https://www.arbeitsagentur.de/jobsuche/" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">
+        🇩🇪 Jobsuche (Arbeitsagentur)
+    </a>
+
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        
+        <a href="https://de.indeed.com/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">
+            🔍 Indeed
+        </a>
+        
+        <a href="https://www.stepstone.de/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
+            📈 StepStone
+        </a>
+
+        <a href="https://www.xing.com/jobs" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="background: #016567; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);">
+            🤝 XING
+        </a>
+        
+    </div>
+</div>
+
+</div>
+
+</section>
+
+<section id="docs" class="tab-content">
+
+<div class="card">
+    <h2>🤖 Помощники ИИ</h2>
+    <p>Ваши персональные ассистенты для перевода документов, написания писем и решения любых задач.</p>
+
+<hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+
+<div style="margin-bottom: 25px;">
+    <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Мультимодальный ИИ от Google. Идеально подходит для работы с сервисами Google, картами и быстрого поиска актуальной информации.</p>
+    <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" 
+       style="background: linear-gradient(90deg, #4285f4, #9b72cb); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">
+        Запустить Gemini
+    </a>
+</div>
+
+<div style="margin-bottom: 25px;">
+    <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Лидер в написании текстов и сложном программировании. Отлично справляется с глубоким анализом данных и творческими задачами.</p>
+    <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" 
+       style="background: #10a37f; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">
+        Открыть ChatGPT
+    </a>
+</div>
+
+<div style="margin-bottom: 10px;">
+    <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">ИИ от Илона Маска (xAI), интегрированный в сеть X. Отличается остроумием и доступом к мировым новостям в режиме реального времени.</p>
+    <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" 
+       style="background: #000000; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">
+        Попробовать Grok
+    </a>
+</div>
+
+</div>
+
+</section>
+
+<section id="health" class="tab-content">
+
+<div class="card">
+    <h2>🏥 Здоровье</h2>
+    <p>Поиск врачей, чтение отзывов и онлайн-запись на прием.</p>
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+    
+    <a href="https://www.doctolib.de/" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       style="background: #0596de; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(5, 150, 222, 0.2); transition: transform 0.2s;">
+        🩺 Doctolib
+    </a>
+    
+    <a href="https://www.jameda.de/" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       style="background: #00b3a6; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 179, 166, 0.2); transition: transform 0.2s;">
+        ⚕️ Jameda
+    </a>
+    
+</div>
+
+</div>
+
+</section>
+
+<section id="laws" class="tab-content">
+
+<div class="card">
+    <h2>⚖️ Законы</h2>
+    <a href="/img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center;">
+        📄 Переходное постановление о пребывании для граждан Украины UkraineAufenthÄndFGV
+    </a>
+</div>
+    </section>
+
+<section id="contacts" class="tab-content">
+
+<div class="card">
+    <h2>📩 Контакты</h2>
+    <p>Свяжитесь с нами по любым вопросам или предложениям.</p>
+
+<div style="margin-top: 15px;">
+    
+    <a href="mailto:hattingen325@gmail.com" 
+       style="background: #ea4335; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(234, 67, 53, 0.2); transition: transform 0.2s;">
+        📧 Написать нам письмо
+    </a>
+
+    <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">
+        hattingen325@gmail.com
+    </p>
+    
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== IMPRESSUM (вкладка "Инфо") ===== -->
+<section id="about" class="tab-content">
+<div class="card">
+    <h2>ℹ️ О проекте</h2>
+    <p><strong>Digital &amp; Mobil in Deutschland</strong> — вспомогательный ресурс для жителей Германии.</p>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+
+    <div style="font-size: 0.85rem; line-height: 1.5; opacity: 0.9;">
+
+        <!-- IMPRESSUM -->
+        <h3 style="margin-bottom: 10px; color: var(--primary-blue);">Impressum</h3>
+
+        <p style="margin-bottom: 15px;">
+            <strong>Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz):</strong><br>
+            Artem Finevych<br>
+            Digital &amp; Mobil in Deutschland<br>
+            Pannhütter Str. 72<br>
+            45525 Hattingen, Deutschland<br><br>
+            <strong>Kontakt:</strong><br>
+            E-Mail: <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>
+        </p>
+
+        <p style="margin-bottom: 15px;">
+            <strong>Hinweis:</strong> Diese Website wird als privates, nicht-kommerzielles
+            Informationsangebot betrieben. Es besteht keine Gewerbeanmeldungspflicht.
+        </p>
+
+        <!-- HAFTUNGSAUSSCHLUSS -->
+        <h3 style="margin-bottom: 10px; color: var(--primary-blue);">Haftungsausschluss (Disclaimer)</h3>
+
+        <p style="margin-bottom: 10px;">
+            <strong>Haftung für eigene Inhalte:</strong><br>
+            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten
+            nach den allgemeinen Gesetzen verantwortlich. Diese Website dient ausschließlich
+            Informationszwecken und stellt keine Rechts-, Steuer- oder sonstige Fachberatung dar.
+        </p>
+
+        <p style="margin-bottom: 10px;">
+            <strong>Haftung für externe Links:</strong><br>
+            Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen
+            Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+            oder Betreiber verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung
+            auf mögliche Rechtsverstöße überprüft — eine permanente inhaltliche Kontrolle ist ohne
+            konkreten Anhaltspunkt nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden
+            entsprechende Links umgehend entfernt (§§ 8–10 DDG).
+        </p>
+
+        <p style="margin-bottom: 10px;">
+            <strong>Eingebettete Inhalte (iFrames):</strong><br>
+            Diese Website bindet Videos des YouTube-Kanals <em>„Миша Бур"</em> sowie weitere
+            YouTube-Inhalte mittels iFrame-Technik ein (im datenschutzfreundlichen Modus über
+            youtube-nocookie.com). Die eingebetteten Inhalte werden direkt von den Servern des
+            jeweiligen Drittanbieters (YouTube / Google LLC) bereitgestellt. Wir haben keinen
+            Einfluss auf die dort angezeigten Inhalte, Datenschutzpraktiken oder
+            Nutzungsbedingungen des Drittanbieters. Beim Abspielen eines Videos kann der
+            Drittanbieter Cookies setzen und personenbezogene Daten (z. B. IP-Adresse)
+            verarbeiten — siehe
+            <a href="#" onclick="showTab('datenschutz', event); return false;" style="color: inherit; font-weight: 600; text-decoration: underline;">Datenschutzerklärung</a>.
+        </p>
+
+        <p style="margin-bottom: 10px;">
+            <strong>Eingebettete Webanwendungen:</strong><br>
+            Diese Website bindet eigene Anwendungen ein, die auf Render (render.com) und
+            Streamlit Cloud (streamlit.io) gehostet werden. Beim Aufruf dieser Anwendungen
+            können die jeweiligen Anbieter Verbindungsdaten (IP-Adresse, Zeitstempel) verarbeiten.
+        </p>
+
+        <!-- URHEBERRECHT -->
+        <h3 style="margin-bottom: 10px; color: var(--primary-blue);">Urheberrecht</h3>
+        <p style="margin-bottom: 10px;">
+            Die durch den Seitenbetreiber erstellten Inhalte und Werke auf dieser Website
+            unterliegen dem deutschen Urheberrecht. Inhalte Dritter (verlinkte Seiten,
+            eingebettete Videos, Nachrichten) sind als solche gekennzeichnet. Sollten Sie
+            auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um Hinweis unter
+            <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>.
+        </p>
+
+        <!-- STREITSCHLICHTUNG -->
+        <h3 style="margin-bottom: 10px; color: var(--primary-blue);">Streitschlichtung</h3>
+        <p style="margin-bottom: 10px;">
+            Die EU-Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer"
+               style="color: inherit; font-weight: 600; text-decoration: underline;">
+               https://ec.europa.eu/consumers/odr</a>.<br>
+            Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren
+            vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG), da kein
+            kommerzielles Angebot vorliegt.
+        </p>
+
+        <!-- ССЫЛКА НА DATENSCHUTZ -->
+        <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue);">
+            🔒 <strong>Datenschutzerklärung:</strong>
+            Informationen zur Verarbeitung personenbezogener Daten finden Sie in unserer
+            <a href="#" onclick="showTab('datenschutz', event); return false;"
+               style="color: inherit; font-weight: 700; text-decoration: underline;">
+               Datenschutzerklärung →</a>
+        </div>
+
+        <div style="font-style: italic; font-size: 0.8rem; border-left: 2px solid rgba(255,255,255,0.3); padding-left: 10px; margin-top: 20px; color: rgba(255,255,255,0.7);">
+            <p><strong>Примечание:</strong> Согласно законам Германии, данный раздел содержит контактные данные владельца ресурса и отказ от ответственности за содержание внешних ссылок.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ===== DATENSCHUTZ (новая вкладка) ===== -->
+<section id="datenschutz" class="tab-content">
+<div class="card">
+    <h2>🔒 Datenschutzerklärung</h2>
+
+    <div style="font-size: 0.85rem; line-height: 1.5; opacity: 0.9;">
+
+        <!-- 1. Verantwortlicher -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">1. Verantwortlicher (Art. 13 DSGVO)</h3>
+        <p style="margin-bottom: 14px;">
+            Artem Finevych<br>
+            Pannhütter Str. 72, 45525 Hattingen<br>
+            E-Mail: <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>
+        </p>
+
+        <!-- 2. Hosting -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">2. Hosting &amp; Server-Logfiles</h3>
+        <p style="margin-bottom: 8px;">Diese Website nutzt mehrere Hosting-Dienste. Beim Aufruf der Website werden von den jeweiligen Anbietern automatisch Server-Logfiles gespeichert (IP-Adresse, Browser, Datum/Uhrzeit). Da alle genannten Anbieter ihren Sitz in den <strong>USA</strong> haben, erfolgt die Datenübermittlung auf Basis der EU-Standardvertragsklauseln (SCC) gemäß Art. 46 DSGVO. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb der Website).</p>
+
+        <div style="margin: 10px 0; padding: 10px 14px; border-radius: 8px; background: rgba(255,255,255,0.15);">
+            <p style="margin-bottom: 6px;">
+                <strong>Vercel Inc.</strong> — 340 Pine Street, Suite 701, San Francisco, CA 94104, USA<br>
+                Haupthosting der Website.<br>
+                <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Vercel Privacy Policy</a>
+            </p>
+            <p style="margin-bottom: 6px;">
+                <strong>GitHub Inc.</strong> — 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA<br>
+                Quellcode-Verwaltung (Repository).<br>
+                <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">GitHub Privacy Statement</a>
+            </p>
+            <p style="margin-bottom: 6px;">
+                <strong>Render Services Inc.</strong> — 525 Brannan Street, Suite 300, San Francisco, CA 94107, USA<br>
+                Hosting eingebetteter Webanwendungen (PDF Compressor u. a.).<br>
+                <a href="https://render.com/privacy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Render Privacy Policy</a>
+            </p>
+            <p style="margin-bottom: 0;">
+                <strong>Snowflake Inc. (Streamlit)</strong> — 450 Concar Drive, San Mateo, CA 94402, USA<br>
+                Hosting der Streamlit-Anwendungen (z. B. Foto-zu-PDF).<br>
+                <a href="https://streamlit.io/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Streamlit Privacy Policy</a>
+            </p>
+        </div>
+
+        <!-- 3. Keine eigenen Cookies -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">3. Keine eigenen Cookies &amp; kein Tracking</h3>
+        <p style="margin-bottom: 14px;">
+            Wir setzen selbst <strong>keine Cookies</strong> und verwenden kein Tracking,
+            kein Analytics (Google Analytics, Matomo o. ä.) und kein Remarketing.
+        </p>
+
+        <!-- 4. YouTube -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">4. Eingebettete YouTube-Videos (iFrame)</h3>
+        <p style="margin-bottom: 14px;">
+            Diese Website bindet Videos von YouTube im <strong>erweiterten Datenschutzmodus</strong>
+            (youtube-nocookie.com) ein. Im erweiterten Datenschutzmodus speichert YouTube
+            keine Cookies auf Ihrem Gerät, solange Sie das Video nicht abspielen.
+            Beim Abspielen eines Videos baut Ihr Browser eine direkte Verbindung zu den
+            YouTube-Servern (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4,
+            Irland) auf. Dabei werden Ihre IP-Adresse sowie Nutzungsdaten übertragen.<br><br>
+            Weitere Informationen:
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
+               style="color: inherit; text-decoration: underline;">Google Datenschutzerklärung</a>.<br>
+            Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an
+            der Informationsvermittlung).
+        </p>
+
+        <!-- 5. Google Translate -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">5. Google Translate</h3>
+        <p style="margin-bottom: 14px;">
+            Die Übersetzungsfunktion dieser Website wird von Google Translate
+            (Google Ireland Ltd.) bereitgestellt. Bei Nutzung der Übersetzungsfunktion
+            werden Seitentexte an Google-Server übertragen. Weitere Informationen:
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
+               style="color: inherit; text-decoration: underline;">Google Datenschutzerklärung</a>.<br>
+            Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
+        </p>
+
+        <!-- 6. Externe Links -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">6. Externe Links</h3>
+        <p style="margin-bottom: 14px;">
+            Unsere Website enthält Links zu externen Seiten Dritter (z. B. hattingen.de,
+            bahn.de, arbeitsagentur.de, doctolib.de u. a.). Beim Anklicken eines Links
+            verlassen Sie unsere Website — für den Datenschutz der verlinkten Seite ist
+            ausschließlich deren Betreiber verantwortlich.
+        </p>
+
+        <!-- 7. Kontaktaufnahme per E-Mail -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">7. Kontaktaufnahme per E-Mail</h3>
+        <p style="margin-bottom: 14px;">
+            Wenn Sie uns per E-Mail kontaktieren, werden Ihre angegebenen Daten (Name,
+            E-Mail-Adresse, Nachrichteninhalt) zur Bearbeitung Ihrer Anfrage gespeichert.
+            Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage:
+            Art. 6 Abs. 1 lit. f DSGVO. Sie können der Speicherung jederzeit widersprechen.
+        </p>
+
+        <!-- 8. Ihre Rechte -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">8. Ihre Rechte (Art. 15–21 DSGVO)</h3>
+        <p style="margin-bottom: 6px;">Sie haben das Recht auf:</p>
+        <ul style="margin: 0 0 14px 18px; padding: 0;">
+            <li>Auskunft über Ihre gespeicherten Daten (Art. 15)</li>
+            <li>Berichtigung unrichtiger Daten (Art. 16)</li>
+            <li>Löschung Ihrer Daten (Art. 17)</li>
+            <li>Einschränkung der Verarbeitung (Art. 18)</li>
+            <li>Datenübertragbarkeit (Art. 20)</li>
+            <li>Widerspruch gegen die Verarbeitung (Art. 21)</li>
+        </ul>
+        <p style="margin-bottom: 14px;">
+            Beschwerden richten Sie an die Datenschutzbehörde NRW:<br>
+            Landesbeauftragte für Datenschutz und Informationsfreiheit NRW (LDI)<br>
+            <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener noreferrer"
+               style="color: inherit; text-decoration: underline;">www.ldi.nrw.de</a>
+        </p>
+
+        <!-- 9. Kontakt -->
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">9. Kontakt Datenschutz</h3>
+        <p style="margin-bottom: 14px;">
+            Bei Fragen zum Datenschutz wenden Sie sich an:<br>
+            <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>
+        </p>
+
+        <!-- Stand -->
+        <div style="font-style: italic; font-size: 0.8rem; border-left: 2px solid rgba(255,255,255,0.3); padding-left: 10px; margin-top: 20px; color: rgba(255,255,255,0.7);">
+            Stand: April 2026 | Gültig für: digital-mobil-deutschland.vercel.app
+        </div>
+
+        <!-- Назад в Impressum -->
+        <div style="margin-top: 20px;">
+            <a href="#" onclick="showTab('about', event); return false;"
+               style="font-size: 0.85rem; color: inherit; text-decoration: underline; opacity: 0.8;">
+                ← Zurück zum Impressum
+            </a>
+        </div>
+
+    </div>
+</div>
+</section>
+
+</main>
+
+<!-- JS модули -->
+
+<script src="js/tabs.js"></script>
+<script src="js/clock.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/news.js"></script>
+<script src="js/translate.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>

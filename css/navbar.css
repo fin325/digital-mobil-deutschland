@@ -61,9 +61,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     padding: 0 15px;
-    margin-top: 10
+    margin-top: 15
+    transform: translateY(10px);
 }
 
 .scroll-hint-text {

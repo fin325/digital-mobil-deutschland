@@ -23,23 +23,28 @@
 
 <body>
     <div class="top-bar">
-        <div class="top-bar-content">
-            <div class="date-time-block">
-                <span id="current-date"></span>
-                <span id="current-time"></span>
-            </div>
-            <div class="weather-scroll-container">
-                <div class="weather-info" id="full-weather-bar">
-                    <span class="w-item" id="city-temp">Laden...</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">💧 <span id="hum">--</span>%</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">⏲️ <span id="press">--</span> mmHg</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
-                </div>
+    <div class="top-bar-content">
+        <div class="date-time-block">
+            <span id="current-date"></span>
+            <span id="current-time"></span>
+        </div>
+        
+        <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">&#8644;</button>
+
+        <div class="weather-scroll-container">
+            <div class="weather-info" id="full-weather-bar">
+                <span class="w-item" id="city-temp">Laden...</span>
+                <span class="divider">|</span>
+                <span class="w-item">💧 <span id="hum">--</span>%</span>
+                <span class="divider">|</span>
+                <span class="w-item">⏲️ <span id="press">--</span> mmHg</span>
+                <span class="divider">|</span>
+                <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
             </div>
         </div>
+    </div>
+</div>
+
         <div class="site-title">Digital & Mobil in Deutschland</div>
         <div class="site-subtitle">Stadt Hattingen</div>
     </div>

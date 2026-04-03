@@ -56,50 +56,31 @@
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* Контейнер: опускаем ниже за счет margin-top */
+/* Стили для подсказки и стрелок (без изменений) */
 .scroll-hint-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;    /* Увеличили отступ сверху, чтобы надпись была ниже */
-    margin-bottom: 10px;  /* Расстояние до самих кнопок */
+    margin-bottom: 8px;
     padding: 0 15px;
 }
-/* Сама надпись: изящная, с мягкой тенью */
+
 .scroll-hint-text {
     font-size: 0.85rem;
-    
-    /* Цвет: чуть темнее базового серого, но мягче черного */
-    color: #4a4a4a; 
-    
+    color: #6c757d;
     font-style: italic;
-    font-weight: 500;
-    letter-spacing: 0.3px; /* Небольшое расстояние между буквами для красоты */
-    
-    /* Элегантная тень: 
-       первая (белая) создает эффект объема, 
-       вторая (темная, очень прозрачная) — легкую глубину */
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8), 
-                 1px 1px 3px rgba(0, 0, 0, 0.15);
-                 
-    opacity: 0.9; /* Чтобы надпись не "кричала", а выглядела частью интерфейса */
 }
 
-/* Немного подправим стрелки, чтобы они гармонировали по высоте */
 .scroll-arrows {
     display: flex;
     gap: 8px;
-    align-items: center;
 }
 
 .arrow-btn {
-    /* Сделаем стрелки чуть изящнее под стать тексту */
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #4a4a4a;
-    padding: 4px 10px;
+    background: white;
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 5px 12px;
     cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-

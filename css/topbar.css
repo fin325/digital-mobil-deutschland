@@ -109,8 +109,6 @@
     align-items: center;
     gap: 4px;
     transition: opacity 0.2s ease;
-    
-    /* Добавлено для кликабельности */
     cursor: pointer;
     user-select: none; /* Чтобы текст не выделялся синим при нажатии */
 }
@@ -127,7 +125,6 @@
 /* Состояние, когда текст показан (после клика) */
 .w-item.show-text .w-label {
     display: inline;
-    /* Можно добавить легкую анимацию появления */
     animation: fadeIn 0.2s ease-in-out;
 }
 

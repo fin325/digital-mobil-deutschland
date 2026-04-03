@@ -14,13 +14,11 @@
 .top-bar-content {
     display: flex;
     align-items: center;
-    gap: 0; /* Убрали разрыв между временем и погодой */
+    gap: 10px;
     width: 100%;
     overflow: hidden;
-    position: relative; /* Контекст для абсолютной кнопки */
 }
 
-/* БЛОК ВРЕМЕНИ */
 .date-time-block {
     display: flex;
     flex-direction: column;
@@ -36,9 +34,12 @@
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;
+    /* transform убран полностью */
 }
 
-#current-date, #current-time, #current-seconds {
+#current-date,
+#current-time,
+#current-seconds {
     color: #003366;
     text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
     margin: 0;
@@ -48,86 +49,71 @@
     white-space: nowrap;
 }
 
-#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
-#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
+#current-date {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+}
 
-/* 1. КОНТЕЙНЕР ПРОКРУТКИ */
+#current-time {
+    font-size: 0.65rem;
+    letter-spacing: -0.2px;
+}
+
+#current-seconds {
+    font-size: 0.65rem;
+    letter-spacing: -0.2px;
+    opacity: 0.9;
+}
+
 .weather-scroll-container {
     display: flex;
     align-items: center;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    scroll-behavior: smooth;
-    padding: 5px 0;
+    /* transform убран полностью */
 }
 
 .weather-scroll-container::-webkit-scrollbar {
     display: none;
 }
 
-/* 2. ЕДИНАЯ ПАНЕЛЬ ПОГОДЫ */
 .weather-info {
     display: flex;
-    gap: 15px;
-    padding: 6px 15px;
-    margin-left: 8px; 
+    gap: 12px;
+    padding-right: 20px;
     flex-wrap: nowrap;
+    font-size: 0.85rem;
     align-items: center;
-    background: rgba(255, 255, 255, 0.25);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
 }
 
-/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ */
 .w-item {
     white-space: nowrap;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 4px 8px;
+    border-radius: 10px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
-    font-weight: 600;
+    transition: transform 0.2s ease;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 4px;
-    transition: opacity 0.2s ease;
-    cursor: pointer;
-    user-select: none;
 }
 
-.w-item:active { opacity: 0.6; }
-
-/* СКРЫТЫЕ ПОДПИСИ */
-.w-label {
-    display: none;
-    font-size: 0.8rem;
-    margin-left: 4px;
-    font-weight: 500;
-    opacity: 0.9;
+.w-item:active {
+    transform: scale(0.95);
 }
 
-.w-item.show-text .w-label {
-    display: inline;
-    animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 0.9; }
-}
-
-/* 4. РАЗДЕЛИТЕЛИ */
-.divider {
-    color: rgba(0, 51, 102, 0.15);
-    margin: 0 2px;
-    font-weight: 300;
-}
-
-/* 5. КНОПКА СТРЕЛКА */
+/* Стили для нашей новой кнопки погоды */
 .weather-arrow-btn {
     position: absolute;
-    top: 11px; /* Скорректировано, чтобы не упиралась в края */
+    top: 10px;
     right: 8px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     padding: 4px 10px;
@@ -140,19 +126,26 @@
     justify-content: center;
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: translateY(+2px);
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
+/* Эффект нажатия (кнопка чуть-чуть сжимается) */
 .weather-arrow-btn:active {
     transform: scale(0.9);
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* ЗАГОЛОВКИ САЙТА */
+.divider {
+    color: rgba(0, 0, 0, 0.2);
+    margin: 0 2px;
+}
+
 .site-title {
     text-align: center;
     color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+                 0 0 15px rgba(100, 180, 255, 0.5);
     margin: 8px 0 4px 0;
     font-size: 1.55rem;
     font-weight: 700;

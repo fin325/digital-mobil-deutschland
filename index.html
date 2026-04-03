@@ -45,6 +45,18 @@
     </div>
 
 <nav class="navbar">
+    <div class="scroll-hint-container">
+    <span class="scroll-hint-text">Прокручиваемые вкладки</span>
+    <div class="scroll-arrows">
+        <button class="arrow-btn" onclick="scrollTabs(-1)">&#8592;</button>
+        <button class="arrow-btn" onclick="scrollTabs(1)">&#8594;</button>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="nav-container scrollable-grid">
+        </div>
+
     <div class="nav-container">
         <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
         <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>

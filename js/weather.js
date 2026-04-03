@@ -56,5 +56,30 @@ async function getWeather() {
     }
 }
 
+function toggleWeatherScroll() {
+    const scrollContainer = document.querySelector('.weather-scroll-container');
+
+    if (scrollContainer) {
+        // Вычисляем, насколько вообще можно прокрутить блок вправо
+        const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+        // Если ползунок находится ближе к началу (прокручено меньше половины)
+        if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
+            // Крутим в самый конец
+            scrollContainer.scrollTo({
+                left: scrollContainer.scrollWidth,
+                behavior: 'smooth'
+            });
+        } else {
+            // Иначе (мы уже в конце) — крутим обратно в самое начало
+            scrollContainer.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+    }
+}
+
+
 // Запускаем функцию при загрузке скрипта
 getWeather();

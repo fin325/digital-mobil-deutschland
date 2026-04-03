@@ -30,17 +30,22 @@
             </div>
 
             <div class="weather-scroll-container">
-                <div class="weather-info" id="full-weather-bar">
-                    <span class="w-item" id="city-temp">Laden...</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">💧 <span id="hum">--</span>%</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">⏲️ <span id="press">--</span> mmHg</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
-                </div>
-            </div>
-        </div>
+    <div class="weather-info" id="full-weather-bar">
+        <span class="w-item" id="city-temp">Laden...</span>
+        <span class="divider">|</span>
+        <span class="w-item" onclick="toggleLabel(this)">
+            💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
+        </span>
+        <span class="divider">|</span>
+        <span class="w-item" onclick="toggleLabel(this)">
+            ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
+        </span>
+        <span class="divider">|</span>
+        <span class="w-item" onclick="toggleLabel(this)">
+            🧲 <span class="w-label">Геомагнитная активность:</span> Kp-Index: <span id="geo">2</span>
+        </span>
+    </div>
+</div>
 
         <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">&#8644;</button>
 

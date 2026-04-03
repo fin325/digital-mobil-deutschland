@@ -1,24 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Digital & Mobil in Deutschland</title>
-<meta name="description" content="Ваш персональный гид по цифровой экосистеме Германии. Помощь в Хаттингене и NRW.">
-
-<meta property="og:title" content="Digital & Mobil in Deutschland">
-<meta property="og:description" content="Инструменты, новости и помощь для жителей Германии.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Digital & Mobil in Deutschland">
-
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/topbar.css">
-<link rel="stylesheet" href="css/navbar.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/translate.css">
-
+    <title>Digital & Mobil in Deutschland</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/topbar.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/translate.css">
 </head>
 
 <body>
@@ -30,24 +20,32 @@
             </div>
 
             <div class="weather-scroll-container">
-    <div class="weather-info" id="full-weather-bar">
-        <span class="w-item" id="city-temp">Laden...</span>
-        <span class="divider">|</span>
-        <span class="w-item" onclick="toggleLabel(this)">
-            💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%</span>
-        <span class="divider">|</span>
-        <span class="w-item" onclick="toggleLabel(this)">
-            ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg</span>
-        <span class="divider">|</span>
-        <span class="w-item" onclick="toggleLabel(this)">
-            🧲 <span class="w-label">Геомагнитная активность:</span> Kp-Index: <span id="geo">2</span>
+                <div class="weather-info" id="full-weather-bar">
+                    <span class="w-item" id="city-temp">Laden...</span>
+                    
+                    <span class="divider">|</span>
+                    
+                    <span class="w-item" onclick="toggleLabel(this)">
+                        💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
+                    </span>
+                    
+                    <span class="divider">|</span>
+                    
+                    <span class="w-item" onclick="toggleLabel(this)">
+                        ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
+                    </span>
+                    
+                    <span class="divider">|</span>
+                    
+                    <span class="w-item" onclick="toggleLabel(this)">
+                        🧲 <span class="w-label">Геомагнитная активность:</span> Kp-Index: <span id="geo">2</span>
+                    </span> </div>
+            </div> <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">&#8644;</button>
+        </div> </div> <div class="site-header">
+        <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 
-        <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">&#8644;</button>
-
-    <div class="site-title">Digital & Mobil in Deutschland</div>
-    <div class="site-subtitle">Stadt Hattingen</div>
-</div>
 <div class="scroll-hint-container">
     <span class="scroll-hint-text">Прокрутка меню</span>
     <div class="scroll-arrows">

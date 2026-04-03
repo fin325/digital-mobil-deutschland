@@ -14,7 +14,7 @@
 .top-bar-content {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0px;
     width: 100%;
     overflow: hidden;
 }
@@ -29,8 +29,8 @@
     background: rgba(255, 255, 255, 0.7);
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    width: 55px;
-    min-width: 55px;
+    width: 65px;
+    min-width: 65px;
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;

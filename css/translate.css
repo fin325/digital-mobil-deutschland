@@ -1,46 +1,58 @@
-/* === TRANSLATE.CSS — Google Translate + адаптив === */
-
-#google_translate_element {
-    margin: 20px 0;
-    text-align: center;
+/* Контейнер секции */
+#translate .card {
+    padding: 20px;
 }
 
-.goog-te-gadget-simple {
-    background-color: rgba(255, 255, 255, 0.4) !important;
-    border: 1px solid var(--glass-border) !important;
-    padding: 8px !important;
-    border-radius: 12px !important;
-    font-family: inherit !important;
-    cursor: pointer;
+/* Стили заголовков и текста внутри вкладки */
+.translate-item {
+    margin-bottom: 25px;
     transition: all 0.3s ease;
 }
 
-.goog-te-gadget-simple:hover {
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+.translate-item h3 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
 }
 
-.goog-te-gadget img {
-    display: none !important;
+.translate-item p {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    opacity: 0.8;
+    line-height: 1.4;
 }
 
-.goog-te-gadget span {
-    display: none !important;
+/* Общий стиль кнопок */
+.btn-translate {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: white !important; /* Чтобы текст всегда был белым */
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
 }
 
-.goog-te-banner-frame.skiptranslate {
-    display: none !important;
+/* Эффекты при наведении */
+.btn-translate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0.9;
 }
 
-.goog-te-menu-value span {
-    color: var(--primary-blue) !important;
-    font-weight: 600 !important;
-    font-size: 0.9rem !important;
+.btn-translate:active {
+    transform: translateY(0);
 }
 
-@media (max-width: 480px) {
-    h1 { font-size: 1.4rem; }
-    .weather-info { font-size: 0.78rem; gap: 8px; }
-    .site-title { font-size: 1.35rem; }
-    .site-subtitle { font-size: 0.95rem; }
+/* Цвета кнопок */
+.bg-google {
+    background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335);
+}
+
+.bg-deepl {
+    background-color: #002e59;
+}
+
+.bg-reverso {
+    background-color: #1e5fa9;
 }

@@ -29,7 +29,7 @@ async function getWeather() {
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
-        // 1. Обновляем город и температуру
+        // Обновляем город и температуру
         if (tempEl) {
             tempEl.innerText = `${city} ${icon} ${temp}°C`;
             tempEl.onclick = (e) => {
@@ -42,7 +42,7 @@ async function getWeather() {
             };
         }
         
-        // 2. Обновляем числа
+        // Обновляем числа
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
@@ -52,51 +52,74 @@ async function getWeather() {
 }
 
 /**
- * УМНАЯ ФУНКЦИЯ ПОДСКАЗОК (Решает проблему обрезки!)
+ * ГЛОБАЛЬНАЯ ПОДСКАЗКА (Идеальное решение проблемы обрезки)
  */
 function toggleLabel(element) {
     if (!element) return;
 
-    const isShown = element.classList.contains('show-text');
+    // Ищем текст внутри HTML, который нужно показать
+    const labelSpan = element.querySelector('.w-label');
+    if (!labelSpan) return;
 
-    // 1. Закрываем все открытые подсказки и стираем старые позиции
-    document.querySelectorAll('.w-item').forEach(item => {
-        item.classList.remove('show-text', 'tip-left', 'tip-right', 'tip-center');
-    });
-
-    // 2. Если была скрыта — открываем
-    if (!isShown) {
-        // УЗНАЕМ ГДЕ ИКОНКА (чтобы подсказка не обрезалась)
-        const rect = element.getBoundingClientRect();
-        const windowWidth = window.innerWidth;
-
-        if (rect.left < 100) {
-            element.classList.add('tip-left');   // Если слева -> открываем вправо
-        } else if (rect.right > windowWidth - 100) {
-            element.classList.add('tip-right');  // Если справа -> открываем влево
-        } else {
-            element.classList.add('tip-center'); // Если в центре -> открываем по центру
+    // Создаем глобальное облачко, если его еще нет на странице
+    let globalTip = document.getElementById('global-weather-tooltip');
+    if (!globalTip) {
+        globalTip = document.createElement('div');
+        globalTip.id = 'global-weather-tooltip';
+        globalTip.className = 'w-label-global';
+        document.body.appendChild(globalTip);
+        
+        // Как только начинаем скроллить погоду — прячем подсказку
+        const scrollContainer = document.querySelector('.weather-scroll-container');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', () => {
+                globalTip.style.display = 'none';
+                document.querySelectorAll('.w-item').forEach(i => i.classList.remove('show-text'));
+            });
         }
-
-        element.classList.add('show-text');
-
-        // 3. Автоматически скрываем через 3 секунды
-        setTimeout(() => {
-            if (element.classList.contains('show-text')) {
-                element.classList.remove('show-text', 'tip-left', 'tip-right', 'tip-center');
-            }
-        }, 3000);
     }
+
+    // Если кликнули на ту же иконку — просто закрываем
+    if (element.classList.contains('show-text')) {
+        element.classList.remove('show-text');
+        globalTip.style.display = 'none';
+        return;
+    }
+
+    // Сбрасываем эффекты у других иконок
+    document.querySelectorAll('.w-item').forEach(item => item.classList.remove('show-text'));
+    element.classList.add('show-text');
+
+    // Передаем текст в глобальную подсказку и показываем её
+    globalTip.innerHTML = labelSpan.innerHTML;
+    globalTip.style.display = 'block';
+
+    // ВЫЧИСЛЯЕМ ИДЕАЛЬНУЮ ПОЗИЦИЮ (поверх всего экрана)
+    const rect = element.getBoundingClientRect();
+    globalTip.style.top = (rect.bottom + 10) + 'px'; // Чуть ниже иконки
+    
+    // Выравниваем по левому краю, но защищаем от обрезки справа
+    let leftPos = rect.left;
+    if (leftPos + globalTip.offsetWidth > window.innerWidth) {
+        leftPos = window.innerWidth - globalTip.offsetWidth - 10;
+    }
+    globalTip.style.left = leftPos + 'px';
+
+    // Автоскрытие через 3 секунды
+    clearTimeout(window.weatherTooltipTimeout);
+    window.weatherTooltipTimeout = setTimeout(() => {
+        element.classList.remove('show-text');
+        globalTip.style.display = 'none';
+    }, 3000);
 }
 
 /**
- * Функция прокрутки ленты погоды
+ * Функция прокрутки
  */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
     if (scrollContainer) {
         const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        
         if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
             scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
         } else {
@@ -105,5 +128,5 @@ function toggleWeatherScroll() {
     }
 }
 
-// Запуск при загрузке страницы
+// Запуск при загрузке
 getWeather();

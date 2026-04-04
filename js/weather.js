@@ -31,26 +31,20 @@ async function getWeather() {
 
         // 1. Обновляем город и температуру
         if (tempEl) {
-            // Важно: если внутри city-temp есть w-label, innerText его сотрет.
-            // Поэтому обновляем текст аккуратно, если нужно сохранить структуру.
-            tempEl.innerHTML = `<span class="w-label">Нажмите для смены города</span> ${city} ${icon} ${temp}°C`;
-            
+            tempEl.innerText = `${city} ${icon} ${temp}°C`;
+            // Убедимся, что клик по городу вызывает смену города, а не подсказку
             tempEl.onclick = (e) => {
-                // Если кликнули именно для смены города (двойной клик или логика API)
-                // Но так как у нас toggleLabel на всех айтемах, добавим проверку:
-                if (e.detail === 2) { // Смена города по двойному клику
-                    const newCity = prompt('Введите название города:', currentCity);
-                    if (newCity && newCity.trim() !== '') {
-                        currentCity = newCity.trim();
-                        getWeather();
-                    }
-                } else {
-                    toggleLabel(tempEl);
+                e.stopPropagation(); // Чтобы не срабатывали лишние события
+                const newCity = prompt('Введите название города:', currentCity);
+                if (newCity && newCity.trim() !== '') {
+                    currentCity = newCity.trim();
+                    getWeather();
                 }
             };
         }
         
-        // 2. Обновляем только числовые значения
+        // 2. Обновляем ТОЛЬКО числа (используем innerText на конкретных ID)
+        // Это сохраняет в целости наши <span class="w-label"> в HTML
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
@@ -60,46 +54,49 @@ async function getWeather() {
 }
 
 /**
- * Улучшенная функция показа подсказки на уровне текста
+ * Улучшенная функция для всплывающих подсказок (Tooltips)
  */
 function toggleLabel(element) {
     if (!element) return;
 
-    // Проверяем, открыта ли подсказка уже
-    const isAlreadyShown = element.classList.contains('show-text');
+    // Проверяем, показана ли подсказка сейчас
+    const isShown = element.classList.contains('show-text');
 
-    // 1. Сначала убираем класс show-text у ВСЕХ элементов (чтобы подсказки не накладывались)
+    // 1. Закрываем все открытые подсказки на странице
     document.querySelectorAll('.w-item').forEach(item => {
         item.classList.remove('show-text');
     });
 
-    // 2. Если подсказка не была открыта — открываем её
-    if (!isAlreadyShown) {
+    // 2. Если была скрыта — открываем
+    if (!isShown) {
         element.classList.add('show-text');
 
-        // 3. Авто-скрытие через 2.5 секунды, чтобы текст вернулся
+        // 3. Автоматически скрываем через 3 секунды
+        // Используем проверку, чтобы не закрыть то, что уже закрыто вручную
         setTimeout(() => {
-            element.classList.remove('show-text');
-        }, 2500);
+            if (element.classList.contains('show-text')) {
+                element.classList.remove('show-text');
+            }
+        }, 3000);
     }
 }
 
 /**
- * Функция прокрутки ленты
+ * Функция прокрутки ленты погоды
  */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
     if (scrollContainer) {
         const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        const currentScroll = scrollContainer.scrollLeft;
-
-        if (currentScroll < maxScrollLeft / 2) {
-            scrollContainer.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+        
+        // Если прокручено меньше половины — в конец, иначе — в начало
+        if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
+            scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
         } else {
             scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
         }
     }
 }
 
-// Запуск
+// Запуск при загрузке страницы
 getWeather();

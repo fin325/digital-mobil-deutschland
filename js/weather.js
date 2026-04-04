@@ -29,10 +29,12 @@ async function getWeather() {
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
+        // 1. Обновляем город и температуру
         if (tempEl) {
             tempEl.innerText = `${city} ${icon} ${temp}°C`;
+            // Убедимся, что клик по городу вызывает смену города, а не подсказку
             tempEl.onclick = (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // Чтобы не срабатывали лишние события
                 const newCity = prompt('Введите название города:', currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
@@ -41,6 +43,8 @@ async function getWeather() {
             };
         }
         
+        // 2. Обновляем ТОЛЬКО числа (используем innerText на конкретных ID)
+        // Это сохраняет в целости наши <span class="w-label"> в HTML
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
@@ -49,35 +53,26 @@ async function getWeather() {
     }
 }
 
+/**
+ * Улучшенная функция для всплывающих подсказок (Tooltips)
+ */
 function toggleLabel(element) {
     if (!element) return;
 
+    // Проверяем, показана ли подсказка сейчас
     const isShown = element.classList.contains('show-text');
 
+    // 1. Закрываем все открытые подсказки на странице
     document.querySelectorAll('.w-item').forEach(item => {
         item.classList.remove('show-text');
     });
 
+    // 2. Если была скрыта — открываем
     if (!isShown) {
         element.classList.add('show-text');
 
-        const label = element.querySelector('.w-label');
-        if (label) {
-            const itemRect = element.getBoundingClientRect();
-            const screenCenterX = window.innerWidth / 2;
-            const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
-            label.style.left = `calc(50% + ${offset}px)`;
-        }
-
-        const scrollContainer = document.querySelector('.weather-scroll-container');
-        if (scrollContainer) {
-            const hideOnScroll = () => {
-                element.classList.remove('show-text');
-                scrollContainer.removeEventListener('scroll', hideOnScroll);
-            };
-            scrollContainer.addEventListener('scroll', hideOnScroll, { once: true });
-        }
-
+        // 3. Автоматически скрываем через 3 секунды
+        // Используем проверку, чтобы не закрыть то, что уже закрыто вручную
         setTimeout(() => {
             if (element.classList.contains('show-text')) {
                 element.classList.remove('show-text');
@@ -86,11 +81,15 @@ function toggleLabel(element) {
     }
 }
 
+/**
+ * Функция прокрутки ленты погоды
+ */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
     if (scrollContainer) {
         const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         
+        // Если прокручено меньше половины — в конец, иначе — в начало
         if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
             scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
         } else {
@@ -98,61 +97,6 @@ function toggleWeatherScroll() {
         }
     }
 }
-
-// Инерционный скролл
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.weather-scroll-container');
-    if (!container) return;
-
-    let startX = 0;
-    let startScrollLeft = 0;
-    let velX = 0;
-    let lastX = 0;
-    let lastTime = 0;
-    let rafId = null;
-    let isDragging = false;
-
-    container.addEventListener('touchstart', e => {
-        cancelAnimationFrame(rafId);
-        isDragging = true;
-        startX = e.touches[0].pageX;
-        startScrollLeft = container.scrollLeft;
-        lastX = startX;
-        lastTime = Date.now();
-        velX = 0;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', e => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const x = e.touches[0].pageX;
-        const now = Date.now();
-        const dt = now - lastTime;
-        if (dt > 0) {
-            velX = (lastX - x) / dt;
-        }
-        lastX = x;
-        lastTime = now;
-        container.scrollLeft = startScrollLeft + (startX - x);
-    }, { passive: false });
-
-    container.addEventListener('touchend', () => {
-        isDragging = false;
-        inertia();
-    });
-
-    container.addEventListener('touchcancel', () => {
-        isDragging = false;
-        cancelAnimationFrame(rafId);
-    });
-
-    function inertia() {
-        if (Math.abs(velX) < 0.3) return;
-        velX *= 0.92;
-        container.scrollLeft += velX * 16;
-        rafId = requestAnimationFrame(inertia);
-    }
-});
 
 // Запуск при загрузке страницы
 getWeather();

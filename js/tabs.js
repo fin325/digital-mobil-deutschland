@@ -1,4 +1,16 @@
+let swipeHintDone = false;
+
+function hideSwipeHint() {
+    if (!swipeHintDone) {
+        swipeHintDone = true;
+        const hint = document.querySelector('.scroll-hint-left');
+        if (hint) hint.classList.add('hidden');
+    }
+}
+
 function scrollTabs(direction) {
+    hideSwipeHint(); // ← скрываем подсказку при нажатии стрелок
+    
     const viewport = document.querySelector('.nav-scroll-viewport');
     
     if (viewport) {
@@ -35,16 +47,8 @@ function showTab(tabId, event) {
     window.scrollTo(0, 0);
 }
 
-let swipeHintDone = false;
-
-const menuScroll = document.querySelector('.your-tabs-container'); // замените на ваш селектор меню
-
-menuScroll.addEventListener('scroll', function onFirstScroll() {
-    if (!swipeHintDone) {
-        swipeHintDone = true;
-        const hint = document.querySelector('.scroll-hint-left');
-        if (hint) hint.classList.add('hidden');
-        menuScroll.removeEventListener('scroll', onFirstScroll);
-    }
-}, { passive: true });
-
+// Слушаем скролл viewport (правильный селектор)
+const menuScroll = document.querySelector('.nav-scroll-viewport');
+if (menuScroll) {
+    menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
+}

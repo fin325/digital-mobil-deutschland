@@ -34,3 +34,17 @@ function showTab(tabId, event) {
     // Скролл страницы вверх при переключении
     window.scrollTo(0, 0);
 }
+
+let swipeHintDone = false;
+
+const menuScroll = document.querySelector('.your-tabs-container'); // замените на ваш селектор меню
+
+menuScroll.addEventListener('scroll', function onFirstScroll() {
+    if (!swipeHintDone) {
+        swipeHintDone = true;
+        const hint = document.querySelector('.scroll-hint-left');
+        if (hint) hint.classList.add('hidden');
+        menuScroll.removeEventListener('scroll', onFirstScroll);
+    }
+}, { passive: true });
+

@@ -27,3 +27,4 @@ async function loadNews() {
         container.innerHTML = 'Fehler beim Laden.';
     }
 }
+

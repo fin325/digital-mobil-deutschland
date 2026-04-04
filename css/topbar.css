@@ -8,13 +8,13 @@
     position: sticky;
     top: 0;
     z-index: 9999 !important;
-    padding: 8px 15px;
+    padding: 0;
     overflow: visible !important;
 }
 
 .top-bar-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0;
     width: 100%;
     overflow: visible !important;
@@ -29,21 +29,23 @@
     justify-content: center;
     line-height: 1.1;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     
-    /* Границы со всех сторон и прижатие */
-    border: 1px solid var(--glass-border);
-    margin-top: -8px;   /* Компенсация padding-top родителя */
-    margin-left: -15px; /* Компенсация padding-left родителя */
-    height: 56px;       /* Высота топбара (40 + 8 + 8) */
-    border-radius: 0 0 6px 0; /* Скругление только внутреннего угла */
+    /* Добавляем границы здесь */
+    border-top: 1px solid rgba(255, 255, 255, 0.3);  /* Верхняя граница */
+    border-left: 1px solid rgba(255, 255, 255, 0.3); /* Левая граница */
     
+    border-radius: 0 0 6px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    width: 65px;
-    min-width: 65px;
+    width: 52px;
+    min-width: 52px;
+    height: 32px;
     flex-shrink: 0;
     box-sizing: border-box;
     gap: 0;
+    align-self: flex-start;
 }
 
 #current-date, #current-time, #current-seconds {
@@ -67,11 +69,12 @@
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
-    padding-top: 5px;
+    padding-top: 0;
     padding-bottom: 55px;
     margin-bottom: -50px;
     gap: 0;
     overscroll-behavior-x: none;
+    align-self: flex-start;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -150,32 +153,29 @@
 }
 
 .weather-arrow-btn {
-    position: relative;
+    /* ... ваши существующие стили ... */
     
-    /* Границы со всех сторон и прижатие */
-    border: 1px solid var(--glass-border);
-    margin-top: -8px;    /* Компенсация padding-top родителя */
-    margin-right: -15px; /* Компенсация padding-right родителя */
-    height: 56px;        /* Высота топбара */
-    border-radius: 0 0 0 8px; /* Скругление только внутреннего угла */
-    align-self: flex-start;
+    /* Устанавливаем границы сверху и справа */
+    border-top: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+    
+    /* Если хотите, чтобы остальные стороны тоже имели границы, 
+       оставьте их или используйте краткую запись: */
+    border-left: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
 
-    top: auto;
-    right: auto;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 4px 10px;
-    cursor: pointer;
-    color: var(--primary-blue);
-    font-size: 1.2rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-    transition: transform 0.2s ease, background 0.2s ease;
-    box-sizing: border-box;
+    /* Углы: 0 0 0 8px означает, что верхний левый, верхний правый 
+       и нижний правый — острые (прижаты), а нижний левый — скруглен */
+    border-radius: 0 0 0 8px;
+
+    /* Остальные стили без изменений */
+    position: relative;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 4px 8px;
+    /* ... */
 }
 
 .weather-arrow-btn:active {

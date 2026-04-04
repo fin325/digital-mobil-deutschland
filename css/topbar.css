@@ -112,7 +112,7 @@
     bottom: auto;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(30%);
+    transform: translateX(-50%) translateY(40px);
     background: rgba(255, 255, 255, 0.98);
     color: var(--primary-blue);
     padding: 5px 10px;
@@ -123,7 +123,6 @@
     z-index: 99999 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--glass-border);
-
 }
 
 .w-label::before {
@@ -136,9 +135,10 @@
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateX(-50%) translateY(15%) scale(0.95); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(30%) scale(1); }
+    from { opacity: 0; transform: translateX(25px) translateY(180%) scale(0.95); }
+    to   { opacity: 1; transform: translateX(40px) translateY(200%) scale(1); }
 }
+
 
 .weather-arrow-btn {
     position: absolute;

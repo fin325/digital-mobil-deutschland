@@ -88,33 +88,37 @@
     transform: translateY(-8px);
 }
 
+.swipe-finger-wrapper {
+    width: 28px;
+    height: 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+}
+
+.swipe-finger {
+    font-size: 1.2rem;
+    display: inline-block;
+    transform-origin: top center;
+    animation: swipeRock 1.6s ease-in-out infinite;
+}
+
+@keyframes swipeRock {
+    0%   { transform: rotate(-20deg); }
+    40%  { transform: rotate(20deg); }
+    70%  { transform: rotate(-20deg); }
+    100% { transform: rotate(-20deg); }
+}
+
 .scroll-hint-left {
     display: flex;
     align-items: center;
     gap: 6px;
+    transition: opacity 0.5s ease;
 }
 
-.swipe-finger-wrapper {
-    width: 36px;
-    overflow: hidden;
-    position: relative;
-    height: 24px;
-    display: flex;
-    align-items: center;
-}
-
-.swipe-finger {
-    font-size: 1.1rem;
-    display: inline-block;
-    animation: swipeAnim 1.8s ease-in-out infinite;
-    transform: rotate(90deg);
-    transform-origin: center;
-}
-
-@keyframes swipeAnim {
-    0%   { transform: rotate(90deg) translateY(-6px); opacity: 0.4; }
-    30%  { opacity: 1; }
-    60%  { transform: rotate(90deg) translateY(6px); opacity: 1; }
-    80%  { opacity: 0.4; }
-    100% { transform: rotate(90deg) translateY(-6px); opacity: 0.4; }
+.scroll-hint-left.hidden {
+    opacity: 0;
+    pointer-events: none;
 }

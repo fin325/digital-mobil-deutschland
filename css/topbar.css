@@ -85,6 +85,7 @@
 
 /* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ (Текст и иконки) */
 .w-item {
+    position: relative; /* Обязательно: привязываем подсказку к иконке */
     white-space: nowrap;
     font-size: 0.85rem;
     color: var(--primary-blue);
@@ -93,12 +94,14 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
+    user-select: none;
     transition: opacity 0.2s ease;
 }
 
-/* Легкий эффект при клике */
+/* Легкий эффект при клике на саму иконку */
 .w-item:active {
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 /* 4. РАЗДЕЛИТЕЛИ ВНУТРИ БЛОКА */
@@ -108,23 +111,59 @@
     font-weight: 300;
 }
 
-/* СКРЫТЫЕ ПОДПИСИ */
+/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (вместо обычных подписей) */
 .w-label {
-    display: none;
-    font-size: 0.8rem;
-    margin-left: 4px;
-    font-weight: 500;
-    opacity: 0.9;
+    display: none; /* Скрыто по умолчанию */
+    position: absolute;
+    
+    /* Позиционируем под иконкой */
+    top: 130%; 
+    left: 50%;
+    transform: translateX(-50%); /* Центрируем точно по середине */
+    
+    /* Стиль "облачка" */
+    background: rgba(255, 255, 255, 0.98); 
+    color: var(--primary-blue);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    z-index: 1000;
+    
+    /* Тень и граница для четкости */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--glass-border);
 }
 
+/* Маленький треугольник-стрелочка над подсказкой */
+.w-label::before {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* Упирается в верх подсказки */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent rgba(255, 255, 255, 0.98) transparent;
+}
+
+/* Показываем подсказку при нажатии */
 .w-item.show-text .w-label {
-    display: inline;
-    animation: fadeIn 0.2s ease-in-out;
+    display: block; /* Вместо inline, чтобы работало позиционирование */
+    animation: slideDown 0.2s ease-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 0.9; }
+/* Анимация плавного появления сверху вниз */
+@keyframes slideDown {
+    from { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0); 
+    }
 }
 
 .weather-arrow-btn {

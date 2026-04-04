@@ -127,11 +127,11 @@
     to { opacity: 0.9; }
 }
 
-/* Стили для нашей новой кнопки погоды */
 .weather-arrow-btn {
     position: absolute;
-    top: 10px;
-    right: 8px;
+    /* Уменьшаем значения, чтобы прижать кнопку к углу */
+    top: 5px;   /* Было 10px — чем меньше число, тем ВЫШЕ кнопка */
+    right: 4px; /* Было 8px — чем меньше число, тем ПРАВЕЕ кнопка */
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
@@ -145,10 +145,11 @@
     justify-content: center;
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transform: translateY(+3px);
+    transform: none; 
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
+/* Эффект нажатия (оставляем только scale) */
 .weather-arrow-btn:active {
     transform: scale(0.9);
     background: rgba(255, 255, 255, 0.5);

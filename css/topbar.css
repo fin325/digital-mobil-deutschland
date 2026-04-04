@@ -19,6 +19,7 @@
     width: 100%;
     overflow: visible !important;
     position: relative;
+    overscroll-behavior: none;
 }
 
 .date-time-block {

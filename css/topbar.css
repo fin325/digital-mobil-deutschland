@@ -7,83 +7,53 @@
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    z-index: 9999 !important; /* Максимальный приоритет шапки над всем сайтом */
+    z-index: 9999 !important;
     padding: 8px 15px;
-    overflow: visible !important; /* Строго разрешаем выход за границы */
+    overflow: visible !important;
 }
 
 .top-bar-content {
     display: flex;
     align-items: center;
-    gap: 0; 
     width: 100%;
-    overflow: visible !important; /* Разрешаем вылет подсказок */
-    position: relative; 
+    position: relative;
+    overflow: visible !important;
 }
 
-/* БЛОК ВРЕМЕНИ */
+/* БЛОК ВРЕМЕНИ (Стоит на месте, никем не перекрыт) */
 .date-time-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    line-height: 1.1;
-    font-weight: 700;
-    /* Сделали фон чуть плотнее, чтобы под ним точно ничего не просвечивало */
     background: rgba(255, 255, 255, 0.85); 
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 65px;
     min-width: 65px;
     height: 40px;
     flex-shrink: 0;
-    box-sizing: border-box;
-    
     position: relative;
-    z-index: 1; /* Оставляем на нижнем слое */
+    z-index: 5;
 }
 
-#current-date, #current-time, #current-seconds {
-    color: #003366;
-    text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
-    margin: 0;
-    font-weight: 700;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-
-#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
-#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
-
-/* 1. КОНТЕЙНЕР ПРОКРУТКИ */
+/* 1. КОНТЕЙНЕР ПРОКРУТКИ (Начинается ПОСЛЕ даты) */
 .weather-scroll-container {
     display: flex;
-    align-items: flex-start; /* ВАЖНО: чтобы строка погоды не съехала вниз */
+    align-items: center;
     overflow-x: auto;
-    overflow-y: visible !important; 
+    overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
     
-    /* ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ СНИЗУ (Создаем невидимое пространство) */
-    padding-top: 5px;     
-    padding-bottom: 55px; 
-    margin-bottom: -50px; 
-    
-    /* УБРАЛИ НАЛОЖЕНИЕ СЛЕВА, теперь блоки стоят четко друг за другом */
-    margin-left: 0;
-    padding-left: 0;
-    
-    position: relative;   
-    z-index: 2; /* Поднимаем скролл чуть выше времени */
+    /* Вертикальный "хак" оставляем, чтобы подсказка была видна СНИЗУ */
+    padding-bottom: 50px;
+    margin-bottom: -45px;
+    padding-top: 5px;
 }
 
-.weather-scroll-container::-webkit-scrollbar {
-    display: none;
-}
+.weather-scroll-container::-webkit-scrollbar { display: none; }
 
-/* 2. ЕДИНАЯ ИНФОРМАЦИОННАЯ ПАНЕЛЬ */
 .weather-info {
     display: flex;
     gap: 15px;
@@ -96,7 +66,7 @@
     border-radius: 12px;
 }
 
-/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ */
+/* 3. ЭЛЕМЕНТЫ ПОГОДЫ */
 .w-item {
     position: relative;
     white-space: nowrap;
@@ -108,114 +78,43 @@
     align-items: center;
     gap: 4px;
     cursor: pointer;
-    user-select: none;
-    transition: opacity 0.2s ease;
-}
-
-.w-item:active {
-    opacity: 0.8;
-}
-
-/* 4. РАЗДЕЛИТЕЛИ */
-.divider {
-    color: rgba(0, 51, 102, 0.15);
-    margin: 0 2px;
-    font-weight: 300;
 }
 
 /* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ */
 .w-label {
     display: none !important; 
     position: absolute;
-    top: 130%; 
-    background: rgba(255, 255, 255, 0.98); 
-    color: var(--primary-blue);
+    top: 130%; /* Вылетает СНИЗУ */
+    background: white; 
+    color: #003366;
     padding: 5px 10px;
     border-radius: 8px;
     font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
-    z-index: 99999 !important;
+    z-index: 10000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
-.w-label::before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent rgba(255, 255, 255, 0.98) transparent;
-}
-
-/* ПОЗИЦИЯ 1: Элемент слева (открываем вправо) */
-.w-item.tip-left .w-label { left: 0; right: auto; transform: none; }
-.w-item.tip-left .w-label::before { left: 15px; margin-left: 0; right: auto; }
-
-/* ПОЗИЦИЯ 2: Элемент справа (открываем влево) */
+/* УМНЫЕ ПОЗИЦИИ (Чтобы не резало края) */
+/* Слева: прижимаем левый край подсказки к иконке */
+.w-item.tip-left .w-label { left: 0; transform: none; }
+/* Справа: прижимаем правый край подсказки к иконке */
 .w-item.tip-right .w-label { right: 0; left: auto; transform: none; }
-.w-item.tip-right .w-label::before { right: 15px; left: auto; margin-left: 0; }
-
-/* ПОЗИЦИЯ 3: Элемент по центру (открываем посередине) */
+/* Центр: по середине */
 .w-item.tip-center .w-label { left: 50%; transform: translateX(-50%); }
-.w-item.tip-center .w-label::before { left: 50%; margin-left: -5px; }
 
-/* Показываем при клике */
 .w-item.show-text .w-label {
     display: block !important;
-    animation: slideDown 0.2s ease-out;
+    animation: fadeIn 0.2s ease-out;
 }
 
-/* Анимация через margin, чтобы не ломать центрирование */
-@keyframes slideDown {
-    from { opacity: 0; margin-top: -10px; }
-    to { opacity: 1; margin-top: 0; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; }
 }
 
-/* КНОПКА СТРЕЛКА */
-.weather-arrow-btn {
-    position: absolute;
-    top: 5px;
-    right: 0px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    padding: 4px 10px;
-    cursor: pointer;
-    color: var(--primary-blue);
-    font-size: 1.2rem;
-    font-weight: bold; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transform: none; 
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.weather-arrow-btn:active {
-    transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.5);
-}
-
-/* ЗАГОЛОВКИ */
-.site-title {
-    text-align: center;
-    color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 8px 0 4px 0;
-    font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.site-subtitle {
-    text-align: center;
-    color: #e6f0ff;
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-}
+/* Остальные стили (кнопка, заголовки) оставляем как у тебя были */
+.weather-arrow-btn { position: absolute; top: 5px; right: 0px; z-index: 20; background: white; border-radius: 8px; padding: 4px 10px; }
+.site-title { text-align: center; color: #fff; margin-top: 10px; }

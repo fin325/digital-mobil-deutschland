@@ -161,6 +161,8 @@
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     flex-shrink: 0;
+    height: 40px;
+    box-sizing: border-box;
     align-self: stretch;
     transition: transform 0.2s ease, background 0.2s ease;
 }

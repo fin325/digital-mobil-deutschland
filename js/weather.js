@@ -99,16 +99,22 @@ function toggleWeatherScroll() {
     }
 }
 
-// Инерционный скролл без резинового эффекта
+// Инерционный скролл
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.weather-scroll-container');
     if (!container) return;
 
-    let startX, startScrollLeft;
-    let velX = 0, lastX, lastTime, rafId;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let velX = 0;
+    let lastX = 0;
+    let lastTime = 0;
+    let rafId = null;
+    let isDragging = false;
 
     container.addEventListener('touchstart', e => {
         cancelAnimationFrame(rafId);
+        isDragging = true;
         startX = e.touches[0].pageX;
         startScrollLeft = container.scrollLeft;
         lastX = startX;
@@ -117,21 +123,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     container.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
         const x = e.touches[0].pageX;
         const now = Date.now();
-        velX = (lastX - x) / (now - lastTime);
+        const dt = now - lastTime;
+        if (dt > 0) {
+            velX = (lastX - x) / dt;
+        }
         lastX = x;
         lastTime = now;
         container.scrollLeft = startScrollLeft + (startX - x);
-    }, { passive: true });
+    }, { passive: false });
 
     container.addEventListener('touchend', () => {
+        isDragging = false;
         inertia();
     });
 
+    container.addEventListener('touchcancel', () => {
+        isDragging = false;
+        cancelAnimationFrame(rafId);
+    });
+
     function inertia() {
-        velX *= 0.95;
-        if (Math.abs(velX) < 0.5) return;
+        if (Math.abs(velX) < 0.3) return;
+        velX *= 0.92;
         container.scrollLeft += velX * 16;
         rafId = requestAnimationFrame(inertia);
     }

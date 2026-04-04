@@ -19,30 +19,34 @@
             <span id="current-time"></span>
         </div>
 
-   <div class="weather-scroll-container">
-    <div class="weather-info" id="full-weather-bar">
-        <span class="w-item" id="city-temp">Laden...</span>
-        
-        <span class="divider">|</span>
-        
-        <span class="w-item" onclick="toggleLabel(this)">
-            <span class="w-tooltip">Влажность воздуха</span>
-            💧 <span id="hum">--</span>%
-        </span>
-        
-        <span class="divider">|</span>
-        
-        <span class="w-item" onclick="toggleLabel(this)">
-            <span class="w-tooltip">Атмосферное давление</span>
-            ⏲️ <span id="press">--</span> mmHg
-        </span>
-        
-        <span class="divider">|</span>
-        
-        <span class="w-item" onclick="toggleLabel(this)">
-            <span class="w-tooltip">Геомагнитная активность</span>
-            🧲 Kp-Index: <span id="geo">2</span>
-        </span>
+        <div class="weather-scroll-container">
+            <div class="weather-info" id="full-weather-bar">
+                <span class="w-item" id="city-temp">Laden...</span>
+                <span class="divider">|</span>
+                <span class="w-item" onclick="toggleLabel(this)">
+                    💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
+                </span>
+                <span class="divider">|</span>
+                <span class="w-item" onclick="toggleLabel(this)">
+                    ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
+                </span>
+                <span class="divider">|</span>
+                <span class="w-item" onclick="toggleLabel(this)">
+                    🧲 <span class="w-label">Геомагнитная активность:</span> Kp-Index: <span id="geo">2</span>
+                </span>
+            </div>
+        </div>
+
+        <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">&#8644;</button>
+    </div> <div class="site-header">
+        <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
+    </div>
+</div> <div class="scroll-hint-container">
+    <span class="scroll-hint-text">Прокрутка меню</span>
+    <div class="scroll-arrows">
+        <button class="arrow-btn" onclick="scrollTabs(-1)">&#8592;</button>
+        <button class="arrow-btn" onclick="scrollTabs(1)">&#8594;</button>
     </div>
 </div>
 

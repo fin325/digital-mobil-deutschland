@@ -131,8 +131,8 @@
     position: absolute;
     /* Уменьшаем значения, чтобы прижать кнопку к углу */
     top: 5px;   /* Было 10px — чем меньше число, тем ВЫШЕ кнопка */
-    right: 4px; /* Было 8px — чем меньше число, тем ПРАВЕЕ кнопка */
-    background: rgba(255, 255, 255, 0.8);
+    right: 2px; /* Было 8px — чем меньше число, тем ПРАВЕЕ кнопка */
+    background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     padding: 4px 10px;

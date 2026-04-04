@@ -88,7 +88,7 @@ function updateAQIUI(index) {
         default: color = "#fff"; status = "--"; icon = "🍃";
     }
 
-    valEl.innerText = `${index} (${status})`;
+    valEl.innerText = index;
     valEl.style.color = color;
     icoEl.innerText = icon;
     icoEl.style.color = color;

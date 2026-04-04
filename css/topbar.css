@@ -1,99 +1,134 @@
-/* === TOPBAR.CSS === */
-
+/* === ОСНОВНОЙ КОНТЕЙНЕР ШАПКИ === */
 .top-bar {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    /* Уровень 9999 гарантирует, что вся панель выше основного контента сайта */
-    z-index: 9999 !important; 
-    padding: 8px 15px;
-    /* Разрешаем вылет подсказок за пределы топ-бара вниз */
-    overflow: visible !important; 
+    z-index: 9999;
+    padding: 8px 0;
+    overflow: hidden; /* Скрывает скролл, когда он выходит за границы */
 }
 
 .top-bar-content {
     display: flex;
     align-items: center;
-    gap: 0; 
     width: 100%;
-    position: relative;
-    /* Разрешаем контенту (подсказкам) выходить за границы контента */
-    overflow: visible !important; 
+    position: relative; 
+    height: 40px;
 }
 
-/* БЛОК ВРЕМЕНИ */
+/* БЛОК ВРЕМЕНИ (Левый "щит") */
 .date-time-block {
+    position: relative;
+    z-index: 50; /* Поверх скролла */
+    background: #ffffff; /* Непрозрачный фон обязателен */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 65px;
     min-width: 65px;
     height: 40px;
-    flex-shrink: 0;
-    
-    /* Слой 1: Дата стоит на нижнем уровне */
-    position: relative;
-    z-index: 1; 
+    margin-left: 15px;
+    border-radius: 6px;
+    box-shadow: 10px 0 15px rgba(255, 255, 255, 0.9); /* Мягкое скрытие текста */
 }
 
-/* 1. КОНТЕЙНЕР ПРОКРУТКИ */
-.weather-scroll-container {
+/* КНОПКА СТРЕЛКА (Правый "щит") */
+.weather-arrow-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 50; /* Поверх скролла */
+    background: #ffffff;
+    height: 100%;
+    width: 45px;
     display: flex;
-    align-items: flex-start;
-    overflow-x: auto;
-    /* overflow-y: visible очень капризный при overflow-x: auto, 
-       поэтому мы используем запас снизу */
-    overflow-y: visible !important; 
-    -webkit-overflow-scrolling: touch;
-    flex-grow: 1;
-    scroll-behavior: smooth;
-    
-    /* Слой 10: Погода стоит ВЫШЕ Даты. Теперь подсказка сможет накрыть Дату сверху */
-    position: relative;
-    z-index: 10; 
-
-    padding-top: 5px;     
-    padding-bottom: 55px; 
-    margin-bottom: -50px; 
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: -10px 0 15px rgba(255, 255, 255, 0.9);
 }
 
-/* 2. ЕДИНАЯ ИНФОРМАЦИОННАЯ ПАНЕЛЬ */
+/* КОНТЕЙНЕР СКРОЛЛА (Растянут на весь экран) */
+.weather-scroll-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10; /* Слой ниже даты и стрелки */
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+    -webkit-overflow-scrolling: touch;
+    
+    /* Отступы, чтобы текст изначально не прятался под кнопками */
+    padding-left: 95px;  /* Ширина даты (65) + отступ (15) + запас */
+    padding-right: 55px; /* Ширина стрелки (45) + запас */
+}
+
+.weather-scroll-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
 .weather-info {
     display: flex;
-    gap: 15px;
-    padding: 6px 15px;
-    margin-left: 8px;
-    flex-wrap: nowrap;
     align-items: center;
-    background: rgba(255, 255, 255, 0.25);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    
-    /* УБЕДИСЬ, ЧТО ЗДЕСЬ НЕТ overflow: hidden! */
-    overflow: visible !important; 
+    gap: 15px;
+    white-space: nowrap;
 }
 
-/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ */
+/* ЭЛЕМЕНТ ПОГОДЫ */
+.w-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #003366;
+    cursor: pointer;
+    height: 40px;
+    padding: 0 5px;
+}
+
+/* ПОДСКАЗКА: Ровно поверх текста */
 .w-label {
-    display: none !important; 
+    display: none !important;
     position: absolute;
-    top: 130%; 
-    background: rgba(255, 255, 255, 0.98); 
-    color: var(--primary-blue);
-    padding: 5px 10px;
-    border-radius: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центровка по обеим осям */
+    
+    background: #003366;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 700;
+    z-index: 100;
     white-space: nowrap;
-    /* Максимальный приоритет внутри контейнера */
-    z-index: 99999 !important; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--glass-border);
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Активация подсказки */
+.w-item.show-text .w-label {
+    display: block !important;
+    animation: popCenter 0.2s ease-out;
+}
+
+@keyframes popCenter {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.divider {
+    color: rgba(0, 51, 102, 0.2);
+    font-weight: 300;
 }

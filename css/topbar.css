@@ -7,9 +7,9 @@
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    z-index: 9999 !important; /* ИЗМЕНЕНО: Максимальный приоритет шапки над всем сайтом */
+    z-index: 9999 !important; /* Максимальный приоритет шапки над всем сайтом */
     padding: 8px 15px;
-    overflow: visible !important; /* ИЗМЕНЕНО: Строго разрешаем выход за границы */
+    overflow: visible !important; /* Строго разрешаем выход за границы */
 }
 
 .top-bar-content {
@@ -17,7 +17,7 @@
     align-items: center;
     gap: 0; 
     width: 100%;
-    overflow: visible !important; /* ИЗМЕНЕНО: Разрешаем вылет подсказок */
+    overflow: visible !important; /* Разрешаем вылет подсказок */
     position: relative; 
 }
 
@@ -29,7 +29,8 @@
     justify-content: center;
     line-height: 1.1;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.7);
+    /* Сделали фон чуть плотнее, чтобы под ним точно ничего не просвечивало */
+    background: rgba(255, 255, 255, 0.85); 
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 65px;
@@ -38,9 +39,8 @@
     flex-shrink: 0;
     box-sizing: border-box;
     
-    /* ДОБАВЛЕНО: Указываем слой, чтобы блок с датой был НИЖЕ подсказки */
     position: relative;
-    z-index: 5;
+    z-index: 1; /* Оставляем на нижнем слое */
 }
 
 #current-date, #current-time, #current-seconds {
@@ -66,16 +66,17 @@
     flex-grow: 1;
     scroll-behavior: smooth;
     
-    /* ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ (Создаем невидимое пространство снизу) */
+    /* ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ СНИЗУ (Создаем невидимое пространство) */
     padding-top: 5px;     
     padding-bottom: 55px; 
     margin-bottom: -50px; 
     
-    /* ДОБАВЛЕНО: ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ (Левый край, чтобы не резало дату) */
-    padding-left: 50px;   /* Расширяем границу влево на 50px */
-    margin-left: -50px;   /* Втягиваем обратно */
-    position: relative;   /* Обязательно для z-index */
-    z-index: 10;          /* Поднимаем скролл выше блока времени */
+    /* УБРАЛИ НАЛОЖЕНИЕ СЛЕВА, теперь блоки стоят четко друг за другом */
+    margin-left: 0;
+    padding-left: 0;
+    
+    position: relative;   
+    z-index: 2; /* Поднимаем скролл чуть выше времени */
 }
 
 .weather-scroll-container::-webkit-scrollbar {

@@ -61,7 +61,6 @@ function toggleLabel(element) {
     if (!isShown) {
         element.classList.add('show-text');
 
-        // Позиционируем по центру экрана
         const label = element.querySelector('.w-label');
         if (label) {
             const itemRect = element.getBoundingClientRect();
@@ -70,7 +69,6 @@ function toggleLabel(element) {
             label.style.left = `calc(50% + ${offset}px)`;
         }
 
-        // Скрываем подсказку при скролле погоды
         const scrollContainer = document.querySelector('.weather-scroll-container');
         if (scrollContainer) {
             const hideOnScroll = () => {
@@ -100,6 +98,44 @@ function toggleWeatherScroll() {
         }
     }
 }
+
+// Инерционный скролл без резинового эффекта
+(function () {
+    const container = document.querySelector('.weather-scroll-container');
+    if (!container) return;
+
+    let startX, startScrollLeft;
+    let velX = 0, lastX, lastTime, rafId;
+
+    container.addEventListener('touchstart', e => {
+        cancelAnimationFrame(rafId);
+        startX = e.touches[0].pageX;
+        startScrollLeft = container.scrollLeft;
+        lastX = startX;
+        lastTime = Date.now();
+        velX = 0;
+    }, { passive: true });
+
+    container.addEventListener('touchmove', e => {
+        const x = e.touches[0].pageX;
+        const now = Date.now();
+        velX = (lastX - x) / (now - lastTime);
+        lastX = x;
+        lastTime = now;
+        container.scrollLeft = startScrollLeft + (startX - x);
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+        inertia();
+    });
+
+    function inertia() {
+        velX *= 0.95;
+        if (Math.abs(velX) < 0.5) return;
+        container.scrollLeft += velX * 16;
+        rafId = requestAnimationFrame(inertia);
+    }
+})();
 
 // Запуск при загрузке страницы
 getWeather();

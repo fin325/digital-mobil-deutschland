@@ -64,7 +64,7 @@
     padding-bottom: 55px;
     margin-bottom: -50px;
     gap: 0;
-    overscroll-behavior-x: contain;
+    overscroll-behavior-x: none;
 }
 
 .weather-scroll-container::-webkit-scrollbar {

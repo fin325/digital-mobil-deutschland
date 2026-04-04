@@ -1,4 +1,4 @@
-/* === TOPBAR.CSS — Верхняя панель, дата/время, погода === */
+/* === TOPBAR.CSS === */
 
 .top-bar {
     background: rgba(255, 255, 255, 0.15);
@@ -7,17 +7,18 @@
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    z-index: 1100;
-    padding: 12px 0;
+    z-index: 9999 !important;
+    padding: 8px 15px;
+    overflow: visible !important;
 }
 
 .top-bar-content {
     display: flex;
     align-items: center;
-    padding: 0 15px;
-    max-width: 100%;
-    overflow: hidden;
-    justify-content: space-between;
+    gap: 0;
+    width: 100%;
+    overflow: visible !important;
+    position: relative;
 }
 
 .date-time-block {
@@ -30,17 +31,14 @@
     background: rgba(255, 255, 255, 0.7);
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    position: relative;
-    transform: translate(-10px, -12px);
     width: 65px;
+    min-width: 65px;
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;
 }
 
-#current-date,
-#current-time,
-#current-seconds {
+#current-date, #current-time, #current-seconds {
     color: #003366;
     text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
     margin: 0;
@@ -50,29 +48,20 @@
     white-space: nowrap;
 }
 
-#current-date {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    margin-bottom: 1px;
-}
-
-#current-time {
-    font-size: 0.65rem;
-    letter-spacing: -0.2px;
-}
-
-#current-seconds {
-    font-size: 0.65rem;
-    letter-spacing: -0.2px;
-    opacity: 0.9;
-}
+#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
+#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
 
 .weather-scroll-container {
     display: flex;
+    align-items: flex-start;
     overflow-x: auto;
+    overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    transform: translateY(-10px);
+    scroll-behavior: smooth;
+    padding-top: 5px;
+    padding-bottom: 55px;
+    margin-bottom: -50px;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -81,45 +70,114 @@
 
 .weather-info {
     display: flex;
-    gap: 12px;
-    padding-right: 20px;
+    gap: 15px;
+    padding: 6px 15px;
+    margin-left: 8px;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    font-size: 0.85rem;
     align-items: center;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
 }
 
 .w-item {
+    position: relative;
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid var(--glass-border);
-    padding: 4px 8px;
-    border-radius: 10px;
     font-size: 0.85rem;
     color: var(--primary-blue);
     flex-shrink: 0;
-    transition: transform 0.2s ease;
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s ease;
 }
 
 .w-item:active {
-    transform: scale(0.95);
+    opacity: 0.8;
 }
 
 .divider {
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 51, 102, 0.15);
     margin: 0 2px;
+    font-weight: 300;
+}
+
+/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ — подняты ВВЕРХ на уровень панели */
+.w-label {
+    display: none !important;
+    position: absolute;
+    bottom: 130%;   /* ИЗМЕНЕНО: вверх вместо вниз */
+    top: auto;      /* ИЗМЕНЕНО: сбрасываем top */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--primary-blue);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    z-index: 99999 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--glass-border);
+}
+
+.w-label::before {
+    content: "";
+    position: absolute;
+    top: 100%;      /* ИЗМЕНЕНО: стрелка смотрит вниз */
+    bottom: auto;   /* ИЗМЕНЕНО: сбрасываем bottom */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent; /* ИЗМЕНЕНО: стрелка вниз */
+}
+
+.w-item.show-text .w-label {
+    display: block !important;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); } /* ИЗМЕНЕНО: анимация снизу вверх */
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.weather-arrow-btn {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.weather-arrow-btn:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .site-title {
     text-align: center;
     color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
-                 0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 10px 0 6px 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
+    margin: 8px 0 4px 0;
     font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -130,23 +188,6 @@
     color: #e6f0ff;
     font-size: 1.05rem;
     font-weight: 500;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-}
-
-/* Кастомный tooltip для погоды */
-#weather-tooltip {
-    position: absolute;
-    top: 12px;
-    left: 85px;
-    background: rgba(0, 51, 102, 0.85);
-    color: white;
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    border-radius: 8px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    white-space: nowrap;
-    z-index: 20;
 }

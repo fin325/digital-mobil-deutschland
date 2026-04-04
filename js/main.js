@@ -5,3 +5,4 @@ document.addEventListener('DOMContentLoaded', () => {
     getWeather();  // weather.js
     loadNews();    // news.js
 });
+

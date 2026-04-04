@@ -58,8 +58,9 @@
     align-items: flex-start;
     overflow-x: auto;
     overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    scroll-behavior: auto; /* важно: не smooth */
+    scroll-behavior: smooth;
     padding-top: 5px;
     padding-bottom: 55px;
     margin-bottom: -50px;

@@ -7,53 +7,64 @@
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    z-index: 9999 !important;
+    /* Уровень 9999 гарантирует, что вся панель выше основного контента сайта */
+    z-index: 9999 !important; 
     padding: 8px 15px;
-    overflow: visible !important;
+    /* Разрешаем вылет подсказок за пределы топ-бара вниз */
+    overflow: visible !important; 
 }
 
 .top-bar-content {
     display: flex;
     align-items: center;
+    gap: 0; 
     width: 100%;
     position: relative;
-    overflow: visible !important;
+    /* Разрешаем контенту (подсказкам) выходить за границы контента */
+    overflow: visible !important; 
 }
 
-/* БЛОК ВРЕМЕНИ (Стоит на месте, никем не перекрыт) */
+/* БЛОК ВРЕМЕНИ */
 .date-time-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.85); 
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 65px;
     min-width: 65px;
     height: 40px;
     flex-shrink: 0;
+    
+    /* Слой 1: Дата стоит на нижнем уровне */
     position: relative;
-    z-index: 5;
+    z-index: 1; 
 }
 
-/* 1. КОНТЕЙНЕР ПРОКРУТКИ (Начинается ПОСЛЕ даты) */
+/* 1. КОНТЕЙНЕР ПРОКРУТКИ */
 .weather-scroll-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     overflow-x: auto;
-    overflow-y: visible !important;
+    /* overflow-y: visible очень капризный при overflow-x: auto, 
+       поэтому мы используем запас снизу */
+    overflow-y: visible !important; 
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
     
-    /* Вертикальный "хак" оставляем, чтобы подсказка была видна СНИЗУ */
-    padding-bottom: 50px;
-    margin-bottom: -45px;
-    padding-top: 5px;
+    /* Слой 10: Погода стоит ВЫШЕ Даты. Теперь подсказка сможет накрыть Дату сверху */
+    position: relative;
+    z-index: 10; 
+
+    padding-top: 5px;     
+    padding-bottom: 55px; 
+    margin-bottom: -50px; 
 }
 
-.weather-scroll-container::-webkit-scrollbar { display: none; }
-
+/* 2. ЕДИНАЯ ИНФОРМАЦИОННАЯ ПАНЕЛЬ */
 .weather-info {
     display: flex;
     gap: 15px;
@@ -64,57 +75,25 @@
     background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
-}
-
-/* 3. ЭЛЕМЕНТЫ ПОГОДЫ */
-.w-item {
-    position: relative;
-    white-space: nowrap;
-    font-size: 0.85rem;
-    color: var(--primary-blue);
-    flex-shrink: 0;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
+    
+    /* УБЕДИСЬ, ЧТО ЗДЕСЬ НЕТ overflow: hidden! */
+    overflow: visible !important; 
 }
 
 /* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ */
 .w-label {
     display: none !important; 
     position: absolute;
-    top: 130%; /* Вылетает СНИЗУ */
-    background: white; 
-    color: #003366;
+    top: 130%; 
+    background: rgba(255, 255, 255, 0.98); 
+    color: var(--primary-blue);
     padding: 5px 10px;
     border-radius: 8px;
     font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
-    z-index: 10000;
+    /* Максимальный приоритет внутри контейнера */
+    z-index: 99999 !important; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid var(--glass-border);
 }
-
-/* УМНЫЕ ПОЗИЦИИ (Чтобы не резало края) */
-/* Слева: прижимаем левый край подсказки к иконке */
-.w-item.tip-left .w-label { left: 0; transform: none; }
-/* Справа: прижимаем правый край подсказки к иконке */
-.w-item.tip-right .w-label { right: 0; left: auto; transform: none; }
-/* Центр: по середине */
-.w-item.tip-center .w-label { left: 50%; transform: translateX(-50%); }
-
-.w-item.show-text .w-label {
-    display: block !important;
-    animation: fadeIn 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; }
-}
-
-/* Остальные стили (кнопка, заголовки) оставляем как у тебя были */
-.weather-arrow-btn { position: absolute; top: 5px; right: 0px; z-index: 20; background: white; border-radius: 8px; padding: 4px 10px; }
-.site-title { text-align: center; color: #fff; margin-top: 10px; }

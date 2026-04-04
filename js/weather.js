@@ -29,10 +29,12 @@ async function getWeather() {
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
-        // Обновляем температуру и город
+        // 1. Обновляем город и температуру
         if (tempEl) {
             tempEl.innerText = `${city} ${icon} ${temp}°C`;
-            tempEl.onclick = () => {
+            // Убедимся, что клик по городу вызывает смену города, а не подсказку
+            tempEl.onclick = (e) => {
+                e.stopPropagation(); // Чтобы не срабатывали лишние события
                 const newCity = prompt('Введите название города:', currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
@@ -41,7 +43,8 @@ async function getWeather() {
             };
         }
         
-        // Обновляем только числа внутри span, не трогая w-tooltip
+        // 2. Обновляем ТОЛЬКО числа (используем innerText на конкретных ID)
+        // Это сохраняет в целости наши <span class="w-label"> в HTML
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
@@ -56,34 +59,37 @@ async function getWeather() {
 function toggleLabel(element) {
     if (!element) return;
 
-    // Проверяем, открыта ли уже эта подсказка
+    // Проверяем, показана ли подсказка сейчас
     const isShown = element.classList.contains('show-text');
 
-    // 1. Сначала закрываем вообще все открытые подсказки на странице
+    // 1. Закрываем все открытые подсказки на странице
     document.querySelectorAll('.w-item').forEach(item => {
         item.classList.remove('show-text');
     });
 
-    // 2. Если подсказка была закрыта — открываем её
+    // 2. Если была скрыта — открываем
     if (!isShown) {
         element.classList.add('show-text');
 
-        // 3. Автоматически скрываем подсказку через 3 секунды
-        // Чтобы она не висела вечно и не мешала
+        // 3. Автоматически скрываем через 3 секунды
+        // Используем проверку, чтобы не закрыть то, что уже закрыто вручную
         setTimeout(() => {
-            element.classList.remove('show-text');
+            if (element.classList.contains('show-text')) {
+                element.classList.remove('show-text');
+            }
         }, 3000);
     }
 }
 
 /**
- * Функция прокрутки ленты
+ * Функция прокрутки ленты погоды
  */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
     if (scrollContainer) {
         const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         
+        // Если прокручено меньше половины — в конец, иначе — в начало
         if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
             scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
         } else {
@@ -92,5 +98,5 @@ function toggleWeatherScroll() {
     }
 }
 
-// Запуск при загрузке
+// Запуск при загрузке страницы
 getWeather();

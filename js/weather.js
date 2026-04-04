@@ -49,9 +49,6 @@ async function getWeather() {
     }
 }
 
-/**
- * Улучшенная функция для всплывающих подсказок (Tooltips)
- */
 function toggleLabel(element) {
     if (!element) return;
 
@@ -64,13 +61,12 @@ function toggleLabel(element) {
     if (!isShown) {
         element.classList.add('show-text');
 
-        // Позиционируем подсказку по центру .weather-info
+        // Позиционируем по центру экрана между датой и кнопкой
         const label = element.querySelector('.w-label');
-        const bar = document.querySelector('.weather-info');
-        if (label && bar) {
-            const barRect = bar.getBoundingClientRect();
+        if (label) {
             const itemRect = element.getBoundingClientRect();
-            const offset = (barRect.left + barRect.width / 2) - (itemRect.left + itemRect.width / 2);
+            const screenCenterX = window.innerWidth / 2;
+            const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
             label.style.left = `calc(50% + ${offset}px)`;
         }
 
@@ -82,9 +78,6 @@ function toggleLabel(element) {
     }
 }
 
-/**
- * Функция прокрутки ленты погоды
- */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
     if (scrollContainer) {

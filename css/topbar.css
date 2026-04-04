@@ -9,15 +9,18 @@
     top: 0;
     z-index: 1100;
     padding: 8px 15px;
+    /* Разрешаем элементам (подсказкам) выходить за границы */
+    overflow: visible; 
 }
 
 .top-bar-content {
     display: flex;
     align-items: center;
-    gap: 0; /* Убрали разрыв между временем и погодой */
+    gap: 0;
     width: 100%;
-    overflow: hidden;
-    position: relative; /* Контекст для абсолютной кнопки */
+    /* overflow: hidden заменен на visible, чтобы видеть всплывающие облачка */
+    overflow: visible; 
+    position: relative;
 }
 
 /* БЛОК ВРЕМЕНИ */
@@ -51,19 +54,19 @@
 #current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
 #current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
 
-/* 1. КОНТЕЙНЕР ПРОКРУТКИ (Четкие границы) */
+/* 1. КОНТЕЙНЕР ПРОКРУТКИ */
 .weather-scroll-container {
     display: flex;
     align-items: center;
+    /* overflow-x оставляем для скролла, y делаем visible для подсказок */
     overflow-x: auto;
+    overflow-y: visible; 
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
     padding: 5px 0;
-    /* Маска (мягкость) удалена */
 }
 
-/* Скрываем стандартный скроллбар */
 .weather-scroll-container::-webkit-scrollbar {
     display: none;
 }
@@ -73,19 +76,17 @@
     display: flex;
     gap: 15px;
     padding: 6px 15px;
-    margin-left: 8px; /* Отступ от блока даты */
+    margin-left: 8px;
     flex-wrap: nowrap;
     align-items: center;
-    
-    /* Стили единого "стеклянного" виджета */
     background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
 }
 
-/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ (Текст и иконки) */
+/* 3. ОТДЕЛЬНЫЕ ПОКАЗАТЕЛИ */
 .w-item {
-    position: relative; /* Обязательно: привязываем подсказку к иконке */
+    position: relative;
     white-space: nowrap;
     font-size: 0.85rem;
     color: var(--primary-blue);
@@ -99,29 +100,26 @@
     transition: opacity 0.2s ease;
 }
 
-/* Легкий эффект при клике на саму иконку */
 .w-item:active {
     opacity: 0.8;
 }
 
-/* 4. РАЗДЕЛИТЕЛИ ВНУТРИ БЛОКА */
+/* 4. РАЗДЕЛИТЕЛИ */
 .divider {
     color: rgba(0, 51, 102, 0.15);
     margin: 0 2px;
     font-weight: 300;
 }
 
-/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ (вместо обычных подписей) */
+/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ */
 .w-label {
-    display: none; /* Скрыто по умолчанию */
+    /* Скрываем через !important, чтобы текст не занимал место в строке погоды */
+    display: none !important; 
     position: absolute;
-    
-    /* Позиционируем под иконкой */
     top: 130%; 
     left: 50%;
-    transform: translateX(-50%); /* Центрируем точно по середине */
+    transform: translateX(-50%);
     
-    /* Стиль "облачка" */
     background: rgba(255, 255, 255, 0.98); 
     color: var(--primary-blue);
     padding: 5px 10px;
@@ -129,18 +127,16 @@
     font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
-    z-index: 1000;
+    z-index: 2000; /* Поднимаем выше всех */
     
-    /* Тень и граница для четкости */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--glass-border);
 }
 
-/* Маленький треугольник-стрелочка над подсказкой */
 .w-label::before {
     content: "";
     position: absolute;
-    bottom: 100%; /* Упирается в верх подсказки */
+    bottom: 100%;
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
@@ -148,29 +144,22 @@
     border-color: transparent transparent rgba(255, 255, 255, 0.98) transparent;
 }
 
-/* Показываем подсказку при нажатии */
+/* Показываем при клике */
 .w-item.show-text .w-label {
-    display: block; /* Вместо inline, чтобы работало позиционирование */
+    display: block !important;
     animation: slideDown 0.2s ease-out;
 }
 
-/* Анимация плавного появления сверху вниз */
 @keyframes slideDown {
-    from { 
-        opacity: 0; 
-        transform: translateX(-50%) translateY(-10px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateX(-50%) translateY(0); 
-    }
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
+/* КНОПКА СТРЕЛКА */
 .weather-arrow-btn {
     position: absolute;
-    /* Уменьшаем значения, чтобы прижать кнопку к углу */
-    top: 5px;   /* Было 10px — чем меньше число, тем ВЫШЕ кнопка */
-    right: 0px; /* Было 8px — чем меньше число, тем ПРАВЕЕ кнопка */
+    top: 5px;
+    right: 0px;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
@@ -188,13 +177,12 @@
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
-/* Эффект нажатия (оставляем только scale) */
 .weather-arrow-btn:active {
     transform: scale(0.9);
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* ЗАГОЛОВКИ САЙТА */
+/* ЗАГОЛОВКИ */
 .site-title {
     text-align: center;
     color: #f0f8ff;

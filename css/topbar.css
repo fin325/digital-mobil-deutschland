@@ -58,14 +58,13 @@
     align-items: flex-start;
     overflow-x: auto;
     overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
     flex-grow: 1;
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* важно: не smooth */
     padding-top: 5px;
     padding-bottom: 55px;
     margin-bottom: -50px;
     gap: 0;
-    overscroll-behavior-x: contain;
+    overscroll-behavior-x: none;
 }
 
 .weather-scroll-container::-webkit-scrollbar {

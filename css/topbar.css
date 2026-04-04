@@ -64,7 +64,7 @@
     padding-bottom: 55px;
     margin-bottom: -50px;
     gap: 0;
-    margin-left: 35px;
+    margin-right: 35px;
 }
 
 .weather-scroll-container::-webkit-scrollbar {

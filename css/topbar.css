@@ -14,12 +14,18 @@
 
 .top-bar-content {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0;
     width: 100%;
-    overflow: visible !important;
+    overflow: hidden;
     position: relative;
     overscroll-behavior: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 0 0 12px 12px;
+    border: 1px solid var(--glass-border);
+    border-top: none;
 }
 
 .date-time-block {
@@ -29,18 +35,18 @@
     justify-content: center;
     line-height: 1.1;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 0 0 6px 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-right: 1px solid var(--glass-border);
     width: 52px;
     min-width: 52px;
-    height: 32px;
     flex-shrink: 0;
     box-sizing: border-box;
     gap: 0;
-    align-self: flex-start;
+    align-self: stretch;
 }
 
 #current-date, #current-time, #current-seconds {
@@ -58,7 +64,7 @@
 
 .weather-scroll-container {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     overflow-x: auto;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
@@ -69,7 +75,7 @@
     margin-bottom: -50px;
     gap: 0;
     overscroll-behavior-x: none;
-    align-self: flex-start;
+    align-self: stretch;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -152,12 +158,13 @@
     top: auto;
     right: auto;
     margin-top: 0;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 0 0 0 8px;
+    height: auto;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-left: 1px solid var(--glass-border);
+    border-radius: 0;
     padding: 4px 8px;
     cursor: pointer;
     color: var(--primary-blue);
@@ -167,15 +174,15 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: none;
     flex-shrink: 0;
-    align-self: flex-start;
+    align-self: stretch;
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .weather-arrow-btn:active {
     transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .site-title {

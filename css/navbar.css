@@ -56,23 +56,58 @@
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* Стили для подсказки и стрелок (без изменений) */
+/* Основной контейнер (ваш с исправлениями) */
 .scroll-hint-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Разносит лево и право */
     align-items: center;
     margin-bottom: 5px;
     padding: 0 15px;
-    margin-top: 15x;
+    margin-top: 15px; /* Исправил 15x на 15px */
     transform: translateY(10px);
 }
 
+/* Группа слева: Рука + Текст */
+.scroll-hint-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между рукой и текстом */
+}
+
+/* Стили текста (ваши) */
 .scroll-hint-text {
     font-size: 0.85rem;
     color: #6c757d;
     font-style: italic;
 }
 
+/* Анимация руки */
+.swipe-hand {
+    font-size: 1.2rem;
+    display: inline-block;
+    animation: swipe-move 2s infinite ease-in-out;
+    user-select: none;
+}
+
+@keyframes swipe-move {
+    0% {
+        transform: translateX(15px);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(-10px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+}
+
+/* Правая часть: Стрелки (ваши стили без изменений) */
 .scroll-arrows {
     display: flex;
     gap: 8px;
@@ -86,4 +121,10 @@
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transform: translateY(-8px);
+    transition: all 0.2s ease;
 }
+
+.arrow-btn:active {
+    transform: translateY(-6px) scale(0.95);
+}
+

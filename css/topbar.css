@@ -36,6 +36,7 @@
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;
+    gap: 0;
 }
 
 #current-date, #current-time, #current-seconds {
@@ -61,9 +62,8 @@
     scroll-behavior: smooth;
     padding-top: 5px;
     padding-bottom: 55px;
-    padding-left: 20px;
     margin-bottom: -50px;
-    margin-left: -20px;
+    gap: 0;
 }
 
 .weather-scroll-container::-webkit-scrollbar {

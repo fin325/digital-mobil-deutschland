@@ -1,70 +1,96 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Digital & Mobil in Deutschland</title>
-<meta name="description" content="Ваш персональный гид по цифровой экосистеме Германии. Помощь в Хаттингене и NRW.">
-
-<meta property="og:title" content="Digital & Mobil in Deutschland">
-<meta property="og:description" content="Инструменты, новости и помощь для жителей Германии.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Digital & Mobil in Deutschland">
-
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/topbar.css">
-<link rel="stylesheet" href="css/navbar.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/translate.css">
-
+    <title>Digital & Mobil in Deutschland</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/topbar.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/translate.css">
 </head>
 
 <body>
     <div class="top-bar">
-        <div class="top-bar-content">
-            <div class="date-time-block">
-                <span id="current-date"></span>
-                <span id="current-time"></span>
-            </div>
-            <div class="weather-scroll-container">
-                <div class="weather-info" id="full-weather-bar">
-                    <span class="w-item" id="city-temp">Laden...</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">💧 <span id="hum">--</span>%</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">⏲️ <span id="press">--</span> mmHg</span>
-                    <span class="divider">|</span>
-                    <span class="w-item">🧲 Kp-Index: <span id="geo">2</span> Punkte</span>
-                </div>
-            </div>
+    <div class="top-bar-content">
+        <div class="date-time-block">
+            <span id="current-date"></span>
+            <span id="current-time"></span>
         </div>
+
+        <div class="weather-scroll-container">
+    <div class="weather-info" id="full-weather-bar">
+        <span class="w-item" id="city-temp">Laden...</span>
+        
+        <span class="divider">|</span>
+        
+       <span class="w-item" onclick="toggleLabel(this)">
+    💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
+</span>
+
+<span class="divider">|</span>
+
+<span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
+    <span id="aqi-icon">🍃</span> 
+    <span class="w-label">Качество воздуха:</span> 
+    <span id="aqi-value">--</span>
+</span>
+
+<span class="divider">|</span>
+
+<span class="w-item" onclick="toggleLabel(this)">
+    🧲 <span class="w-label">Геомагнитная активность:</span> : <span id="geo">2</span>
+</span>
+
+<span class="divider">|</span>
+
+<span class="w-item" onclick="toggleLabel(this)">
+    ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
+</span>
+    </div>
+</div>
+
+        <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">&#8644;</button>
+    </div> <div class="site-header">
         <div class="site-title">Digital & Mobil in Deutschland</div>
         <div class="site-subtitle">Stadt Hattingen</div>
     </div>
+</div> <div class="scroll-hint-container">
+    <span class="scroll-hint-text">Возможен свайп</span>
+    <div class="scroll-arrows">
+        <button class="arrow-btn" onclick="scrollTabs(-1)">&#8592;</button>
+        <button class="arrow-btn" onclick="scrollTabs(1)">&#8594;</button>
+    </div>
+</div>
 
 <nav class="navbar">
-    <div class="nav-container">
-        <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
-        <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-        <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
-        <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-        <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
-        <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
-        <button class="nav-btn" onclick="showTab('datenschutz', event)">Datenschutz</button>
-        <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
-    </div>
-    <div class="nav-container nav-row-2">
-        <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
-        <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-        <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-        <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-        <button class="nav-btn" onclick="showTab('docs', event)">Документы</button>
-        <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-        <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
-    </div>
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+            
+            <div class="nav-row">
+                <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
+                <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
+                <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
+                <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
+                <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
+                <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
+                <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
+                <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+            </div>
 
+            <div class="nav-row">
+                <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
+                <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
+                <button class="nav-btn" onclick="showTab('docs', event)">ИИ Помощники </button>
+                <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
+                <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
+                <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
+                <button class="nav-btn" onclick="showTab('datenschutz', event)">Datenschutz</button>
+            </div>
+
+        </div>
+    </div>
 </nav>
 
 <main class="container">
@@ -111,7 +137,7 @@
         </div>
 
         <div style="display: grid; gap: 10px; margin-top: 15px;">
-            <button class="btn-main" onclick="showTab('img2pdf', event)">🖼️ Создать PDF из фото</button>
+            <button class="btn-main" onclick="showTab('img2pdf', event)">🌠Создать PDF из фото</button>
             <button class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Читать текстовые новости</button>
         </div>
     </div> 
@@ -119,7 +145,7 @@
 
 <section id="img2pdf" class="tab-content">
     <div class="card">
-        <h2>🖼️ Создать PDF из фото</h2>
+        <h2>🌠Создать PDF из фото</h2>
         <div class="iframe-wrapper">
             <iframe 
                 src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true">
@@ -169,7 +195,7 @@
 </div>
 
 <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
-    <strong>💡 Информация:</strong> Все ссылки ведут на официальный портал города. Чтобы перевести страницы на русский язык, используйте функцию «Перевод» в меню нашего сайта.
+    <strong>💡 Информация:</strong> Все ссылки ведут на официальный портал города.
 </div>
 
 </div>
@@ -242,10 +268,34 @@
 
 <section id="translate" class="tab-content">
     <div class="card">
-        <h2 style="color: var(--primary-blue); text-align: center;">🗣️ Перевод страницы</h2>
-        <p class="status-msg" style="text-align: center;">Выберите язык для перевода всего сайта:</p>
-        <div id="google_translate_element" style="text-align: center; margin: 20px 0;"></div>
-        <p style="font-size: 0.8rem; color: #666; text-align: center;">* Der Service wird von Google Translate bereitgestellt.</p>
+        <h2>🌐 Перевод и Словари</h2>
+        <p>Используйте профессиональные инструменты для работы с текстами.</p>
+
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
+
+        <div class="translate-item">
+            <h3 style="color: #4285f4;">Google Translate</h3>
+            <p>Универсальный инструмент: перевод текстов, документов и целых веб-сайтов.</p>
+            <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" class="btn-translate bg-google">
+                Google Переводчик
+            </a>
+        </div>
+
+        <div class="translate-item">
+            <h3 style="color: #002e59;">DeepL</h3>
+            <p>Высокоточный перевод на базе нейросетей. Лучший выбор для европейских языков.</p>
+            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="btn-translate bg-deepl">
+                Открыть DeepL
+            </a>
+        </div>
+
+        <div class="translate-item">
+            <h3 style="color: #1e5fa9;">Reverso Context</h3>
+            <p>Поиск слов в контексте реальных предложений. Помогает понять нюансы живой речи.</p>
+            <a href="https://context.reverso.net/" target="_blank" rel="noopener noreferrer" class="btn-translate bg-reverso">
+                Найти в Reverso
+            </a>
+        </div>
     </div>
 </section>
 
@@ -297,7 +347,7 @@
 <section id="docs" class="tab-content">
 
 <div class="card">
-    <h2>🤖 Помощники ИИ</h2>
+    <h2>💻Помощники ИИ</h2>
     <p>Ваши персональные ассистенты для перевода документов, написания писем и решения любых задач.</p>
 
 <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">

@@ -1,5 +1,10 @@
 /* === TOPBAR.CSS === */
 
+:root {
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --primary-blue: #003366;
+}
+
 .top-bar {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
@@ -8,7 +13,7 @@
     position: sticky;
     top: 0;
     z-index: 9999 !important;
-    padding: 8px 15px;
+    padding: 8px 15px; /* Родительские отступы */
     overflow: visible !important;
 }
 
@@ -17,11 +22,10 @@
     align-items: center;
     gap: 0;
     width: 100%;
-    overflow: visible !important;
     position: relative;
-    overscroll-behavior: none;
 }
 
+/* БЛОК ДАТЫ И ВРЕМЕНИ (ЛЕВЫЙ ВЕРХНИЙ УГОЛ) */
 .date-time-block {
     display: flex;
     flex-direction: column;
@@ -29,23 +33,33 @@
     justify-content: center;
     line-height: 1.1;
     font-weight: 700;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-radius: 0 0 8px 0;
-    box-shadow: none;
-    border-right: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
-    width: 52px;
-    min-width: 52px;
+    background: rgba(255, 255, 255, 0.8);
+    
+    /* Размеры */
+    width: 65px;
+    min-width: 65px;
+    height: 56px; /* 40px + 8px(top) + 8px(bottom) */
     flex-shrink: 0;
     box-sizing: border-box;
-    gap: 0;
-    align-self: stretch;
+
+    /* ПРИЖАТИЕ: компенсируем padding родителя (8px и 15px) */
+    margin-top: -8px;
+    margin-left: -15px;
+    
+    /* ГРАНИЦЫ: прорисовка нижнего и правого края */
+    border-right: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    border-left: 1px solid transparent; /* Можно сделать прозрачной, если прижато к экрану */
+    border-top: none;
+
+    /* Углы: скругляем только один внутренний угол (правый нижний) */
+    border-radius: 0 0 8px 0;
+    
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 #current-date, #current-time, #current-seconds {
-    color: #003366;
+    color: var(--primary-blue);
     text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
     margin: 0;
     font-weight: 700;
@@ -55,21 +69,21 @@
 }
 
 #current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
-#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
+#current-time { font-size: 0.65rem; letter-spacing: -0.2px; }
 
+/* КОНТЕЙНЕР СКРОЛЛА ПОГОДЫ */
 .weather-scroll-container {
     display: flex;
-    align-items: flex-start;
+    align-items: center; /* Выровняли по центру */
     overflow-x: auto;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
-    padding-top: 5px;
-    padding-bottom: 55px;
-    margin-bottom: -50px;
+    margin-bottom: 0; /* Убрали старые костыли с margin */
     gap: 0;
     overscroll-behavior-x: none;
+    height: 100%;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -79,13 +93,13 @@
 .weather-info {
     display: flex;
     gap: 5px;
-    padding: 6px 8px;
-    margin-left: 0px;
+    padding: 6px 12px;
+    margin-left: 10px; /* Отступ от блока даты */
     flex-wrap: nowrap;
     align-items: center;
     background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--glass-border);
-    border-radius: 0px;
+    border-radius: 6px;
 }
 
 .w-item {
@@ -99,102 +113,65 @@
     align-items: center;
     gap: 4px;
     cursor: pointer;
-    user-select: none;
     transition: opacity 0.2s ease;
 }
 
-.w-item:active {
-    opacity: 0.8;
-}
-
-.divider {
-    color: rgba(0, 51, 102, 0.15);
-    margin: 0 2px;
-    font-weight: 300;
-}
-
-/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ — по центру элемента */
-.w-label {
-    display: none !important;
-    position: absolute;
-    bottom: auto;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(25px);
-    background: rgba(255, 255, 255, 0.98);
-    color: var(--primary-blue);
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    white-space: nowrap;
-    z-index: 99999 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--glass-border);
-}
-
-.w-label::before {
-    display: none;
-}
-
-.w-item.show-text .w-label {
-    display: block !important;
-    animation: slideDown 0.2s ease-out;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateX(-50%) translateY(12.5px) scale(0.95); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(25px) scale(1); }
-}
-
+/* КНОПКА СТРЕЛКИ (ПРАВЫЙ ВЕРХНИЙ УГОЛ) */
 .weather-arrow-btn {
     position: relative;
-    top: auto;
-    right: auto;
-    margin-top: 0;
-    height: auto;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    border-left: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
-    border-radius: 0 0 0 8px;
-    padding: 4px 8px;
+    height: 56px; /* Должна совпадать с блоком даты */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 4px 12px;
     cursor: pointer;
     color: var(--primary-blue);
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    box-shadow: none;
     flex-shrink: 0;
-    align-self: stretch;
-    transition: transform 0.2s ease, background 0.2s ease;
+    box-sizing: border-box;
+
+    /* ПРИЖАТИЕ: компенсируем padding родителя (8px и 15px) */
+    margin-top: -8px;
+    margin-right: -15px;
+    align-self: flex-start;
+
+    /* ГРАНИЦЫ: прорисовка нижнего и левого края */
+    border-left: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    border-right: none;
+    border-top: none;
+
+    /* Углы: скругляем только внутренний (левый нижний) */
+    border-radius: 0 0 0 8px;
+    
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background 0.2s ease;
 }
 
 .weather-arrow-btn:active {
-    transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.6);
 }
 
-.site-title {
-    text-align: center;
-    color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 8px 0 4px 0;
-    font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ */
+.w-label {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: white;
+    color: var(--primary-blue);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    z-index: 99999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 1px solid var(--glass-border);
 }
 
-.site-subtitle {
-    text-align: center;
-    color: #e6f0ff;
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+.w-item.show-text .w-label {
+    display: block !important;
 }

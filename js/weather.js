@@ -100,7 +100,7 @@ function toggleWeatherScroll() {
 }
 
 // Инерционный скролл без резинового эффекта
-(function () {
+document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.weather-scroll-container');
     if (!container) return;
 
@@ -135,7 +135,7 @@ function toggleWeatherScroll() {
         container.scrollLeft += velX * 16;
         rafId = requestAnimationFrame(inertia);
     }
-})();
+});
 
 // Запуск при загрузке страницы
 getWeather();

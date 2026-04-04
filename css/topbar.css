@@ -55,13 +55,17 @@
 /* 1. КОНТЕЙНЕР ПРОКРУТКИ */
 .weather-scroll-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* ВАЖНО: чтобы строка погоды не съехала вниз */
     overflow-x: auto;
     overflow-y: visible !important; 
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
-    padding: 5px 0;
+    
+    /* ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ (Создаем невидимое пространство) */
+    padding-top: 5px;     /* Верхний отступ оставляем как был */
+    padding-bottom: 55px; /* Делаем дно контейнера глубоким для подсказки */
+    margin-bottom: -50px; /* Втягиваем всё обратно, чтобы макет не разъехался */
 }
 
 .weather-scroll-container::-webkit-scrollbar {

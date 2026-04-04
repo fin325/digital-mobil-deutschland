@@ -63,7 +63,8 @@
     padding-top: 5px;
     padding-bottom: 55px;
     margin-bottom: -50px;
-    gap: 0; 
+    gap: 0;
+    margin-left: 35px;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -73,7 +74,7 @@
 .weather-info {
     display: flex;
     gap: 5px;
-    padding: 6px 15px;
+    padding: 6px 55px;
     margin-left: 0px;
     flex-wrap: nowrap;
     align-items: center;

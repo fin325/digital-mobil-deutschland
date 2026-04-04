@@ -11,16 +11,31 @@
     z-index: 1000;
 }
 
-.nav-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
+/* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
+.nav-scroll-viewport {
+    overflow-x: auto; /* Включаем скролл здесь */
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth; /* Плавность для стрелок */
 }
 
-.nav-container::-webkit-scrollbar {
+/* Скрываем скроллбар */
+.nav-scroll-viewport::-webkit-scrollbar {
     display: none;
+}
+
+/* 2. ОБЕРТКА ДЛЯ РЯДОВ (растягивается под самый длинный ряд) */
+.nav-rows-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Расстояние между 1 и 2 рядом */
+    width: max-content; /* Критично для синхронного скролла */
+}
+
+/* 3. СТИЛИ ДЛЯ РЯДОВ */
+.nav-row {
+    display: flex;
+    gap: 10px;
 }
 
 .nav-btn {
@@ -28,7 +43,7 @@
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
-    white-space: nowrap;
+    white-space: nowrap; /* Не дает тексту переноситься */
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
@@ -41,10 +56,34 @@
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-.nav-row-2 {
-    margin-top: 8px;
+/* Стили для подсказки и стрелок (без изменений) */
+.scroll-hint-container {
     display: flex;
-    gap: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 0 15px;
+    margin-top: 15x;
+    transform: translateY(10px);
+}
+
+.scroll-hint-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.scroll-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.arrow-btn {
+    background: white;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transform: translateY(-8px);
 }

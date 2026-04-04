@@ -37,6 +37,10 @@
     height: 40px;
     flex-shrink: 0;
     box-sizing: border-box;
+    
+    /* ДОБАВЛЕНО: Указываем слой, чтобы блок с датой был НИЖЕ подсказки */
+    position: relative;
+    z-index: 5;
 }
 
 #current-date, #current-time, #current-seconds {
@@ -62,10 +66,16 @@
     flex-grow: 1;
     scroll-behavior: smooth;
     
-    /* ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ (Создаем невидимое пространство) */
-    padding-top: 5px;     /* Верхний отступ оставляем как был */
-    padding-bottom: 55px; /* Делаем дно контейнера глубоким для подсказки */
-    margin-bottom: -50px; /* Втягиваем всё обратно, чтобы макет не разъехался */
+    /* ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ (Создаем невидимое пространство снизу) */
+    padding-top: 5px;     
+    padding-bottom: 55px; 
+    margin-bottom: -50px; 
+    
+    /* ДОБАВЛЕНО: ХИТРОСТЬ ПРОТИВ ОБРЕЗКИ (Левый край, чтобы не резало дату) */
+    padding-left: 50px;   /* Расширяем границу влево на 50px */
+    margin-left: -50px;   /* Втягиваем обратно */
+    position: relative;   /* Обязательно для z-index */
+    z-index: 10;          /* Поднимаем скролл выше блока времени */
 }
 
 .weather-scroll-container::-webkit-scrollbar {

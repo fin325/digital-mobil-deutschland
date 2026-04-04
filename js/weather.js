@@ -41,7 +41,7 @@ async function getWeather() {
             };
         }
         
-        // Обновляем только числа, чтобы не стереть иконки и скрытые подписи
+        // Обновляем только числа внутри span, не трогая w-tooltip
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
@@ -51,17 +51,33 @@ async function getWeather() {
 }
 
 /**
- * Функция для показа/скрытия текстовых описаний (Влажность, Давление и т.д.)
- * Вызывается через onclick="toggleLabel(this)" в HTML
+ * Улучшенная функция для всплывающих подсказок (Tooltips)
  */
 function toggleLabel(element) {
-    if (element) {
-        element.classList.toggle('show-text');
+    if (!element) return;
+
+    // Проверяем, открыта ли уже эта подсказка
+    const isShown = element.classList.contains('show-text');
+
+    // 1. Сначала закрываем вообще все открытые подсказки на странице
+    document.querySelectorAll('.w-item').forEach(item => {
+        item.classList.remove('show-text');
+    });
+
+    // 2. Если подсказка была закрыта — открываем её
+    if (!isShown) {
+        element.classList.add('show-text');
+
+        // 3. Автоматически скрываем подсказку через 3 секунды
+        // Чтобы она не висела вечно и не мешала
+        setTimeout(() => {
+            element.classList.remove('show-text');
+        }, 3000);
     }
 }
 
 /**
- * Функция прокрутки всей ленты погоды в начало или конец
+ * Функция прокрутки ленты
  */
 function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');

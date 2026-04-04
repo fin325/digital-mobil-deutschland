@@ -61,13 +61,23 @@ function toggleLabel(element) {
     if (!isShown) {
         element.classList.add('show-text');
 
-        // Позиционируем по центру экрана между датой и кнопкой
+        // Позиционируем по центру экрана
         const label = element.querySelector('.w-label');
         if (label) {
             const itemRect = element.getBoundingClientRect();
             const screenCenterX = window.innerWidth / 2;
             const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
             label.style.left = `calc(50% + ${offset}px)`;
+        }
+
+        // Скрываем подсказку при скролле погоды
+        const scrollContainer = document.querySelector('.weather-scroll-container');
+        if (scrollContainer) {
+            const hideOnScroll = () => {
+                element.classList.remove('show-text');
+                scrollContainer.removeEventListener('scroll', hideOnScroll);
+            };
+            scrollContainer.addEventListener('scroll', hideOnScroll, { once: true });
         }
 
         setTimeout(() => {

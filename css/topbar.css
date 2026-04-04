@@ -8,13 +8,13 @@
     position: sticky;
     top: 0;
     z-index: 9999 !important;
-    padding: 8px 15px;
+    padding: 0;
     overflow: visible !important;
 }
 
 .top-bar-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0;
     width: 100%;
     overflow: visible !important;
@@ -30,7 +30,7 @@
     line-height: 1.1;
     font-weight: 700;
     background: rgba(255, 255, 255, 0.8);
-    border-radius: 6px;
+    border-radius: 0 0 6px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 65px;
     min-width: 65px;
@@ -38,6 +38,7 @@
     flex-shrink: 0;
     box-sizing: border-box;
     gap: 0;
+    align-self: flex-start;
 }
 
 #current-date, #current-time, #current-seconds {
@@ -61,11 +62,12 @@
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
-    padding-top: 5px;
+    padding-top: 0;
     padding-bottom: 55px;
     margin-bottom: -50px;
     gap: 0;
     overscroll-behavior-x: none;
+    align-self: flex-start;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -147,11 +149,11 @@
     position: relative;
     top: auto;
     right: auto;
-    margin-top: 1px;
+    margin-top: 0;
     height: 40px;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: 0 0 0 8px;
     padding: 4px 10px;
     cursor: pointer;
     color: var(--primary-blue);
@@ -163,7 +165,7 @@
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     flex-shrink: 0;
-    align-self: stretch;
+    align-self: flex-start;
     transition: transform 0.2s ease, background 0.2s ease;
 }
 

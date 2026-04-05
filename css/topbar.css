@@ -22,24 +22,36 @@
     overscroll-behavior: none;
 }
 
-.date-time-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.1;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.15);
+/* --- ОБЩИЕ СТИЛИ (Унификация: высота 30px, только нижний бордер, без радиуса) --- */
+.date-time-block, 
+.weather-info, 
+.weather-arrow-btn {
+    height: 30px; /* Новая высота */
+    background: rgba(255, 255, 255, 0.25); /* Одинаковая прозрачность */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 0 0 6px 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Одинаковая тень */
+    box-sizing: border-box;
+    
+    /* Границы: только снизу */
+    border: none !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    
+    /* Убираем закругления везде */
+    border-radius: 0 !important;
+    
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* --- БЛОК ДАТЫ И ВРЕМЕНИ --- */
+.date-time-block {
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1; /* Плотно для 30px */
     width: 52px;
     min-width: 52px;
-    height: 32px;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    gap: 0;
     align-self: flex-start;
 }
 
@@ -53,9 +65,16 @@
     white-space: nowrap;
 }
 
-#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
-#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
+#current-date { 
+    font-size: 0.6rem; 
+    text-transform: uppercase; 
+}
+#current-time, #current-seconds { 
+    font-size: 0.65rem; 
+    letter-spacing: -0.2px; 
+}
 
+/* --- КОНТЕЙНЕР СКРОЛЛА --- */
 .weather-scroll-container {
     display: flex;
     align-items: flex-start;
@@ -64,9 +83,8 @@
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
-    padding-top: 0;
-    padding-bottom: 55px;
-    margin-bottom: -50px;
+    padding: 0;
+    margin: 0;
     gap: 0;
     overscroll-behavior-x: none;
     align-self: flex-start;
@@ -76,16 +94,13 @@
     display: none;
 }
 
+/* --- ИНФО О ПОГОДЕ (Внутри скролла) --- */
 .weather-info {
-    display: flex;
-    gap: 5px;
-    padding: 6px 8px;
-    margin-left: 0px;
+    gap: 8px;
+    padding: 0 8px;
+    margin-left: 0;
     flex-wrap: nowrap;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.25);
-    border: 1px solid var(--glass-border);
-    border-radius: 0px;
+    /* Наследует высоту и фон из общего блока выше */
 }
 
 .w-item {
@@ -103,9 +118,7 @@
     transition: opacity 0.2s ease;
 }
 
-.w-item:active {
-    opacity: 0.8;
-}
+.w-item:active { opacity: 0.8; }
 
 .divider {
     color: rgba(0, 51, 102, 0.15);
@@ -113,14 +126,31 @@
     font-weight: 300;
 }
 
-/* ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ — по центру элемента */
+/* --- КНОПКА-СТРЕЛКА --- */
+.weather-arrow-btn {
+    position: relative;
+    padding: 0 8px;
+    cursor: pointer;
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+    font-weight: bold;
+    justify-content: center;
+    z-index: 10;
+    align-self: flex-start;
+    transition: background 0.2s ease;
+}
+
+.weather-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* --- ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ --- */
 .w-label {
     display: none !important;
     position: absolute;
-    bottom: auto;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(25px);
+    transform: translateX(-50%) translateY(20px);
     background: rgba(255, 255, 255, 0.98);
     color: var(--primary-blue);
     padding: 5px 10px;
@@ -128,13 +158,9 @@
     font-size: 0.75rem;
     font-weight: 700;
     white-space: nowrap;
-    z-index: 99999 !important;
+    z-index: 9999;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--glass-border);
-}
-
-.w-label::before {
-    display: none;
 }
 
 .w-item.show-text .w-label {
@@ -143,34 +169,8 @@
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateX(-50%) translateY(12.5px) scale(0.95); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(25px) scale(1); }
-}
-
-.weather-arrow-btn {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin-top: 0;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 0 0 0 8px;
-    padding: 4px 8px;
-    cursor: pointer;
-    color: var(--primary-blue);
-    font-size: 1rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-    align-self: flex-start;
-    transition: transform 0.2s ease, background 0.2s ease;
+    from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.95); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1); }
 }
 
 .weather-arrow-btn:active {

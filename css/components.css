@@ -34,8 +34,6 @@
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
-    
-    /* Добавляем эти свойства внутрь, чтобы не вылезало за края */
     display: block;
     box-sizing: border-box;
     white-space: normal;
@@ -51,7 +49,7 @@
 /* 2. ПРАВИЛО ДЛЯ ОТСТУПОВ (чтобы кнопки не слипались во вкладках) */
 .tab-content .btn-main {
     font-size: 1.0rem;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
 }
 
 /* 3. ТВОИ ВКЛАДКИ (логика их показа) */
@@ -62,7 +60,10 @@
 
 .tab-content.active {
     display: block;
-    animation: fadeIn 0.4s ease-out;
+    animation: fadeInUp 0.35s ease-out forwards;
+    -webkit-animation: fadeInUp 0.35s ease-out forwards;
+    will-change: opacity, transform;
+    transform-origin: bottom center;
 }
 
 .iframe-wrapper {

@@ -46,8 +46,8 @@
     flex-direction: column;
     justify-content: center;
     line-height: 1.1;
-    width: 52px;
-    min-width: 52px;
+    width: 60px;
+    min-width: 60px;
     gap: 0;
     position: relative;
 }

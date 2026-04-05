@@ -9,7 +9,7 @@
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.2) !important; /* Прозрачность сохранена */
+    background: rgba(255, 255, 255, 0.2) !important;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
@@ -17,24 +17,13 @@
     padding: 25px;
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
-
-    /* ДОБАВЛЕНО: Плавное появление карточек (как во втором коде) */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 80ms,
-                transform 0.6s cubic-bezier(0.23, 1, 0.32, 1) 80ms;
-}
-
-/* ДОБАВЛЕНО: Активация карточек при показе вкладки */
-.tab-content.active .card {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .btn-main {
-    background: rgba(0, 82, 155, 0.7) !important; /* Тот же уровень прозрачности */
+    background: rgba(0, 82, 155, 0.7) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
@@ -46,6 +35,7 @@
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
     
+    /* Добавляем эти свойства внутрь, чтобы не вылезало за края */
     display: block;
     box-sizing: border-box;
     white-space: normal;
@@ -58,28 +48,24 @@
     transform: scale(0.97);
 }
 
+/* 2. ПРАВИЛО ДЛЯ ОТСТУПОВ (чтобы кнопки не слипались во вкладках) */
 .tab-content .btn-main {
     font-size: 1.0rem;
     margin-bottom: 15px; 
 }
 
-/* ОБНОВЛЕНО: Логика вкладок с использованием opacity вместо простой анимации */
+/* 3. ТВОИ ВКЛАДКИ (логика их показа) */
 .tab-content {
     font-size: 1.0rem;
     display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 
-        opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-        transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    pointer-events: none;
 }
 
 .tab-content.active {
     display: block;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+    animation: fadeInUp 0.35s ease-out forwards;
+    -webkit-animation: fadeInUp 0.35s ease-out forwards;
+    will-change: opacity, transform;
+    transform-origin: bottom center;
 }
 
 .iframe-wrapper {
@@ -91,12 +77,66 @@
     width: 100%;
 }
 
-/* Остальные элементы (новости, ссылки) в обоих кодах имеют одинаковую прозрачность (0.2 - 0.3) */
-.news-card-mini, .news-item {
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin: 15px 0;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.status-msg {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.news-card-mini {
     background: rgba(255, 255, 255, 0.3);
     padding: 10px;
     border-radius: 12px;
     margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+
+.news-card-mini:active {
+    transform: scale(0.98);
+}
+
+.news-item {
+    background: rgba(255, 255, 255, 0.3);
+    border-left: 4px solid #00529b;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 0 12px 12px 0;
+}
+
+.news-title {
+    font-weight: bold;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 5px;
+    color: #1d1d1f;
+    text-decoration: none;
 }
 
 .law-link {

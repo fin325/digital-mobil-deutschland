@@ -45,7 +45,7 @@
 .date-time-block {
     flex-direction: column;
     justify-content: center;
-    line-height: 1;
+    line-height: 1.1;
     width: 52px;
     min-width: 52px;
     gap: 0;
@@ -61,15 +61,8 @@
     white-space: nowrap;
 }
 
-#current-date {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-}
-
-#current-time, #current-seconds {
-    font-size: 0.65rem;
-    letter-spacing: -0.2px;
-}
+#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
+#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
 
 /* --- КОНТЕЙНЕР СКРОЛЛА --- */
 .weather-scroll-container {

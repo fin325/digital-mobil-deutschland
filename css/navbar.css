@@ -56,75 +56,91 @@
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* Основной контейнер (ваш с исправлениями) */
+/* Стили для подсказки и стрелок (без изменений) */
 .scroll-hint-container {
     display: flex;
-    justify-content: space-between; /* Разносит лево и право */
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
     padding: 0 15px;
-    margin-top: 15px; /* Исправил 15x на 15px */
+    margin-top: 15x;
     transform: translateY(10px);
 }
 
-/* Группа слева: Рука + Текст */
-.scroll-hint-left {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Расстояние между рукой и текстом */
-}
-
-/* Стили текста (ваши) */
 .scroll-hint-text {
     font-size: 0.85rem;
     color: #6c757d;
     font-style: italic;
 }
 
-/* Анимация руки */
-.swipe-hand {
-    font-size: 1.2rem;
-    display: inline-block;
-    animation: swipe-move 2s infinite ease-in-out;
-    user-select: none;
-}
-
-@keyframes swipe-move {
-    0% {
-        transform: translateX(15px);
-        opacity: 0;
-    }
-    20% {
-        opacity: 1;
-    }
-    80% {
-        transform: translateX(-10px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(-20px);
-        opacity: 0;
-    }
-}
-
-/* Правая часть: Стрелки (ваши стили без изменений) */
 .scroll-arrows {
     display: flex;
     gap: 8px;
 }
 
 .arrow-btn {
-    background: white;
+    /* 1. Цвет стрелки (иконки или текста внутри) */
+    color: var(--primary-blue);
+    
+    /* 2. Эффект стекла как у .top-bar */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* 3. Границы и структура */
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: 4px; 
     padding: 5px 12px;
     cursor: pointer;
+    box-sizing: border-box;
+    
+    /* Сохраняем тень и позиционирование */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transform: translateY(-8px);
-    transition: all 0.2s ease;
+    
+    /* Плавность при наведении */
+    transition: background 0.3s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.arrow-btn:active {
-    transform: translateY(-6px) scale(0.95);
+/* Эффект при наведении, чтобы кнопка слегка подсвечивалась */
+.arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
+.swipe-finger-wrapper {
+    width: 28px;
+    height: 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+}
+
+.swipe-finger {
+    font-size: 1.2rem;
+    display: inline-block;
+    transform-origin: top center;
+    animation: swipeRock 1.6s ease-in-out infinite;
+}
+
+@keyframes swipeRock {
+    0%   { transform: rotate(-20deg); }
+    40%  { transform: rotate(20deg); }
+    70%  { transform: rotate(-20deg); }
+    100% { transform: rotate(-20deg); }
+}
+
+.scroll-hint-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-hint-left.hidden {
+    opacity: 0;
+    pointer-events: none;
+}

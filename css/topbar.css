@@ -15,6 +15,7 @@
 .top-bar-content {
     display: flex;
     align-items: flex-start;
+    height: 35px;
     gap: 0;
     width: 100%;
     overflow: visible !important;
@@ -46,8 +47,8 @@
     flex-direction: column;
     justify-content: center;
     line-height: 1.1;
-    width: 65px;
-    min-width: 65px;
+    width: 70px;
+    min-width: 70px;
     gap: 0;
     position: relative;
 }
@@ -109,13 +110,14 @@
     cursor: pointer;
     user-select: none;
     transition: opacity 0.2s ease;
+    padding-right: 5px;
 }
 
 .w-item:active { opacity: 0.8; }
 
 .divider {
     color: rgba(0, 51, 102, 0.15);
-    margin: 0 2px;
+    margin: 0 1px;
     font-weight: 300;
 }
 

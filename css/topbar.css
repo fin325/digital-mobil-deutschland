@@ -98,7 +98,8 @@
     position: relative;
     white-space: nowrap;
     font-size: 0.85rem;
-    color: var(--primary-blue);
+    color: #003366;
+    text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
     flex-shrink: 0;
     font-weight: 600;
     display: flex;

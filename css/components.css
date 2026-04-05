@@ -62,10 +62,7 @@
 
 .tab-content.active {
     display: block;
-    animation: fadeInUp 0.35s ease-out forwards;
-    -webkit-animation: fadeInUp 0.35s ease-out forwards;
-    will-change: opacity, transform;
-    transform-origin: bottom center;
+    animation: fadeIn 0.4s ease-out;
 }
 
 .iframe-wrapper {

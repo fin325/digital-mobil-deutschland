@@ -39,6 +39,7 @@
     align-items: center;
     flex-shrink: 0;
     align-self: flex-start;
+    position: relative;
 }
 
 /* --- БЛОК ДАТЫ И ВРЕМЕНИ --- */

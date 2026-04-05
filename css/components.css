@@ -61,26 +61,8 @@
 }
 
 .tab-content.active {
-    /* 1. Отображение и базовый фон */
     display: block;
-    background: rgba(255, 255, 255, 0.2) !important;
-    
-    /* 2. Эффект матового стекла (Glassmorphism) */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    
-    /* 3. Анимация появления */
-    animation: fadeInUp 0.35s ease-out forwards;
-    -webkit-animation: fadeInUp 0.35s ease-out forwards;
-    
-    /* 4. Оптимизация и точка опоры */
-    will-change: opacity, transform;
-    transform-origin: bottom center;
-    
-    /* 5. Дополнительная стабильность */
-    pointer-events: auto;
-    position: relative;
-    z-index: 5;
+    animation: fadeIn 0.4s ease-out;
 }
 
 .iframe-wrapper {

@@ -83,7 +83,7 @@
     color: var(--primary-blue);
     
     /* 2. Эффект стекла как у .top-bar */
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     

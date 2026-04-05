@@ -193,3 +193,8 @@
     margin: 0 0 8px 0;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
+
+.site-title, .site-subtitle {
+    position: relative;
+    top: -10px; /* Сдвиг вверх на 10px */
+}

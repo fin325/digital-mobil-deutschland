@@ -17,7 +17,7 @@
     padding: 25px;
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 0.8s ease-out forwards;
+    /* Анимация карточек удалена, чтобы не конфликтовать с появлением вкладок */
     position: relative;
     z-index: 1;
 }
@@ -64,6 +64,8 @@
     display: block;
     /* Установили новую плавную анимацию */
     animation: smoothTabFadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    /* Включаем аппаратное ускорение для устранения подтормаживаний */
+    will-change: transform, opacity;
 }
 
 /* Сама плавная анимация появления для вкладок */

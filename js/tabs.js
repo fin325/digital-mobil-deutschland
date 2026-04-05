@@ -9,19 +9,17 @@ function hideSwipeHint() {
 }
 
 function scrollTabs(direction) {
-    hideSwipeHint(); // ← скрываем подсказку при нажатии стрелок
+    hideSwipeHint();
     
     const viewport = document.querySelector('.nav-scroll-viewport');
     
     if (viewport) {
         if (direction === 1) {
-            // Крутим в самый конец (до Инфо и Datenschutz одновременно)
             viewport.scrollTo({
                 left: viewport.scrollWidth,
                 behavior: 'smooth'
             });
         } else {
-            // Крутим в начало
             viewport.scrollTo({
                 left: 0,
                 behavior: 'smooth'
@@ -38,7 +36,19 @@ function showTab(tabId, event) {
 
     // Показываем нужную вкладку
     const targetTab = document.getElementById(tabId);
-    if (targetTab) targetTab.classList.add('active');
+    if (targetTab) {
+        // Сбрасываем анимацию перед показом
+        targetTab.style.animation = 'none';
+        targetTab.style.webkitAnimation = 'none';
+
+        // Принудительный reflow — заставляет браузер "забыть" старое состояние
+        void targetTab.offsetHeight;
+
+        targetTab.style.animation = '';
+        targetTab.style.webkitAnimation = '';
+
+        targetTab.classList.add('active');
+    }
 
     // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');

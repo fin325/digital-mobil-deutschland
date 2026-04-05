@@ -15,8 +15,7 @@ body {
     overflow-x: hidden;
     position: relative;
     padding: 0;
-    background-size: cover;
-    top: 0 !important;
+    /* Удалили background-size: cover отсюда, так как он задан в ::before */
 }
 
 body::before {
@@ -27,14 +26,24 @@ body::before {
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
                 url('../img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
     background-size: cover;
+    
+    /* ⚡ ОПТИМИЗАЦИЯ ФОНА: Выносим тяжелую картинку в отдельный слой GPU.
+       Это делает скроллинг страницы поверх фона идеально плавным. */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
+/* ❗ ВАЖНО: Если вы применяли градиентную анимацию к фону, лучше от нее отказаться,
+   либо анимировать ::before через transform: scale() и translate(). */
 @keyframes gradientBG {
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/* Оставляем эти анимации только в том случае, если вы применяете их к другим
+   элементам на сайте (например, к модальным окнам или картинкам).
+   Если нет — смело удаляйте этот блок. */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }

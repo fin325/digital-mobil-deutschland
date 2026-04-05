@@ -29,7 +29,9 @@
     justify-content: center;
     line-height: 1.1;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 0 0 6px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 52px;
@@ -151,7 +153,9 @@
     right: auto;
     margin-top: 0;
     height: 32px;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 0 0 0 8px;
     padding: 4px 8px;

@@ -13,10 +13,10 @@
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
 .nav-scroll-viewport {
-    overflow-x: auto; /* Включаем скролл здесь */
+    overflow-x: auto; 
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; /* Плавность для стрелок */
+    scroll-behavior: smooth; 
 }
 
 /* Скрываем скроллбар */
@@ -24,12 +24,12 @@
     display: none;
 }
 
-/* 2. ОБЕРТКА ДЛЯ РЯДОВ (растягивается под самый длинный ряд) */
+/* 2. ОБЕРТКА ДЛЯ РЯДОВ */
 .nav-rows-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Расстояние между 1 и 2 рядом */
-    width: max-content; /* Критично для синхронного скролла */
+    gap: 8px; 
+    width: max-content; 
 }
 
 /* 3. СТИЛИ ДЛЯ РЯДОВ */
@@ -43,11 +43,19 @@
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
-    white-space: nowrap; /* Не дает тексту переноситься */
+    white-space: nowrap; 
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* ⚡ ОПТИМИЗАЦИЯ ЗДЕСЬ: Убрали all, прописали конкретные свойства */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color, transform;
+}
+
+/* Эффект упругого вдавливания при нажатии для ощущения скорости */
+.nav-btn:active {
+    transform: scale(0.95);
 }
 
 .nav-btn.active {
@@ -56,14 +64,14 @@
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
-/* Стили для подсказки и стрелок (без изменений) */
+/* Стили для подсказки и стрелок */
 .scroll-hint-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
     padding: 0 15px;
-    margin-top: 15x;
+    margin-top: 15px; /* Исправлена опечатка 15x на 15px */
     transform: translateY(10px);
 }
 
@@ -79,35 +87,29 @@
 }
 
 .arrow-btn {
-    /* 1. Цвет стрелки (иконки или текста внутри) */
     color: var(--primary-blue);
-    
-    /* 2. Эффект стекла как у .top-bar */
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    
-    /* 3. Границы и структура */
     border: 1px solid var(--glass-border);
     border-radius: 4px; 
     padding: 5px 12px;
     cursor: pointer;
     box-sizing: border-box;
-    
-    /* Сохраняем тень и позиционирование */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transform: translateY(-8px);
-    
-    /* Плавность при наведении */
-    transition: background 0.3s ease, opacity 0.2s ease;
+    transition: background 0.3s ease, opacity 0.2s ease, transform 0.1s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Эффект при наведении, чтобы кнопка слегка подсвечивалась */
 .arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.arrow-btn:active {
+    transform: translateY(-8px) scale(0.92); /* Приятный клик по стрелкам */
 }
 
 .swipe-finger-wrapper {
@@ -124,6 +126,8 @@
     display: inline-block;
     transform-origin: top center;
     animation: swipeRock 1.6s ease-in-out infinite;
+    /* ⚡ ОПТИМИЗАЦИЯ: Разгружаем процессор телефона для бесконечной анимации */
+    will-change: transform;
 }
 
 @keyframes swipeRock {
@@ -137,7 +141,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
 }
 
 .scroll-hint-left.hidden {

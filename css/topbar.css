@@ -22,37 +22,33 @@
     overscroll-behavior: none;
 }
 
-/* --- ОБЩИЕ СТИЛИ (Унификация: высота 30px, только нижний бордер, без радиуса) --- */
-.date-time-block, 
-.weather-info, 
+/* --- ОБЩИЕ СТИЛИ --- */
+.date-time-block,
+.weather-info,
 .weather-arrow-btn {
-    height: 30px; /* Новая высота */
-    background: rgba(255, 255, 255, 0.25); /* Одинаковая прозрачность */
+    height: 30px;
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Одинаковая тень */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
-    
-    /* Границы: только снизу */
     border: none !important;
     border-bottom: 1px solid var(--glass-border) !important;
-    
-    /* Убираем закругления везде */
     border-radius: 0 !important;
-    
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    align-self: flex-start;
 }
 
 /* --- БЛОК ДАТЫ И ВРЕМЕНИ --- */
 .date-time-block {
     flex-direction: column;
     justify-content: center;
-    line-height: 1; /* Плотно для 30px */
+    line-height: 1;
     width: 52px;
     min-width: 52px;
-    align-self: flex-start;
+    gap: 0;
 }
 
 #current-date, #current-time, #current-seconds {
@@ -65,13 +61,14 @@
     white-space: nowrap;
 }
 
-#current-date { 
-    font-size: 0.6rem; 
-    text-transform: uppercase; 
+#current-date {
+    font-size: 0.6rem;
+    text-transform: uppercase;
 }
-#current-time, #current-seconds { 
-    font-size: 0.65rem; 
-    letter-spacing: -0.2px; 
+
+#current-time, #current-seconds {
+    font-size: 0.65rem;
+    letter-spacing: -0.2px;
 }
 
 /* --- КОНТЕЙНЕР СКРОЛЛА --- */
@@ -84,7 +81,9 @@
     flex-grow: 1;
     scroll-behavior: smooth;
     padding: 0;
+    padding-bottom: 55px;
     margin: 0;
+    margin-bottom: -55px;
     gap: 0;
     overscroll-behavior-x: none;
     align-self: flex-start;
@@ -94,13 +93,12 @@
     display: none;
 }
 
-/* --- ИНФО О ПОГОДЕ (Внутри скролла) --- */
+/* --- ИНФО О ПОГОДЕ --- */
 .weather-info {
     gap: 8px;
     padding: 0 8px;
     margin-left: 0;
     flex-wrap: nowrap;
-    /* Наследует высоту и фон из общего блока выше */
 }
 
 .w-item {
@@ -136,11 +134,15 @@
     font-weight: bold;
     justify-content: center;
     z-index: 10;
-    align-self: flex-start;
     transition: background 0.2s ease;
 }
 
 .weather-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.weather-arrow-btn:active {
+    transform: scale(0.9);
     background: rgba(255, 255, 255, 0.35);
 }
 
@@ -173,11 +175,7 @@
     to   { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1); }
 }
 
-.weather-arrow-btn:active {
-    transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.5);
-}
-
+/* --- ЗАГОЛОВКИ --- */
 .site-title {
     text-align: center;
     color: #f0f8ff;

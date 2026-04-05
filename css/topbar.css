@@ -39,7 +39,6 @@
     align-items: center;
     flex-shrink: 0;
     align-self: flex-start;
-    position: relative;
 }
 
 /* --- БЛОК ДАТЫ И ВРЕМЕНИ --- */
@@ -50,6 +49,7 @@
     width: 52px;
     min-width: 52px;
     gap: 0;
+    position: relative;
 }
 
 #current-date, #current-time, #current-seconds {

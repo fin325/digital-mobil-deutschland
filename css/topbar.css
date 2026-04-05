@@ -29,14 +29,7 @@
     justify-content: center;
     line-height: 1.1;
     font-weight: 700;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    
-    /* Добавляем границы здесь */
-    border-top: 1px solid rgba(255, 255, 255, 0.3);  /* Верхняя граница */
-    border-left: 1px solid rgba(255, 255, 255, 0.3); /* Левая граница */
-    
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 0 0 6px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     width: 52px;
@@ -153,29 +146,27 @@
 }
 
 .weather-arrow-btn {
-    /* ... ваши существующие стили ... */
-    
-    /* Устанавливаем границы сверху и справа */
-    border-top: 1px solid var(--glass-border);
-    border-right: 1px solid var(--glass-border);
-    
-    /* Если хотите, чтобы остальные стороны тоже имели границы, 
-       оставьте их или используйте краткую запись: */
-    border-left: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
-
-    /* Углы: 0 0 0 8px означает, что верхний левый, верхний правый 
-       и нижний правый — острые (прижаты), а нижний левый — скруглен */
-    border-radius: 0 0 0 8px;
-
-    /* Остальные стили без изменений */
     position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 0;
     height: 32px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--glass-border);
+    border-radius: 0 0 0 8px;
     padding: 4px 8px;
-    /* ... */
+    cursor: pointer;
+    color: var(--primary-blue);
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+    align-self: flex-start;
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .weather-arrow-btn:active {

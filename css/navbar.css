@@ -79,13 +79,35 @@
 }
 
 .arrow-btn {
-    background: white;
+    /* 1. Цвет стрелки (иконки или текста внутри) */
+    color: var(--primary-blue);
+    
+    /* 2. Эффект стекла как у .top-bar */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* 3. Границы и структура */
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: 4px; 
     padding: 5px 12px;
     cursor: pointer;
+    box-sizing: border-box;
+    
+    /* Сохраняем тень и позиционирование */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transform: translateY(-8px);
+    
+    /* Плавность при наведении */
+    transition: background 0.3s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Эффект при наведении, чтобы кнопка слегка подсвечивалась */
+.arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .swipe-finger-wrapper {

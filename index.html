@@ -8,31 +8,13 @@
     <link rel="stylesheet" href="css/topbar.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/components.css">
-
-    <style>
-        /* Обязательно добавляем это, чтобы шапка отображалась как блочный элемент */
-        app-header {
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
 
 <app-header></app-header>
 
-<div class="scroll-hint-container">
-    <div class="scroll-hint-left">
-        <div class="swipe-finger-wrapper">
-            <div class="swipe-finger">👇🏼</div>
-        </div>
-        <span class="scroll-hint-text">Свайп меню</span>
-    </div>
-    <div class="scroll-arrows">
-        <button class="arrow-btn" onclick="scrollTabs(-1)">←</button>
-        <button class="arrow-btn" onclick="scrollTabs(1)">→</button>
-    </div>
-</div>
+<scroll-hint></scroll-hint>
 
 <nav class="navbar">
     <div class="nav-scroll-viewport">
@@ -330,7 +312,6 @@
 </main>
 
 <script src="js/components.js"></script>
-
 <script src="js/tabs.js"></script>
 <script src="js/clock.js"></script>
 <script src="js/weather.js"></script>

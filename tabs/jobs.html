@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/components.css">
 
-      <style>
-        /* Жестко переносим меню вниз */
+    <style>
+        /* Оставляем здесь только позиционирование меню внизу для этой страницы */
         .navbar {
             position: fixed !important;
             top: auto !important;
@@ -25,20 +25,7 @@
         body {
             padding-bottom: 120px; 
         }
-
-        /* === ИСПРАВЛЕНИЕ ДЛЯ ССЫЛОК === */
-        /* Заставляем <a> вести себя и выглядеть в точности как <button> */
-        a.nav-btn {
-            display: inline-flex !important; /* Выравнивает текст по центру как в кнопках */
-            align-items: center;
-            justify-content: center;
-            text-decoration: none !important; /* Убирает подчеркивание */
-            box-sizing: border-box;
-            font-family: inherit; /* Берет тот же шрифт, что и у кнопок */
-            line-height: normal;
-        }
     </style>
-
 </head>
 
 <body>
@@ -72,6 +59,7 @@
         <div class="site-subtitle">Stadt Hattingen</div>
     </div>
 </div>
+
 <main class="container" style="padding-top: 20px;">
     <section class="tab-content active" style="display: block;">
         <div class="card">
@@ -128,7 +116,7 @@
 <script src="../js/clock.js"></script>
 <script src="../js/weather.js"></script>
 <script>
-    // Запускаем только часы и погоду (без новостей и вкладок, чтобы не было ошибок)
+    // Запускаем часы и погоду
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initClock === 'function') initClock();
         if (typeof getWeather === 'function') getWeather();

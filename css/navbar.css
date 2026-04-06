@@ -39,37 +39,32 @@
 }
 
 .nav-btn {
+    /* === ТВОЙ ОРИГИНАЛЬНЫЙ ДИЗАЙН === */
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
-    white-space: nowrap; 
-    
-    /* Стандартный синий цвет текста вместо переменной */
-    color: #007aff; 
-    
+    white-space: nowrap; /* Не дает тексту переноситься */
+    color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Выравнивание для <a> и <button> */
-    display: inline-flex;         
+    /* === ТЕХНИЧЕСКАЯ ЧАСТЬ (чтобы ссылки выглядели как кнопки) === */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;        
-    box-sizing: border-box;       
-    font-family: inherit;         
-    font-size: 14px;              
-    margin: 0;                    
+    text-decoration: none;  /* Убирает подчеркивание у ссылок */
+    box-sizing: border-box;
+    font-family: inherit;   /* Чтобы шрифт совпадал */
+    font-size: inherit;     /* Уравнивает размер текста между <button> и <a> */
 }
 
 .nav-btn.active {
-    /* Тот же стандартный синий для фона активной кнопки */
-    background: #007aff; 
-    color: white !important;      
-    
-    /* Тень пересчитана под новый оттенок синего */
-    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3); 
+    /* === ТВОЙ ОРИГИНАЛЬНЫЙ ДИЗАЙН === */
+    background: var(--primary-blue);
+    color: white !important; /* !important нужен только чтобы браузер не сделал ссылку синей */
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
 /* Стили для подсказки и стрелок (без изменений) */

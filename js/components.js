@@ -1,4 +1,4 @@
-// 1. Компонент шапки (Время, погода, заголовки)
+
 class AppHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `

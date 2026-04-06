@@ -62,26 +62,20 @@
 
 <main class="container" style="padding-top: 20px;">
     <section class="tab-content active" style="display: block;">
-    <div class="card">
-        <h2>💼 Работа и вакансии</h2>
-        <p>Популярные порталы для поиска работы в Германии.</p>
-</div>
-    
-        
-        <!-- Кнопка "Вернуться на главную" оставляем как была -->
-        <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
-    
-    <a href="../index.html" style="color: #000080; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
-        ← Вернуться на главную
-    </a>
+        <div class="card">
+            <h2>🖥️Видео портал с улучшенной навигацией для смартфонов</h2>
+            <p>Популярные порталы для поиска работы в Германии.</p>
 
-    <a href="../index.html#jobs" style="color: #000080; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
-        ← Назад
-    </a>
+            <!-- сюда кнопки порталов -->
 
-</div>
+            <div style="margin-top: 30px; display: flex; justify-content: center;">
+                <a href="../index.html" style="color: #000080; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+                    ← Вернуться на основную страницу сайта
+                </a>
+            </div>
 
-</section>
+        </div>
+    </section>
 </main>
 
 <nav class="navbar">
@@ -92,23 +86,24 @@
              <div class="nav-row">
                 <a href="../index.html" class="nav-btn">Домой</a>
                 <button class="nav-btn active" onclick="showTab('home', event)">Основная</button>
-                <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-                <button class="nav-btn" onclick="showTab('pdf', event)">PDF Сжатие</button>
-                <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
-                <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
-                <button class="nav-btn" onclick="showTab('translate', event)">Перевод</button>
-                <button class="nav-btn" onclick="showTab('contacts', event)">Контакты</button>
-                <button class="nav-btn" onclick="showTab('about', event)">Инфо</button>
+                <button class="nav-btn" onclick="showTab('img2pdf', event)">Новости Мира</button>
+                <button class="nav-btn" onclick="showTab('pdf', event)">Авто</button>
+                <button class="nav-btn" onclick="showTab('maps', event)">IT Програмирование</button>
+                <button class="nav-btn" onclick="showTab('mobile', event)">Природа</button>
+                <button class="nav-btn" onclick="showTab('translate', event)">Спорт</button>
+                <button class="nav-btn" onclick="showTab('contacts', event)">Кулинария</button>
+                <button class="nav-btn" onclick="showTab('about', event)">Комедия</button>
             </div>
 
             <div class="nav-row">
-                <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Hattingen</button>
+                <button class="nav-btn" onclick="showTab('news-hattingen', event)">Hattingen</button>
                 <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
                 <button class="nav-btn" onclick="showTab('docs', event)">ИИ Помощники </button>
                 <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
                 <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
                 <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-                <button class="nav-btn" onclick="showTab('datenschutz', event)">Datenschutz</button>
+                <button class="nav-btn" onclick="showTab('datenschutz', event)">Футбол</button>
+                <a href="../index.html#about" class="nav-btn">Инфо</a>
             </div>   
         </div>
     </div>

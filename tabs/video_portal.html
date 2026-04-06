@@ -23,6 +23,20 @@
         body {
             padding-bottom: 120px; 
         }
+        
+        /* Гарантируем правильное отображение и прозрачность подсказки */
+        .scroll-hint-container {
+            position: fixed;
+            bottom: 60px; /* Отрегулируйте эту цифру, если подсказка будет слишком близко или далеко от меню */
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            background: transparent !important; /* Убираем фон */
+            pointer-events: none; /* Пропускаем клики сквозь прозрачную часть */
+        }
+        .scroll-hint-container .arrow-btn {
+            pointer-events: auto; /* Кнопкам возвращаем возможность клика */
+        }
     </style>
 </head>
 
@@ -149,21 +163,20 @@
 
 </main>
 
-<nav class="navbar">
-    
-    <div class="scroll-hint-container">
-        <div class="scroll-hint-left">
-            <div class="swipe-finger-wrapper">
-                <div class="swipe-finger">👇🏼</div>
-            </div>
-            <span class="scroll-hint-text">Свайп меню</span>
+<div class="scroll-hint-container">
+    <div class="scroll-hint-left">
+        <div class="swipe-finger-wrapper">
+            <div class="swipe-finger">👇🏼</div>
         </div>
-        <div class="scroll-arrows">
-            <button class="arrow-btn" onclick="scrollTabs(-1)">&#8592;</button>
-            <button class="arrow-btn" onclick="scrollTabs(1)">&#8594;</button>
-        </div>
+        <span class="scroll-hint-text">Свайп меню</span>
     </div>
+    <div class="scroll-arrows">
+        <button class="arrow-btn" onclick="scrollTabs(-1)">&#8592;</button>
+        <button class="arrow-btn" onclick="scrollTabs(1)">&#8594;</button>
+    </div>
+</div>
 
+<nav class="navbar">
     <div class="nav-scroll-viewport">
         <div class="nav-rows-wrapper">
 

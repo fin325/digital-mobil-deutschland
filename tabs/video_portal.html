@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Работа и вакансии в Германии | Hattingen</title>
+    <title>Видео портал | Hattingen</title>
     
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/topbar.css">
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../css/components.css">
 
     <style>
-        /* Оставляем здесь только позиционирование меню внизу для этой страницы */
         .navbar {
             position: fixed !important;
             top: auto !important;
@@ -21,7 +20,6 @@
             z-index: 9999;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
-
         body {
             padding-bottom: 120px; 
         }
@@ -37,7 +35,6 @@
             <span id="current-time"></span>
             <span class="divider" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">|</span>
         </div>
-
         <div class="weather-scroll-container">
             <div class="weather-info" id="full-weather-bar">
                 <span class="w-item" id="city-temp">Laden...</span>
@@ -51,7 +48,6 @@
                 <span class="w-item" onclick="toggleLabel(this)">⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg</span>
             </div>
         </div>
-
         <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>
     </div> 
     <div class="site-header">
@@ -61,50 +57,125 @@
 </div>
 
 <main class="container" style="padding-top: 20px;">
-    <section class="tab-content active" style="display: block;">
+
+    <section id="home" class="tab-content active">
         <div class="card">
-            <h2>🖥️Видео портал с улучшенной навигацией для смартфонов</h2>
-            <p>Популярные порталы для поиска работы в Германии.</p>
-
-            <!-- сюда кнопки порталов -->
-
+            <h2>🖥️ Видео портал</h2>
+            <p>Видео по категориям для удобного просмотра на смартфоне.</p>
             <div style="margin-top: 30px; display: flex; justify-content: center;">
                 <a href="../index.html" style="color: #000080; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
                     ← Вернуться на основную страницу сайта
                 </a>
             </div>
-
         </div>
     </section>
+
+    <section id="world-news" class="tab-content">
+        <div class="card">
+            <h2>🌍 Новости Мира</h2>
+            <p>Видео о мировых новостях.</p>
+        </div>
+    </section>
+
+    <section id="auto" class="tab-content">
+        <div class="card">
+            <h2>🚗 Авто</h2>
+            <p>Видео об автомобилях.</p>
+        </div>
+    </section>
+
+    <section id="it" class="tab-content">
+        <div class="card">
+            <h2>💻 IT Программирование</h2>
+            <p>Видео по программированию и технологиям.</p>
+        </div>
+    </section>
+
+    <section id="nature" class="tab-content">
+        <div class="card">
+            <h2>🌿 Природа</h2>
+            <p>Видео о природе.</p>
+        </div>
+    </section>
+
+    <section id="sport" class="tab-content">
+        <div class="card">
+            <h2>⚽ Спорт</h2>
+            <p>Видео о спорте.</p>
+        </div>
+    </section>
+
+    <section id="cooking" class="tab-content">
+        <div class="card">
+            <h2>🍳 Кулинария</h2>
+            <p>Видео о кулинарии.</p>
+        </div>
+    </section>
+
+    <section id="comedy" class="tab-content">
+        <div class="card">
+            <h2>😄 Комедия</h2>
+            <p>Смешные видео.</p>
+        </div>
+    </section>
+
+    <section id="hattingen" class="tab-content">
+        <div class="card">
+            <h2>🏙️ Hattingen</h2>
+            <p>Видео о городе Hattingen.</p>
+        </div>
+    </section>
+
+    <section id="news-de" class="tab-content">
+        <div class="card">
+            <h2>🗞️ Новости DE</h2>
+            <p>Новости Германии.</p>
+        </div>
+    </section>
+
+    <section id="ai" class="tab-content">
+        <div class="card">
+            <h2>🤖 ИИ Помощники</h2>
+            <p>Видео об искусственном интеллекте.</p>
+        </div>
+    </section>
+
+    <section id="football" class="tab-content">
+        <div class="card">
+            <h2>⚽ Футбол</h2>
+            <p>Видео о футболе.</p>
+        </div>
+    </section>
+
 </main>
 
 <nav class="navbar">
     <div class="nav-scroll-viewport">
         <div class="nav-rows-wrapper">
+
             <div class="nav-row">
-                <a href="../index.html" class="nav-btn">Главная</a>
-             <div class="nav-row">
-                <a href="../index.html" class="nav-btn">Домой</a>
+                <a href="../index.html" class="nav-btn">← Главная</a>
                 <button class="nav-btn active" onclick="showTab('home', event)">Основная</button>
-                <button class="nav-btn" onclick="showTab('img2pdf', event)">Новости Мира</button>
-                <button class="nav-btn" onclick="showTab('pdf', event)">Авто</button>
-                <button class="nav-btn" onclick="showTab('maps', event)">IT Програмирование</button>
-                <button class="nav-btn" onclick="showTab('mobile', event)">Природа</button>
-                <button class="nav-btn" onclick="showTab('translate', event)">Спорт</button>
-                <button class="nav-btn" onclick="showTab('contacts', event)">Кулинария</button>
-                <button class="nav-btn" onclick="showTab('about', event)">Комедия</button>
+                <button class="nav-btn" onclick="showTab('world-news', event)">Новости Мира</button>
+                <button class="nav-btn" onclick="showTab('auto', event)">Авто</button>
+                <button class="nav-btn" onclick="showTab('it', event)">IT Программирование</button>
+                <button class="nav-btn" onclick="showTab('nature', event)">Природа</button>
+                <button class="nav-btn" onclick="showTab('sport', event)">Спорт</button>
+                <button class="nav-btn" onclick="showTab('cooking', event)">Кулинария</button>
+                <button class="nav-btn" onclick="showTab('comedy', event)">Комедия</button>
             </div>
 
             <div class="nav-row">
-                <button class="nav-btn" onclick="showTab('news-hattingen', event)">Hattingen</button>
-                <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
-                <button class="nav-btn" onclick="showTab('docs', event)">ИИ Помощники </button>
-                <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
-                <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-                <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
-                <button class="nav-btn" onclick="showTab('datenschutz', event)">Футбол</button>
+                <button class="nav-btn" onclick="showTab('hattingen', event)">Hattingen</button>
+                <button class="nav-btn" onclick="showTab('news-de', event)">Новости DE</button>
+                <button class="nav-btn" onclick="showTab('ai', event)">ИИ Помощники</button>
+                <button class="nav-btn" onclick="showTab('football', event)">Футбол</button>
+                <a href="../index.html#jobs" class="nav-btn">Работа</a>
+                <a href="../index.html#health" class="nav-btn">Здоровье</a>
+                <a href="../index.html#laws" class="nav-btn">Законы</a>
                 <a href="../index.html#about" class="nav-btn">Инфо</a>
-            </div>   
+            </div>
+
         </div>
     </div>
 </nav>
@@ -112,7 +183,18 @@
 <script src="../js/clock.js"></script>
 <script src="../js/weather.js"></script>
 <script>
-    // Запускаем часы и погоду
+    function showTab(tabId, event) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        const target = document.getElementById(tabId);
+        if (target) target.classList.add('active');
+        if (event && event.currentTarget) event.currentTarget.classList.add('active');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initClock === 'function') initClock();
         if (typeof getWeather === 'function') getWeather();

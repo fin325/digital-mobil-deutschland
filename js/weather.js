@@ -1,207 +1,197 @@
 /* === weather.js — Погода OpenWeatherMap + Качество воздуха === */
 
-const WEATHER_API_KEY = ‘9057c4b98fd893160015f5d4bc3696cc’;
-let currentCity = ‘Hattingen’;
+const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
+let currentCity = 'Hattingen';
 
-const CACHE_KEY = ‘weatherCache’;
-const CACHE_TTL = 10 * 60 * 1000; // 10 минут в миллисекундах
+const CACHE_TTL = 10 * 60 * 1000; // 10 минут
 
 async function getWeather() {
-// Проверяем кэш
-try {
-const cached = localStorage.getItem(CACHE_KEY);
-if (cached) {
-const { data, timestamp, city } = JSON.parse(cached);
-const age = Date.now() - timestamp;
-if (age < CACHE_TTL) {
-// Данные свежие — используем кэш, API не вызываем
-currentCity = city;
-applyWeatherData(data);
-return;
-}
-}
-} catch (e) {
-// Если кэш повреждён — просто идём дальше
-}
+    try {
+        // Проверяем кэш
+        const cached = localStorage.getItem('weatherCache');
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < CACHE_TTL && parsed.city === currentCity) {
+                applyWeatherData(parsed.data);
+                return;
+            }
+        }
+    } catch (e) {}
 
-// Кэш устарел или отсутствует — делаем запрос
-try {
-    const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
-    );
-    const d = await res.json();
+    // Запрос к API
+    try {
+        const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
+        );
+        const d = await res.json();
 
-    if (!d.main) {
-        console.error('Город не найден:', d.message);
-        return;
+        if (!d.main) {
+            console.error('Город не найден:', d.message);
+            return;
+        }
+
+        try {
+            localStorage.setItem('weatherCache', JSON.stringify({
+                data: d,
+                timestamp: Date.now(),
+                city: currentCity
+            }));
+        } catch (e) {}
+
+        applyWeatherData(d);
+
+    } catch (e) {
+        console.error('Ошибка погоды:', e);
     }
-
-    // Сохраняем в кэш
-    localStorage.setItem(CACHE_KEY, JSON.stringify({
-        data: d,
-        timestamp: Date.now(),
-        city: currentCity
-    }));
-
-    applyWeatherData(d);
-
-} catch (e) {
-    console.error('Ошибка погоды:', e);
-}
-
 }
 
 function applyWeatherData(d) {
-const temp = Math.round(d.main.temp);
-const city = d.name;
-const code = d.weather[0].id;
-const lat  = d.coord.lat;
-const lon  = d.coord.lon;
+    try {
+        const temp = Math.round(d.main.temp);
+        const city = d.name;
+        const code = d.weather[0].id;
+        const lat  = d.coord.lat;
+        const lon  = d.coord.lon;
 
-let icon = '☁️';
-if (code === 800)     icon = '☀️';
-else if (code > 800)  icon = '☁️';
-else if (code >= 600) icon = '❄️';
-else if (code >= 300) icon = '🌧️';
+        let icon = '☁️';
+        if (code === 800)     icon = '☀️';
+        else if (code > 800)  icon = '☁️';
+        else if (code >= 600) icon = '❄️';
+        else if (code >= 300) icon = '🌧️';
 
-const tempEl  = document.getElementById('city-temp');
-const pressEl = document.getElementById('press');
-const humEl   = document.getElementById('hum');
+        const tempEl  = document.getElementById('city-temp');
+        const pressEl = document.getElementById('press');
+        const humEl   = document.getElementById('hum');
 
-if (tempEl) {
-    tempEl.innerText = `${city} ${icon} ${temp}°C`;
-    tempEl.onclick = (e) => {
-        e.stopPropagation();
-        const newCity = prompt('Введите название города:', currentCity);
-        if (newCity && newCity.trim() !== '') {
-            currentCity = newCity.trim();
-            // При смене города сбрасываем кэш
-            localStorage.removeItem(CACHE_KEY);
-            getWeather();
+        if (tempEl) {
+            tempEl.innerText = `${city} ${icon} ${temp}°C`;
+            tempEl.onclick = (e) => {
+                e.stopPropagation();
+                const newCity = prompt('Введите название города:', currentCity);
+                if (newCity && newCity.trim() !== '') {
+                    currentCity = newCity.trim();
+                    localStorage.removeItem('weatherCache');
+                    localStorage.removeItem('aqiCache');
+                    getWeather();
+                }
+            };
         }
-    };
+
+        if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
+        if (humEl)   humEl.innerText   = d.main.humidity;
+
+        getAirPollution(lat, lon);
+
+    } catch (e) {
+        console.error('Ошибка применения данных погоды:', e);
+    }
 }
-
-if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
-if (humEl)   humEl.innerText   = d.main.humidity;
-
-getAirPollution(lat, lon);
-
-}
-
-/* === КАЧЕСТВО ВОЗДУХА (тоже с кэшем) === */
-
-const AQI_CACHE_KEY = ‘aqiCache’;
 
 async function getAirPollution(lat, lon) {
-try {
-const cached = localStorage.getItem(AQI_CACHE_KEY);
-if (cached) {
-const { index, timestamp } = JSON.parse(cached);
-if (Date.now() - timestamp < CACHE_TTL) {
-updateAQIUI(index);
-return;
-}
-}
-} catch (e) {}
+    try {
+        const cached = localStorage.getItem('aqiCache');
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < CACHE_TTL) {
+                updateAQIUI(parsed.index);
+                return;
+            }
+        }
+    } catch (e) {}
 
-try {
-    const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
-    );
-    const data = await res.json();
-    const aqiIndex = data.list[0].main.aqi;
+    try {
+        const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
+        );
+        const data = await res.json();
+        const aqiIndex = data.list[0].main.aqi;
 
-    localStorage.setItem(AQI_CACHE_KEY, JSON.stringify({
-        index: aqiIndex,
-        timestamp: Date.now()
-    }));
+        try {
+            localStorage.setItem('aqiCache', JSON.stringify({
+                index: aqiIndex,
+                timestamp: Date.now()
+            }));
+        } catch (e) {}
 
-    updateAQIUI(aqiIndex);
-} catch (e) {
-    console.error('Ошибка качества воздуха:', e);
-}
+        updateAQIUI(aqiIndex);
 
+    } catch (e) {
+        console.error('Ошибка качества воздуха:', e);
+    }
 }
 
 function updateAQIUI(index) {
-const valEl = document.getElementById(‘aqi-value’);
-const icoEl = document.getElementById(‘aqi-icon’);
+    const valEl = document.getElementById('aqi-value');
+    const icoEl = document.getElementById('aqi-icon');
 
-if (!valEl || !icoEl) return;
+    if (!valEl || !icoEl) return;
 
-let color, icon;
+    let color, icon;
 
-switch (index) {
-    case 1: color = "#2ecc71"; icon = "🍃"; break;
-    case 2: color = "#f1c40f"; icon = "💨"; break;
-    case 3: color = "#e67e22"; icon = "🌫️"; break;
-    case 4: color = "#e74c3c"; icon = "⚠️"; break;
-    case 5: color = "#9b59b6"; icon = "😷"; break;
-    default: color = "#fff";   icon = "🍃";
+    switch (index) {
+        case 1: color = "#2ecc71"; icon = "🍃"; break;
+        case 2: color = "#f1c40f"; icon = "💨"; break;
+        case 3: color = "#e67e22"; icon = "🌫️"; break;
+        case 4: color = "#e74c3c"; icon = "⚠️"; break;
+        case 5: color = "#9b59b6"; icon = "😷"; break;
+        default: color = "#fff";   icon = "🍃";
+    }
+
+    valEl.innerText = index;
+    valEl.style.color = color;
+    icoEl.innerText = icon;
+    icoEl.style.color = color;
+    icoEl.style.textShadow = `0 0 8px ${color}66`;
 }
-
-valEl.innerText = index;
-valEl.style.color = color;
-icoEl.innerText = icon;
-icoEl.style.color = color;
-icoEl.style.textShadow = `0 0 8px ${color}66`;
-
-}
-
-/* === UI функции (без изменений) === */
 
 function toggleLabel(element) {
-if (!element) return;
+    if (!element) return;
 
-const isShown = element.classList.contains('show-text');
+    const isShown = element.classList.contains('show-text');
 
-document.querySelectorAll('.w-item').forEach(item => {
-    item.classList.remove('show-text');
-});
+    document.querySelectorAll('.w-item').forEach(item => {
+        item.classList.remove('show-text');
+    });
 
-if (!isShown) {
-    element.classList.add('show-text');
+    if (!isShown) {
+        element.classList.add('show-text');
 
-    const label = element.querySelector('.w-label');
-    if (label) {
-        const itemRect = element.getBoundingClientRect();
-        const screenCenterX = window.innerWidth / 2;
-        const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
-        label.style.left = `calc(50% + ${offset}px)`;
-    }
-
-    const scrollContainer = document.querySelector('.weather-scroll-container');
-    if (scrollContainer) {
-        const hideOnScroll = () => {
-            element.classList.remove('show-text');
-            scrollContainer.removeEventListener('scroll', hideOnScroll);
-        };
-        scrollContainer.addEventListener('scroll', hideOnScroll, { once: true });
-    }
-
-    setTimeout(() => {
-        if (element.classList.contains('show-text')) {
-            element.classList.remove('show-text');
+        const label = element.querySelector('.w-label');
+        if (label) {
+            const itemRect = element.getBoundingClientRect();
+            const screenCenterX = window.innerWidth / 2;
+            const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
+            label.style.left = `calc(50% + ${offset}px)`;
         }
-    }, 3000);
-}
 
+        const scrollContainer = document.querySelector('.weather-scroll-container');
+        if (scrollContainer) {
+            const hideOnScroll = () => {
+                element.classList.remove('show-text');
+                scrollContainer.removeEventListener('scroll', hideOnScroll);
+            };
+            scrollContainer.addEventListener('scroll', hideOnScroll, { once: true });
+        }
+
+        setTimeout(() => {
+            if (element.classList.contains('show-text')) {
+                element.classList.remove('show-text');
+            }
+        }, 3000);
+    }
 }
 
 function toggleWeatherScroll() {
-const scrollContainer = document.querySelector(’.weather-scroll-container’);
-if (scrollContainer) {
-const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-    if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
-        scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
-    } else {
-        scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+    const scrollContainer = document.querySelector('.weather-scroll-container');
+    if (scrollContainer) {
+        const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
+            scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
+        } else {
+            scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+        }
     }
 }
 
-}
-
-// Запуск при загрузке страницы
+// Запуск
 getWeather();

@@ -14,25 +14,6 @@
         app-header {
             display: block;
         }
-
-        /* Настройки позиционирования подсказки свайпа, чтобы стрелки не уезжали за экран */
-        .scroll-hint-container {
-            position: fixed;
-            bottom: 120px; /* Высота над вашим нижним меню */
-            left: 0;
-            width: 100%;
-            box-sizing: border-box; 
-            padding: 0 15px; 
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            z-index: 10000;
-            background: transparent !important;
-            pointer-events: none;
-        }
-        .scroll-hint-container .arrow-btn {
-            pointer-events: auto; /* Возвращаем кликабельность кнопкам */
-        }
     </style>
 </head>
 

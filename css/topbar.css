@@ -198,3 +198,32 @@
     position: relative;
     top: -10px; /* Сдвиг вверх на 10px */
 }
+
+/* --- КОМПОНЕНТЫ И ПОДСКАЗКА СВАЙПА (ДОБАВЛЕНО) --- */
+
+/* Делаем теги компонентов блочными по умолчанию */
+app-header, scroll-hint {
+    display: block;
+}
+
+/* Базовые стили для подсказки (зафиксирована внизу над меню) */
+.scroll-hint-container {
+    position: fixed;
+    bottom: 120px; /* Высота над нижним меню */
+    left: 0;
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 0 15px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    z-index: 10000;
+    background: transparent !important;
+    pointer-events: none; /* Пропускаем клики сквозь пустую область */
+}
+
+/* Возвращаем кликабельность кнопкам и левой части */
+.scroll-hint-container .arrow-btn,
+.scroll-hint-container .scroll-hint-left {
+    pointer-events: auto; 
+}

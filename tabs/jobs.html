@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/components.css">
 
-    <style>
+      <style>
+        /* Жестко переносим меню вниз */
         .navbar {
             position: fixed !important;
             top: auto !important;
@@ -24,7 +25,20 @@
         body {
             padding-bottom: 120px; 
         }
+
+        /* === ИСПРАВЛЕНИЕ ДЛЯ ССЫЛОК === */
+        /* Заставляем <a> вести себя и выглядеть в точности как <button> */
+        a.nav-btn {
+            display: inline-flex !important; /* Выравнивает текст по центру как в кнопках */
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important; /* Убирает подчеркивание */
+            box-sizing: border-box;
+            font-family: inherit; /* Берет тот же шрифт, что и у кнопок */
+            line-height: normal;
+        }
     </style>
+
 </head>
 
 <body>

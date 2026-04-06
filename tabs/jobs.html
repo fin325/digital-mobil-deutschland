@@ -4,40 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Работа и вакансии в Германии | Hattingen</title>
-    <meta name="description" content="Поиск работы в Германии: Jobsuche, Indeed, StepStone и другие порталы.">
-    
+    <meta name="description" content="Поиск работы в Германии: Jobsuche, Indeed, StepStone и другие порталы. Актуальные вакансии в Хаттингене.">
+
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; }
-        .navbar { background: #f8f9fa; border-bottom: 1px solid #ddd; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
-        .nav-scroll-viewport { overflow-x: auto; white-space: nowrap; padding: 0 10px; }
-        .nav-row { display: flex; gap: 5px; margin-bottom: 5px; }
-        .nav-btn { padding: 8px 16px; background: #fff; border: 1px solid #007aff; color: #007aff; border-radius: 20px; text-decoration: none; font-size: 14px; }
-        /* Подсвечиваем кнопку "Работа" */
-        .nav-btn.active { background: #007aff; color: #fff; }
-        
-        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
-        .card { background: #fff; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { margin-top: 0; color: #333; }
-        p { color: #666; line-height: 1.5; }
+        /* Дополнительные правки для этой страницы */
+        body { background-color: #f0f2f5; }
+        .container { padding: 20px; max-width: 800px; margin: 0 auto; }
+        .nav-btn.active { background: #007aff !important; color: #fff !important; }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
     <div class="nav-scroll-viewport">
-        <div class="nav-row">
-            <a href="../index.html" class="nav-btn">Главная</a>
-            <button class="nav-btn">Фото в PDF</button>
-            <button class="nav-btn">Новости</button>
-            <a href="jobs.html" class="nav-btn active">Работа</a>
-            <a href="../index.html#contacts" class="nav-btn">Контакты</a>
+        <div class="nav-rows-wrapper">
+            
+            <div class="nav-row">
+                <a href="../index.html" class="nav-btn">Главная</a>
+                <a href="../index.html#img2pdf" class="nav-btn">Фото в PDF</a>
+                <a href="../index.html#pdf" class="nav-btn">PDF Сжатие</a>
+                <a href="../index.html#maps" class="nav-btn">Карты</a>
+                <a href="../index.html#mobile" class="nav-btn">Транспорт</a>
+                <a href="../index.html#contacts" class="nav-btn">Контакты</a>
+            </div>
+
+            <div class="nav-row">
+                <a href="../index.html#news-hattingen" class="nav-btn">Новости Hattingen</a>
+                <a href="../index.html#news" class="nav-btn">Новости DE</a>
+                <a href="../index.html#docs" class="nav-btn">ИИ Помощники</a>
+                <a href="jobs.html" class="nav-btn active">Работа</a>
+                <a href="../index.html#health" class="nav-btn">Здоровье</a>
+                <a href="../index.html#datenschutz" class="nav-btn">Datenschutz</a>
+            </div>
+
         </div>
     </div>
 </nav>
 
-<div class="container">
+<main class="container">
     <div class="card">
-        <h2>💼 Работа</h2>
+        <h2>💼 Работа и вакансии</h2>
         <p>Популярные порталы для поиска работы и вакансии в Германии. Начните поиск прямо сейчас на проверенных ресурсах.</p>
 
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
@@ -58,11 +69,13 @@
             </div>
         </div>
         
-        <div style="margin-top: 20px; text-align: center;">
-            <a href="../index.html" style="color: #007aff; text-decoration: none; font-size: 0.9rem;">← Вернуться назад</a>
+        <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; text-align: center;">
+            <a href="../index.html" style="color: #007aff; text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+                ← Вернуться на главную
+            </a>
         </div>
     </div>
-</div>
+</main>
 
 </body>
 </html>

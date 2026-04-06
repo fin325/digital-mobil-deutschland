@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/components.css">
 
-    <style>
+        <style>
         .navbar {
             position: fixed !important;
             top: auto !important;
@@ -24,20 +24,26 @@
             padding-bottom: 120px; 
         }
         
-        /* Гарантируем правильное отображение и прозрачность подсказки */
+        /* Исправленный контейнер с подсказкой */
         .scroll-hint-container {
             position: fixed;
-            bottom: 120px; /* Отрегулируйте эту цифру, если подсказка будет слишком близко или далеко от меню */
+            bottom: 110px; /* Высота над меню, как мы настроили */
             left: 0;
             width: 100%;
+            box-sizing: border-box; /* Запрещаем блоку быть шире экрана */
+            padding: 0 15px; /* Безопасные отступы по бокам */
+            display: flex;
+            justify-content: space-between; /* Растаскиваем палец и стрелки по разным углам */
+            align-items: center;
             z-index: 10000;
-            background: transparent !important; /* Убираем фон */
-            pointer-events: none; /* Пропускаем клики сквозь прозрачную часть */
+            background: transparent !important;
+            pointer-events: none;
         }
         .scroll-hint-container .arrow-btn {
-            pointer-events: auto; /* Кнопкам возвращаем возможность клика */
+            pointer-events: auto;
         }
     </style>
+
 </head>
 
 <body>

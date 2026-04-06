@@ -1,23 +1,68 @@
-<div class="card">
-    <h2>💼 Работа</h2>
-    <p>Популярные порталы для поиска работы и вакансий в Германии.</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Работа и вакансии в Германии | Hattingen</title>
+    <meta name="description" content="Поиск работы в Германии: Jobsuche, Indeed, StepStone и другие порталы.">
+    
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; }
+        .navbar { background: #f8f9fa; border-bottom: 1px solid #ddd; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
+        .nav-scroll-viewport { overflow-x: auto; white-space: nowrap; padding: 0 10px; }
+        .nav-row { display: flex; gap: 5px; margin-bottom: 5px; }
+        .nav-btn { padding: 8px 16px; background: #fff; border: 1px solid #007aff; color: #007aff; border-radius: 20px; text-decoration: none; font-size: 14px; }
+        /* Подсвечиваем кнопку "Работа" */
+        .nav-btn.active { background: #007aff; color: #fff; }
+        
+        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        .card { background: #fff; border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; color: #333; }
+        p { color: #666; line-height: 1.5; }
+    </style>
+</head>
+<body>
 
-    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-        <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">
-            🇩🇪 Jobsuche (Arbeitsagentur)
-        </a>
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-row">
+            <a href="../index.html" class="nav-btn">Главная</a>
+            <button class="nav-btn">Фото в PDF</button>
+            <button class="nav-btn">Новости</button>
+            <a href="jobs.html" class="nav-btn active">Работа</a>
+            <a href="../index.html#contacts" class="nav-btn">Контакты</a>
+        </div>
+    </div>
+</nav>
 
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">
-                🔍 Indeed
+<div class="container">
+    <div class="card">
+        <h2>💼 Работа</h2>
+        <p>Популярные порталы для поиска работы и вакансии в Германии. Начните поиск прямо сейчас на проверенных ресурсах.</p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">
+                🇩🇪 Jobsuche (Arbeitsagentur)
             </a>
-            <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
-                📈 StepStone
-            </a>
-            <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" style="background: #016567; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);">
-                🤝 XING
-            </a>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">
+                    🔍 Indeed
+                </a>
+                <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
+                    📈 StepStone
+                </a>
+                <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" style="background: #016567; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);">
+                    🤝 XING
+                </a>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="../index.html" style="color: #007aff; text-decoration: none; font-size: 0.9rem;">← Вернуться назад</a>
         </div>
     </div>
 </div>
 
+</body>
+</html>

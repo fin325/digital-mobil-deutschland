@@ -1,4 +1,4 @@
-// Компонент шапки (Время, погода, заголовки)
+// 1. Компонент шапки (Время, погода, заголовки)
 class AppHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -13,21 +13,29 @@ class AppHeader extends HTMLElement {
                     <div class="weather-scroll-container">
                         <div class="weather-info" id="full-weather-bar">
                             <span class="w-item" id="city-temp">Laden...</span>
+                            
                             <span class="divider">|</span>
+                            
                             <span class="w-item" onclick="toggleLabel(this)">
                                 💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
                             </span>
+
                             <span class="divider">|</span>
+
                             <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
                                 <span id="aqi-icon">🍃</span> 
                                 <span class="w-label">Качество воздуха 5(максимум):</span> 
                                 <span id="aqi-value">--</span>
                             </span>
+
                             <span class="divider">|</span>
+
                             <span class="w-item" onclick="toggleLabel(this)">
                                 🧲 <span class="w-label">Геомагнитная активность:</span> <span id="geo">2</span>
                             </span>
+
                             <span class="divider">|</span>
+
                             <span class="w-item" onclick="toggleLabel(this)">
                                 ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
                             </span>
@@ -44,8 +52,11 @@ class AppHeader extends HTMLElement {
         `;
     }
 }
+// Регистрируем компонент шапки
 customElements.define('app-header', AppHeader);
 
+
+// 2. Компонент подсказки для свайпа (Указатель и стрелки)
 class ScrollHint extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -64,4 +75,5 @@ class ScrollHint extends HTMLElement {
         `;
     }
 }
-
+// ВАЖНО: Регистрируем компонент подсказки (именно этой строчки не хватало!)
+customElements.define('scroll-hint', ScrollHint);

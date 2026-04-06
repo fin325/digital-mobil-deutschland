@@ -182,19 +182,9 @@
 
 <script src="../js/clock.js"></script>
 <script src="../js/weather.js"></script>
-<script>
-    function showTab(tabId, event) {
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        const target = document.getElementById(tabId);
-        if (target) target.classList.add('active');
-        if (event && event.currentTarget) event.currentTarget.classList.add('active');
-    }
+<script src="../js/tabs.js"></script>
 
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initClock === 'function') initClock();
         if (typeof getWeather === 'function') getWeather();

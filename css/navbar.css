@@ -38,8 +38,8 @@
     gap: 10px;
 }
 
+/* === 1. ТВОЙ ОРИГИНАЛЬНЫЙ КОД (Для кнопок на главной index.html) === */
 .nav-btn {
-    /* === ТВОЙ ОРИГИНАЛЬНЫЙ ДИЗАЙН === */
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
@@ -49,22 +49,29 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* === ТЕХНИЧЕСКАЯ ЧАСТЬ (чтобы ссылки выглядели как кнопки) === */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;  /* Убирает подчеркивание у ссылок */
-    box-sizing: border-box;
-    font-family: inherit;   /* Чтобы шрифт совпадал */
-    font-size: inherit;     /* Уравнивает размер текста между <button> и <a> */
 }
 
 .nav-btn.active {
-    /* === ТВОЙ ОРИГИНАЛЬНЫЙ ДИЗАЙН === */
     background: var(--primary-blue);
-    color: white !important; /* !important нужен только чтобы браузер не сделал ссылку синей */
+    color: white;
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+}
+
+/* === 2. НАСТРОЙКИ ДЛЯ ССЫЛОК (Для меню в jobs.html) === */
+a.nav-btn {
+    text-decoration: none; 
+    display: inline-block; 
+    box-sizing: border-box;
+    font-size: 13.333px; /* Имитируем размер шрифта обычной кнопки */
+    font-family: system-ui, -apple-system, sans-serif; 
+    color: var(--primary-blue) !important; /* Защита от синего цвета ссылок */
+}
+
+/* Полностью прописанный active для ссылок */
+a.nav-btn.active {
+    background: var(--primary-blue) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2) !important;
 }
 
 /* Стили для подсказки и стрелок (без изменений) */

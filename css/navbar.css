@@ -11,10 +11,11 @@ app-header, scroll-hint {
 }
 
 .navbar {
-    background: rgba(255, 255, 255, 0.95); /* Сделали чуть плотнее, чтобы контент под ним не мешал читать кнопки */
+    /* Меняем 0.95 обратно на 0.3 для эффекта стекла */
+    background: rgba(255, 255, 255, 0.3); 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid var(--glass-border); /* Заменили border-bottom на border-top, т.к. меню теперь внизу */
+    border-top: 1px solid var(--glass-border); 
     padding: 12px 0;
     position: fixed !important;
     top: auto !important;

@@ -6,7 +6,15 @@ body {
 }
 
 /* Делаем новые теги компонентов блочными по умолчанию */
-app-header, scroll-hint {
+app-header {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 10000; /* Делаем z-index высоким, чтобы она была поверх всего */
+}
+
+/* Подсказку оставляем просто блочной */
+scroll-hint {
     display: block;
 }
 

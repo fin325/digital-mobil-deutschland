@@ -11,18 +11,16 @@
     <link rel="stylesheet" href="../css/components.css">
 
     <style>
-        /* Жестко переносим меню вниз, ничего не меняя в его дизайне */
         .navbar {
-            position: fixed !important; /* Делаем фиксированным поверх всего */
-            top: auto !important;       /* Отменяем привязку к верху */
-            bottom: 0 !important;       /* Прижимаем строго к низу экрана */
+            position: fixed !important;
+            top: auto !important;
+            bottom: 0 !important;
             left: 0;
             width: 100%;
-            z-index: 9999;              /* Чтобы всегда было поверх контента */
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* Легкая тень сверху */
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
-        /* Добавляем отступ внизу страницы, чтобы карточка не пряталась за меню */
         body {
             padding-bottom: 120px; 
         }
@@ -31,6 +29,35 @@
 
 <body>
 
+<div class="top-bar">
+    <div class="top-bar-content">
+        <div class="date-time-block">
+            <span id="current-date"></span>
+            <span id="current-time"></span>
+            <span class="divider" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">|</span>
+        </div>
+
+        <div class="weather-scroll-container">
+            <div class="weather-info" id="full-weather-bar">
+                <span class="w-item" id="city-temp">Laden...</span>
+                <span class="divider">|</span>
+                <span class="w-item" onclick="toggleLabel(this)">💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%</span>
+                <span class="divider">|</span>
+                <span class="w-item" id="aqi-item" onclick="toggleLabel(this)"><span id="aqi-icon">🍃</span> <span class="w-label">Качество воздуха:</span> <span id="aqi-value">--</span></span>
+                <span class="divider">|</span>
+                <span class="w-item" onclick="toggleLabel(this)">🧲 <span class="w-label">Геомагнитная активность:</span> <span id="geo">--</span></span>
+                <span class="divider">|</span>
+                <span class="w-item" onclick="toggleLabel(this)">⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg</span>
+            </div>
+        </div>
+
+        <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>
+    </div> 
+    <div class="site-header">
+        <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
+    </div>
+</div>
 <main class="container" style="padding-top: 20px;">
     <section class="tab-content active" style="display: block;">
         <div class="card">
@@ -59,7 +86,6 @@
 <nav class="navbar">
     <div class="nav-scroll-viewport">
         <div class="nav-rows-wrapper">
-            
             <div class="nav-row">
                 <a href="../index.html" class="nav-btn">Главная</a>
                 <a href="../index.html#img2pdf" class="nav-btn">Фото в PDF</a>
@@ -70,7 +96,6 @@
                 <a href="../index.html#contacts" class="nav-btn">Контакты</a>
                 <a href="../index.html#about" class="nav-btn">Инфо</a>
             </div>
-
             <div class="nav-row">
                 <a href="../index.html#news-hattingen" class="nav-btn">Новости Hattingen</a>
                 <a href="../index.html#news" class="nav-btn">Новости DE</a>
@@ -82,10 +107,19 @@
                 <a href="../index.html#health" class="nav-btn">Здоровье</a>
                 <a href="../index.html#datenschutz" class="nav-btn">Datenschutz</a>
             </div>
-
         </div>
     </div>
 </nav>
+
+<script src="../js/clock.js"></script>
+<script src="../js/weather.js"></script>
+<script>
+    // Запускаем только часы и погоду (без новостей и вкладок, чтобы не было ошибок)
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof initClock === 'function') initClock();
+        if (typeof getWeather === 'function') getWeather();
+    });
+</script>
 
 </body>
 </html>

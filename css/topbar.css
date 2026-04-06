@@ -227,3 +227,23 @@ app-header, scroll-hint {
 .scroll-hint-container .scroll-hint-left {
     pointer-events: auto; 
 }
+
+/* === ГЛОБАЛЬНЫЕ СТИЛИ ДЛЯ НИЖНЕГО МЕНЮ (ДОБАВЛЕНО) === */
+
+body {
+    /* Добавляем отступ снизу, чтобы контент не прятался под зафиксированным меню */
+    padding-bottom: 120px !important; 
+}
+
+.navbar {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.95); /* Немного прозрачный фон для красоты */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}

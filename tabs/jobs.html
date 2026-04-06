@@ -62,27 +62,55 @@
 
 <main class="container" style="padding-top: 20px;">
     <section class="tab-content active" style="display: block;">
-        <div class="card">
-            <h2>💼 Работа и вакансии</h2>
-            <p>Популярные порталы для поиска работы в Германии.</p>
+    <div class="card">
+        <h2>💼 Работа и вакансии</h2>
+        <p>Популярные порталы для поиска работы в Германии.</p>
 
-            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-                <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" class="btn-main" style="background: #e30613; color: white; text-decoration: none; text-align: center; padding: 12px; border-radius: 10px; font-weight: 700;">
-                    🇩🇪 Jobsuche (Arbeitsagentur)
-                </a>
-                <div style="display: flex; gap: 10px;">
-                    <a href="https://de.indeed.com/" target="_blank" class="btn-main" style="background: #2164f3; color: white; text-decoration: none; text-align: center; padding: 10px; border-radius: 10px; flex: 1;">Indeed</a>
-                    <a href="https://www.stepstone.de/" target="_blank" class="btn-main" style="background: #000; color: white; text-decoration: none; text-align: center; padding: 10px; border-radius: 10px; flex: 1;">StepStone</a>
-                </div>
-            </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
             
-            <div style="margin-top: 30px; text-align: center;">
-                <a href="../index.html" style="color: #007aff; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
-                    ← Вернуться на главную
+            <!-- Главная кнопка (как в первом варианте) -->
+            <a href="https://www.arbeitsagentur.de/jobsuche/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">
+                🇩🇪 Jobsuche (Arbeitsagentur)
+            </a>
+
+            <!-- Блок с мелкими кнопками -->
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                
+                <a href="https://de.indeed.com/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">
+                    🔍 Indeed
                 </a>
+                
+                <a href="https://www.stepstone.de/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
+                    📈 StepStone
+                </a>
+                
+                <a href="https://www.xing.com/jobs" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   style="background: #016567; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);">
+                    🤝 XING
+                </a>
+                
             </div>
         </div>
-    </section>
+        
+        <!-- Кнопка "Вернуться на главную" оставляем как была -->
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="../index.html" style="color: #007aff; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+                ← Вернуться на главную
+            </a>
+        </div>
+    </div>
+</section>
 </main>
 
 <nav class="navbar">

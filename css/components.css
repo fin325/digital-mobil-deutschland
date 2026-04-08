@@ -62,9 +62,8 @@
 
 .tab-content.active {
     display: block;
-    animation: fadeInUp 0.6s cubic-bezier (0.165, 0.84, 0.44, 1) forwards;
-    -webkit-animation: fadeInUp 0.6s
-    cubic-bezier (0.165, 0.84, 0.44, 1) forwards;
+    animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    -webkit-animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     transform-origin: bottom center;
 }
 
@@ -83,25 +82,96 @@ iframe {
     border: none;
 }
 
-.video-wrapper {
+/* === НОВЫЕ СТИЛИ ДЛЯ YOUTUBE (Решение в два клика) === */
+.video-container {
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.video-placeholder {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Пропорция 16:9 */
+    background-color: #111;
+    cursor: pointer;
     overflow: hidden;
     border-radius: 15px;
-    margin: 15px 0;
-    background: rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.video-wrapper iframe {
+.video-placeholder img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border: none;
+    object-fit: cover;
+    transition: opacity 0.3s ease, transform 0.4s ease;
 }
+
+/* Легкий зум картинки при наведении */
+.video-placeholder:hover img {
+    transform: scale(1.05);
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(230, 33, 23, 0.9); /* Красный цвет YouTube */
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    pointer-events: none; /* Клик проходит сквозь кнопку на саму заглушку */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+}
+
+/* Эффект кнопки при наведении на всё видео */
+.video-placeholder:hover .play-button {
+    background-color: rgba(255, 0, 0, 1);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.video-note {
+    font-size: 0.85rem;
+    color: #444;
+    margin-top: 8px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.video-note a {
+    color: #00529b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.video-note a:hover {
+    text-decoration: underline;
+}
+
+/* Состояние загрузки (если интернет медленный) */
+.video-placeholder.is-loading img,
+.video-placeholder.is-loading .play-button {
+    opacity: 0.3;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: bold;
+    z-index: 3;
+}
+/* ======================================================== */
 
 .status-msg {
     font-size: 0.9rem;

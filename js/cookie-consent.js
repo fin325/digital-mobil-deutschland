@@ -29,7 +29,10 @@ silktideCookieBannerManager.updateCookieBannerConfig({
   ],
   text: {
     banner: {
-      description: "<p>Wir verwenden Cookies, um die Nutzung zu verbessern, personalisierte Inhalte (YouTube) anzubieten und unsere Website zu analysieren. <a href=\"datenschutz.html\" target=\"_blank\">Mehr in der Datenschutzerklärung</a>.</p>",
+      description: `<p>Wir verwenden Cookies, um die Nutzung zu verbessern, personalisierte Inhalte (YouTube) anzubieten und unsere Website zu analysieren. 
+      <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click(); return false;">Datenschutzerklärung</a> 
+      und <a href="#" onclick="event.preventDefault(); document.querySelector('.about-button').click(); return false;">Impressum</a> 
+      finden Sie über die entsprechenden Buttons auf dieser Seite.</p>`,
       acceptAllButtonText: "Alle akzeptieren",
       rejectNonEssentialButtonText: "Nur notwendige",
       preferencesButtonText: "Einstellungen"

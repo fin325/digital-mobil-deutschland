@@ -26,15 +26,17 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und andere externe Inhalte. Sie werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt.</p>",
       required: false,
       
-      // === НОВЫЙ КОД: Автоматическая загрузка видео при согласии ===
+      // === АВТОМАТИЗАЦИЯ YOUTUBE ===
+      // Эта функция сработает, когда пользователь согласится на рекламу / внешние сервисы
       onAccept: function() {
-        // Находим все видео-заглушки, которые еще не были активированы
-        const uninitializedPlaceholders = document.querySelectorAll('.video-loading-target.video-placeholder');
+        // Находим все оставшиеся черные квадраты-заглушки
+        const placeholders = document.querySelectorAll('.video-placeholder');
         
-        // Проходим по каждой заглушке и вызываем функцию из main.js
-        uninitializedPlaceholders.forEach(function(placeholder) {
-            if (typeof loadEmbeddedContent === 'function') {
-                loadEmbeddedContent(placeholder);
+        // "Кликаем" по каждому из них программно, чтобы запустить loadVideo / loadPlaylist
+        placeholders.forEach(function(placeholder) {
+            // Проверяем, есть ли еще событие onclick (мы удаляем его после загрузки)
+            if (typeof placeholder.onclick === 'function') {
+                placeholder.click();
             }
         });
       }

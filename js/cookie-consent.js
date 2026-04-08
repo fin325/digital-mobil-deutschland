@@ -1,38 +1,30 @@
-window.silktideConsentManager.init({
-  // Настройки фона и иконки
+silktideCookieBannerManager.updateCookieBannerConfig({
   background: {
     showBackground: true
   },
   cookieIcon: {
     position: "bottomLeft"
   },
-  position: {
-    banner: "bottomCenter"
-  },
-  
-  // ВАЖНО: теперь используется consentTypes, а не cookieTypes
-  consentTypes: [ 
+  cookieTypes: [
     {
       id: "necessary",
-      label: "Notwendig", // ВАЖНО: используется 'label' вместо 'name'
+      name: "Notwendig",
       description: "<p>Diese Cookies sind technisch erforderlich, damit die Website richtig funktioniert. Sie können nicht deaktiviert werden.</p>",
       required: true
     },
     {
       id: "analytics",
-      label: "Statistik",
+      name: "Statistik",
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false
     },
     {
       id: "advertising",
-      label: "Werbung & externe Inhalte",
+      name: "Werbung & externe Inhalte",
       description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und andere externe Inhalte. Sie werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt.</p>",
       required: false
     }
   ],
-
-  // Тексты для баннера и окна настроек
   text: {
     banner: {
       description: `<p>Wir verwenden Cookies, um die Nutzung zu verbessern, personalisierte Inhalte (YouTube) anzubieten und unsere Website zu analysieren. 
@@ -47,5 +39,8 @@ window.silktideConsentManager.init({
       title: "Cookie-Einstellungen anpassen",
       description: "<p>Wir respektieren Ihr Recht auf Privatsphäre. Sie können auswählen, welche Cookies Sie zulassen möchten.</p>"
     }
+  },
+  position: {
+    banner: "bottomCenter"
   }
 });

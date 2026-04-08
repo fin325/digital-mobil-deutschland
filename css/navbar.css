@@ -1,88 +1,66 @@
-/* === NAVBAR.CSS — Навигация === */
-
-body {
-    padding-top: 220px !important; 
-}
-
+/* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
     display: block;
     position: sticky;
     top: 0;
-    z-index: 10000;
+    z-index: 10000; /* Делаем z-index высоким, чтобы она была поверх всего */
 }
 
+/* Подсказку оставляем просто блочной */
 scroll-hint {
     display: block;
 }
 
-/* Указатель и стрелки — сразу под app-header (~130px) */
-.scroll-hint-container {
-    position: fixed;
-    top: 130px;
-    bottom: auto;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-    z-index: 10000;
-    background: transparent !important;
-    pointer-events: none;
-}
-
-.scroll-hint-container .arrow-btn,
-.scroll-hint-container .scroll-hint-left {
-    pointer-events: auto;
-}
-
-/* Меню — под указателем (130 + ~40px) */
 .navbar {
+    /* Меняем 0.95 обратно на 0.3 для эффекта стекла */
     background: rgba(255, 255, 255, 0.3); 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    border-top: none;
+    border-top: 1px solid var(--glass-border); 
     padding: 12px 0;
     position: fixed !important;
-    top: 170px !important;
-    bottom: auto !important;
+    top: auto !important;
+    bottom: 0 !important;
     left: 0;
     width: 100%;
-    z-index: 9998;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
+/* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
 .nav-scroll-viewport {
-    overflow-x: auto;
+    overflow-x: auto; /* Включаем скролл здесь */
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Плавность для стрелок */
 }
 
+/* Скрываем скроллбар */
 .nav-scroll-viewport::-webkit-scrollbar {
     display: none;
 }
 
+/* 2. ОБЕРТКА ДЛЯ РЯДОВ (растягивается под самый длинный ряд) */
 .nav-rows-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    width: max-content;
+    gap: 8px; /* Расстояние между 1 и 2 рядом */
+    width: max-content; /* Критично для синхронного скролла */
 }
 
+/* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
     display: flex;
     gap: 10px;
 }
 
+/* === 1. ТВОЙ ОРИГИНАЛЬНЫЙ КОД (Для кнопок на главной index.html) === */
 .nav-btn {
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid var(--glass-border);
     padding: 10px 18px;
     border-radius: 14px;
-    white-space: nowrap;
+    white-space: nowrap; /* Не дает тексту переноситься */
     color: var(--primary-blue);
     font-weight: 600;
     cursor: pointer;
@@ -95,19 +73,43 @@ scroll-hint {
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
 
+/* === 2. НАСТРОЙКИ ДЛЯ ССЫЛОК (Для меню в jobs.html) === */
 a.nav-btn {
     text-decoration: none; 
     display: inline-block; 
     box-sizing: border-box;
-    font-size: 13.333px;
+    font-size: 13.333px; /* Имитируем размер шрифта обычной кнопки */
     font-family: system-ui, -apple-system, sans-serif; 
-    color: var(--primary-blue) !important;
+    color: var(--primary-blue) !important; /* Защита от синего цвета ссылок */
 }
 
+/* Полностью прописанный active для ссылок */
 a.nav-btn.active {
     background: var(--primary-blue) !important;
     color: white !important;
     box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2) !important;
+}
+
+/* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
+.scroll-hint-container {
+    position: fixed;
+    bottom: 120px; /* Высота над зафиксированным меню */
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 10000;
+    background: transparent !important;
+    pointer-events: none; /* Пропускаем клики сквозь пустую область */
+}
+
+/* Возвращаем кликабельность активным элементам внутри контейнера */
+.scroll-hint-container .arrow-btn,
+.scroll-hint-container .scroll-hint-left {
+    pointer-events: auto;
 }
 
 .scroll-hint-text {
@@ -122,25 +124,35 @@ a.nav-btn.active {
 }
 
 .arrow-btn {
+    /* 1. Цвет стрелки (иконки или текста внутри) */
     color: var(--primary-blue);
+    
+    /* 2. Эффект стекла как у .top-bar */
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    
+    /* 3. Границы и структура */
     border: 1px solid var(--glass-border);
     border-radius: 4px; 
     padding: 5px 12px;
     cursor: pointer;
     box-sizing: border-box;
+    
+    /* Сохраняем тень и позиционирование */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transform: translateY(0px);
+    transform: translateY(-8px);
+    
+    /* Плавность при наведении */
     transition: background 0.3s ease, opacity 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Эффект при наведении, чтобы кнопка слегка подсвечивалась */
 .arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .swipe-finger-wrapper {

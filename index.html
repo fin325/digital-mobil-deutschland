@@ -23,7 +23,6 @@
     <div class="nav-scroll-viewport">
         <div class="nav-rows-wrapper">
 
-```
         <div class="nav-row">
             <button class="nav-btn active" onclick="showTab('home', event)">Startseite</button>
             <button class="nav-btn" onclick="showTab('img2pdf', event)">Foto zu PDF</button>
@@ -47,7 +46,6 @@
 
     </div>
 </div>
-```
 
 </nav>
 
@@ -57,68 +55,62 @@
             <h1>Willkommen! 🇩🇪</h1>
             <p>Ihr persönlicher Guide durch das digitale Ökosystem Deutschlands.</p>
 
-```
         <a href="tabs/video_portal.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
             🎬 Video-Portal
         </a>
 
-        <div class="video-wrapper">
-<div class="video-placeholder" onclick="loadVideo(this, 'j7wLBpAhn_g')">
-    <img src="https://img.youtube.com/vi/j7wLBpAhn_g/hqdefault.jpg">
-    <div class="play">▶ Video ansehen</div>
-</div>
-<p class="video-note">
+        <div class="video-container" data-video-id="j7wLBpAhn_g">
+  <div class="video-loading-target video-placeholder">
+    <img src="https://img.youtube.com/vi/j7wLBpAhn_g/hqdefault.jpg" alt="Video Thumbnail">
+    <div class="play-button">▶ Video ansehen</div>
+    <div class="loading-spinner" style="display: none;">Lädt...</div>
+  }
+  <p class="video-note">
     Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
     Weitere Informationen finden Sie in unserer 
     <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-</p>
-```
-
+  </p>
 </div>
 
-<!-- Video 2 -->
-
-<div class="video-wrapper">
-    <div class="video-placeholder" onclick="loadVideo(this, 'tIxvgYC0K44')">
-        <img src="https://img.youtube.com/vi/tIxvgYC0K44/hqdefault.jpg">
-        <div class="play">▶ Video ansehen</div>
-    </div>
-    <p class="video-note">
-        Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-        Weitere Informationen finden Sie in unserer 
-        <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-    </p>
+<div class="video-container" data-video-id="tIxvgYC0K44">
+  <div class="video-loading-target video-placeholder">
+    <img src="https://img.youtube.com/vi/tIxvgYC0K44/hqdefault.jpg" alt="Video Thumbnail">
+    <div class="play-button">▶ Video ansehen</div>
+    <div class="loading-spinner" style="display: none;">Lädt...</div>
+  }
+  <p class="video-note">
+    Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
+    Weitere Informationen finden Sie in unserer 
+    <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
+  </p>
 </div>
 
-<!-- Playlist 1 -->
-
-<div class="video-wrapper">
-    <div class="video-placeholder" onclick="loadPlaylist(this, 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')">
-        <img src="https://img.youtube.com/vi/j7wLBpAhn_g/hqdefault.jpg">
-        <div class="play">▶ Playlist ansehen</div>
-    </div>
-    <p class="video-note">
-        Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-        Weitere Informationen finden Sie in unserer 
-        <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-    </p>
+<div class="video-container" data-playlist-id="PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ">
+  <div class="video-loading-target video-placeholder">
+    <img src="https://img.youtube.com/vi/j7wLBpAhn_g/hqdefault.jpg" alt="Playlist Thumbnail">
+    <div class="play-button">▶ Playlist ansehen</div>
+    <div class="loading-spinner" style="display: none;">Lädt...</div>
+  }
+  <p class="video-note">
+    Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
+    Weitere Informationen finden Sie in unserer 
+    <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
+  </p>
 </div>
 
-<!-- Playlist 2 -->
-
-<div class="video-wrapper">
-    <div class="video-placeholder" onclick="loadPlaylist(this, 'PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT')">
-        <img src="https://img.youtube.com/vi/tIxvgYC0K44/hqdefault.jpg">
-        <div class="play">▶ Playlist ansehen</div>
-    </div>
-    <p class="video-note">
-        Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-        Weitere Informationen finden Sie in unserer 
-        <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-    </p>
+<div class="video-container" data-playlist-id="PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT">
+  <div class="video-loading-target video-placeholder">
+    <img src="https://img.youtube.com/vi/tIxvgYC0K44/hqdefault.jpg" alt="Playlist Thumbnail">
+    <div class="play-button">▶ Playlist ansehen</div>
+    <div class="loading-spinner" style="display: none;">Lädt...</div>
+  }
+  <p class="video-note">
+    Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
+    Weitere Informationen finden Sie in unserer 
+    <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
+  </p>
 </div>
 
-```
         <div style="display: grid; gap: 10px; margin-top: 15px;">
             <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
                 💼 Arbeit finden
@@ -356,7 +348,6 @@
         </div>
     </div>
 </section>
-```
 
 </main>
 

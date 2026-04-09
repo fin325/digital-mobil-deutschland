@@ -5,7 +5,7 @@
     --glass-border: rgba(255, 255, 255, 0.3);
     --primary-blue: #00529b;
     --text-dark: #1d1d1f;
-    --topbar-height: 86px; /* задайте реальную высоту */
+    --topbar-height: 100px; /* задайте реальную высоту */
 }
 
 body {

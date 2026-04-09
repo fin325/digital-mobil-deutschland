@@ -175,6 +175,12 @@
 }
 
 /* --- ЗАГОЛОВКИ --- */
+.site-header {
+    position: relative;
+    z-index: 10;     /* Слой ниже, чем 100 */
+    /* ваши остальные стили */
+}
+
 .site-title {
     text-align: center;
     color: #f0f8ff;

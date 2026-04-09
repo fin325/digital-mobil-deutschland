@@ -3,7 +3,6 @@ class AppHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <div class="top-bar">
-                <div class="top-bar-content">
                     <div class="date-time-block">
                         <span id="current-date"></span>
                         <span id="current-time"></span>
@@ -45,10 +44,12 @@ class AppHeader extends HTMLElement {
                     <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>
                 </div> 
             </div>
+            <div class="top-bar-content">
                 <div class="site-header">
                     <div class="site-title">Digital & Mobil in Deutschland</div>
                     <div class="site-subtitle">Stadt Hattingen</div>
                 </div>
+            </div>
         `;
     }
 }

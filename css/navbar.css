@@ -2,10 +2,7 @@
 
 /* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
-    display: contents;
-    position: sticky;
-    top: 0;
-    z-index: 10000; 
+    display: contents; 
 }
 
 scroll-hint {

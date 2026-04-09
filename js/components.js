@@ -39,6 +39,7 @@ class AppHeader extends HTMLElement {
                                 ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
                             </span>
                         </div>
+                      </div>
                     </div>
 
                     <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>

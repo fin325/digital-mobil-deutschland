@@ -20,6 +20,7 @@
     z-index: 9999 !important;
     padding: 0;
     overflow: visible !important;
+    height: 30px;
 }
 
 .top-bar-content {
@@ -40,6 +41,7 @@
     z-index: 9997 !important; /* Чуть ниже, чем у top-bar */
     padding: 15px 0; /* Отступы для красоты */
     width: 100%;
+    top: 0;
 }
 
 .site-title {

@@ -1,9 +1,19 @@
-/* === TOPBAR.CSS === */
+/* === TOPBAR & HEADER CSS === */
 
-.top-bar {
+/* --- ОБЩИЙ ЭФФЕКТ СТЕКЛА --- */
+/* Применяем ко всем элементам, которым нужна прозрачность и размытие */
+.top-bar,
+.site-header,
+.date-time-block,
+.weather-info,
+.weather-arrow-btn {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- ВЕРХНЯЯ ПАНЕЛЬ (TOP BAR) --- */
+.top-bar {
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
@@ -23,14 +33,44 @@
     overscroll-behavior: none;
 }
 
-/* --- ОБЩИЕ СТИЛИ --- */
+/* --- ШАПКА САЙТА (SITE HEADER) --- */
+.site-header {
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 50px; /* Отступ равен высоте top-bar, чтобы они не слипались */
+    z-index: 9998 !important; /* Чуть ниже, чем у top-bar */
+    padding: 15px 0; /* Отступы для красоты */
+    width: 100%;
+}
+
+.site-title {
+    text-align: center;
+    color: #f0f8ff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
+    margin: 8px 0 4px 0;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    top: -10px;
+}
+
+.site-subtitle {
+    text-align: center;
+    color: #e6f0ff;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    position: relative;
+    top: -10px;
+}
+
+/* --- ЭЛЕМЕНТЫ ВНУТРИ TOP BAR --- */
 .date-time-block,
 .weather-info,
 .weather-arrow-btn {
     height: 30px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
     border: none !important;
@@ -65,8 +105,16 @@
     top: 2px;
 }
 
-#current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
-#current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
+#current-date { 
+    font-size: 0.65rem; 
+    text-transform: uppercase; 
+    margin-bottom: 1px; 
+}
+
+#current-time, #current-seconds { 
+    font-size: 0.65rem; 
+    letter-spacing: -0.2px; 
+}
 
 /* --- КОНТЕЙНЕР СКРОЛЛА --- */
 .weather-scroll-container {
@@ -115,7 +163,9 @@
     padding-right: 5px;
 }
 
-.w-item:active { opacity: 0.8; }
+.w-item:active { 
+    opacity: 0.8; 
+}
 
 .divider {
     color: rgba(0, 51, 102, 0.15);
@@ -172,29 +222,4 @@
 @keyframes slideDown {
     from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.95); }
     to   { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1); }
-}
-
-/* --- ЗАГОЛОВКИ --- */
-.site-title {
-    text-align: center;
-    color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 8px 0 4px 0;
-    font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.site-subtitle {
-    text-align: center;
-    color: #e6f0ff;
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-}
-
-.site-title, .site-subtitle {
-    position: relative;
-    top: -10px; /* Сдвиг вверх на 10px */
 }

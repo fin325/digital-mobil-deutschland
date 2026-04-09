@@ -19,8 +19,10 @@
     gap: 0;
     width: 100%;
     overflow: visible !important;
-    position: relative;
     overscroll-behavior: none;
+    position: sticky; /* sticky сюда */
+    top: 0;
+    z-index: 10000;
 }
 
 /* --- ОБЩИЕ СТИЛИ --- */

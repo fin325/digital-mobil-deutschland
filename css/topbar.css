@@ -37,7 +37,7 @@
 .site-header {
     border-bottom: 1px solid var(--glass-border);
     position: relative;
-    z-index: 9998 !important; /* Чуть ниже, чем у top-bar */
+    z-index: 9997 !important; /* Чуть ниже, чем у top-bar */
     padding: 15px 0; /* Отступы для красоты */
     width: 100%;
 }

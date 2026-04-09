@@ -44,11 +44,11 @@ class AppHeader extends HTMLElement {
 
                     <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>
                 </div> 
+            </div>
                 <div class="site-header">
                     <div class="site-title">Digital & Mobil in Deutschland</div>
                     <div class="site-subtitle">Stadt Hattingen</div>
                 </div>
-            </div>
         `;
     }
 }

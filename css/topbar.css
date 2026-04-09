@@ -25,7 +25,7 @@
 .top-bar-content {
     display: flex;
     align-items: flex-start;
-    height: 50px;
+    height: 30px;
     gap: 0;
     width: 100%;
     overflow: visible !important;
@@ -36,8 +36,7 @@
 /* --- ШАПКА САЙТА (SITE HEADER) --- */
 .site-header {
     border-bottom: 1px solid var(--glass-border);
-    position: sticky;
-    top: 50px; /* Отступ равен высоте top-bar, чтобы они не слипались */
+    position: relative;
     z-index: 9998 !important; /* Чуть ниже, чем у top-bar */
     padding: 15px 0; /* Отступы для красоты */
     width: 100%;

@@ -51,7 +51,6 @@ this.innerHTML = `
     `;
 }
 
-
 }
 // Регистрируем компонент шапки
 customElements.define(‘app-header’, AppHeader);

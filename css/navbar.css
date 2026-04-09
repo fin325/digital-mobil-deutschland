@@ -1,4 +1,5 @@
 /* === NAVBAR.CSS — Навигация === */
+/* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
 display: block;
 position: sticky;

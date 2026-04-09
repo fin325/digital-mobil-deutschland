@@ -1,168 +1,147 @@
 /* === NAVBAR.CSS — Навигация === */
-
-/* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
-    display: block;
-    position: sticky;
-    top: 0;
-    z-index: 10000; 
+display: block;
+position: sticky;
+top: 0;
+z-index: 10000;
 }
-
 scroll-hint {
-    display: block;
+display: block;
 }
-
 .navbar {
-    background: rgba(255, 255, 255, 0.3); 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border); /* Граница теперь снизу */
-    padding: 12px 0;
-    
-    /* Меню прилипает к верху */
-    position: sticky;
-    top: var(--topbar-height);
-    z-index: 9998;
-    top: 50px;
-}
+background: rgba(255, 255, 255, 0.3);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid var(–glass-border); /* Граница теперь снизу */
+padding: 12px 0;
 
+/* Меню прилипает к верху */
+position: sticky;
+top: 0;
+z-index: 9999;
+
+
+}
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
 .nav-scroll-viewport {
-    overflow-x: auto; 
-    padding: 0 15px;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; 
+overflow-x: auto;
+padding: 0 15px;
+-webkit-overflow-scrolling: touch;
+scroll-behavior: smooth;
 }
-
 /* Скрываем скроллбар */
 .nav-scroll-viewport::-webkit-scrollbar {
-    display: none;
+display: none;
 }
-
 /* 2. ОБЕРТКА ДЛЯ РЯДОВ */
 .nav-rows-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; 
-    width: max-content; 
+display: flex;
+flex-direction: column;
+gap: 8px;
+width: max-content;
 }
-
 /* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
-    display: flex;
-    gap: 10px;
+display: flex;
+gap: 10px;
 }
-
 /* === КНОПКИ === */
 .nav-btn {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid var(--glass-border);
-    padding: 10px 18px;
-    border-radius: 14px;
-    white-space: nowrap; 
-    color: var(--primary-blue);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+background: rgba(255, 255, 255, 0.3);
+border: 1px solid var(–glass-border);
+padding: 10px 18px;
+border-radius: 14px;
+white-space: nowrap;
+color: var(–primary-blue);
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .nav-btn.active {
-    background: var(--primary-blue);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+background: var(–primary-blue);
+color: white;
+box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
 }
-
 /* === ССЫЛКИ === */
 a.nav-btn {
-    text-decoration: none; 
-    display: inline-block; 
-    box-sizing: border-box;
-    font-size: 13.333px; 
-    font-family: system-ui, -apple-system, sans-serif; 
-    color: var(--primary-blue) !important; 
+text-decoration: none;
+display: inline-block;
+box-sizing: border-box;
+font-size: 13.333px;
+font-family: system-ui, -apple-system, sans-serif;
+color: var(–primary-blue) !important;
 }
-
 a.nav-btn.active {
-    background: var(--primary-blue) !important;
-    color: white !important;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2) !important;
+background: var(–primary-blue) !important;
+color: white !important;
+box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2) !important;
 }
-
 /* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
 .scroll-hint-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-    margin-bottom: 5px;
-    margin-top: 15px;
-    transform: translateY(10px);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 15px;
+margin-bottom: 5px;
+margin-top: 15px;
+transform: translateY(10px);
 }
-
 .scroll-hint-text {
-    font-size: 0.85rem;
-    color: #6c757d;
-    font-style: italic;
+font-size: 0.85rem;
+color: #6c757d;
+font-style: italic;
 }
-
 .scroll-arrows {
-    display: flex;
-    gap: 8px;
+display: flex;
+gap: 8px;
 }
-
 .arrow-btn {
-    color: var(--primary-blue);
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 4px; 
-    padding: 5px 12px;
-    cursor: pointer;
-    box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transform: translateY(-8px);
-    transition: background 0.3s ease, opacity 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+color: var(–primary-blue);
+background: rgba(255, 255, 255, 0.25);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border: 1px solid var(–glass-border);
+border-radius: 4px;
+padding: 5px 12px;
+cursor: pointer;
+box-sizing: border-box;
+box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+transform: translateY(-8px);
+transition: background 0.3s ease, opacity 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
 }
-
 .arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
+background: rgba(255, 255, 255, 0.25);
 }
-
 .swipe-finger-wrapper {
-    width: 28px;
-    height: 32px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    position: relative;
+width: 28px;
+height: 32px;
+display: flex;
+align-items: flex-start;
+justify-content: center;
+position: relative;
 }
-
 .swipe-finger {
-    font-size: 1.2rem;
-    display: inline-block;
-    transform-origin: top center;
-    animation: swipeRock 1.6s ease-in-out infinite;
+font-size: 1.2rem;
+display: inline-block;
+transform-origin: top center;
+animation: swipeRock 1.6s ease-in-out infinite;
 }
-
 @keyframes swipeRock {
-    0%   { transform: rotate(-20deg); }
-    40%  { transform: rotate(20deg); }
-    70%  { transform: rotate(-20deg); }
-    100% { transform: rotate(-20deg); }
+0%   { transform: rotate(-20deg); }
+40%  { transform: rotate(20deg); }
+70%  { transform: rotate(-20deg); }
+100% { transform: rotate(-20deg); }
 }
-
 .scroll-hint-left {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: opacity 0.5s ease;
+display: flex;
+align-items: center;
+gap: 6px;
+transition: opacity 0.5s ease;
 }
-
 .scroll-hint-left.hidden {
-    opacity: 0;
-    pointer-events: none;
+opacity: 0;
+pointer-events: none;
 }

@@ -23,6 +23,7 @@ scroll-hint {
     position: sticky;
     top: var(--topbar-height);
     z-index: 9998;
+    top: 50px;
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */

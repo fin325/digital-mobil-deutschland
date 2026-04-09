@@ -1,206 +1,200 @@
 /* === TOPBAR.CSS === */
 
 .top-bar {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: none;
-    position: relative;
-    top: 0;
-    z-index: 9999 !important;
-    padding: 0;
-    overflow: visible !important;
+background: rgba(255, 255, 255, 0.15);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border-bottom: 1px solid var(–glass-border);
+position: sticky;
+top: 0;
+z-index: 9999 !important;
+padding: 0;
+overflow: visible !important;
 }
 
 .top-bar-content {
-    display: flex;
-    align-items: flex-start;
-    height: 50px;
-    gap: 0;
-    width: 100%;
-    overflow: visible !important;
-    overscroll-behavior: none;
-    position: sticky; /* sticky сюда */
-    top: 0;
-    z-index: 10000;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
+display: flex;
+align-items: flex-start;
+height: 50px;
+gap: 0;
+width: 100%;
+overflow: visible !important;
+position: relative;
+overscroll-behavior: none;
 }
 
-/* --- ОБЩИЕ СТИЛИ --- */
+/* — ОБЩИЕ СТИЛИ — */
 .date-time-block,
 .weather-info,
 .weather-arrow-btn {
-    height: 30px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
-    border: none !important;
-    border-bottom: 1px solid var(--glass-border) !important;
-    border-radius: 0 !important;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    align-self: flex-start;
+height: 30px;
+background: rgba(255, 255, 255, 0.15);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+box-sizing: border-box;
+border: none !important;
+border-bottom: 1px solid var(–glass-border) !important;
+border-radius: 0 !important;
+display: flex;
+align-items: center;
+flex-shrink: 0;
+align-self: flex-start;
 }
 
-/* --- БЛОК ДАТЫ И ВРЕМЕНИ --- */
+/* — БЛОК ДАТЫ И ВРЕМЕНИ — */
 .date-time-block {
-    flex-direction: column;
-    justify-content: center;
-    line-height: 1.1;
-    width: 70px;
-    min-width: 70px;
-    gap: 0;
-    position: relative;
+flex-direction: column;
+justify-content: center;
+line-height: 1.1;
+width: 70px;
+min-width: 70px;
+gap: 0;
+position: relative;
 }
 
 #current-date, #current-time, #current-seconds {
-    color: #003366;
-    text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
-    margin: 0;
-    font-weight: 700;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-    position: relative;
-    top: 2px;
+color: #003366;
+text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
+margin: 0;
+font-weight: 700;
+text-align: center;
+font-variant-numeric: tabular-nums;
+white-space: nowrap;
+position: relative;
+top: 2px;
 }
 
 #current-date { font-size: 0.65rem; text-transform: uppercase; margin-bottom: 1px; }
 #current-time, #current-seconds { font-size: 0.65rem; letter-spacing: -0.2px; }
 
-/* --- КОНТЕЙНЕР СКРОЛЛА --- */
+/* — КОНТЕЙНЕР СКРОЛЛА — */
 .weather-scroll-container {
-    display: flex;
-    align-items: flex-start;
-    overflow-x: auto;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-    flex-grow: 1;
-    scroll-behavior: smooth;
-    padding: 0;
-    padding-bottom: 55px;
-    margin: 0;
-    margin-bottom: -55px;
-    gap: 0;
-    overscroll-behavior-x: none;
-    align-self: flex-start;
+display: flex;
+align-items: flex-start;
+overflow-x: auto;
+overflow-y: visible !important;
+-webkit-overflow-scrolling: touch;
+flex-grow: 1;
+scroll-behavior: smooth;
+padding: 0;
+padding-bottom: 55px;
+margin: 0;
+margin-bottom: -55px;
+gap: 0;
+overscroll-behavior-x: none;
+align-self: flex-start;
 }
 
 .weather-scroll-container::-webkit-scrollbar {
-    display: none;
+display: none;
 }
 
-/* --- ИНФО О ПОГОДЕ --- */
+/* — ИНФО О ПОГОДЕ — */
 .weather-info {
-    gap: 8px;
-    padding: 0 8px;
-    margin-left: 0;
-    flex-wrap: nowrap;
+gap: 8px;
+padding: 0 8px;
+margin-left: 0;
+flex-wrap: nowrap;
 }
 
 .w-item {
-    position: relative;
-    white-space: nowrap;
-    font-size: 0.85rem;
-    color: #003366;
-    text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
-    flex-shrink: 0;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    user-select: none;
-    transition: opacity 0.2s ease;
-    padding-right: 5px;
+position: relative;
+white-space: nowrap;
+font-size: 0.85rem;
+color: #003366;
+text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
+flex-shrink: 0;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 4px;
+cursor: pointer;
+user-select: none;
+transition: opacity 0.2s ease;
+padding-right: 5px;
 }
 
 .w-item:active { opacity: 0.8; }
 
 .divider {
-    color: rgba(0, 51, 102, 0.15);
-    margin: 0 1px;
-    font-weight: 300;
+color: rgba(0, 51, 102, 0.15);
+margin: 0 1px;
+font-weight: 300;
 }
 
-/* --- КНОПКА-СТРЕЛКА --- */
+/* — КНОПКА-СТРЕЛКА — */
 .weather-arrow-btn {
-    position: relative;
-    padding: 0 8px;
-    cursor: pointer;
-    color: var(--primary-blue);
-    font-size: 0.9rem;
-    font-weight: bold;
-    justify-content: center;
-    z-index: 10;
-    transition: background 0.2s ease;
+position: relative;
+padding: 0 8px;
+cursor: pointer;
+color: var(–primary-blue);
+font-size: 0.9rem;
+font-weight: bold;
+justify-content: center;
+z-index: 10;
+transition: background 0.2s ease;
 }
 
 .weather-arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
+background: rgba(255, 255, 255, 0.25);
 }
 
 .weather-arrow-btn:active {
-    transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.35);
+transform: scale(0.9);
+background: rgba(255, 255, 255, 0.35);
 }
 
-/* --- ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ --- */
+/* — ВСПЛЫВАЮЩИЕ ПОДСКАЗКИ — */
 .w-label {
-    display: none !important;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: rgba(255, 255, 255, 0.98);
-    color: var(--primary-blue);
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    white-space: nowrap;
-    z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--glass-border);
+display: none !important;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translateX(-50%) translateY(20px);
+background: rgba(255, 255, 255, 0.98);
+color: var(–primary-blue);
+padding: 5px 10px;
+border-radius: 8px;
+font-size: 0.75rem;
+font-weight: 700;
+white-space: nowrap;
+z-index: 9999;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+border: 1px solid var(–glass-border);
 }
 
 .w-item.show-text .w-label {
-    display: block !important;
-    animation: slideDown 0.2s ease-out;
+display: block !important;
+animation: slideDown 0.2s ease-out;
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.95); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1); }
+from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.95); }
+to   { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1); }
 }
 
-/* --- ЗАГОЛОВКИ --- */
+/* — ЗАГОЛОВКИ — */
 .site-title {
-    text-align: center;
-    color: #f0f8ff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 8px 0 4px 0;
-    font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+text-align: center;
+color: #f0f8ff;
+text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
+margin: 8px 0 4px 0;
+font-size: 1.55rem;
+font-weight: 700;
+letter-spacing: -0.5px;
 }
 
 .site-subtitle {
-    text-align: center;
-    color: #e6f0ff;
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+text-align: center;
+color: #e6f0ff;
+font-size: 1.05rem;
+font-weight: 500;
+margin: 0 0 8px 0;
+text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .site-title, .site-subtitle {
-    position: relative;
-    top: -10px; /* Сдвиг вверх на 10px */
+position: relative;
+top: -10px; /* Сдвиг вверх на 10px */
 }

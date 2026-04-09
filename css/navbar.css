@@ -21,7 +21,7 @@ scroll-hint {
     
     /* Меню прилипает к верху */
     position: sticky;
-    top: 0;
+    top: 30px;
     z-index: 9998;
 }
 

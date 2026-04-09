@@ -15,9 +15,14 @@
 
 <body>
 
-<app-header></app-header>
-
-<scroll-hint></scroll-hint>
+<app-header>
+  <div class="topbar-dismissible">
+    <!-- логотип, заголовок, прочее что скрывается -->
+  </div>
+  <div class="topbar-sticky">
+    <!-- только погода + время — остаётся -->
+  </div>
+</app-header>
 
 <nav class="navbar">
     <div class="nav-scroll-viewport">

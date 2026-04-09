@@ -50,7 +50,6 @@ this.innerHTML = `
         </div>
     `;
 }
-
 }
 // Регистрируем компонент шапки
 customElements.define(‘app-header’, AppHeader);

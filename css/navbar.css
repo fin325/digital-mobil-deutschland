@@ -20,7 +20,7 @@ scroll-hint {
     padding: 12px 0;
     
     /* Меню прилипает к верху */
-    position: sticky;
+    position: relative;
     top: 0;
     z-index: 9999;
 }

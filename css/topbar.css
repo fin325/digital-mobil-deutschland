@@ -15,7 +15,7 @@
 .top-bar-content {
     display: flex;
     align-items: flex-start;
-    height: 50px;
+    height: 30px;
     gap: 0;
     width: 100%;
     overflow: visible !important;

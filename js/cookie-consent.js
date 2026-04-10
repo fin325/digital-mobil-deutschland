@@ -31,13 +31,20 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und das Laden externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
       onAccept: function() {
-        // YouTube — убираем все placeholder (любое количество)
-        document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
-          ph.style.display = "none";
-        });
+        function loadVideos() {
+          document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
+            const btn = ph.querySelector('button');
+            if (btn) btn.click();
+          });
+          if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
+          if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+        }
 
-        if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
-        if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', loadVideos, { once: true });
+        } else {
+          loadVideos();
+        }
       },
       onReject: function() {
         // YouTube

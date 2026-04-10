@@ -1,5 +1,9 @@
 class AppHeader extends HTMLElement {
     connectedCallback() {
+        const isRu = document.documentElement.lang === 'ru';
+        const langHref = isRu ? '/' : '/ru/';
+        const langLabel = isRu ? '🇩🇪 DE' : '🇷🇺 RU';
+
         this.innerHTML = `
             <div class="top-bar">
                 <div class="top-bar-content">
@@ -38,7 +42,9 @@ class AppHeader extends HTMLElement {
             <div class="site-header">
                 <div class="site-header-text">
                     <div class="site-title">Digital & Mobil in Deutschland</div>
-                    <div class="site-subtitle">Stadt Hattingen</div>            
+                    <div class="site-subtitle">Stadt Hattingen</div>
+                </div>
+                <a href="${langHref}" class="lang-btn">${langLabel}</a>
             </div>
         `;
     }

@@ -470,13 +470,12 @@
 #silktide-cookie-icon {
   display: none;
   position: fixed;
-  top: 80px;
-  left: 8px;
-  bottom: auto;
+  bottom: 12px;
+  left: 6px;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 28px;
+  width: 30px;
+  height: 15px;
   border-radius: 8px;
   padding: 0px;
   border: none;

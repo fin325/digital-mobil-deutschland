@@ -150,3 +150,32 @@ iframe {
     font-weight: bold;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+.consent-placeholder {
+    background: #f8f9fa;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px dashed #6c757d;
+    margin-bottom: 15px;
+}
+
+.consent-placeholder p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.load-tool-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.load-tool-btn:hover {
+    background: #0056b3;
+}

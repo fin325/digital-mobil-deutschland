@@ -18,17 +18,22 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       id: "analytics",
       name: "Statistik",
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
-      required: false
+      required: false,
+      
+      // === ЗАГРУЗКА НОВОСТЕЙ ПРИ СОГЛАСИИ НА STATISTIK ===
+      onAccept: function() {
+        loadNews();
+      }
     },
     {
       id: "advertising",
       name: "Werbung & externe Inhalte",
-      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und другие externe Inhalte. Sie werden nur mit Ihrer ausdrücklichen Einwilligung gesetzt.</p>",
+      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку внешних инструментов (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
       
-      // === АВТОМАТИЗАЦИЯ YOUTUBE + PDF ПРИЛОЖЕНИЙ ===
+      // === ЗАГРУЗКА YOUTUBE + PDF ПРИЛОЖЕНИЙ ПРИ СОГЛАСИИ НА WERBUNG ===
       onAccept: function() {
-        // === Автоматизация YouTube (твой старый код) ===
+        // YouTube (твой оригинальный код)
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
         videoPlaceholders.forEach(function(placeholder) {
             if (typeof placeholder.onclick === 'function') {
@@ -36,17 +41,12 @@ silktideCookieBannerManager.updateCookieBannerConfig({
             }
         });
 
-        // === НОВАЯ АВТОМАТИЗАЦИЯ ДЛЯ PDF ПРИЛОЖЕНИЙ ===
-        // Загружаем оба инструмента автоматически при согласии на "Werbung"
+        // PDF-приложения
         const pdfPlaceholder = document.getElementById('pdf-placeholder');
         const photoPlaceholder = document.getElementById('photo-placeholder');
 
-        if (pdfPlaceholder) {
-            loadPdfCompressor();
-        }
-        if (photoPlaceholder) {
-            loadPhotoToPdf();
-        }
+        if (pdfPlaceholder) loadPdfCompressor();
+        if (photoPlaceholder) loadPhotoToPdf();
       }
     }
   ],
@@ -70,12 +70,27 @@ silktideCookieBannerManager.updateCookieBannerConfig({
   }
 });
 
-// === Функции загрузки iframe (оставляем как было) ===
+// ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
 
+// Новости (загружаются при согласии на Statistik)
+function loadNews() {
+    if (typeof window.loadTagesschauNews === 'function') {
+        window.loadTagesschauNews();
+    } else if (typeof initNews === 'function') {
+        initNews();
+    } else {
+        // Если функция не определена глобально, можно попробовать перезагрузить контейнер
+        const newsContainer = document.getElementById('news-container');
+        if (newsContainer) {
+            newsContainer.innerHTML = '<p class="status-msg">Wird geladen...</p>';
+        }
+    }
+}
+
+// Foto zu PDF
 function loadPhotoToPdf() {
     const placeholder = document.getElementById('photo-placeholder');
     const iframe = document.getElementById('photo-iframe');
-    
     if (iframe && placeholder) {
         iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
         iframe.style.display = "block";
@@ -83,10 +98,10 @@ function loadPhotoToPdf() {
     }
 }
 
+// PDF-Kompressor
 function loadPdfCompressor() {
     const placeholder = document.getElementById('pdf-placeholder');
     const iframe = document.getElementById('pdf-iframe');
-    
     if (iframe && placeholder) {
         iframe.src = "https://pdf-compressor-web.onrender.com";
         iframe.style.display = "block";

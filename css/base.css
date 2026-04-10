@@ -17,7 +17,7 @@ body {
     padding: 0;
     background-size: cover;
     top: 0 !important;
-    filter: contrast(1.1);
+    filter: contrast(1.5);
 }
 
 body::before {

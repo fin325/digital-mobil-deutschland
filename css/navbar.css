@@ -13,12 +13,11 @@ scroll-hint {
     background: rgba(255, 255, 255, 0.3); 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border); /* Граница теперь снизу */
+    border-bottom: 1px solid var(--glass-border);
     padding: 12px 0;
     
-    /* Меню прилипает к верху */
     position: sticky;
-    top: 65px;
+    top: 65px; /* 30px topbar + 35px scroll-hint-container */
     z-index: 9997;
 }
 
@@ -94,9 +93,9 @@ a.nav-btn.active {
     margin-top: 15px;
     transform: translateY(10px);
     position: sticky;
-    top: 30px;
+    top: 30px; /* упирается в topbar */
     z-index: 9998;
-    hihgt: 35px;
+    height: 35px; /* исправлена опечатка */
 }
 
 .scroll-hint-text {
@@ -121,14 +120,12 @@ a.nav-btn.active {
     cursor: pointer;
     box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transform: translateY(-8px);
+    transform: translateY(-8px); /* ваша настройка положения */
     transition: background 0.3s ease, opacity 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 30px;
-    z-index: 9998;
-    hihgt: 35px;
+    height: 35px; /* исправлена опечатка */
 }
 
 .arrow-btn:hover {

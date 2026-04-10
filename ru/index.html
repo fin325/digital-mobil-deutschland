@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital & Mobil in Deutschland</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/topbar.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/silktide-consent-manager.css">
 </head>
 
 <body>
 
 <app-header></app-header>
-
 <scroll-hint></scroll-hint>
 
 <nav class="navbar">
     <div class="nav-scroll-viewport">
         <div class="nav-rows-wrapper">
 
-```
         <div class="nav-row">
             <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
             <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
@@ -45,108 +45,98 @@
 
     </div>
 </div>
-```
-
 </nav>
 
 <main class="container">
     <section id="home" class="tab-content active">
         <div class="card hero-card">
-            <h1>Willkommen! 🇩🇪</h1>
-            <p>Ваш персональный гид по цифровой экосистеме Германии.</p>
-
-```
-        <a href="../tabs/video_portal.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-            🎬 Видео портал
-        </a>
+            <h1 style="margin-top: 0; margin-bottom: 5px;">Willkommen! 🇩🇪</h1>
+            <p style="font-size: 1rem; line-height: 1.4; color: #333; margin-bottom: 12px; margin-top: 0; font-weight: 500;">
+                Межкультурный центр Magnet — интеграция мигрантов через образовательные и социальные проекты. Просто нажмите на Magnet.
+            </p>
+            <a href="../tabs/video_portal.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none;">
+                <img src="../img/IMG_2784.jpeg" alt="Interkulturelles Zentrum Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+            </a>
 
         <div class="video-wrapper">
-<div class="video-placeholder" onclick="loadVideo(this, 'j7wLBpAhn_g')">
-    <img src="https://img.youtube.com/vi/j7wLBpAhn_g/hqdefault.jpg">
-    <div class="play">▶ Video ansehen</div>
-</div>
-<p class="video-note">
-    Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-    Weitere Informationen finden Sie in unserer 
-    <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-</p>
-```
+            <div class="video-placeholder" onclick="loadVideo(this, 'j7wLBpAhn_g')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; background:#111; display:flex; justify-content:center; align-items:center;">
+                <div style="background:rgba(204, 0, 0, 0.9); color:white; padding:12px 24px; border-radius:30px; font-weight:bold;">▶ Смотреть видео</div>
+            </div>
+        </div>
 
-</div>
+        <div class="video-wrapper">
+            <div class="video-placeholder" onclick="loadVideo(this, 'tIxvgYC0K44')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; background:#111; display:flex; justify-content:center; align-items:center;">
+                <div style="background:rgba(204, 0, 0, 0.9); color:white; padding:12px 24px; border-radius:30px; font-weight:bold;">▶ Смотреть видео</div>
+            </div>
+        </div>
 
-<!-- Видео 2 -->
+        <div class="video-wrapper">
+            <div class="video-placeholder" onclick="loadPlaylist(this, 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; background:#111; display:flex; justify-content:center; align-items:center;">
+                <div style="background:rgba(204, 0, 0, 0.9); color:white; padding:12px 24px; border-radius:30px; font-weight:bold;">▶ Смотреть плейлист</div>
+            </div>
+        </div>
 
-<div class="video-wrapper">
-    <div class="video-placeholder" onclick="loadVideo(this, 'tIxvgYC0K44')">
-        <img src="https://img.youtube.com/vi/tIxvgYC0K44/hqdefault.jpg">
-        <div class="play">▶ Video ansehen</div>
-    </div>
-    <p class="video-note">
-        Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-        Weitere Informationen finden Sie in unserer 
-        <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-    </p>
-</div>
+        <div class="video-wrapper">
+            <div class="video-placeholder" onclick="loadPlaylist(this, 'PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; background:#111; display:flex; justify-content:center; align-items:center;">
+                <div style="background:rgba(204, 0, 0, 0.9); color:white; padding:12px 24px; border-radius:30px; font-weight:bold;">▶ Смотреть плейлист</div>
+            </div>
+        </div>
 
-<!-- Плейлист 1 -->
-
-<div class="video-wrapper">
-    <div class="video-placeholder" onclick="loadPlaylist(this, 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')">
-        <img src="https://img.youtube.com/vi/j7wLBpAhn_g/hqdefault.jpg">
-        <div class="play">▶ Playlist ansehen</div>
-    </div>
-    <p class="video-note">
-        Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-        Weitere Informationen finden Sie in unserer 
-        <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-    </p>
-</div>
-
-<!-- Плейлист 2 -->
-
-<div class="video-wrapper">
-    <div class="video-placeholder" onclick="loadPlaylist(this, 'PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT')">
-        <img src="https://img.youtube.com/vi/tIxvgYC0K44/hqdefault.jpg">
-        <div class="play">▶ Playlist ansehen</div>
-    </div>
-    <p class="video-note">
-        Mit dem Klick stimmen Sie der Datenübertragung an YouTube (Google) zu. 
-        Weitere Informationen finden Sie in unserer 
-        <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
-    </p>
-</div>
-
-```
         <div style="display: grid; gap: 10px; margin-top: 15px;">
             <a href="../tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
                 💼 Найти работу
             </a>
-
             <button type="button" class="btn-main" onclick="showTab('img2pdf', event)">
                 🌠 Создать PDF из фото
             </button>
-
             <button type="button" class="btn-main" style="background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">
                 Читать текстовые новости
             </button>
         </div>
-    </div> 
-</section>
+    </div>
+    </section>
+</main>
 
+<!-- ====================== ФОТО В PDF ====================== -->
 <section id="img2pdf" class="tab-content">
     <div class="card">
-        <h2>🌠 Создать PDF из фото</h2>
+        <h2>🌠 Фото в PDF</h2>
         <div class="iframe-wrapper">
-            <iframe src="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true"></iframe>
+            <div id="photo-placeholder" class="consent-placeholder">
+                <p><strong>Этот инструмент может использовать технические куки.</strong></p>
+                <p style="margin: 15px 0;">Для использования конвертера фото в PDF дайте своё согласие.</p>
+                <button onclick="loadPhotoToPdf()" class="load-tool-btn">
+                    Загрузить конвертер
+                </button>
+            </div>
+            <iframe id="photo-iframe"
+                    src=""
+                    style="display: none; width: 100%; height: 950px; border: none;"
+                    allowfullscreen>
+            </iframe>
         </div>
-    </div> 
+    </div>
 </section>
 
+<!-- ====================== PDF СЖАТИЕ ====================== -->
 <section id="pdf" class="tab-content">
     <div class="card">
-        <h2>📄 PDF-Kompressor</h2>
+        <h2>📄 PDF-Компрессор</h2>
         <div class="iframe-wrapper">
-            <iframe src="https://pdf-compressor-web.onrender.com" allow="downloads" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+            <div id="pdf-placeholder" class="consent-placeholder">
+                <p><strong>Этот инструмент может использовать технические куки.</strong></p>
+                <p style="margin: 15px 0;">Для использования PDF-компрессора дайте своё согласие.</p>
+                <button onclick="loadPdfCompressor()" class="load-tool-btn">
+                    Загрузить PDF-компрессор
+                </button>
+            </div>
+            <iframe id="pdf-iframe"
+                    src=""
+                    style="display: none; width: 100%; height: 820px; border: none;"
+                    allow="downloads"
+                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+                    allowfullscreen>
+            </iframe>
         </div>
     </div>
 </section>
@@ -155,16 +145,13 @@
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
             <h2 style="margin: 0;">🗞️ Последние события</h2>
-            <span style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
+            <span style="font-size: 0.85rem; color: #666;">Источник: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
         </div>
-        
         <div id="news-container">
-            <p class="status-msg">Wird geladen...</p>
+            <p class="status-msg">Загрузка...</p>
         </div>
-        
         <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
-            Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen. 
-            Durch das Laden werden ggf. Daten an Drittanbieter übertragen.
+            Примечание: новости загружаются через RSS с tagesschau.de. При загрузке данные могут передаваться третьим лицам.
         </p>
     </div>
 </section>
@@ -213,7 +200,7 @@
 <section id="translate" class="tab-content">
     <div class="card">
         <h2>🌐 Перевод и Словари</h2>
-        <p>Используйте профессиональные инструменты для работы с текстами.</p>
+        <p>Профессиональные инструменты для работы с текстами.</p>
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
         <div class="translate-item">
             <h3>Google Translate</h3>
@@ -239,7 +226,7 @@
         <p>Популярные порталы для поиска работы и вакансий в Германии.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
             <a href="../tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;">🏦 Портал о работе</a>
-            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">🇩🇪 Jobsuche (Arbeitsagentur)</a> 
+            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">🇩🇪 Jobsuche (Arbeitsagentur)</a>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">🔍 Indeed</a>
                 <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">📈 StepStone</a>
@@ -266,7 +253,7 @@
         </div>
         <div style="margin-bottom: 10px;">
             <h3 style="margin-bottom: 5px; color: #1e1c1a;">Claude</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Интеллектуальный ассистент от Anthropic — честный, точный и естественный в общении. Работает с большими документами, пишет и отлаживает код, анализирует данные, помогает с текстами.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Интеллектуальный ассистент от Anthropic — честный, точный и естественный в общении. Работает с большими документами, пишет и отлаживает код, анализирует данные.</p>
             <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" style="background: #da7756; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Попробовать Claude</a>
         </div>
         <div style="margin-bottom: 10px;">
@@ -280,7 +267,7 @@
 <section id="health" class="tab-content">
     <div class="card">
         <h2>🏥 Здоровье</h2>
-        <p>Поиск врачей, чтение отзывов и онлайн-запись на прием.</p>
+        <p>Поиск врачей, чтение отзывов и онлайн-запись на приём.</p>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
             <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" style="background: #0596de; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(5, 150, 222, 0.2); transition: transform 0.2s;">🩺 Doctolib</a>
             <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" style="background: #00b3a6; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 179, 166, 0.2); transition: transform 0.2s;">⚕️ Jameda</a>
@@ -354,46 +341,17 @@
         </div>
     </div>
 </section>
-```
 
 </main>
 
-<!-- Language switcher button -->
-
-<a href="/" style="
-position: fixed;
-bottom: 24px;
-right: 20px;
-z-index: 9999;
-background: white;
-border: 2px solid #ddd;
-border-radius: 50px;
-padding: 9px 18px;
-font-size: 0.95rem;
-text-decoration: none;
-box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-font-weight: 700;
-color: #333;
-display: flex;
-align-items: center;
-gap: 6px;
-transition: box-shadow 0.2s, transform 0.2s;"
-onmouseover="this.style.boxShadow='0 5px 18px rgba(0,0,0,0.22)';this.style.transform='translateY(-1px)'"
-onmouseout="this.style.boxShadow='0 3px 12px rgba(0,0,0,0.15)';this.style.transform='translateY(0)'">
-🇩🇪 <span>DE</span>
-</a>
-
-<script src="../js/components.js"></script>
-
-<script src="../js/tabs.js"></script>
-
-<script src="../js/clock.js"></script>
-
-<script src="../js/weather.js"></script>
-
-<script src="../js/news.js"></script>
-
-<script src="../js/main.js"></script>
+    <script src="../js/silktide-consent-manager.js" defer></script>
+    <script src="../js/cookie-consent.js" defer></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/tabs.js"></script>
+    <script src="../js/clock.js"></script>
+    <script src="../js/weather.js"></script>
+    <script src="../js/news.js"></script>
+    <script src="../js/main.js"></script>
 
 </body>
 </html>

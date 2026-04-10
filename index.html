@@ -61,27 +61,39 @@
             </a>
 
         <div class="video-wrapper">
-    <div class="video-placeholder consent-placeholder" onclick="loadVideo(this, 'j7wLBpAhn_g')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer;">
+    <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
         <p><strong>YouTube-Video</strong></p>
         <p>Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <div class="load-tool-btn">▶ Video ansehen</div>
+        <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Video ansehen</button>
     </div>
+    <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </div>
 
 <div class="video-wrapper">
-    <div class="video-placeholder consent-placeholder" onclick="loadVideo(this, 'tIxvgYC0K44')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer;">
+    <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
         <p><strong>YouTube-Video</strong></p>
         <p>Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <div class="load-tool-btn">▶ Video ansehen</div>
+        <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Video ansehen</button>
     </div>
+    <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </div>
 
 <div class="video-wrapper">
-    <div class="video-placeholder consent-placeholder" onclick="loadPlaylist(this, 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" style="position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer;">
+    <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
         <p><strong>YouTube-Playlist</strong></p>
         <p>Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <div class="load-tool-btn">▶ Playlist ansehen</div>
+        <button onclick="loadPlaylist('video-placeholder-3', 'video-iframe-3', 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" class="load-tool-btn">▶ Playlist ansehen</button>
     </div>
+    <iframe id="video-iframe-3" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</div>
+
+<div class="video-wrapper">
+    <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%;">
+        <p><strong>YouTube-Playlist</strong></p>
+        <p>Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
+        <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PL0jhe96TEHQ7XMC56JAXJgQo95rRF1zqT')" class="load-tool-btn">▶ Playlist ansehen</button>
+    </div>
+    <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </div>
 
         <div style="display: grid; gap: 10px; margin-top: 15px;">

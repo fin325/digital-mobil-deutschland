@@ -28,24 +28,35 @@ silktideCookieBannerManager.updateCookieBannerConfig({
     {
       id: "advertising",
       name: "Werbung & externe Inhalte",
-      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку внешних инструментов (PDF-Kompressor, Foto zu PDF).</p>",
+      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und das Laden externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
       onAccept: function() {
-        const videoPlaceholders = document.querySelectorAll('.video-placeholder');
-        videoPlaceholders.forEach(function(placeholder) {
+        // YouTube — автоматически загружаем все 4 видео
+        document.querySelectorAll('.video-placeholder').forEach(function(placeholder) {
           if (typeof placeholder.onclick === 'function') {
-            placeholder.click();
+            placeholder.onclick.call(placeholder);
           }
         });
+
         if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
         if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
       },
       onReject: function() {
+        // YouTube — скрываем iframe, показываем placeholder
+        document.querySelectorAll('.video-wrapper').forEach(function(wrapper) {
+          const iframe = wrapper.querySelector('iframe');
+          const placeholder = wrapper.querySelector('.video-placeholder');
+          if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
+          if (placeholder) placeholder.style.display = "flex";
+        });
+
+        // PDF компрессор
         const pdfPh = document.getElementById('pdf-placeholder');
         const pdfIframe = document.getElementById('pdf-iframe');
         if (pdfPh) pdfPh.style.display = "block";
         if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
 
+        // Фото в PDF
         const photoPh = document.getElementById('photo-placeholder');
         const photoIframe = document.getElementById('photo-iframe');
         if (photoPh) photoPh.style.display = "block";

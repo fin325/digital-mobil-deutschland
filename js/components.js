@@ -1,4 +1,3 @@
-
 class AppHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -13,29 +12,21 @@ class AppHeader extends HTMLElement {
                     <div class="weather-scroll-container">
                         <div class="weather-info" id="full-weather-bar">
                             <span class="w-item" id="city-temp">Laden...</span>
-                            
                             <span class="divider">|</span>
-                            
                             <span class="w-item" onclick="toggleLabel(this)">
                                 💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
                             </span>
-
                             <span class="divider">|</span>
-
                             <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
                                 <span id="aqi-icon">🍃</span> 
                                 <span class="w-label">Качество воздуха 5(максимум):</span> 
                                 <span id="aqi-value">--</span>
                             </span>
-
                             <span class="divider">|</span>
-
                             <span class="w-item" onclick="toggleLabel(this)">
                                 🧲 <span class="w-label">Геомагнитная активность:</span> <span id="geo">2</span>
                             </span>
-
                             <span class="divider">|</span>
-
                             <span class="w-item" onclick="toggleLabel(this)">
                                 ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
                             </span>
@@ -44,19 +35,19 @@ class AppHeader extends HTMLElement {
                     <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>
                 </div> 
             </div>
-                <div class="site-header">
+            <div class="site-header">
+                <div class="site-header-text">
                     <div class="site-title">Digital & Mobil in Deutschland</div>
                     <div class="site-subtitle">Stadt Hattingen</div>
-                    <a href="/ru/" class="lang-btn">🇷🇺 RU</a>
                 </div>
+                <a href="/ru/" class="lang-btn">🇷🇺 RU</a>
+            </div>
         `;
     }
 }
-// Регистрируем компонент шапки
 customElements.define('app-header', AppHeader);
 
 
-// 2. Компонент подсказки для свайпа (Указатель и стрелки)
 class ScrollHint extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -67,16 +58,12 @@ class ScrollHint extends HTMLElement {
                     </div>
                     <span class="scroll-hint-text">Свайп меню</span>
                 </div>
-                <div class="site-header">
-    <div class="site-header-text">
-        <div class="site-title">Digital & Mobil in Deutschland</div>
-        <div class="site-subtitle">Stadt Hattingen</div>
-    </div>
-    <a href="/ru/" class="lang-btn">🇷🇺 RU</a>
-</div>
-</div>
+                <div class="scroll-arrows">
+                    <button class="arrow-btn" onclick="scrollTabs(-1)">←</button>
+                    <button class="arrow-btn" onclick="scrollTabs(1)">→</button>
+                </div>
+            </div>
         `;
     }
 }
-// ВАЖНО: Регистрируем компонент подсказки (именно этой строчки не хватало!)
 customElements.define('scroll-hint', ScrollHint);

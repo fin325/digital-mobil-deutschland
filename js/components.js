@@ -47,6 +47,7 @@ class AppHeader extends HTMLElement {
                 <div class="site-header">
                     <div class="site-title">Digital & Mobil in Deutschland</div>
                     <div class="site-subtitle">Stadt Hattingen</div>
+                    <a href="/ru/" class="lang-btn">🇷🇺 RU</a>
                 </div>
         `;
     }

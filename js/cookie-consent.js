@@ -17,6 +17,12 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
       onAccept: function() {
         loadNews();
+      },
+      onReject: function() {
+        const placeholder = document.getElementById('news-placeholder');
+        const container = document.getElementById('news-container');
+        if (placeholder) placeholder.style.display = "block";
+        if (container) container.style.display = "none";
       }
     },
     {
@@ -57,7 +63,6 @@ function loadNews() {
     if (placeholder) placeholder.style.display = "none";
     if (container) container.style.display = "block";
 
-    // Загружаем новости
     if (typeof window.loadTagesschauNews === 'function') {
         window.loadTagesschauNews();
     } else {

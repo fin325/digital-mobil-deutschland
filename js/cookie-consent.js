@@ -61,3 +61,23 @@ silktideCookieBannerManager.updateCookieBannerConfig({
     banner: "bottomCenter"
   }
 });
+
+// === Автозагрузка iframe только после нажатия кнопки ===
+
+function loadPhotoToPdf() {
+    const placeholder = document.getElementById('photo-placeholder');
+    const iframe = document.getElementById('photo-iframe');
+    
+    iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
+    iframe.style.display = "block";
+    placeholder.style.display = "none";
+}
+
+function loadPdfCompressor() {
+    const placeholder = document.getElementById('pdf-placeholder');
+    const iframe = document.getElementById('pdf-iframe');
+    
+    iframe.src = "https://pdf-compressor-web.onrender.com";
+    iframe.style.display = "block";
+    placeholder.style.display = "none";
+}

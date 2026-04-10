@@ -64,3 +64,16 @@ function loadPlaylist(el, listId) {
     el.style.background = 'transparent';
     el.onclick = null;
 }
+
+window.addEventListener('scroll', () => {
+    const icon = document.getElementById('silktide-cookie-icon');
+    if (!icon) return;
+    if (window.scrollY > 80) {
+        icon.style.opacity = '0';
+        icon.style.pointerEvents = 'none';
+    } else {
+        icon.style.opacity = '1';
+        icon.style.pointerEvents = 'auto';
+    }
+});
+

@@ -31,23 +31,21 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und das Laden externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
       onAccept: function() {
-        // YouTube — автоматически загружаем все 4 видео
-        document.querySelectorAll('.video-placeholder').forEach(function(placeholder) {
-          if (typeof placeholder.onclick === 'function') {
-            placeholder.onclick.call(placeholder);
-          }
+        // YouTube — убираем все placeholder (любое количество)
+        document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
+          ph.style.display = "none";
         });
 
         if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
         if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
       },
       onReject: function() {
-        // YouTube — скрываем iframe, показываем placeholder
-        document.querySelectorAll('.video-wrapper').forEach(function(wrapper) {
-          const iframe = wrapper.querySelector('iframe');
-          const placeholder = wrapper.querySelector('.video-placeholder');
+        // YouTube
+        document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
+          const num = ph.id.replace('video-placeholder-', '');
+          const iframe = document.getElementById('video-iframe-' + num);
+          ph.style.display = "flex";
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
-          if (placeholder) placeholder.style.display = "flex";
         });
 
         // PDF компрессор

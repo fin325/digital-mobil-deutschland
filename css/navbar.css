@@ -93,6 +93,9 @@ a.nav-btn.active {
     margin-bottom: 5px;
     margin-top: 15px;
     transform: translateY(10px);
+    position: sticky;
+    top: 30px;
+    z-index: 9998;
 }
 
 .scroll-hint-text {

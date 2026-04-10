@@ -1,10 +1,5 @@
 class AppHeader extends HTMLElement {
     connectedCallback() {
-        const isRu = document.documentElement.lang === 'ru';
-        const langBtn = isRu
-            ? `<a href="/" class="lang-btn">🇩🇪 DE</a>`
-            : `<a href="/ru/" class="lang-btn">🇷🇺 RU</a>`;
-
         this.innerHTML = `
             <div class="top-bar">
                 <div class="top-bar-content">

@@ -66,11 +66,14 @@ class ScrollHint extends HTMLElement {
                     </div>
                     <span class="scroll-hint-text">Свайп меню</span>
                 </div>
-                <div class="scroll-arrows">
-                    <button class="arrow-btn" onclick="scrollTabs(-1)">←</button>
-                    <button class="arrow-btn" onclick="scrollTabs(1)">→</button>
-                </div>
-            </div>
+                <div class="site-header">
+    <div class="site-header-text">
+        <div class="site-title">Digital & Mobil in Deutschland</div>
+        <div class="site-subtitle">Stadt Hattingen</div>
+    </div>
+    <a href="/ru/" class="lang-btn">🇷🇺 RU</a>
+</div>
+</div>
         `;
     }
 }

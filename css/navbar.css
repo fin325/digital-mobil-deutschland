@@ -123,6 +123,8 @@ a.nav-btn.active {
     align-items: center;
     justify-content: center;
     z-index: 9998;
+    position: sticky;
+    top: calc(30px + env(safe-area-inset-top));
 }
 
 .arrow-btn:hover {

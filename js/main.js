@@ -29,7 +29,6 @@ fetch('https://ВАШ_АДРЕС_НА_RENDER.onrender.com/wakeup', { mode: 'no-c
 // === Функции загрузки YouTube ===
 
 function loadVideo(placeholderId, iframeId, videoId) {
-    alert('loadVideo вызван: ' + iframeId + ' / ' + videoId);
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe) {
@@ -40,7 +39,6 @@ function loadVideo(placeholderId, iframeId, videoId) {
 }
 
 function loadPlaylist(placeholderId, iframeId, listId) {
-    alert('loadPlaylist вызван: ' + iframeId + ' / ' + listId);
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe) {

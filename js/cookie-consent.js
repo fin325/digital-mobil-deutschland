@@ -20,7 +20,6 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
       
-      // Новости загружаются при согласии на Statistik
       onAccept: function() {
         loadNews();
       }
@@ -28,10 +27,9 @@ silktideCookieBannerManager.updateCookieBannerConfig({
     {
       id: "advertising",
       name: "Werbung & externe Inhalte",
-      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку внешних инструментов (PDF-Kompressor, Foto zu PDF).</p>",
+      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
       
-      // YouTube + PDF-приложения загружаются при согласии на Werbung
       onAccept: function() {
         // YouTube
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
@@ -69,14 +67,18 @@ silktideCookieBannerManager.updateCookieBannerConfig({
 
 // ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
 
-// Новости (вызываем ту же функцию, что и в news.js)
+// Новости (с placeholder)
 function loadNews() {
+    const placeholder = document.getElementById('news-placeholder');
     const container = document.getElementById('news-container');
-    if (!container) return;
+    
+    if (!container || !placeholder) return;
 
-    container.innerHTML = '<p class="status-msg">Wird geladen...</p>';
+    // Скрываем placeholder и показываем контейнер
+    placeholder.style.display = "none";
+    container.style.display = "block";
 
-    // Вызываем оригинальную функцию из news.js
+    // Загружаем новости
     if (typeof window.loadTagesschauNews === 'function') {
         window.loadTagesschauNews();
     }

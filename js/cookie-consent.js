@@ -100,34 +100,3 @@ iframe.style.display = “block”;
 placeholder.style.display = “none”;
 }
 }
-<section id="news" class="tab-content">
-    <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-            <h2 style="margin: 0;">🗞️ Aktuelle Nachrichten</h2>
-            <span style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
-        </div>
-
-    <div id="news-wrapper">
-        <!-- Placeholder до согласия -->
-        <div id="news-placeholder" class="consent-placeholder">
-            <p><strong>Nachrichten von tagesschau.de</strong></p>
-            <p>Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
-            
-            <button onclick="loadNews()" class="load-tool-btn">
-                Nachrichten laden
-            </button>
-        </div>
-
-        <!-- Контейнер новостей (скрыт до согласия) -->
-        <div id="news-container" style="display: none;">
-            <!-- Новости будут загружаться сюда -->
-        </div>
-    </div>
-    
-    <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
-        Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen.
-    </p>
-</div>
-
-
-</section>

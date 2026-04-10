@@ -20,6 +20,9 @@ scroll-hint {
     position: sticky;
     top: 30px;
     z-index: 9998;
+    top: calc(30px + env(safe-area-inset-top));
+}
+
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */

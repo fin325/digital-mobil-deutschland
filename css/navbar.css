@@ -19,7 +19,7 @@ scroll-hint {
     /* Меню прилипает к верху */
     position: sticky;
     z-index: 9998;
-    top: calc(30px + env(safe-area-inset-top));
+    top: 30px;
 }
 
 }

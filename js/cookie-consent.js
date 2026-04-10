@@ -67,12 +67,11 @@ silktideCookieBannerManager.updateCookieBannerConfig({
 
 // ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
 
-// Новости (с placeholder)
 function loadNews() {
     const placeholder = document.getElementById('news-placeholder');
     const container = document.getElementById('news-container');
     
-    if (!container || !placeholder) return;
+    if (!placeholder || !container) return;
 
     // Скрываем placeholder и показываем контейнер
     placeholder.style.display = "none";
@@ -81,10 +80,11 @@ function loadNews() {
     // Загружаем новости
     if (typeof window.loadTagesschauNews === 'function') {
         window.loadTagesschauNews();
+    } else {
+        console.warn("loadTagesschauNews function not found");
     }
 }
 
-// Foto zu PDF
 function loadPhotoToPdf() {
     const placeholder = document.getElementById('photo-placeholder');
     const iframe = document.getElementById('photo-iframe');
@@ -95,7 +95,6 @@ function loadPhotoToPdf() {
     }
 }
 
-// PDF-Kompressor
 function loadPdfCompressor() {
     const placeholder = document.getElementById('pdf-placeholder');
     const iframe = document.getElementById('pdf-iframe');

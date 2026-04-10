@@ -18,10 +18,8 @@ scroll-hint {
     
     /* Меню прилипает к верху */
     position: sticky;
-    z-index: 9998;
     top: 30px;
-}
-
+    z-index: 9998;
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
@@ -124,9 +122,6 @@ a.nav-btn.active {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9998;
-    position: sticky;
-    top: calc(30px + env(safe-area-inset-top));
 }
 
 .arrow-btn:hover {

@@ -20,7 +20,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
       
-      // === ЗАГРУЗКА НОВОСТЕЙ ПРИ СОГЛАСИИ НА STATISTIK ===
+      // Новости загружаются при согласии на Statistik
       onAccept: function() {
         loadNews();
       }
@@ -31,9 +31,9 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку внешних инструментов (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
       
-      // === ЗАГРУЗКА YOUTUBE + PDF ПРИЛОЖЕНИЙ ПРИ СОГЛАСИИ НА WERBUNG ===
+      // YouTube + PDF-приложения загружаются при согласии на Werbung
       onAccept: function() {
-        // YouTube (твой оригинальный код)
+        // YouTube
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
         videoPlaceholders.forEach(function(placeholder) {
             if (typeof placeholder.onclick === 'function') {
@@ -42,11 +42,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         });
 
         // PDF-приложения
-        const pdfPlaceholder = document.getElementById('pdf-placeholder');
-        const photoPlaceholder = document.getElementById('photo-placeholder');
-
-        if (pdfPlaceholder) loadPdfCompressor();
-        if (photoPlaceholder) loadPhotoToPdf();
+        if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
+        if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
       }
     }
   ],
@@ -72,18 +69,16 @@ silktideCookieBannerManager.updateCookieBannerConfig({
 
 // ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
 
-// Новости (загружаются при согласии на Statistik)
+// Новости (вызываем ту же функцию, что и в news.js)
 function loadNews() {
+    const container = document.getElementById('news-container');
+    if (!container) return;
+
+    container.innerHTML = '<p class="status-msg">Wird geladen...</p>';
+
+    // Вызываем оригинальную функцию из news.js
     if (typeof window.loadTagesschauNews === 'function') {
         window.loadTagesschauNews();
-    } else if (typeof initNews === 'function') {
-        initNews();
-    } else {
-        // Если функция не определена глобально, можно попробовать перезагрузить контейнер
-        const newsContainer = document.getElementById('news-container');
-        if (newsContainer) {
-            newsContainer.innerHTML = '<p class="status-msg">Wird geladen...</p>';
-        }
     }
 }
 

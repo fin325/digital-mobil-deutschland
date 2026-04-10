@@ -226,7 +226,7 @@
 }
 
 .lang-btn {
-    position: absolute;
+    position: fixed;
     right: 12px;
     top: 4px;
     background: white;

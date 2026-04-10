@@ -130,30 +130,25 @@
 </section>
 
 <!-- ====================== PDF-KOMPRESSOR ====================== -->
-<section id="pdf" class="tab-content">
+<section id="news" class="tab-content">
     <div class="card">
-        <h2>📄 PDF-Kompressor</h2>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+            <h2 style="margin: 0;">🗞️ Aktuelle Nachrichten</h2>
+            <span style="font-size: 0.85rem; color: #666;">Quelle: tagesschau.de</span>
+        </div>
         
-        <div class="iframe-wrapper">
-            
+        <div id="news-wrapper">
             <!-- Placeholder -->
-            <div id="pdf-placeholder" class="consent-placeholder">
-                <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
-                <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>
-                
-                <button onclick="loadPdfCompressor()" class="load-tool-btn">
-                    PDF-Kompressor laden
+            <div id="news-placeholder" class="consent-placeholder">
+                <p><strong>Nachrichten von tagesschau.de</strong></p>
+                <p>Diese Nachrichten werden via RSS geladen.</p>
+                <button onclick="loadNews()" class="load-tool-btn">
+                    Nachrichten laden
                 </button>
             </div>
 
-            <!-- Сам iframe -->
-            <iframe id="pdf-iframe" 
-                    src="" 
-                    style="display: none; width: 100%; height: 820px; border: none;"
-                    allow="downloads" 
-                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-                    allowfullscreen>
-            </iframe>
+            <!-- Контейнер новостей -->
+            <div id="news-container" style="display: none;"></div>
         </div>
     </div>
 </section>

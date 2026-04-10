@@ -36,6 +36,19 @@ silktideCookieBannerManager.updateCookieBannerConfig({
 
         if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
         if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+      },
+      onReject: function() {
+        // PDF компрессор
+        const pdfPh = document.getElementById('pdf-placeholder');
+        const pdfIframe = document.getElementById('pdf-iframe');
+        if (pdfPh) pdfPh.style.display = "block";
+        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
+
+        // Фото в PDF
+        const photoPh = document.getElementById('photo-placeholder');
+        const photoIframe = document.getElementById('photo-iframe');
+        if (photoPh) photoPh.style.display = "block";
+        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; }
       }
     }
   ],

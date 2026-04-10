@@ -1,12 +1,8 @@
 // js/cookie-consent.js
 
 silktideCookieBannerManager.updateCookieBannerConfig({
-  background: {
-    showBackground: true
-  },
-  cookieIcon: {
-    position: "bottomLeft"
-  },
+  background: { showBackground: true },
+  cookieIcon: { position: "bottomLeft" },
   cookieTypes: [
     {
       id: "necessary",
@@ -19,10 +15,14 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       name: "Statistik",
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
-      
-      // === ЗАГРУЗКА НОВОСТЕЙ ПРИ СОГЛАСИИ НА STATISTIK ===
       onAccept: function() {
         loadNews();
+      },
+      onReject: function() {
+        const placeholder = document.getElementById('news-placeholder');
+        const container = document.getElementById('news-container');
+        if (placeholder) placeholder.style.display = "block";
+        if (container) container.style.display = "none";
       }
     },
     {
@@ -30,23 +30,26 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       name: "Werbung & externe Inhalte",
       description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку внешних инструментов (PDF-Kompressor, Foto zu PDF).</p>",
       required: false,
-      
-      // === ЗАГРУЗКА YOUTUBE + PDF ПРИЛОЖЕНИЙ ПРИ СОГЛАСИИ НА WERBUNG ===
       onAccept: function() {
-        // YouTube (твой оригинальный код)
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
         videoPlaceholders.forEach(function(placeholder) {
-            if (typeof placeholder.onclick === 'function') {
-                placeholder.click();
-            }
+          if (typeof placeholder.onclick === 'function') {
+            placeholder.click();
+          }
         });
+        if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
+        if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+      },
+      onReject: function() {
+        const pdfPh = document.getElementById('pdf-placeholder');
+        const pdfIframe = document.getElementById('pdf-iframe');
+        if (pdfPh) pdfPh.style.display = "block";
+        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
 
-        // PDF-приложения
-        const pdfPlaceholder = document.getElementById('pdf-placeholder');
-        const photoPlaceholder = document.getElementById('photo-placeholder');
-
-        if (pdfPlaceholder) loadPdfCompressor();
-        if (photoPlaceholder) loadPhotoToPdf();
+        const photoPh = document.getElementById('photo-placeholder');
+        const photoIframe = document.getElementById('photo-iframe');
+        if (photoPh) photoPh.style.display = "block";
+        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; }
       }
     }
   ],
@@ -65,46 +68,40 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Wir respektieren Ihr Recht auf Privatsphäre. Sie können auswählen, welche Cookies Sie zulassen möchten.</p>"
     }
   },
-  position: {
-    banner: "bottomCenter"
-  }
+  position: { banner: "bottomCenter" }
 });
 
 // ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
 
-// Новости (загружаются при согласии на Statistik)
 function loadNews() {
+    const placeholder = document.getElementById('news-placeholder');
+    const container = document.getElementById('news-container');
+    if (placeholder) placeholder.style.display = "none";
+    if (container) container.style.display = "block";
+
     if (typeof window.loadTagesschauNews === 'function') {
         window.loadTagesschauNews();
-    } else if (typeof initNews === 'function') {
-        initNews();
     } else {
-        // Если функция не определена глобально, можно попробовать перезагрузить контейнер
-        const newsContainer = document.getElementById('news-container');
-        if (newsContainer) {
-            newsContainer.innerHTML = '<p class="status-msg">Wird geladen...</p>';
-        }
+        console.error("Функция loadTagesschauNews не найдена!");
     }
 }
 
-// Foto zu PDF
 function loadPhotoToPdf() {
-    const placeholder = document.getElementById('photo-placeholder');
+    const ph = document.getElementById('photo-placeholder');
     const iframe = document.getElementById('photo-iframe');
-    if (iframe && placeholder) {
+    if (ph && iframe) {
         iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
         iframe.style.display = "block";
-        placeholder.style.display = "none";
+        ph.style.display = "none";
     }
 }
 
-// PDF-Kompressor
 function loadPdfCompressor() {
-    const placeholder = document.getElementById('pdf-placeholder');
+    const ph = document.getElementById('pdf-placeholder');
     const iframe = document.getElementById('pdf-iframe');
-    if (iframe && placeholder) {
+    if (ph && iframe) {
         iframe.src = "https://pdf-compressor-web.onrender.com";
         iframe.style.display = "block";
-        placeholder.style.display = "none";
+        ph.style.display = "none";
     }
 }

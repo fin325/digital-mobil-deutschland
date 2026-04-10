@@ -20,8 +20,6 @@
     z-index: 9999 !important;
     padding: 0;
     overflow: visible !important;
-    height: 30px;
-    padding-top: env(safe-area-inset-top);
     height: calc(30px + env(safe-area-inset-top));
 }
 

@@ -68,7 +68,7 @@ function loadPlaylist(el, listId) {
 window.addEventListener('scroll', () => {
     const icon = document.getElementById('silktide-cookie-icon');
     if (!icon) return;
-    if (window.scrollY > 80) {
+    if (window.scrollY > 0) {
         icon.style.setProperty('opacity', '0', 'important');
         icon.style.setProperty('pointer-events', 'none', 'important');
     } else {

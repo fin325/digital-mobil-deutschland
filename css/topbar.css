@@ -227,8 +227,8 @@
 
 .lang-btn {
     position: fixed;
-    top: 80px;
-    right: 12px;
+    top: 50px;
+    right: 10px;
     z-index: 9997;
     background: white;
     border: 2px solid #ddd;

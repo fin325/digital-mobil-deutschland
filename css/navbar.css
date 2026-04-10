@@ -18,8 +18,8 @@ scroll-hint {
     
     /* Меню прилипает к верху */
     position: sticky;
-    top: 30px;
-    z-index: 9998;
+    top: 65px;
+    z-index: 9997;
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
@@ -96,6 +96,7 @@ a.nav-btn.active {
     position: sticky;
     top: 30px;
     z-index: 9998;
+    hihgt: 35px;
 }
 
 .scroll-hint-text {

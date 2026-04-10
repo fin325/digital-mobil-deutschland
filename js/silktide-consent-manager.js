@@ -1,119 +1,569 @@
-// js/cookie-consent.js
+/* 
+  Silktide Consent Manager - https://silktide.com/consent-manager/  
 
-silktideCookieBannerManager.updateCookieBannerConfig({
-  background: {
-    showBackground: true
-  },
-  cookieIcon: {
-    position: "bottomLeft"
-  },
-  cookieTypes: [
-    {
-      id: "necessary",
-      name: "Notwendig",
-      description: "<p>Diese Cookies sind technisch erforderlich, damit die Website richtig funktioniert. Sie können nicht deaktiviert werden.</p>",
-      required: true
-    },
-    {
-      id: "analytics",
-      name: "Statistik",
-      description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
-      required: false,
-      
-      onAccept: function() {
-        loadNews();
-      }
-    },
-    {
-      id: "advertising",
-      name: "Werbung & externe Inhalte",
-      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos и загрузку externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
-      required: false,
-      
-      onAccept: function() {
-        // YouTube
-        const videoPlaceholders = document.querySelectorAll('.video-placeholder');
-        videoPlaceholders.forEach(function(placeholder) {
-            if (typeof placeholder.onclick === 'function') {
-                placeholder.click();
+  Styles are at risked of being overridden by styles coming from the site the consent manager is used on.
+  To help prevent this, global wrapper elements are prefixed with "#silktide-"
+*/
+
+/* --------------------------------
+  Global Styles - These elements exist in the main DOM and styling is limited to positioning and animation
+-------------------------------- */
+/* Wrapper (Global) */
+#silktide-wrapper {
+              --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
+              --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+              --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
+              --primaryColor: #3B62E2;
+              --backgroundColor: #FFFFFF;
+              --textColor: #253B48;
+              --backdropBackgroundColor: #00000033;
+              --backdropBackgroundBlur: 0px;
+              --cookieIconColor: #3B62E2;
+              --cookieIconBackgroundColor: #FFFFFF;
+              position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  pointer-events: none;
+  border: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center
             }
-        });
 
-        // PDF-приложения
-        if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
-        if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
-      }
-    }
-  ],
-  text: {
-    banner: {
-      description: `<p>Wir verwenden Cookies, um die Nutzung zu verbessern, personalisierte Inhalte (YouTube) anzubieten und unsere Website zu analysieren. 
-      <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click(); return false;">Datenschutzerklärung</a> 
-      und <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click(); return false;">Impressum</a> 
-      finden Sie über die entsprechenden Buttons auf dieser Seite.</p>`,
-      acceptAllButtonText: "Alle akzeptieren",
-      rejectNonEssentialButtonText: "Nur notwendige",
-      preferencesButtonText: "Einstellungen"
-    },
-    preferences: {
-      title: "Cookie-Einstellungen anpassen",
-      description: "<p>Wir respektieren Ihr Recht auf Privatsphäre. Sie können auswählen, welche Cookies Sie zulassen möchten.</p>"
-    }
-  },
-  position: {
-    banner: "bottomCenter"
+/* Backdrop (Global) */
+#silktide-backdrop-global {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  border: 0px;
+  display: none;
+}
+
+/* --------------------------------
+  Links
+-------------------------------- */
+#silktide-wrapper a {
+  all: unset;
+  display: inline-block;
+  color: var(--primaryColor);
+  text-decoration: underline;
+}
+
+#silktide-wrapper a:hover {
+  cursor: pointer;
+  color: var(--textColor);
+}
+
+/* --------------------------------
+  Focus Styles
+-------------------------------- */
+#silktide-wrapper a:focus,
+#silktide-wrapper #silktide-banner button:focus,
+#silktide-wrapper #silktide-modal button:focus,
+#silktide-wrapper #silktide-cookie-icon:focus {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: 5px;
+}
+
+#silktide-wrapper #silktide-cookie-icon:focus {
+  border-radius: 50%;
+}
+
+/* --------------------------------
+  General Styles
+-------------------------------- */
+
+#silktide-wrapper .st-button {
+  color: var(--backgroundColor);
+  background-color: var(--primaryColor);
+  border: 2px solid var(--primaryColor);
+  padding: 10px 20px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#silktide-wrapper .st-button--primary {
+}
+
+#silktide-wrapper .st-button--primary:hover {
+  background-color: var(--backgroundColor);
+  color: var(--primaryColor);
+}
+
+#silktide-wrapper .st-button--secondary {
+  background-color: var(--backgroundColor);
+  color: var(--primaryColor);
+}
+
+#silktide-wrapper .st-button--secondary:hover {
+  background-color: var(--primaryColor);
+  color: var(--backgroundColor);
+}
+
+/* --------------------------------
+  Banner
+-------------------------------- */
+#silktide-banner {
+  font-family: var(--fontFamily);
+  color: var(--textColor);
+  background-color: var(--backgroundColor);
+  box-sizing: border-box;
+  padding: 32px;
+  border-radius: 5px;
+  pointer-events: auto;
+  border: 0px;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 600px;
+  overflow: auto;
+  max-width: calc(100% - 32px);
+  max-height: calc(100vh - 32px);
+  transform: translate(0, -20px);
+  opacity: 0;
+  animation: silktide-slideInDown 350ms ease-out forwards;
+  animation-delay: 0.3s;
+  box-shadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+}
+
+#silktide-banner:focus {
+  border-radius: 50%;
+}
+
+#silktide-banner.center {
+  top: 50%;
+  left: 50%;
+  bottom: auto;
+  right: auto;
+  position: fixed;
+  transform: translate(-50%, calc(-50% - 20px));
+  animation: silktide-slideInDown-center 350ms ease-out forwards;
+}
+
+#silktide-banner.bottomLeft {
+  bottom: 16px;
+  left: 16px;
+  position: fixed;
+}
+
+#silktide-banner.bottomCenter {
+  bottom: 16px;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -20px);
+  animation: silktide-slideInDown-bottomCenter 350ms ease-out forwards;
+}
+
+#silktide-banner .preferences {
+  display: flex;
+  gap: 5px;
+  border: none;
+  padding: 15px 0px;
+  background-color: transparent;
+  color: var(--primaryColor);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#silktide-banner .preferences span {
+  display: block;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+#silktide-banner .preferences span:hover {
+  color: var(--textColor);
+}
+
+#silktide-banner .preferences:after {
+  display: block;
+  content: '>';
+  text-decoration: none;
+}
+
+#silktide-banner p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0px 0px 15px;
+}
+
+#silktide-banner a {
+  display: inline-block;
+  color: var(--primaryColor);
+  text-decoration: underline;
+  background-color: var(--backgroundColor);
+}
+
+#silktide-banner a:hover {
+  color: var(--textColor);
+}
+
+#silktide-banner a.silktide-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: var(--primaryColor); /* passed down to svg > path */
+  margin-left: auto;
+  width: 48px;
+  height: 48px;
+}
+
+
+#silktide-banner .actions {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+@media (min-width: 600px) {
+  #silktide-banner .actions {
+    flex-direction: row;
+    align-items: center;
   }
-});
-
-// ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
-
-function loadNews() {
-    if (!document.getElementById('news-placeholder')) {
-        document.addEventListener('DOMContentLoaded', loadNews, { once: true });
-        return;
-    }
-
-    const placeholder = document.getElementById('news-placeholder');
-    const container = document.getElementById('news-container');
-
-    if (!placeholder || !container) return;
-
-    placeholder.style.display = "none";
-    container.style.display = "block";
-
-    if (typeof window.loadTagesschauNews === 'function') {
-        window.loadTagesschauNews();
-    } else {
-        console.warn("loadTagesschauNews function not found");
-    }
 }
 
-function loadPhotoToPdf() {
-    if (!document.getElementById('photo-placeholder')) {
-        document.addEventListener('DOMContentLoaded', loadPhotoToPdf, { once: true });
-        return;
-    }
-
-    const placeholder = document.getElementById('photo-placeholder');
-    const iframe = document.getElementById('photo-iframe');
-    if (iframe && placeholder) {
-        iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
-        iframe.style.display = "block";
-        placeholder.style.display = "none";
-    }
+#silktide-banner .actions-row {
+  display: flex;
+  gap: 16px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
-function loadPdfCompressor() {
-    if (!document.getElementById('pdf-placeholder')) {
-        document.addEventListener('DOMContentLoaded', loadPdfCompressor, { once: true });
-        return;
-    }
+/* --------------------------------
+  Modal
+-------------------------------- */
+#silktide-modal {
+  display: none;
+  pointer-events: auto;
+  overflow: auto;
+  width: 800px;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0px;
+  transform: translate(0px, -20px);
+  opacity: 0;
+  animation: silktide-slideInUp-center 350ms ease-out forwards;
+  box-shadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  font-family: var(--fontFamily);
+  color: var(--textColor);
+  flex-direction: column;
+  padding: 30px;
+  background-color: var(--backgroundColor);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
-    const placeholder = document.getElementById('pdf-placeholder');
-    const iframe = document.getElementById('pdf-iframe');
-    if (iframe && placeholder) {
-        iframe.src = "https://pdf-compressor-web.onrender.com";
-        iframe.style.display = "block";
-        placeholder.style.display = "none";
-    }
+/* --------------------------------
+  Modal - Header
+-------------------------------- */
+#silktide-modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+#silktide-modal h1 {
+  font-family: var(--fontFamily);
+  color: var(--textColor);
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0px;
+}
+
+#silktide-modal .modal-close {
+  display: inline-flex;
+  border: none;
+  padding: 13px;
+  border: 0px;
+  cursor: pointer;
+  background: var(--backgroundColor);
+  color: var(--primaryColor);
+}
+
+#silktide-modal .modal-close svg {
+  fill: var(--primaryColor);
+}
+
+/* --------------------------------
+  Modal - Content
+-------------------------------- */
+
+#silktide-modal section {
+  flex: 1;
+  margin-top: 32px;
+}
+
+#silktide-modal section::-webkit-scrollbar {
+  display: block; /* Force scrollbars to show */
+  width: 5px; /* Width of the scrollbar */
+}
+
+#silktide-modal section::-webkit-scrollbar-thumb {
+  background-color: var(--textColor); /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+#silktide-modal p {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--textColor);
+  margin: 0px 0px 15px;
+}
+
+#silktide-modal p:last-of-type {
+  margin: 0px;
+}
+
+#silktide-modal fieldset {
+  padding: 0px;
+  border: none;
+  margin: 0px 0px 32px;
+}
+
+#silktide-modal fieldset:last-of-type {
+  margin: 0px;
+}
+
+#silktide-modal legend {
+  padding: 0px;
+  margin: 0px 0px 10px;
+  font-weight: 700;
+  color: var(--textColor);
+  font-size: 16px;
+}
+
+#silktide-modal .cookie-type-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;  
+}
+
+/* --------------------------------
+  Modal - Switches
+-------------------------------- */
+#silktide-modal .switch {
+  flex-shrink: 0;
+  position: relative;
+  display: inline-block;
+  height: 34px;
+  width: 74px;
+  cursor: pointer;
+}
+
+#silktide-modal .switch:focus-within {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: 25px;
+}
+
+#silktide-modal .switch input {
+  opacity: 0;
+  position: absolute;
+}
+
+/* Unchecked Switch Styles */
+#silktide-modal .switch__pill {
+  position: relative;
+  display: block;
+  height: 34px;
+  width: 74px;
+  background: var(--textColor);
+  border-radius: 25px;
+}
+
+#silktide-modal .switch__dot {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: block;
+  height: 30px;
+  width: 30px;
+  background: var(--backgroundColor);
+  border-radius: 50%;
+  transition: left 150ms ease-out;
+}
+
+#silktide-modal .switch__off,
+#silktide-modal .switch__on {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--backgroundColor);
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  transition: right 150ms ease-out, opacity 150ms ease-out;
+}
+
+#silktide-modal .switch__off {
+  opacity: 1;
+}
+
+#silktide-modal .switch__on {
+  opacity: 0;
+}
+
+/* Checked Switch Styles */
+#silktide-modal .switch input:checked + .switch__pill {
+  background: var(--primaryColor);
+}
+
+#silktide-modal .switch input:checked ~ .switch__dot {
+  left: calc(100% - 32px);
+}
+
+#silktide-modal .switch input:checked ~ .switch__off {
+  right: calc(100% - 32px);
+  opacity: 0;
+}
+
+#silktide-modal .switch input:checked ~ .switch__on {
+  right: calc(100% - 34px);
+  opacity: 1;
+}
+
+/* Disabled Switch Styles */
+#silktide-modal .switch input:disabled + .switch__pill {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* --------------------------------
+  Modal - Footer
+-------------------------------- */
+#silktide-modal footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media (min-width: 600px) {
+  #silktide-modal footer {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+#silktide-modal footer a {
+  margin-left: auto;
+  padding: 14px 0px;
+}
+
+/* Cookie Icon */
+#silktide-cookie-icon {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 0px;
+  border: none;
+  background-color: var(--cookieIconColor);
+  cursor: pointer;
+  box-shadow: 0px 0px 6px 0px #0000001a;
+  pointer-events: auto;
+  animation: silktide-fadeIn 0.3s ease-in-out forwards;
+}
+
+#silktide-cookie-icon.bottomRight {
+  left: auto;
+  right: 10px;
+}
+
+#silktide-cookie-icon svg {
+  fill: var(--cookieIconBackgroundColor);
+}
+
+/* --------------------------------
+  Backdrop
+-------------------------------- */
+#silktide-backdrop {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdropBackgroundColor);
+  backdrop-filter: blur(var(--backdropBackgroundBlur));
+  pointer-events: all;
+}
+
+/* --------------------------------
+  Animations
+-------------------------------- */
+@keyframes silktide-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes silktide-slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes silktide-slideInDown-center {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 20px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes silktide-slideInDown-bottomCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes silktide-slideInUp-center {
+  from {
+    opacity: 0;
+    transform: translate(0px, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
 }

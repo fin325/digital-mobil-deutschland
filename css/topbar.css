@@ -227,8 +227,8 @@
 
 .lang-btn {
     position: fixed;
-    top: 45px;
-    right: 12px;
+    top: 100px;
+    right: 20px;
     z-index: 9997;
     background: white;
     border: 2px solid #ddd;
@@ -236,15 +236,23 @@
     padding: 6px 13px;
     font-size: 0.8rem;
     text-decoration: none;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     font-weight: 700;
     color: #333;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .lang-btn:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.22);
     transform: translateY(-1px);
 }
+
+.lang-btn:not(:hover) {
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    transform: translateY(0);
+}
+
 

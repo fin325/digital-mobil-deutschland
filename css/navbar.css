@@ -126,6 +126,9 @@ a.nav-btn.active {
     display: flex;
     align-items: center;
     justify-content: center;
+    top: 30px;
+    z-index: 9998;
+    hihgt: 35px;
 }
 
 .arrow-btn:hover {

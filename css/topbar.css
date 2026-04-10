@@ -20,7 +20,7 @@
     z-index: 9999 !important;
     padding: 0;
     overflow: visible !important;
-    height: calc(30px + env(safe-area-inset-top));
+    height: 30px;
 }
 
 .top-bar-content {

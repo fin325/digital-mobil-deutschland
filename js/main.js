@@ -10,16 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hash) {
         const targetButton = document.querySelector(`button[onclick*="'${hash}'"]`);
         if (targetButton) {
-            // 1. Запускаем функцию переключения вкладки
             showTab(hash, { currentTarget: targetButton, preventDefault: () => {} });
             
-            // 2. Поднимаем экран вверх И прокручиваем меню к кнопке
             setTimeout(() => {
                 window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
                 targetButton.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }, 50); 
             
-            // 3. Очищаем ссылку от #id
             history.replaceState(null, null, window.location.pathname);
         }
     }
@@ -29,40 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
 fetch('https://ВАШ_АДРЕС_НА_RENDER.onrender.com/wakeup', { mode: 'no-cors' })
   .catch(() => {});
 
-// === Функции загрузки YouTube (замена заглушки на iframe) ===
+// === Функции загрузки YouTube ===
 
-function loadVideo(el, id) {
-    el.innerHTML = `
-        <iframe 
-            style="position:absolute; top:0; left:0; width:100%; height:100%;"
-            src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" 
-            title="YouTube video" 
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-    `;
-    // Сбрасываем курсор и фон, так как это уже плеер
-    el.style.cursor = 'default';
-    el.style.background = 'transparent';
-    // Убираем onclick, чтобы повторный клик не перезагружал видео
-    el.onclick = null; 
+function loadVideo(placeholderId, iframeId, videoId) {
+    const placeholder = document.getElementById(placeholderId);
+    const iframe = document.getElementById(iframeId);
+    if (placeholder && iframe) {
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+        iframe.style.display = "block";
+        placeholder.style.display = "none";
+    }
 }
 
-function loadPlaylist(el, listId) {
-    el.innerHTML = `
-        <iframe 
-            style="position:absolute; top:0; left:0; width:100%; height:100%;"
-            src="https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&autoplay=1&rel=0" 
-            title="Мой плейлист" 
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-    `;
-    el.style.cursor = 'default';
-    el.style.background = 'transparent';
-    el.onclick = null;
+function loadPlaylist(placeholderId, iframeId, listId) {
+    const placeholder = document.getElementById(placeholderId);
+    const iframe = document.getElementById(iframeId);
+    if (placeholder && iframe) {
+        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&autoplay=1&rel=0`;
+        iframe.style.display = "block";
+        placeholder.style.display = "none";
+    }
 }
 
 window.addEventListener('scroll', () => {
@@ -76,5 +59,3 @@ window.addEventListener('scroll', () => {
         icon.style.setProperty('pointer-events', 'auto', 'important');
     }
 });
-
-

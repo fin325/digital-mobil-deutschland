@@ -228,8 +228,7 @@
 .lang-btn {
     position: absolute;
     right: 12px;
-    top: 50%;
-    transform: translateY(+10%);
+    bottom: 4px;
     background: white;
     border: 2px solid #ddd;
     border-radius: 50px;

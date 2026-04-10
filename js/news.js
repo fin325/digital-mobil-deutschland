@@ -28,3 +28,5 @@ async function loadNews() {
     }
 }
 
+// Делаем функцию доступной глобально для cookie-consent.js
+window.loadTagesschauNews = loadNews;

@@ -163,8 +163,8 @@ a.nav-btn.active {
 }
 
 .scroll-top-btn {
-    position: relative;
-    bottom: 25vh;
+    position: fixed;
+    bottom: 15vh;
     right: 10px;
     width: 26px;
     height: 38px;

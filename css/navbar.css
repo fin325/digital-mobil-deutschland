@@ -171,8 +171,8 @@ a.nav-btn.active {
 
 .scroll-top-btn {
     position: fixed;
-    bottom: 45vh; /* середина экрана */
-    right: 7px;
+    bottom: 45vh;
+    right: 8px;
     width: 36px;
     height: 48px;
     border-radius: 10px;
@@ -192,9 +192,13 @@ a.nav-btn.active {
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    touch-action: manipulation; /* убирает задержку 300мс на iOS */
+    -webkit-tap-highlight-color: transparent; /* убирает серую вспышку */
+    user-select: none;
 }
 
 .scroll-top-btn.visible {
     opacity: 1;
     pointer-events: all;
 }
+

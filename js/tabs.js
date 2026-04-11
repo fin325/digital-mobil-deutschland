@@ -63,8 +63,21 @@ if (menuScroll) {
     menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
 }
 
-// Показываем кнопку только когда проскроллили вниз
+// Кнопка наверх
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
+
+// Мгновенное срабатывание на касание
+scrollTopBtn?.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}, { passive: false });
+
+// Запасной вариант для мыши
+scrollTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Показываем кнопку только когда проскроллили вниз
 window.addEventListener('scroll', () => {
     if (window.scrollY > 200) {
         scrollTopBtn?.classList.add('visible');

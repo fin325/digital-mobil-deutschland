@@ -18,7 +18,7 @@ scroll-hint {
     
     /* Меню прилипает к верху */
     position: sticky;
-    top: 65px;
+    top: 35px;
     z-index: 9997;
 }
 
@@ -96,7 +96,7 @@ a.nav-btn.active {
     position: sticky;
     top: 30px;
     z-index: 9998;
-    hight: 10px;
+    hight: 5px;
 }
 
 .scroll-hint-text {

@@ -34,6 +34,12 @@ function showTab(tabId, event) {
     // Снимаем активность со всех кнопок
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
 
+    // Делаем кнопку активной сразу
+    if (event && event.currentTarget) event.currentTarget.classList.add('active');
+
+    // Запоминаем позицию скролла ДО переключения вкладки
+    const scrollBefore = window.scrollY;
+
     // Показываем нужную вкладку
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
@@ -49,20 +55,26 @@ function showTab(tabId, event) {
 
         targetTab.classList.add('active');
 
+        // Восстанавливаем позицию скролла сразу после показа вкладки
+        window.scrollTo(0, scrollBefore);
+
         setTimeout(() => {
             const topBarHeight = document.querySelector('.top-bar')?.offsetHeight || 0;
             const scrollHintHeight = document.querySelector('scroll-hint')?.offsetHeight || 0;
             const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
             const offset = topBarHeight + scrollHintHeight + navbarHeight;
 
-            const tabRect = targetTab.getBoundingClientRect();
+            // Navbar прилип если скролл больше чем позиция navbar на странице
+            const navbar = document.querySelector('.navbar');
+            const navbarOffsetTop = navbar?.offsetTop || 0;
+            const navbarIsSticky = window.scrollY >= navbarOffsetTop - offset;
 
-            // Проверяем прилип ли navbar
-            const navbarRect = document.querySelector('.navbar')?.getBoundingClientRect();
-            const navbarIsSticky = navbarRect && navbarRect.top <= offset;
-
-            if (!navbarIsSticky) {
-                // Меню не прилипло — скроллим только если вкладка скрыта за панелями
+            if (navbarIsSticky) {
+                // Меню прилипло — просто восстанавливаем скролл, не двигаем
+                window.scrollTo(0, scrollBefore);
+            } else {
+                // Меню не прилипло — скроллим к началу вкладки если скрыта
+                const tabRect = targetTab.getBoundingClientRect();
                 if (tabRect.top < offset) {
                     window.scrollTo({
                         top: targetTab.getBoundingClientRect().top + window.scrollY - offset - 10,
@@ -70,12 +82,8 @@ function showTab(tabId, event) {
                     });
                 }
             }
-            // Если navbar прилип — не двигаем страницу вообще
-        }, 100);
+        }, 50);
     }
-
-    // Делаем кнопку активной
-    if (event && event.currentTarget) event.currentTarget.classList.add('active');
 }
 
 // Слушаем скролл viewport

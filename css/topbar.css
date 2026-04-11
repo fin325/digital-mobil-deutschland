@@ -43,7 +43,7 @@
     position: sticky;
     top: 30px; /* прилипает под top-bar */
     z-index: 9998;
-    height: 80px;
+    height: 90px;
     overflow: hidden
 }
 
@@ -233,8 +233,8 @@
 
 .lang-btn {
     position: fixed;
-    top: 50px;
-    left: 10px;
+    top: 55px;
+    right: 8px;
     z-index: 9997;
     background: white;
     border: 2px solid #ddd;

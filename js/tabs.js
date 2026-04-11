@@ -62,3 +62,13 @@ const menuScroll = document.querySelector('.nav-scroll-viewport');
 if (menuScroll) {
     menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
 }
+
+// Показываем кнопку только когда проскроллили вниз
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        scrollTopBtn?.classList.add('visible');
+    } else {
+        scrollTopBtn?.classList.remove('visible');
+    }
+}, { passive: true });

@@ -48,12 +48,25 @@ function showTab(tabId, event) {
         targetTab.style.webkitAnimation = '';
 
         targetTab.classList.add('active');
+
+        // Скроллим к началу вкладки с учётом высоты sticky элементов
+        setTimeout(() => {
+            const topBarHeight = document.querySelector('.top-bar')?.offsetHeight || 0;
+            const scrollHintHeight = document.querySelector('scroll-hint')?.offsetHeight || 0;
+            const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+
+            const offset = topBarHeight + scrollHintHeight + navbarHeight;
+            const tabTop = targetTab.getBoundingClientRect().top + window.scrollY - offset - 10;
+
+            window.scrollTo({
+                top: tabTop,
+                behavior: 'smooth'
+            });
+        }, 50);
     }
 
     // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
-
-    // window.scrollTo(0, 0) — удалено, меню не съезжает
 }
 
 // Слушаем скролл viewport

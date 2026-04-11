@@ -7,7 +7,7 @@
 
 /* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
-    display: block;
+    display: contens;
 }
 
 scroll-hint {

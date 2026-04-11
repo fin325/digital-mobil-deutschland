@@ -95,6 +95,7 @@ a.nav-btn.active {
     font-size: 0.85rem;
     color: #6c757d;
     font-style: italic;
+    transform: translateY(5px)
 }
 
 .scroll-arrows {
@@ -139,6 +140,7 @@ a.nav-btn.active {
     display: inline-block;
     transform-origin: top center;
     animation: swipeRock 1.6s ease-in-out infinite;
+    transform: translateY(5px)
 }
 
 @keyframes swipeRock {

@@ -7,6 +7,7 @@ app-header {
 
 scroll-hint {
     display: block;
+    height: 30px;
 }
 
 .navbar {

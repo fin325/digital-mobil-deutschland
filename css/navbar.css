@@ -164,7 +164,7 @@ a.nav-btn.active {
 
 .scroll-top-btn {
     position: fixed;
-    bottom: 15vh;
+    bottom: 25px;
     right: 10px;
     width: 26px;
     height: 38px;
@@ -198,7 +198,7 @@ a.nav-btn.active {
 
 /* Во время скролла — чуть меньше */
 .scroll-top-btn.scrolling {
-    transform: scale(0.75); /* было 0.5, теперь не так сильно уменьшается */
+    transform: scale(0.85); /* было 0.5, теперь не так сильно уменьшается */
     opacity: 0.4;
     pointer-events: none;
 }

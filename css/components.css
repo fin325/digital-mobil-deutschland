@@ -20,7 +20,6 @@
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
-    overscroll-behavior-y: none;
 }
 
 .btn-main {

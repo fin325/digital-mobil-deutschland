@@ -1,7 +1,6 @@
 /* === TOPBAR & HEADER CSS === */
 
 /* --- ОБЩИЙ ЭФФЕКТ СТЕКЛА --- */
-/* Применяем ко всем элементам, которым нужна прозрачность и размытие */
 .top-bar,
 .site-header,
 .date-time-block,
@@ -38,8 +37,8 @@
 .site-header {
     border-bottom: 1px solid var(--glass-border);
     position: relative;
-    z-index: 9997 !important; /* Чуть ниже, чем у top-bar */
-    padding: 15px 0; /* Отступы для красоты */
+    z-index: 9997 !important;
+    padding: 15px 0;
     width: 100%;
     top: 0;
 }
@@ -122,17 +121,18 @@
     display: flex;
     align-items: flex-start;
     overflow-x: auto;
-    overflow-y: visible !important;
+    overflow-y: visible !important; /* оставляем для всплывающих подсказок */
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
     padding: 0;
-    padding-bottom: 55px;
+    padding-bottom: 55px; /* трюк для скрытия скроллбара */
     margin: 0;
-    margin-bottom: -55px;
+    margin-bottom: -55px; /* трюк для скрытия скроллбара */
     gap: 0;
     overscroll-behavior-x: none;
     align-self: flex-start;
+    pointer-events: none; /* невидимая зона не перехватывает клики navbar */
 }
 
 .weather-scroll-container::-webkit-scrollbar {
@@ -145,6 +145,7 @@
     padding: 0 8px;
     margin-left: 0;
     flex-wrap: nowrap;
+    pointer-events: all; /* возвращаем клики */
 }
 
 .w-item {
@@ -185,6 +186,7 @@
     justify-content: center;
     z-index: 10;
     transition: background 0.2s ease;
+    pointer-events: all; /* возвращаем клики */
 }
 
 .weather-arrow-btn:hover {
@@ -254,4 +256,3 @@
     box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     transform: translateY(0);
 }
-

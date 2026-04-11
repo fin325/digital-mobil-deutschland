@@ -190,10 +190,10 @@ a.nav-btn.active {
     justify-content: center;
     z-index: 10000;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
-    touch-action: none; /* добавлено */
-    will-change: transform; /* добавлено */
+    touch-action: none;
+    will-change: transform;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
 }
@@ -203,4 +203,10 @@ a.nav-btn.active {
     pointer-events: all;
 }
 
+/* Во время скролла — маленькая */
+.scroll-top-btn.scrolling {
+    transform: scale(0.5);
+    opacity: 0.4;
+    pointer-events: none; /* во время скролла не кликабельна */
+}
 

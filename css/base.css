@@ -17,7 +17,6 @@ body {
     padding: 0;
     background-size: cover;
     top: 0 !important;
-    overscroll-behavior-y: none;
 }
 
 body::before {

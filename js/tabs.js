@@ -81,7 +81,7 @@ window.addEventListener('scroll', () => {
     scrollTimer = setTimeout(() => {
         // Скролл остановился — нормальный размер
         scrollTopBtn?.classList.remove('scrolling');
-    }, 300);
+    }, 150);
 }, { passive: true });
 
 scrollTopBtn?.addEventListener('pointerdown', (e) => {

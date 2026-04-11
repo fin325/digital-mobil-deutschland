@@ -133,6 +133,7 @@ a.nav-btn.active {
     align-items: flex-start;
     justify-content: center;
     position: relative;
+    transform: translateY(5px);
 }
 
 .swipe-finger {
@@ -140,7 +141,6 @@ a.nav-btn.active {
     display: inline-block;
     transform-origin: top center;
     animation: swipeRock 1.6s ease-in-out infinite;
-    transform: translateY(5px);
 }
 
 @keyframes swipeRock {

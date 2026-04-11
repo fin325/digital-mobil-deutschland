@@ -43,7 +43,7 @@
     position: sticky;
     top: 30px; /* прилипает под top-bar */
     z-index: 9998;
-    hight: 40px;
+    hight: 50px;
     overflow: hidden
 }
 

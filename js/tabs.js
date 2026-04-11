@@ -41,7 +41,7 @@ function showTab(tabId, event) {
         targetTab.style.animation = 'none';
         targetTab.style.webkitAnimation = 'none';
 
-        // Принудительный reflow — заставляет браузер "забыть" старое состояние
+        // Принудительный reflow
         void targetTab.offsetHeight;
 
         targetTab.style.animation = '';
@@ -53,11 +53,10 @@ function showTab(tabId, event) {
     // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    // Скролл страницы вверх при переключении
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0) — удалено, меню не съезжает
 }
 
-// Слушаем скролл viewport (правильный селектор)
+// Слушаем скролл viewport
 const menuScroll = document.querySelector('.nav-scroll-viewport');
 if (menuScroll) {
     menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });

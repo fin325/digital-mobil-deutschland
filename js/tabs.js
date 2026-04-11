@@ -29,24 +29,16 @@ function scrollTabs(direction) {
 }
 
 function showTab(tabId, event) {
-    // Скрываем весь контент
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    // Снимаем активность со всех кнопок
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
 
-    // Показываем нужную вкладку
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
-        // Сбрасываем анимацию перед показом
         targetTab.style.animation = 'none';
         targetTab.style.webkitAnimation = 'none';
-
-        // Принудительный reflow
         void targetTab.offsetHeight;
-
         targetTab.style.animation = '';
         targetTab.style.webkitAnimation = '';
-
         targetTab.classList.add('active');
 
         setTimeout(() => {
@@ -55,20 +47,15 @@ function showTab(tabId, event) {
             const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
             const offset = topBarHeight + scrollHintHeight + navbarHeight;
 
-            const tabTop = targetTab.getBoundingClientRect().top;
-
-            // Скроллим ТОЛЬКО если начало вкладки скрыто за sticky панелями
-            if (tabTop < offset) {
-                window.scrollTo({
-                    top: targetTab.getBoundingClientRect().top + window.scrollY - offset - 10,
-                    behavior: 'smooth'
-                });
-            }
-            // Если вкладка видна — ничего не делаем, меню остаётся на месте
+            // Скроллим к началу вкладки всегда
+            const tabTop = targetTab.getBoundingClientRect().top + window.scrollY - offset - 10;
+            window.scrollTo({
+                top: tabTop,
+                behavior: 'smooth'
+            });
         }, 50);
     }
 
-    // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 }
 

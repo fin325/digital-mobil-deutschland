@@ -7,7 +7,6 @@ app-header {
 
 scroll-hint {
     display: block;
-    height: 30px;
 }
 
 .navbar {
@@ -89,8 +88,7 @@ a.nav-btn.active {
     padding: 0 15px;
     margin-bottom: 5px;
     margin-top: 5px;
-    transform: translateY(10px);
-    height: 30px;
+    height: 26px;
 }
 
 .scroll-hint-text {
@@ -115,7 +113,7 @@ a.nav-btn.active {
     cursor: pointer;
     box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transform: translateY(-8px);
+    transform: translateY(0.1px);
     transition: background 0.3s ease, opacity 0.2s ease;
     display: flex;
     align-items: center;

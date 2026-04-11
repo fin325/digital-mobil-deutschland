@@ -25,12 +25,12 @@ function showTab(tabId, event) {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    // Жёстко фиксируем позицию скролла
+    // Сохраняем скролл и замораживаем body
     const savedScroll = window.scrollY;
-
-    // Блокируем любой скролл на время переключения
-    const lockScroll = () => window.scrollTo(0, savedScroll);
-    window.addEventListener('scroll', lockScroll);
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScroll}px`;
+    document.body.style.width = '100%';
 
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
@@ -42,31 +42,9 @@ function showTab(tabId, event) {
         targetTab.classList.add('active');
     }
 
-    // Снимаем блокировку через 200мс
-    setTimeout(() => {
-        window.removeEventListener('scroll', lockScroll);
-
-        if (!targetTab) return;
-
-        const topBarHeight = document.querySelector('.top-bar')?.offsetHeight || 0;
-        const scrollHintHeight = document.querySelector('scroll-hint')?.offsetHeight || 0;
-        const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
-        const offset = topBarHeight + scrollHintHeight + navbarHeight;
-
-        const tabRect = targetTab.getBoundingClientRect();
-
-        // Если начало вкладки скрыто — скроллим к нему
-        if (tabRect.top < offset) {
-            window.scrollTo({
-                top: savedScroll + tabRect.top - offset - 10,
-                behavior: 'smooth'
-            });
-        }
-    }, 200);
-}
-
-// Слушаем скролл viewport
-const menuScroll = document.querySelector('.nav-scroll-viewport');
-if (menuScroll) {
-    menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
-}
+    // Размораживаем и восстанавливаем позицию
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body​​​​​​​​​​​​​​​​

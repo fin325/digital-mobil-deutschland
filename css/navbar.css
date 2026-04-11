@@ -7,7 +7,7 @@
 
 /* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
-    display: contens;
+    display: contents;
 }
 
 scroll-hint {
@@ -98,10 +98,10 @@ a.nav-btn.active {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    margin-bottom: 5px;
+    margin-top: 15px;
+    transform: translateY(10px);
+    height: 35px;
 }
 
 .scroll-hint-text {
@@ -126,6 +126,7 @@ a.nav-btn.active {
     cursor: pointer;
     box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transform: translateY(-8px);
     transition: background 0.3s ease, opacity 0.2s ease;
     display: flex;
     align-items: center;
@@ -134,7 +135,7 @@ a.nav-btn.active {
 }
 
 .arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .swipe-finger-wrapper {

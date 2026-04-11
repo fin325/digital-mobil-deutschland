@@ -49,20 +49,29 @@ function showTab(tabId, event) {
 
         targetTab.classList.add('active');
 
-        // Скроллим к началу вкладки с учётом высоты sticky элементов
         setTimeout(() => {
             const topBarHeight = document.querySelector('.top-bar')?.offsetHeight || 0;
             const scrollHintHeight = document.querySelector('scroll-hint')?.offsetHeight || 0;
             const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
-
             const offset = topBarHeight + scrollHintHeight + navbarHeight;
-            const tabTop = targetTab.getBoundingClientRect().top + window.scrollY - offset - 10;
 
-            window.scrollTo({
-                top: tabTop,
-                behavior: 'smooth'
-            });
-        }, 50);
+            const tabRect = targetTab.getBoundingClientRect();
+
+            // Проверяем прилип ли navbar
+            const navbarRect = document.querySelector('.navbar')?.getBoundingClientRect();
+            const navbarIsSticky = navbarRect && navbarRect.top <= offset;
+
+            if (!navbarIsSticky) {
+                // Меню не прилипло — скроллим только если вкладка скрыта за панелями
+                if (tabRect.top < offset) {
+                    window.scrollTo({
+                        top: targetTab.getBoundingClientRect().top + window.scrollY - offset - 10,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            // Если navbar прилип — не двигаем страницу вообще
+        }, 100);
     }
 
     // Делаем кнопку активной

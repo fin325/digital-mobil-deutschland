@@ -192,8 +192,9 @@ a.nav-btn.active {
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
-    touch-action: manipulation; /* убирает задержку 300мс на iOS */
-    -webkit-tap-highlight-color: transparent; /* убирает серую вспышку */
+    touch-action: none; /* добавлено */
+    will-change: transform; /* добавлено */
+    -webkit-tap-highlight-color: transparent;
     user-select: none;
 }
 
@@ -201,4 +202,5 @@ a.nav-btn.active {
     opacity: 1;
     pointer-events: all;
 }
+
 

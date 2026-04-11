@@ -66,14 +66,9 @@ if (menuScroll) {
 // Кнопка наверх
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 
-// Мгновенное срабатывание на касание
-scrollTopBtn?.addEventListener('touchstart', (e) => {
+// Мгновенное срабатывание через pointerdown
+scrollTopBtn?.addEventListener('pointerdown', (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}, { passive: false });
-
-// Запасной вариант для мыши
-scrollTopBtn?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 

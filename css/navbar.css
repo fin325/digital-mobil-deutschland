@@ -1,32 +1,24 @@
 /* === NAVBAR.CSS — Навигация === */
 
-:root {
-    --topbar-height: 30px;
-    --scrollhint-height: 35px;
-}
-
 /* Делаем новые теги компонентов блочными по умолчанию */
 app-header {
-    display: contents;
+    display: contents; 
 }
 
 scroll-hint {
     display: block;
-    position: sticky;
-    top: var(--topbar-height); /* 30px — прилипает под top-bar */
-    z-index: 9998;
-    height: var(--scrollhint-height);
 }
 
 .navbar {
     background: rgba(255, 255, 255, 0.3); 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border); /* Граница теперь снизу */
     padding: 12px 0;
     
+    /* Меню прилипает к верху */
     position: sticky;
-    top: calc(var(--topbar-height) + var(--scrollhint-height)); /* 30 + 35 = 65px */
+    top: 65px;
     z-index: 9997;
 }
 
@@ -101,7 +93,10 @@ a.nav-btn.active {
     margin-bottom: 5px;
     margin-top: 15px;
     transform: translateY(10px);
-    height: 35px;
+    position: sticky;
+    top: 30px;
+    z-index: 9998;
+    hight: 35px;
 }
 
 .scroll-hint-text {
@@ -131,7 +126,10 @@ a.nav-btn.active {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 35px;
+    top: 30px;
+    z-index: 9998;
+    hihgt: 35px;
+    position: sticky;
 }
 
 .arrow-btn:hover {

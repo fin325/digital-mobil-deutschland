@@ -65,18 +65,26 @@ if (menuScroll) {
 
 // Кнопка наверх
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
+let scrollTimer;
 
-// Мгновенное срабатывание через pointerdown
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        // Во время скролла — маленькая и полупрозрачная
+        scrollTopBtn?.classList.add('visible');
+        scrollTopBtn?.classList.add('scrolling');
+    } else {
+        scrollTopBtn?.classList.remove('visible');
+        scrollTopBtn?.classList.remove('scrolling');
+    }
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        // Скролл остановился — нормальный размер
+        scrollTopBtn?.classList.remove('scrolling');
+    }, 300);
+}, { passive: true });
+
 scrollTopBtn?.addEventListener('pointerdown', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-
-// Показываем кнопку только когда проскроллили вниз
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-        scrollTopBtn?.classList.add('visible');
-    } else {
-        scrollTopBtn?.classList.remove('visible');
-    }
-}, { passive: true });

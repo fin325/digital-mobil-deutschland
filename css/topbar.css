@@ -40,7 +40,9 @@
     z-index: 9997 !important;
     padding: 15px 0;
     width: 100%;
-    top: 0;
+    position: sticky;
+    top: 30px; /* прилипает под top-bar */
+    z-index: 9998;
 }
 
 .site-title {

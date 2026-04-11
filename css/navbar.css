@@ -203,10 +203,10 @@ a.nav-btn.active {
     pointer-events: all;
 }
 
-/* Во время скролла — маленькая */
+/* Во время скролла — чуть меньше */
 .scroll-top-btn.scrolling {
-    transform: scale(0.5);
+    transform: scale(0.75); /* было 0.5, теперь не так сильно уменьшается */
     opacity: 0.4;
-    pointer-events: none; /* во время скролла не кликабельна */
+    pointer-events: none;
 }
 

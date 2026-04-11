@@ -53,7 +53,8 @@ function showTab(tabId, event) {
     // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    // window.scrollTo(0, 0) — удалено, меню не съезжает
+    // Всегда скроллим в начало страницы
+    window.scrollTo(0, 0);
 }
 
 // Слушаем скролл viewport

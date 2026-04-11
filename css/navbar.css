@@ -172,7 +172,7 @@ a.nav-btn.active {
 .scroll-top-btn {
     position: fixed;
     bottom: 45vh; /* середина экрана */
-    right: 15px;
+    right: 7px;
     width: 36px;
     height: 48px;
     border-radius: 10px;

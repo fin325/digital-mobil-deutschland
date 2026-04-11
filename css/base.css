@@ -13,7 +13,6 @@ body {
     color: var(--text-dark);
     min-height: 100vh;
     overflow-x: hidden;
-    position: relative;
     padding: 0;
     background-size: cover;
     top: 0 !important;

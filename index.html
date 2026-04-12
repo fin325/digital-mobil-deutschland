@@ -334,6 +334,153 @@
     </div>
 </section>
 
+<!-- ====================== ÜBER DAS PROJEKT (DE) ====================== -->
+
+<section id="project" class="tab-content">
+    <div class="card">
+        <h2>🚀 Über das Projekt</h2>
+
+    <p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+        <strong>Digital &amp; Mobil in Deutschland</strong> — ein kostenloses Informationsportal
+        für Einwohner und Neuzugewanderte in Deutschland. Alle wichtigen Dienste,
+        Nachrichten und Tools an einem Ort.
+    </p>
+
+    <div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
+        <h3 style="margin: 0 0 10px; color: var(--primary-blue); font-size: 0.95rem;">Was bietet die Seite?</h3>
+        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+            🗞️ Aktuelle Nachrichten (RSS-Feed von tagesschau.de)<br>
+            🎬 YouTube-Videos &amp; Playlists — Nachrichten aus Deutschland auf Deutsch und Russisch (iframe, nocookie)<br>
+            🌤️ Wetter &amp; Luftqualität in Echtzeit (OpenWeatherMap API)<br>
+            📄 PDF-Kompressor (eigene Web-App auf Render)<br>
+            📸 Foto zu PDF (eigene Web-App auf Streamlit)
+        </p>
+        <p style="margin: 0 0 10px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
+            Links zu externen Quellen:
+        </p>
+        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+            💼 Jobportale<br>
+            🩺 Arztsuche &amp; Online-Terminbuchung<br>
+            🚆 DB Fahrplan &amp; Navigation<br>
+            🌐 Übersetzer<br>
+            💻 KI-Assistenten<br>
+            🏙️ Lokale Infos für Hattingen
+        </p>
+        <p style="margin: 0 0 6px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
+            Sprachumschaltung innerhalb der Website:
+        </p>
+        <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+            🇩🇪🇷🇺 Mehrsprachig (Deutsch / Russisch)
+        </p>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0;">
+
+    <!-- Технический блок — сворачиваемый -->
+    <details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
+        <summary style="cursor: pointer; font-weight: 700; color: var(--primary-blue); font-size: 0.95rem;">
+            🛠 Technische Details
+        </summary>
+        <div style="margin-top: 14px; font-size: 0.85rem; line-height: 1.7;">
+
+            <p style="margin-bottom: 12px;">
+                <strong>Stack:</strong><br>
+                HTML5, CSS3, JavaScript (Vanilla ES6+)
+            </p>
+
+            <p style="margin-bottom: 12px;">
+                <strong>APIs &amp; Dienste:</strong><br>
+                OpenWeatherMap (Wetter &amp; Luftqualität)<br>
+                rss2json (RSS-Feed von tagesschau.de)
+            </p>
+
+            <p style="margin-bottom: 12px;">
+                <strong>Hosting:</strong><br>
+                Vercel (statische Website)
+            </p>
+
+            <p style="margin-bottom: 12px;">
+                <strong>Datenschutz &amp; Compliance:</strong><br>
+                Cookie Consent Manager (Silktide)<br>
+                YouTube im erweiterten Datenschutzmodus (nocookie)<br>
+                Zwei-Klick-Lösung für externe Inhalte<br>
+                Lokale Schriftarten (kein Google Fonts CDN)<br>
+                DSGVO-konforme Datenschutzerklärung<br>
+                Impressum gemäß § 5 DDG &amp; § 18 MStV
+            </p>
+
+            <p style="margin-bottom: 12px;">
+                <strong>Features:</strong><br>
+                Echtzeit-Uhr &amp; Datumsanzeige<br>
+                Wetter mit lokalem Caching (Local Storage)<br>
+                Sprachumschaltung (DE ↔ RU)<br>
+                Responsive Design (Mobile First)<br>
+                Tab-basierte Navigation ohne Seitenreload
+            </p>
+
+            <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
+
+            <!-- PDF-Kompressor -->
+            <p style="margin-bottom: 6px;">
+                <strong>📄 PDF-Kompressor</strong>
+            </p>
+            <p style="margin-bottom: 6px;">
+                <em>Stack:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)
+            </p>
+            <p style="margin-bottom: 6px;">
+                <em>Hosting:</em> Render (Web Service), Supabase (Datenbank)
+            </p>
+            <p style="margin-bottom: 12px;">
+                <em>Funktionsweise:</em> Der Nutzer lädt eine PDF-Datei hoch und wählt eine Qualitätsstufe (in Prozent).
+                Das Backend öffnet die PDF mit PyMuPDF, rendert jede Seite als Rasterbild (Pixmap) mit der gewählten Skalierung
+                und erstellt ein neues PDF aus den komprimierten Bildern.
+                Dabei werden Garbage Collection (Stufe 4), Deflate-Kompression für Bilder, Schriften und Streams angewandt.
+                Die komprimierte Datei wird direkt als Download zurückgegeben — es werden keine Dateien auf dem Server gespeichert.
+                Zusätzlich verfügt die App über ein Feedback-System (Like/Dislike) mit Supabase-Datenbank (PostgreSQL) und IP-basierter Duplikaterkennung — jeder Nutzer kann nur einmal abstimmen, seine Stimme ändern oder zurücknehmen.
+            </p>
+            <p style="margin-bottom: 12px;">
+                <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
+                    GitHub: pdf-compressor-web →
+                </a>
+            </p>
+
+            <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
+
+            <!-- Foto zu PDF -->
+            <p style="margin-bottom: 6px;">
+                <strong>📸 Foto zu PDF</strong>
+            </p>
+            <p style="margin-bottom: 6px;">
+                <em>Stack:</em> Python, Streamlit, Pillow (PIL)
+            </p>
+            <p style="margin-bottom: 6px;">
+                <em>Hosting:</em> Streamlit Community Cloud (Snowflake)
+            </p>
+            <p style="margin-bottom: 12px;">
+                <em>Funktionsweise:</em> Der Nutzer wählt ein oder mehrere Fotos (JPG/PNG) über den Datei-Upload aus.
+                Die Bilder werden mit Pillow in den RGB-Modus konvertiert und anschließend mit der Methode <code>Image.save()</code>
+                zu einer mehrseitigen PDF-Datei zusammengefügt — jedes Foto wird zu einer eigenen Seite.
+                Die gesamte Verarbeitung erfolgt im Arbeitsspeicher (BytesIO), ohne Dateien auf dem Server zu speichern.
+                Nach der Erstellung wird das PDF als Vorschau im Browser angezeigt (Base64-iframe) und kann direkt heruntergeladen werden.
+                Eine Miniaturansicht aller hochgeladenen Fotos wird in einem 4-Spalten-Raster dargestellt.
+            </p>
+            <p style="margin-bottom: 0;">
+                <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
+                    GitHub: photo-to-pdf-converter →
+                </a>
+            </p>
+
+        </div>
+    </details>
+
+    <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
+        💡 <strong>Idee &amp; Entwicklung:</strong> Artem Finevych, Hattingen (NRW)
+    </div>
+
+</div>
+
+</section>
+
 </main>
 
 <!-- Кнопка возврата наверх -->

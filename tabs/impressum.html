@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum — Digital & Mobil in Deutschland</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<app-header></app-header>
+
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+            <div class="nav-row">
+                <a href="../index.html" class="nav-btn active" style="text-decoration:none;">← Startseite</a>
+                <a href="datenschutz.html" class="nav-btn" style="text-decoration:none;">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+<section id="home" class="tab-content active">
+    <div class="card">
+        <h2>ℹ️ Impressum</h2>
+
+```
+    <div style="font-size: 0.85rem; line-height: 1.6; opacity: 0.9;">
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)</h3>
+        <p style="margin-bottom: 14px;">
+            Artem Finevych<br>
+            Digital &amp; Mobil in Deutschland<br>
+            Pannhütter Str. 72<br>
+            45525 Hattingen, Deutschland
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Kontakt</h3>
+        <p style="margin-bottom: 14px;">
+            E-Mail: <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+        <p style="margin-bottom: 14px;">
+            Artem Finevych<br>
+            Pannhütter Str. 72<br>
+            45525 Hattingen, Deutschland
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Hinweis zur Nutzung</h3>
+        <p style="margin-bottom: 14px;">
+            Diese Website wird als privates, nicht-kommerzielles Informationsangebot betrieben.
+            Es werden keine Waren oder Dienstleistungen angeboten und keine Einnahmen durch Werbung erzielt.
+            Es besteht keine Gewerbeanmeldungspflicht.
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Haftung für Inhalte</h3>
+        <p style="margin-bottom: 14px;">
+            Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt.
+            Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.
+            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
+            Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Haftung für Links</h3>
+        <p style="margin-bottom: 14px;">
+            Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+            Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
+            Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+            Bei Bekanntwerden von Rechtsverletzungen werden entsprechende Links umgehend entfernt.
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Urheberrecht</h3>
+        <p style="margin-bottom: 14px;">
+            Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des Autors.
+        </p>
+
+        <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue);">
+            🔒 <strong>Datenschutz:</strong>
+            Informationen zur Verarbeitung personenbezogener Daten finden Sie in unserer
+            <a href="datenschutz.html" style="color: inherit; font-weight: 700; text-decoration: underline;">Datenschutzerklärung →</a>
+        </div>
+    </div>
+</div>
+```
+
+</section>
+</main>
+
+<button class="scroll-top-btn" touch-action="none">↑</button>
+
+<script src="../js/components.js"></script>
+
+<script src="../js/tabs.js"></script>
+
+<script src="../js/clock.js"></script>
+
+<script src="../js/weather.js"></script>
+
+<script src="../js/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof initClock === 'function') initClock();
+        if (typeof getWeather === 'function') getWeather();
+    });
+</script>
+
+</body>
+</html>

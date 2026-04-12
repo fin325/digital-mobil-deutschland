@@ -22,10 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Фоновый пинг для пробуждения Render-приложения при загрузке сайта
-fetch('https://ВАШ_АДРЕС_НА_RENDER.onrender.com/wakeup', { mode: 'no-cors' })
-  .catch(() => {});
-
 // === Функции загрузки YouTube ===
 
 function loadVideo(placeholderId, iframeId, videoId) {

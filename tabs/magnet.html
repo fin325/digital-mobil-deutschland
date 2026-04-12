@@ -30,12 +30,12 @@
 </nav>
 
 <main class="container">
-
-```
 <!-- Startseite -->
 <section id="home" class="tab-content active">
     <div class="card">
-        <h1 style="margin-top: 0; margin-bottom: 10px;">Interkulturelles Zentrum Magnet 🧲</h1>
+        <div class="btn-main" style="padding: 0; overflow: hidden; border: none; margin-bottom: 16px; pointer-events: none; cursor: default;">
+            <img src="../img/IMG_2784.jpeg" alt="Interkulturelles Zentrum Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
         <p style="font-size: 1rem; line-height: 1.5; color: #333; font-weight: 500;">
             Das Interkulturelle Zentrum «Magnet» ist ein Begegnungsort für Menschen verschiedener Kulturen in Hattingen. 
             Das Zentrum fördert die Integration von Migranten durch Bildungs- und Sozialprojekte, 
@@ -65,17 +65,20 @@
         </p>
     </div>
 </section>
-```
-
 </main>
 
 <button class="scroll-top-btn" touch-action="none">↑</button>
-
 <script src="../js/components.js"></script>
-
 <script src="../js/tabs.js"></script>
-
+<script src="../js/clock.js"></script>
+<script src="../js/weather.js"></script>
 <script src="../js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof initClock === 'function') initClock();
+        if (typeof getWeather === 'function') getWeather();
+    });
+</script>
 
 </body>
 </html>

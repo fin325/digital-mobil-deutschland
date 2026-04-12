@@ -1,8 +1,28 @@
 class AppHeader extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';
-        const langHref = isRu ? '/' : '/ru/';
-        const langLabel = isRu ? '🇷🇺 → 🇩🇪' : '🇩🇪 → 🇷🇺';
+const langLabel = isRu ? '🇷🇺 → 🇩🇪' : '🇩🇪 → 🇷🇺';
+
+// Определяем текущий файл
+const path = window.location.pathname;
+const filename = path.split('/').pop() || 'index.html';
+
+let langHref;
+if (isRu) {
+    // ru/magnet.html → /tabs/magnet.html, ru/index.html → /
+    if (filename === 'index.html' || filename === '') {
+        langHref = '/';
+    } else {
+        langHref = '/tabs/' + filename;
+    }
+} else {
+    // /tabs/magnet.html → /ru/magnet.html, /index.html → /ru/
+    if (filename === 'index.html' || filename === '' || path === '/') {
+        langHref = '/ru/';
+    } else {
+        langHref = '/ru/' + filename;
+    }
+}
         
         this.innerHTML = `
             <div class="top-bar">

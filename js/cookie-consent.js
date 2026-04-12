@@ -121,3 +121,10 @@ function loadPdfCompressor() {
         ph.style.display = "none";
     }
 }
+
+onAccept: function() {
+    // Wake-up ping
+    fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' }).catch(() => {});
+    // ... остальной код loadVideos
+}
+

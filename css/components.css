@@ -82,10 +82,11 @@ iframe {
     border: none;
 }
 
+/* Базовый контейнер для видео */
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
+    /* Убрали padding-bottom и height: 0 */
+    width: 100%;
     overflow: hidden;
     border-radius: 15px;
     margin: 15px 0;
@@ -93,6 +94,20 @@ iframe {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Формат для горизонтальных видео (16:9) */
+.video-wrapper.horizontal {
+    aspect-ratio: 16 / 9;
+}
+
+/* Формат для вертикальных видео (9:16) */
+.video-wrapper.vertical {
+    max-width: 350px; /* Ограничитель ширины */
+    aspect-ratio: 9 / 16;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стили для самого iframe внутри */
 .video-wrapper iframe {
     position: absolute;
     top: 0;

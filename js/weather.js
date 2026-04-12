@@ -1,13 +1,13 @@
-/* === weather.js — Погода OpenWeatherMap + Качество воздуха === */
+/* === weather.js — Wetter OpenWeatherMap + Luftqualität === */
 
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
 let currentCity = 'Hattingen';
 
-const CACHE_TTL = 10 * 60 * 1000; // 10 минут
+const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
 async function getWeather() {
     try {
-        // Проверяем кэш
+        // Cache prüfen
         const cached = localStorage.getItem('weatherCache');
         if (cached) {
             const parsed = JSON.parse(cached);
@@ -18,7 +18,7 @@ async function getWeather() {
         }
     } catch (e) {}
 
-    // Запрос к API
+    // API-Anfrage
     try {
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
@@ -26,7 +26,7 @@ async function getWeather() {
         const d = await res.json();
 
         if (!d.main) {
-            console.error('Город не найден:', d.message);
+            console.error('Stadt nicht gefunden:', d.message);
             return;
         }
 
@@ -41,7 +41,7 @@ async function getWeather() {
         applyWeatherData(d);
 
     } catch (e) {
-        console.error('Ошибка погоды:', e);
+        console.error('Wetter-Fehler:', e);
     }
 }
 
@@ -67,7 +67,7 @@ function applyWeatherData(d) {
             tempEl.innerText = `${city} ${icon} ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
-                const newCity = prompt('Введите название города:', currentCity);
+                const newCity = prompt('Bitte den Namen der Stadt eingeben:', currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.removeItem('weatherCache');
@@ -83,7 +83,7 @@ function applyWeatherData(d) {
         getAirPollution(lat, lon);
 
     } catch (e) {
-        console.error('Ошибка применения данных погоды:', e);
+        console.error('Fehler beim Anwenden der Wetterdaten:', e);
     }
 }
 
@@ -116,7 +116,7 @@ async function getAirPollution(lat, lon) {
         updateAQIUI(aqiIndex);
 
     } catch (e) {
-        console.error('Ошибка качества воздуха:', e);
+        console.error('Fehler bei der Luftqualität:', e);
     }
 }
 
@@ -193,5 +193,5 @@ function toggleWeatherScroll() {
     }
 }
 
-// Запуск
+// Start
 getWeather();

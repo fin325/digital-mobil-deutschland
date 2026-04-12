@@ -61,8 +61,9 @@
 
 .tab-content.active {
     display: block;
-    animation: fadeInUp 0.6s ease forwards;
-    -webkit-animation: fadeInUp 0.6s ease forwards;
+    animation: fadeInUp 0.6s cubic-bezier (0.165, 0.84, 0.44, 1) forwards;
+    -webkit-animation: fadeInUp 0.6s
+    cubic-bezier (0.165, 0.84, 0.44, 1) forwards;
     transform-origin: bottom center;
 }
 

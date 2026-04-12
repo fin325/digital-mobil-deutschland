@@ -125,18 +125,17 @@
     display: flex;
     align-items: flex-start;
     overflow-x: auto;
-    overflow-y: visible !important; /* оставляем для всплывающих подсказок */
+    overflow-y: hidden;              /* было visible — ломало скролл */
     -webkit-overflow-scrolling: touch;
     flex-grow: 1;
     scroll-behavior: smooth;
     padding: 0;
-    padding-bottom: 55px; /* трюк для скрытия скроллбара */
     margin: 0;
-    margin-bottom: -55px; /* трюк для скрытия скроллбара */
     gap: 0;
     overscroll-behavior-x: none;
     align-self: flex-start;
-    pointer-events: none; /* невидимая зона не перехватывает клики navbar */
+    height: 30px;
+    pointer-events: auto;           /* было none — блокировало тач */
 }
 
 .weather-scroll-container::-webkit-scrollbar {

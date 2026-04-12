@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интеркультурный центр Magnet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/topbar.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+<app-header></app-header>
+
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+            <div class="nav-row">
+                <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
+                <button class="nav-btn" onclick="showTab('gallery', event)">Галерея</button>
+                <button class="nav-btn" onclick="showTab('about', event)">О нас</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+
+```
+<!-- Главная -->
+<section id="home" class="tab-content active">
+    <div class="card">
+        <h1 style="margin-top: 0; margin-bottom: 10px;">Интеркультурный центр Magnet 🧲</h1>
+        <p style="font-size: 1rem; line-height: 1.5; color: #333; font-weight: 500;">
+            Интеркультурный центр «Magnet» — это место встречи людей разных культур в Хаттингене. 
+            Центр занимается интеграцией мигрантов через образовательные и социальные проекты, 
+            помогает с изучением немецкого языка, адаптацией в обществе и поиском контактов. 
+            Мы организуем мероприятия, мастер-классы и консультации для всех, 
+            кто хочет стать частью местного сообщества.
+        </p>
+    </div>
+</section>
+
+<!-- Галерея -->
+<section id="gallery" class="tab-content">
+    <div class="card">
+        <h2>🖼️ Галерея</h2>
+        <p style="text-align: center; padding: 30px 0; opacity: 0.6; font-weight: 600;">
+            Контент появится позже
+        </p>
+    </div>
+</section>
+
+<!-- О нас -->
+<section id="about" class="tab-content">
+    <div class="card">
+        <h2>ℹ️ О нас</h2>
+        <p style="text-align: center; padding: 30px 0; opacity: 0.6; font-weight: 600;">
+            Контент появится позже
+        </p>
+    </div>
+</section>
+```
+
+</main>
+
+<button class="scroll-top-btn" touch-action="none">↑</button>
+
+<script src="js/components.js"></script>
+
+<script src="js/tabs.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

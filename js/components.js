@@ -38,21 +38,21 @@ if (isRu) {
                             <span class="w-item" id="city-temp">Laden...</span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                💧 <span class="w-label">Влажность воздуха:</span> <span id="hum">--</span>%
+                                💧 <span class="w-label">Luftfeuchtigkeit</span> <span id="hum">--</span>%
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
                                 <span id="aqi-icon">🍃</span> 
-                                <span class="w-label">Качество воздуха 5(максимум):</span> 
+                                <span class="w-label">Luftqualität (1 – sehr gut)</span> 
                                 <span id="aqi-value">--</span>
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                🧲 <span class="w-label">Геомагнитная активность:</span> <span id="geo">2</span>
+                                🧲 <span class="w-label">Geomagnetik (1-ruhig)</span> <span id="geo">2</span>
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                ⏲️ <span class="w-label">Атмосферное давление:</span> <span id="press">--</span> mmHg
+                                ⏲️ <span class="w-label">Luftdruck</span> <span id="press">--</span> mmHg
                             </span>
                         </div>
                     </div>

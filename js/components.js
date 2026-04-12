@@ -80,7 +80,7 @@ class ScrollHint extends HTMLElement {
                     <div class="swipe-finger-wrapper">
                         <div class="swipe-finger">👇🏼</div>
                     </div>
-                    <span class="scroll-hint-text">Свайп меню</span>
+                    <span class="scroll-hint-text">Menü mit Wischfunktion</span>
                 </div>
                 <div class="scroll-arrows">
                     <button class="arrow-btn" onclick="scrollTabs(-1)">←</button>

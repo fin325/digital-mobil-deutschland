@@ -16,13 +16,23 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
       onAccept: function() {
-        loadNews();
+        // ИСПРАВЛЕНИЕ: Ждем загрузки HTML перед вызовом loadNews, 
+        // чтобы скрипт точно нашел элементы на странице
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', loadNews, { once: true });
+        } else {
+          loadNews();
+        }
       },
       onReject: function() {
         const placeholder = document.getElementById('news-placeholder');
         const container = document.getElementById('news-container');
+        
         if (placeholder) placeholder.style.display = "block";
-        if (container) container.style.display = "none";
+        if (container) {
+            container.style.display = "none";
+            container.innerHTML = ""; // Очищаем старые новости при отказе
+        }
       }
     },
     {

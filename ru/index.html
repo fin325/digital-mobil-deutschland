@@ -164,21 +164,24 @@
 <section id="news" class="tab-content">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-            <h2 style="margin: 0;">🗞️ Актуальные новости</h2>
-            <span style="font-size: 0.85rem; color: #666;">Источник: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
+            <h2 style="margin: 0;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости">🗞️ Aktuelle Nachrichten</h2>
+            <span id="news-source" style="font-size: 0.85rem; color: #666;" data-de-html='Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a>' data-ru-html='Источник: <a href="https://ru.euronews.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">ru.euronews.com</a>'>Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
         </div>
+        
         <div id="news-wrapper">
             <div id="news-placeholder" class="consent-placeholder">
-                <p><strong>Новости от tagesschau.de</strong></p>
-                <p>Новости загружаются через RSS и могут передавать данные третьим лицам.</p>
-                <button onclick="loadNews()" class="load-tool-btn">
-                    Загрузить новости
+                <p><strong data-de="Nachrichten von tagesschau.de" data-ru="Новости от Euronews">Nachrichten von tagesschau.de</strong></p>
+                <p data-de="Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen." data-ru="Новости загружаются через RSS и могут передавать данные третьим лицам.">Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
+                <button onclick="loadNews()" class="load-tool-btn" data-de="Nachrichten laden" data-ru="Загрузить новости">
+                    Nachrichten laden
                 </button>
             </div>
+
             <div id="news-container" style="display: none;"></div>
         </div>
-        <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
-            Примечание: новости загружаются через RSS от tagesschau.de.
+        
+        <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;" data-de="Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen." data-ru="Примечание: новости загружаются через RSS от ru.euronews.com.">
+            Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen.
         </p>
     </div>
 </section>

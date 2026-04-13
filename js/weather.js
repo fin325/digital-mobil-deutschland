@@ -5,12 +5,12 @@ let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
-// Определяем язык страницы один раз для всего файла
+// Determine the page language once for the entire file
 const isRu = document.documentElement.lang === 'ru';
 
 async function getWeather() {
     try {
-        // Проверяем кэш
+        // Check the cache
         const cached = localStorage.getItem('weatherCache');
         if (cached) {
             const parsed = JSON.parse(cached);
@@ -23,8 +23,8 @@ async function getWeather() {
 
     // API-Anfrage
     try {
-        // ИЗМЕНЕНИЕ ЗДЕСЬ: Всегда запрашиваем погоду на немецком (lang=de), 
-        // чтобы OpenWeatherMap сам переводил введенные города (Мюнхен -> München)
+        // CHANGE HERE: Always request the weather in German (lang=de),
+        // so OpenWeatherMap automatically translates entered city names (e.g., Munich -> München)
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
         );
@@ -53,13 +53,13 @@ async function getWeather() {
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name; // Официальное название города от API (всегда на немецком)
+        const city = d.name; // name API (Deutsch)
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
 
-        // ИЗМЕНЕНИЕ ЗДЕСЬ: Если пользователь ввел город по-русски или с маленькой буквы, 
-        // мы сохраняем в память красивое немецкое название, которое вернул сервер!
+        // CHANGE HERE: If the user entered the city in Russian or in lowercase,
+        // we store the properly formatted German name returned by the server!
         if (currentCity !== city) {
             currentCity = city;
             localStorage.setItem('userCity', city);
@@ -80,7 +80,7 @@ function applyWeatherData(d) {
             tempEl.onclick = (e) => {
                 e.stopPropagation();
                 
-                // Перевод окна для ввода города
+                // Translation of the city input box
                 const promptMsg = isRu 
                     ? 'Пожалуйста, введите название города:' 
                     : 'Bitte den Namen der Stadt eingeben:';

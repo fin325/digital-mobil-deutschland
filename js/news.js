@@ -4,11 +4,10 @@ async function loadNews() {
     const container = document.getElementById('news-container');
     if (!container) return;
 
-    // Определяем язык страницы
     const lang = document.documentElement.lang || 'de';
 
     const feeds = {
-        ru: 'https://rss.dw.com/rdf/rss-rus',
+        ru: 'https://rss.dw.com/rdf/rss-ru-all',
         de: 'https://rss.dw.com/rdf/rss-de'
     };
 
@@ -21,7 +20,7 @@ async function loadNews() {
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
     try {
-        const res  = await fetch(apiUrl);
+        const res = await fetch(apiUrl);
         const data = await res.json();
 
         if (data.status === 'ok') {
@@ -38,6 +37,8 @@ async function loadNews() {
                 `;
                 container.appendChild(div);
             });
+        } else {
+            container.innerHTML = errorMsg[lang] || errorMsg.de;
         }
     } catch (e) {
         container.innerHTML = errorMsg[lang] || errorMsg.de;
@@ -45,3 +46,4 @@ async function loadNews() {
 }
 
 window.loadTagesschauNews = loadNews;
+window.loadNews = loadNews;

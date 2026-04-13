@@ -95,6 +95,8 @@
 }
 
 #silktide-wrapper .st-button--primary {
+  background-color: #007aff;
+  border-color: #007aff;
 }
 
 #silktide-wrapper .st-button--primary:hover {
@@ -214,12 +216,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  fill: var(--primaryColor); /* passed down to svg > path */
+  fill: var(--primaryColor);
   margin-left: auto;
   width: 48px;
   height: 48px;
 }
-
 
 #silktide-banner .actions {
   display: flex;
@@ -311,13 +312,13 @@
 }
 
 #silktide-modal section::-webkit-scrollbar {
-  display: block; /* Force scrollbars to show */
-  width: 5px; /* Width of the scrollbar */
+  display: block;
+  width: 5px;
 }
 
 #silktide-modal section::-webkit-scrollbar-thumb {
-  background-color: var(--textColor); /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners for the thumb */
+  background-color: var(--textColor);
+  border-radius: 10px;
 }
 
 #silktide-modal p {
@@ -379,7 +380,6 @@
   position: absolute;
 }
 
-/* Unchecked Switch Styles */
 #silktide-modal .switch__pill {
   position: relative;
   display: block;
@@ -421,7 +421,6 @@
   opacity: 0;
 }
 
-/* Checked Switch Styles */
 #silktide-modal .switch input:checked + .switch__pill {
   background: var(--primaryColor);
 }
@@ -440,7 +439,6 @@
   opacity: 1;
 }
 
-/* Disabled Switch Styles */
 #silktide-modal .switch input:disabled + .switch__pill {
   opacity: 0.65;
   cursor: not-allowed;
@@ -468,20 +466,22 @@
   padding: 14px 0px;
 }
 
-/* Cookie Icon */
+/* --------------------------------
+  Cookie Icon — уменьшен, левый нижний угол
+-------------------------------- */
 #silktide-cookie-icon {
   display: none;
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 12px;
+  left: 6px;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 30px;
+  height: 28px;
+  border-radius: 8px;
   padding: 0px;
   border: none;
-  background-color: var(--cookieIconColor);
+  background-color: #003366;
   cursor: pointer;
   box-shadow: 0px 0px 6px 0px #0000001a;
   pointer-events: auto;
@@ -490,11 +490,13 @@
 
 #silktide-cookie-icon.bottomRight {
   left: auto;
-  right: 10px;
+  right: 12px;
 }
 
 #silktide-cookie-icon svg {
   fill: var(--cookieIconBackgroundColor);
+  width: 22px;
+  height: 22px;
 }
 
 /* --------------------------------
@@ -516,12 +518,8 @@
   Animations
 -------------------------------- */
 @keyframes silktide-fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes silktide-slideInDown {

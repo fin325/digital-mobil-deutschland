@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портал работы | Работа и обучение в Германии</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+<app-header></app-header>
+
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+            <div class="nav-row">
+                <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
+                <button class="nav-btn" onclick="showTab('jobs', event)">Поиск работы</button>
+                <button class="nav-btn" onclick="showTab('ausbildung', event)">Ausbildung</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+
+<section id="home" class="tab-content active">
+    <div class="card">
+        
+        <div style="margin-top: 10px; display: flex; justify-content: center;">
+            <a href="../ru/index.html" style="color: #000080; margin: 0 0 16px 0; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+                ←  Назад на главную страницу
+            </a>
+        </div>
+
+        <div class="btn-main" style="padding: 0; overflow: hidden; border: none; margin-bottom: 16px;">
+            <div style="padding: 18px 20px; text-align: center;">
+                <h2 style="margin: 0; font-size: 1.5rem; color: #333;">💼 Портал по поиску работы</h2>
+            </div>
+        </div>
+        
+        <p style="font-size: 1rem; line-height: 1.6; color: #333; font-weight: 500;">
+            Этот портал поможет вам найти работу или место для профессионального обучения (Ausbildung) в Германии. 
+            Мы собрали важнейшие ресурсы для поиска работы и учебных мест в Германии в одном месте.
+        </p>
+        <p style="font-size: 0.92rem; line-height: 1.5; color: #555; margin-top: 12px;">
+            Используйте вкладки сверху для переключения между поиском работы и обучением. 
+            Все ссылки ведут напрямую на официальные и проверенные платформы.
+        </p>
+    </div>
+</section>
+
+<section id="jobs" class="tab-content">
+    <div class="card">
+        <h2>🔍 Поиск работы в Германии</h2>
+        <p style="margin-bottom: 16px; color: #555;">Основные порталы для поиска вакансий:</p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" 
+               style="background: #e30613; color: white; padding: 14px 18px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2);">
+                🇩🇪 Биржа труда — Bundesagentur für Arbeit
+            </a>
+
+            <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" 
+               style="background: #2164f3; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">
+                🔍 Indeed Deutschland
+            </a>
+
+            <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #1a1a2e; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
+                📈 StepStone
+            </a>
+
+            <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" 
+               style="background: #016567; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);">
+                🤝 XING Jobs
+            </a>
+
+            <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer" 
+               style="background: #0077b5; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(0, 119, 181, 0.2);">
+                💼 LinkedIn Jobs
+            </a>
+
+            <a href="https://www.glassdoor.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #0caa41; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(12, 170, 65, 0.2);">
+                ⭐ Glassdoor — отзывы и вакансии
+            </a>
+
+            <a href="https://www.meinestadt.de/deutschland/jobs" target="_blank" rel="noopener noreferrer" 
+               style="background: #ff6600; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);">
+                📍 MeineStadt.de — работа по городам
+            </a>
+
+            <a href="https://www.stellenanzeigen.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #2c3e50; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(44, 62, 80, 0.2);">
+                📋 Stellenanzeigen.de
+            </a>
+
+            <a href="https://www.jobs.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #34495e; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(52, 73, 94, 0.2);">
+                🌐 Jobs.de
+            </a>
+
+            <a href="https://www.kimeta.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #8e44ad; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(142, 68, 173, 0.2);">
+                🔎 Kimeta.de
+            </a>
+
+            <a href="https://www.kununu.com/" target="_blank" rel="noopener noreferrer" 
+               style="background: #99c221; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(153, 194, 33, 0.2);">
+                💬 Kununu — отзывы о работодателях
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<section id="ausbildung" class="tab-content">
+    <div class="card">
+        <h2>🎓 Поиск Ausbildung</h2>
+        <p style="margin-bottom: 16px; color: #555;">Основные порталы для поиска мест профессионального обучения:</p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <a href="https://www.arbeitsagentur.de/ausbildungsplatzsuche" target="_blank" rel="noopener noreferrer" 
+               style="background: #e30613; color: white; padding: 14px 18px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2);">
+                🇩🇪 Поиск Ausbildung — Bundesagentur für Arbeit
+            </a>
+
+            <a href="https://www.ihk-lehrstellenboerse.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #003366; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(0, 51, 102, 0.2);">
+                🏛️ IHK Lehrstellenbörse — Торгово-промышленная палата
+            </a>
+
+            <a href="https://www.ausbildung.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #2980b9; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(41, 128, 185, 0.2);">
+                📘 Ausbildung.de
+            </a>
+
+            <a href="https://www.azubi.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #e67e22; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(230, 126, 34, 0.2);">
+                🎯 Azubi.de
+            </a>
+
+            <a href="https://www.azubiyo.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #27ae60; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(39, 174, 96, 0.2);">
+                ✅ Azubiyo.de
+            </a>
+
+            <a href="https://www.aubi-plus.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #16a085; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(22, 160, 133, 0.2);">
+                🔍 AUBI-plus
+            </a>
+
+            <a href="https://www.meinestadt.de/deutschland/ausbildung" target="_blank" rel="noopener noreferrer" 
+               style="background: #ff6600; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(255, 102, 0, 0.2);">
+                📍 MeineStadt.de — Ausbildung по городам
+            </a>
+
+            <a href="https://www.hwk.de/ausbildungsboerse/" target="_blank" rel="noopener noreferrer" 
+               style="background: #7f8c8d; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(127, 140, 141, 0.2);">
+                🔧 Ремесленная палата — Ausbildungsbörse
+            </a>
+
+            <a href="https://www.berufenet.arbeitsagentur.de/" target="_blank" rel="noopener noreferrer" 
+               style="background: #2c3e50; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(44, 62, 80, 0.2);">
+                📚 BERUFENET — информация о профессиях
+            </a>
+
+            <a href="https://www.bibb.de/dienst/berufesuche/de/index_berufesuche.php" target="_blank" rel="noopener noreferrer" 
+               style="background: #8e44ad; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-shadow: 0 2px 6px rgba(142, 68, 173, 0.2);">
+                🏫 BIBB — поиск профессий
+            </a>
+
+        </div>
+    </div>
+</section>
+
+</main>
+
+<button class="scroll-top-btn" touch-action="none">↑</button>
+<script src="../js/components.js"></script>
+<script src="../js/tabs.js"></script>
+<script src="../js/clock.js"></script>
+<script src="../js/weather.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof initClock === 'function') initClock();
+        if (typeof getWeather === 'function') getWeather();
+    });
+</script>
+
+</body>
+</html>

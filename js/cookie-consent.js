@@ -16,6 +16,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
       onAccept: function() {
+        // ИСПРАВЛЕНИЕ: Ждем загрузки HTML перед вызовом loadNews, 
+        // чтобы скрипт точно нашел элементы на странице
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadNews, { once: true });
         } else {
@@ -40,22 +42,12 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
       onAccept: function() {
         function loadVideos() {
-          // 1. Включаем защиту от автоплея для Android и других браузеров
-          window.isBannerAutoLoading = true;
-
-          // 2. Симулируем клик для загрузки iframe
           document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
             const btn = ph.querySelector('button');
             if (btn) btn.click();
           });
-          
           if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
           if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
-          
-          // 3. Выключаем защиту с задержкой 300 мс, чтобы ссылки гарантированно собрались без автоплея
-          setTimeout(function() {
-              window.isBannerAutoLoading = false;
-          }, 300);
         }
 
         if (document.readyState === 'loading') {
@@ -69,7 +61,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
           const num = ph.id.replace('video-placeholder-', '');
           const iframe = document.getElementById('video-iframe-' + num);
-          if (ph) ph.style.display = "flex";
+          ph.style.display = "flex";
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
         });
 

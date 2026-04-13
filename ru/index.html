@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цифровые технологии и мобильность в Германии</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/topbar.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/silktide-consent-manager.css">
+    <title>Цифровой помощник в Германии</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/silktide-consent-manager.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     <div class="nav-row">
         <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
         <button class="nav-btn" onclick="showTab('img2pdf', event)">Фото в PDF</button>
-        <button class="nav-btn" onclick="showTab('pdf', event)">PDF-компрессор</button>
+        <button class="nav-btn" onclick="showTab('pdf', event)">PDF Компрессор</button>
         <button class="nav-btn" onclick="showTab('maps', event)">Карты</button>
         <button class="nav-btn" onclick="showTab('mobile', event)">Транспорт</button>
         <button class="nav-btn" onclick="showTab('contacts', event)">Контакт</button>
@@ -32,44 +32,43 @@
 
     <div class="nav-row">
         <button class="nav-btn" onclick="showTab('news-hattingen', event)">Новости Хаттингена</button>
-        <button class="nav-btn" onclick="showTab('news', event)">Новости Германии</button>
-        <button class="nav-btn" onclick="showTab('docs', event)">ИИ-ассистенты</button>
+        <button class="nav-btn" onclick="showTab('news', event)">Новости DE</button>
+        <button class="nav-btn" onclick="showTab('docs', event)">ИИ-Помощники</button>
         <button class="nav-btn" onclick="showTab('laws', event)">Законы</button>
         <button class="nav-btn" onclick="showTab('jobs', event)">Работа</button>
-        <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>     
+        <button class="nav-btn" onclick="showTab('health', event)">Здоровье</button>
         <button class="nav-btn" onclick="showTab('translate', event)">Переводчик</button>
     </div>
- </div>
+
 </div>
 
+</div>
 </nav>
 
 <main class="container">
     <section id="home" class="tab-content active">
-
-    <div class="card hero-card">
-        <h1 style="margin-top: 0; margin-bottom: 5px;">Добро пожаловать! 🇩🇪</h1>
-        <p style="font-size: 1rem; line-height: 1.4; color: #333; margin-bottom: 12px; margin-top: 5px; font-weight: 500;">
-            Интеркультурный центр «Магнет» — интеграция мигрантов через образовательные и социальные проекты.
-            Просто нажмите на «Магнет».
-        </p>
-        <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none;">
-            <img src="img/IMG_2784.jpeg" alt="Интеркультурный центр Магнет" style="width: 100%; height: auto; display: block; border-radius: 8px;">
-        </a>
+        <div class="card hero-card">
+            <h1 style="margin-top: 0; margin-bottom: 5px;">Добро пожаловать! 🇩🇪</h1>
+            <p style="font-size: 1rem; line-height: 1.4; color: #333; margin-bottom: 12px; margin-top: 5px; font-weight: 500;">
+                Интеркультурный центр Magnet — интеграция мигрантов через образовательные и социальные проекты.
+                Просто нажмите на Magnet.
+            </p>
+            <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none;">
+                <img src="../img/IMG_2784.jpeg" alt="Интеркультурный центр Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+            </a>
 
     <div class="video-wrapper horizontal">
 <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-    <p style="margin:0 0 8px;"><strong>YouTube-видео</strong></p>
+    <p style="margin:0 0 8px;"><strong>YouTube-Видео</strong></p>
     <p style="margin:0 0 16px; font-size:0.9rem;">Загружая видео, вы принимаете политику конфиденциальности YouTube/Google.</p>
     <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Смотреть видео</button>
 </div>
 <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-
 </div>
 
 <div class="video-wrapper horizontal">
     <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-видео</strong></p>
+        <p style="margin:0 0 8px;"><strong>YouTube-Видео</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Загружая видео, вы принимаете политику конфиденциальности YouTube/Google.</p>
         <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Смотреть видео</button>
     </div>
@@ -78,7 +77,7 @@
 
 <div class="video-wrapper horizontal">
     <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-плейлист</strong></p>
+        <p style="margin:0 0 8px;"><strong>YouTube-Плейлист</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Загружая видео, вы принимаете политику конфиденциальности YouTube/Google.</p>
         <button onclick="loadPlaylist('video-placeholder-3', 'video-iframe-3', 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" class="load-tool-btn">▶ Смотреть плейлист</button>
     </div>
@@ -87,7 +86,7 @@
 
 <div class="video-wrapper horizontal">
     <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-плейлист</strong></p>
+        <p style="margin:0 0 8px;"><strong>YouTube-Плейлист</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Загружая видео, вы принимаете политику конфиденциальности YouTube/Google.</p>
         <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Смотреть плейлист</button>
     </div>
@@ -118,59 +117,45 @@
 <section id="img2pdf" class="tab-content">
     <div class="card">
         <h2>🌠 Фото в PDF</h2>
-
-    <div class="iframe-wrapper">
-        
-        <!-- Заглушка (показывается до согласия) -->
-        <div id="photo-placeholder" class="consent-placeholder">
-            <p><strong>Этот инструмент может использовать технические cookies.</strong></p>
-            <p style="margin: 15px 0;">Чтобы использовать конвертер «Фото в PDF», пожалуйста, дайте согласие.</p>
-            
-            <button onclick="loadPhotoToPdf()" class="load-tool-btn">
-                Загрузить конвертер
-            </button>
+        <div class="iframe-wrapper">
+            <div id="photo-placeholder" class="consent-placeholder">
+                <p><strong>Этот инструмент может устанавливать технические cookie.</strong></p>
+                <p style="margin: 15px 0;">Для использования конвертера «Фото в PDF» дайте согласие.</p>
+                <button onclick="loadPhotoToPdf()" class="load-tool-btn">
+                    Загрузить конвертер
+                </button>
+            </div>
+            <iframe id="photo-iframe" 
+                    src="" 
+                    style="display: none; width: 100%; height: 950px; border: none;"
+                    allowfullscreen>
+            </iframe>
         </div>
-
-        <!-- Сам iframe (скрыт до нажатия кнопки) -->
-        <iframe id="photo-iframe" 
-                src="" 
-                style="display: none; width: 100%; height: 950px; border: none;"
-                allowfullscreen>
-        </iframe>
     </div>
-</div>
-
 </section>
 
 <!-- ====================== PDF-КОМПРЕССОР ====================== -->
 
 <section id="pdf" class="tab-content">
     <div class="card">
-        <h2>📄 PDF-компрессор</h2>
-
-    <div class="iframe-wrapper">
-        
-        <!-- Заглушка -->
-        <div id="pdf-placeholder" class="consent-placeholder">
-            <p><strong>Этот инструмент может использовать технические cookies.</strong></p>
-            <p style="margin: 15px 0;">Чтобы использовать PDF-компрессор, пожалуйста, дайте согласие.</p>
-            
-            <button onclick="loadPdfCompressor()" class="load-tool-btn">
-                Загрузить PDF-компрессор
-            </button>
+        <h2>📄 PDF-Компрессор</h2>
+        <div class="iframe-wrapper">
+            <div id="pdf-placeholder" class="consent-placeholder">
+                <p><strong>Этот инструмент может устанавливать технические cookie.</strong></p>
+                <p style="margin: 15px 0;">Для использования PDF-компрессора дайте согласие.</p>
+                <button onclick="loadPdfCompressor()" class="load-tool-btn">
+                    Загрузить компрессор
+                </button>
+            </div>
+            <iframe id="pdf-iframe" 
+                    src="" 
+                    style="display: none; width: 100%; height: 820px; border: none;"
+                    allow="downloads" 
+                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+                    allowfullscreen>
+            </iframe>
         </div>
-
-        <!-- Сам iframe -->
-        <iframe id="pdf-iframe" 
-                src="" 
-                style="display: none; width: 100%; height: 820px; border: none;"
-                allow="downloads" 
-                sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-                allowfullscreen>
-        </iframe>
     </div>
-</div>
-
 </section>
 
 <!-- ====================== НОВОСТИ ====================== -->
@@ -181,33 +166,29 @@
             <h2 style="margin: 0;">🗞️ Актуальные новости</h2>
             <span style="font-size: 0.85rem; color: #666;">Источник: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
         </div>
-
-    <div id="news-wrapper">
-        <div id="news-placeholder" class="consent-placeholder">
-            <p><strong>Новости с tagesschau.de</strong></p>
-            <p>Новости загружаются через RSS и могут передавать данные третьим лицам.</p>
-            <button onclick="loadNews()" class="load-tool-btn">
-                Загрузить новости
-            </button>
+        <div id="news-wrapper">
+            <div id="news-placeholder" class="consent-placeholder">
+                <p><strong>Новости от tagesschau.de</strong></p>
+                <p>Новости загружаются через RSS и могут передавать данные третьим лицам.</p>
+                <button onclick="loadNews()" class="load-tool-btn">
+                    Загрузить новости
+                </button>
+            </div>
+            <div id="news-container" style="display: none;"></div>
         </div>
-
-        <div id="news-container" style="display: none;"></div>
+        <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
+            Примечание: новости загружаются через RSS от tagesschau.de.
+        </p>
     </div>
-    
-    <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
-        Примечание: Новости загружаются через RSS с tagesschau.de.
-    </p>
-</div>
-
 </section>
 
 <section id="news-hattingen" class="tab-content">
     <div class="card">
         <h2 style="color: #003366; text-align: center; margin-bottom: 10px;">🏙️ Жизнь в Хаттингене</h2>
-        <p class="status-msg" style="text-align: center; color: #1a1c1e;">Официальные городские разделы для жителей и гостей:</p>
+        <p class="status-msg" style="text-align: center; color: #1a1c1e;">Официальные разделы города для жителей и гостей:</p>
         <div style="display: grid; gap: 12px; margin-top: 20px;">
             <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;">📰 Все городские новости</a>
-            <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;">🏰 Туризм и досуг</a>
+            <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;">🏰 Туризм и отдых</a>
             <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(255, 152, 0, 0.7) !important;">🎓 Образование и культура</a>
             <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;">📅 Мероприятия</a>
         </div>
@@ -220,12 +201,12 @@
 <section id="mobile" class="tab-content">
     <div class="card">
         <h2>🚆 Транспорт</h2>
-        <p>Актуальные расписания поездов и автобусов.</p>
+        <p>Актуальное расписание поездов и автобусов.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <a href="https://www.bahn.de/buchung/fahrplan/suche" style="background: #cc0000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">🌐 Расписание DB</a>
-                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">🍎 Приложение для iPhone</a>
-                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #3ddc84; color: #2a7a50; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">🤖 Приложение для Android</a>
+                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">🍎 App для iPhone</a>
+                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #3ddc84; color: #2a7a50; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;">🤖 App для Android</a>
             </div>
         </div>
     </div>
@@ -234,7 +215,7 @@
 <section id="maps" class="tab-content">
     <div class="card">
         <h2>🗺️ Карты</h2>
-        <p>Простая навигация и поиск в Хаттингене.</p>
+        <p>Удобная навигация и поиск в Хаттингене.</p>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
             <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" style="background: #4285F4; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2); transition: transform 0.2s;">📍 Google Maps</a>
             <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">🍎 Apple Maps</a>
@@ -254,12 +235,12 @@
         </div>
         <div class="translate-item">
             <h3 style="color: #002e59;">DeepL</h3>
-            <p>Высокоточный перевод на основе нейронных сетей. Лучший выбор для европейских языков.</p>
+            <p>Высокоточный перевод на основе нейросетей. Лучший выбор для европейских языков.</p>
             <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="btn-translate bg-deepl">Открыть DeepL</a>
         </div>
         <div class="translate-item">
             <h3 style="color: #1e5fa9;">Reverso Context</h3>
-            <p>Поиск слов в контексте реальных предложений. Помогает понять нюансы разговорной речи.</p>
+            <p>Поиск слов в контексте реальных предложений. Помогает понять нюансы разговорного языка.</p>
             <a href="https://context.reverso.net/" target="_blank" rel="noopener noreferrer" class="btn-translate bg-reverso">Искать в Reverso</a>
         </div>
     </div>
@@ -270,8 +251,8 @@
         <h2>💼 Работа</h2>
         <p>Популярные порталы для поиска работы в Германии.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;">🏦 Портал вакансий</a>
-            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">🇩🇪 Поиск работы (Агентство по труду)</a> 
+            <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;">🏦 Портал работы</a>
+            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;">🇩🇪 Биржа труда (Arbeitsagentur)</a>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);">🔍 Indeed</a>
                 <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">📈 StepStone</a>
@@ -283,27 +264,27 @@
 
 <section id="docs" class="tab-content">
     <div class="card">
-        <h2>💻 ИИ-ассистенты</h2>
-        <p>Ваши персональные помощники для переводов, писем и любых других задач.</p>
+        <h2>💻 ИИ-Помощники</h2>
+        <p>Ваши личные помощники для переводов, писем и любых других задач.</p>
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Мультимодальный ИИ от Google. Идеален для работы с сервисами Google, картами и быстрого получения актуальной информации.</p>
-            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(90deg, #4285f4, #9b72cb); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Запустить Gemini</a>
+            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Мультимодальный ИИ от Google. Идеален для работы с сервисами Google, картами и быстрой актуальной информацией.</p>
+            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(90deg, #4285f4, #9b72cb); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Открыть Gemini</a>
         </div>
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Лидер рынка в написании текстов и сложном программировании. Отлично подходит для анализа данных и творческих задач.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Лидер в написании текстов и сложном программировании. Отлично подходит для анализа данных и творческих задач.</p>
             <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="background: #10a37f; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Открыть ChatGPT</a>
         </div>
         <div style="margin-bottom: 10px;">
             <h3 style="margin-bottom: 5px; color: #1e1c1a;">Claude</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Интеллектуальный ассистент от Anthropic — честный, точный и естественный в общении. Работает с большими документами, пишет и отлаживает код, анализирует данные.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Умный помощник от Anthropic — честный, точный и естественный в общении. Работает с большими документами, пишет и отлаживает код, анализирует данные.</p>
             <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" style="background: #da7756; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Попробовать Claude</a>
         </div>
         <div style="margin-bottom: 10px;">
             <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">ИИ от Илона Маска (xAI), интегрированный в сеть X. Известен остроумием и доступом к мировым новостям в реальном времени.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">ИИ от Илона Маска (xAI), интегрированный в сеть X. Известен юмором и доступом к мировым новостям в реальном времени.</p>
             <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Попробовать Grok</a>
         </div>
     </div>
@@ -332,7 +313,7 @@
 <section id="contacts" class="tab-content">
     <div class="card">
         <h2>📩 Контакт</h2>
-        <p>Свяжитесь с нами по любым вопросам или предложениям.</p>
+        <p>Свяжитесь с нами по вопросам или предложениям.</p>
         <div style="margin-top: 15px;">
             <a href="mailto:hattingen325@gmail.com" style="background: #ea4335; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(234, 67, 53, 0.2); transition: transform 0.2s;">📧 Написать письмо</a>
             <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">hattingen325@gmail.com</p>
@@ -348,8 +329,7 @@
 
 <p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
     <strong>Digital &amp; Mobil in Deutschland</strong> — бесплатный информационный портал
-    для жителей и новоприбывших в Германию. Все важные сервисы,
-    новости и инструменты в одном месте.
+    для жителей и приехавших в Германию. Все важные сервисы, новости и инструменты в одном месте.
 </p>
 
 <p style="margin: 0 0 10px 0; font-family: inherit;">
@@ -362,25 +342,25 @@
             🗞️ Актуальные новости (RSS-лента от tagesschau.de)<br>
             🎬 YouTube-видео и плейлисты — новости из Германии на немецком и русском (iframe, nocookie)<br>
             🌤️ Погода и качество воздуха в реальном времени (OpenWeatherMap API)<br>
-            📄 PDF-компрессор (собственное веб-приложение на Render)<br>
+            📄 PDF-Компрессор (собственное веб-приложение на Render)<br>
             📸 Фото в PDF (собственное веб-приложение на Streamlit)
         </p>
         <p style="margin: 0 0 10px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
             Ссылки на внешние источники:
         </p>
         <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
-            💼 Порталы вакансий<br>
-            🩺 Поиск врачей и онлайн-запись на приём<br>
+            💼 Порталы работы<br>
+            🩺 Поиск врачей и онлайн-запись<br>
             🚆 Расписание DB и навигация<br>
             🌐 Переводчики<br>
-            💻 ИИ-ассистенты<br>
-            🏙️ Местная информация о Хаттингене
+            💻 ИИ-помощники<br>
+            🏙️ Местная информация по Хаттингену
         </p>
         <p style="margin: 0 0 6px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
             Переключение языка на сайте:
         </p>
         <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
-            🇩🇪🇷🇺 Многоязычный (немецкий / русский)
+            🇩🇪🇷🇺 Многоязычный (Немецкий / Русский)
         </p>
     </div>
 
@@ -389,7 +369,7 @@
 <!-- Технический блок — сворачиваемый -->
 <details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
     <summary style="cursor: pointer; font-weight: 700; color: var(--primary-blue); font-size: 0.95rem;">
-        🛠 Технические подробности
+        🛠 Технические детали
     </summary>
     <div style="margin-top: 14px; font-size: 0.85rem; line-height: 1.7;">
 
@@ -413,26 +393,26 @@
             <strong>Защита данных и соответствие:</strong><br>
             Cookie Consent Manager (Silktide)<br>
             YouTube в расширенном режиме конфиденциальности (nocookie)<br>
-            Решение с двойным кликом для внешнего контента<br>
+            Двухклик-решение для внешнего контента<br>
             Локальные шрифты (без Google Fonts CDN)<br>
-            Политика конфиденциальности в соответствии с GDPR<br>
+            Политика конфиденциальности по DSGVO<br>
             Импрессум согласно § 5 DDG и § 18 MStV
         </p>
 
         <p style="margin-bottom: 12px;">
             <strong>Функции:</strong><br>
-            Часы и отображение даты в реальном времени<br>
+            Часы и дата в реальном времени<br>
             Погода с локальным кэшированием (Local Storage)<br>
             Переключение языка (DE ↔ RU)<br>
             Адаптивный дизайн (Mobile First)<br>
-            Навигация на вкладках без перезагрузки страницы
+            Навигация по вкладкам без перезагрузки страницы
         </p>
 
         <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
 
-        <!-- PDF-компрессор -->
+        <!-- PDF-Компрессор -->
         <p style="margin-bottom: 6px;">
-            <strong>📄 PDF-компрессор</strong>
+            <strong>📄 PDF-Компрессор</strong>
         </p>
         <p style="margin-bottom: 6px;">
             <em>Стек:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)
@@ -445,8 +425,8 @@
             Бэкенд открывает PDF с помощью PyMuPDF, рендерит каждую страницу как растровое изображение (Pixmap) с выбранным масштабированием
             и создаёт новый PDF из сжатых изображений.
             При этом применяются сборка мусора (уровень 4), Deflate-сжатие для изображений, шрифтов и потоков.
-            Сжатый файл возвращается напрямую для скачивания — файлы на сервере не сохраняются.
-            Дополнительно приложение имеет систему обратной связи (лайк/дизлайк) с базой данных Supabase (PostgreSQL) и определением дубликатов по IP — каждый пользователь может проголосовать только один раз, изменить или отозвать свой голос.
+            Сжатый файл отправляется непосредственно как скачивание — файлы на сервере не сохраняются.
+            Дополнительно приложение имеет систему обратной связи (лайк/дизлайк) с базой данных Supabase (PostgreSQL) и распознаванием дубликатов по IP — каждый пользователь может проголосовать только один раз, изменить или отменить свой голос.
         </p>
         <p style="margin-bottom: 12px;">
             <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
@@ -471,8 +451,8 @@
             Изображения конвертируются с помощью Pillow в режим RGB и затем объединяются методом <code>Image.save()</code>
             в многостраничный PDF-файл — каждое фото становится отдельной страницей.
             Вся обработка происходит в оперативной памяти (BytesIO), без сохранения файлов на сервере.
-            После создания PDF отображается в виде предварительного просмотра в браузере (Base64-iframe) и может быть сразу скачан.
-            Миниатюры всех загруженных фото отображаются в сетке из 4 столбцов.
+            После создания PDF отображается как предпросмотр в браузере (Base64-iframe) и доступен для скачивания.
+            Миниатюры всех загруженных фото показываются в сетке из 4 колонок.
         </p>
         <p style="margin-bottom: 0;">
             <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
@@ -484,30 +464,24 @@
 </details>
 
 <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
-    💡 <strong>Идея и разработка:</strong> Артём Финевич, Хаттинген (Северный Рейн-Вестфалия)
+    💡 <strong>Идея и разработка:</strong> Artem Finevych, Hattingen (NRW)
 </div>
 
 </div>
-
 </section>
 
 </main>
 
-<!-- Кнопка возврата наверх -->
-
 <button class="scroll-top-btn" touch-action="none">↑</button>
 
-<!-- Language switcher button -->
+<script src="../js/silktide-consent-manager.js" defer></script>
+<script src="../js/cookie-consent.js" defer></script>
+<script src="../js/components.js"></script>
+<script src="../js/tabs.js"></script>
+<script src="../js/clock.js"></script>
+<script src="../js/weather.js"></script>
+<script src="../js/news.js"></script>
+<script src="../js/main.js"></script>
 
-<script src="js/silktide-consent-manager.js" defer></script>
-<script src="js/cookie-consent.js" defer></script>
-<!-- Ваши скрипты -->
-<script src="js/components.js"></script>
-<script src="js/tabs.js"></script>
-<script src="js/clock.js"></script>
-<script src="js/weather.js"></script>
-<script src="js/news.js"></script>
-<script src="js/main.js"></script>
-
-  </body>
+</body>
 </html>

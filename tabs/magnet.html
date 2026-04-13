@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interkulturelles Zentrum Magnet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+<app-header></app-header>
+
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+            <div class="nav-row">
+                <button class="nav-btn active" onclick="showTab('home', event)">Startseite</button>
+                <button class="nav-btn" onclick="showTab('gallery', event)">Galerie</button>
+                <button class="nav-btn" onclick="showTab('about', event)">Über uns</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+<!-- Startseite -->
+<section id="home" class="tab-content active">
+    <div class="card">
+        
+        <div style="margin-top: 10px; display: flex; justify-content: center;">
+            <a href="../index.html" style="color: #000080; margin: 0 0 16px 0; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+            ←  Zurück zur Hauptseite
+            </a>
+        </div>
+
+        <div class="btn-main" style="padding: 0; overflow: hidden; border: none; margin-bottom: 20px; pointer-events: none; cursor: default;">
+            <img src="../img/IMG_2784.jpeg" alt="Interkulturelles Zentrum Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <a href="https://www.iz-magnet.de" 
+               style="display: block; width: 80%; max-width: 300px; background: #4A90E2; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-sizing: border-box;">
+               🌐 Offizielle Website
+            </a>
+        </div>
+
+        <p style="font-size: 1rem; line-height: 1.5; color: #333; font-weight: 500;">
+            Das Interkulturelle Zentrum «Magnet» ist ein Begegnungsort für Menschen verschiedener Kulturen in Hattingen. 
+            Das Zentrum fördert die Integration von Migranten durch Bildungs- und Sozialprojekte, 
+            unterstützt beim Erlernen der deutschen Sprache, bei der gesellschaftlichen Eingliederung und beim Aufbau von Kontakten. 
+            Wir organisieren Veranstaltungen, Workshops und Beratungen für alle, 
+            die Teil der lokalen Gemeinschaft werden möchten.
+        </p>
+        
+    </div>
+</section>
+
+<!-- Galerie -->
+<section id="gallery" class="tab-content">
+    <div class="card">
+        <h2>🖼️ Galerie</h2>
+        <p style="text-align: center; padding: 30px 0; opacity: 0.6; font-weight: 600;">
+            Der Inhalt wird in Kürze verfügbar sein. Die inhaltliche Gestaltung erfolgt in enger Zusammenarbeit mit der Leitung des Zentrums.
+        </p>
+    </div>
+</section>
+
+<!-- Über uns -->
+<section id="about" class="tab-content">
+    <div class="card">
+        <h2>ℹ️ Über uns</h2>
+        <p style="text-align: center; padding: 30px 0; opacity: 0.6; font-weight: 600;">
+            Der Inhalt wird in Kürze verfügbar sein. Die inhaltliche Gestaltung erfolgt in enger Zusammenarbeit mit der Leitung des Zentrums.
+        </p>
+    </div>
+</section>
+</main>
+
+<button class="scroll-top-btn" touch-action="none">↑</button>
+<script src="../js/components.js"></script>
+<script src="../js/tabs.js"></script>
+<script src="../js/clock.js"></script>
+<script src="../js/weather.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof initClock === 'function') initClock();
+        if (typeof getWeather === 'function') getWeather();
+    });
+</script>
+
+</body>
+</html>

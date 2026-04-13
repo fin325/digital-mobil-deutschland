@@ -1,14 +1,3 @@
-/* 
-  Silktide Consent Manager - https://silktide.com/consent-manager/  
-
-  Styles are at risked of being overridden by styles coming from the site the consent manager is used on.
-  To help prevent this, global wrapper elements are prefixed with "#silktide-"
-*/
-
-/* --------------------------------
-  Global Styles - These elements exist in the main DOM and styling is limited to positioning and animation
--------------------------------- */
-/* Wrapper (Global) */
 #silktide-wrapper {
               --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
               --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;

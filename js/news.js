@@ -1,4 +1,4 @@
-/* === news.js — Двуязычные новости DW === */
+/* === news.js — Новости Deutsche Welle (DE/RU) === */
 
 async function loadNews() {
     const container = document.getElementById('news-container');
@@ -7,42 +7,66 @@ async function loadNews() {
     const lang = document.documentElement.lang || 'de';
 
     const feeds = {
-        ru: 'https://rss.dw.com/rdf/rss-ru-all',
-        de: 'https://rss.dw.com/rdf/rss-de'
+        de: 'https://rss.dw.com/rdf/rss-de',
+        ru: 'https://rss.dw.com/rdf/rss-ru-all'
     };
 
     const errorMsg = {
-        ru: 'Ошибка загрузки новостей.',
-        de: 'Fehler beim Laden der Nachrichten.'
+        de: 'Fehler beim Laden der Nachrichten.',
+        ru: 'Ошибка загрузки новостей.'
     };
 
     const rssUrl = feeds[lang] || feeds.de;
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    const errText = errorMsg[lang] || errorMsg.de;
 
-    try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
+    const proxies = [
+        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?${encodeURIComponent(url)}`
+    ];
 
-        if (data.status === 'ok') {
-            container.innerHTML = '';
-            data.items.slice(0, 5).forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'news-item';
-                div.innerHTML = `
-                    <a href="${item.link}" target="_blank"
-                       class="news-title">${item.title}</a>
-                    <p class="news-desc">
-                        ${item.description.split('.')[0]}...
-                    </p>
-                `;
-                container.appendChild(div);
+    for (const makeUrl of proxies) {
+        try {
+            const res = await fetch(makeUrl(rssUrl));
+            if (!res.ok) continue;
+
+            const text = await res.text();
+            const doc = new DOMParser().parseFromString(text, 'text/xml');
+            const items = doc.querySelectorAll('item');
+
+            if (items.length === 0) continue;
+
+            const news = [];
+            items.forEach((item, i) => {
+                if (i >= 5) return;
+                news.push({
+                    title: item.querySelector('title')?.textContent || '',
+                    link:  item.querySelector('link')?.textContent || '',
+                    desc: (item.querySelector('description')?.textContent || '').split('.')[0]
+                });
             });
-        } else {
-            container.innerHTML = errorMsg[lang] || errorMsg.de;
+
+            renderNews(container, news);
+            return;
+        } catch (e) {
+            console.warn('Proxy failed:', e);
         }
-    } catch (e) {
-        container.innerHTML = errorMsg[lang] || errorMsg.de;
     }
+
+    container.innerHTML = errText;
+}
+
+function renderNews(container, items) {
+    container.innerHTML = '';
+    items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'news-item';
+        div.innerHTML = `
+            <a href="${item.link}" target="_blank"
+               class="news-title">${item.title}</a>
+            <p class="news-desc">${item.desc}...</p>
+        `;
+        container.appendChild(div);
+    });
 }
 
 window.loadTagesschauNews = loadNews;

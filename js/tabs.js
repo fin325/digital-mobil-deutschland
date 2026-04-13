@@ -41,7 +41,7 @@ function showTab(tabId, event) {
         targetTab.style.animation = 'none';
         targetTab.style.webkitAnimation = 'none';
 
-        // Принудительный reflow — заставляет браузер "забыть" старое состояние
+        // Принудительный reflow
         void targetTab.offsetHeight;
 
         targetTab.style.animation = '';
@@ -53,12 +53,38 @@ function showTab(tabId, event) {
     // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    // Скролл страницы вверх при переключении
+    // Всегда скроллим в начало страницы
     window.scrollTo(0, 0);
 }
 
-// Слушаем скролл viewport (правильный селектор)
+// Слушаем скролл viewport
 const menuScroll = document.querySelector('.nav-scroll-viewport');
 if (menuScroll) {
     menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
 }
+
+// Кнопка наверх
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+let scrollTimer;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        // Во время скролла — маленькая и полупрозрачная
+        scrollTopBtn?.classList.add('visible');
+        scrollTopBtn?.classList.add('scrolling');
+    } else {
+        scrollTopBtn?.classList.remove('visible');
+        scrollTopBtn?.classList.remove('scrolling');
+    }
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        // Скролл остановился — нормальный размер
+        scrollTopBtn?.classList.remove('scrolling');
+    }, 150);
+}, { passive: true });
+
+scrollTopBtn?.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});

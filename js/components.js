@@ -6,7 +6,7 @@ class AppHeader extends HTMLElement {
         // Словари для разных языков
         const texts = {
             loading: isRu ? 'Загрузка...' : 'Laden...',
-            humidity: isRu ? 'Влажность возуха' : 'Luftfeuchtigkeit',
+            humidity: isRu ? 'Влажность воздуха' : 'Luftfeuchtigkeit',
             aqi: isRu ? 'Качество воздуха (1-отлично)' : 'Luftqualität (1 – sehr gut)',
             geo: isRu ? 'Геомагнитная активность (1-спокойно)' : 'Geomagnetik (1-ruhig)',
             pressure: isRu ? 'Атмосферное давление' : 'Luftdruck',

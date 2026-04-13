@@ -344,137 +344,138 @@
   <a href="../ru/datenschutz.html" style="color: inherit; font-weight: 700; text-decoration: underline; margin-left: 8px;">Защита данных →</a>
 </p>
 
-    <div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
-        <h3 style="margin: 0 0 10px; color: var(--primary-blue); font-size: 0.95rem;">Что предлагает сайт?</h3>
-        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
-            🗞️ Актуальные новости (RSS-лента от tagesschau.de)<br>
-            🎬 YouTube-видео и плейлисты — новости из Германии на немецком и русском (iframe, nocookie)<br>
-            🌤️ Погода и качество воздуха в реальном времени (OpenWeatherMap API)<br>
-            📄 PDF-Компрессор (собственное веб-приложение на Render)<br>
-            📸 Фото в PDF (собственное веб-приложение на Streamlit)
-        </p>
-        <p style="margin: 0 0 10px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
-            Ссылки на внешние источники:
-        </p>
-        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
-            💼 Порталы работы<br>
-            🩺 Поиск врачей и онлайн-запись<br>
-            🚆 Расписание DB и навигация<br>
-            🌐 Переводчики<br>
-            💻 ИИ-помощники<br>
-            🏙️ Местная информация по Хаттингену
-        </p>
-        <p style="margin: 0 0 6px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
-            Переключение языка на сайте:
-        </p>
-        <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
-            🇩🇪🇷🇺 Многоязычный (Немецкий / Русский)
-        </p>
-    </div>
+<div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
+    <h3 style="margin: 0 0 10px; color: var(--primary-blue); font-size: 0.95rem;">Что предлагает сайт?</h3>
+    <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+        🗞️ Актуальные новости (RSS-лента от ru.euronews.com / tagesschau.de)<br>
+        🎬 YouTube-видео и плейлисты — новости из Германии на немецком и русском (iframe, nocookie)<br>
+        🌤️ Погода и качество воздуха в реальном времени (OpenWeatherMap API)<br>
+        📄 PDF-Компрессор (собственное веб-приложение на Render)<br>
+        📸 Фото в PDF (собственное веб-приложение на Streamlit)
+    </p>
+    <p style="margin: 0 0 10px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
+        Ссылки на внешние источники:
+    </p>
+    <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+        💼 Порталы работы<br>
+        🩺 Поиск врачей и онлайн-запись<br>
+        🚆 Расписание DB и навигация<br>
+        🌐 Переводчики<br>
+        💻 ИИ-помощники<br>
+        🏙️ Местная информация по Хаттингену
+    </p>
+    <p style="margin: 0 0 6px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
+        Переключение языка на сайте:
+    </p>
+    <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+        🇩🇪🇷🇺 Многоязычный (Немецкий / Русский)
+    </p>
+</div>
 
 <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0;">
 
 <!-- Технический блок — сворачиваемый -->
+
 <details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
     <summary style="cursor: pointer; font-weight: 700; color: var(--primary-blue); font-size: 0.95rem;">
         🛠 Технические детали
     </summary>
     <div style="margin-top: 14px; font-size: 0.85rem; line-height: 1.7;">
 
-        <p style="margin-bottom: 12px;">
-            <strong>Стек:</strong><br>
-            HTML5, CSS3, JavaScript (Vanilla ES6+)
-        </p>
+    <p style="margin-bottom: 12px;">
+        <strong>Стек:</strong><br>
+        HTML5, CSS3, JavaScript (Vanilla ES6+)
+    </p>
 
-        <p style="margin-bottom: 12px;">
-            <strong>API и сервисы:</strong><br>
-            OpenWeatherMap (погода и качество воздуха)<br>
-            rss2json (RSS-лента от tagesschau.de)
-        </p>
+    <p style="margin-bottom: 12px;">
+        <strong>API и сервисы:</strong><br>
+        OpenWeatherMap (погода и качество воздуха)<br>
+        rss2json (RSS-лента от ru.euronews.com / tagesschau.de)
+    </p>
 
-        <p style="margin-bottom: 12px;">
-            <strong>Хостинг:</strong><br>
-            Vercel (статический сайт)
-        </p>
+    <p style="margin-bottom: 12px;">
+        <strong>Хостинг:</strong><br>
+        Vercel (статический сайт)
+    </p>
 
-        <p style="margin-bottom: 12px;">
-            <strong>Защита данных и соответствие:</strong><br>
-            Cookie Consent Manager (Silktide)<br>
-            YouTube в расширенном режиме конфиденциальности (nocookie)<br>
-            Двухклик-решение для внешнего контента<br>
-            Локальные шрифты (без Google Fonts CDN)<br>
-            Политика конфиденциальности по DSGVO<br>
-            Импрессум согласно § 5 DDG и § 18 MStV
-        </p>
+    <p style="margin-bottom: 12px;">
+        <strong>Защита данных и соответствие:</strong><br>
+        Cookie Consent Manager (Silktide)<br>
+        YouTube в расширенном режиме конфиденциальности (nocookie)<br>
+        Двухклик-решение для внешнего контента<br>
+        Локальные шрифты (без Google Fonts CDN)<br>
+        Политика конфиденциальности по DSGVO<br>
+        Импрессум согласно § 5 DDG и § 18 MStV
+    </p>
 
-        <p style="margin-bottom: 12px;">
-            <strong>Функции:</strong><br>
-            Часы и дата в реальном времени<br>
-            Погода с локальным кэшированием (Local Storage)<br>
-            Переключение языка (DE ↔ RU)<br>
-            Адаптивный дизайн (Mobile First)<br>
-            Навигация по вкладкам без перезагрузки страницы
-        </p>
+    <p style="margin-bottom: 12px;">
+        <strong>Функции:</strong><br>
+        Часы и дата в реальном времени<br>
+        Погода с локальным кэшированием (Local Storage)<br>
+        Переключение языка (DE ↔ RU)<br>
+        Адаптивный дизайн (Mobile First)<br>
+        Навигация по вкладкам без перезагрузки страницы
+    </p>
 
-        <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
+    <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
 
-        <!-- PDF-Компрессор -->
-        <p style="margin-bottom: 6px;">
-            <strong>📄 PDF-Компрессор</strong>
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Стек:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Хостинг:</em> Render (Web Service), Supabase (база данных)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <em>Принцип работы:</em> Пользователь загружает PDF-файл и выбирает уровень качества (в процентах).
-            Бэкенд открывает PDF с помощью PyMuPDF, рендерит каждую страницу как растровое изображение (Pixmap) с выбранным масштабированием
-            и создаёт новый PDF из сжатых изображений.
-            При этом применяются сборка мусора (уровень 4), Deflate-сжатие для изображений, шрифтов и потоков.
-            Сжатый файл отправляется непосредственно как скачивание — файлы на сервере не сохраняются.
-            Дополнительно приложение имеет систему обратной связи (лайк/дизлайк) с базой данных Supabase (PostgreSQL) и распознаванием дубликатов по IP — каждый пользователь может проголосовать только один раз, изменить или отменить свой голос.
-        </p>
-        <p style="margin-bottom: 12px;">
-            <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
-                GitHub: pdf-compressor-web →
-            </a>
-        </p>
+    <!-- PDF-Компрессор -->
+    <p style="margin-bottom: 6px;">
+        <strong>📄 PDF-Компрессор</strong>
+    </p>
+    <p style="margin-bottom: 6px;">
+        <em>Стек:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)
+    </p>
+    <p style="margin-bottom: 6px;">
+        <em>Хостинг:</em> Render (Web Service), Supabase (база данных)
+    </p>
+    <p style="margin-bottom: 12px;">
+        <em>Принцип работы:</em> Пользователь загружает PDF-файл и выбирает уровень качества (в процентах).
+        Бэкенд открывает PDF с помощью PyMuPDF, рендерит каждую страницу как растровое изображение (Pixmap) с выбранным масштабированием
+        и создаёт новый PDF из сжатых изображений.
+        При этом применяются сборка мусора (уровень 4), Deflate-сжатие для изображений, шрифтов и потоков.
+        Сжатый файл отправляется непосредственно как скачивание — файлы на сервере не сохраняются.
+        Дополнительно приложение имеет систему обратной связи (лайк/дизлайк) с базой данных Supabase (PostgreSQL) и распознаванием дубликатов по IP — каждый пользователь может проголосовать только один раз, изменить или отменить свой голос.
+    </p>
+    <p style="margin-bottom: 12px;">
+        <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
+            GitHub: pdf-compressor-web →
+        </a>
+    </p>
 
-        <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
+    <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
 
-        <!-- Фото в PDF -->
-        <p style="margin-bottom: 6px;">
-            <strong>📸 Фото в PDF</strong>
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Стек:</em> Python, Streamlit, Pillow (PIL)
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Хостинг:</em> Streamlit Community Cloud (Snowflake)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <em>Принцип работы:</em> Пользователь выбирает одно или несколько фото (JPG/PNG) через загрузку файлов.
-            Изображения конвертируются с помощью Pillow в режим RGB и затем объединяются методом <code>Image.save()</code>
-            в многостраничный PDF-файл — каждое фото становится отдельной страницей.
-            Вся обработка происходит в оперативной памяти (BytesIO), без сохранения файлов на сервере.
-            После создания PDF отображается как предпросмотр в браузере (Base64-iframe) и доступен для скачивания.
-            Миниатюры всех загруженных фото показываются в сетке из 4 колонок.
-        </p>
-        <p style="margin-bottom: 0;">
-            <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
-                GitHub: photo-to-pdf-converter →
-            </a>
-        </p>
+    <!-- Фото в PDF -->
+    <p style="margin-bottom: 6px;">
+        <strong>📸 Фото в PDF</strong>
+    </p>
+    <p style="margin-bottom: 6px;">
+        <em>Стек:</em> Python, Streamlit, Pillow (PIL)
+    </p>
+    <p style="margin-bottom: 6px;">
+        <em>Хостинг:</em> Streamlit Community Cloud (Snowflake)
+    </p>
+    <p style="margin-bottom: 12px;">
+        <em>Принцип работы:</em> Пользователь выбирает одно или несколько фото (JPG/PNG) через загрузку файлов.
+        Изображения конвертируются с помощью Pillow в режим RGB и затем объединяются методом <code>Image.save()</code>
+        в многостраничный PDF-файл — каждое фото становится отдельной страницей.
+        Вся обработка происходит в оперативной памяти (BytesIO), без сохранения файлов на сервере.
+        После создания PDF отображается как предпросмотр в браузере (Base64-iframe) и доступен для скачивания.
+        Миниатюры всех загруженных фото показываются в сетке из 4 колонок.
+    </p>
+    <p style="margin-bottom: 0;">
+        <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
+            GitHub: photo-to-pdf-converter →
+        </a>
+    </p>
 
-    </div>
+</div>
+
 </details>
 
 <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
     💡 <strong>Идея и разработка:</strong> Artem Finevych, Hattingen (NRW)
 </div>
-
 </div>
 </section>
 

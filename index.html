@@ -174,27 +174,24 @@
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
             <h2 style="margin: 0;">🗞️ Aktuelle Nachrichten</h2>
-            <span style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.dw.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">Deutsche Welle</a></span>
+            <span id="news-source" style="font-size: 0.85rem; color: #666;"></span>
         </div>
         
         <div id="news-wrapper">
             <div id="news-placeholder" class="consent-placeholder">
-                <p><strong>Nachrichten von Deutsche Welle</strong></p>
-                <p>Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
+                <p><strong>Nachrichten werden via RSS geladen</strong></p>
+                <p>Diese Nachrichten können Daten an Drittanbieter übertragen.</p>
                 <button onclick="loadNews()" class="load-tool-btn">
                     Nachrichten laden
                 </button>
             </div>
-
             <div id="news-container" style="display: none;"></div>
         </div>
         
-        <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
-            Hinweis: Diese Nachrichten werden via RSS von Deutsche Welle geladen.
-        </p>
+        <p id="news-hint" style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;"></p>
     </div>
 </section>
- 
+
 <section id="news-hattingen" class="tab-content">
     <div class="card">
         <h2 style="color: #003366; text-align: center; margin-bottom: 10px;">🏙️ Leben in Hattingen</h2>

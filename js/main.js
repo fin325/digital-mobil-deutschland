@@ -30,9 +30,10 @@ function loadVideo(placeholderId, iframeId, videoId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe) {
-        // Проверяем: это автоматическая загрузка баннером (0) или ручной клик (1)?
-        const playNow = window.isBannerAutoLoading ? '0' : '1';
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${playNow}&rel=0`;
+        // Если грузит баннер, параметра автоплея нет. Если реальный клик человека - добавляем автоплей.
+        const autoplayParam = window.isBannerAutoLoading ? '' : '&autoplay=1';
+        
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0${autoplayParam}`;
         iframe.style.display = "block";
         placeholder.style.display = "none";
     }
@@ -42,9 +43,10 @@ function loadPlaylist(placeholderId, iframeId, listId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe) {
-        // Проверяем: это автоматическая загрузка баннером (0) или ручной клик (1)?
-        const playNow = window.isBannerAutoLoading ? '0' : '1';
-        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&autoplay=${playNow}&rel=0`;
+        // Если грузит баннер, параметра автоплея нет. Если реальный клик человека - добавляем автоплей.
+        const autoplayParam = window.isBannerAutoLoading ? '' : '&autoplay=1';
+        
+        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&rel=0${autoplayParam}`;
         iframe.style.display = "block";
         placeholder.style.display = "none";
     }

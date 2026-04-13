@@ -12,8 +12,6 @@ body {
     margin: 0;
     color: var(--text-dark);
     min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
     padding: 0;
     background-size: cover;
     top: 0 !important;
@@ -27,6 +25,38 @@ body::before {
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
                 url('../img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
     background-size: cover;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/montserrat-v31-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/montserrat-v31-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/montserrat-v31-latin-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/montserrat-v31-latin-800.woff2') format('woff2');
 }
 
 @keyframes gradientBG {

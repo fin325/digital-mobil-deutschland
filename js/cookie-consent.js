@@ -16,8 +16,6 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
       onAccept: function() {
-        // ИСПРАВЛЕНИЕ: Ждем загрузки HTML перед вызовом loadNews, 
-        // чтобы скрипт точно нашел элементы на странице
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadNews, { once: true });
         } else {
@@ -31,7 +29,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         if (placeholder) placeholder.style.display = "block";
         if (container) {
             container.style.display = "none";
-            container.innerHTML = ""; // Очищаем старые новости при отказе
+            container.innerHTML = ""; 
         }
       }
     },
@@ -42,12 +40,19 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
       onAccept: function() {
         function loadVideos() {
+          // ФЛАГ: Сообщаем main.js, что сейчас идет "тихая" автоматическая загрузка
+          window.isBannerAutoLoading = true;
+
           document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
             const btn = ph.querySelector('button');
             if (btn) btn.click();
           });
+          
           if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
           if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+          
+          // ФЛАГ: Выключаем режим, чтобы ручные клики снова воспроизводили видео сразу
+          window.isBannerAutoLoading = false;
         }
 
         if (document.readyState === 'loading') {

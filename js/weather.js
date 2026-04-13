@@ -1,7 +1,9 @@
 /* === weather.js — Wetter OpenWeatherMap + Luftqualität === */
 
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
-let currentCity = 'Hattingen';
+
+// ИЗМЕНЕНИЕ ЗДЕСЬ: Сначала пытаемся достать город из памяти. Если там пусто, берем 'Hattingen'
+let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
@@ -53,7 +55,7 @@ async function getWeather() {
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name; // OpenWeatherMap вернет название города на выбранном языке (если оно есть в их базе)
+        const city = d.name; // OpenWeatherMap вернет название
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
@@ -81,6 +83,10 @@ function applyWeatherData(d) {
                 const newCity = prompt(promptMsg, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
+                    
+                    // ИЗМЕНЕНИЕ ЗДЕСЬ: Сохраняем новый город в память браузера!
+                    localStorage.setItem('userCity', currentCity);
+                    
                     localStorage.removeItem('weatherCache');
                     localStorage.removeItem('aqiCache');
                     getWeather();

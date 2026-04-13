@@ -5,9 +5,12 @@ let currentCity = 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
+// Определяем язык страницы один раз для всего файла
+const isRu = document.documentElement.lang === 'ru';
+
 async function getWeather() {
     try {
-        // Cache prüfen
+        // Проверяем кэш
         const cached = localStorage.getItem('weatherCache');
         if (cached) {
             const parsed = JSON.parse(cached);
@@ -20,13 +23,15 @@ async function getWeather() {
 
     // API-Anfrage
     try {
+        // Выбираем язык для API OpenWeatherMap
+        const apiLang = isRu ? 'ru' : 'de';
         const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
+            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=${apiLang}`
         );
         const d = await res.json();
 
         if (!d.main) {
-            console.error('Stadt nicht gefunden:', d.message);
+            console.error(isRu ? 'Город не найден:' : 'Stadt nicht gefunden:', d.message);
             return;
         }
 
@@ -41,14 +46,14 @@ async function getWeather() {
         applyWeatherData(d);
 
     } catch (e) {
-        console.error('Wetter-Fehler:', e);
+        console.error(isRu ? 'Ошибка погоды:' : 'Wetter-Fehler:', e);
     }
 }
 
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name;
+        const city = d.name; // OpenWeatherMap вернет название города на выбранном языке (если оно есть в их базе)
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
@@ -67,7 +72,13 @@ function applyWeatherData(d) {
             tempEl.innerText = `${city} ${icon} ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
-                const newCity = prompt('Bitte den Namen der Stadt eingeben:', currentCity);
+                
+                // Перевод окна для ввода города
+                const promptMsg = isRu 
+                    ? 'Пожалуйста, введите название города:' 
+                    : 'Bitte den Namen der Stadt eingeben:';
+                
+                const newCity = prompt(promptMsg, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.removeItem('weatherCache');
@@ -83,7 +94,7 @@ function applyWeatherData(d) {
         getAirPollution(lat, lon);
 
     } catch (e) {
-        console.error('Fehler beim Anwenden der Wetterdaten:', e);
+        console.error(isRu ? 'Ошибка применения данных:' : 'Fehler beim Anwenden der Wetterdaten:', e);
     }
 }
 
@@ -116,7 +127,7 @@ async function getAirPollution(lat, lon) {
         updateAQIUI(aqiIndex);
 
     } catch (e) {
-        console.error('Fehler bei der Luftqualität:', e);
+        console.error(isRu ? 'Ошибка качества воздуха:' : 'Fehler bei der Luftqualität:', e);
     }
 }
 

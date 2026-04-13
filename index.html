@@ -169,27 +169,28 @@
     </div>
 </section>
 
-<!-- ====================== NEWS (Deutsche Welle) ====================== -->
+<!-- ====================== NEWS ====================== -->
 <section id="news" class="tab-content">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-            <h2 style="margin: 0;">🗞️ Aktuelle Nachrichten</h2>
-            <span style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.dw.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">Deutsche Welle</a></span>
+            <h2 style="margin: 0;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости">🗞️ Aktuelle Nachrichten</h2>
+            <span id="news-source" style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
         </div>
         
         <div id="news-wrapper">
             <div id="news-placeholder" class="consent-placeholder">
-                <p><strong>Nachrichten von Deutsche Welle</strong></p>
-                <p>Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
-                <button onclick="loadNews()" class="load-tool-btn">
+                <p><strong data-de="Nachrichten von tagesschau.de" data-ru="Новости от Euronews">Nachrichten von tagesschau.de</strong></p>
+                <p data-de="Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen." data-ru="Новости загружаются через RSS и могут передавать данные третьим лицам.">Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
+                <button onclick="loadNews()" class="load-tool-btn" data-de="Nachrichten laden" data-ru="Загрузить новости">
                     Nachrichten laden
                 </button>
             </div>
+
             <div id="news-container" style="display: none;"></div>
         </div>
         
-        <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
-            Hinweis: Diese Nachrichten werden via RSS von Deutsche Welle geladen.
+        <p id="news-hint" style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;" data-de="Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen." data-ru="Примечание: новости загружаются через RSS от ru.euronews.com.">
+            Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen.
         </p>
     </div>
 </section>

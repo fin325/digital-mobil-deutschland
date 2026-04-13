@@ -29,7 +29,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         if (placeholder) placeholder.style.display = "block";
         if (container) {
             container.style.display = "none";
-            container.innerHTML = ""; 
+            container.innerHTML = ""; // Очищаем старые новости при отказе
         }
       }
     },
@@ -40,9 +40,10 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
       onAccept: function() {
         function loadVideos() {
-          // ФЛАГ: Сообщаем main.js, что сейчас идет "тихая" автоматическая загрузка
+          // 1. Включаем защиту от автоплея для Android и других браузеров
           window.isBannerAutoLoading = true;
 
+          // 2. Симулируем клик для загрузки iframe
           document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
             const btn = ph.querySelector('button');
             if (btn) btn.click();
@@ -51,8 +52,10 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
           if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
           
-          // ФЛАГ: Выключаем режим, чтобы ручные клики снова воспроизводили видео сразу
-          window.isBannerAutoLoading = false;
+          // 3. Выключаем защиту с задержкой 300 мс, чтобы ссылки гарантированно собрались без автоплея
+          setTimeout(function() {
+              window.isBannerAutoLoading = false;
+          }, 300);
         }
 
         if (document.readyState === 'loading') {
@@ -66,7 +69,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
           const num = ph.id.replace('video-placeholder-', '');
           const iframe = document.getElementById('video-iframe-' + num);
-          ph.style.display = "flex";
+          if (ph) ph.style.display = "flex";
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
         });
 

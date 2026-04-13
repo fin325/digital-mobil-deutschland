@@ -20,24 +20,54 @@ async function loadNews() {
     const errText = errorMsg[lang] || errorMsg.de;
 
     const proxies = [
-        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-        url => `https://corsproxy.io/?${encodeURIComponent(url)}`
+        url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+        url => `https://proxy.corsfix.com/?${encodeURIComponent(url)}`,
+        url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`
     ];
 
-    for (const makeUrl of proxies) {
+    for (let i = 0; i < proxies.length; i++) {
         try {
-            const res = await fetch(makeUrl(rssUrl));
+            const proxyUrl = proxies[i](rssUrl);
+            const res = await fetch(proxyUrl);
             if (!res.ok) continue;
 
-            const text = await res.text();
-            const doc = new DOMParser().parseFromString(text, 'text/xml');
-            const items = doc.querySelectorAll('item');
+            const raw = await res.text();
 
+            // rss2json возвращает JSON
+            if (proxyUrl.includes('rss2json')) {
+                try {
+                    const data = JSON.parse(raw);
+                    if (data.status === 'ok' && data.items?.length) {
+                        renderNews(container, data.items.map(it => ({
+                            title: it.title,
+                            link: it.link,
+                            desc: (it.description || '').split('.')[0]
+                        })));
+                        return;
+                    }
+                } catch(e) {}
+                continue;
+            }
+
+            // allorigins возвращает JSON с полем contents
+            let xml = raw;
+            if (proxyUrl.includes('allorigins')) {
+                try {
+                    const json = JSON.parse(raw);
+                    xml = json.contents || '';
+                } catch(e) {
+                    continue;
+                }
+            }
+
+            const doc = new DOMParser().parseFromString(xml, 'text/xml');
+            const items = doc.querySelectorAll('item');
             if (items.length === 0) continue;
 
             const news = [];
-            items.forEach((item, i) => {
-                if (i >= 5) return;
+            items.forEach((item, idx) => {
+                if (idx >= 5) return;
                 news.push({
                     title: item.querySelector('title')?.textContent || '',
                     link:  item.querySelector('link')?.textContent || '',
@@ -48,7 +78,7 @@ async function loadNews() {
             renderNews(container, news);
             return;
         } catch (e) {
-            console.warn('Proxy failed:', e);
+            console.warn('Proxy ' + i + ' failed:', e);
         }
     }
 

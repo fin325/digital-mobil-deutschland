@@ -1,27 +1,69 @@
-/* === weather.js — Погода OpenWeatherMap + Качество воздуха === */
+/* === weather.js — Wetter OpenWeatherMap + Luftqualität === */
 
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
-let currentCity = 'Hattingen'; 
+let currentCity = localStorage.getItem('userCity') || 'Hattingen';
+
+const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
+
+// Determine the page language once for the entire file
+const isRu = document.documentElement.lang === 'ru';
 
 async function getWeather() {
     try {
+        // Check the cache
+        const cached = localStorage.getItem('weatherCache');
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < CACHE_TTL && parsed.city === currentCity) {
+                applyWeatherData(parsed.data);
+                return;
+            }
+        }
+    } catch (e) {}
+
+    // API-Anfrage
+    try {
+        // CHANGE HERE: Always request the weather in German (lang=de),
+        // so OpenWeatherMap automatically translates entered city names (e.g., Munich -> München)
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
         );
         const d = await res.json();
 
         if (!d.main) {
-            console.error('Город не найден:', d.message);
+            console.error(isRu ? 'Город не найден:' : 'Stadt nicht gefunden:', d.message);
             return;
         }
 
+        try {
+            localStorage.setItem('weatherCache', JSON.stringify({
+                data: d,
+                timestamp: Date.now(),
+                city: currentCity
+            }));
+        } catch (e) {}
+
+        applyWeatherData(d);
+
+    } catch (e) {
+        console.error(isRu ? 'Ошибка погоды:' : 'Wetter-Fehler:', e);
+    }
+}
+
+function applyWeatherData(d) {
+    try {
         const temp = Math.round(d.main.temp);
-        const city = d.name;
+        const city = d.name; // name API (Deutsch)
         const code = d.weather[0].id;
-        
-        // ДОБАВЛЕНО: Сохраняем координаты для запроса качества воздуха
-        const lat = d.coord.lat;
-        const lon = d.coord.lon;
+        const lat  = d.coord.lat;
+        const lon  = d.coord.lon;
+
+        // CHANGE HERE: If the user entered the city in Russian or in lowercase,
+        // we store the properly formatted German name returned by the server!
+        if (currentCity !== city) {
+            currentCity = city;
+            localStorage.setItem('userCity', city);
+        }
 
         let icon = '☁️';
         if (code === 800)     icon = '☀️';
@@ -37,55 +79,82 @@ async function getWeather() {
             tempEl.innerText = `${city} ${icon} ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
-                const newCity = prompt('Введите название города:', currentCity);
+                
+                // Translation of the city input box
+                const promptMsg = isRu 
+                    ? 'Пожалуйста, введите название города:' 
+                    : 'Bitte den Namen der Stadt eingeben:';
+                
+                const newCity = prompt(promptMsg, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
+                    localStorage.setItem('userCity', currentCity);
+                    
+                    localStorage.removeItem('weatherCache');
+                    localStorage.removeItem('aqiCache');
                     getWeather();
                 }
             };
         }
-        
+
         if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
         if (humEl)   humEl.innerText   = d.main.humidity;
 
-        // ДОБАВЛЕНО: Запускаем проверку воздуха по полученным координатам
         getAirPollution(lat, lon);
 
     } catch (e) {
-        console.error('Ошибка погоды:', e);
+        console.error(isRu ? 'Ошибка применения данных:' : 'Fehler beim Anwenden der Wetterdaten:', e);
     }
 }
 
-/* === ДОБАВЛЕННЫЕ ФУНКЦИИ ДЛЯ ВОЗДУХА === */
 async function getAirPollution(lat, lon) {
+    try {
+        const cached = localStorage.getItem('aqiCache');
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < CACHE_TTL) {
+                updateAQIUI(parsed.index);
+                return;
+            }
+        }
+    } catch (e) {}
+
     try {
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
         );
         const data = await res.json();
-        
         const aqiIndex = data.list[0].main.aqi;
+
+        try {
+            localStorage.setItem('aqiCache', JSON.stringify({
+                index: aqiIndex,
+                timestamp: Date.now()
+            }));
+        } catch (e) {}
+
         updateAQIUI(aqiIndex);
+
     } catch (e) {
-        console.error('Ошибка качества воздуха:', e);
+        console.error(isRu ? 'Ошибка качества воздуха:' : 'Fehler bei der Luftqualität:', e);
     }
 }
 
 function updateAQIUI(index) {
-    const valEl  = document.getElementById('aqi-value');
-    const icoEl  = document.getElementById('aqi-icon');
+    const valEl = document.getElementById('aqi-value');
+    const icoEl = document.getElementById('aqi-icon');
 
     if (!valEl || !icoEl) return;
 
-    let color, status, icon;
+    let color, icon;
 
     switch (index) {
-        case 1: color = "#2ecc71"; status = "Отлично"; icon = "🍃"; break;
-        case 2: color = "#f1c40f"; status = "Терпимо"; icon = "💨"; break;
-        case 3: color = "#e67e22"; status = "Средне";  icon = "🌫️"; break;
-        case 4: color = "#e74c3c"; status = "Вредно";  icon = "⚠️"; break;
-        case 5: color = "#9b59b6"; status = "Опасно";  icon = "😷"; break;
-        default: color = "#fff"; status = "--"; icon = "🍃";
+        case 1: color = "#2ecc71"; icon = "🍃"; break;
+        case 2: color = "#f1c40f"; icon = "💨"; break;
+        case 3: color = "#e67e22"; icon = "🌫️"; break;
+        case 4: color = "#e74c3c"; icon = "⚠️"; break;
+        case 5: color = "#9b59b6"; icon = "😷"; break;
+        default: color = "#fff";   icon = "🍃";
     }
 
     valEl.innerText = index;
@@ -94,9 +163,6 @@ function updateAQIUI(index) {
     icoEl.style.color = color;
     icoEl.style.textShadow = `0 0 8px ${color}66`;
 }
-/* ======================================= */
-
-// НИЖЕ — ТВОЙ ОРИГИНАЛЬНЫЙ КОД БЕЗ ИЗМЕНЕНИЙ
 
 function toggleLabel(element) {
     if (!element) return;
@@ -110,7 +176,6 @@ function toggleLabel(element) {
     if (!isShown) {
         element.classList.add('show-text');
 
-        // Позиционируем по центру экрана
         const label = element.querySelector('.w-label');
         if (label) {
             const itemRect = element.getBoundingClientRect();
@@ -119,7 +184,6 @@ function toggleLabel(element) {
             label.style.left = `calc(50% + ${offset}px)`;
         }
 
-        // Скрываем подсказку при скролле погоды
         const scrollContainer = document.querySelector('.weather-scroll-container');
         if (scrollContainer) {
             const hideOnScroll = () => {
@@ -141,7 +205,6 @@ function toggleWeatherScroll() {
     const scrollContainer = document.querySelector('.weather-scroll-container');
     if (scrollContainer) {
         const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        
         if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
             scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
         } else {
@@ -150,5 +213,5 @@ function toggleWeatherScroll() {
     }
 }
 
-// Запуск при загрузке страницы
+// Start
 getWeather();

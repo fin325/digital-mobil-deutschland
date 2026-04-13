@@ -6,10 +6,10 @@ class AppHeader extends HTMLElement {
         // Словари для разных языков
         const texts = {
             loading: isRu ? 'Загрузка...' : 'Laden...',
-            humidity: isRu ? 'Влажность' : 'Luftfeuchtigkeit',
-            aqi: isRu ? 'Качество воздуха (1-отл.)' : 'Luftqualität (1 – sehr gut)',
-            geo: isRu ? 'Геомагн. фон (1-спокойно)' : 'Geomagnetik (1-ruhig)',
-            pressure: isRu ? 'Давление' : 'Luftdruck',
+            humidity: isRu ? 'Влажность возуха' : 'Luftfeuchtigkeit',
+            aqi: isRu ? 'Качество воздуха (1-отлично)' : 'Luftqualität (1 – sehr gut)',
+            geo: isRu ? 'Геомагнитная активность (1-спокойно)' : 'Geomagnetik (1-ruhig)',
+            pressure: isRu ? 'Атмосферное давление' : 'Luftdruck',
             mmHg: isRu ? 'мм рт.ст.' : 'mmHg',
             city: isRu ? 'Город Хаттинген' : 'Stadt Hattingen'
         };
@@ -87,7 +87,7 @@ class ScrollHint extends HTMLElement {
     connectedCallback() {
         // Проверяем язык и для этого компонента
         const isRu = document.documentElement.lang === 'ru';
-        const hintText = isRu ? 'Меню с прокруткой' : 'Menü mit Wischfunktion';
+        const hintText = isRu ? 'Свайп меню' : 'Swipe-Menü';
 
         this.innerHTML = `
             <div class="scroll-hint-container">

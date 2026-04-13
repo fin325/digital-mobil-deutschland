@@ -48,6 +48,8 @@
 
 </nav>
 
+<main class="container">
+
 <section id="home" class="tab-content active">
     <div class="card hero-card">
         
@@ -114,15 +116,10 @@
 </div>
     </div>
     </section>
-</main>
-
-
-<!-- ====================== FOTO ZU PDF ====================== -->
 <section id="img2pdf" class="tab-content">
     <div class="card">
         <h2>🌠 Foto zu PDF</h2>
         <div class="iframe-wrapper"> 
-            <!-- Placeholder (показывается до согласия) -->
             <div id="photo-placeholder" class="consent-placeholder">
                 <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
                 <p style="margin: 15px 0;">Um den Foto-zu-PDF Converter zu nutzen, gib bitte deine Einwilligung.</p>  
@@ -130,7 +127,6 @@
                     Converter laden
                 </button>
             </div>
-            <!-- Сам iframe (скрыт до нажатия кнопки) -->
             <iframe id="photo-iframe" 
                     src="" 
                     style="display: none; width: 100%; height: 950px; border: none;"
@@ -140,13 +136,11 @@
     </div>
 </section>
 
-<!-- ====================== PDF-KOMPRESSOR ====================== -->
 <section id="pdf" class="tab-content">
     <div class="card">
         <h2>📄 PDF-Kompressor</h2>
         <div class="iframe-wrapper">
             
-            <!-- Placeholder -->
             <div id="pdf-placeholder" class="consent-placeholder">
                 <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
                 <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>         
@@ -154,7 +148,6 @@
                     PDF-Kompressor laden
                 </button>
             </div>
-            <!-- Сам iframe -->
             <iframe id="pdf-iframe" 
                     src="" 
                     style="display: none; width: 100%; height: 820px; border: none;"
@@ -166,7 +159,6 @@
     </div>
 </section>
 
-<!-- ====================== NEWS ====================== -->
 <section id="news" class="tab-content">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
@@ -328,14 +320,12 @@
     </div>
 </section>
 
-<!-- ====================== ÜBER DAS PROJEKT (DE) ====================== -->
-
 <section id="project" class="tab-content">
     <div class="card">
         <h2>🚀 Über das Projekt</h2>
 
 <p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
-    <strong>Digital &amp; Mobil in Deutschland</strong> — ein kostenloses Informationsportal
+    <strong>Digital & Mobil in Deutschland</strong> — ein kostenloses Informationsportal
     für Einwohner und Neuzugewanderte in Deutschland. Alle wichtigen Dienste,
     Nachrichten und Tools an einem Ort.
 </p>
@@ -348,8 +338,8 @@
         <h3 style="margin: 0 0 10px; color: var(--primary-blue); font-size: 0.95rem;">Was bietet die Seite?</h3>
         <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
             🗞️ Aktuelle Nachrichten (RSS-Feed von tagesschau.de / ru.euronews.com)<br>
-            🎬 YouTube-Videos &amp; Playlists — Nachrichten aus Deutschland auf Deutsch und Russisch (iframe, nocookie)<br>
-            🌤️ Wetter &amp; Luftqualität in Echtzeit (OpenWeatherMap API)<br>
+            🎬 YouTube-Videos & Playlists — Nachrichten aus Deutschland auf Deutsch und Russisch (iframe, nocookie)<br>
+            🌤️ Wetter & Luftqualität in Echtzeit (OpenWeatherMap API)<br>
             📄 PDF-Kompressor (eigene Web-App auf Render)<br>
             📸 Foto zu PDF (eigene Web-App auf Streamlit)
         </p>
@@ -358,8 +348,8 @@
         </p>
         <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
             💼 Jobportale<br>
-            🩺 Arztsuche &amp; Online-Terminbuchung<br>
-            🚆 DB Fahrplan &amp; Navigation<br>
+            🩺 Arztsuche & Online-Terminbuchung<br>
+            🚆 DB Fahrplan & Navigation<br>
             🌐 Übersetzer<br>
             💻 KI-Assistenten<br>
             🏙️ Lokale Infos für Hattingen
@@ -373,7 +363,6 @@
     </div>
 <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0;">
 
-<!-- Technischer Block — aufklappbar -->
 <details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
     <summary style="cursor: pointer; font-weight: 700; color: var(--primary-blue); font-size: 0.95rem;">
         🛠 Technische Details
@@ -386,8 +375,8 @@
         </p>
 
         <p style="margin-bottom: 12px;">
-            <strong>APIs &amp; Dienste:</strong><br>
-            OpenWeatherMap (Wetter &amp; Luftqualität)<br>
+            <strong>APIs & Dienste:</strong><br>
+            OpenWeatherMap (Wetter & Luftqualität)<br>
             rss2json (RSS-Feed von tagesschau.de / ru.euronews.com)
         </p>
 
@@ -397,25 +386,24 @@
         </p>
 
         <p style="margin-bottom: 12px;">
-            <strong>Datenschutz &amp; Compliance:</strong><br>
+            <strong>Datenschutz & Compliance:</strong><br>
             Cookie Consent Manager (Silktide)<br>
             YouTube im erweiterten Datenschutzmodus (nocookie)<br>
             Zwei-Klick-Lösung für externe Inhalte<br>
             Lokale Schriftarten (kein Google Fonts CDN)<br>
             DSGVO-konforme Datenschutzerklärung<br>
-            Impressum gemäß § 5 DDG &amp; § 18 MStV
+            Impressum gemäß § 5 DDG & § 18 MStV
         </p>
 
         <p style="margin-bottom: 12px;">
             <strong>Features:</strong><br>
-            Echtzeit-Uhr &amp; Datumsanzeige<br>
+            Echtzeit-Uhr & Datumsanzeige<br>
             Wetter mit lokalem Caching (Local Storage)<br>
             Sprachumschaltung (DE ↔ RU)<br>
             Responsive Design (Mobile First)<br>
             Tab-basierte Navigation ohne Seitenreload
         </p>
         <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
-        <!-- PDF-Kompressor -->
         <p style="margin-bottom: 6px;">
             <strong>📄 PDF-Kompressor</strong>
         </p>
@@ -440,7 +428,6 @@
         </p>
 
         <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
-        <!-- Foto zu PDF -->
         <p style="margin-bottom: 6px;">
             <strong>📸 Foto zu PDF</strong>
         </p>
@@ -467,7 +454,7 @@
 </details>
 
 <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
-    💡 <strong>Idee &amp; Entwicklung:</strong> Artem Finevych, Hattingen (NRW)
+    💡 <strong>Idee & Entwicklung:</strong> Artem Finevych, Hattingen (NRW)
 </div>
 
 </div>
@@ -506,12 +493,9 @@
 
 </main>
 
-<!-- Nach-oben-Button -->
 <button class="scroll-top-btn" touch-action="none">↑</button>
-<!-- Language switcher button -->
-    <script src="js/silktide-consent-manager.js" defer></script>
+<script src="js/silktide-consent-manager.js" defer></script>
     <script src="js/cookie-consent.js" defer></script>
-    <!-- Твои скрипты -->
     <script src="js/components.js"></script>
     <script src="js/tabs.js"></script>
     <script src="js/clock.js"></script>
@@ -521,4 +505,3 @@
 
   </body>
 </html>
-

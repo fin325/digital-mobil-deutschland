@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Импрессум — Digital & Mobil in Deutschland</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<app-header></app-header>
+
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+            <div class="nav-row">
+                <a href="../ru/index.html" class="nav-btn active" style="text-decoration:none;">← Главная</a>
+                <a href="datenschutz.html" class="nav-btn" style="text-decoration:none;">Конфиденциальность</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+<section id="home" class="tab-content active">
+    <div class="card">
+        <h2>ℹ️ Импрессум</h2>
+
+    <div style="font-size: 0.85rem; line-height: 1.6; opacity: 0.9;">
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Сведения согласно § 5 DDG (Закон о цифровых услугах)</h3>
+        <p style="margin-bottom: 14px;">
+            Artem Finevych<br>
+            Digital &amp; Mobil in Deutschland<br>
+            Pannhütter Str. 72<br>
+            45525 Hattingen, Deutschland
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Контакт</h3>
+        <p style="margin-bottom: 14px;">
+            E-Mail: <a href="mailto:hattingen325@gmail.com" style="color: inherit; font-weight: 600; text-decoration: underline;">hattingen325@gmail.com</a>
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Ответственный за содержание согласно § 18 абз. 2 MStV</h3>
+        <p style="margin-bottom: 14px;">
+            Artem Finevych<br>
+            Pannhütter Str. 72<br>
+            45525 Hattingen, Deutschland
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Примечание об использовании</h3>
+        <p style="margin-bottom: 14px;">
+            Данный сайт является частным, некоммерческим информационным ресурсом.
+            Товары и услуги не предлагаются, доход от рекламы не извлекается.
+            Регистрация предпринимательской деятельности не требуется.
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Ответственность за содержание</h3>
+        <p style="margin-bottom: 14px;">
+            Содержание данного сайта создано с максимальной тщательностью.
+            Однако мы не можем гарантировать правильность, полноту и актуальность содержания.
+            Как поставщик услуг, мы несём ответственность за собственное содержание на этих страницах в соответствии с § 7 абз. 1 DDG.
+            Согласно §§ 8–10 DDG мы не обязаны контролировать переданную или сохранённую информацию третьих лиц.
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Ответственность за ссылки</h3>
+        <p style="margin-bottom: 14px;">
+            Данный сайт содержит ссылки на внешние сайты третьих лиц, на содержание которых мы не имеем влияния.
+            За содержание связанных страниц отвечает их оператор.
+            На момент размещения ссылок нарушения закона не были обнаружены.
+            При выявлении правонарушений соответствующие ссылки будут незамедлительно удалены.
+        </p>
+
+        <h3 style="margin-bottom: 8px; color: var(--primary-blue);">Авторское право</h3>
+        <p style="margin-bottom: 14px;">
+            Содержание и произведения, созданные оператором сайта, защищены немецким законом об авторском праве.
+            Копирование, обработка, распространение и любое использование за пределами авторского права требуют письменного согласия автора.
+        </p>
+
+        <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue);">
+            🔒 <strong>Защита данных:</strong>
+            Информацию об обработке персональных данных вы найдёте в нашей
+            <a href="datenschutz-ru.html" style="color: inherit; font-weight: 700; text-decoration: underline;">Политике конфиденциальности →</a>
+        </div>
+    </div>
+</div>
+
+</section>
+</main>
+
+<button class="scroll-top-btn" touch-action="none">↑</button>
+<script src="../js/components.js"></script>
+<script src="../js/tabs.js"></script>
+<script src="../js/clock.js"></script>
+<script src="../js/weather.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof initClock === 'function') initClock();
+        if (typeof getWeather === 'function') getWeather();
+    });
+</script>
+
+</body>
+</html>

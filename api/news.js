@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+const https = require('https');
+
+export default function handler(req, res) {
     const lang = req.query.lang || 'de';
 
     const feeds = {
@@ -6,15 +8,18 @@ export default async function handler(req, res) {
         ru: 'https://rss.dw.com/rdf/rss-ru-all'
     };
 
-    try {
-        const response = await fetch(feeds[lang] || feeds.de);
-        const xml = await response.text();
+    const url = feeds[lang] || feeds.de;
 
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-        res.setHeader('Cache-Control', 's-maxage=300');
-        res.status(200).send(xml);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed' });
-    }
+    https.get(url, (response) => {
+        let data = '';
+        response.on('data', chunk => { data += chunk; });
+        response.on('end', () => {
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+            res.setHeader('Cache-Control', 's-maxage=300');
+            res.status(200).send(data);
+        });
+    }).on('error', (err) => {
+        res.status(500).json({ error: err.message });
+    });
 }

@@ -56,5 +56,13 @@ async function loadNews() {
     }
 }
 
+// Перезагрузить новости при смене языка (если уже были загружены)
+window.addEventListener('languageChanged', () => {
+    const container = document.getElementById('news-container');
+    if (container && container.style.display !== 'none' && container.innerHTML !== '') {
+        loadNews();
+    }
+});
+
 // Доступно глобально
 window.loadTagesschauNews = loadNews;

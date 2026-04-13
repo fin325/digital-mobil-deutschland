@@ -16,4 +16,3 @@ function initClock() {
     updateClock();
     setInterval(updateClock, 1000);
 }
-

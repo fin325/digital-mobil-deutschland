@@ -3,7 +3,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     initClock();   // clock.js
     getWeather();  // weather.js
-    loadNews();    // news.js
+    
+    // ВАЖНО: Мы убрали отсюда loadNews();
+    // Теперь новости загружаются только после согласия в куки или по клику на заглушку!
 
     // === Автоматическое открытие вкладки по ссылке (Hash) ===
     const hash = window.location.hash.replace('#', ''); 

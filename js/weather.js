@@ -1,8 +1,6 @@
 /* === weather.js — Wetter OpenWeatherMap + Luftqualität === */
 
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
-
-// ИЗМЕНЕНИЕ ЗДЕСЬ: Сначала пытаемся достать город из памяти. Если там пусто, берем 'Hattingen'
 let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
@@ -25,10 +23,10 @@ async function getWeather() {
 
     // API-Anfrage
     try {
-        // Выбираем язык для API OpenWeatherMap
-        const apiLang = isRu ? 'ru' : 'de';
+        // ИЗМЕНЕНИЕ ЗДЕСЬ: Всегда запрашиваем погоду на немецком (lang=de), 
+        // чтобы OpenWeatherMap сам переводил введенные города (Мюнхен -> München)
         const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=${apiLang}`
+            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
         );
         const d = await res.json();
 
@@ -55,10 +53,17 @@ async function getWeather() {
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name; // OpenWeatherMap вернет название
+        const city = d.name; // Официальное название города от API (всегда на немецком)
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
+
+        // ИЗМЕНЕНИЕ ЗДЕСЬ: Если пользователь ввел город по-русски или с маленькой буквы, 
+        // мы сохраняем в память красивое немецкое название, которое вернул сервер!
+        if (currentCity !== city) {
+            currentCity = city;
+            localStorage.setItem('userCity', city);
+        }
 
         let icon = '☁️';
         if (code === 800)     icon = '☀️';
@@ -83,8 +88,6 @@ function applyWeatherData(d) {
                 const newCity = prompt(promptMsg, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
-                    
-                    // ИЗМЕНЕНИЕ ЗДЕСЬ: Сохраняем новый город в память браузера!
                     localStorage.setItem('userCity', currentCity);
                     
                     localStorage.removeItem('weatherCache');

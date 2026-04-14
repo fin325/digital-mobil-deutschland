@@ -24,13 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Фоновый пинг для пробуждения Render-приложения при загрузке сайта
+fetch('https://ВАШ_АДРЕС_НА_RENDER.onrender.com/wakeup', { mode: 'no-cors' })
+  .catch(() => {});
+
 // === Функции загрузки YouTube ===
 
 function loadVideo(placeholderId, iframeId, videoId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe) {
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+        // Убрали autoplay=1. Плеер просто загрузится в режиме паузы.
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
         iframe.style.display = "block";
         placeholder.style.display = "none";
     }
@@ -40,12 +45,14 @@ function loadPlaylist(placeholderId, iframeId, listId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe) {
-        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&autoplay=1&rel=0`;
+        // Убрали autoplay=1. Плейлист просто загрузится в режиме паузы.
+        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&rel=0`;
         iframe.style.display = "block";
         placeholder.style.display = "none";
     }
 }
 
+// === Управление видимостью иконки куки при скролле ===
 window.addEventListener('scroll', () => {
     const icon = document.getElementById('silktide-cookie-icon');
     if (!icon) return;

@@ -193,3 +193,7 @@ iframe {
 .load-tool-btn:hover {
     background: #0056b3;
 }
+
+#project .card {
+    background: rgba(255, 255, 255, 0.65) !important;
+}

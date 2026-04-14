@@ -53,9 +53,8 @@ scroll-hint {
     border-radius: 14px;
     white-space: nowrap; 
     color: var(--primary-blue);
-    text-shadow: 0 0 1px rgba(0, 51, 102, 0.25);
     font-weight: 600;
-    font-size: 12.8px;
+    font-size: 12.5px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

@@ -1,5 +1,4 @@
 // js/cookie-consent.js
-
 silktideCookieBannerManager.updateCookieBannerConfig({
   background: { showBackground: true },
   cookieIcon: { position: "bottomLeft" },

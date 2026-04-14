@@ -54,7 +54,7 @@ scroll-hint {
     white-space: nowrap; 
     color: var(--primary-blue);
     font-weight: 600;
-    font-size: 15.5px;
+    font-size: 14.5px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -70,7 +70,7 @@ a.nav-btn {
     text-decoration: none; 
     display: inline-block; 
     box-sizing: border-box;
-    font-size: 14.5px; 
+    font-size: 14px; 
     font-family: system-ui, -apple-system, sans-serif; 
     color: var(--primary-blue) !important; 
 }

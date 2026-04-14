@@ -54,6 +54,7 @@ scroll-hint {
     white-space: nowrap; 
     color: var(--primary-blue);
     font-weight: 600;
+    font-size: 15.5px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

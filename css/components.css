@@ -23,7 +23,7 @@
 }
 
 .btn-main {
-    background: rgba(0, 82, 155, 0.7) !important;
+    background: rgba(0, 82, 155, 0.3) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
@@ -195,5 +195,5 @@ iframe {
 }
 
 #project .card {
-    background: rgba(255, 255, 255, 0.4) !important;
+    background: rgba(255, 255, 255, 0.35) !important;
 }

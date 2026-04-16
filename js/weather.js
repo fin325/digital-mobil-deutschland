@@ -149,9 +149,9 @@ function updateAQIUI(index) {
     let color, icon;
 
     switch (index) {
-        case 1: color = "#2ecc71"; icon = '<span class="icon-emoji icon-de"></span>'; break;
-        case 2: color = "#f1c40f"; icon = '<span class="icon-emoji icon-de"></span>'; break;
-        case 3: color = "#e67e22"; icon = '<span class="icon-emoji icon-de"></span>'; break;
+        case 1: color = "#2ecc71"; icon = "<span class="icon-emoji icon-de"></span>"; break;
+        case 2: color = "#f1c40f"; icon = "<span class="icon-emoji icon-de"></span>"; break;
+        case 3: color = "#e67e22"; icon = "<span class="icon-emoji icon-de"></span>"; break;
         case 4: color = "#e74c3c"; icon = "⚠️"; break;
         case 5: color = "#9b59b6"; icon = "😷"; break;
         default: color = "#fff";   icon = "🍃";

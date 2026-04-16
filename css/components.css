@@ -22,57 +22,38 @@
     z-index: 1;
 }
 
-/* Работа над текстом внутри карточек */
-.card h1, .card h2 {
-    color: var(--text-dark);
-    font-weight: 800; /* Используем ваш Montserrat 800 */
-    margin-top: 0;
-    margin-bottom: 12px;
-    letter-spacing: -0.02em; /* Делает заголовок плотнее и стильнее */
-}
-
-.card p {
-    color: var(--text-muted); /* Текст чуть светлее заголовка */
-    font-weight: 400;
-    font-size: 1.05rem;
-    margin-bottom: 15px;
-}
-
-.card strong, .card b {
-    font-weight: 700;
-    color: var(--text-dark); /* Акценты выделяем цветом темнее */
-}
-
 .btn-main {
-    font-family: 'Montserrat', sans-serif;
     background: rgba(0, 82, 155, 0.7) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
     color: white !important;
     padding: 18px;
     font-size: 1.1rem;
-    font-weight: 700; /* Делаем текст на кнопках жирнее */
+    font-weight: 600;
     border-radius: 18px;
     width: 100%;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    
+    /* Добавляем эти свойства внутрь, чтобы не вылезало за края */
     display: block;
     box-sizing: border-box;
     white-space: normal;
     text-align: center;
     text-decoration: none;
-    letter-spacing: 0.02em; /* Немного раздвигаем буквы для читаемости */
 }
 
 .btn-main:active {
     transform: scale(0.97);
 }
 
+/* 2. ПРАВИЛО ДЛЯ ОТСТУПОВ (чтобы кнопки не слипались во вкладках) */
 .tab-content .btn-main {
     font-size: 1.0rem;
     margin-bottom: 15px;
 }
 
+/* 3. ТВОИ ВКЛАДКИ (логика их показа) */
 .tab-content {
     font-size: 1.0rem;
     display: none;
@@ -80,8 +61,9 @@
 
 .tab-content.active {
     display: block;
-    animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    -webkit-animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation: fadeInUp 0.6s cubic-bezier (0.165, 0.84, 0.44, 1) forwards;
+    -webkit-animation: fadeInUp 0.6s
+    cubic-bezier (0.165, 0.84, 0.44, 1) forwards;/*С Ошибкой пробел анимация парадоксально лучше и плавнее!!!*/
     transform-origin: bottom center;
 }
 
@@ -100,8 +82,10 @@ iframe {
     border: none;
 }
 
+/* Базовый контейнер для видео */
 .video-wrapper {
     position: relative;
+    /* Убрали padding-bottom и height: 0 */
     width: 100%;
     overflow: hidden;
     border-radius: 15px;
@@ -110,24 +94,32 @@ iframe {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.video-wrapper.horizontal { aspect-ratio: 16 / 9; }
+/* Формат для горизонтальных видео (16:9) */
+.video-wrapper.horizontal {
+    aspect-ratio: 16 / 9;
+}
+
+/* Формат для вертикальных видео (9:16) */
 .video-wrapper.vertical {
-    max-width: 350px;
+    max-width: 350px; /* Ограничитель ширины */
     aspect-ratio: 9 / 16;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Стили для самого iframe внутри */
 .video-wrapper iframe {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
 }
 
 .status-msg {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: #666;
     text-align: center;
     margin-bottom: 15px;
 }
@@ -140,22 +132,25 @@ iframe {
     transition: transform 0.2s;
 }
 
+.news-card-mini:active {
+    transform: scale(0.98);
+}
+
 .news-item {
     background: rgba(255, 255, 255, 0.3);
-    border-left: 4px solid var(--primary-blue);
+    border-left: 4px solid #00529b;
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 0 12px 12px 0;
 }
 
 .news-title {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 0.95rem;
     display: block;
     margin-bottom: 5px;
-    color: var(--text-dark);
+    color: #1d1d1f;
     text-decoration: none;
-    line-height: 1.3;
 }
 
 .law-link {
@@ -165,13 +160,13 @@ iframe {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     text-decoration: none;
-    color: var(--primary-blue);
-    font-weight: 700;
+    color: #00529b;
+    font-weight: bold;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .consent-placeholder {
-    background: rgba(248, 249, 250, 0.8);
+    background: #f8f9fa;
     padding: 30px 20px;
     border-radius: 12px;
     text-align: center;
@@ -181,7 +176,22 @@ iframe {
 
 .consent-placeholder p {
     margin: 10px 0;
-    color: var(--text-muted);
+    color: #555;
+}
+
+.load-tool-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.load-tool-btn:hover {
+    background: #0056b3;
 }
 
 #project .card {

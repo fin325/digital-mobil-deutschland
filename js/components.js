@@ -93,7 +93,7 @@ class ScrollHint extends HTMLElement {
             <div class="scroll-hint-container">
                 <div class="scroll-hint-left">
                     <div class="swipe-finger-wrapper">
-                        <div class="swipe-finger">👇🏼</div>
+                        <div class="swipe-finger"><span class="icon-emoji icon-finger"></span></div>
                     </div>
                     <span class="scroll-hint-text">${hintText}</span>
                 </div>

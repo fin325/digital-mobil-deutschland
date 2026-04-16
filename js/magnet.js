@@ -1,30 +1,56 @@
+/* === magnet.js — Geomagnetische Aktivität (NOAA) === */
+
+const MAGNET_CACHE_TTL = 30 * 60 * 1000; // 30 Minuten
+
 async function getGeomagneticActivity() {
     try {
-        const now = new Date();
-        const start = new Date(now - 24 * 60 * 60 * 1000);
-        const startStr = start.toISOString().slice(0, 19) + 'Z';
-        const endStr   = now.toISOString().slice(0, 19) + 'Z';
+        const cached = localStorage.getItem('magnetCache');
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < MAGNET_CACHE_TTL) {
+                applyMagnetData(parsed.kp);
+                return;
+            }
+        }
+    } catch (e) {}
 
+    try {
         const res = await fetch(
-            `https://kp.gfz.de/app/json/?start=${startStr}&end=${endStr}&index=Kp`
+            'https://services.swpc.noaa.gov/json/planetary_k_index_1m.json'
         );
         const data = await res.json();
-        const values = data.Kp;
+        const kp = data[data.length - 1].kp_index;
 
-        const el = document.getElementById('geo');
-        if (!el) {
-            alert('geo element NOT FOUND');
-            return;
-        }
-        if (!values || values.length === 0) {
-            alert('Kp values EMPTY');
-            return;
-        }
-        el.innerText = values[values.length - 1];
+        try {
+            localStorage.setItem('magnetCache', JSON.stringify({
+                kp,
+                timestamp: Date.now()
+            }));
+        } catch (e) {}
+
+        applyMagnetData(kp);
 
     } catch (e) {
-        alert('ERROR: ' + e.message);
+        console.error('Fehler Geomagnetik:', e);
     }
 }
 
+function applyMagnetData(kp) {
+    const el = document.getElementById('geo');
+    if (!el) return;
+
+    const value = Math.round(kp * 10) / 10;
+    el.innerText = value;
+
+    let color;
+    if (kp <= 2)      color = '#2ecc71';
+    else if (kp <= 4) color = '#f1c40f';
+    else if (kp <= 6) color = '#e67e22';
+    else              color = '#e74c3c';
+
+    el.style.color = color;
+    el.style.fontWeight = 'bold';
+}
+
+// Start
 getGeomagneticActivity();

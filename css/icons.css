@@ -23,9 +23,9 @@
 .icon-rain { background-image: url('../img/icon/rain.svg'); }
 /* Классы для качества воздуха (AQI) ты, скорее всего, уже добавил */
 .icon-leaf { background-image: url('../img/icon/leaf.svg'); }
-.icon-air { background-image: url('../img/icon/wind.svg'); }
+.icon-air { background-image: url('../img/icon/air.svg'); }
 .icon-fog { background-image: url('../img/icon/fog.svg'); }
-.icon-attention { background-image: url('../img/icon/warning.svg'); }
+.icon-attention { background-image: url('../img/icon/attention.svg'); }
 .icon-mask { background-image: url('../img/icon/mask.svg'); }
 
 /* Добавь сюда остальные по аналогии... */

@@ -1,7 +1,7 @@
 class AppHeader extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';
-        const langLabel = isRu ? '🇷🇺 → <span class="icon-emoji icon-de"></span>' : '🇩🇪 → 🇷🇺';
+        const langLabel = isRu ? '🇷🇺 → <span class="icon-emoji icon-de"></span>' : '<span class="icon-emoji icon-de"></span> → 🇷🇺';
 
         // Словари для разных языков
         const texts = {

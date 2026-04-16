@@ -13,8 +13,8 @@
 /* 2. Конкретные иконки: связываем класс с файлом в папке */
 /* Важно: ../ означает "выйти из папки css", чтобы зайти в папку img */
 
-.icon-home { background-image: url('../img/icon/de.svg'); }
-.icon-photo { background-image: url('../img/icon/ru.svg'); }
-.icon-compress { background-image: url('../img/icon/pdf-kompressor.svg'); }
-.icon-map { background-image: url('../img/icon/health.svg'); }
+.icon-de { background-image: url('../img/icon/de.svg'); }
+.icon-ru { background-image: url('../img/icon/ru.svg'); }
+.icon-kompressor { background-image: url('../img/icon/pdf-kompressor.svg'); }
+.icon-health { background-image: url('../img/icon/health.svg'); }
 /* Добавь сюда остальные по аналогии... */

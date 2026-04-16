@@ -59,7 +59,7 @@ class AppHeader extends HTMLElement {
                              </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                🧲 <span class="w-label">${texts.geo}</span> <span id="geo">2</span>
+                                🧲 <span class="w-label">${texts.geo}</span> <span id="geo"></span>
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">

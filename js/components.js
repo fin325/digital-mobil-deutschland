@@ -53,10 +53,10 @@ class AppHeader extends HTMLElement {
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
-                                <span id="aqi-icon">🍃</span> 
-                                <span class="w-label">${texts.aqi}</span> 
-                                <span id="aqi-value">--</span>
-                            </span>
+                             <span id="aqi-icon" class="icon-emoji icon-leaf"></span> 
+                             <span class="w-label">${texts.aqi}</span> 
+                             <span id="aqi-value">--</span>
+                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
                                 🧲 <span class="w-label">${texts.geo}</span> <span id="geo">2</span>

@@ -1,5 +1,4 @@
 /* === magnet.js — Geomagnetische Aktivität (GFZ Potsdam) === */
-document.getElementById('geo').innerText = 'TEST';
 const MAGNET_CACHE_TTL = 30 * 60 * 1000; // 30 Minuten
 async function getGeomagneticActivity() {
     try {

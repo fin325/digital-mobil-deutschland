@@ -5,11 +5,12 @@ let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
-// Определяем язык страницы
+// Determine the page language once for the entire file
 const isRu = document.documentElement.lang === 'ru';
 
 async function getWeather() {
     try {
+        // Check the cache
         const cached = localStorage.getItem('weatherCache');
         if (cached) {
             const parsed = JSON.parse(cached);
@@ -20,7 +21,10 @@ async function getWeather() {
         }
     } catch (e) {}
 
+    // API-Anfrage
     try {
+        // CHANGE HERE: Always request the weather in German (lang=de),
+        // so OpenWeatherMap automatically translates entered city names (e.g., Munich -> München)
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
         );
@@ -49,32 +53,34 @@ async function getWeather() {
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name; 
+        const city = d.name; // name API (Deutsch)
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
 
+        // CHANGE HERE: If the user entered the city in Russian or in lowercase,
+        // we store the properly formatted German name returned by the server!
         if (currentCity !== city) {
             currentCity = city;
             localStorage.setItem('userCity', city);
         }
 
-        // Иконки для основной погоды (проверь эти классы в icons.css)
-        let icon = `<span class="icon-emoji icon-cloud"></span>`; 
-        if (code === 800)     icon = `<span class="icon-emoji icon-sun"></span>`;
-        else if (code > 800)  icon = `<span class="icon-emoji icon-cloud"></span>`;
-        else if (code >= 600) icon = `<span class="icon-emoji icon-snow"></span>`;
-        else if (code >= 300) icon = `<span class="icon-emoji icon-rain"></span>`;
+        let icon = '☁️';
+        if (code === 800)     icon = '☀️';
+        else if (code > 800)  icon = '☁️';
+        else if (code >= 600) icon = '❄️';
+        else if (code >= 300) icon = '🌧️';
 
         const tempEl  = document.getElementById('city-temp');
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
         if (tempEl) {
-            // ВАЖНО: используем .innerHTML для отображения иконки
-            tempEl.innerHTML = `${city} ${icon} ${temp}°C`;
+            tempEl.innerText = `${city} ${icon} ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
+                
+                // Translation of the city input box
                 const promptMsg = isRu 
                     ? 'Пожалуйста, введите название города:' 
                     : 'Bitte den Namen der Stadt eingeben:';
@@ -83,6 +89,7 @@ function applyWeatherData(d) {
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
+                    
                     localStorage.removeItem('weatherCache');
                     localStorage.removeItem('aqiCache');
                     getWeather();
@@ -141,34 +148,34 @@ function updateAQIUI(index) {
 
     let color, icon;
 
-    // Используем обратные кавычки (клавиша Ё), чтобы избежать ошибок с кавычками внутри
     switch (index) {
-        case 1: color = "#2ecc71"; icon = '<span class="icon-emoji icon-leaf"></span>'; break;
-        case 2: color = "#f1c40f"; icon = '<span class="icon-emoji icon-air"></span>'; break;
-        case 3: color = "#e67e22"; icon = '<span class="icon-emoji icon-fog"></span>'; break;
-        case 4: color = "#e74c3c"; icon = '<span class="icon-emoji icon-attention"></span>'; break;
-        case 5: color = "#9b59b6"; icon = '<span class="icon-emoji icon-mask"></span>'; break;
-        default: color = "#fff";   icon = '<span class="icon-emoji icon-leaf"></span>';
+        case 1: color = "#2ecc71"; icon = '<span class="icon-emoji icon-de"></span>'; break;
+        case 2: color = "#f1c40f"; icon = '<span class="icon-emoji icon-de"></span>'; break;
+        case 3: color = "#e67e22"; icon = '<span class="icon-emoji icon-de"></span>'; break;
+        case 4: color = "#e74c3c"; icon = "⚠️"; break;
+        case 5: color = "#9b59b6"; icon = "😷"; break;
+        default: color = "#fff";   icon = "🍃";
     }
 
     valEl.innerText = index;
     valEl.style.color = color;
-    
-    // ВАЖНО: заменяем .innerText на .innerHTML
-    icoEl.innerHTML = icon;
+    icoEl.innerText = icon;
     icoEl.style.color = color;
     icoEl.style.textShadow = `0 0 8px ${color}66`;
 }
 
-// Функции прокрутки и меток (оставляем без изменений)
 function toggleLabel(element) {
     if (!element) return;
+
     const isShown = element.classList.contains('show-text');
+
     document.querySelectorAll('.w-item').forEach(item => {
         item.classList.remove('show-text');
     });
+
     if (!isShown) {
         element.classList.add('show-text');
+
         const label = element.querySelector('.w-label');
         if (label) {
             const itemRect = element.getBoundingClientRect();
@@ -176,6 +183,7 @@ function toggleLabel(element) {
             const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
             label.style.left = `calc(50% + ${offset}px)`;
         }
+
         const scrollContainer = document.querySelector('.weather-scroll-container');
         if (scrollContainer) {
             const hideOnScroll = () => {
@@ -184,6 +192,7 @@ function toggleLabel(element) {
             };
             scrollContainer.addEventListener('scroll', hideOnScroll, { once: true });
         }
+
         setTimeout(() => {
             if (element.classList.contains('show-text')) {
                 element.classList.remove('show-text');
@@ -204,4 +213,5 @@ function toggleWeatherScroll() {
     }
 }
 
+// Start
 getWeather();

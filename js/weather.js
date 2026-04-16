@@ -149,13 +149,13 @@ function updateAQIUI(index) {
     let color, icon;
 
     switch (index) {
-        case 1: color = "#2ecc71"; icon = "<span class="icon-emoji icon-leaf"></span>"; break;
-        case 2: color = "#f1c40f"; icon = "<span class="icon-emoji icon-air"></span>"; break;
-        case 3: color = "#e67e22"; icon = "<span class="icon-emoji icon-fog"></span>"; break;
-        case 4: color = "#e74c3c"; icon = "<span class="icon-emoji icon-attention"></span>"; break;
-        case 5: color = "#9b59b6"; icon = "<span class="icon-emoji icon-mask"></span>"; break;
-        default: color = "#fff";   icon = "<span class="icon-emoji icon-leaf"></span>";
-    }
+    case 1: color = "#2ecc71"; icon = `<span class="icon-emoji icon-leaf"></span>`; break;
+    case 2: color = "#f1c40f"; icon = `<span class="icon-emoji icon-air"></span>`; break;
+    case 3: color = "#e67e22"; icon = `<span class="icon-emoji icon-fog"></span>`; break;
+    case 4: color = "#e74c3c"; icon = `<span class="icon-emoji icon-attention"></span>`; break;
+    case 5: color = "#9b59b6"; icon = `<span class="icon-emoji icon-mask"></span>`; break;
+    default: color = "#fff";   icon = `<span class="icon-emoji icon-leaf"></span>`;
+}
 
     valEl.innerText = index;
     valEl.style.color = color;

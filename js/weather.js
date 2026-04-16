@@ -144,9 +144,9 @@ function updateAQIUI(index) {
 
     switch (index) {
         case 1: color = "#2ecc71"; iconClass = "icon-leaf";    break;
-        case 2: color = "#f1c40f"; iconClass = "icon-wind";    break;
+        case 2: color = "#f1c40f"; iconClass = "icon-air";    break;
         case 3: color = "#e67e22"; iconClass = "icon-fog";     break;
-        case 4: color = "#e74c3c"; iconClass = "icon-warning"; break;
+        case 4: color = "#e74c3c"; iconClass = "icon-attention"; break;
         case 5: color = "#9b59b6"; iconClass = "icon-mask";    break;
         default: color = "#fff";   iconClass = "icon-leaf";
     }

@@ -10,6 +10,13 @@
     margin-right: 8px;
 }
 
+#aqi-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
 /* 2. Конкретные иконки */
 .icon-de      { background-image: url('../img/icon/de.svg'); }
 .icon-ru      { background-image: url('../img/icon/ru.svg'); }

@@ -17,9 +17,15 @@
 .icon-ru { background-image: url('../img/icon/ru.svg'); }
 .icon-health { background-image: url('../img/icon/health.svg'); }
 .icon-finger { background-image: url('../img/icon/finger.svg'); }
-.icon-air { background-image: url('../img/icon/air.svg'); }
-.icon-fog { background-image: url('../img/icon/fog.svg'); }
+.icon-sun { background-image: url('../img/icon/sun.svg'); }
+.icon-cloud { background-image: url('../img/icon/cloud.svg'); }
+.icon-snow { background-image: url('../img/icon/snow.svg'); }
+.icon-rain { background-image: url('../img/icon/rain.svg'); }
+/* Классы для качества воздуха (AQI) ты, скорее всего, уже добавил */
 .icon-leaf { background-image: url('../img/icon/leaf.svg'); }
-.icon-attention { background-image: url('../img/icon/attention.svg'); }
+.icon-air { background-image: url('../img/icon/wind.svg'); }
+.icon-fog { background-image: url('../img/icon/fog.svg'); }
+.icon-attention { background-image: url('../img/icon/warning.svg'); }
 .icon-mask { background-image: url('../img/icon/mask.svg'); }
+
 /* Добавь сюда остальные по аналогии... */

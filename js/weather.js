@@ -3,9 +3,9 @@
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
 let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
-const CACHE_TTL = 10 * 60 * 1000; // 10 минут
+const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
-// Определяем язык страницы
+// Determine the page language once for the entire file
 const isRu = document.documentElement.lang === 'ru';
 
 async function getWeather() {
@@ -49,7 +49,7 @@ async function getWeather() {
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name; 
+        const city = d.name;
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
@@ -59,30 +59,31 @@ function applyWeatherData(d) {
             localStorage.setItem('userCity', city);
         }
 
-        // Иконки для основной погоды
-        let icon = `<span class="icon-emoji icon-cloud"></span>`; 
-        if (code === 800)     icon = `<span class="icon-emoji icon-sun"></span>`;
-        else if (code > 800)  icon = `<span class="icon-emoji icon-cloud"></span>`;
-        else if (code >= 600) icon = `<span class="icon-emoji icon-snow"></span>`;
-        else if (code >= 300) icon = `<span class="icon-emoji icon-rain"></span>`;
+        // SVG-иконки вместо эмодзи
+        let iconClass = 'icon-cloud';
+        if (code === 800)     iconClass = 'icon-sun';
+        else if (code > 800)  iconClass = 'icon-cloud';
+        else if (code >= 600) iconClass = 'icon-snow';
+        else if (code >= 300) iconClass = 'icon-rain';
 
         const tempEl  = document.getElementById('city-temp');
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
         if (tempEl) {
-            // КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: .innerHTML вместо .innerText
-            tempEl.innerHTML = `${city} ${icon} ${temp}°C`;
+            tempEl.innerHTML = `${city} <span class="icon-emoji ${iconClass}"></span> ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
-                const promptMsg = isRu 
-                    ? 'Пожалуйста, введите название города:' 
+
+                const promptMsg = isRu
+                    ? 'Пожалуйста, введите название города:'
                     : 'Bitte den Namen der Stadt eingeben:';
-                
+
                 const newCity = prompt(promptMsg, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
+
                     localStorage.removeItem('weatherCache');
                     localStorage.removeItem('aqiCache');
                     getWeather();
@@ -96,7 +97,7 @@ function applyWeatherData(d) {
         getAirPollution(lat, lon);
 
     } catch (e) {
-        console.error(isRu ? 'Ошибка применения данных:' : 'Fehler при применении данных:', e);
+        console.error(isRu ? 'Ошибка применения данных:' : 'Fehler beim Anwenden der Wetterdaten:', e);
     }
 }
 
@@ -129,7 +130,7 @@ async function getAirPollution(lat, lon) {
         updateAQIUI(aqiIndex);
 
     } catch (e) {
-        console.error(isRu ? 'Ошибка качества воздуха:' : 'Fehler Luftqualität:', e);
+        console.error(isRu ? 'Ошибка качества воздуха:' : 'Fehler bei der Luftqualität:', e);
     }
 }
 
@@ -139,31 +140,71 @@ function updateAQIUI(index) {
 
     if (!valEl || !icoEl) return;
 
-    let color, icon;
+    let color, iconClass;
 
-    // Используем обратные кавычки (Ё) для безопасной вставки HTML
     switch (index) {
-        case 1: color = "#2ecc71"; icon = `<span class="icon-emoji icon-leaf"></span>`; break;
-        case 2: color = "#f1c40f"; icon = `<span class="icon-emoji icon-air"></span>`; break;
-        case 3: color = "#e67e22"; icon = `<span class="icon-emoji icon-fog"></span>`; break;
-        case 4: color = "#e74c3c"; icon = `<span class="icon-emoji icon-attention"></span>`; break;
-        case 5: color = "#9b59b6"; icon = `<span class="icon-emoji icon-mask"></span>`; break;
-        default: color = "#fff";   icon = `<span class="icon-emoji icon-leaf"></span>`;
+        case 1: color = "#2ecc71"; iconClass = "icon-leaf";    break;
+        case 2: color = "#f1c40f"; iconClass = "icon-wind";    break;
+        case 3: color = "#e67e22"; iconClass = "icon-fog";     break;
+        case 4: color = "#e74c3c"; iconClass = "icon-warning"; break;
+        case 5: color = "#9b59b6"; iconClass = "icon-mask";    break;
+        default: color = "#fff";   iconClass = "icon-leaf";
     }
 
-    // 1. Устанавливаем цифру индекса
     valEl.innerText = index;
     valEl.style.color = color;
-    
-    // 2. Устанавливаем иконку и её цвет
-    // КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: .innerHTML
-    icoEl.innerHTML = icon; 
-    icoEl.style.color = color; // Это сработает только с масками в CSS
-    icoEl.style.textShadow = `0 0 8px ${color}66`;
+
+    icoEl.innerHTML = `<span class="icon-emoji ${iconClass}" style="color:${color}; text-shadow:0 0 8px ${color}66;"></span>`;
 }
 
-// Функции меток и прокрутки оставляем без изменений...
-function toggleLabel(element) { /* ... код без изменений ... */ }
-function toggleWeatherScroll() { /* ... код без изменений ... */ }
+function toggleLabel(element) {
+    if (!element) return;
 
+    const isShown = element.classList.contains('show-text');
+
+    document.querySelectorAll('.w-item').forEach(item => {
+        item.classList.remove('show-text');
+    });
+
+    if (!isShown) {
+        element.classList.add('show-text');
+
+        const label = element.querySelector('.w-label');
+        if (label) {
+            const itemRect = element.getBoundingClientRect();
+            const screenCenterX = window.innerWidth / 2;
+            const offset = screenCenterX - (itemRect.left + itemRect.width / 2);
+            label.style.left = `calc(50% + ${offset}px)`;
+        }
+
+        const scrollContainer = document.querySelector('.weather-scroll-container');
+        if (scrollContainer) {
+            const hideOnScroll = () => {
+                element.classList.remove('show-text');
+                scrollContainer.removeEventListener('scroll', hideOnScroll);
+            };
+            scrollContainer.addEventListener('scroll', hideOnScroll, { once: true });
+        }
+
+        setTimeout(() => {
+            if (element.classList.contains('show-text')) {
+                element.classList.remove('show-text');
+            }
+        }, 3000);
+    }
+}
+
+function toggleWeatherScroll() {
+    const scrollContainer = document.querySelector('.weather-scroll-container');
+    if (scrollContainer) {
+        const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        if (scrollContainer.scrollLeft < maxScrollLeft / 2) {
+            scrollContainer.scrollTo({ left: scrollContainer.scrollWidth, behavior: 'smooth' });
+        } else {
+            scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+    }
+}
+
+// Start
 getWeather();

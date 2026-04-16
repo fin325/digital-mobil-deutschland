@@ -14,7 +14,7 @@
     display: inline-block;
     width: 22px;
     height: 22px;
-    flex-shrink: 0;
+    background-color: red !important;
 }
 
 /* 2. Конкретные иконки */

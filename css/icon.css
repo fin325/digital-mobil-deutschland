@@ -1,0 +1,20 @@
+/* 1. Базовый стиль: настраиваем общий вид всех иконок */
+.icon-emoji {
+    display: inline-block;
+    width: 22px;        /* Размер иконки (подбери под свой текст) */
+    height: 22px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    vertical-align: middle; /* Выравнивание по центру текста */
+    margin-right: 8px;      /* Отступ от текста справа */
+}
+
+/* 2. Конкретные иконки: связываем класс с файлом в папке */
+/* Важно: ../ означает "выйти из папки css", чтобы зайти в папку img */
+
+.icon-home { background-image: url('../img/icon/de.svg'); }
+.icon-photo { background-image: url('../img/icon/ru.svg'); }
+.icon-compress { background-image: url('../img/icon/pdf-kompressor.svg'); }
+.icon-map { background-image: url('../img/icon/health.svg'); }
+/* Добавь сюда остальные по аналогии... */

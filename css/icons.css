@@ -57,7 +57,12 @@
 .icon-2139        { background-image: url('../img/icon/2139.svg'); }        /* ℹ️ */
 .icon-2695        { background-image: url('../img/icon/2695.svg'); }        /* ⚕ */
 .icon-2696        { background-image: url('../img/icon/2696.svg'); }        /* ⚖ */
-
+/* 6. Дополнительные — ru/index.html */
+.icon-1f34e { background-image: url('../img/icon/1f34e.svg'); } /* 🍎 red_apple */
+.icon-1f4c4 { background-image: url('../img/icon/1f4c4.svg'); } /* 📄 page_facing_up */
+.icon-1f4f8 { background-image: url('../img/icon/1f4f8.svg'); } /* 📸 camera_with_flash */
+.icon-1f576 { background-image: url('../img/icon/1f576.svg'); } /* 🕶️ sunglasses */
+.icon-1f3d8 { background-image: url('../img/icon/1f3d8.svg'); } /* 🏘️ houses */
 /* 3. components.js */
 .icon-1f4a7       { background-image: url('../img/icon/1f4a7.svg'); }       /* 💧 */
 .icon-1f343       { background-image: url('../img/icon/1f343.svg'); }       /* 🍃 */

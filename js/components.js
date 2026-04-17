@@ -2,6 +2,7 @@ class AppHeader extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';
         const langLabel = isRu ? '<span class="icon-emoji icon-1f1f7-1f1f8"></span> → <span class="icon-emoji icon-1f1e9-1f1ea"></span>' : '<span class="icon-emoji icon-1f1e9-1f1ea"></span> → <span class="icon-emoji icon-1f1f7-1f1f8"></span>';
+
         // Словари для разных языков
         const texts = {
             loading: isRu ? 'Загрузка...' : 'Laden...',
@@ -42,22 +43,28 @@ class AppHeader extends HTMLElement {
                         <span id="current-time"></span>
                         <span class="divider" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">|</span>
                     </div>
-                    <div class="weather-info" id="full-weather-bar">
-    <span class="w-item" id="city-temp">${texts.loading}</span>
-    <span class="divider">|</span>
-    <span class="w-item" onclick="toggleLabel(this)">
-    <span class="icon-emoji icon-1f4a7"></span> <span class="w-label">${texts.humidity}</span> <span id="hum">--</span>%</span>
-    <span class="divider">|</span>
-    <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
-    <span id="aqi-icon" class="icon-emoji icon-leaf"></span> 
-    <span class="w-label">${texts.aqi}</span> 
-    <span id="aqi-value">--</span></span>
-    <span class="divider">|</span>
-    <span class="w-item" onclick="toggleLabel(this)">
-    <span class="icon-emoji icon-1f9f2"></span> <span class="w-label">${texts.geo}</span> <span id="geo"></span></span>
-    <span class="divider">|</span>
-    <span class="w-item" onclick="toggleLabel(this)">
-    <span class="icon-emoji icon-23f2"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}</span>
+
+                    <div class="weather-scroll-container">
+                        <div class="weather-info" id="full-weather-bar">
+                            <span class="w-item" id="city-temp">${texts.loading}</span>
+                            <span class="divider">|</span>
+                            <span class="w-item" onclick="toggleLabel(this)">
+                                <span class="icon-emoji icon-1f4a7"></span> <span class="w-label">${texts.humidity}</span> <span id="hum">--</span>%
+                            </span>
+                            <span class="divider">|</span>
+                            <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
+                                <span id="aqi-icon" class="icon-emoji icon-1f343"></span> 
+                                <span class="w-label">${texts.aqi}</span> 
+                                <span id="aqi-value">--</span>
+                            </span>
+                            <span class="divider">|</span>
+                            <span class="w-item" onclick="toggleLabel(this)">
+                                <span class="icon-emoji icon-1f9f2"></span> <span class="w-label">${texts.geo}</span> <span id="geo">2</span>
+                            </span>
+                            <span class="divider">|</span>
+                            <span class="w-item" onclick="toggleLabel(this)">
+                                <span class="icon-emoji icon-23f2"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
+                            </span>
                         </div>
                     </div>
                     <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>
@@ -86,7 +93,7 @@ class ScrollHint extends HTMLElement {
             <div class="scroll-hint-container">
                 <div class="scroll-hint-left">
                     <div class="swipe-finger-wrapper">
-                        <div class="swipe-finger"><span class="icon-emoji icon-finger"></span></div>
+                        <div class="swipe-finger"><span class="icon-emoji icon-1f447-1f3fc"></span></div>
                     </div>
                     <span class="scroll-hint-text">${hintText}</span>
                 </div>

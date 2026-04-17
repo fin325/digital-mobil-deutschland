@@ -14,6 +14,7 @@
 }
 
 /* 2. Icon definitions by Unicode hex code */
+.icon-23f2 { background-image: url('../img/icon/23f2.svg'); }
 .icon-1f600 { background-image: url('../img/icon/1f600.svg'); }
 .icon-1f601 { background-image: url('../img/icon/1f601.svg'); }
 .icon-1f602 { background-image: url('../img/icon/1f602.svg'); }

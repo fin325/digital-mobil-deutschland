@@ -177,25 +177,151 @@
     </section>
 
     <section id="project" class="tab-content">
-        <div class="card">
-            <h2><span class="icon-emoji icon-rocket"></span> Über das Projekt</h2>
-            <div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
-                <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
-                    <span class="icon-emoji icon-rolled_newspaper"></span> Aktuelle Nachrichten<br>
-                    <span class="icon-emoji icon-clapper_board"></span> YouTube-Videos<br>
-                    <span class="icon-emoji icon-sun_behind_small_cloud"></span> Wetter & Luftqualität
-                </p>
-                <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
-                    <span class="icon-emoji icon-flag_germany"></span><span class="icon-emoji icon-flag_russia"></span> Mehrsprachig
-                </p>
-            </div>
-            <details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
-                <summary style="cursor: pointer; font-weight: 700; color: var(--primary-blue); font-size: 0.95rem;">
-                    <span class="icon-emoji icon-hammer_and_wrench"></span> Technische Details
-                </summary>
-            </details>
-        </div>
-    </section>
+    <div class="card">
+        <h2><span class="icon-emoji icon-rocket"></span> Über das Projekt</h2>
+<p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+    <strong>Digital & Mobil in Deutschland</strong> — ein kostenloses Informationsportal
+    für Einwohner und Neuzugewanderte in Deutschland. Alle wichtigen Dienste,
+    Nachrichten und Tools an einem Ort.
+</p>
+<p style="margin: 0 0 10px 0; font-family: inherit;">
+  Link zu <a href="tabs/impressum.html" style="color: inherit; font-weight: 700; text-decoration: underline;">Impressum →</a> 
+  <a href="tabs/datenschutz.html" style="color: inherit; font-weight: 700; text-decoration: underline; margin-left: 15px;">Datenschutz →</a>
+</p>
+    <div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
+        <h3 style="margin: 0 0 10px; color: var(--primary-blue); font-size: 0.95rem;">Was bietet die Seite?</h3>
+        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+            <span class="icon-emoji icon-rolled_newspaper"></span> Aktuelle Nachrichten (RSS-Feed von tagesschau.de / ru.euronews.com)<br>
+            <span class="icon-emoji icon-clapper_board"></span> YouTube-Videos & Playlists — Nachrichten aus Deutschland auf Deutsch und Russisch (iframe, nocookie)<br>
+            <span class="icon-emoji icon-sun_behind_small_cloud"></span> Wetter & Luftqualität in Echtzeit (OpenWeatherMap API)<br>
+            <span class="icon-emoji icon-newspaper"></span> PDF-Kompressor (eigene Web-App auf Render)<br>
+            <span class="icon-emoji icon-shooting_star"></span> Foto zu PDF (eigene Web-App auf Streamlit)
+        </p>
+        <p style="margin: 0 0 10px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
+            Links zu externen Quellen:
+        </p>
+        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+            <span class="icon-emoji icon-briefcase"></span> Jobportale<br>
+            <span class="icon-emoji icon-stethoscope"></span> Arztsuche & Online-Terminbuchung<br>
+            <span class="icon-emoji icon-train"></span> DB Fahrplan & Navigation<br>
+            <span class="icon-emoji icon-globe_with_meridians"></span> Übersetzer<br>
+            <span class="icon-emoji icon-laptop"></span> KI-Assistenten<br>
+            <span class="icon-emoji icon-cityscape"></span> Lokale Infos für Hattingen
+        </p>
+        <p style="margin: 0 0 6px; font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">
+            Sprachumschaltung innerhalb der Website:
+        </p>
+        <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+            <span class="icon-emoji icon-flag_germany"></span><span class="icon-emoji icon-flag_russia"></span> Mehrsprachig (Deutsch / Russisch)
+        </p>
+    </div>
+<hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0;">
+<details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
+    <summary style="cursor: pointer; font-weight: 700; color: var(--primary-blue); font-size: 0.95rem;">
+        <span class="icon-emoji icon-hammer_and_wrench"></span> Technische Details
+    </summary>
+    <div style="margin-top: 14px; font-size: 0.85rem; line-height: 1.7;">
+        <p style="margin-bottom: 12px;">
+            <strong>Stack:</strong><br>
+            HTML5, CSS3, JavaScript (Vanilla ES6+)
+        </p>
+        <p style="margin-bottom: 12px;">
+            <strong>APIs & Dienste:</strong><br>
+            OpenWeatherMap (Wetter & Luftqualität)<br>
+            rss2json (RSS-Feed von tagesschau.de / ru.euronews.com)
+        </p>
+        <p style="margin-bottom: 12px;">
+            <strong>Hosting:</strong><br>
+            Vercel (statische Website)
+        </p>
+        <p style="margin-bottom: 12px;">
+            <strong>Datenschutz & Compliance:</strong><br>
+            Cookie Consent Manager (Silktide)<br>
+            YouTube im erweiterten Datenschutzmodus (nocookie)<br>
+            Zwei-Klick-Lösung für externe Inhalte<br>
+            Lokale Schriftarten (keи Google Fonts CDN)<br>
+            DSGVO-konforme Datenschutzerklärung<br>
+            Impressum gemäß § 5 DDG & § 18 MStV
+        </p>
+        <p style="margin-bottom: 12px;">
+            <strong>Features:</strong><br>
+            Echtzeit-Uhr & Datumsanzeige<br>
+            Wetter mit lokalem Caching (Local Storage)<br>
+            Sprachumschaltung (DE ↔ RU)<br>
+            Responsive Design (Mobile First)<br>
+            Tab-basierte Navigation ohne Seitenreload
+        </p>
+        <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
+        <p style="margin-bottom: 6px;">
+            <strong><span class="icon-emoji icon-newspaper"></span> PDF-Kompressor</strong>
+        </p>
+        <p style="margin-bottom: 6px;">
+            <em>Stack:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)
+        </p>
+        <p style="margin-bottom: 6px;">
+            <em>Hosting:</em> Render (Web Service), Supabase (Datenbank)
+        </p>
+        <p style="margin-bottom: 12px;">
+            <em>Funktionsweise:</em> Der Nutzer lädt eine PDF-Datei hoch und wählt eine Qualitätsstufe (in Prozent).
+            Das Backend öffnet die PDF mit PyMuPDF, rendert jede Seite als Rasterbild (Pixmap) mit der gewählten Skalierung
+            und erstellt ein neues PDF aus den komprimierten Bildern.
+            Dabei werden Garbage Collection (Stufe 4), Deflate-Kompression für Bilder, Schriften und Streams angewandt.
+            Die komprimierte Datei wird direkt als Download zurückgegeben — es werden keine Dateien auf dem Server gespeichert.
+            Zusätzlich verfügt die App über ein Feedback-System (Like/Dislike) mit Supabase-Datenbank (PostgreSQL) und IP-basierter Duplikaterkennung — jeder Nutzer kann nur einmal abstimmen, seine Stimme ändern oder zurücknehmen.
+        </p>
+        <p style="margin-bottom: 12px;">
+            <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
+                GitHub: pdf-compressor-web →
+            </a>
+        </p>
+        <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
+        <p style="margin-bottom: 6px;">
+            <strong><span class="icon-emoji icon-shooting_star"></span> Foto zu PDF</strong>
+        </p>
+        <p style="margin-bottom: 6px;">
+            <em>Stack:</em> Python, Streamlit, Pillow (PIL)
+        </p>
+        <p style="margin-bottom: 6px;">
+            <em>Hosting:</em> Streamlit Community Cloud (Snowflake)
+        </p>
+        <p style="margin-bottom: 12px;">
+            <em>Funktionsweise:</em> Der Nutzer wählt ein oder mehrere Fotos (JPG/PNG) über den Datei-Upload aus.
+            Die Bilder werden mit Pillow in den RGB-Modus конвентированы и anschließend mit der Methode <code>Image.save()</code>
+            zu einer mehrseitigen PDF-Datei zusammengefügt — jedes Foto wird zu einer eigenen Seite.
+            Die gesamte Verarbeitung erfolgt im Arbeitsspeicher (BytesIO), ohne Dateien auf dem Server zu speichern.
+            Nach der Erstellung wird das PDF als Vorschau im Browser angezeigt (Base64-iframe) und kann direkt heruntergeladen werden.
+            Eine Miniaturansicht aller hochgeladenen Fotos wird in einem 4-Spalten-Raster dargestellt.
+        </p>
+        <p style="margin-bottom: 0;">
+            <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline;">
+                GitHub: photo-to-pdf-converter →
+            </a>
+        </p>
+    </div>
+</details>
+<div style="margin-top: 20px; padding: 16px; border-radius: 10px; background: rgba(0,51,153,0.05); border: 1px solid rgba(0,51,153,0.15);">
+    <h3 style="margin: 0 0 12px; color: #003399; font-size: 0.95rem; text-align: center;"><span class="icon-emoji icon-laptop"></span> Entwicklung</h3>
+    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+        <a href="/img/Entwicklung.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+            <span class="icon-emoji icon-newspaper"></span> Entwicklung.pdf
+        </a>
+        <a href="/img/HTML-Structure.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+            <span class="icon-emoji icon-newspaper"></span> HTML-Structure.pdf
+        </a>
+        <a href="/img/Styles.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+            <span class="icon-emoji icon-newspaper"></span> Styles.pdf
+        </a>
+        <a href="/img/Scripts.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+            <span class="icon-emoji icon-newspaper"></span> Scripts.pdf
+        </a>
+    </div>
+</div>
+
+<div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
+    <span class="icon-emoji icon-information"></span> <strong>Idee & Entwicklung:</strong> Artem Finevych, Hattingen (NRW)
+</div>
+</div>
+</section>
 
     <section id="housing" class="tab-content">
         <div class="card">

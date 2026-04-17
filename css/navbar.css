@@ -71,7 +71,7 @@ a.nav-btn {
     display: inline-block; 
     box-sizing: border-box;
     font-size: 14px; 
-    font-family: system-ui, -apple-system, sans-serif; 
+    font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; 
     color: var(--primary-blue) !important; 
 }
 

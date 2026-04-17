@@ -202,3 +202,17 @@ a.nav-btn.active {
     opacity: 0.4;
     pointer-events: none;
 }
+
+/* Обращаемся именно к иконке ВНУТРИ кнопки языка */
+.lang-btn .icon-emoji {
+    width: 14px;  /* Уменьшаем ширину */
+    height: 14px; /* Уменьшаем высоту */
+    margin-right: 0; /* Убираем лишний отступ, так как у тебя в кнопке уже есть gap: 4px */
+}
+
+/* Если ты вставил SVG кодом прямо в HTML, используй этот селектор: */
+.lang-btn svg {
+    width: 14px;
+    height: 14px;
+}
+

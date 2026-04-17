@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Aldrich', 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     margin: 0;
     color: var(--text-dark);
     min-height: 100vh;
@@ -45,6 +45,14 @@ h1, h2, h3 {
     line-height: 1.2;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Aldrich';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/aldrich-v22-latin-regular.woff2') format('woff2');
 }
 
 @font-face {

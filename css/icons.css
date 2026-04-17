@@ -1,0 +1,78 @@
+/* === icons.css === */
+
+/* 1. Base style for all icons */
+.icon-emoji {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    vertical-align: middle;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* 2. Navigation & Sections — index.html */
+.icon-1f1e9-1f1ea { background-image: url('../img/icon/1f1e9-1f1ea.svg'); } /* 🇩🇪 */
+.icon-1f1f7-1f1fa { background-image: url('../img/icon/1f1f7-1f1f8.svg'); } /* 🇷🇺 */
+.icon-1f310       { background-image: url('../img/icon/1f310.svg'); }       /* 🌐 */
+.icon-1f320       { background-image: url('../img/icon/1f320.svg'); }       /* 🌠 */
+.icon-1f324       { background-image: url('../img/icon/1f324.svg'); }       /* 🌤 */
+.icon-1f333       { background-image: url('../img/icon/1f333.svg'); }       /* 🌳 */
+.icon-1f34f       { background-image: url('../img/icon/1f34f.svg'); }       /* 🍏 */
+.icon-1f393       { background-image: url('../img/icon/1f393.svg'); }       /* 🎓 */
+.icon-1f3ac       { background-image: url('../img/icon/1f3ac.svg'); }       /* 🎬 */
+.icon-1f3d7       { background-image: url('../img/icon/1f3d7.svg'); }       /* 🏗 */
+.icon-1f3d9       { background-image: url('../img/icon/1f3d9.svg'); }       /* 🏙 */
+.icon-1f3db       { background-image: url('../img/icon/1f3db.svg'); }       /* 🏛 */
+.icon-1f3e0       { background-image: url('../img/icon/1f3e0.svg'); }       /* 🏠 */
+.icon-1f3e2       { background-image: url('../img/icon/1f3e2.svg'); }       /* 🏢 */
+.icon-1f3e5       { background-image: url('../img/icon/1f3e5.svg'); }       /* 🏥 */
+.icon-1f3e6       { background-image: url('../img/icon/1f3e6.svg'); }       /* 🏦 */
+.icon-1f3f0       { background-image: url('../img/icon/1f3f0.svg'); }       /* 🏰 */
+.icon-1f4a1       { background-image: url('../img/icon/1f4a1.svg'); }       /* 💡 */
+.icon-1f4bb       { background-image: url('../img/icon/1f4bb.svg'); }       /* 💻 */
+.icon-1f4bc       { background-image: url('../img/icon/1f4bc.svg'); }       /* 💼 */
+.icon-1f4c5       { background-image: url('../img/icon/1f4c5.svg'); }       /* 📅 */
+.icon-1f4c8       { background-image: url('../img/icon/1f4c8.svg'); }       /* 📈 */
+.icon-1f4c9       { background-image: url('../img/icon/1f4c9.svg'); }       /* 📉 */
+.icon-1f4cd       { background-image: url('../img/icon/1f4cd.svg'); }       /* 📍 */
+.icon-1f4de       { background-image: url('../img/icon/1f4de.svg'); }       /* 📞 */
+.icon-1f4e2       { background-image: url('../img/icon/1f4e2.svg'); }       /* 📢 */
+.icon-1f4e7       { background-image: url('../img/icon/1f4e7.svg'); }       /* 📧 */
+.icon-1f4e9       { background-image: url('../img/icon/1f4e9.svg'); }       /* 📩 */
+.icon-1f4f0       { background-image: url('../img/icon/1f4f0.svg'); }       /* 📰 */
+.icon-1f50d       { background-image: url('../img/icon/1f50d.svg'); }       /* 🔍 */
+.icon-1f5de       { background-image: url('../img/icon/1f5de.svg'); }       /* 🗞 */
+.icon-1f5fa       { background-image: url('../img/icon/1f5fa.svg'); }       /* 🗺 */
+.icon-1f680       { background-image: url('../img/icon/1f680.svg'); }       /* 🚀 */
+.icon-1f686       { background-image: url('../img/icon/1f686.svg'); }       /* 🚆 */
+.icon-1f6e0       { background-image: url('../img/icon/1f6e0.svg'); }       /* 🛠 */
+.icon-1f6e1       { background-image: url('../img/icon/1f6e1.svg'); }       /* 🛡 */
+.icon-1f6e3       { background-image: url('../img/icon/1f6e3.svg'); }       /* 🛣 */
+.icon-1f916       { background-image: url('../img/icon/1f916.svg'); }       /* 🤖 */
+.icon-1f91d       { background-image: url('../img/icon/1f91d.svg'); }       /* 🤝 */
+.icon-1fa7a       { background-image: url('../img/icon/1fa7a.svg'); }       /* 🩺 */
+.icon-2139        { background-image: url('../img/icon/2139.svg'); }        /* ℹ️ */
+.icon-2695        { background-image: url('../img/icon/2695.svg'); }        /* ⚕ */
+.icon-2696        { background-image: url('../img/icon/2696.svg'); }        /* ⚖ */
+
+/* 3. components.js */
+.icon-1f4a7       { background-image: url('../img/icon/1f4a7.svg'); }       /* 💧 */
+.icon-1f343       { background-image: url('../img/icon/1f343.svg'); }       /* 🍃 */
+.icon-1f9f2       { background-image: url('../img/icon/1f9f2.svg'); }       /* 🧲 */
+.icon-23f2        { background-image: url('../img/icon/23f2.svg'); }        /* ⏲ */
+.icon-1f447-1f3fc { background-image: url('../img/icon/1f447-1f3fc.svg'); } /* 👇🏼 */
+
+/* 4. weather.js — погодные условия */
+.icon-2600        { background-image: url('../img/icon/2600.svg'); }        /* ☀️ */
+.icon-2601        { background-image: url('../img/icon/2601.svg'); }        /* ☁️ */
+.icon-2744        { background-image: url('../img/icon/2744.svg'); }        /* ❄️ */
+.icon-1f327       { background-image: url('../img/icon/1f327.svg'); }       /* 🌧 */
+
+/* 5. weather.js — AQI */
+.icon-1f4a8       { background-image: url('../img/icon/1f4a8.svg'); }       /* 💨 */
+.icon-1f32b       { background-image: url('../img/icon/1f32b.svg'); }       /* 🌫 */
+.icon-26a0        { background-image: url('../img/icon/26a0.svg'); }        /* ⚠️ */
+.icon-1f637       { background-image: url('../img/icon/1f637.svg'); }       /* 😷 */

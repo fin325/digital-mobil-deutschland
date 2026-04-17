@@ -1,30 +1,77 @@
-/* 1. Базовый стиль */
+/* === icons.css === */
+
+/* 1. Базовый стиль для всех иконок */
 .icon-emoji {
     display: inline-block;
-    width: 22px;
+    width: 22px;  /* Стандартный размер для кнопок */
     height: 22px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     vertical-align: middle;
     margin-right: 8px;
+    /* Если хочешь, чтобы иконки не сжимались во флекс-контейнерах: */
+    flex-shrink: 0;
 }
 
-/* 2. Конкретные иконки */
-.icon-de      { background-image: url('../img/icon/de.svg'); }
-.icon-ru      { background-image: url('../img/icon/ru.svg'); }
-.icon-health  { background-image: url('../img/icon/health.svg'); }
-.icon-finger  { background-image: url('../img/icon/finger.svg'); }
+/* 2. Основная навигация и кнопки */
+.icon-classical_building    { background-image: url('../img/icon/classical_building.svg'); }
+.icon-shooting_star         { background-image: url('../img/icon/shooting_star.svg'); }
+.icon-motorway              { background-image: url('../img/icon/motorway.svg'); }
+.icon-train                 { background-image: url('../img/icon/train.svg'); }
+.icon-telephone_receiver    { background-image: url('../img/icon/telephone_receiver.svg'); }
+.icon-globe_with_meridians  { background-image: url('../img/icon/globe_with_meridians.svg'); }
+.icon-information           { background-image: url('../img/icon/information.svg'); }
+.icon-cityscape             { background-image: url('../img/icon/cityscape.svg'); }
+.icon-newspaper             { background-image: url('../img/icon/newspaper.svg'); }
+.icon-laptop                { background-image: url('../img/icon/laptop.svg'); }
+.icon-balance_scale         { background-image: url('../img/icon/balance_scale.svg'); }
+.icon-briefcase             { background-image: url('../img/icon/briefcase.svg'); }
+.icon-hospital              { background-image: url('../img/icon/hospital.svg'); }
+.icon-house                 { background-image: url('../img/icon/house.svg'); }
+.icon-rolled_newspaper      { background-image: url('../img/icon/rolled_newspaper.svg'); }
 
-/* Погода */
-.icon-sun     { background-image: url('../img/icon/sun.svg'); }
-.icon-cloud   { background-image: url('../img/icon/cloud.svg'); }
-.icon-snow    { background-image: url('../img/icon/snow.svg'); }
-.icon-rain    { background-image: url('../img/icon/rain.svg'); }
+/* 3. Дополнительные иконки разделов */
+.icon-castle                { background-image: url('../img/icon/castle.svg'); }
+.icon-graduation_cap        { background-image: url('../img/icon/graduation_cap.svg'); }
+.icon-calendar              { background-image: url('../img/icon/calendar.svg'); }
+.icon-shield                { background-image: url('../img/icon/shield.svg'); }
+.icon-rocket                { background-image: url('../img/icon/rocket.svg'); }
+.icon-clapper_board         { background-image: url('../img/icon/clapper_board.svg'); }
+.icon-hammer_and_wrench     { background-image: url('../img/icon/hammer_and_wrench.svg'); }
+.icon-office_building       { background-image: url('../img/icon/office_building.svg'); }
+.icon-loudspeaker           { background-image: url('../img/icon/loudspeaker.svg'); }
+.icon-houses                { background-image: url('../img/icon/houses.svg'); }
+.icon-deciduous_tree        { background-image: url('../img/icon/deciduous_tree.svg'); }
+.icon-building_construction { background-image: url('../img/icon/building_construction.svg'); }
+.icon-stethoscope           { background-image: url('../img/icon/stethoscope.svg'); }
+.icon-medical_symbol        { background-image: url('../img/icon/medical_symbol.svg'); }
+.icon-envelope_with_arrow   { background-image: url('../img/icon/envelope_with_arrow.svg'); }
+.icon-e_mail                { background-image: url('../img/icon/e_mail.svg'); }
+.icon-round_pushpin         { background-image: url('../img/icon/round_pushpin.svg'); }
 
-/* Качество воздуха (AQI) */
-.icon-leaf    { background-image: url('../img/icon/leaf.svg'); }
-.icon-wind    { background-image: url('../img/icon/air.svg'); }
-.icon-fog     { background-image: url('../img/icon/fog.svg'); }
-.icon-warning { background-image: url('../img/icon/attention.svg'); }
-.icon-mask    { background-image: url('../img/icon/mask.svg'); }
+/* 4. Флаги и Языки */
+.icon-flag_germany          { background-image: url('../img/icon/flag_germany.svg'); }
+.icon-flag_russia           { background-image: url('../img/icon/flag_russia.svg'); }
+.icon-de                    { background-image: url('../img/icon/flag_germany.svg'); } /* Дубликат для удобства */
+.icon-ru                    { background-image: url('../img/icon/flag_russia.svg'); }  /* Дубликат для удобства */
+
+/* 5. Погода */
+.icon-sun                   { background-image: url('../img/icon/sun.svg'); }
+.icon-cloud                 { background-image: url('../img/icon/cloud.svg'); }
+.icon-snow                  { background-image: url('../img/icon/snow.svg'); }
+.icon-rain                  { background-image: url('../img/icon/rain.svg'); }
+.icon-sun_behind_small_cloud { background-image: url('../img/icon/sun_behind_small_cloud.svg'); }
+
+/* 6. Качество воздуха (AQI) */
+.icon-leaf                  { background-image: url('../img/icon/leaf.svg'); }
+.icon-wind                  { background-image: url('../img/icon/wind.svg'); }
+.icon-air                   { background-image: url('../img/icon/wind.svg'); } /* Совместимость со скриптом */
+.icon-fog                   { background-image: url('../img/icon/fog.svg'); }
+.icon-warning               { background-image: url('../img/icon/attention.svg'); }
+.icon-attention             { background-image: url('../img/icon/attention.svg'); } /* Совместимость со скриптом */
+.icon-mask                  { background-image: url('../img/icon/mask.svg'); }
+
+/* 7. Прочее */
+.icon-finger                { background-image: url('../img/icon/pointer.svg'); }
+.icon-health                { background-image: url('../img/icon/hospital.svg'); }

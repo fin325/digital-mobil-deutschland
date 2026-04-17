@@ -12,7 +12,6 @@ class AppHeader extends HTMLElement {
             mmHg: isRu ? 'мм рт.ст.' : 'mmHg',
             city: isRu ? 'Город Хаттинген' : 'Stadt Hattingen'
         };
-
         // Определяем текущий файл
         const path = window.location.pathname;
         const filename = path.split('/').pop() || 'index.html';

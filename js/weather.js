@@ -59,10 +59,10 @@ function applyWeatherData(d) {
         }
 
         let iconClass = 'icon-cloud';
-        if (code === 800)     iconClass = 'icon-sun';
-        else if (code > 800)  iconClass = 'icon-cloud';
-        else if (code >= 600) iconClass = 'icon-snow';
-        else if (code >= 300) iconClass = 'icon-rain';
+        if (code === 800)     iconClass = 'icon-2600';
+        else if (code > 800)  iconClass = 'icon-2601';
+        else if (code >= 600) iconClass = 'icon-2744';
+        else if (code >= 300) iconClass = 'icon-1f327';
 
         const tempEl  = document.getElementById('city-temp');
         const pressEl = document.getElementById('press');
@@ -141,12 +141,12 @@ function updateAQIUI(index) {
     let color, iconClass;
 
     switch (index) {
-        case 1: color = "#2ecc71"; iconClass = "icon-leaf";    break;
-        case 2: color = "#f1c40f"; iconClass = "icon-wind";    break;
-        case 3: color = "#e67e22"; iconClass = "icon-fog";     break;
-        case 4: color = "#e74c3c"; iconClass = "icon-warning"; break;
-        case 5: color = "#9b59b6"; iconClass = "icon-mask";    break;
-        default: color = "#fff";   iconClass = "icon-leaf";
+        case 1: color = "#2ecc71"; iconClass = "icon-1f343";    break;
+        case 2: color = "#f1c40f"; iconClass = "icon-1f4a8";    break;
+        case 3: color = "#e67e22"; iconClass = "icon-1f32b";     break;
+        case 4: color = "#e74c3c"; iconClass = "icon-26a0"; break;
+        case 5: color = "#9b59b6"; iconClass = "icon-1f637";    break;
+        default: color = "#fff";   iconClass = "icon-1f343";
     }
 
     valEl.innerText = index;

@@ -2,7 +2,6 @@ class AppHeader extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';
         const langLabel = isRu ? '<span class="icon-emoji icon-1f1f7-1f1f8"></span> → <span class="icon-emoji icon-1f1e9-1f1ea"></span>' : '<span class="icon-emoji icon-1f1e9-1f1ea"></span> → <span class="icon-emoji icon-1f1f7-1f1f8"></span>';
-
         // Словари для разных языков
         const texts = {
             loading: isRu ? 'Загрузка...' : 'Laden...',
@@ -81,7 +80,6 @@ class AppHeader extends HTMLElement {
     }
 }
 customElements.define('app-header', AppHeader);
-
 
 class ScrollHint extends HTMLElement {
     connectedCallback() {

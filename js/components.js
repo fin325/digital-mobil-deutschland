@@ -42,28 +42,22 @@ class AppHeader extends HTMLElement {
                         <span id="current-time"></span>
                         <span class="divider" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">|</span>
                     </div>
-
-                    <div class="weather-scroll-container">
-                        <div class="weather-info" id="full-weather-bar">
-                            <span class="w-item" id="city-temp">${texts.loading}</span>
-                            <span class="divider">|</span>
-                            <span class="w-item" onclick="toggleLabel(this)">
-                                💧 <span class="w-label">${texts.humidity}</span> <span id="hum">--</span>%
-                            </span>
-                            <span class="divider">|</span>
-                            <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
-                             <span id="aqi-icon" class="icon-emoji icon-leaf"></span> 
-                             <span class="w-label">${texts.aqi}</span> 
-                             <span id="aqi-value">--</span>
-                             </span>
-                            <span class="divider">|</span>
-                            <span class="w-item" onclick="toggleLabel(this)">
-                                🧲 <span class="w-label">${texts.geo}</span> <span id="geo"></span>
-                            </span>
-                            <span class="divider">|</span>
-                            <span class="w-item" onclick="toggleLabel(this)">
-                                ⏲️ <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
-                            </span>
+                    <div class="weather-info" id="full-weather-bar">
+    <span class="w-item" id="city-temp">${texts.loading}</span>
+    <span class="divider">|</span>
+    <span class="w-item" onclick="toggleLabel(this)">
+    <span class="icon-emoji icon-1f4a7"></span> <span class="w-label">${texts.humidity}</span> <span id="hum">--</span>%</span>
+    <span class="divider">|</span>
+    <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
+    <span id="aqi-icon" class="icon-emoji icon-leaf"></span> 
+    <span class="w-label">${texts.aqi}</span> 
+    <span id="aqi-value">--</span></span>
+    <span class="divider">|</span>
+    <span class="w-item" onclick="toggleLabel(this)">
+    <span class="icon-emoji icon-1f9f2"></span> <span class="w-label">${texts.geo}</span> <span id="geo"></span></span>
+    <span class="divider">|</span>
+    <span class="w-item" onclick="toggleLabel(this)">
+    <span class="icon-emoji icon-23f2"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}</span>
                         </div>
                     </div>
                     <button class="weather-arrow-btn" onclick="toggleWeatherScroll()">⇄</button>

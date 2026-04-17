@@ -5,7 +5,6 @@ let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
-// Determine the page language once for the entire file
 const isRu = document.documentElement.lang === 'ru';
 
 async function getWeather() {
@@ -59,7 +58,6 @@ function applyWeatherData(d) {
             localStorage.setItem('userCity', city);
         }
 
-        // SVG-иконки вместо эмодзи
         let iconClass = 'icon-cloud';
         if (code === 800)     iconClass = 'icon-sun';
         else if (code > 800)  iconClass = 'icon-cloud';
@@ -154,7 +152,9 @@ function updateAQIUI(index) {
     valEl.innerText = index;
     valEl.style.color = color;
 
-    icoEl.innerHTML = `<span class="icon-emoji ${iconClass}" style="color:${color}; text-shadow:0 0 8px ${color}66;"></span>`;
+    // Меняем className напрямую — без innerHTML и вложенных span
+    icoEl.className = `icon-emoji ${iconClass}`;
+    icoEl.style.filter = `drop-shadow(0 0 4px ${color})`;
 }
 
 function toggleLabel(element) {

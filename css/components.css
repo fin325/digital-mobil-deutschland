@@ -31,6 +31,15 @@
     word-break: normal;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    display: flex;            /* Чтобы иконки-эмодзи тоже были по центру */
+    justify-content: center;  /* Центрирование контента внутри flex */
+    align-items: center;      /* Выравнивание по вертикали */
+    gap: 10px;                /* Отступ между иконкой и текстом */
+    width: 100%;              /* Занимать всю ширину */
+}
+
 /* Применяем стили только для вкладки Проект */
 #project .card p, 
 #project .card div {

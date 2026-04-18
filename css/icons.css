@@ -8,16 +8,16 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    vertical-align: text-bottom;
+    vertical-align: middle;
     margin-right: 8px;
     flex-shrink: 0;
-    top: -10px;
 }
 
 /* В заголовках карточек */
 .card h2 .icon-emoji {
     width: 28px;
     height: 28px;
+    margin-bottom: 4px;
 }
 
 /* В кнопках внутри карточек */

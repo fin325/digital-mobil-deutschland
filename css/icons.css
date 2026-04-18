@@ -9,13 +9,34 @@
     background-size: contain;
     background-position: center;
     vertical-align: middle;
-    margin-right: 8px;
+    margin-right: 3px;
     flex-shrink: 0;
+}
+
+.nav-btn .icon-emoji {
+    transform: translateY(-1px);
+}
+
+/* В заголовках карточек */
+.card h2 .icon-emoji {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    flex-shrink: 0;
+    transform: translateY(-5px);
+}
+
+/* В кнопках внутри карточек */
+.card .btn-main .icon-emoji {
+    width: 22px;
+    height: 22px;
+    transform: translateY(-4px);
 }
 
 /* 2. Navigation & Sections — index.html */
 .icon-1f1e9-1f1ea { background-image: url('../img/icon/1f1e9-1f1ea.svg'); } /* 🇩🇪 */
-.icon-1f1f7-1f1fa { background-image: url('../img/icon/1f1f7-1f1f8.svg'); } /* 🇷🇺 */
+.icon-1f1f7-1f1fa { background-image: url('../img/icon/1f1f7-1f1fa.svg'); } /* 🇷🇺 */
 .icon-1f310       { background-image: url('../img/icon/1f310.svg'); }       /* 🌐 */
 .icon-1f320       { background-image: url('../img/icon/1f320.svg'); }       /* 🌠 */
 .icon-1f324       { background-image: url('../img/icon/1f324.svg'); }       /* 🌤 */
@@ -57,7 +78,12 @@
 .icon-2139        { background-image: url('../img/icon/2139.svg'); }        /* ℹ️ */
 .icon-2695        { background-image: url('../img/icon/2695.svg'); }        /* ⚕ */
 .icon-2696        { background-image: url('../img/icon/2696.svg'); }        /* ⚖ */
-
+/* 6. Дополнительные — ru/index.html */
+.icon-1f34e { background-image: url('../img/icon/1f34e.svg'); } /* 🍎 red_apple */
+.icon-1f4c4 { background-image: url('../img/icon/1f4c4.svg'); } /* 📄 page_facing_up */
+.icon-1f4f8 { background-image: url('../img/icon/1f4f8.svg'); } /* 📸 camera_with_flash */
+.icon-1f576 { background-image: url('../img/icon/1f576.svg'); } /* 🕶️ sunglasses */
+.icon-1f3d8 { background-image: url('../img/icon/1f3d8.svg'); } /* 🏘️ houses */
 /* 3. components.js */
 .icon-1f4a7       { background-image: url('../img/icon/1f4a7.svg'); }       /* 💧 */
 .icon-1f343       { background-image: url('../img/icon/1f343.svg'); }       /* 🍃 */
@@ -76,3 +102,12 @@
 .icon-1f32b       { background-image: url('../img/icon/1f32b.svg'); }       /* 🌫 */
 .icon-26a0        { background-image: url('../img/icon/26a0.svg'); }        /* ⚠️ */
 .icon-1f637       { background-image: url('../img/icon/1f637.svg'); }       /* 😷 */
+/* Job-Portal — недостающие */
+.icon-2b50  { background-image: url('../img/icon/2b50.svg'); }  /* ⭐ star */
+.icon-1f4cb { background-image: url('../img/icon/1f4cb.svg'); } /* 📋 list */
+.icon-1f4ac { background-image: url('../img/icon/1f4ac.svg'); } /* 💬 chat */
+.icon-1f4d8 { background-image: url('../img/icon/1f4d8.svg'); } /* 📘 book */
+.icon-1f3af { background-image: url('../img/icon/1f3af.svg'); } /* 🎯 target */
+.icon-2705  { background-image: url('../img/icon/2705.svg'); }  /* ✅ check */
+.icon-1f527 { background-image: url('../img/icon/1f527.svg'); } /* 🔧 tools */
+.icon-1f5bc { background-image: url('../img/icon/1f5bc.svg'); } /* 🖼️ gallery */

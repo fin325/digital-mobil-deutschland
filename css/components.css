@@ -20,6 +20,14 @@
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
+    /* Включает автоматическую расстановку переносов (нужен <html lang="de">) */
+    hyphens: auto;-webkit-hyphens: auto;
+/* Растягивает текст по ширине (левый и правый края будут ровными) */
+    text-align: justify;
+/* Улучшает алгоритм растягивания текста в Chrome */
+    text-justify: inter-word;
+/* Разрешает разрыв очень длинных слов, если перенос не сработал */
+    overflow-wrap: break-word;
 }
 
 .btn-main {

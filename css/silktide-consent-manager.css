@@ -1,8 +1,10 @@
 /* 
   Silktide Consent Manager - https://silktide.com/consent-manager/  
+
   Styles are at risked of being overridden by styles coming from the site the consent manager is used on.
   To help prevent this, global wrapper elements are prefixed with "#silktide-"
 */
+
 /* --------------------------------
   Global Styles - These elements exist in the main DOM and styling is limited to positioning and animation
 -------------------------------- */

@@ -18,6 +18,14 @@
 }
 
 /* В заголовках карточек */
+.card h1 .icon-emoji {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    flex-shrink: 0;
+}
+/* В заголовках карточек */
 .card h2 .icon-emoji {
     width: 28px;
     height: 28px;

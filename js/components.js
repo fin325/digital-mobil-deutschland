@@ -61,7 +61,7 @@ class AppHeader extends HTMLElement {
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                <span class="icon-emoji icon-23f2"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
+                                <span class="icon-emoji icon-1f39a"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
                             </span>
                         </div>
                     </div>

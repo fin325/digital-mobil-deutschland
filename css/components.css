@@ -21,7 +21,7 @@
     position: relative;
     z-index: 1;
     /* Включает автоматическую расстановку переносов (нужен <html lang="de">) */
-    hyphens: none;-webkit-hyphens: none;
+    hyphens: auto;-webkit-hyphens: auto;
 /* Растягивает текст по ширине (левый и правый края будут ровными) */
     text-align: justify;
 /* Улучшает алгоритм растягивания текста в Chrome */
@@ -40,25 +40,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;              /* Занимать всю ширину */
 }
 
-/* Применяем стили только для вкладки Проект */
-#project .card p, 
-#project .card div {
-    text-align: justify;
-    
-}
-
 #home .card p, 
 #home .card div {
     text-align: center;
 /* Таргетируем именно секцию новостей */
-}
-
-#news .card p, 
-#news #news-container {
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    /* Убедимся, что слова не вылетают за края */
-    overflow-wrap: break-word;
 }
 
 .btn-main {

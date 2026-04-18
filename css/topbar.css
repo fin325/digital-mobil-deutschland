@@ -51,12 +51,12 @@
     text-align: center;
     color: #f0f8ff;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(100, 180, 255, 0.5);
-    margin: 8px 0 4px 0;
-    font-size: 1.55rem;
+    margin: 8px 5px 4px 5px;
+    font-size: 1.45rem;
     font-weight: 700;
     letter-spacing: -0.5px;
     position: relative;
-    top: 5px;
+    top: 8px;
 }
 
 .site-subtitle {
@@ -67,7 +67,7 @@
     margin: 0 0 8px 0;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
     position: relative;
-    top: 5px;
+    top: 12px;
 }
 
 /* --- ЭЛЕМЕНТЫ ВНУТРИ TOP BAR --- */
@@ -259,3 +259,19 @@
     box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     transform: translateY(0);
 }
+
+/* 1. Это правило затронет ТОЛЬКО иконку внутри кнопки переключения языка */
+.lang-btn .icon-emoji {
+    width: 14px !important;
+    height: 14px !important;
+    margin-right: 0; /* Убираем внешний отступ, так как в кнопке есть gap */
+    flex-shrink: 0;  /* Чтобы флаг не сплющило, если текст будет длинным */
+}
+
+/* 2. На всякий случай убедись, что основной стиль иконок не изменился */
+.icon-emoji {
+    width: 22px;
+    height: 22px;
+}
+
+

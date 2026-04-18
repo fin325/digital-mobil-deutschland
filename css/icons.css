@@ -20,14 +20,14 @@
     min-width: 28px;
     min-height: 28px;
     flex-shrink: 0;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
 }
 
 /* В кнопках внутри карточек */
 .card .btn-main .icon-emoji {
     width: 22px;
     height: 22px;
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 }
 
 /* 2. Navigation & Sections — index.html */

@@ -23,7 +23,8 @@ scroll-hint {
     overflow-x: auto; 
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
+    cursor: grab;
 }
 
 /* Скрываем скроллбар */

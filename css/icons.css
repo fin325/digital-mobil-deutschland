@@ -9,7 +9,7 @@
     background-size: contain;
     background-position: center;
     vertical-align: middle;
-    margin-right: 3px;
+    margin-right: 0px;
     flex-shrink: 0;
 }
 
@@ -17,7 +17,7 @@
 .card h2 .icon-emoji {
     width: 28px;
     height: 28px;
-    top: -5px;
+    top: -20px;
 }
 
 /* В кнопках внутри карточек */

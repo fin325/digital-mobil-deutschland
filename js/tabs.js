@@ -88,3 +88,45 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// Drag-to-scroll для меню на ПК
+(function () {
+    const vp = document.querySelector('.nav-scroll-viewport');
+    if (!vp) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasDragged = false;
+
+    vp.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - vp.offsetLeft;
+        scrollLeft = vp.scrollLeft;
+        vp.style.cursor = 'grabbing';
+        vp.style.userSelect = 'none';
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - vp.offsetLeft;
+        const walk = x - startX;
+        if (Math.abs(walk) > 4) hasDragged = true;
+        vp.scrollLeft = scrollLeft - walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        vp.style.cursor = '';
+        vp.style.userSelect = '';
+    });
+
+    // Блокируем клик на кнопке если было перетаскивание
+    vp.addEventListener('click', (e) => {
+        if (hasDragged) e.stopPropagation();
+    }, true);
+})();
+

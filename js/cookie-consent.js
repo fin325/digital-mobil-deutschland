@@ -131,4 +131,3 @@ function loadPdfCompressor() {
         ph.style.display = "none";
     }
 }
-

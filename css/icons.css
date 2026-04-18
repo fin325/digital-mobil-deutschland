@@ -8,10 +8,9 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    vertical-align: middle;
+    vertical-align: text-bottom;
     margin-right: 8px;
     flex-shrink: 0;
-    top: -2px;
 }
 
 /* В заголовках карточек */

@@ -13,6 +13,18 @@
     flex-shrink: 0;
 }
 
+/* В заголовках карточек */
+.card h2 .icon-emoji {
+    width: 28px;
+    height: 28px;
+}
+
+/* В кнопках внутри карточек */
+.card .btn-main .icon-emoji {
+    width: 22px;
+    height: 22px;
+}
+
 /* 2. Navigation & Sections — index.html */
 .icon-1f1e9-1f1ea { background-image: url('../img/icon/1f1e9-1f1ea.svg'); } /* 🇩🇪 */
 .icon-1f1f7-1f1fa { background-image: url('../img/icon/1f1f7-1f1fa.svg'); } /* 🇷🇺 */

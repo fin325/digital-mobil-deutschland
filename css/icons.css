@@ -11,7 +11,6 @@
     vertical-align: middle;
     margin-right: 3px;
     flex-shrink: 0;
-    transform: translateY(-5px);
 }
 
 /* В заголовках карточек */
@@ -21,7 +20,7 @@
     min-width: 28px;
     min-height: 28px;
     flex-shrink: 0;
-    transform: translateY(-5px);
+    transform: translateY(-2px);
 }
 
 /* В кнопках внутри карточек */

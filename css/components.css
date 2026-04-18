@@ -1,7 +1,7 @@
 /* === COMPONENTS.CSS — Карточки, кнопки, вкладки, iframe, новости, законы === */
 
 .container {
-    padding: 15px;
+    padding: 15px 17px;
     max-width: 800px;
     margin: 0 auto;
     position: relative;
@@ -14,12 +14,36 @@
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     border-radius: 28px;
-    padding: 25px;
+    padding: 25px 17px;
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
+    /* Включает автоматическую расстановку переносов (нужен <html lang="de">) */
+    hyphens: none;-webkit-hyphens: none;
+/* Растягивает текст по ширине (левый и правый края будут ровными) */
+    text-align: left;
+/* Улучшает алгоритм растягивания текста в Chrome */
+    text-justify: inter-word;
+/* Разрешает разрыв очень длинных слов, если перенос не сработал */
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+h1, h2, h4, h5, h6 {
+    text-align: center;
+    display: flex;            /* Чтобы иконки-эмодзи тоже были по центру */
+    justify-content: center;  /* Центрирование контента внутри flex */
+    align-items: center;      /* Выравнивание по вертикали */
+    gap: 10px;                /* Отступ между иконкой и текстом */
+    width: 100%;              /* Занимать всю ширину */
+}
+
+#home .card p, 
+#home .card div {
+    text-align: center;
+/* Таргетируем именно секцию новостей */
 }
 
 .btn-main {
@@ -197,3 +221,4 @@ iframe {
 #project .card {
     background: rgba(255, 255, 255, 0.35) !important;
 }
+

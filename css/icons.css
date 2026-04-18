@@ -13,6 +13,10 @@
     flex-shrink: 0;
 }
 
+.nav-btn .icon-emoji {
+    transform: translateY(-4px);
+}
+
 /* В заголовках карточек */
 .card h2 .icon-emoji {
     width: 28px;
@@ -20,14 +24,14 @@
     min-width: 28px;
     min-height: 28px;
     flex-shrink: 0;
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
 /* В кнопках внутри карточек */
 .card .btn-main .icon-emoji {
     width: 22px;
     height: 22px;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
 }
 
 /* 2. Navigation & Sections — index.html */

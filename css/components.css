@@ -1,7 +1,7 @@
 /* === COMPONENTS.CSS — Карточки, кнопки, вкладки, iframe, новости, законы === */
 
 .container {
-    padding: 15px 12px;
+    padding: 15px 17px;
     max-width: 800px;
     margin: 0 auto;
     position: relative;
@@ -14,20 +14,21 @@
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     border-radius: 28px;
-    padding: 25px 12px;
+    padding: 25px 17px;
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
     /* Включает автоматическую расстановку переносов (нужен <html lang="de">) */
-    hyphens: auto;-webkit-hyphens: auto;
+    hyphens: none;-webkit-hyphens: none;
 /* Растягивает текст по ширине (левый и правый края будут ровными) */
     text-align: justify;
 /* Улучшает алгоритм растягивания текста в Chrome */
     text-justify: inter-word;
 /* Разрешает разрыв очень длинных слов, если перенос не сработал */
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
+    word-break: normal;
 }
 
 .btn-main {

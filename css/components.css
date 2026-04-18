@@ -42,6 +42,8 @@
 #home .card div {
     text-align: center;
 /* Таргетируем именно секцию новостей */
+}
+
 #news .card p, 
 #news #news-container {
     hyphens: auto;

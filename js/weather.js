@@ -5,12 +5,10 @@ let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
 
-// Determine the page language once for the entire file
 const isRu = document.documentElement.lang === 'ru';
 
 async function getWeather() {
     try {
-        // Check the cache
         const cached = localStorage.getItem('weatherCache');
         if (cached) {
             const parsed = JSON.parse(cached);
@@ -21,10 +19,7 @@ async function getWeather() {
         }
     } catch (e) {}
 
-    // API-Anfrage
     try {
-        // CHANGE HERE: Always request the weather in German (lang=de),
-        // so OpenWeatherMap automatically translates entered city names (e.g., Munich -> München)
         const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
         );
@@ -53,43 +48,40 @@ async function getWeather() {
 function applyWeatherData(d) {
     try {
         const temp = Math.round(d.main.temp);
-        const city = d.name; // name API (Deutsch)
+        const city = d.name;
         const code = d.weather[0].id;
         const lat  = d.coord.lat;
         const lon  = d.coord.lon;
 
-        // CHANGE HERE: If the user entered the city in Russian or in lowercase,
-        // we store the properly formatted German name returned by the server!
         if (currentCity !== city) {
             currentCity = city;
             localStorage.setItem('userCity', city);
         }
 
-        let icon = '☁️';
-        if (code === 800)     icon = '☀️';
-        else if (code > 800)  icon = '☁️';
-        else if (code >= 600) icon = '❄️';
-        else if (code >= 300) icon = '🌧️';
+        let iconClass = 'icon-cloud';
+        if (code === 800)     iconClass = 'icon-2600';
+        else if (code > 800)  iconClass = 'icon-2601';
+        else if (code >= 600) iconClass = 'icon-2744';
+        else if (code >= 300) iconClass = 'icon-1f327';
 
         const tempEl  = document.getElementById('city-temp');
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
         if (tempEl) {
-            tempEl.innerText = `${city} ${icon} ${temp}°C`;
+            tempEl.innerHTML = `${city} <span class="icon-emoji ${iconClass}"></span> ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
-                
-                // Translation of the city input box
-                const promptMsg = isRu 
-                    ? 'Пожалуйста, введите название города:' 
+
+                const promptMsg = isRu
+                    ? 'Пожалуйста, введите название города:'
                     : 'Bitte den Namen der Stadt eingeben:';
-                
+
                 const newCity = prompt(promptMsg, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
-                    
+
                     localStorage.removeItem('weatherCache');
                     localStorage.removeItem('aqiCache');
                     getWeather();
@@ -146,22 +138,23 @@ function updateAQIUI(index) {
 
     if (!valEl || !icoEl) return;
 
-    let color, icon;
+    let color, iconClass;
 
     switch (index) {
-        case 1: color = "#2ecc71"; icon = "🍃"; break;
-        case 2: color = "#f1c40f"; icon = "💨"; break;
-        case 3: color = "#e67e22"; icon = "🌫️"; break;
-        case 4: color = "#e74c3c"; icon = "⚠️"; break;
-        case 5: color = "#9b59b6"; icon = "😷"; break;
-        default: color = "#fff";   icon = "🍃";
+        case 1: color = "#2ecc71"; iconClass = "icon-1f343";    break;
+        case 2: color = "#f1c40f"; iconClass = "icon-1f4a8";    break;
+        case 3: color = "#e67e22"; iconClass = "icon-1f32b";     break;
+        case 4: color = "#e74c3c"; iconClass = "icon-26a0"; break;
+        case 5: color = "#9b59b6"; iconClass = "icon-1f637";    break;
+        default: color = "#fff";   iconClass = "icon-1f343";
     }
 
     valEl.innerText = index;
     valEl.style.color = color;
-    icoEl.innerText = icon;
-    icoEl.style.color = color;
-    icoEl.style.textShadow = `0 0 8px ${color}66`;
+
+    // Меняем className напрямую — без innerHTML и вложенных span
+    icoEl.className = `icon-emoji ${iconClass}`;
+    icoEl.style.filter = `drop-shadow(0 0 4px ${color})`;
 }
 
 function toggleLabel(element) {

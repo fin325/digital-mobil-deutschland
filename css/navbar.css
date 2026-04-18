@@ -134,7 +134,7 @@ a.nav-btn.active {
     align-items: flex-start;
     justify-content: center;
     position: relative;
-    transform: translateY(5px);
+    transform: translateY(10px);
 }
 
 .swipe-finger {

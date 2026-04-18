@@ -32,12 +32,24 @@
 }
 
 #tab-projekt .card {
-    text-align: justify;
+    text-align: justify !important;
 }
 
-#tab-news-hattingen .card {
+/* Таргетируем именно секцию новостей */
+#news .card p, 
+#news #news-container {
     text-align: justify;
+    text-justify: inter-word;
+    
+    /* Для новостей (особенно немецких) КРИТИЧЕСКИ важны переносы, 
+       иначе будут дыры из-за длинных слов вроде "Drittanbieter" */
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    
+    /* Убедимся, что слова не вылетают за края */
+    overflow-wrap: break-word;
 }
+
 .btn-main {
     background: rgba(0, 82, 155, 0.7) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;

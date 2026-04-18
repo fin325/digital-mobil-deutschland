@@ -3,9 +3,18 @@
 const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
 let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
-const CACHE_TTL = 10 * 60 * 1000; // 10 Minuten
+const CACHE_TTL = 10 * 60 * 1000; // 10 минут
 
 const isRu = document.documentElement.lang === 'ru';
+
+// Словари для консоли и промптов (основные тексты уже есть в AppHeader)
+const weatherMessages = {
+    cityPrompt: isRu ? 'Пожалуйста, введите название города:' : 'Bitte den Namen der Stadt營geben:',
+    errorCity: isRu ? 'Город не найден:' : 'Stadt nicht gefunden:',
+    errorWeather: isRu ? 'Ошибка погоды:' : 'Wetter-Fehler:',
+    errorApply: isRu ? 'Ошибка применения данных:' : 'Fehler beim Anwenden der Wetterdaten:',
+    errorAir: isRu ? 'Ошибка качества воздуха:' : 'Fehler bei der Luftqualität:'
+};
 
 async function getWeather() {
     try {
@@ -20,13 +29,14 @@ async function getWeather() {
     } catch (e) {}
 
     try {
+        // Запрашиваем данные. lang=de или ru влияет только на описание (которое мы тут не используем, но пусть будет)
         const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=de`
+            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=${isRu ? 'ru' : 'de'}`
         );
         const d = await res.json();
 
         if (!d.main) {
-            console.error(isRu ? 'Город не найден:' : 'Stadt nicht gefunden:', d.message);
+            console.error(weatherMessages.errorCity, d.message);
             return;
         }
 
@@ -41,7 +51,7 @@ async function getWeather() {
         applyWeatherData(d);
 
     } catch (e) {
-        console.error(isRu ? 'Ошибка погоды:' : 'Wetter-Fehler:', e);
+        console.error(weatherMessages.errorWeather, e);
     }
 }
 
@@ -58,6 +68,7 @@ function applyWeatherData(d) {
             localStorage.setItem('userCity', city);
         }
 
+        // Логика иконок
         let iconClass = 'icon-cloud';
         if (code === 800)     iconClass = 'icon-2600';
         else if (code > 800)  iconClass = 'icon-2601';
@@ -68,20 +79,15 @@ function applyWeatherData(d) {
         const pressEl = document.getElementById('press');
         const humEl   = document.getElementById('hum');
 
+        // 1. Температура и выбор города
         if (tempEl) {
             tempEl.innerHTML = `${city} <span class="icon-emoji ${iconClass}"></span> ${temp}°C`;
             tempEl.onclick = (e) => {
                 e.stopPropagation();
-
-                const promptMsg = isRu
-                    ? 'Пожалуйста, введите название города:'
-                    : 'Bitte den Namen der Stadt eingeben:';
-
-                const newCity = prompt(promptMsg, currentCity);
+                const newCity = prompt(weatherMessages.cityPrompt, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
-
                     localStorage.removeItem('weatherCache');
                     localStorage.removeItem('aqiCache');
                     getWeather();
@@ -89,13 +95,23 @@ function applyWeatherData(d) {
             };
         }
 
-        if (pressEl) pressEl.innerText = Math.round(d.main.pressure * 0.75006);
-        if (humEl)   humEl.innerText   = d.main.humidity;
+        // 2. Давление: только число! 
+        // Единица измерения подхватится из HTML компонента AppHeader
+        if (pressEl) {
+            const pressureValue = isRu 
+                ? Math.round(d.main.pressure * 0.75006) // мм рт.ст.
+                : Math.round(d.main.pressure);          // hPa
+            
+            pressEl.innerText = pressureValue;
+        }
+
+        // 3. Влажность
+        if (humEl) humEl.innerText = d.main.humidity;
 
         getAirPollution(lat, lon);
 
     } catch (e) {
-        console.error(isRu ? 'Ошибка применения данных:' : 'Fehler beim Anwenden der Wetterdaten:', e);
+        console.error(weatherMessages.errorApply, e);
     }
 }
 
@@ -128,7 +144,7 @@ async function getAirPollution(lat, lon) {
         updateAQIUI(aqiIndex);
 
     } catch (e) {
-        console.error(isRu ? 'Ошибка качества воздуха:' : 'Fehler bei der Luftqualität:', e);
+        console.error(weatherMessages.errorAir, e);
     }
 }
 
@@ -139,36 +155,31 @@ function updateAQIUI(index) {
     if (!valEl || !icoEl) return;
 
     let color, iconClass;
-
     switch (index) {
-        case 1: color = "#2ecc71"; iconClass = "icon-1f343";    break;
-        case 2: color = "#f1c40f"; iconClass = "icon-1f4a8";    break;
-        case 3: color = "#e67e22"; iconClass = "icon-1f32b";     break;
-        case 4: color = "#e74c3c"; iconClass = "icon-26a0"; break;
-        case 5: color = "#9b59b6"; iconClass = "icon-1f637";    break;
+        case 1: color = "#2ecc71"; iconClass = "icon-1f343"; break;
+        case 2: color = "#f1c40f"; iconClass = "icon-1f4a8"; break;
+        case 3: color = "#e67e22"; iconClass = "icon-1f32b"; break;
+        case 4: color = "#e74c3c"; iconClass = "icon-26a0";  break;
+        case 5: color = "#9b59b6"; iconClass = "icon-1f637"; break;
         default: color = "#fff";   iconClass = "icon-1f343";
     }
 
     valEl.innerText = index;
     valEl.style.color = color;
-
-    // Меняем className напрямую — без innerHTML и вложенных span
     icoEl.className = `icon-emoji ${iconClass}`;
     icoEl.style.filter = `drop-shadow(0 0 4px ${color})`;
 }
 
+// Функции управления интерфейсом (скролл и метки)
 function toggleLabel(element) {
     if (!element) return;
-
     const isShown = element.classList.contains('show-text');
-
     document.querySelectorAll('.w-item').forEach(item => {
         item.classList.remove('show-text');
     });
 
     if (!isShown) {
         element.classList.add('show-text');
-
         const label = element.querySelector('.w-label');
         if (label) {
             const itemRect = element.getBoundingClientRect();
@@ -206,5 +217,5 @@ function toggleWeatherScroll() {
     }
 }
 
-// Start
+// Запуск при загрузке
 getWeather();

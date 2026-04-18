@@ -55,6 +55,33 @@ h1, h2, h3 {
     src: url('../fonts/aldrich-v22-latin-regular.woff2') format('woff2');
 }
 
+woff2]
+
+/* tektur-regular - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Tektur';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/tektur-v6-cyrillic_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* tektur-500 - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Tektur';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/tektur-v6-cyrillic_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* tektur-600 - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Tektur';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/tektur-v6-cyrillic_latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;

@@ -31,8 +31,18 @@
     word-break: normal;
 }
 
-#tab-projekt .card {
-    text-align: justify !important;
+/* Применяем стили только для вкладки Проект */
+#project .card p, 
+#project .card div {
+    text-align: justify;
+    text-justify: inter-word; /* Делает распределение пробелов в Chrome красивым */
+    
+    /* Включаем автоматические переносы для немецкого/русского */
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    
+    /* Защита от вылета длинных слов за границы */
+    overflow-wrap: break-word;
 }
 
 /* Таргетируем именно секцию новостей */

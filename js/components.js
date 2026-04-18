@@ -1,8 +1,7 @@
 class AppHeader extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';
-        const langLabel = isRu ? '🇷🇺 → 🇩🇪' : '🇩🇪 → 🇷🇺';
-
+        const langLabel = isRu ? '<span class="icon-emoji icon-1f1f7-1f1fa"></span> → <span class="icon-emoji icon-1f1e9-1f1ea"></span>' : '<span class="icon-emoji icon-1f1e9-1f1ea"></span> → <span class="icon-emoji icon-1f1f7-1f1fa"></span>';
         // Словари для разных языков
         const texts = {
             loading: isRu ? 'Загрузка...' : 'Laden...',
@@ -13,7 +12,6 @@ class AppHeader extends HTMLElement {
             mmHg: isRu ? 'мм рт.ст.' : 'mmHg',
             city: isRu ? 'Город Хаттинген' : 'Stadt Hattingen'
         };
-
         // Определяем текущий файл
         const path = window.location.pathname;
         const filename = path.split('/').pop() || 'index.html';
@@ -49,21 +47,21 @@ class AppHeader extends HTMLElement {
                             <span class="w-item" id="city-temp">${texts.loading}</span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                💧 <span class="w-label">${texts.humidity}</span> <span id="hum">--</span>%
+                                <span class="icon-emoji icon-1f4a7"></span> <span class="w-label">${texts.humidity}</span> <span id="hum">--</span>%
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" id="aqi-item" onclick="toggleLabel(this)">
-                                <span id="aqi-icon">🍃</span> 
+                                <span id="aqi-icon" class="icon-emoji icon-1f343"></span> 
                                 <span class="w-label">${texts.aqi}</span> 
                                 <span id="aqi-value">--</span>
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                🧲 <span class="w-label">${texts.geo}</span> <span id="geo">2</span>
+                                <span class="icon-emoji icon-1f9f2"></span> <span class="w-label">${texts.geo}</span> <span id="geo">2</span>
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                ⏲️ <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
+                                <span class="icon-emoji icon-1f39a"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
                             </span>
                         </div>
                     </div>
@@ -82,7 +80,6 @@ class AppHeader extends HTMLElement {
 }
 customElements.define('app-header', AppHeader);
 
-
 class ScrollHint extends HTMLElement {
     connectedCallback() {
         // Проверяем язык и для этого компонента
@@ -93,7 +90,7 @@ class ScrollHint extends HTMLElement {
             <div class="scroll-hint-container">
                 <div class="scroll-hint-left">
                     <div class="swipe-finger-wrapper">
-                        <div class="swipe-finger">👇🏼</div>
+                        <div class="swipe-finger"><span class="icon-emoji icon-1f447-1f3fc"></span></div>
                     </div>
                     <span class="scroll-hint-text">${hintText}</span>
                 </div>

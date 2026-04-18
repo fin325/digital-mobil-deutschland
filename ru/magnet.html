@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/topbar.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/icons.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
             <div class="nav-row">
                 <button class="nav-btn active" onclick="showTab('home', event)">Главная</button>
                 <button class="nav-btn" onclick="showTab('gallery', event)">Галерея</button>
-                <button class="nav-btn" onclick="showTab('about', event)">О нас</button>
+                <button class="nav-btn" onclick="showTab('about', event)">О центре Magnet</button>
             </div>
         </div>
     </div>
@@ -46,7 +47,7 @@
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
             <a href="https://www.iz-magnet.de" 
                style="display: block; width: 80%; max-width: 300px; background: #4A90E2; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; box-sizing: border-box;">
-               🌐 Официальный сайт
+               <span class="icon-emoji icon-1f310"></span> Официальный сайт
             </a>
         </div>
 
@@ -64,7 +65,7 @@
 <!-- Галерея -->
 <section id="gallery" class="tab-content">
     <div class="card">
-        <h2>🖼️ Галерея</h2>
+        <h2><span class="icon-emoji icon-1f5bc"></span> Галерея</h2>
         <p style="text-align: center; padding: 30px 0; opacity: 0.6; font-weight: 600;">
             Контент появится в ближайшее время. Идет сотрудничество с руководством центра по содержанию контента.
         </p>
@@ -74,7 +75,7 @@
 <!-- О нас -->
 <section id="about" class="tab-content">
     <div class="card">
-        <h2>ℹ️ О нас</h2>
+        <h2><span class="icon-emoji icon-2139"></span> О нас</h2>
         <p style="text-align: center; padding: 30px 0; opacity: 0.6; font-weight: 600;">
             Контент появится в ближайшее время. Идет сотрудничество с руководством центра по содержанию контента.
         </p>
@@ -86,6 +87,7 @@
 <script src="../js/components.js"></script>
 <script src="../js/tabs.js"></script>
 <script src="../js/clock.js"></script>
+<script src="../js/magnet.js"></script>
 <script src="../js/weather.js"></script>
 <script src="../js/main.js"></script>
 <script>

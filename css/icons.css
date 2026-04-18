@@ -20,7 +20,7 @@
     min-width: 28px;
     min-height: 28px;
     flex-shrink: 0;
-    transform: translateY(-3px);
+    transform: translateY(-10px);
 }
 
 /* В кнопках внутри карточек */

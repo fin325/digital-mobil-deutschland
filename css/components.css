@@ -32,6 +32,7 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
+    hyphens: none;-webkit-hyphens: none;
     text-align: center;
     display: flex;            /* Чтобы иконки-эмодзи тоже были по центру */
     justify-content: center;  /* Центрирование контента внутри flex */
@@ -43,6 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 #home .card p, 
 #home .card div {
     text-align: center;
+    hyphens: none;-webkit-hyphens: none;
 /* Таргетируем именно секцию новостей */
 }
 

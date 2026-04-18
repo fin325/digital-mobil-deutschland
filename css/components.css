@@ -23,7 +23,7 @@
     /* Включает автоматическую расстановку переносов (нужен <html lang="de">) */
     hyphens: none;-webkit-hyphens: none;
 /* Растягивает текст по ширине (левый и правый края будут ровными) */
-    text-align: center;
+    text-align: justify;
 /* Улучшает алгоритм растягивания текста в Chrome */
     text-justify: inter-word;
 /* Разрешает разрыв очень длинных слов, если перенос не сработал */
@@ -35,27 +35,17 @@
 #project .card p, 
 #project .card div {
     text-align: justify;
-    text-justify: inter-word; /* Делает распределение пробелов в Chrome красивым */
     
-    /* Включаем автоматические переносы для немецкого/русского */
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    
-    /* Защита от вылета длинных слов за границы */
-    overflow-wrap: break-word;
 }
 
+#home .card p, 
+#home .card div {
+    text-align: center;
 /* Таргетируем именно секцию новостей */
 #news .card p, 
 #news #news-container {
-    text-align: justify;
-    text-justify: inter-word;
-    
-    /* Для новостей (особенно немецких) КРИТИЧЕСКИ важны переносы, 
-       иначе будут дыры из-за длинных слов вроде "Drittanbieter" */
     hyphens: auto;
     -webkit-hyphens: auto;
-    
     /* Убедимся, что слова не вылетают за края */
     overflow-wrap: break-word;
 }

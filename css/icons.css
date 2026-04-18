@@ -17,7 +17,10 @@
 .card h2 .icon-emoji {
     width: 28px;
     height: 28px;
-    top: 20px;
+    min-width: 28px;
+    min-height: 28px;
+    flex-shrink: 0;
+    transform: translateY(-3px);
 }
 
 /* В кнопках внутри карточек */

@@ -1,7 +1,10 @@
 class AppHeader extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';
-        const langLabel = isRu ? '<span class="icon-emoji icon-1f1f7-1f1fa"></span> → <span class="icon-emoji icon-1f1e9-1f1ea"></span>' : '<span class="icon-emoji icon-1f1e9-1f1ea"></span> → <span class="icon-emoji icon-1f1f7-1f1fa"></span>';
+        const langLabel = isRu 
+            ? '<span class="icon-emoji icon-1f1f7-1f1fa"></span> → <span class="icon-emoji icon-1f1e9-1f1ea"></span>' 
+            : '<span class="icon-emoji icon-1f1e9-1f1ea"></span> → <span class="icon-emoji icon-1f1f7-1f1fa"></span>';
+
         // Словари для разных языков
         const texts = {
             loading: isRu ? 'Загрузка...' : 'Laden...',
@@ -9,23 +12,22 @@ class AppHeader extends HTMLElement {
             aqi: isRu ? 'Качество воздуха (1-отлично)' : 'Luftqualität (1 – sehr gut)',
             geo: isRu ? 'Геомагнитная активность (1-спокойно)' : 'Geomagnetik (1-ruhig)',
             pressure: isRu ? 'Атмосферное давление' : 'Luftdruck',
-            mmHg: isRu ? 'мм рт.ст.' : 'mmHg',
+            unitPress: isRu ? ' мм рт.ст.' : ' hPa', // Исправлено: hPa для немецкого
             city: isRu ? 'Город Хаттинген' : 'Stadt Hattingen'
         };
-        // Определяем текущий файл
+
+        // Определяем текущий файл для переключателя языков
         const path = window.location.pathname;
         const filename = path.split('/').pop() || 'index.html';
 
         let langHref;
         if (isRu) {
-            // ru/magnet.html → /tabs/magnet.html, ru/index.html → /
             if (filename === 'index.html' || filename === '') {
                 langHref = '/';
             } else {
                 langHref = '/tabs/' + filename;
             }
         } else {
-            // /tabs/magnet.html → /ru/magnet.html, /index.html → /ru/
             if (filename === 'index.html' || filename === '' || path === '/') {
                 langHref = '/ru/';
             } else {
@@ -61,7 +63,9 @@ class AppHeader extends HTMLElement {
                             </span>
                             <span class="divider">|</span>
                             <span class="w-item" onclick="toggleLabel(this)">
-                                <span class="icon-emoji icon-1f39a"></span> <span class="w-label">${texts.pressure}</span> <span id="press">--</span> ${texts.mmHg}
+                                <span class="icon-emoji icon-23f2"></span> 
+                                <span class="w-label">${texts.pressure}</span> 
+                                <span id="press">--</span>${texts.unitPress}
                             </span>
                         </div>
                     </div>
@@ -82,7 +86,6 @@ customElements.define('app-header', AppHeader);
 
 class ScrollHint extends HTMLElement {
     connectedCallback() {
-        // Проверяем язык и для этого компонента
         const isRu = document.documentElement.lang === 'ru';
         const hintText = isRu ? 'Свайп меню' : 'Swipe-Menü';
 

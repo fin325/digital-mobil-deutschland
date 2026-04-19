@@ -21,15 +21,16 @@
         0 8px 32px rgba(0, 20, 80, 0.14),
         0 1px 0 rgba(255, 255, 255, 0.4) inset,
         0 -1px 0 rgba(0, 0, 0, 0.05) inset;
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
-    hyphens: none; -webkit-hyphens: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    hyphens: none;
+    -webkit-hyphens: none;
     text-align: left;
     text-justify: inter-word;
     overflow-wrap: anywhere;
     word-break: normal;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover {
@@ -131,8 +132,8 @@ h1, h2, h4, h5, h6 {
 
 .tab-content.active {
     display: block;
-    animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    -webkit-animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    -webkit-animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     transform-origin: bottom center;
 }
 
@@ -253,7 +254,7 @@ iframe {
     transform: translateY(-1px);
 }
 
-/* === CONSENT === */
+/* === CONSENT PLACEHOLDER === */
 .consent-placeholder {
     background: rgba(255, 255, 255, 0.12);
     border: 1px dashed rgba(255, 255, 255, 0.35);
@@ -291,5 +292,5 @@ iframe {
 }
 
 #project .card {
-    background: rgba(255, 255, 255, 0.22) !important;
+    background: rgba(255, 255, 255, 0.35) !important;
 }

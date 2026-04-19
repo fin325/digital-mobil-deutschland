@@ -1,150 +1,105 @@
 /* === NAVBAR.CSS — Навигация === */
 
 .navbar {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 12px 0;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 10px 0;
     position: sticky;
-    top: 0;
+    top: 45px;
     z-index: 1000;
+    box-shadow: 0 4px 24px rgba(0, 40, 100, 0.10);
 }
 
-/* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
-.nav-scroll-viewport {
-    overflow-x: auto; 
+.nav-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; 
 }
 
-/* Скрываем скроллбар */
-.nav-scroll-viewport::-webkit-scrollbar {
+.nav-container::-webkit-scrollbar {
     display: none;
 }
 
-/* 2. ОБЕРТКА ДЛЯ РЯДОВ */
-.nav-rows-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; 
-    width: max-content; 
-}
-
-/* 3. СТИЛИ ДЛЯ РЯДОВ */
-.nav-row {
-    display: flex;
-    gap: 10px;
-}
-
 .nav-btn {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid var(--glass-border);
-    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 9px 16px;
     border-radius: 14px;
-    white-space: nowrap; 
-    color: var(--primary-blue);
+    white-space: nowrap;
+    color: #003a7a;
     font-weight: 600;
+    font-size: 0.88rem;
     cursor: pointer;
-    
-    /* ⚡ ОПТИМИЗАЦИЯ ЗДЕСЬ: Убрали all, прописали конкретные свойства */
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: background-color, transform;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.01em;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Эффект упругого вдавливания при нажатии для ощущения скорости */
+/* Shine sweep on hover */
+.nav-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 100%
+    );
+    transition: left 0.4s ease;
+    pointer-events: none;
+}
+
+.nav-btn:hover::after {
+    left: 160%;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.38);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 60, 140, 0.13);
+    color: #002060;
+}
+
 .nav-btn:active {
-    transform: scale(0.95);
+    transform: translateY(0px) scale(0.97);
 }
 
 .nav-btn.active {
-    background: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(0, 82, 155, 0.85) 0%, rgba(0, 120, 210, 0.85) 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 4px 16px rgba(0, 82, 155, 0.35),
+        0 0 0 1px rgba(255,255,255,0.15) inset;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-/* Стили для подсказки и стрелок */
-.scroll-hint-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-    padding: 0 15px;
-    margin-top: 15px; /* Исправлена опечатка 15x на 15px */
-    transform: translateY(10px);
+.nav-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 20px rgba(0, 82, 155, 0.45),
+        0 0 0 1px rgba(255,255,255,0.2) inset;
 }
 
-.scroll-hint-text {
-    font-size: 0.85rem;
-    color: #6c757d;
-    font-style: italic;
-}
-
-.scroll-arrows {
+.nav-row-2 {
+    margin-top: 8px;
     display: flex;
     gap: 8px;
+    padding: 8px 15px 0 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-.arrow-btn {
-    color: var(--primary-blue);
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 4px; 
-    padding: 5px 12px;
-    cursor: pointer;
-    box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transform: translateY(-8px);
-    transition: background 0.3s ease, opacity 0.2s ease, transform 0.1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.35);
-}
-
-.arrow-btn:active {
-    transform: translateY(-8px) scale(0.92); /* Приятный клик по стрелкам */
-}
-
-.swipe-finger-wrapper {
-    width: 28px;
-    height: 32px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    position: relative;
-}
-
-.swipe-finger {
-    font-size: 1.2rem;
-    display: inline-block;
-    transform-origin: top center;
-    animation: swipeRock 1.6s ease-in-out infinite;
-    /* ⚡ ОПТИМИЗАЦИЯ: Разгружаем процессор телефона для бесконечной анимации */
-    will-change: transform;
-}
-
-@keyframes swipeRock {
-    0%   { transform: rotate(-20deg); }
-    40%  { transform: rotate(20deg); }
-    70%  { transform: rotate(-20deg); }
-    100% { transform: rotate(-20deg); }
-}
-
-.scroll-hint-left {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: opacity 0.4s ease;
-}
-
-.scroll-hint-left.hidden {
-    opacity: 0;
-    pointer-events: none;
+.nav-row-2::-webkit-scrollbar {
+    display: none;
 }

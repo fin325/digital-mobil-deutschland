@@ -10,13 +10,15 @@ scroll-hint {
 
 .navbar {
     background: rgba(0, 20, 60, 0.3);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    /* Уменьшено с 24px до 12px для производительности на Android */
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
     padding: 12px 0 14px 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
+    transform: translateZ(0); /* Аппаратное ускорение для всей панели */
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
@@ -68,11 +70,11 @@ scroll-hint {
     isolation: isolate;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     transform: translateZ(0);
+    /* Новое: убираем стандартное выделение Android и запрещаем выделение текста */
     -webkit-tap-highlight-color: transparent;
     user-select: none;
 }
 
-/* Shine sweep — скрыт по умолчанию */
 .nav-btn::after {
     content: '';
     position: absolute;
@@ -88,9 +90,37 @@ scroll-hint {
         transparent 100%
     );
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-100%) translateZ(0); /* translateZ для GPU */
     transition: transform 0.4s ease, opacity 0.1s ease;
     pointer-events: none;
+    will-change: transform; /* Подготовка видеокарты к анимации */
+}
+
+/* Анимация блика: только для устройств с мышкой */
+@media (hover: hover) {
+    .nav-btn:hover::after {
+        transform: translateX(160%) translateZ(0);
+        opacity: 1;
+    }
+    
+    .nav-btn:hover {
+        background: rgba(0, 30, 80, 0.50);
+        border-color: rgba(255, 255, 255, 0.40);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
+        color: #ffffff;
+    }
+}
+
+/* Анимация для сенсорных экранов (Android/iOS) при нажатии */
+.nav-btn:active::after {
+    transform: translateX(160%) translateZ(0);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.1s ease;
+}
+
+.nav-btn:active {
+    transform: translateY(0px) scale(0.97);
 }
 
 .nav-btn.active {
@@ -114,6 +144,17 @@ a.nav-btn {
     background: rgba(0, 30, 80, 0.35) !important;
 }
 
+/* Повторяем логику ховера для ссылок через медиа-запрос */
+@media (hover: hover) {
+    a.nav-btn:hover {
+        background: rgba(0, 30, 80, 0.50) !important;
+        border-color: rgba(255, 255, 255, 0.40) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25) !important;
+        color: #ffffff !important;
+    }
+}
+
 a.nav-btn.active {
     background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%) !important;
     color: white !important;
@@ -123,31 +164,7 @@ a.nav-btn.active {
         0 0 0 1px rgba(255, 255, 255, 0.15) inset !important;
 }
 
-/* === СТРЕЛКИ === */
-.arrow-btn {
-    color: #d0eaff;
-    background: rgba(0, 30, 80, 0.35);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 4px;
-    padding: 5px 12px;
-    cursor: pointer;
-    box-sizing: border-box;
-    box-shadow: none;
-    transform: translateY(0.1px) translateZ(0);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    isolation: isolate;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-}
-
-/* === СТИЛИ ДЛЯ ПОДСКАЗКИ === */
+/* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
 .scroll-hint-container {
     display: flex;
     justify-content: space-between;
@@ -168,6 +185,32 @@ a.nav-btn.active {
 .scroll-arrows {
     display: flex;
     gap: 8px;
+}
+
+.arrow-btn {
+    color: #d0eaff;
+    background: rgba(0, 30, 80, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    padding: 5px 12px;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: none;
+    transform: translateY(0.1px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.arrow-btn:hover {
+    background: rgba(0, 30, 80, 0.50);
+    border-color: rgba(255, 255, 255, 0.40);
+    box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
+    transform: translateY(-1px);
 }
 
 .swipe-finger-wrapper {
@@ -244,77 +287,4 @@ a.nav-btn.active {
     transform: scale(0.75);
     opacity: 0.4;
     pointer-events: none;
-}
-
-/* ======================================
-   HOVER — только ПК и Smart TV с мышью
-   ====================================== */
-@media (hover: hover) and (pointer: fine) {
-    .nav-btn:hover {
-        background: rgba(0, 30, 80, 0.50);
-        border-color: rgba(255, 255, 255, 0.40);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
-        color: #ffffff;
-    }
-
-    .nav-btn:hover::after {
-        transform: translateX(160%);
-        opacity: 1;
-    }
-
-    .nav-btn.active:hover {
-        transform: translateY(-2px);
-        box-shadow:
-            0 6px 20px rgba(0, 82, 155, 0.45),
-            0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-    }
-
-    a.nav-btn:hover {
-        background: rgba(0, 30, 80, 0.50) !important;
-        border-color: rgba(255, 255, 255, 0.40) !important;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25) !important;
-        color: #ffffff !important;
-    }
-
-    .arrow-btn:hover {
-        background: rgba(0, 30, 80, 0.50);
-        border-color: rgba(255, 255, 255, 0.40);
-        box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
-        transform: translateY(-1px) translateZ(0);
-    }
-}
-
-/* ======================================
-   ACTIVE — телефоны и планшеты (touch)
-   ====================================== */
-@media (hover: none) {
-    .nav-btn:active {
-        background: rgba(0, 30, 80, 0.60);
-        border-color: rgba(255, 255, 255, 0.45);
-        transform: scale(0.96);
-        box-shadow: 0 2px 8px rgba(0, 20, 60, 0.3);
-        color: #ffffff;
-        transition: all 0.1s ease;
-    }
-
-    .nav-btn:active::after {
-        transform: translateX(160%);
-        opacity: 1;
-        transition: transform 0.3s ease, opacity 0.05s ease;
-    }
-
-    a.nav-btn:active {
-        background: rgba(0, 30, 80, 0.60) !important;
-        border-color: rgba(255, 255, 255, 0.45) !important;
-        transform: scale(0.96);
-        color: #ffffff !important;
-    }
-
-    .arrow-btn:active {
-        background: rgba(0, 30, 80, 0.60);
-        border-color: rgba(255, 255, 255, 0.45);
-        transform: scale(0.96) translateZ(0);
-    }
 }

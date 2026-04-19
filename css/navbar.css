@@ -9,13 +9,13 @@ scroll-hint {
 }
 
 .navbar {
-    background: rgba(0, 30, 80, 0.35);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
     padding: 12px 0 14px 0;
     z-index: 9997;
-    box-shadow: 0 4px 24px rgba(0, 20, 60, 0.18);
+    box-shadow: 0 4px 24px rgba(0, 40, 100, 0.10);
     overflow: visible;
 }
 
@@ -50,7 +50,7 @@ scroll-hint {
 
 /* === КНОПКИ === */
 .nav-btn {
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(0, 30, 80, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 9px 16px;
     border-radius: 14px;
@@ -88,10 +88,10 @@ scroll-hint {
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(0, 30, 80, 0.50);
     border-color: rgba(255, 255, 255, 0.40);
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(0, 60, 140, 0.15);
+    box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
     color: #ffffff;
 }
 
@@ -124,7 +124,7 @@ a.nav-btn {
     font-size: 0.88rem;
     font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
     color: #d0eaff !important;
-    background: rgba(255, 255, 255, 0.14) !important;
+    background: rgba(0, 30, 80, 0.35) !important;
 }
 
 a.nav-btn.active {
@@ -137,10 +137,10 @@ a.nav-btn.active {
 }
 
 a.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.22) !important;
+    background: rgba(0, 30, 80, 0.50) !important;
     border-color: rgba(255, 255, 255, 0.40) !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(0, 60, 140, 0.15) !important;
+    box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25) !important;
     color: #ffffff !important;
 }
 
@@ -169,7 +169,7 @@ a.nav-btn:hover {
 
 .arrow-btn {
     color: #d0eaff;
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(0, 30, 80, 0.35);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -186,9 +186,9 @@ a.nav-btn:hover {
 }
 
 .arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(0, 30, 80, 0.50);
     border-color: rgba(255, 255, 255, 0.40);
-    box-shadow: 0 4px 14px rgba(0, 60, 140, 0.13);
+    box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
     transform: translateY(-1px);
 }
 
@@ -235,7 +235,7 @@ a.nav-btn:hover {
     width: 26px;
     height: 38px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(0, 30, 80, 0.35);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.25);

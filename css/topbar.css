@@ -158,10 +158,14 @@
 
 /* --- ИНФО О ПОГОДЕ --- */
 .weather-info {
-    background: transparent;
-    gap: 8px;
-    padding: 0 8px;
-    margin-left: 0;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 10px;
+    gap: 0;
+    padding: 0 6px;
+    margin: 0 4px;
     flex-wrap: nowrap;
     pointer-events: all;
 }
@@ -169,10 +173,10 @@
 .w-item {
     position: relative;
     white-space: nowrap;
-    background: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 4px 10px;
-    border-radius: 10px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 4px 8px;
     font-size: 0.82rem;
     color: #d0eaff;
     flex-shrink: 0;
@@ -183,17 +187,15 @@
     cursor: pointer;
     user-select: none;
     transition: all 0.2s ease;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 }
 
 .w-item:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 0.22);
+    opacity: 0.7;
+    transform: scale(0.97);
 }
 
 .divider {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.25);
     margin: 0 2px;
     font-weight: 300;
 }

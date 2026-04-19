@@ -37,7 +37,7 @@ scroll-hint {
 .nav-rows-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px; 
+    gap: 8px;
     width: max-content;
     padding-top: 2px;
 }
@@ -50,12 +50,12 @@ scroll-hint {
 
 /* === КНОПКИ === */
 .nav-btn {
-    background: rgba(180, 210, 240, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 9px 16px;
     border-radius: 14px;
     white-space: nowrap;
-    color: #003a7a;
+    color: #d0eaff;
     font-weight: 600;
     font-size: 0.88rem;
     cursor: pointer;
@@ -88,11 +88,11 @@ scroll-hint {
 }
 
 .nav-btn:hover {
-    background: rgba(200, 225, 255, 0.40);
-    border-color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.40);
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(0, 60, 140, 0.15);
-    color: #002060;
+    color: #ffffff;
 }
 
 .nav-btn:active {
@@ -118,13 +118,13 @@ scroll-hint {
 
 /* === ССЫЛКИ === */
 a.nav-btn {
-    text-decoration: none; 
-    display: inline-block; 
+    text-decoration: none;
+    display: inline-block;
     box-sizing: border-box;
     font-size: 0.88rem;
-    font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; 
-    color: #003a7a !important;
-    background: rgba(180, 210, 240, 0.25) !important;
+    font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: #d0eaff !important;
+    background: rgba(255, 255, 255, 0.14) !important;
 }
 
 a.nav-btn.active {
@@ -137,11 +137,11 @@ a.nav-btn.active {
 }
 
 a.nav-btn:hover {
-    background: rgba(200, 225, 255, 0.40) !important;
-    border-color: rgba(255, 255, 255, 0.65) !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-color: rgba(255, 255, 255, 0.40) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(0, 60, 140, 0.15) !important;
-    color: #002060 !important;
+    color: #ffffff !important;
 }
 
 /* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
@@ -157,7 +157,7 @@ a.nav-btn:hover {
 
 .scroll-hint-text {
     font-size: 0.85rem;
-    color: #6c757d;
+    color: #d0eaff;
     font-style: italic;
     transform: translateY(5px);
 }
@@ -168,16 +168,16 @@ a.nav-btn:hover {
 }
 
 .arrow-btn {
-    color: #003a7a;
-    background: rgba(180, 210, 240, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: 4px; 
+    color: #d0eaff;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
     padding: 5px 12px;
     cursor: pointer;
     box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
     transform: translateY(0.1px);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -186,8 +186,8 @@ a.nav-btn:hover {
 }
 
 .arrow-btn:hover {
-    background: rgba(200, 225, 255, 0.40);
-    border-color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.40);
     box-shadow: 0 4px 14px rgba(0, 60, 140, 0.13);
     transform: translateY(-1px);
 }
@@ -235,11 +235,11 @@ a.nav-btn:hover {
     width: 26px;
     height: 38px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    color: #003a7a;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #d0eaff;
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;

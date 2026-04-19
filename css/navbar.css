@@ -1,44 +1,68 @@
 /* === NAVBAR.CSS — Навигация === */
 
-.navbar {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 12px 0;
-    position: sticky;
-    top: 45px;
-    z-index: 1000;
+app-header {
+    display: contents; 
 }
 
-.nav-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
+scroll-hint {
+    display: block;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 12px 0;
+    z-index: 9997;
+    box-shadow:
+        0 4px 20px rgba(0, 50, 120, 0.08),
+        0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.nav-scroll-viewport {
+    overflow-x: auto; 
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    cursor: grab;
 }
 
-.nav-container::-webkit-scrollbar {
+.nav-scroll-viewport::-webkit-scrollbar {
     display: none;
 }
 
+.nav-rows-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+    width: max-content; 
+}
+
+.nav-row {
+    display: flex;
+    gap: 10px;
+}
+
+/* === КНОПКИ === */
 .nav-btn {
     background: rgba(255, 255, 255, 0.55);
     border: 1px solid rgba(200, 220, 255, 0.65);
     padding: 10px 18px;
     border-radius: 14px;
     white-space: nowrap;
-    color: var(--primary-blue);
+    color: #003366;
     font-weight: 600;
+    font-size: 13.0px;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Montserrat', 'Tektur', -apple-system, sans-serif;
     box-shadow: 0 2px 8px rgba(0, 50, 120, 0.07);
     position: relative;
     overflow: hidden;
 }
 
-/* Shine sweep при нажатии/hover */
+/* Shine sweep */
 .nav-btn::after {
     content: '';
     position: absolute;
@@ -92,10 +116,156 @@
         0 1px 0 rgba(255, 255, 255, 0.25) inset;
 }
 
-.nav-row-2 {
-    margin-top: 8px;
+/* === ССЫЛКИ === */
+a.nav-btn {
+    text-decoration: none; 
+    display: inline-block; 
+    box-sizing: border-box;
+    font-size: 14px; 
+    font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
+    color: #003366 !important;
+}
+
+a.nav-btn.active {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 82, 155, 0.9) 0%,
+        rgba(0, 130, 220, 0.9) 100%
+    ) !important;
+    color: white !important;
+    box-shadow:
+        0 4px 16px rgba(0, 82, 155, 0.28),
+        0 1px 0 rgba(255, 255, 255, 0.2) inset !important;
+}
+
+/* === ПОДСКАЗКА И СТРЕЛКИ === */
+.scroll-hint-container {
     display: flex;
-    gap: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: 26px;
+}
+
+.scroll-hint-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+    transform: translateY(5px);
+}
+
+.scroll-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.arrow-btn {
+    color: var(--primary-blue);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(200, 220, 255, 0.65);
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 50, 120, 0.1);
+    transform: translateY(0.1px);
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.88);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.15);
+    border-color: rgba(0, 82, 155, 0.2);
+}
+
+.arrow-btn:active {
+    transform: scale(0.94);
+    box-shadow: 0 1px 4px rgba(0, 50, 120, 0.08);
+}
+
+/* === FINGER === */
+.swipe-finger-wrapper {
+    width: 28px;
+    height: 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    transform: translateY(10px);
+}
+
+.swipe-finger {
+    font-size: 1.2rem;
+    display: inline-block;
+    transform-origin: top center;
+    animation: swipeRock 1.6s ease-in-out infinite;
+}
+
+@keyframes swipeRock {
+    0%   { transform: rotate(-20deg); }
+    40%  { transform: rotate(20deg); }
+    70%  { transform: rotate(-20deg); }
+    100% { transform: rotate(-20deg); }
+}
+
+.scroll-hint-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-hint-left.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* === SCROLL TOP BTN === */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 40vh;
+    right: 10px;
+    width: 26px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(200, 220, 255, 0.65);
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 50, 120, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+    touch-action: none;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.scroll-top-btn.scrolling {
+    transform: scale(0.75);
+    opacity: 0.4;
+    pointer-events: none;
 }

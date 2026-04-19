@@ -65,17 +65,19 @@ scroll-hint {
     font-family: 'Montserrat', 'Tektur', -apple-system, sans-serif;
     position: relative;
     overflow: hidden;
-    isolation: isolate;                                          /* ← новое */
-    -webkit-mask-image: -webkit-radial-gradient(white, black);  /* ← новое */
-    transform: translateZ(0);                                    /* ← новое */
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    transform: translateZ(0);
+    /* Убираем синий прямоугольник при нажатии на Android */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-btn::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;       /* ← было left: -100% */
-    width: 100%;   /* ← было 60% */
+    left: 0;
+    width: 100%;
     height: 100%;
     border-radius: inherit;
     background: linear-gradient(
@@ -84,14 +86,14 @@ scroll-hint {
         rgba(255, 255, 255, 0.35) 50%,
         transparent 100%
     );
-    opacity: 0;                          /* ← скрыт через opacity */
-    transform: translateX(-100%);        /* ← смещение через transform */
+    opacity: 0;
+    transform: translateX(-100%);
     transition: transform 0.4s ease, opacity 0.1s ease;
     pointer-events: none;
 }
 
 .nav-btn:hover::after {
-    transform: translateX(160%);         /* ← движение через transform */
+    transform: translateX(160%);
     opacity: 1;
 }
 
@@ -191,6 +193,8 @@ a.nav-btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Убираем синий прямоугольник при нажатии на Android */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .arrow-btn:hover {

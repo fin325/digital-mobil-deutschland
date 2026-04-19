@@ -1,207 +1,105 @@
 /* === NAVBAR.CSS — Навигация === */
 
-/* Делаем новые теги компонентов блочными по умолчанию */
-app-header {
-    display: contents; 
-}
-
-scroll-hint {
-    display: block;
-}
-
 .navbar {
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border); /* Граница теперь снизу */
-    padding: 12px 0;
-    z-index: 9997;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 10px 0;
+    position: sticky;
+    top: 45px;
+    z-index: 1000;
+    box-shadow: 0 4px 24px rgba(0, 40, 100, 0.10);
 }
 
-/* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
-.nav-scroll-viewport {
-    overflow-x: auto; 
+.nav-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
     padding: 0 15px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; 
 }
 
-/* Скрываем скроллбар */
-.nav-scroll-viewport::-webkit-scrollbar {
+.nav-container::-webkit-scrollbar {
     display: none;
 }
 
-/* 2. ОБЕРТКА ДЛЯ РЯДОВ */
-.nav-rows-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; 
-    width: max-content; 
-}
-
-/* 3. СТИЛИ ДЛЯ РЯДОВ */
-.nav-row {
-    display: flex;
-    gap: 10px;
-}
-
-/* === КНОПКИ === */
 .nav-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 0.5px solid var(--glass-border);
-    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 9px 16px;
     border-radius: 14px;
-    white-space: nowrap; 
-    color: #003366;
+    white-space: nowrap;
+    color: #003a7a;
     font-weight: 600;
-    font-size: 13.0px;
+    font-size: 0.88rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: 'Montserrat', 'Tektur', -apple-system, sans-serif;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.01em;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine sweep on hover */
+.nav-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 100%
+    );
+    transition: left 0.4s ease;
+    pointer-events: none;
+}
+
+.nav-btn:hover::after {
+    left: 160%;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.38);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 60, 140, 0.13);
+    color: #002060;
+}
+
+.nav-btn:active {
+    transform: translateY(0px) scale(0.97);
 }
 
 .nav-btn.active {
-    background: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(0, 82, 155, 0.85) 0%, rgba(0, 120, 210, 0.85) 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 4px 16px rgba(0, 82, 155, 0.35),
+        0 0 0 1px rgba(255,255,255,0.15) inset;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-/* === ССЫЛКИ === */
-a.nav-btn {
-    text-decoration: none; 
-    display: inline-block; 
-    box-sizing: border-box;
-    font-size: 14px; 
-    font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; 
-    color: var(--primary-blue) !important; 
+.nav-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 20px rgba(0, 82, 155, 0.45),
+        0 0 0 1px rgba(255,255,255,0.2) inset;
 }
 
-a.nav-btn.active {
-    background: var(--primary-blue) !important;
-    color: white !important;
-    box-shadow: 0 4px 12px rgba(0, 82, 155, 0.2) !important;
-}
-
-/* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
-.scroll-hint-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    height: 26px;
-}
-
-.scroll-hint-text {
-    font-size: 0.85rem;
-    color: #6c757d;
-    font-style: italic;
-    transform: translateY(5px);
-}
-
-.scroll-arrows {
+.nav-row-2 {
+    margin-top: 8px;
     display: flex;
     gap: 8px;
+    padding: 8px 15px 0 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-.arrow-btn {
-    color: var(--primary-blue);
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 4px; 
-    padding: 5px 12px;
-    cursor: pointer;
-    box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transform: translateY(0.1px);
-    transition: background 0.3s ease, opacity 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.nav-row-2::-webkit-scrollbar {
+    display: none;
 }
-
-.arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.swipe-finger-wrapper {
-    width: 28px;
-    height: 32px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    position: relative;
-    transform: translateY(5px);
-}
-
-.swipe-finger {
-    font-size: 1.2rem;
-    display: inline-block;
-    transform-origin: top center;
-    animation: swipeRock 1.6s ease-in-out infinite;
-}
-
-@keyframes swipeRock {
-    0%   { transform: rotate(-20deg); }
-    40%  { transform: rotate(20deg); }
-    70%  { transform: rotate(-20deg); }
-    100% { transform: rotate(-20deg); }
-}
-
-.scroll-hint-left {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: opacity 0.5s ease;
-}
-
-.scroll-hint-left.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.scroll-top-btn {
-    position: fixed;
-    bottom: 40vh;
-    right: 10px;
-    width: 26px;
-    height: 38px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    color: var(--primary-blue);
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    transition: opacity 0.15s ease, transform 0.15s ease; /* было 0.3s */
-    pointer-events: none;
-    touch-action: none;
-    will-change: transform;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-}
-
-.scroll-top-btn.visible {
-    opacity: 1;
-    pointer-events: all;
-}
-
-/* Во время скролла — чуть меньше */
-.scroll-top-btn.scrolling {
-    transform: scale(0.75); /* было 0.5, теперь не так сильно уменьшается */
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-

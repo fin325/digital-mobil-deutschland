@@ -49,6 +49,7 @@ scroll-hint {
 }
 
 /* === КНОПКИ === */
+
 .nav-btn {
     background: rgba(0, 30, 80, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -64,15 +65,18 @@ scroll-hint {
     font-family: 'Montserrat', 'Tektur', -apple-system, sans-serif;
     position: relative;
     overflow: hidden;
+    isolation: isolate;                                          /* ← новое */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);  /* ← новое */
+    transform: translateZ(0);                                    /* ← новое */
 }
 
-/* Shine sweep on hover */
 .nav-btn::after {
     content: '';
     position: absolute;
     top: 0; left: -100%;
     width: 60%;
     height: 100%;
+    border-radius: inherit;   /* ← новое */
     background: linear-gradient(
         120deg,
         transparent 0%,
@@ -82,7 +86,7 @@ scroll-hint {
     transition: left 0.4s ease;
     pointer-events: none;
 }
- 
+
 .nav-btn:hover::after {
     left: 160%;
 }

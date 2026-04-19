@@ -13,15 +13,17 @@ scroll-hint {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    padding: 12px 0;
+    padding: 12px 0 14px 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 40, 100, 0.10);
+    overflow: visible;
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
 .nav-scroll-viewport {
-    overflow-x: auto; 
-    padding: 0 15px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0 15px 4px 15px;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     cursor: grab;
@@ -36,7 +38,8 @@ scroll-hint {
     display: flex;
     flex-direction: column;
     gap: 8px; 
-    width: max-content; 
+    width: max-content;
+    padding-top: 2px;
 }
 
 /* 3. СТИЛИ ДЛЯ РЯДОВ */

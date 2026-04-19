@@ -8,35 +8,32 @@
     z-index: 1;
 }
 
-/* === CARD === */
 .card {
-    background: rgba(255, 255, 255, 0.16) !important;
+    background: rgba(255, 255, 255, 0.45) !important;
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.72);
     border-radius: 28px;
     padding: 25px 17px;
     margin-bottom: 20px;
     box-shadow:
-        0 8px 32px rgba(0, 20, 80, 0.14),
-        0 1px 0 rgba(255, 255, 255, 0.4) inset,
-        0 -1px 0 rgba(0, 0, 0, 0.05) inset;
+        0 8px 32px rgba(0, 40, 100, 0.10),
+        0 1px 0 rgba(255, 255, 255, 1) inset;
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
     z-index: 1;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    hyphens: none;
-    -webkit-hyphens: none;
+    hyphens: none; -webkit-hyphens: none;
     text-align: left;
     text-justify: inter-word;
     overflow-wrap: anywhere;
     word-break: normal;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover {
     box-shadow:
-        0 14px 40px rgba(0, 20, 80, 0.18),
-        0 1px 0 rgba(255, 255, 255, 0.5) inset;
+        0 14px 40px rgba(0, 40, 100, 0.14),
+        0 1px 0 rgba(255, 255, 255, 1) inset;
     transform: translateY(-1px);
 }
 
@@ -58,13 +55,13 @@ h1, h2, h4, h5, h6 {
 .btn-main {
     background: linear-gradient(
         135deg,
-        rgba(0, 82, 155, 0.78) 0%,
-        rgba(0, 112, 200, 0.78) 100%
+        rgba(0, 82, 155, 0.85) 0%,
+        rgba(0, 120, 210, 0.85) 100%
     ) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.32) !important;
     color: white !important;
-    padding: 16px 18px;
-    font-size: 1.05rem;
+    padding: 18px;
+    font-size: 1.1rem;
     font-weight: 600;
     border-radius: 18px;
     width: 100%;
@@ -79,13 +76,12 @@ h1, h2, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     box-shadow:
-        0 4px 16px rgba(0, 82, 155, 0.25),
-        0 1px 0 rgba(255, 255, 255, 0.2) inset;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-    letter-spacing: 0.01em;
+        0 4px 16px rgba(0, 82, 155, 0.22),
+        0 1px 0 rgba(255, 255, 255, 0.22) inset;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Shine effect */
+/* Shine sweep */
 .btn-main::before {
     content: '';
     position: absolute;
@@ -95,7 +91,7 @@ h1, h2, h4, h5, h6 {
     background: linear-gradient(
         120deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.22) 50%,
+        rgba(255, 255, 255, 0.28) 50%,
         transparent 100%
     );
     transition: left 0.5s ease;
@@ -109,14 +105,14 @@ h1, h2, h4, h5, h6 {
 .btn-main:hover {
     transform: translateY(-2px);
     box-shadow:
-        0 8px 24px rgba(0, 82, 155, 0.38),
+        0 8px 24px rgba(0, 82, 155, 0.32),
         0 1px 0 rgba(255, 255, 255, 0.3) inset;
-    border-color: rgba(255, 255, 255, 0.4) !important;
+    border-color: rgba(255, 255, 255, 0.45) !important;
 }
 
 .btn-main:active {
-    transform: scale(0.97) translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 82, 155, 0.2);
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0, 82, 155, 0.18);
 }
 
 .tab-content .btn-main {
@@ -132,20 +128,21 @@ h1, h2, h4, h5, h6 {
 
 .tab-content.active {
     display: block;
-    animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    -webkit-animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation: fadeInUp 0.6s cubic-bezier (0.165, 0.84, 0.44, 1) forwards;
+    -webkit-animation: fadeInUp 0.6s
+    cubic-bezier (0.165, 0.84, 0.44, 1) forwards;/*С Ошибкой пробел анимация парадоксально лучше и плавнее!!!*/
     transform-origin: bottom center;
 }
 
 /* === IFRAME === */
 .iframe-wrapper {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     height: 700px;
     width: 100%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 4px 16px rgba(0, 40, 100, 0.08) inset;
 }
 
 iframe {
@@ -161,11 +158,11 @@ iframe {
     overflow: hidden;
     border-radius: 18px;
     margin: 15px 0;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.08);
     box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.22),
-        0 1px 0 rgba(255, 255, 255, 0.12) inset;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+        0 6px 20px rgba(0, 40, 100, 0.12),
+        0 1px 0 rgba(255, 255, 255, 0.7) inset;
+    border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
 .video-wrapper.horizontal {
@@ -190,49 +187,49 @@ iframe {
 /* === STATUS === */
 .status-msg {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.65);
+    color: #555;
     text-align: center;
     margin-bottom: 15px;
 }
 
 /* === NEWS === */
 .news-card-mini {
-    background: rgba(255, 255, 255, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    padding: 10px;
     border-radius: 14px;
     margin-bottom: 10px;
     transition: all 0.22s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 40, 100, 0.07);
 }
 
 .news-card-mini:active {
     transform: scale(0.98);
-    background: rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.72);
 }
 
 .news-item {
-    background: rgba(255, 255, 255, 0.22);
-    border-left: 3px solid rgba(0, 82, 155, 0.8);
-    padding: 12px 14px;
-    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.48);
+    border-left: 3px solid var(--primary-blue);
+    padding: 12px;
+    margin-bottom: 15px;
     border-radius: 0 14px 14px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 8px rgba(0, 40, 100, 0.07);
     transition: transform 0.2s ease;
 }
 
 .news-item:hover {
     transform: translateX(2px);
+    background: rgba(255, 255, 255, 0.65);
 }
 
 .news-title {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 0.95rem;
     display: block;
     margin-bottom: 5px;
-    color: #ffffff;
+    color: #1d1d1f;
     text-decoration: none;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* === LAWS === */
@@ -240,24 +237,26 @@ iframe {
     display: block;
     padding: 15px;
     margin: 10px 0;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.45);
     border-radius: 14px;
     text-decoration: none;
-    color: #cce4ff;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #00529b;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.65);
     transition: all 0.22s ease;
+    box-shadow: 0 2px 8px rgba(0, 40, 100, 0.07);
 }
 
 .law-link:hover {
-    background: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.68);
     transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 40, 100, 0.12);
 }
 
-/* === CONSENT PLACEHOLDER === */
+/* === CONSENT === */
 .consent-placeholder {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.45);
+    border: 1.5px dashed rgba(0, 82, 155, 0.3);
     padding: 30px 20px;
     border-radius: 16px;
     text-align: center;
@@ -266,25 +265,25 @@ iframe {
 
 .consent-placeholder p {
     margin: 10px 0;
-    color: rgba(255, 255, 255, 0.75);
+    color: #555;
 }
 
 .load-tool-btn {
     padding: 12px 30px;
     font-size: 16px;
-    background: linear-gradient(135deg, #0066cc, #0099ff);
+    background: linear-gradient(135deg, #00529b, #0078d4);
     color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: 0 4px 14px rgba(0, 102, 204, 0.35);
+    box-shadow: 0 4px 14px rgba(0, 82, 155, 0.28);
     font-weight: 600;
 }
 
 .load-tool-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.45);
+    box-shadow: 0 6px 20px rgba(0, 82, 155, 0.38);
 }
 
 .load-tool-btn:active {
@@ -292,5 +291,5 @@ iframe {
 }
 
 #project .card {
-    background: rgba(255, 255, 255, 0.35) !important;
+    background: rgba(255, 255, 255, 0.52) !important;
 }

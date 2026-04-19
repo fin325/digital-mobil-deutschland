@@ -113,3 +113,19 @@
 .icon-1f527 { background-image: url('../img/icon/1f527.svg'); } /* 🔧 tools */
 .icon-1f5bc { background-image: url('../img/icon/1f5bc.svg'); } /* 🖼️ gallery */
 .icon-1f3ec { background-image: url('../img/icon/1f3ec.svg'); } /*🏬*/
+/* === weather.js — расширенные показатели === */
+.icon-1f32c { background-image: url('../img/icon/1f32c.svg'); } /* 🌬 ветер */
+.icon-1f305 { background-image: url('../img/icon/1f305.svg'); } /* 🌅 восход */
+.icon-1f307 { background-image: url('../img/icon/1f307.svg'); } /* 🌇 закат */
+.icon-1f3ed { background-image: url('../img/icon/1f3ed.svg'); } /* 🏭 NO₂ */
+.icon-1f31e { background-image: url('../img/icon/1f31e.svg'); } /* 🌞 O₃ */
+
+/* === weather.js — фазы луны === */
+.icon-1f311 { background-image: url('../img/icon/1f311.svg'); } /* 🌑 новолуние */
+.icon-1f312 { background-image: url('../img/icon/1f312.svg'); } /* 🌒 */
+.icon-1f313 { background-image: url('../img/icon/1f313.svg'); } /* 🌓 */
+.icon-1f314 { background-image: url('../img/icon/1f314.svg'); } /* 🌔 */
+.icon-1f315 { background-image: url('../img/icon/1f315.svg'); } /* 🌕 полнолуние */
+.icon-1f316 { background-image: url('../img/icon/1f316.svg'); } /* 🌖 */
+.icon-1f317 { background-image: url('../img/icon/1f317.svg'); } /* 🌗 */
+.icon-1f318 { background-image: url('../img/icon/1f318.svg'); } /* 🌘 */

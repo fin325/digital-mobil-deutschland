@@ -38,7 +38,6 @@ scroll-hint {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: max-content;
     padding-top: 2px;
     min-width: 100%;
 }
@@ -47,7 +46,7 @@ scroll-hint {
 .nav-row {
     display: flex;
     gap: 10px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -77,6 +76,7 @@ a {
     transform: translateZ(0);
     /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
+    flex: 1;
 }
 
 .nav-btn::after {

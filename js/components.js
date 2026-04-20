@@ -9,7 +9,7 @@ class AppHeader extends HTMLElement {
             loading:   isRu ? 'Загрузка...'                   : 'Laden...',
             humidity:  isRu ? 'Влажность воздуха'             : 'Luftfeuchtigkeit',
             aqi:       isRu ? 'Качество воздуха (1-отлично)'  : 'Luftqualität (1 – sehr gut)',
-            geo:       isRu ? 'Геомагнитная активность (1-спокойно)' : 'Geomagnetik (1-ruhig)',
+            geo:       isRu ? 'Геомагнитная активность (0-9)' : 'Geomagnetik (1-ruhig)',
             pressure:  isRu ? 'Атмосферное давление'          : 'Luftdruck',
             unitPress: isRu ? ' мм рт.ст.'                    : ' hPa',
             city:      isRu ? 'Город Хаттинген'               : 'Stadt Hattingen',
@@ -18,9 +18,9 @@ class AppHeader extends HTMLElement {
             sunrise:   isRu ? 'Восход'                         : 'Sonnenaufgang',
             sunset:    isRu ? 'Закат'                          : 'Sonnenuntergang',
             moon:      isRu ? 'Фаза луны'                     : 'Mondphase',
-            no2:       isRu ? 'NO₂ (μg/m³)'                   : 'NO₂ (μg/m³)',
-            co:        isRu ? 'CO (μg/m³)'                    : 'CO (μg/m³)',
-            o3:        isRu ? 'O₃ (μg/m³)'                    : 'O₃ (μg/m³)',
+            no2:       isRu ? 'NO₂-отлично до 40 (μg/m³)'                   : 'NO₂-sehr gut bis 40 (μg/m³)',
+            co:        isRu ? 'CO-отлично до 4000 (μg/m³)'                    : 'CO-sehr gut bis 4000 (μg/m³)',
+            o3:        isRu ? 'O₃-отлично до 100 (μg/m³)'                    : 'O₃-sehr gut bis 100 (μg/m³)',
         };
 
         const path = window.location.pathname;

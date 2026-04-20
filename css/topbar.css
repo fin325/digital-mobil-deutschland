@@ -170,6 +170,8 @@
     margin: 0;
     flex-wrap: nowrap;
     pointer-events: all;
+    min-width: 100%;
+    justify-content: space-evenly;
 }
 
 .w-item {

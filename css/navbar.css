@@ -77,7 +77,6 @@ a {
     transform: translateZ(0);
     /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
-    flex: 1;
 }
 
 .nav-btn::after {

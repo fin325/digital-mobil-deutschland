@@ -29,19 +29,16 @@ function scrollTabs(direction) {
 }
 
 function showTab(tabId, event) {
-    // Скрываем весь контент
+    hideSwipeHint(); // ← добавлено
+
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    // Снимаем активность со всех кнопок
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
 
-    // Показываем нужную вкладку
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
-        // Сбрасываем анимацию перед показом
         targetTab.style.animation = 'none';
         targetTab.style.webkitAnimation = 'none';
 
-        // Принудительный reflow
         void targetTab.offsetHeight;
 
         targetTab.style.animation = '';
@@ -50,26 +47,21 @@ function showTab(tabId, event) {
         targetTab.classList.add('active');
     }
 
-    // Делаем кнопку активной
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    // Всегда скроллим в начало страницы
     window.scrollTo(0, 0);
 }
 
-// Слушаем скролл viewport
 const menuScroll = document.querySelector('.nav-scroll-viewport');
 if (menuScroll) {
     menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
 }
 
-// Кнопка наверх
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 let scrollTimer;
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 200) {
-        // Во время скролла — маленькая и полупрозрачная
         scrollTopBtn?.classList.add('visible');
         scrollTopBtn?.classList.add('scrolling');
     } else {
@@ -79,7 +71,6 @@ window.addEventListener('scroll', () => {
 
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => {
-        // Скролл остановился — нормальный размер
         scrollTopBtn?.classList.remove('scrolling');
     }, 150);
 }, { passive: true });
@@ -89,7 +80,6 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Drag-to-scroll для меню на ПК
 (function () {
     const vp = document.querySelector('.nav-scroll-viewport');
     if (!vp) return;
@@ -124,9 +114,7 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
         vp.style.userSelect = '';
     });
 
-    // Блокируем клик на кнопке если было перетаскивание
     vp.addEventListener('click', (e) => {
         if (hasDragged) e.stopPropagation();
     }, true);
 })();
-

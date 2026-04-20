@@ -126,8 +126,11 @@ function loadPdfCompressor() {
     const ph = document.getElementById('pdf-placeholder');
     const iframe = document.getElementById('pdf-iframe');
     if (ph && iframe) {
+        fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
+            .catch(() => {});
         iframe.src = "https://pdf-compressor-web.onrender.com";
         iframe.style.display = "block";
         ph.style.display = "none";
     }
 }
+

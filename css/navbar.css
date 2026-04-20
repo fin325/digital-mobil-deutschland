@@ -48,6 +48,10 @@ scroll-hint {
     gap: 10px;
 }
 
+a {
+    touch-action: manipulation;
+}
+
 /* === КНОПКИ === */
 
 .nav-btn {

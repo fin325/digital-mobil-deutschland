@@ -152,5 +152,13 @@ Hattingen, Nordrhein-Westfalen, Deutschland
 
 💡 Idee
 
-Ziel des Projekts ist es, eine zentrale digitale Plattform zu schaffen,
+## Ziel des Projekts
+
+Ziel ist es, eine zentrale digitale Plattform zu schaffen,
 die besonders Migranten den Alltag in Deutschland erleichtert.
+
+---
+
+© 2026 Artem Finevych. Alle Rechte vorbehalten.  
+Dieses Projekt ist urheberrechtlich geschützt.  
+Lizenz: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)

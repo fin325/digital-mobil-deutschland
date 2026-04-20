@@ -47,6 +47,7 @@ scroll-hint {
 .nav-row {
     display: flex;
     gap: 10px;
+    justify-content: space-evenly;
 }
 
 a {

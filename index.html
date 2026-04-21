@@ -9,11 +9,9 @@
     <meta name="description" content="Portal für Einwohner & Migranten in Hattingen, Bochum, NRW, Deutschland. PDF komprimieren für E-Mail. Wetter, Luftqualität, Arztsuche, Jobsuche und Ausbildung.">
     <meta name="keywords" content="Hattingen, Bochum, NRW, Deutschland, Migranten, Einwohner, PDF komprimieren, Wetter, Luftqualität, Arztsuche, Jobsuche, Ausbildung, Integration, русский">
     <meta name="robots" content="index, follow">
-    <!-- PWA на iPhone: цвет статус-бара -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="DMD">
-<!-- Цвет фона во время загрузки -->
     <meta name="theme-color" content="#1a3a5c">
     <meta property="og:title" content="Digital & Mobil in Deutschland">
     <meta property="og:description" content="Portal für Einwohner & Migranten in Hattingen, Bochum, NRW. Arztsuche, Jobsuche und Ausbildung.">
@@ -219,10 +217,10 @@
         <h2><span class="icon-emoji icon-1f686"></span> Transport</h2>
         <p style="text-align: center;">Aktuelle Zug- und Busfahrpläne.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.bahn.de/buchung/fahrplan/suche" style="background: #cc0000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f310"></span> DB Fahrplan</a>
-                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f34e"></span> App für iPhone</a>
-                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #3ddc84; color: #2a7a50; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f916"></span> App für Android</a>
+            <div class="btn-link-group">
+                <a href="https://www.bahn.de/buchung/fahrplan/suche" class="btn-link" style="background:#cc0000;color:white;flex-grow:1"><span class="icon-emoji icon-1f310"></span> DB Fahrplan</a>
+                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid var(--primary-blue);color:var(--primary-blue);flex-grow:1"><span class="icon-emoji icon-1f34e"></span> App für iPhone</a>
+                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #3ddc84;color:#2a7a50;flex-grow:1"><span class="icon-emoji icon-1f916"></span> App für Android</a>
             </div>
         </div>
     </div>
@@ -232,9 +230,9 @@
     <div class="card">
         <h2><span class="icon-emoji icon-1f5fa"></span> Karten</h2>
         <p style="text-align: center;">Einfache Navigation und Suche in Hattingen.</p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-            <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" style="background: #4285F4; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
-            <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f34e"></span> Apple Maps</a>
+        <div class="btn-link-group" style="margin-top: 15px;">
+            <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4285F4;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(66,133,244,0.2)"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+            <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,0.2)"><span class="icon-emoji icon-1f34e"></span> Apple Maps</a>
         </div>
     </div>
 </section>
@@ -270,12 +268,12 @@
         <p style="text-align: center;">Beliebte Jobportale für die Stellensuche in Deutschland.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
             <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;"><span class="icon-emoji icon-1f3e6"></span> Job-Portal</a>
-            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f1e9-1f1ea"></span> Jobsuche (Arbeitsagentur)</a> 
-        <div class="btn-link-group">
-             <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#2164f3;flex-grow:1;box-shadow:0 2px 6px rgba(33,100,243,.2)"><span class="icon-emoji icon-1f50d"></span> Indeed</a>
-             <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,.2)"><span class="icon-emoji icon-1f4c8"></span> StepStone</a>
-             <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#016567;flex-grow:1;box-shadow:0 2px 6px rgba(1,101,103,.2)"><span class="icon-emoji icon-1f91d"></span> XING</a>
-         </div>
+            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#e30613;color:white;box-shadow:0 4px 10px rgba(227,6,19,0.2)"><span class="icon-emoji icon-1f1e9-1f1ea"></span> Jobsuche (Arbeitsagentur)</a>
+            <div class="btn-link-group">
+                <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#2164f3;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(33,100,243,.2)"><span class="icon-emoji icon-1f50d"></span> Indeed</a>
+                <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,.2)"><span class="icon-emoji icon-1f4c8"></span> StepStone</a>
+                <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#016567;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(1,101,103,.2)"><span class="icon-emoji icon-1f91d"></span> XING</a>
+            </div>
         </div>
     </div>
 </section>
@@ -288,22 +286,22 @@
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Multimodale KI von Google. Ideal für die Arbeit mit Google-Diensten, Karten und schnelle aktuelle Informationen.</p>
-            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(90deg, #4285f4, #9b72cb); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 500; display: inline-block;">Gemini starten</a>
+            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:linear-gradient(90deg,#4285f4,#9b72cb);color:white;padding:10px 20px;display:inline-block">Gemini starten</a>
         </div>
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Marktführer beim Schreiben von Texten und komplexer Programmierung. Hervorragend für Datenanalyse und kreative Aufgaben.</p>
-            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="background: #10a37f; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 500; display: inline-block;">ChatGPT öffnen</a>
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#10a37f;color:white;padding:10px 20px;display:inline-block">ChatGPT öffnen</a>
         </div>
         <div style="margin-bottom: 10px;">
             <h3 style="margin-bottom: 5px; color: #1e1c1a;">Claude</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Intelligenter Assistent von Anthropic – ehrlich, präzise und natürlich in der Kommunikation. Arbeitet mit großen Dokumenten, schreibt und debuggt Code, analysiert Daten.</p>
-            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" style="background: #da7756; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 500; display: inline-block;">Claude ausprobieren</a>
+            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#da7756;color:white;padding:10px 20px;display:inline-block">Claude ausprobieren</a>
         </div>
         <div style="margin-bottom: 10px;">
             <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">KI von Elon Musk (xAI), in das X-Netzwerk integriert. Bekannt für Witz und Echtzeit-Zugang zu Weltnachrichten.</p>
-            <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 500; display: inline-block;">Grok ausprobieren</a>
+            <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;padding:10px 20px;display:inline-block">Grok ausprobieren</a>
         </div>
     </div>
 </section>
@@ -312,9 +310,9 @@
     <div class="card">
         <h2><span class="icon-emoji icon-1f3e5"></span> Gesundheit</h2>
         <p style="text-align: center;">Arztsuche, Bewertungen und Online-Terminbuchung.</p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-            <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" style="background: #0596de; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(5, 150, 222, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1fa7a"></span> Doctolib</a>
-            <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" style="background: #00b3a6; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 179, 166, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-2695"></span> Jameda</a>
+        <div class="btn-link-group" style="margin-top: 15px;">
+            <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#0596de;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(5,150,222,0.2)"><span class="icon-emoji icon-1fa7a"></span> Doctolib</a>
+            <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#00b3a6;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,179,166,0.2)"><span class="icon-emoji icon-2695"></span> Jameda</a>
         </div>
     </div>
 </section>
@@ -333,7 +331,7 @@
         <h2><span class="icon-emoji icon-1f4e9"></span> Kontakt</h2>
         <p style="text-align: center;">Kontaktieren Sie uns bei Fragen oder Anregungen.</p>
         <div style="margin-top: 15px;">
-        <a href="mailto:hattingen325@gmail.com" target="_blank" rel="noopener noreferrer" style="background: #ea4335; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(234, 67, 53, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f4e7"></span> E-Mail schreiben</a>
+        <a href="mailto:hattingen325@gmail.com" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ea4335;color:white;box-shadow:0 4px 10px rgba(234,67,53,0.2);display:block;text-align:center"><span class="icon-emoji icon-1f4e7"></span> E-Mail schreiben</a>
         <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">hattingen325@gmail.com</p>
         </div>
     </div>
@@ -350,7 +348,7 @@
     <span style="margin: 0 6px;">|</span>
     <a href="tabs/datenschutz.html" style="color: inherit; font-weight: 700; text-decoration: underline;">Datenschutz→</a>
 </p>
-<div class="<div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
+<div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
         <h3 style="margin: 0 0 10px; color: #003399; font-size: 0.95rem;">Was bietet die Seite?</h3>
         <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
             <span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten (RSS-Feed von tagesschau.de / ru.euronews.com)<br>
@@ -499,21 +497,21 @@
         <h2><span class="icon-emoji icon-1f3e0"></span> Mietwohnungen</h2>
         <p style="text-align: center;">Finden Sie aktuelle Wohnungsangebote, Genossenschaften und WG-Zimmer in Hattingen.</p>
     <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/ennepe-ruhr-kreis/hattingen/wohnung-mieten" target="_blank" rel="noopener noreferrer" style="background: #ff5a5f; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3e2"></span> ImmoScout24</a>
-            <a href="https://www.kleinanzeigen.de/s-wohnung-mieten/hattingen/c203l1869" target="_blank" rel="noopener noreferrer" style="background: #4682b4; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f4e2"></span> Kleinanzeigen</a>
+        <div class="btn-link-group">
+            <a href="https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/ennepe-ruhr-kreis/hattingen/wohnung-mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff5a5f;color:white;flex-grow:1"><span class="icon-emoji icon-1f3e2"></span> ImmoScout24</a>
+            <a href="https://www.kleinanzeigen.de/s-wohnung-mieten/hattingen/c203l1869" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4682b4;color:white;flex-grow:1"><span class="icon-emoji icon-1f4e2"></span> Kleinanzeigen</a>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://www.hwg.de/" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #0054a6; color: #0054a6; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3ec"></span> hwg eG (Lokal)</a>
-            <a href="https://www.gartenstadt.de/wohnen/alle-wohnungsangebote.html" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #2e8b57; color: #2e8b57; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f333"></span> Gartenstadt Hüttenau</a>
+        <div class="btn-link-group">
+            <a href="https://www.hwg.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #0054a6;color:#0054a6;flex-grow:1"><span class="icon-emoji icon-1f3ec"></span> hwg eG (Lokal)</a>
+            <a href="https://www.gartenstadt.de/wohnen/alle-wohnungsangebote.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #2e8b57;color:#2e8b57;flex-grow:1"><span class="icon-emoji icon-1f333"></span> Gartenstadt Hüttenau</a>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://www.leg-wohnen.de/mietwohnungen/hattingen" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #e30613; color: #e30613; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3d7"></span> LEG Wohnen</a>
-            <a href="https://www.vonovia.de/zuhause-finden?city=Hattingen" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #004f9f; color: #004f9f; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3d9"></span> Vonovia</a>
+        <div class="btn-link-group">
+            <a href="https://www.leg-wohnen.de/mietwohnungen/hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #e30613;color:#e30613;flex-grow:1"><span class="icon-emoji icon-1f3d7"></span> LEG Wohnen</a>
+            <a href="https://www.vonovia.de/zuhause-finden?city=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #004f9f;color:#004f9f;flex-grow:1"><span class="icon-emoji icon-1f3d9"></span> Vonovia</a>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="https://www.wg-gesucht.de/wg-zimmer-in-Hattingen.3089.0.1.0.html" target="_blank" rel="noopener noreferrer" style="background: #ff8c00; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f91d"></span> WG-Gesucht</a>
-            <a href="https://www.immowelt.de/suche/hattingen/wohnungen/mieten" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #333; color: #333; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 500; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3e0"></span> Immowelt</a>
+        <div class="btn-link-group">
+            <a href="https://www.wg-gesucht.de/wg-zimmer-in-Hattingen.3089.0.1.0.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff8c00;color:white;flex-grow:1"><span class="icon-emoji icon-1f91d"></span> WG-Gesucht</a>
+            <a href="https://www.immowelt.de/suche/hattingen/wohnungen/mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #333;color:#333;flex-grow:1"><span class="icon-emoji icon-1f3e0"></span> Immowelt</a>
         </div>
     </div>
 </div>

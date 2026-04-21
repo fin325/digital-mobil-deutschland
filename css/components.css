@@ -350,6 +350,7 @@ iframe {
     display: inline-block;
 }
 
+.text-link.is-active,
 .text-link:active {
     opacity: 0.6;
     transform: scale(0.95);
@@ -413,8 +414,14 @@ iframe {
         transition: all 0.1s ease;
     }
 
-
 .text-link:hover {
         opacity: 0.7;
+    }
+
+    .text-link:active,
+    .text-link.is-active {
+        opacity: 0.6;
+        transform: scale(0.95);
+        transition: all 0.1s ease;
     }
 }

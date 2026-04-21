@@ -304,7 +304,7 @@ iframe {
     }
 
     .card {
-        background: rgba(100, 130, 170, 0.85) !important;
+        background: rgba(100, 130, 170, 0.75) !important;
         backdrop-filter: blur(10px) saturate(140%);
         -webkit-backdrop-filter: blur(10px) saturate(140%);
     }

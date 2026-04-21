@@ -316,6 +316,7 @@ iframe {
     .law-link,
     .load-tool-btn,
     .status-msg {
+        font-weight: 500 !important;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

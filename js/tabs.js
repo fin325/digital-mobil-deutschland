@@ -119,7 +119,7 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
     }, true);
 })();
 
-// iOS fix: первый тап после скролла
+// Touch fix: анимация + навигация для a.btn-main
 document.querySelectorAll('a.btn-main').forEach(link => {
     let startY = 0;
     let moved = false;
@@ -127,19 +127,26 @@ document.querySelectorAll('a.btn-main').forEach(link => {
     link.addEventListener('touchstart', function(e) {
         startY = e.touches[0].clientY;
         moved = false;
+        this.classList.add('is-active');   // ← мгновенно запускаем анимацию
     }, { passive: true });
 
     link.addEventListener('touchmove', function() {
         moved = true;
+        this.classList.remove('is-active'); // ← скролл — убираем анимацию
     }, { passive: true });
 
     link.addEventListener('touchend', function(e) {
-        if (moved) return;
+        if (moved) {
+            this.classList.remove('is-active');
+            return;
+        }
         e.preventDefault();
         const href = this.getAttribute('href');
-        if (href) setTimeout(() => window.location.href = href, 180);
+        const el = this;
+        setTimeout(() => {
+            el.classList.remove('is-active');
+            if (href) window.location.href = href;
+        }, 180);
     }, { passive: false });
 });
-
-
 

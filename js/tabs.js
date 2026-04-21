@@ -137,7 +137,7 @@ document.querySelectorAll('a.btn-main').forEach(link => {
         if (moved) return;
         e.preventDefault();
         const href = this.getAttribute('href');
-        if (href) setTimeout(() => window.location.href = href, 150);
+        if (href) setTimeout(() => window.location.href = href, 180);
     }, { passive: false });
 });
 

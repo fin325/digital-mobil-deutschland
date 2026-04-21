@@ -118,3 +118,13 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
         if (hasDragged) e.stopPropagation();
     }, true);
 })();
+
+// iOS fix: первый тап после скролла
+document.querySelectorAll('a.btn-main').forEach(link => {
+    link.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        if (href) window.location.href = href;
+    }, { passive: false });
+});
+

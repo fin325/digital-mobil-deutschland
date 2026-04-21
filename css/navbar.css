@@ -53,6 +53,7 @@ scroll-hint {
 
 a {
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* === КНОПКИ === */

@@ -51,7 +51,7 @@ scroll-hint {
     width: 100%;
 }
 
-a {
+a { 
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }

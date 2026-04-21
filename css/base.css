@@ -121,3 +121,19 @@ h1, h2, h3 {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+/* === PC font rendering fix === */
+@media (hover: hover) and (pointer: fine) {
+    h1, h2, h3, h4, h5, h6 {
+        text-shadow: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p {
+        text-shadow: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+

@@ -49,7 +49,6 @@ function showTab(tabId, event) {
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    // Сохраняем вкладку в истории браузера
     history.pushState({ tab: tabId }, '', `#${tabId}`);
 
     window.scrollTo(0, 0);
@@ -64,17 +63,13 @@ function showTabSilent(tabId) {
 
     const btn = document.querySelector(`[onclick="showTab('${tabId}', event)"]`);
     if (btn) btn.classList.add('active');
-
-    window.scrollTo(0, 0);
 }
 
-// Восстанавливаем вкладку при нажатии назад
 window.addEventListener('popstate', (e) => {
     const tabId = e.state?.tab || 'home';
     showTabSilent(tabId);
 });
 
-// При загрузке страницы — восстанавливаем вкладку из URL
 window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash.replace('#', '');
     if (hash) showTabSilent(hash);

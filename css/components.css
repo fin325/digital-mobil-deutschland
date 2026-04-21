@@ -59,6 +59,12 @@ h1, h2, h4, h5, h6 {
     flex-wrap: wrap;
 }
 
+.btn-link-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .btn-link {
     padding: 10px 15px;
     border-radius: 10px;

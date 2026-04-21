@@ -124,7 +124,8 @@ document.querySelectorAll('a.btn-main').forEach(link => {
     link.addEventListener('touchend', function(e) {
         e.preventDefault();
         const href = this.getAttribute('href');
-        if (href) window.location.href = href;
+        if (href) setTimeout(() => window.location.href = href, 150);
     }, { passive: false });
 });
+
 

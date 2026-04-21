@@ -323,17 +323,16 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-    .site-title {
-        text-shadow: none;
+        .site-title {
+        font-size: 1.65rem;
+        font-weight: 600;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        font-weight: 500;
         opacity: 0.92;
     }
 
     .site-subtitle {
         font-weight: 500;
-        text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         opacity: 0.88;

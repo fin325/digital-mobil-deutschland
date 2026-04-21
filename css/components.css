@@ -82,6 +82,8 @@ h1, h2, h4, h5, h6 {
         0 1px 0 rgba(255, 255, 255, 0.2) inset;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     letter-spacing: 0.01em;
+    touch-action: manipulation;
+    
 }
 
 /* Shine effect */

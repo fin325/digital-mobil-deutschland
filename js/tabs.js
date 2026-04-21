@@ -29,7 +29,7 @@ function scrollTabs(direction) {
 }
 
 function showTab(tabId, event) {
-    hideSwipeHint(); // ← добавлено
+    hideSwipeHint();
 
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -49,8 +49,36 @@ function showTab(tabId, event) {
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
+    // Сохраняем вкладку в истории браузера
+    history.pushState({ tab: tabId }, '', `#${tabId}`);
+
     window.scrollTo(0, 0);
 }
+
+function showTabSilent(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) targetTab.classList.add('active');
+
+    const btn = document.querySelector(`[onclick="showTab('${tabId}', event)"]`);
+    if (btn) btn.classList.add('active');
+
+    window.scrollTo(0, 0);
+}
+
+// Восстанавливаем вкладку при нажатии назад
+window.addEventListener('popstate', (e) => {
+    const tabId = e.state?.tab || 'home';
+    showTabSilent(tabId);
+});
+
+// При загрузке страницы — восстанавливаем вкладку из URL
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) showTabSilent(hash);
+});
 
 const menuScroll = document.querySelector('.nav-scroll-viewport');
 if (menuScroll) {
@@ -127,12 +155,12 @@ document.querySelectorAll('a.btn-main').forEach(link => {
     link.addEventListener('touchstart', function(e) {
         startY = e.touches[0].clientY;
         moved = false;
-        this.classList.add('is-active');   // ← мгновенно запускаем анимацию
+        this.classList.add('is-active');
     }, { passive: true });
 
     link.addEventListener('touchmove', function() {
         moved = true;
-        this.classList.remove('is-active'); // ← скролл — убираем анимацию
+        this.classList.remove('is-active');
     }, { passive: true });
 
     link.addEventListener('touchend', function(e) {
@@ -193,4 +221,3 @@ document.querySelectorAll('a.text-link').forEach(link => {
         setTimeout(() => this.classList.remove('is-active'), 150);
     }, { passive: true });
 });
-

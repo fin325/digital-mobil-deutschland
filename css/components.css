@@ -53,6 +53,36 @@ h1, h2, h4, h5, h6 {
     text-align: center;
 }
 
+.btn-link-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-link {
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn-link.is-active {
+    opacity: 0.75;
+    transform: scale(0.96);
+}
+
 /* === BUTTONS === */
 .btn-main {
     background: linear-gradient(

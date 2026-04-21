@@ -261,7 +261,6 @@
     to   { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1); }
 }
 
-/* --- КНОПКА ЯЗЫКА --- */
 .lang-btn {
     position: fixed;
     top: 50px;
@@ -282,6 +281,18 @@
     align-items: center;
     gap: 4px;
     transition: box-shadow 0.2s, transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    overflow: hidden;
+}
+
+.lang-btn:active,
+.lang-btn.is-active {
+    transform: scale(0.96);
+    opacity: 0.85;
+    transition: all 0.1s ease;
 }
 
 .lang-btn:hover {
@@ -323,7 +334,7 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-        .site-title {
+    .site-title {
         font-size: 1.85rem;
         font-weight: 500;
         -webkit-font-smoothing: antialiased;
@@ -343,6 +354,17 @@
         backdrop-filter: blur(10px) saturate(140%);
         -webkit-backdrop-filter: blur(10px) saturate(140%);
     }
+
+    .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.26);
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+        transform: translateY(-1px);
+    }
+
+    .lang-btn:active,
+    .lang-btn.is-active {
+        transform: scale(0.96);
+        opacity: 0.85;
+        transition: all 0.1s ease;
+    }
 }
-
-

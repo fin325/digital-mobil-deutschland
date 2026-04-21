@@ -173,29 +173,8 @@ document.querySelectorAll('a.btn-main').forEach(link => {
     }, { passive: false });
 });
 
-document.querySelectorAll('a.btn-link').forEach(link => {
-    let moved = false;
-    let startY = 0;
-
-    link.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-        moved = false;
-        this.classList.add('is-active');
-    }, { passive: true });
-
-    link.addEventListener('touchmove', function(e) {
-        if (Math.abs(e.touches[0].clientY - startY) > 8) {
-            moved = true;
-            this.classList.remove('is-active');
-        }
-    }, { passive: true });
-
-    link.addEventListener('touchend', function() {
-        setTimeout(() => this.classList.remove('is-active'), 180);
-    }, { passive: true });
-});
-
-document.querySelectorAll('a.text-link').forEach(link => {
+// Touch fix: анимация для btn-link, text-link, lang-btn
+document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link => {
     let moved = false;
     let startY = 0;
 

@@ -294,7 +294,6 @@ a.nav-btn:hover {
     }
 
     .nav-btn {
-        font-weight: 500;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -303,14 +302,12 @@ a.nav-btn:hover {
     }
 
     .nav-btn.active {
-        font-weight: 500;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
     a.nav-btn {
-        font-weight: 500;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

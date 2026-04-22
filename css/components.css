@@ -19,16 +19,15 @@
 
 .inner-tab-content {
   display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 10;
+  margin-top: 8px;
 }
 
 .inner-tab-content.active {
   display: block;
 }
+
 
 .inner-desc {
   font-size: 0.9rem;

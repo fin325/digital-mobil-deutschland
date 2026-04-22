@@ -83,79 +83,66 @@
 </nav>
 
 <main class="container">
+
 <section id="home" class="tab-content active">
-    <div class="card hero-card">    
-        <h1 style="margin-top: 0; margin-bottom: 10px; display: flex; align-items: center;">Willkommen! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
-        <p>In Hattingen gibt es das Interkulturelle Zentrum Magnet, das sich mit der Integration von Migranten durch Bildungs- und Sozialprojekte beschäftigt.</p>
-        <p>Klicken Sie einfach auf Magnet.</p>
-        <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
-           <img src="img/IMG_2784.jpeg" alt="Interkulturelles Zentrum Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
-        </a>
-        <div class="video-wrapper horizontal">
-    <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+  <div class="card hero-card">
+    <h1 style="margin-top: 0; margin-bottom: 10px; display: flex; align-items: center;">Willkommen! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
+    <p>In Hattingen gibt es das Interkulturelle Zentrum Magnet, das sich mit der Integration von Migranten durch Bildungs- und Sozialprojekte beschäftigt.</p>
+    <p>Klicken Sie einfach auf Magnet.</p>
+    <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
+      <img src="img/IMG_2784.jpeg" alt="Interkulturelles Zentrum Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+    </a>
+    <div class="video-wrapper horizontal">
+      <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
         <p style="margin:0 0 8px;"><strong>YouTube-Video</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
         <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Video ansehen</button>
+      </div>
+      <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
-    <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+    <div class="video-wrapper horizontal">
+      <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
         <p style="margin:0 0 8px;"><strong>YouTube-Video</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
         <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Video ansehen</button>
+      </div>
+      <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
-    <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+    <div class="video-wrapper horizontal">
+      <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
         <p style="margin:0 0 8px;"><strong>YouTube-Playlist</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
         <button onclick="loadPlaylist('video-placeholder-3', 'video-iframe-3', 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" class="load-tool-btn">▶ Playlist ansehen</button>
+      </div>
+      <iframe id="video-iframe-3" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
-    <iframe id="video-iframe-3" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+    <div class="video-wrapper horizontal">
+      <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
         <p style="margin:0 0 8px;"><strong>YouTube-Playlist</strong></p>
         <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
         <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Playlist ansehen</button>
+      </div>
+      <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
-    <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-    <div style="display: grid; gap: 8px; margin-top: 15px;">
-    <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-        <span class="icon-emoji icon-1f4bc"></span> Arbeit finden
-    </a>
-    <button type="button" class="btn-main" style="font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">
-        Textnachrichten lesen
-    </button>
-    <a href="tabs/impressum.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-        <span class="icon-emoji icon-2696"></span> Impressum
-    </a>
-    <a href="tabs/datenschutz.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-        <span class="icon-emoji icon-1f6e1"></span> Datenschutz
-    </a>
-</div>
+    <div class="btn-grid">
+      <a href="tabs/jobs.html" class="btn-main btn-main--flex"><span class="icon-emoji icon-1f4bc"></span> Arbeit finden</a>
+      <button type="button" class="btn-main" style="font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">Textnachrichten lesen</button>
+      <a href="tabs/impressum.html" class="btn-main btn-main--flex"><span class="icon-emoji icon-2696"></span> Impressum</a>
+      <a href="tabs/datenschutz.html" class="btn-main btn-main--flex"><span class="icon-emoji icon-1f6e1"></span> Datenschutz</a>
     </div>
-    </section>
-    
-    <section id="pdf" class="tab-content">
+  </div>
+</section>
+
+<section id="pdf" class="tab-content">
   <div class="card card--pdf">
     <h2><span class="icon-emoji icon-1f4c9"></span> PDF für Mail</h2>
     <div class="nav-rows-wrapper">
       <div class="nav-row">
-        <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)">
-          <span class="icon-emoji icon-1f4c9"></span>PDF Kompressor
-        </button>
-        <button class="nav-btn" onclick="showInnerTab('pdf-foto', event)">
-          <span class="icon-emoji icon-1f320"></span>Foto zu PDF
-        </button>
+        <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)"><span class="icon-emoji icon-1f4c9"></span>PDF Kompressor</button>
+        <button class="nav-btn" onclick="showInnerTab('pdf-foto', event)"><span class="icon-emoji icon-1f320"></span>Foto zu PDF</button>
       </div>
     </div>
-
     <div class="inner-content-area">
-
       <div id="pdf-kompressor" class="inner-tab-content">
         <div class="iframe-wrapper">
           <div id="pdf-placeholder" class="consent-placeholder">
@@ -163,14 +150,12 @@
             <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>
             <button onclick="loadPdfCompressor()" class="load-tool-btn">PDF-Kompressor laden</button>
           </div>
-          <iframe id="pdf-iframe" src=""
-            style="display: none; width: 100%; height: 820px; border: none;"
+          <iframe id="pdf-iframe" src="" style="display: none; width: 100%; height: 820px; border: none;"
             allow="downloads"
             sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
             allowfullscreen></iframe>
         </div>
       </div>
-
       <div id="pdf-foto" class="inner-tab-content">
         <div class="iframe-wrapper">
           <div id="photo-placeholder" class="consent-placeholder">
@@ -178,366 +163,266 @@
             <p style="margin: 15px 0;">Um den Foto-zu-PDF Converter zu nutzen, gib bitte deine Einwilligung.</p>
             <button onclick="loadPhotoToPdf()" class="load-tool-btn">Converter laden</button>
           </div>
-          <iframe id="photo-iframe" src=""
-            style="display: none; width: 100%; height: 950px; border: none;"
-            allowfullscreen></iframe>
+          <iframe id="photo-iframe" src="" style="display: none; width: 100%; height: 950px; border: none;" allowfullscreen></iframe>
         </div>
       </div>
-
       <div class="inner-info">
-          <p>Kostenlose erweiterte Version des PDF-Editors nutzen – einschließlich PDF signieren, PDFs zusammenführen und vieles mehr.</p>
-          <a href="https://tools.pdf24.org/de/" target="_blank" class="btn-main">PDF24 Tools</a>
+        <p>Kostenlose erweiterte Version des PDF-Editors nutzen – einschließlich PDF signieren, PDFs zusammenführen und vieles mehr.</p>
+        <a href="https://tools.pdf24.org/de/" target="_blank" class="btn-main">PDF24 Tools</a>
       </div>
     </div>
   </div>
 </section>
 
 <section id="news" class="tab-content">
-    <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-            <h2 style="margin: 0;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости"><span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten</h2>
-            <span id="news-source" style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
-        </div> 
-        <div id="news-wrapper">
-            <div id="news-placeholder" class="consent-placeholder">
-                <p><strong data-de="Nachrichten von tagesschau.de" data-ru="Новости от Euronews">Nachrichten von tagesschau.de</strong></p>
-                <p data-de="Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen." data-ru="Новости загружаются через RSS и могут передавать данные третьим лицам.">Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
-                <button onclick="loadNews()" class="load-tool-btn" data-de="Nachrichten laden" data-ru="Загрузить новости">
-                    Nachrichten laden
-                </button>
-            </div>
-            <div id="news-container" style="display: none;"></div>
-        </div>
-        <p id="news-hint" style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;" data-de="Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen." data-ru="Примечание: новости загружаются через RSS от ru.euronews.com.">
-            Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen.
-        </p>
+  <div class="card">
+    <div class="card-header">
+      <h2 style="margin: 0;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости"><span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten</h2>
+      <span id="news-source" style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
     </div>
+    <div id="news-wrapper">
+      <div id="news-placeholder" class="consent-placeholder">
+        <p><strong data-de="Nachrichten von tagesschau.de" data-ru="Новости от Euronews">Nachrichten von tagesschau.de</strong></p>
+        <p data-de="Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen." data-ru="Новости загружаются через RSS и могут передавать данные третьим лицам.">Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen.</p>
+        <button onclick="loadNews()" class="load-tool-btn" data-de="Nachrichten laden" data-ru="Загрузить новости">Nachrichten laden</button>
+      </div>
+      <div id="news-container" style="display: none;"></div>
+    </div>
+    <p id="news-hint" style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;" data-de="Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen." data-ru="Примечание: новости загружаются через RSS от ru.euronews.com.">
+      Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen.
+    </p>
+  </div>
 </section>
 
 <section id="news-hattingen" class="tab-content">
-    <div class="card">
-        <h2 style="text-align: center; margin-bottom: 10px;"><span class="icon-emoji icon-1f3d9"></span> Leben in Hattingen</h2>
-        <p style="text-align: center;">Offizielle Stadtbereiche für Einwohner und Besucher:</p>
-        <div style="display: grid; gap: 12px; margin-top: 20px;">
-            <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;"><span class="icon-emoji icon-1f4f0"></span> Alle Stadtnachrichten</a>
-            <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;"><span class="icon-emoji icon-1f3f0"></span> Tourismus & Freizeit</a>
-            <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(255, 152, 0, 0.7) !important;"><span class="icon-emoji icon-1f393"></span> Bildung & Kultur</a>
-            <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;"><span class="icon-emoji icon-1f4c5"></span> Veranstaltungen</a>
-        </div>
-        <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
-            <strong><span class="icon-emoji icon-1f4a1"></span> Hinweis:</strong> Alle Links führen zum offiziellen Stadtportal.
-        </div>
+  <div class="card">
+    <h2 class="card-title--center"><span class="icon-emoji icon-1f3d9"></span> Leben in Hattingen</h2>
+    <p class="card-desc">Offizielle Stadtbereiche für Einwohner und Besucher:</p>
+    <div class="btn-grid">
+      <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main btn-main--block" style="background: rgba(0, 82, 155, 0.8) !important;"><span class="icon-emoji icon-1f4f0"></span> Alle Stadtnachrichten</a>
+      <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main btn-main--block" style="background: rgba(40, 167, 69, 0.7) !important;"><span class="icon-emoji icon-1f3f0"></span> Tourismus & Freizeit</a>
+      <a href="https://www.hattingen.de/stadt_hattingen/Bildung%20und%20Kultur/" target="_blank" class="btn-main btn-main--block" style="background: rgba(255, 152, 0, 0.7) !important;"><span class="icon-emoji icon-1f393"></span> Bildung & Kultur</a>
+      <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main btn-main--block" style="background: rgba(108, 117, 125, 0.8) !important;"><span class="icon-emoji icon-1f4c5"></span> Veranstaltungen</a>
     </div>
+    <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
+      <strong><span class="icon-emoji icon-1f4a1"></span> Hinweis:</strong> Alle Links führen zum offiziellen Stadtportal.
+    </div>
+  </div>
 </section>
 
 <section id="mobile" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f686"></span> Transport</h2>
-        <p style="text-align: center;">Aktuelle Zug- und Busfahrpläne.</p>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <div class="btn-link-group">
-                <a href="https://www.bahn.de/buchung/fahrplan/suche" class="btn-link" style="background:#cc0000;color:white;flex-grow:1"><span class="icon-emoji icon-1f310"></span> DB Fahrplan</a>
-                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid var(--primary-blue);color:var(--primary-blue);flex-grow:1"><span class="icon-emoji icon-1f34e"></span> App für iPhone</a>
-                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #3ddc84;color:#2a7a50;flex-grow:1"><span class="icon-emoji icon-1f916"></span> App für Android</a>
-            </div>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f686"></span> Transport</h2>
+    <p class="card-desc">Aktuelle Zug- und Busfahrpläne.</p>
+    <div class="btn-col">
+      <div class="btn-link-group">
+        <a href="https://www.bahn.de/buchung/fahrplan/suche" class="btn-link" style="background:#cc0000;color:white;flex-grow:1"><span class="icon-emoji icon-1f310"></span> DB Fahrplan</a>
+        <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid var(--primary-blue);color:var(--primary-blue);flex-grow:1"><span class="icon-emoji icon-1f34e"></span> App für iPhone</a>
+        <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #3ddc84;color:#2a7a50;flex-grow:1"><span class="icon-emoji icon-1f916"></span> App für Android</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section id="maps" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f5fa"></span> Karten</h2>
-        <p style="text-align: center;">Einfache Navigation und Suche in Hattingen.</p>
-        <div class="btn-link-group" style="margin-top: 15px;">
-            <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4285F4;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(66,133,244,0.2)"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
-            <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,0.2)"><span class="icon-emoji icon-1f34e"></span> Apple Maps</a>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f5fa"></span> Karten</h2>
+    <p class="card-desc">Einfache Navigation und Suche in Hattingen.</p>
+    <div class="btn-link-group" style="margin-top: 15px;">
+      <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4285F4;color:white;flex-grow:1"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+      <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;flex-grow:1"><span class="icon-emoji icon-1f34e"></span> Apple Maps</a>
     </div>
+  </div>
 </section>
 
 <section id="translate" class="tab-content">
-    <div class="card">
-        <h2 style="display: block; text-align: center;">
-            <span class="icon-emoji icon-1f310" style="float: none; display: inline-block; vertical-align: middle; margin-bottom: 4px;"></span>
-            Übersetzer &amp; Wörterbücher</h2>
-        <p style="text-align: center;">Professionelle Werkzeuge für die Arbeit mit Texten.</p>
-        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
-        <div class="translate-item">
-            <h3>Google Translate</h3>
-            <p>Universelles Tool: Übersetzung von Texten, Dokumenten und ganzen Websites.</p>
-            <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #1a73e8, #4285f4) !important;">Google Übersetzer</a>
-        </div>
-        <div class="translate-item">
-            <h3>DeepL</h3>
-            <p style="text-align: center;">Hochpräzise Übersetzung auf Basis neuronaler Netze. Beste Wahl für europäische Sprachen.</p>
-            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #002e59, #0d47a1) !important;">DeepL öffnen</a>
-        </div>
-        <div class="translate-item">
-            <h3>Reverso Context</h3>
-            <p style="text-align: center;">Wortsuche im Kontext echter Sätze. Hilft, die Nuancen der gesprochenen Sprache zu verstehen.</p>
-            <a href="https://context.reverso.net/" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #1a1a1a, #3a3a3a) !important;">In Reverso suchen</a>
-        </div>
+  <div class="card">
+    <h2 class="card-title--center"><span class="icon-emoji icon-1f310"></span> Übersetzer &amp; Wörterbücher</h2>
+    <p class="card-desc">Professionelle Werkzeuge für die Arbeit mit Texten.</p>
+    <hr class="card-divider">
+    <div class="translate-item">
+      <h3>Google Translate</h3>
+      <p>Universelles Tool: Übersetzung von Texten, Dokumenten und ganzen Websites.</p>
+      <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #1a73e8, #4285f4) !important;">Google Übersetzer</a>
     </div>
+    <div class="translate-item">
+      <h3>DeepL</h3>
+      <p class="card-desc">Hochpräzise Übersetzung auf Basis neuronaler Netze. Beste Wahl für europäische Sprachen.</p>
+      <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #002e59, #0d47a1) !important;">DeepL öffnen</a>
+    </div>
+    <div class="translate-item">
+      <h3>Reverso Context</h3>
+      <p class="card-desc">Wortsuche im Kontext echter Sätze. Hilft, die Nuancen der gesprochenen Sprache zu verstehen.</p>
+      <a href="https://context.reverso.net/" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #1a1a1a, #3a3a3a) !important;">In Reverso suchen</a>
+    </div>
+  </div>
 </section>
 
 <section id="jobs" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f4bc"></span> Arbeit</h2>
-        <p style="text-align: center;">Beliebte Jobportale für die Stellensuche in Deutschland.</p>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;"><span class="icon-emoji icon-1f3e6"></span> Job-Portal</a>
-            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#e30613;color:white;box-shadow:0 4px 10px rgba(227,6,19,0.2)"><span class="icon-emoji icon-1f1e9-1f1ea"></span> Jobsuche (Arbeitsagentur)</a>
-            <div class="btn-link-group">
-                <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#2164f3;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(33,100,243,.2)"><span class="icon-emoji icon-1f50d"></span> Indeed</a>
-                <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,.2)"><span class="icon-emoji icon-1f4c8"></span> StepStone</a>
-                <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#016567;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(1,101,103,.2)"><span class="icon-emoji icon-1f91d"></span> XING</a>
-            </div>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f4bc"></span> Arbeit</h2>
+    <p class="card-desc">Beliebte Jobportale für die Stellensuche in Deutschland.</p>
+    <div class="btn-col">
+      <a href="tabs/jobs.html" class="btn-main btn-main--flex"><span class="icon-emoji icon-1f3e6"></span> Job-Portal</a>
+      <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#e30613;color:white;box-shadow:0 4px 10px rgba(227,6,19,0.2)"><span class="icon-emoji icon-1f1e9-1f1ea"></span> Jobsuche (Arbeitsagentur)</a>
+      <div class="btn-link-group">
+        <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#2164f3;color:white;flex-grow:1"><span class="icon-emoji icon-1f50d"></span> Indeed</a>
+        <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000;color:white;flex-grow:1"><span class="icon-emoji icon-1f4c8"></span> StepStone</a>
+        <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#016567;color:white;flex-grow:1"><span class="icon-emoji icon-1f91d"></span> XING</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section id="docs" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f4bb"></span> KI-Assistenten</h2>
-        <p style="text-align: center;">Ihre persönlichen Assistenten für Übersetzungen, Briefe und alle anderen Aufgaben.</p>
-        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
-        <div style="margin-bottom: 25px;">
-            <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Multimodale KI von Google. Ideal für die Arbeit mit Google-Diensten, Karten und schnelle aktuelle Informationen.</p>
-            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:linear-gradient(90deg,#4285f4,#9b72cb);color:white;padding:10px 20px;display:inline-block">Gemini starten</a>
-        </div>
-        <div style="margin-bottom: 25px;">
-            <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Marktführer beim Schreiben von Texten und komplexer Programmierung. Hervorragend für Datenanalyse und kreative Aufgaben.</p>
-            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#10a37f;color:white;padding:10px 20px;display:inline-block">ChatGPT öffnen</a>
-        </div>
-        <div style="margin-bottom: 10px;">
-            <h3 style="margin-bottom: 5px; color: #1e1c1a;">Claude</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Intelligenter Assistent von Anthropic – ehrlich, präzise und natürlich in der Kommunikation. Arbeitet mit großen Dokumenten, schreibt und debuggt Code, analysiert Daten.</p>
-            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#da7756;color:white;padding:10px 20px;display:inline-block">Claude ausprobieren</a>
-        </div>
-        <div style="margin-bottom: 10px;">
-            <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">KI von Elon Musk (xAI), in das X-Netzwerk integriert. Bekannt für Witz und Echtzeit-Zugang zu Weltnachrichten.</p>
-            <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;padding:10px 20px;display:inline-block">Grok ausprobieren</a>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f4bb"></span> KI-Assistenten</h2>
+    <p class="card-desc">Ihre persönlichen Assistenten für Übersetzungen, Briefe und alle anderen Aufgaben.</p>
+    <hr class="card-divider">
+    <div style="margin-bottom: 25px;">
+      <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Multimodale KI von Google. Ideal für die Arbeit mit Google-Diensten, Karten und schnelle aktuelle Informationen.</p>
+      <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:linear-gradient(90deg,#4285f4,#9b72cb);color:white;padding:10px 20px;display:inline-block">Gemini starten</a>
     </div>
+    <div style="margin-bottom: 25px;">
+      <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Marktführer beim Schreiben von Texten und komplexer Programmierung. Hervorragend für Datenanalyse und kreative Aufgaben.</p>
+      <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#10a37f;color:white;padding:10px 20px;display:inline-block">ChatGPT öffnen</a>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <h3 style="margin-bottom: 5px; color: #1e1c1a;">Claude</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Intelligenter Assistent von Anthropic – ehrlich, präzise und natürlich in der Kommunikation.</p>
+      <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#da7756;color:white;padding:10px 20px;display:inline-block">Claude ausprobieren</a>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">KI von Elon Musk (xAI), in das X-Netzwerk integriert. Bekannt für Witz und Echtzeit-Zugang zu Weltnachrichten.</p>
+      <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;padding:10px 20px;display:inline-block">Grok ausprobieren</a>
+    </div>
+  </div>
 </section>
 
 <section id="health" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f3e5"></span> Gesundheit</h2>
-        <p style="text-align: center;">Arztsuche, Bewertungen und Online-Terminbuchung.</p>
-        <div class="btn-link-group" style="margin-top: 15px;">
-            <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#0596de;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(5,150,222,0.2)"><span class="icon-emoji icon-1fa7a"></span> Doctolib</a>
-            <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#00b3a6;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,179,166,0.2)"><span class="icon-emoji icon-2695"></span> Jameda</a>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f3e5"></span> Gesundheit</h2>
+    <p class="card-desc">Arztsuche, Bewertungen und Online-Terminbuchung.</p>
+    <div class="btn-link-group" style="margin-top: 15px;">
+      <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#0596de;color:white;flex-grow:1"><span class="icon-emoji icon-1fa7a"></span> Doctolib</a>
+      <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#00b3a6;color:white;flex-grow:1"><span class="icon-emoji icon-2695"></span> Jameda</a>
     </div>
+  </div>
 </section>
 
 <section id="laws" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-2696"></span> Gesetze</h2>
-        <a href="/img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block;">
-            <span class="icon-emoji icon-1f4f0"></span> Übergangsregelung zum Aufenthalt für ukrainische Staatsangehörige UkraineAufenthÄndFGV
-        </a>
-    </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-2696"></span> Gesetze</h2>
+    <a href="/img/ukraine.pdf" target="_blank" class="btn-main btn-main--block">
+      <span class="icon-emoji icon-1f4f0"></span> Übergangsregelung zum Aufenthalt für ukrainische Staatsangehörige UkraineAufenthÄndFGV
+    </a>
+  </div>
 </section>
 
 <section id="contacts" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f4e9"></span> Kontakt</h2>
-        <p style="text-align: center;">Kontaktieren Sie uns bei Fragen oder Anregungen.</p>
-        <div style="margin-top: 15px;">
-        <a href="mailto:hattingen325@gmail.com" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ea4335;color:white;box-shadow:0 4px 10px rgba(234,67,53,0.2);display:block;text-align:center"><span class="icon-emoji icon-1f4e7"></span> E-Mail schreiben</a>
-        <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">hattingen325@gmail.com</p>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f4e9"></span> Kontakt</h2>
+    <p class="card-desc">Kontaktieren Sie uns bei Fragen oder Anregungen.</p>
+    <div style="margin-top: 15px;">
+      <a href="mailto:hattingen325@gmail.com" target="_blank" rel="noopener noreferrer" class="btn-link btn-link--block" style="background:#ea4335;color:white;box-shadow:0 4px 10px rgba(234,67,53,0.2);text-align:center"><span class="icon-emoji icon-1f4e7"></span> E-Mail schreiben</a>
+      <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">hattingen325@gmail.com</p>
     </div>
+  </div>
 </section>
 
 <section id="project" class="tab-content">
-    <div class="card">
-<h2><span class="icon-emoji icon-1f680"></span> Über das Projekt</h2>
-<p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px;">
-    <strong>Digital &amp; Mobil in Deutschland</strong> — ein kostenloses Informationsportal für Einwohner und Neuzugewanderte in Deutschland. Alle wichtigen Dienste, Nachrichten und Tools an einem Ort.
-</p>
-<p style="margin: 0 0 10px 0; font-size: 0.9rem;">
-    Links zum <a href="tabs/impressum.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline">Impressum→</a>
-    <span style="margin: 0 6px;">|</span>
-    <a href="tabs/datenschutz.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline">Datenschutz→</a>
-</p>
-<div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
-        <h3 style="margin: 0 0 10px; color: #003399; font-size: 0.95rem;">Was bietet die Seite?</h3>
-        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
-            <span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten (RSS-Feed von tagesschau.de / ru.euronews.com)<br>
-            <span class="icon-emoji icon-1f3ac"></span> YouTube-Videos &amp; Playlists — Nachrichten aus Deutschland auf Deutsch und Russisch (iframe, nocookie)<br>
-            <span class="icon-emoji icon-1f324"></span> Wetter &amp; Luftqualität in Echtzeit (OpenWeatherMap API)<br>
-            <span class="icon-emoji icon-1f4f0"></span> PDF-Kompressor (eigene Web-App auf Render)<br>
-            <span class="icon-emoji icon-1f320"></span> Foto zu PDF (eigene Web-App auf Streamlit)
-        </p>
-        <p style="margin: 0 0 10px; font-size: 0.82rem; color: #003399; font-weight: 600;">
-            Links zu externen Quellen:
-        </p>
-        <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
-            <span class="icon-emoji icon-1f4bc"></span> Jobportale<br>
-            <span class="icon-emoji icon-1fa7a"></span> Arztsuche &amp; Online-Terminbuchung<br>
-            <span class="icon-emoji icon-1f3e0"></span> Wohnungssuche<br>
-            <span class="icon-emoji icon-1f686"></span> DB Fahrplan &amp; Navigation<br>
-            <span class="icon-emoji icon-1f310"></span> Übersetzer<br>
-            <span class="icon-emoji icon-1f4bb"></span> KI-Assistenten<br>
-            <span class="icon-emoji icon-1f3d9"></span> Lokale Infos für Hattingen
-        </p>
-        <p style="margin: 0 0 6px; font-size: 0.82rem; color: #003399; font-weight: 600;">
-            Sprachumschaltung innerhalb der Website:
-        </p>
-        <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;"><span class="icon-emoji icon-1f1e9-1f1ea"></span><span class="icon-emoji icon-1f1f7-1f1fa"></span> Mehrsprachig (De / Ru)</p>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f680"></span> Über das Projekt</h2>
+    <p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px;">
+      <strong>Digital &amp; Mobil in Deutschland</strong> — ein kostenloses Informationsportal für Einwohner und Neuzugewanderte in Deutschland.
+    </p>
+    <p style="margin: 0 0 10px 0; font-size: 0.9rem;">
+      Links zum <a href="tabs/impressum.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline">Impressum→</a>
+      <span style="margin: 0 6px;">|</span>
+      <a href="tabs/datenschutz.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline">Datenschutz→</a>
+    </p>
+    <div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
+      <h3 style="margin: 0 0 10px; color: #003399; font-size: 0.95rem;">Was bietet die Seite?</h3>
+      <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6;">
+        <span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten (RSS-Feed von tagesschau.de / ru.euronews.com)<br>
+        <span class="icon-emoji icon-1f3ac"></span> YouTube-Videos &amp; Playlists<br>
+        <span class="icon-emoji icon-1f324"></span> Wetter &amp; Luftqualität in Echtzeit (OpenWeatherMap API)<br>
+        <span class="icon-emoji icon-1f4f0"></span> PDF-Kompressor (eigene Web-App auf Render)<br>
+        <span class="icon-emoji icon-1f320"></span> Foto zu PDF (eigene Web-App auf Streamlit)
+      </p>
+      <p style="margin: 0 0 6px; font-size: 0.82rem; color: #003399; font-weight: 600;">Sprachumschaltung:</p>
+      <p style="margin: 0; font-size: 0.85rem;"><span class="icon-emoji icon-1f1e9-1f1ea"></span><span class="icon-emoji icon-1f1f7-1f1fa"></span> Mehrsprachig (De / Ru)</p>
     </div>
-<hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0;">
-<details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
-    <summary style="cursor: pointer; font-weight: 700; color: #003399; font-size: 0.95rem;">
-        <span class="icon-emoji icon-1f6e0"></span> Technische Details
-    </summary>
-    <div style="margin-top: 14px; font-size: 0.85rem; line-height: 1.7;">
-        <p style="margin-bottom: 12px;">
-            <strong>Stack:</strong><br>
-            HTML5, CSS3, JavaScript (Vanilla ES6+)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <strong>APIs &amp; Dienste:</strong><br>
-            OpenWeatherMap (Wetter &amp; Luftqualität)<br>
-            rss2json (RSS-Feed von tagesschau.de / ru.euronews.com)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <strong>Hosting:</strong><br>
-            Vercel (statische Website)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <strong>Datenschutz &amp; Compliance:</strong><br>
-            Cookie Consent Manager (Silktide)<br>
-            YouTube im erweiterten Datenschutzmodus (nocookie)<br>
-            Zwei-Klick-Lösung für externe Inhalte<br>
-            Lokale Schriftarten (kein Google Fonts CDN)<br>
-            DSGVO-konforme Datenschutzerklärung<br>
-            Impressum gemäß § 5 DDG &amp; § 18 MStV
-        </p>
-        <p style="margin-bottom: 12px;">
-            <strong>Features:</strong><br>
-            Echtzeit-Uhr &amp; Datumsanzeige<br>
-            Wetter mit lokalem Caching (Local Storage)<br>
-            Sprachumschaltung (DE ↔ RU)<br>
-            Responsive Design (Mobile First)<br>
-            Tab-basierte Navigation ohne Seitenreload
-        </p>
-        <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
-        <p style="margin-bottom: 6px;">
-            <strong><span class="icon-emoji icon-1f4f0"></span> PDF-Kompressor</strong>
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Stack:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Hosting:</em> Render (Web Service), Supabase (Datenbank)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <em>Funktionsweise:</em> Der Nutzer lädt eine PDF-Datei hoch und wählt eine Qualitätsstufe (in Prozent).
-            Das Backend öffnet die PDF mit PyMuPDF, rendert jede Seite als Rasterbild (Pixmap) mit der gewählten Skalierung
-            und erstellt ein neues PDF aus den komprimierten Bildern.
-            Dabei werden Garbage Collection (Stufe 4), Deflate-Kompression für Bilder, Schriften und Streams angewandt.
-            Die komprimierte Datei wird direkt als Download zurückgegeben — es werden keine Dateien auf dem Server gespeichert.
-            Zusätzlich verfügt die App über ein Feedback-System (Like/Dislike) mit Supabase-Datenbank (PostgreSQL) und IP-basierter Duplikaterkennung — jeder Nutzer kann nur einmal abstimmen, seine Stimme ändern oder zurücknehmen.
-        </p>
-        <p style="margin-bottom: 12px;">
-            <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" class="text-link" style="color:#003399;text-decoration:underline">
-             GitHub: pdf-compressor-web →
-            </a>
-        </p>
-        <hr style="border: 0; border-top: 1px solid rgba(0,51,153,0.15); margin: 16px 0;">
-        <p style="margin-bottom: 6px;">
-            <strong><span class="icon-emoji icon-1f320"></span> Foto zu PDF</strong>
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Stack:</em> Python, Streamlit, Pillow (PIL)
-        </p>
-        <p style="margin-bottom: 6px;">
-            <em>Hosting:</em> Streamlit Community Cloud (Snowflake)
-        </p>
-        <p style="margin-bottom: 12px;">
-            <em>Funktionsweise:</em> Der Nutzer wählt ein oder mehrere Fotos (JPG/PNG) über den Datei-Upload aus.
-            Die Bilder werden mit Pillow in den RGB-Modus konvertiert und anschließend mit der Methode <code>Image.save()</code>
-            zu einer mehrseitigen PDF-Datei zusammengefügt — jedes Foto wird zu einer eigenen Seite.
-            Die gesamte Verarbeitung erfolgt im Arbeitsspeicher (BytesIO), ohne Dateien auf dem Server zu speichern.
-            Nach der Erstellung wird das PDF als Vorschau im Browser angezeigt (Base64-iframe) und kann direkt heruntergeladen werden.
-            Eine Miniaturansicht aller hochgeladenen Fotos wird in einem 4-Spalten-Raster dargestellt.
-        </p>
-        <p style="margin-bottom: 0;">
-            <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" class="text-link" style="color:#003399;text-decoration:underline">
-            GitHub: photo-to-pdf-converter →
-            </a>
-        </p>
+    <hr class="card-divider">
+    <details style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.08);">
+      <summary style="cursor: pointer; font-weight: 700; color: #003399; font-size: 0.95rem;"><span class="icon-emoji icon-1f6e0"></span> Technische Details</summary>
+      <div style="margin-top: 14px; font-size: 0.85rem; line-height: 1.7;">
+        <p><strong>Stack:</strong><br>HTML5, CSS3, JavaScript (Vanilla ES6+)</p>
+        <p><strong>APIs &amp; Dienste:</strong><br>OpenWeatherMap (Wetter &amp; Luftqualität)<br>rss2json (RSS-Feed von tagesschau.de / ru.euronews.com)</p>
+        <p><strong>Hosting:</strong><br>Vercel (statische Website)</p>
+        <p><strong>Datenschutz &amp; Compliance:</strong><br>Cookie Consent Manager (Silktide)<br>YouTube im erweiterten Datenschutzmodus (nocookie)<br>Zwei-Klick-Lösung für externe Inhalte<br>DSGVO-konforme Datenschutzerklärung</p>
+        <p><strong>Features:</strong><br>Echtzeit-Uhr &amp; Datumsanzeige<br>Wetter mit lokalem Caching (Local Storage)<br>Sprachumschaltung (DE ↔ RU)<br>Responsive Design (Mobile First)</p>
+        <hr class="card-divider">
+        <p><strong><span class="icon-emoji icon-1f4f0"></span> PDF-Kompressor</strong></p>
+        <p><em>Stack:</em> Python, Flask, PyMuPDF (fitz), Supabase (PostgreSQL)</p>
+        <p><em>Hosting:</em> Render (Web Service), Supabase (Datenbank)</p>
+        <p><em>Funktionsweise:</em> Der Nutzer lädt eine PDF-Datei hoch und wählt eine Qualitätsstufe. Das Backend komprimiert die PDF und gibt sie direkt als Download zurück — ohne Speicherung auf dem Server.</p>
+        <p><a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" class="text-link" style="color:#003399;text-decoration:underline">GitHub: pdf-compressor-web →</a></p>
+        <hr class="card-divider">
+        <p><strong><span class="icon-emoji icon-1f320"></span> Foto zu PDF</strong></p>
+        <p><em>Stack:</em> Python, Streamlit, Pillow (PIL)</p>
+        <p><em>Hosting:</em> Streamlit Community Cloud (Snowflake)</p>
+        <p><em>Funktionsweise:</em> Fotos werden mit Pillow konvertiert und zu einer mehrseitigen PDF zusammengefügt. Verarbeitung erfolgt im Arbeitsspeicher ohne Dateispeicherung.</p>
+        <p><a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" class="text-link" style="color:#003399;text-decoration:underline">GitHub: photo-to-pdf-converter →</a></p>
+      </div>
+    </details>
+    <div style="margin-top: 20px; padding: 16px; border-radius: 10px; background: rgba(0,51,153,0.05); border: 1px solid rgba(0,51,153,0.15);">
+      <h3 style="margin: 0 0 12px; color: #003399; font-size: 0.95rem; text-align: center;"><span class="icon-emoji icon-1f4bb"></span> Entwicklung</h3>
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+        <a href="/img/Entwicklung.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> Entwicklung.pdf</a>
+        <a href="/img/HTML-Structure.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> HTML-Structure.pdf</a>
+        <a href="/img/Styles.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> Styles.pdf</a>
+        <a href="/img/Scripts.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> Scripts.pdf</a>
+        <a href="/img/Update_Bericht_April_18.04.26.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> Update_Bericht_<wbr>April_18.04.26.pdf</a>
+        <a href="/img/iOS_Bugfix_Bericht.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> iOS_Bugfix_<wbr>Bericht_21.04.26.pdf</a>
+        <a href="/img/Android_Bugfix_Bericht_21.04.26.pdf" target="_blank" class="btn-main btn-main--block" style="width: 100%; max-width: 250px;"><span class="icon-emoji icon-1f4c4"></span> Android_Bugfix_<wbr>Bericht_21.04.26.pdf</a>
+        <a href="https://github.com/fin325/digital-mobil-deutschland" target="_blank" rel="noopener noreferrer" class="text-link" style="color:#003399;text-decoration:underline">GitHub →</a>
+      </div>
     </div>
-</details>
-<div style="margin-top: 20px; padding: 16px; border-radius: 10px; background: rgba(0,51,153,0.05); border: 1px solid rgba(0,51,153,0.15);">
-    <h3 style="margin: 0 0 12px; color: #003399; font-size: 0.95rem; text-align: center;"><span class="icon-emoji icon-1f4bb"></span> Entwicklung</h3>
-    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-        <a href="/img/Entwicklung.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> Entwicklung.pdf
-        </a>
-        <a href="/img/HTML-Structure.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> HTML-Structure.pdf
-        </a>
-        <a href="/img/Styles.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> Styles.pdf
-        </a>
-        <a href="/img/Scripts.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> Scripts.pdf
-        </a>
-        <a href="/img/Update_Bericht_April_18.04.26.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> Update_Bericht_<wbr>April_18.04.26.pdf
-        </a>
-        <a href="/img/iOS_Bugfix_Bericht.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> iOS_Bugfix_<wbr>Bericht_21.04.26.pdf
-        </a>
-        <a href="/img/Android_Bugfix_Bericht_21.04.26.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
-            <span class="icon-emoji icon-1f4c4"></span> Android_Bugfix_<wbr>Bericht_21.04.26.pdf
-        </a>
-        <p style="margin-bottom: 0;">
-        <a href="https://github.com/fin325/digital-mobil-deutschland" target="_blank" rel="noopener noreferrer" class="text-link" style="color:#003399;text-decoration:underline">
-        GitHub →
-        </a>
+    <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
+      <span class="icon-emoji icon-1f4a1"></span> <strong>Idee &amp; Entwicklung:</strong> Artem Finevych, &nbsp;&nbsp;Hattingen (NRW)
     </div>
-</div>
-
-<div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue); font-size: 0.85rem;">
-    <span class="icon-emoji icon-1f4a1"></span> <strong>Idee &amp; Entwicklung:</strong> Artem Finevych, &nbsp;&nbsp;&nbsp;&nbsp;Hattingen (NRW)
-</div>
-</div>
+  </div>
 </section>
 
 <section id="housing" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f3e0"></span> Mietwohnungen</h2>
-        <p style="text-align: center;">Finden Sie aktuelle Wohnungsangebote, Genossenschaften und WG-Zimmer in Hattingen.</p>
-    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-        <div class="btn-link-group">
-            <a href="https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/ennepe-ruhr-kreis/hattingen/wohnung-mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff5a5f;color:white;flex-grow:1"><span class="icon-emoji icon-1f3e2"></span> ImmoScout24</a>
-            <a href="https://www.kleinanzeigen.de/s-wohnung-mieten/hattingen/c203l1869" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4682b4;color:white;flex-grow:1"><span class="icon-emoji icon-1f4e2"></span> Kleinanzeigen</a>
-        </div>
-        <div class="btn-link-group">
-            <a href="https://www.hwg.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #0054a6;color:#0054a6;flex-grow:1"><span class="icon-emoji icon-1f3ec"></span> hwg eG (Lokal)</a>
-            <a href="https://www.gartenstadt.de/wohnen/alle-wohnungsangebote.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #2e8b57;color:#2e8b57;flex-grow:1"><span class="icon-emoji icon-1f333"></span> Gartenstadt Hüttenau</a>
-        </div>
-        <div class="btn-link-group">
-            <a href="https://www.leg-wohnen.de/mietwohnungen/hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #e30613;color:#e30613;flex-grow:1"><span class="icon-emoji icon-1f3d7"></span> LEG Wohnen</a>
-            <a href="https://www.vonovia.de/zuhause-finden?city=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #004f9f;color:#004f9f;flex-grow:1"><span class="icon-emoji icon-1f3d9"></span> Vonovia</a>
-        </div>
-        <div class="btn-link-group">
-            <a href="https://www.wg-gesucht.de/wg-zimmer-in-Hattingen.3089.0.1.0.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff8c00;color:white;flex-grow:1"><span class="icon-emoji icon-1f91d"></span> WG-Gesucht</a>
-            <a href="https://www.immowelt.de/suche/hattingen/wohnungen/mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #333;color:#333;flex-grow:1"><span class="icon-emoji icon-1f3e0"></span> Immowelt</a>
-        </div>
+  <div class="card">
+    <h2><span class="icon-emoji icon-1f3e0"></span> Mietwohnungen</h2>
+    <p class="card-desc">Finden Sie aktuelle Wohnungsangebote, Genossenschaften und WG-Zimmer in Hattingen.</p>
+    <div class="btn-col">
+      <div class="btn-link-group">
+        <a href="https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/ennepe-ruhr-kreis/hattingen/wohnung-mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff5a5f;color:white;flex-grow:1"><span class="icon-emoji icon-1f3e2"></span> ImmoScout24</a>
+        <a href="https://www.kleinanzeigen.de/s-wohnung-mieten/hattingen/c203l1869" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4682b4;color:white;flex-grow:1"><span class="icon-emoji icon-1f4e2"></span> Kleinanzeigen</a>
+      </div>
+      <div class="btn-link-group">
+        <a href="https://www.hwg.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #0054a6;color:#0054a6;flex-grow:1"><span class="icon-emoji icon-1f3ec"></span> hwg eG (Lokal)</a>
+        <a href="https://www.gartenstadt.de/wohnen/alle-wohnungsangebote.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #2e8b57;color:#2e8b57;flex-grow:1"><span class="icon-emoji icon-1f333"></span> Gartenstadt Hüttenau</a>
+      </div>
+      <div class="btn-link-group">
+        <a href="https://www.leg-wohnen.de/mietwohnungen/hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #e30613;color:#e30613;flex-grow:1"><span class="icon-emoji icon-1f3d7"></span> LEG Wohnen</a>
+        <a href="https://www.vonovia.de/zuhause-finden?city=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #004f9f;color:#004f9f;flex-grow:1"><span class="icon-emoji icon-1f3d9"></span> Vonovia</a>
+      </div>
+      <div class="btn-link-group">
+        <a href="https://www.wg-gesucht.de/wg-zimmer-in-Hattingen.3089.0.1.0.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff8c00;color:white;flex-grow:1"><span class="icon-emoji icon-1f91d"></span> WG-Gesucht</a>
+        <a href="https://www.immowelt.de/suche/hattingen/wohnungen/mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #333;color:#333;flex-grow:1"><span class="icon-emoji icon-1f3e0"></span> Immowelt</a>
+      </div>
     </div>
-</div>
-
+  </div>
 </section>
+
 </main>
 
 <button class="scroll-top-btn" touch-action="none">↑</button>

@@ -12,6 +12,9 @@ scroll-hint {
   margin-left: -4px; /* отрицательный — двигает влево */
 }
 
+.inner-tab-content { display: none; }
+.inner-tab-content.active { display: block; }
+
 .navbar {
     background: rgba(0, 20, 60, 0.3);
     backdrop-filter: blur(24px) saturate(180%);

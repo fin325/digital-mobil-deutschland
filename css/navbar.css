@@ -50,8 +50,8 @@ scroll-hint {
 /* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
     display: flex;
-    gap: 10px;
-    justify-content: space-between;
+    gap: 9px;
+    justify-content: flex-start;
     width: 100%;
 }
 

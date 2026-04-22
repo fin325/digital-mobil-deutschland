@@ -12,15 +12,18 @@
   position: relative;
 }
 
+.inner-content-area {
+  position: relative;
+  margin-top: 12px;
+}
+
 .inner-tab-content {
   display: none;
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  background: var(--card-bg, #fff);
-  margin-top: 12px;
-  padding: 0 16px;
 }
 
 .inner-tab-content.active {

@@ -8,6 +8,43 @@
     z-index: 1;
 }
 
+.card--pdf {
+  position: relative;
+}
+
+.inner-tab-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: var(--card-bg, #fff);
+  margin-top: 12px;
+  padding: 0 16px;
+}
+
+.inner-tab-content.active {
+  display: block;
+}
+
+.inner-desc {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.inner-info {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.inner-info a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
 .card { 
     background: rgba(100, 130, 170, 0.45) !important;
     backdrop-filter: blur(20px) saturate(160%);

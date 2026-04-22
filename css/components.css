@@ -42,7 +42,7 @@
   min-height: 60px;
 }
 
-.inner-info a {
+.inner-info a:not(.btn-main) {
   color: #007bff;
   text-decoration: underline;
 }

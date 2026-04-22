@@ -251,7 +251,7 @@ iframe {
     width: 100%;
     overflow: hidden;
     border-radius: 18px;
-    margin: 5px 0 5px 0;
+    margin: 5px 0 10px 0;
     background: rgba(0, 0, 0, 0.15);
     box-shadow:
         0 6px 20px rgba(0, 0, 0, 0.22),

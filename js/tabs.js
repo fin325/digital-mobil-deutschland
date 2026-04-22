@@ -197,16 +197,17 @@ document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link =>
 });
 
 function showInnerTab(id, event) {
-  // Скрываем все внутренние вкладки
+  const content = document.getElementById(id);
+  const btn = event.currentTarget;
+  const isActive = content.classList.contains('active');
+
   document.querySelectorAll('.inner-tab-content').forEach(el => el.classList.remove('active'));
-  // Убираем active со всех внутренних кнопок
-  document.querySelectorAll('.nav-row .nav-btn[onclick*="showInnerTab"]').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn[onclick*="showInnerTab"]').forEach(el => el.classList.remove('active'));
 
-  // Показываем нужную вкладку
-  document.getElementById(id).classList.add('active');
-  event.currentTarget.classList.add('active');
-
-  // Загружаем приложение если ещё не загружено
-  if (id === 'pdf-kompressor') loadPdfCompressor();
-  if (id === 'pdf-foto') loadPhotoToPdf();
+  if (!isActive) {
+    content.classList.add('active');
+    btn.classList.add('active');
+    if (id === 'pdf-kompressor') loadPdfCompressor();
+    if (id === 'pdf-foto') loadPhotoToPdf();
+  }
 }

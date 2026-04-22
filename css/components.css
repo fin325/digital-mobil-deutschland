@@ -7,6 +7,41 @@
     position: relative;
     z-index: 1;
 }
+/* =====================
+   ЗАГОЛОВКИ И ОПИСАНИЯ
+   ===================== */
+/* Центрированный заголовок (maps, translate, news-hattingen) */
+.card-title--center { text-align: center; margin-bottom: 10px; }
+
+/* Центрированный текст под h2 (jobs, health, mobile, maps, housing) */
+.card-desc { text-align: center; margin-bottom: 15px; }
+
+/* Разделитель hr (translate, docs, project) */
+.card-divider { border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 20px 0; }
+
+/* =====================
+   LAYOUTS
+   ===================== */
+/* Заголовок + источник в строку (news) */
+.card-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+
+/* Вертикальный список кнопок (jobs, mobile, housing) */
+.btn-col { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+
+/* Сетка кнопок (home, news-hattingen) */
+.btn-grid { display: grid; gap: 8px; margin-top: 15px; }
+
+/* =====================
+   ОБЩИЕ СТИЛИ КНОПОК
+   ===================== */
+/* btn-main как блок на всю ширину (laws, project) */
+.btn-main--block { text-decoration: none; display: block; text-align: center; }
+
+/* btn-main flex с иконкой (home, jobs) */
+.btn-main--flex { text-decoration: none; display: flex; align-items: center; justify-content: center; }
+
+/* btn-link блочная на всю ширину (contacts) */
+.btn-link--block { display: block; text-align: center; }
 
 .card--pdf {
   position: relative;

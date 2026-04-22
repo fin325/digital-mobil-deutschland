@@ -2,7 +2,7 @@
   "name": "Digital & Mobil in Deutschland",
   "short_name": "DMD",
   "start_url": "/",
-  "display": "browser",
+  "display": "minimal-ui",
   "background_color": "#1a3a5c",
   "theme_color": "#1a3a5c",
   "icons": [

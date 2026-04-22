@@ -14,7 +14,7 @@
 
 .inner-content-area {
   position: relative;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 .inner-tab-content {
@@ -33,7 +33,7 @@
 .inner-desc {
   font-size: 0.9rem;
   color: #555;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .inner-info {

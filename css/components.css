@@ -19,11 +19,9 @@
 
 .inner-tab-content {
   display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 10;
+  margin-top: 12px;
 }
 
 .inner-tab-content.active {

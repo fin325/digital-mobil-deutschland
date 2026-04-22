@@ -29,7 +29,7 @@ function scrollTabs(direction) {
 }
 
 function showTab(tabId, event) {
-    hideSwipeHint();
+    hideSwipeHint(); // ← добавлено
 
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -49,36 +49,8 @@ function showTab(tabId, event) {
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 
-    history.pushState({ tab: tabId }, '', `#${tabId}`);
-
     window.scrollTo(0, 0);
 }
-
-function showTabSilent(tabId) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-    const targetTab = document.getElementById(tabId);
-    if (targetTab) targetTab.classList.add('active');
-
-    const btn = document.querySelector(`[onclick="showTab('${tabId}', event)"]`);
-    if (btn) btn.classList.add('active');
-}
-
-window.addEventListener('popstate', (e) => {
-    const tabId = e.state?.tab || 'home';
-    showTabSilent(tabId);
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-        showTabSilent(hash);
-        history.replaceState({ tab: hash }, '', `#${hash}`);
-    } else {
-        history.replaceState({ tab: 'home' }, '', window.location.href);
-    }
-});
 
 const menuScroll = document.querySelector('.nav-scroll-viewport');
 if (menuScroll) {
@@ -147,7 +119,7 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
     }, true);
 })();
 
-// Touch fix: анимация + навигация для a.btn-main
+// iOS fix: первый тап после скролла
 document.querySelectorAll('a.btn-main').forEach(link => {
     let startY = 0;
     let moved = false;
@@ -155,48 +127,18 @@ document.querySelectorAll('a.btn-main').forEach(link => {
     link.addEventListener('touchstart', function(e) {
         startY = e.touches[0].clientY;
         moved = false;
-        this.classList.add('is-active');
     }, { passive: true });
 
     link.addEventListener('touchmove', function() {
         moved = true;
-        this.classList.remove('is-active');
     }, { passive: true });
 
     link.addEventListener('touchend', function(e) {
-        if (moved) {
-            this.classList.remove('is-active');
-            return;
-        }
+        if (moved) return;
         e.preventDefault();
         const href = this.getAttribute('href');
-        const el = this;
-        setTimeout(() => {
-            el.classList.remove('is-active');
-            if (href) window.location.href = href;
-        }, 180);
+        if (href) setTimeout(() => window.location.href = href, 180);
     }, { passive: false });
 });
 
-// Touch fix: анимация для btn-link, text-link, lang-btn
-document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link => {
-    let moved = false;
-    let startY = 0;
 
-    link.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-        moved = false;
-        this.classList.add('is-active');
-    }, { passive: true });
-
-    link.addEventListener('touchmove', function(e) {
-        if (Math.abs(e.touches[0].clientY - startY) > 8) {
-            moved = true;
-            this.classList.remove('is-active');
-        }
-    }, { passive: true });
-
-    link.addEventListener('touchend', function() {
-        setTimeout(() => this.classList.remove('is-active'), 150);
-    }, { passive: true });
-});

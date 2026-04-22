@@ -53,6 +53,41 @@ h1, h2, h4, h5, h6 {
     text-align: center;
 }
 
+.btn-link-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-link-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-link {
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn-link.is-active {
+    opacity: 0.75;
+    transform: scale(0.96);
+}
+
 /* === BUTTONS === */
 .btn-main {
     background: linear-gradient(
@@ -83,28 +118,36 @@ h1, h2, h4, h5, h6 {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     letter-spacing: 0.01em;
     touch-action: manipulation;
-    
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 /* Shine effect */
 .btn-main::before {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
-    width: 60%;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    border-radius: inherit;
     background: linear-gradient(
         120deg,
         transparent 0%,
         rgba(255, 255, 255, 0.22) 50%,
         transparent 100%
     );
-    transition: left 0.5s ease;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease, opacity 0.1s ease;
     pointer-events: none;
 }
 
 .btn-main:hover::before {
-    left: 160%;
+    transform: translateX(160%);
+    opacity: 1;
 }
 
 .btn-main:hover {
@@ -115,9 +158,16 @@ h1, h2, h4, h5, h6 {
     border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
-.btn-main:active {
+.btn-main:active,
+.btn-main.is-active {
     transform: scale(0.97) translateY(0);
     box-shadow: 0 2px 8px rgba(0, 82, 155, 0.2);
+}
+
+.btn-main.is-active::before {
+    transform: translateX(160%);
+    opacity: 1;
+    transition: transform 0.4s ease, opacity 0.05s ease;
 }
 
 .tab-content .btn-main {
@@ -293,6 +343,19 @@ iframe {
     transform: scale(0.97);
 }
 
+.text-link {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    display: inline-block;
+}
+
+.text-link.is-active,
+.text-link:active {
+    opacity: 0.6;
+    transform: scale(0.95);
+}
+
 /* === PC font rendering fix === */
 @media (hover: hover) and (pointer: fine) {
     .btn-main,
@@ -337,8 +400,28 @@ iframe {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
     }
+    
+    .btn-link:hover {
+        opacity: 0.82;
+        transform: translateY(-1px);
+        transition: all 0.25s ease;
+    }
+
+    .btn-link:active,
+    .btn-link.is-active {
+        transform: scale(0.97) translateY(0);
+        opacity: 0.75;
+        transition: all 0.1s ease;
+    }
+
+.text-link:hover {
+        opacity: 0.7;
+    }
+
+    .text-link:active,
+    .text-link.is-active {
+        opacity: 0.6;
+        transform: scale(0.95);
+        transition: all 0.1s ease;
+    }
 }
-
-
-
-

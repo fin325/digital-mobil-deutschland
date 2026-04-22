@@ -51,12 +51,12 @@ scroll-hint {
     width: 100%;
 }
 
-a {
+a { 
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
-
+   
 /* === КНОПКИ === */
-
 .nav-btn {
     background: rgba(0, 30, 80, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -295,6 +295,7 @@ a.nav-btn:hover {
 
     .nav-btn {
         font-weight: 500;
+        font-size: 0.98rem;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -304,6 +305,7 @@ a.nav-btn:hover {
 
     .nav-btn.active {
         font-weight: 500;
+        font-size: 0.98rem;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -311,6 +313,7 @@ a.nav-btn:hover {
 
     a.nav-btn {
         font-weight: 500;
+        font-size: 0.98rem;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

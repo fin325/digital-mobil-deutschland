@@ -8,6 +8,10 @@ scroll-hint {
     display: block;
 }
 
+.navbar .nav-btn .icon-emoji {
+  margin-left: -4px; /* отрицательный — двигает влево */
+}
+
 .navbar {
     background: rgba(0, 20, 60, 0.3);
     backdrop-filter: blur(24px) saturate(180%);

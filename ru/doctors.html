@@ -142,8 +142,8 @@
 
             <div class="nav-row">
                 <button class="nav-btn active" onclick="showTab('home', event)">🏠 Главная</button>
+                <button class="nav-btn" onclick="showTab('feedback', event)">✉️ Добавить врача</button>
                 <button class="nav-btn" onclick="showTab('terapevt', event)">🩺 Терапевты</button>
-                <button class="nav-btn" onclick="showTab('ginekolog', event)">🤰 Гинекологи</button>
                 <button class="nav-btn" onclick="showTab('pediatr', event)">👶 Педиатры</button>
                 <button class="nav-btn" onclick="showTab('stomatolog', event)">🦷 Стоматологи</button>
             </div>
@@ -159,9 +159,10 @@
             <div class="nav-row">
                 <button class="nav-btn" onclick="showTab('okulist', event)">👁️ Окулисты</button>
                 <button class="nav-btn" onclick="showTab('urolog', event)">🔵 Урологи</button>
+                <button class="nav-btn" onclick="showTab('ginekolog', event)">🤰 Гинекологи</button>
                 <button class="nav-btn" onclick="showTab('psiholog', event)">💬 Психотерапевты</button>
                 <button class="nav-btn" onclick="showTab('resursy', event)">🔗 Ресурсы</button>
-                <button class="nav-btn" onclick="showTab('feedback', event)">✉️ Обратная связь</button>
+                <button class="nav-btn" onclick="showTab('feedback', event)">✉️ Добавить врача</button>
             </div>
 
         </div>
@@ -825,22 +826,18 @@
 <!-- ══════════ ОБРАТНАЯ СВЯЗЬ ══════════ -->
 <section id="feedback" class="tab-content">
     <div class="card">
-        <h2>✉️ Обратная связь</h2>
-        <p style="color:#444;line-height:1.6;margin-bottom:12px;">
-            Знаете русско- или украиноязычного врача, которого нет в нашем списке?
-            Заполните форму — мы добавим его! 🙏
+        <h2>✉️ Добавить врача</h2>
+        <p style="color:#444;line-height:1.6;margin-bottom:16px;">
+            Знаете русско- или украиноязычного врача, которого нет в нашем списке? Напишите нам, желательно ссылку в Googke картах— мы добавим его! 🙏
         </p>
-        <div style="border-radius:12px;overflow:hidden;">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc9GunXKRcjh_hsDmEy3j0s-w7A6k3iuSiJ03nwo03jQXp-mQ/viewform?embedded=true"
-                width="100%"
-                height="900"
-                frameborder="0"
-                marginheight="0"
-                marginwidth="0"
-                style="border:none;">
-                Загрузка…
-            </iframe>
-        </div>
+        <a href="mailto:hattingen325@gmail.com?subject=Новый врач для списка NRW&body=Имя врача / Praxis:%0A%0AГород:%0A%0AСпециальность:%0A%0AАдрес:%0A%0AТелефон:%0A%0AСсылка Google Maps:%0A%0AДополнительно:"
+           class="btn-main"
+           style="text-decoration:none;display:block;text-align:center;">
+            📩 Написать нам
+        </a>
+        <p style="font-size:0.82rem;color:#777;text-align:center;margin-top:10px;">
+            hattingen325@gmail.com
+        </p>
     </div>
 </section>
 

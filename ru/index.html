@@ -69,146 +69,144 @@
     <button class="nav-btn" onclick="showTab('docs', event)"><span class="icon-emoji icon-1f4bb"></span>ИИ-ассистенты</button>
     <button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Законы</button>
     <button class="nav-btn" onclick="showTab('jobs', event)"><span class="icon-emoji icon-1f4bc"></span>Работа</button>
-    <button class="nav-btn" onclick="showTab('health', event)"><span class="icon-emoji icon-1f3e5"></span>Здоровье</button>     
+    <button class="nav-btn" onclick="showTab('health', event)"><span class="icon-emoji icon-1f3e5"></span>Здоровье</button>
     <button class="nav-btn" onclick="showTab('housing', event)"><span class="icon-emoji icon-1f3e0"></span>Жильё</button>
     </div>
-  </div>
-</div>
+    <div class="nav-row">
+    <button class="nav-btn" onclick="showTab('magnet', event)"><span class="icon-emoji icon-1f9f2"></span>Магнет</button>
+    <button class="nav-btn" onclick="showTab('ausbildung', event)"><span class="icon-emoji icon-1f393"></span>Ausbildung</button>
+    <button class="nav-btn" onclick="showTab('weather', event)"><span class="icon-emoji icon-1f326"></span>Погода</button>
+    <button class="nav-btn" onclick="showTab('kp', event)"><span class="icon-emoji icon-1f300"></span>Магнитная буря</button>
+    </div>
+    </div>
+    </div>
 </nav>
+
 <main class="container">
 <section id="home" class="tab-content active">
-    <div class="card hero-card">    
-        <h1 style="margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; font-size: 1.2rem;">Добро пожаловать! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
-        <p>В Хаттингене находится Межкультурный центр Magnet, который занимается интеграцией мигрантов через образовательные и социальные проекты.</p>
-        <p>Просто нажмите на Magnet.</p>
-        <a href="../ru/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none;">
-            <img src="../img/IMG_2784.jpeg" alt="Межкультурный центр Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
+    <div class="card hero-card">
+        <h1 style="margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">Добро пожаловать! <span class="icon-emoji icon-1f1f7-1f1fa" style="margin-left: 6px;"></span></h1>
+        <p style="text-align: center;">В Хаттингене находится Интеркультурный центр Магнет для мигрантов. Узнайте больше о центре — нажмите на Магнет</p>
+        <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
+            <img src="../img/IMG_2784.jpeg" alt="Интеркультурный центр Магнет" style="width: 100%; height: auto; display: block; border-radius: 8px;">
         </a>
-        <div class="video-wrapper horizontal">
-    <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-видео</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">При загрузке вы принимаете политику конфиденциальности YouTube/Google.</p>
-        <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Смотреть видео</button>
-    </div>
-    <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-видео</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">При загрузке вы принимаете политику конфиденциальности YouTube/Google.</p>
-        <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Смотреть видео</button>
-    </div>
-    <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-плейлист</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">При загрузке вы принимаете политику конфиденциальности YouTube/Google.</p>
-        <button onclick="loadPlaylist('video-placeholder-3', 'video-iframe-3', 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" class="load-tool-btn">▶ Смотреть плейлист</button>
-    </div>
-    <iframe id="video-iframe-3" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-плейлист</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">При загрузке вы принимаете политику конфиденциальности YouTube/Google.</p>
-        <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Смотреть плейлист</button>
-    </div>
-    <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-    <div style="display: grid; gap: 8px; margin-top: 15px;">
-    <a href="../ru/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-        <span class="icon-emoji icon-1f4bc"></span> Найти работу
-    </a>
-    <button type="button" class="btn-main" style="font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">
-        Читать новости
-    </button>
-    <a href="../ru/impressum.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-        <span class="icon-emoji icon-2696"></span> Импрессум
-    </a>
-    <a href="../ru/datenschutz.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
-        <span class="icon-emoji icon-1f6e1"></span> Конфиденциальность
-    </a>
-</div>
-    </div>
-    </section>
-<section id="img2pdf" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f320"></span> Фото в PDF</h2>
-        <div class="iframe-wrapper"> 
-            <div id="photo-placeholder" class="consent-placeholder">
-                <p><strong>Этот инструмент может устанавливать технические cookies.</strong></p>
-                <p style="margin: 15px 0;">Чтобы воспользоваться конвертером Фото в PDF, пожалуйста, дайте согласие.</p>  
-                <button onclick="loadPhotoToPdf()" class="load-tool-btn">
-                    Загрузить конвертер
-                </button>
-            </div>
-            <iframe id="photo-iframe" 
-                    src="" 
-                    style="display: none; width: 100%; height: 950px; border: none;"
-                    allowfullscreen>
-            </iframe>
+        <div style="display: grid; gap: 8px; margin-top: 15px;">
+            <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                <span class="icon-emoji icon-1f4bc"></span> Найти работу
+            </a>
+            <button type="button" class="btn-main" style="font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">
+                Читать новости
+            </button>
+            <a href="tabs/impressum.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                <span class="icon-emoji icon-2696"></span> Impressum
+            </a>
+            <a href="tabs/datenschutz.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                <span class="icon-emoji icon-1f6e1"></span> Datenschutz
+            </a>
         </div>
     </div>
 </section>
 
 <section id="pdf" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f4f0"></span> Сжатие PDF</h2>
-        <div class="iframe-wrapper">
-            <div id="pdf-placeholder" class="consent-placeholder">
-                <p><strong>Этот инструмент может устанавливать технические cookies.</strong></p>
-                <p style="margin: 15px 0;">Чтобы воспользоваться компрессором PDF, пожалуйста, дайте согласие.</p>         
-                <button onclick="loadPdfCompressor()" class="load-tool-btn">
-                    Загрузить компрессор PDF
-                </button>
-            </div>
-            <iframe id="pdf-iframe" 
-                    src="" 
-                    style="display: none; width: 100%; height: 820px; border: none;"
-                    allow="downloads" 
-                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-                    allowfullscreen>
-            </iframe>
-        </div>
+  <div class="card card--pdf">
+    <h2><span class="icon-emoji icon-1f4c9"></span> PDF для почты</h2>
+    <div class="nav-rows-wrapper">
+      <div class="nav-row">
+        <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)">
+          <span class="icon-emoji icon-1f4c9"></span>Сжатие PDF
+        </button>
+        <button class="nav-btn" onclick="showInnerTab('pdf-foto', event)">
+          <span class="icon-emoji icon-1f320"></span>Фото в PDF
+        </button>
+      </div>
     </div>
+
+    <div class="inner-content-area">
+
+      <div id="pdf-kompressor" class="inner-tab-content">
+        <div class="iframe-wrapper">
+          <div id="pdf-placeholder" class="consent-placeholder">
+            <p><strong>Этот инструмент может использовать технические файлы cookie.</strong></p>
+            <p style="margin: 15px 0;">Для использования компрессора PDF, пожалуйста, дайте своё согласие.</p>
+            <button onclick="loadPdfCompressor()" class="load-tool-btn">Загрузить PDF-компрессор</button>
+          </div>
+          <iframe id="pdf-iframe" src=""
+            style="display: none; width: 100%; height: 820px; border: none;"
+            allow="downloads"
+            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div id="pdf-foto" class="inner-tab-content">
+        <div class="iframe-wrapper">
+          <div id="photo-placeholder" class="consent-placeholder">
+            <p><strong>Этот инструмент может использовать технические файлы cookie.</strong></p>
+            <p style="margin: 15px 0;">Для использования конвертера фото в PDF, пожалуйста, дайте своё согласие.</p>
+            <button onclick="loadPhotoToPdf()" class="load-tool-btn">Загрузить конвертер</button>
+          </div>
+          <iframe id="photo-iframe" src=""
+            style="display: none; width: 100%; height: 950px; border: none;"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="inner-info">
+          <p>Используйте бесплатную расширенную версию PDF-редактора — включая подписание PDF, объединение файлов и многое другое.</p>
+          <a href="https://tools.pdf24.org/de/" target="_blank" class="btn-main">PDF24 Tools</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="news" class="tab-content">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-            <h2 style="margin: 0;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости"><span class="icon-emoji icon-1f5de"></span> Последние новости</h2>
-            <span id="news-source" style="font-size: 0.85rem; color: #666;" 
-                  data-de-html='Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a>' 
-                  data-ru-html='Источник: <a href="https://ru.euronews.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">ru.euronews.com</a>'>
-                  Источник: <a href="https://ru.euronews.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">ru.euronews.com</a>
-            </span>
+            <h2 style="margin-bottom: 5px;"><span class="icon-emoji icon-1f5de"></span> Последние новости</h2>
         </div>
-
-    <div id="news-wrapper">
-        <div id="news-placeholder" class="consent-placeholder">
-            <p><strong data-de="Nachrichten von tagesschau.de" data-ru="Новости от Euronews">Новости от Euronews</strong></p>
-            <p data-de="Diese Nachrichten werden via RSS geladen und können Daten an Drittanbieter übertragen." data-ru="Новости загружаются через RSS и могут передавать данные третьим лицам.">
-                Новости загружаются через RSS и могут передавать данные третьим лицам.
-            </p>
-            <button onclick="loadNews()" class="load-tool-btn" data-de="Nachrichten laden" data-ru="Загрузка новостей">
-                Загрузка новостей
-            </button>
+        <div class="video-wrapper horizontal" style="margin-top: -5px;">
+            <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+                <p style="margin:0 0 8px;"><strong>YouTube-плейлист</strong></p>
+                <p style="margin:0 0 16px; font-size:0.9rem;">Нажимая «Смотреть», вы принимаете политику конфиденциальности YouTube/Google.</p>
+                <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Смотреть плейлист</button>
+            </div>
+            <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
-        <div id="news-container" style="display: none;"></div>
+        <span id="news-source" style="font-size: 0.85rem; color: #666;">Источник: <a href="https://ru.euronews.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">ru.euronews.com</a></span>
+        <div id="news-wrapper" style="margin-top: 12px;">
+            <div id="news-placeholder" class="consent-placeholder">
+                <p><strong>Новости от Euronews</strong></p>
+                <p>Новости загружаются через RSS и могут передавать данные третьим лицам.</p>
+                <button onclick="loadNews()" class="load-tool-btn">Загрузить новости</button>
+            </div>
+            <div id="news-container" style="display: none;"></div>
+        </div>
+        <p id="news-hint" style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;">
+            Примечание: новости загружаются через RSS от ru.euronews.com.
+        </p>
     </div>
-    
-    <p style="font-size: 0.7rem; color: #999; margin-top: 15px; line-height: 1.2;" data-de="Hinweis: Diese Nachrichten werden via RSS von tagesschau.de geladen." data-ru="Примечание: Эти новости загружаются через RSS с сайта ru.euronews.com.">
-        Примечание: Эти новости загружаются через RSS с сайта ru.euronews.com.
-    </p>
-</div>
-
 </section>
 
 <section id="news-hattingen" class="tab-content">
     <div class="card">
         <h2 style="text-align: center; margin-bottom: 10px;"><span class="icon-emoji icon-1f3d9"></span> Жизнь в Хаттингене</h2>
-        <p class="status-msg" style="text-align: center; color: #1a1c1e;">Официальные городские ресурсы для жителей и гостей:</p>
+        <p style="text-align: center;">Официальные разделы города для жителей и гостей:</p>
+        <div class="video-wrapper horizontal">
+            <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+                <p style="margin:0 0 8px;"><strong>YouTube-видео</strong></p>
+                <p style="margin:0 0 16px; font-size:0.9rem;">Нажимая «Смотреть», вы принимаете политику конфиденциальности YouTube/Google.</p>
+                <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Смотреть видео</button>
+            </div>
+            <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="video-wrapper horizontal">
+            <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+                <p style="margin:0 0 8px;"><strong>YouTube-видео</strong></p>
+                <p style="margin:0 0 16px; font-size:0.9rem;">Нажимая «Смотреть», вы принимаете политику конфиденциальности YouTube/Google.</p>
+                <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Смотреть видео</button>
+            </div>
+            <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
         <div style="display: grid; gap: 12px; margin-top: 20px;">
             <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;"><span class="icon-emoji icon-1f4f0"></span> Все новости города</a>
             <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;"><span class="icon-emoji icon-1f3f0"></span> Туризм и досуг</a>
@@ -216,7 +214,7 @@
             <a href="https://www.hattingen.de/stadt_hattingen/Leben/Veranstaltungen/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(108, 117, 125, 0.8) !important;"><span class="icon-emoji icon-1f4c5"></span> Мероприятия</a>
         </div>
         <div style="margin-top: 25px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.2); font-size: 0.85rem; line-height: 1.4;">
-            <strong><span class="icon-emoji icon-1f4a1"></span> Примечание:</strong> Все ссылки ведут на официальный городской портал.
+            <strong><span class="icon-emoji icon-1f4a1"></span> Примечание:</strong> Все ссылки ведут на официальный портал города Хаттинген.
         </div>
     </div>
 </section>

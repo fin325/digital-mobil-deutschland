@@ -141,13 +141,14 @@
     </section>
     
     <section id="pdf" class="tab-content">
-  <div class="card">
+  <div class="card card--pdf">
     <h2><span class="icon-emoji icon-1f4c9"></span> PDF für Mail</h2>
 
-    <!-- Внутреннее меню — те же классы что navbar -->
+    <p class="inner-desc">PDF-Werkzeuge zur Bearbeitung von Dateien für den E-Mail-Versand.</p>
+
     <div class="nav-rows-wrapper">
       <div class="nav-row">
-        <button class="nav-btn active" onclick="showInnerTab('pdf-kompressor', event)">
+        <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)">
           <span class="icon-emoji icon-1f4c9"></span>PDF Kompressor
         </button>
         <button class="nav-btn" onclick="showInnerTab('pdf-foto', event)">
@@ -156,8 +157,7 @@
       </div>
     </div>
 
-    <!-- PDF Kompressor -->
-    <div id="pdf-kompressor" class="inner-tab-content active">
+    <div id="pdf-kompressor" class="inner-tab-content">
       <div class="iframe-wrapper">
         <div id="pdf-placeholder" class="consent-placeholder">
           <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
@@ -172,7 +172,6 @@
       </div>
     </div>
 
-    <!-- Foto zu PDF -->
     <div id="pdf-foto" class="inner-tab-content">
       <div class="iframe-wrapper">
         <div id="photo-placeholder" class="consent-placeholder">
@@ -184,6 +183,11 @@
           style="display: none; width: 100%; height: 950px; border: none;"
           allowfullscreen></iframe>
       </div>
+    </div>
+
+    <div class="inner-info">
+      <p>Hier kannst du deinen Text schreiben.</p>
+      <p>Und noch eine Zeile. <a href="https://example.com" target="_blank">Link Beispiel</a></p>
     </div>
   </div>
 </section>

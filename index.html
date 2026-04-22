@@ -143,9 +143,7 @@
     <section id="pdf" class="tab-content">
   <div class="card card--pdf">
     <h2><span class="icon-emoji icon-1f4c9"></span> PDF für Mail</h2>
-
     <p class="inner-desc">PDF-Werkzeuge zur Bearbeitung von Dateien für den E-Mail-Versand.</p>
-
     <div class="nav-rows-wrapper">
       <div class="nav-row">
         <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)">
@@ -159,41 +157,40 @@
 
     <div class="inner-content-area">
 
-  <div class="inner-info">
-    <p>Hier kannst du deinen Text schreiben.</p>
-    <p>Und noch eine Zeile. <a href="https://example.com" target="_blank">Link Beispiel</a></p>
-  </div>
-
-  <div id="pdf-kompressor" class="inner-tab-content">
-    <div class="iframe-wrapper">
-      <div id="pdf-placeholder" class="consent-placeholder">
-        <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
-        <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>
-        <button onclick="loadPdfCompressor()" class="load-tool-btn">PDF-Kompressor laden</button>
+      <div id="pdf-kompressor" class="inner-tab-content">
+        <div class="iframe-wrapper">
+          <div id="pdf-placeholder" class="consent-placeholder">
+            <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
+            <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>
+            <button onclick="loadPdfCompressor()" class="load-tool-btn">PDF-Kompressor laden</button>
+          </div>
+          <iframe id="pdf-iframe" src=""
+            style="display: none; width: 100%; height: 820px; border: none;"
+            allow="downloads"
+            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+            allowfullscreen></iframe>
+        </div>
       </div>
-      <iframe id="pdf-iframe" src=""
-        style="display: none; width: 100%; height: 820px; border: none;"
-        allow="downloads"
-        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-        allowfullscreen></iframe>
+
+      <div id="pdf-foto" class="inner-tab-content">
+        <div class="iframe-wrapper">
+          <div id="photo-placeholder" class="consent-placeholder">
+            <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
+            <p style="margin: 15px 0;">Um den Foto-zu-PDF Converter zu nutzen, gib bitte deine Einwilligung.</p>
+            <button onclick="loadPhotoToPdf()" class="load-tool-btn">Converter laden</button>
+          </div>
+          <iframe id="photo-iframe" src=""
+            style="display: none; width: 100%; height: 950px; border: none;"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="inner-info">
+        <p>Hier kannst du deinen Text schreiben.</p>
+        <p>Und noch eine Zeile. <a href="https://example.com" target="_blank">Link Beispiel</a></p>
+      </div>
     </div>
   </div>
-
-  <div id="pdf-foto" class="inner-tab-content">
-    <div class="iframe-wrapper">
-      <div id="photo-placeholder" class="consent-placeholder">
-        <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
-        <p style="margin: 15px 0;">Um den Foto-zu-PDF Converter zu nutzen, gib bitte deine Einwilligung.</p>
-        <button onclick="loadPhotoToPdf()" class="load-tool-btn">Converter laden</button>
-      </div>
-      <iframe id="photo-iframe" src=""
-        style="display: none; width: 100%; height: 950px; border: none;"
-        allowfullscreen></iframe>
-    </div>
-  </div>
-
-</div>
-</div>
 </section>
 
 <section id="news" class="tab-content">

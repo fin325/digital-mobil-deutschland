@@ -38,12 +38,12 @@
     <link rel="apple-touch-startup-image" href="/img/icons/splash-1668x2224.png" media="(device-width: 834px) and (-webkit-device-pixel-ratio: 2)">
     <link rel="apple-touch-startup-image" href="/img/icons/splash-1536x2048.png" media="(device-width: 768px) and (-webkit-device-pixel-ratio: 2)">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/topbar.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/silktide-consent-manager.css">
-    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/silktide-consent-manager.css">
+    <link rel="stylesheet" href="../css/icons.css">
 </head>
 
 <body>
@@ -51,56 +51,57 @@
 <scroll-hint></scroll-hint>
 
 <nav class="navbar">
-    <div class="nav-scroll-viewport">
+  <div class="nav-scroll-viewport">
     <div class="nav-rows-wrapper">
-    <div class="nav-row">
-    <button class="nav-btn active" onclick="showTab('home', event)"><span class="icon-emoji icon-1f3db"></span>Главная</button>
-    <button class="nav-btn" onclick="showTab('img2pdf', event)"><span class="icon-emoji icon-1f320"></span>Фото в PDF</button>
-    <button class="nav-btn" onclick="showTab('pdf', event)"><span class="icon-emoji icon-1f4c9"></span>Сжатие PDF</button>
-    <button class="nav-btn" onclick="showTab('maps', event)"><span class="icon-emoji icon-1f6e3"></span>Карты</button>
-    <button class="nav-btn" onclick="showTab('mobile', event)"><span class="icon-emoji icon-1f686"></span>Транспорт</button>
-    <button class="nav-btn" onclick="showTab('contacts', event)"><span class="icon-emoji icon-1f4de"></span>Контакт</button>
-    <button class="nav-btn" onclick="showTab('translate', event)"><span class="icon-emoji icon-1f310"></span>Переводчик</button>
-    <button class="nav-btn" onclick="showTab('project', event)"><span class="icon-emoji icon-2139"></span>О проекте</button>
+
+<div class="nav-row">
+<button class="nav-btn active" onclick="showTab('home', event)"><span class="icon-emoji icon-1f3db"></span>Главная</button>
+<button class="nav-btn" onclick="showTab('pdf', event)"><span class="icon-emoji icon-1f4c9"></span>PDF для почты</button>
+<button class="nav-btn" onclick="showTab('mobile', event)"><span class="icon-emoji icon-1f686"></span>DB</button>
+<button class="nav-btn" onclick="showTab('img2pdf', event)"><span class="icon-emoji icon-1f320"></span>Фото PDF</button>
+<button class="nav-btn" onclick="showTab('maps', event)"><span class="icon-emoji icon-1f6e3"></span>Карты</button>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="showTab('news', event)"><span class="icon-emoji icon-1f4f0"></span>Новости</button>
+<button class="nav-btn" onclick="showTab('news-hattingen', event)"><span class="icon-emoji icon-1f3d9"></span>Хаттинген</button>
+<button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Законы</button>
+<button class="nav-btn" onclick="showTab('translate', event)"><span class="icon-emoji icon-1f310"></span>Переводчик</button>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="showTab('jobs', event)"><span class="icon-emoji icon-1f4bc"></span>Работа</button>
+<button class="nav-btn" onclick="showTab('health', event)"><span class="icon-emoji icon-1f3e5"></span>Врачи</button>
+<button class="nav-btn" onclick="showTab('housing', event)"><span class="icon-emoji icon-1f3e0"></span>Жильё</button>
+<button class="nav-btn" onclick="showTab('docs', event)"><span class="icon-emoji icon-1f4bb"></span>ИИ</button>
+<button class="nav-btn" onclick="showTab('contacts', event)"><span class="icon-emoji icon-1f4de"></span>Контакт</button>
+<button class="nav-btn" onclick="showTab('project', event)"><span class="icon-emoji icon-2139"></span>О проекте</button>
+</div>
+
     </div>
-    <div class="nav-row">
-    <button class="nav-btn" onclick="showTab('news-hattingen', event)"><span class="icon-emoji icon-1f3d9"></span>Новости Хаттинген</button>
-    <button class="nav-btn" onclick="showTab('news', event)"><span class="icon-emoji icon-1f4f0"></span>Новости мира</button>
-    <button class="nav-btn" onclick="showTab('docs', event)"><span class="icon-emoji icon-1f4bb"></span>ИИ-ассистенты</button>
-    <button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Законы</button>
-    <button class="nav-btn" onclick="showTab('jobs', event)"><span class="icon-emoji icon-1f4bc"></span>Работа</button>
-    <button class="nav-btn" onclick="showTab('health', event)"><span class="icon-emoji icon-1f3e5"></span>Здоровье</button>
-    <button class="nav-btn" onclick="showTab('housing', event)"><span class="icon-emoji icon-1f3e0"></span>Жильё</button>
-    </div>
-    <div class="nav-row">
-    <button class="nav-btn" onclick="showTab('magnet', event)"><span class="icon-emoji icon-1f9f2"></span>Магнет</button>
-    <button class="nav-btn" onclick="showTab('ausbildung', event)"><span class="icon-emoji icon-1f393"></span>Ausbildung</button>
-    <button class="nav-btn" onclick="showTab('weather', event)"><span class="icon-emoji icon-1f326"></span>Погода</button>
-    <button class="nav-btn" onclick="showTab('kp', event)"><span class="icon-emoji icon-1f300"></span>Магнитная буря</button>
-    </div>
-    </div>
-    </div>
+  </div>
 </nav>
 
 <main class="container">
+
 <section id="home" class="tab-content active">
     <div class="card hero-card">
-        <h1 style="margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">Добро пожаловать! <span class="icon-emoji icon-1f1f7-1f1fa" style="margin-left: 6px;"></span></h1>
+        <h1 style="margin-bottom: 10px; display: flex; align-items: center;">Добро пожаловать! <span class="icon-emoji icon-1f1f7-1f1fa" style="margin-left: 6px;"></span></h1>
         <p style="text-align: center;">В Хаттингене находится Интеркультурный центр Магнет для мигрантов. Узнайте больше о центре — нажмите на Магнет</p>
-        <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
+        <a href="magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
             <img src="../img/IMG_2784.jpeg" alt="Интеркультурный центр Магнет" style="width: 100%; height: auto; display: block; border-radius: 8px;">
         </a>
         <div style="display: grid; gap: 8px; margin-top: 15px;">
-            <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+            <a href="jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
                 <span class="icon-emoji icon-1f4bc"></span> Найти работу
             </a>
             <button type="button" class="btn-main" style="font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif; background: rgba(0, 122, 255, 0.7) !important;" onclick="showTab('news', event)">
                 Читать новости
             </button>
-            <a href="tabs/impressum.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+            <a href="impressum.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
                 <span class="icon-emoji icon-2696"></span> Impressum
             </a>
-            <a href="tabs/datenschutz.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+            <a href="datenschutz.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
                 <span class="icon-emoji icon-1f6e1"></span> Datenschutz
             </a>
         </div>
@@ -113,7 +114,7 @@
     <div class="nav-rows-wrapper">
       <div class="nav-row">
         <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)">
-          <span class="icon-emoji icon-1f4c9"></span>Сжатие PDF
+          <span class="icon-emoji icon-1f4c9"></span>PDF Компрессор
         </button>
         <button class="nav-btn" onclick="showInnerTab('pdf-foto', event)">
           <span class="icon-emoji icon-1f320"></span>Фото в PDF
@@ -224,10 +225,10 @@
         <h2><span class="icon-emoji icon-1f686"></span> Транспорт</h2>
         <p style="text-align: center;">Актуальное расписание поездов и автобусов.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.bahn.de/buchung/fahrplan/suche" style="background: #cc0000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f310"></span> Расписание DB</a>
-                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f34e"></span> Приложение для iPhone</a>
-                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #3ddc84; color: #2a7a50; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f916"></span> Приложение для Android</a>
+            <div class="btn-link-group">
+                <a href="https://www.bahn.de/buchung/fahrplan/suche" class="btn-link" style="background:#cc0000;color:white;flex-grow:1"><span class="icon-emoji icon-1f310"></span> Расписание DB</a>
+                <a href="https://apps.apple.com/de/app/db-navigator/id343555245" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid var(--primary-blue);color:var(--primary-blue);flex-grow:1"><span class="icon-emoji icon-1f34e"></span> Приложение для iPhone</a>
+                <a href="https://play.google.com/store/apps/details?id=de.hafas.android.db" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #3ddc84;color:#2a7a50;flex-grow:1"><span class="icon-emoji icon-1f916"></span> Приложение для Android</a>
             </div>
         </div>
     </div>
@@ -237,32 +238,34 @@
     <div class="card">
         <h2><span class="icon-emoji icon-1f5fa"></span> Карты</h2>
         <p style="text-align: center;">Простая навигация и поиск по Хаттингену.</p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-            <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" style="background: #4285F4; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
-            <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f34e"></span> Apple Maps</a>
+        <div class="btn-link-group" style="margin-top: 15px;">
+            <a href="https://maps.google.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4285F4;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(66,133,244,0.2)"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+            <a href="https://maps.apple.com/?q=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,0.2)"><span class="icon-emoji icon-1f34e"></span> Apple Maps</a>
         </div>
     </div>
 </section>
 
 <section id="translate" class="tab-content">
     <div class="card">
-        <h2><span class="icon-emoji icon-1f310"></span> Переводчики и словари</h2>
+        <h2 style="display: block; text-align: center;">
+            <span class="icon-emoji icon-1f310" style="float: none; display: inline-block; vertical-align: middle; margin-bottom: 4px;"></span>
+            Переводчики и словари</h2>
         <p style="text-align: center;">Профессиональные инструменты для работы с текстами.</p>
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
         <div class="translate-item">
             <h3>Google Translate</h3>
             <p>Универсальный инструмент: перевод текстов, документов и целых сайтов.</p>
-            <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" class="btn-translate bg-google">Google Переводчик</a>
+            <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #1a73e8, #4285f4) !important;">Google Переводчик</a>
         </div>
         <div class="translate-item">
-            <h3 style="color: #002e59;">DeepL</h3>
+            <h3>DeepL</h3>
             <p style="text-align: center;">Высокоточный перевод на основе нейронных сетей. Лучший выбор для европейских языков.</p>
-            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="btn-translate bg-deepl">Открыть DeepL</a>
+            <a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #002e59, #0d47a1) !important;">Открыть DeepL</a>
         </div>
         <div class="translate-item">
-            <h3 style="color: #1e5fa9;">Reverso Context</h3>
+            <h3>Reverso Context</h3>
             <p style="text-align: center;">Поиск слов в контексте реальных предложений. Помогает понять нюансы разговорной речи.</p>
-            <a href="https://context.reverso.net/" target="_blank" rel="noopener noreferrer" class="btn-translate bg-reverso">Искать в Reverso</a>
+            <a href="https://context.reverso.net/" target="_blank" rel="noopener noreferrer" class="btn-main" style="background: linear-gradient(135deg, #1a1a1a, #3a3a3a) !important;">Искать в Reverso</a>
         </div>
     </div>
 </section>
@@ -272,12 +275,12 @@
         <h2><span class="icon-emoji icon-1f4bc"></span> Работа</h2>
         <p style="text-align: center;">Популярные порталы для поиска работы в Германии.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <a href="../ru/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;"><span class="icon-emoji icon-1f3e6"></span> Портал вакансий</a>
-            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" style="background: #e30613; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(227, 6, 19, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f1e9-1f1ea"></span> Поиск работы (Arbeitsagentur)</a>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" style="background: #2164f3; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(33, 100, 243, 0.2);"><span class="icon-emoji icon-1f50d"></span> Indeed</a>
-                <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);"><span class="icon-emoji icon-1f4c8"></span> StepStone</a>
-                <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" style="background: #016567; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(1, 101, 103, 0.2);"><span class="icon-emoji icon-1f91d"></span> XING</a>
+            <a href="jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-radius: 10px;"><span class="icon-emoji icon-1f3e6"></span> Портал вакансий</a>
+            <a href="https://www.arbeitsagentur.de/jobsuche/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#e30613;color:white;box-shadow:0 4px 10px rgba(227,6,19,0.2)"><span class="icon-emoji icon-1f1e9-1f1ea"></span> Поиск работы (Arbeitsagentur)</a>
+            <div class="btn-link-group">
+                <a href="https://de.indeed.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#2164f3;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(33,100,243,.2)"><span class="icon-emoji icon-1f50d"></span> Indeed</a>
+                <a href="https://www.stepstone.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,0,0,.2)"><span class="icon-emoji icon-1f4c8"></span> StepStone</a>
+                <a href="https://www.xing.com/jobs" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#016567;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(1,101,103,.2)"><span class="icon-emoji icon-1f91d"></span> XING</a>
             </div>
         </div>
     </div>
@@ -291,22 +294,22 @@
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: var(--primary-blue);">Gemini</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Мультимодальный ИИ от Google. Идеально подходит для работы с сервисами Google, картами и быстрого получения актуальной информации.</p>
-            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(90deg, #4285f4, #9b72cb); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Запустить Gemini</a>
+            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:linear-gradient(90deg,#4285f4,#9b72cb);color:white;padding:10px 20px;display:inline-block">Запустить Gemini</a>
         </div>
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: #10a37f;">ChatGPT</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Лидер рынка в написании текстов и сложном программировании. Отличный инструмент для анализа данных и творческих задач.</p>
-            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="background: #10a37f; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Открыть ChatGPT</a>
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#10a37f;color:white;padding:10px 20px;display:inline-block">Открыть ChatGPT</a>
         </div>
         <div style="margin-bottom: 25px;">
             <h3 style="margin-bottom: 5px; color: #1e1c1a;">Claude</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">Умный ассистент от Anthropic — честный, точный и естественный в общении. Работает с большими документами, пишет и отлаживает код, анализирует данные.</p>
-            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" style="background: #da7756; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Попробовать Claude</a>
+            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#da7756;color:white;padding:10px 20px;display:inline-block">Попробовать Claude</a>
         </div>
         <div style="margin-bottom: 10px;">
             <h3 style="margin-bottom: 5px; color: #000000;">Grok</h3>
             <p style="font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8;">ИИ от Илона Маска (xAI), интегрированный в сеть X. Известен юмором и доступом к мировым новостям в реальном времени.</p>
-            <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" style="background: #000000; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-block;">Попробовать Grok</a>
+            <a href="https://grok.com/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#000000;color:white;padding:10px 20px;display:inline-block">Попробовать Grok</a>
         </div>
     </div>
 </section>
@@ -318,9 +321,9 @@
             <span class="icon-emoji icon-1f1f7-1f1fa"></span> Русскоязычные врачи NRW
         </a>
         <p style="text-align: center;">Поиск врачей, отзывы и онлайн-запись на приём.</p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-            <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" style="background: #0596de; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(5, 150, 222, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1fa7a"></span> Doctolib</a>
-            <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" style="background: #00b3a6; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-align: center; flex-grow: 1; box-shadow: 0 2px 6px rgba(0, 179, 166, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-2695"></span> Jameda</a>
+        <div class="btn-link-group" style="margin-top: 15px;">
+            <a href="https://www.doctolib.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#0596de;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(5,150,222,0.2)"><span class="icon-emoji icon-1fa7a"></span> Doctolib</a>
+            <a href="https://www.jameda.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#00b3a6;color:white;flex-grow:1;box-shadow:0 2px 6px rgba(0,179,166,0.2)"><span class="icon-emoji icon-2695"></span> Jameda</a>
         </div>
     </div>
 </section>
@@ -328,7 +331,7 @@
 <section id="laws" class="tab-content">
     <div class="card">
         <h2><span class="icon-emoji icon-2696"></span> Законы</h2>
-        <a href="../img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block;">
+        <a href="/img/ukraine.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block;">
             <span class="icon-emoji icon-1f4f0"></span> Переходные положения о пребывании для граждан Украины UkraineAufenthÄndFGV
         </a>
     </div>
@@ -339,7 +342,7 @@
         <h2><span class="icon-emoji icon-1f4e9"></span> Контакт</h2>
         <p style="text-align: center;">Свяжитесь с нами по вопросам или предложениям.</p>
         <div style="margin-top: 15px;">
-            <a href="mailto:hattingen325@gmail.com" target="_blank" rel="noopener noreferrer" style="background: #ea4335; color: white; padding: 12px 15px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; text-align: center; display: block; box-shadow: 0 4px 10px rgba(234, 67, 53, 0.2); transition: transform 0.2s;"><span class="icon-emoji icon-1f4e7"></span> Написать e-mail</a>
+            <a href="mailto:hattingen325@gmail.com" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ea4335;color:white;box-shadow:0 4px 10px rgba(234,67,53,0.2);display:block;text-align:center"><span class="icon-emoji icon-1f4e7"></span> Написать e-mail</a>
             <p style="font-size: 0.8rem; color: rgba(0,0,0,0.5); text-align: center; margin-top: 10px;">hattingen325@gmail.com</p>
         </div>
     </div>
@@ -348,14 +351,13 @@
 <section id="project" class="tab-content">
     <div class="card">
         <h2><span class="icon-emoji icon-1f680"></span> О проекте</h2>
-        <p style="text-align: center; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
-            <strong>Цифровой & Мобильный в Германии</strong> — бесплатный информационный портал
-            для жителей и новоприбывших в Германии. Все важные сервисы,
-            новости и инструменты в одном месте.
+        <p style="font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px;">
+            <strong>Цифровой &amp; Мобильный в Германии</strong> — бесплатный информационный портал для жителей и новоприбывших в Германии. Все важные сервисы, новости и инструменты в одном месте.
         </p>
-        <p style="margin: 0 0 10px 0; font-family: inherit;">
-            Ссылки на <a href="../ru/impressum.html" style="color: inherit; font-weight: 700; text-decoration: underline;">Импрессум→</a>
-            <a href="../ru/datenschutz.html" style="color: inherit; font-weight: 700; text-decoration: underline; margin-left: 3px;">Конфиденциальность→</a>
+        <p style="margin: 0 0 10px 0; font-size: 0.9rem;">
+            Ссылки на <a href="impressum.html" style="color:inherit;font-weight:700;text-decoration:underline">Импрессум→</a>
+            <span style="margin: 0 6px;">|</span>
+            <a href="datenschutz.html" style="color:inherit;font-weight:700;text-decoration:underline">Конфиденциальность→</a>
         </p>
         <div style="padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.1); margin-bottom: 20px;">
             <h3 style="margin: 0 0 10px; color: #003399; font-size: 0.95rem;">Что предлагает сайт?</h3>
@@ -438,7 +440,7 @@
                     Дополнительно приложение имеет систему обратной связи (Нравится/Не нравится) с базой данных Supabase (PostgreSQL) и определением дублей по IP-адресу — каждый пользователь может проголосовать только один раз, изменить или отозвать свой голос.
                 </p>
                 <p style="margin-bottom: 12px;">
-                    <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color: #003399; text-decoration: underline;">
+                    <a href="https://github.com/fin325/pdf-compressor-web" target="_blank" rel="noopener noreferrer" style="color:#003399;text-decoration:underline">
                         GitHub: pdf-compressor-web →
                     </a>
                 </p>
@@ -461,7 +463,7 @@
                     Миниатюры всех загруженных фото отображаются в сетке из 4 столбцов.
                 </p>
                 <p style="margin-bottom: 0;">
-                    <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color: #003399; text-decoration: underline;">
+                    <a href="https://github.com/fin325/photo-to-pdf-converter" target="_blank" rel="noopener noreferrer" style="color:#003399;text-decoration:underline">
                         GitHub: photo-to-pdf-converter →
                     </a>
                 </p>
@@ -470,23 +472,29 @@
         <div style="margin-top: 20px; padding: 16px; border-radius: 10px; background: rgba(0,51,153,0.05); border: 1px solid rgba(0,51,153,0.15);">
             <h3 style="margin: 0 0 12px; color: #003399; font-size: 0.95rem; text-align: center;"><span class="icon-emoji icon-1f4bb"></span> Разработка</h3>
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                <a href="../img/Entwicklung.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+                <a href="/img/Entwicklung.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
                     <span class="icon-emoji icon-1f4c4"></span> Entwicklung.pdf
                 </a>
-                <a href="../img/HTML-Structure.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+                <a href="/img/HTML-Structure.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
                     <span class="icon-emoji icon-1f4c4"></span> HTML-Structure.pdf
                 </a>
-                <a href="../img/Styles.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+                <a href="/img/Styles.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
                     <span class="icon-emoji icon-1f4c4"></span> Styles.pdf
                 </a>
-                <a href="../img/Scripts.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+                <a href="/img/Scripts.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
                     <span class="icon-emoji icon-1f4c4"></span> Scripts.pdf
                 </a>
                 <a href="/img/Update_Bericht_April_18.04.26.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
                     <span class="icon-emoji icon-1f4c4"></span> Обновление_Отчет_<wbr>Апрель_18.04.26.pdf
                 </a>
+                <a href="/img/iOS_Bugfix_Bericht.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+                    <span class="icon-emoji icon-1f4c4"></span> iOS_Bugfix_<wbr>Bericht_21.04.26.pdf
+                </a>
+                <a href="/img/Android_Bugfix_Bericht_21.04.26.pdf" target="_blank" class="btn-main" style="text-decoration: none; display: block; text-align: center; width: 100%; max-width: 250px;">
+                    <span class="icon-emoji icon-1f4c4"></span> Android_Bugfix_<wbr>Bericht_21.04.26.pdf
+                </a>
                 <p style="margin-bottom: 0;">
-                    <a href="https://github.com/fin325/digital-mobil-deutschland" target="_blank" rel="noopener noreferrer" style="color: #003399; text-decoration: underline;">
+                    <a href="https://github.com/fin325/digital-mobil-deutschland" target="_blank" rel="noopener noreferrer" style="color:#003399;text-decoration:underline">
                         GitHub →
                     </a>
                 </p>
@@ -503,21 +511,21 @@
         <h2><span class="icon-emoji icon-1f3e0"></span> Жильё в аренду</h2>
         <p style="text-align: center;">Найдите актуальные предложения квартир, кооперативы и комнаты в общежитии в Хаттингене.</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/ennepe-ruhr-kreis/hattingen/wohnung-mieten" target="_blank" rel="noopener noreferrer" style="background: #ff5a5f; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3e2"></span> ImmoScout24</a>
-                <a href="https://www.kleinanzeigen.de/s-wohnung-mieten/hattingen/c203l1869" target="_blank" rel="noopener noreferrer" style="background: #4682b4; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f4e2"></span> Kleinanzeigen</a>
+            <div class="btn-link-group">
+                <a href="https://www.immobilienscout24.de/Suche/de/nordrhein-westfalen/ennepe-ruhr-kreis/hattingen/wohnung-mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff5a5f;color:white;flex-grow:1"><span class="icon-emoji icon-1f3e2"></span> ImmoScout24</a>
+                <a href="https://www.kleinanzeigen.de/s-wohnung-mieten/hattingen/c203l1869" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#4682b4;color:white;flex-grow:1"><span class="icon-emoji icon-1f4e2"></span> Kleinanzeigen</a>
             </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.hwg.de/" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #0054a6; color: #0054a6; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3e0s"></span> hwg eG (Местный)</a>
-                <a href="https://www.gartenstadt.de/wohnen/alle-wohnungsangebote.html" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #2e8b57; color: #2e8b57; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f333"></span> Gartenstadt Hüttenau</a>
+            <div class="btn-link-group">
+                <a href="https://www.hwg.de/" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #0054a6;color:#0054a6;flex-grow:1"><span class="icon-emoji icon-1f3ec"></span> hwg eG (Местный)</a>
+                <a href="https://www.gartenstadt.de/wohnen/alle-wohnungsangebote.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #2e8b57;color:#2e8b57;flex-grow:1"><span class="icon-emoji icon-1f333"></span> Gartenstadt Hüttenau</a>
             </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.leg-wohnen.de/mietwohnungen/hattingen" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #e30613; color: #e30613; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3d7"></span> LEG Wohnen</a>
-                <a href="https://www.vonovia.de/zuhause-finden?city=Hattingen" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #004f9f; color: #004f9f; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3d9"></span> Vonovia</a>
+            <div class="btn-link-group">
+                <a href="https://www.leg-wohnen.de/mietwohnungen/hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #e30613;color:#e30613;flex-grow:1"><span class="icon-emoji icon-1f3d7"></span> LEG Wohnen</a>
+                <a href="https://www.vonovia.de/zuhause-finden?city=Hattingen" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #004f9f;color:#004f9f;flex-grow:1"><span class="icon-emoji icon-1f3d9"></span> Vonovia</a>
             </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.wg-gesucht.de/wg-zimmer-in-Hattingen.3089.0.1.0.html" target="_blank" rel="noopener noreferrer" style="background: #ff8c00; color: white; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f91d"></span> WG-Gesucht</a>
-                <a href="https://www.immowelt.de/suche/hattingen/wohnungen/mieten" target="_blank" rel="noopener noreferrer" style="background: rgba(255,255,255,0.5); border: 1px solid #333; color: #333; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-align: center; flex-grow: 1;"><span class="icon-emoji icon-1f3e0"></span> Immowelt</a>
+            <div class="btn-link-group">
+                <a href="https://www.wg-gesucht.de/wg-zimmer-in-Hattingen.3089.0.1.0.html" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:#ff8c00;color:white;flex-grow:1"><span class="icon-emoji icon-1f91d"></span> WG-Gesucht</a>
+                <a href="https://www.immowelt.de/suche/hattingen/wohnungen/mieten" target="_blank" rel="noopener noreferrer" class="btn-link" style="background:rgba(255,255,255,0.5);border:1px solid #333;color:#333;flex-grow:1"><span class="icon-emoji icon-1f3e0"></span> Immowelt</a>
             </div>
         </div>
     </div>

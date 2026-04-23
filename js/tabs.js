@@ -79,6 +79,14 @@ window.addEventListener('popstate', (e) => {
 window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash.replace('#', '');
     if (hash) showTabSilent(hash);
+
+    // Скрываем подсказку при скролле меню
+    const viewport = document.querySelector('.nav-scroll-viewport');
+    if (viewport) {
+        viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });
+        // Скрываем подсказку при касании меню на мобильном
+        viewport.addEventListener('touchstart', hideSwipeHint, { passive: true, once: true });
+    }
 });
 
 
@@ -95,8 +103,5 @@ function showInnerTab(id, event) {
     if (!isActive) {
         content.classList.add('active');
         btn.classList.add('active');
-
-        // ❌ УБРАНО:
-        // никакой автозагрузки iframe
     }
 }

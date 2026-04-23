@@ -1,9 +1,7 @@
 /* === weather.js — Wetter über eigenen Proxy + Luftqualität === */
 
 let currentCity = localStorage.getItem('userCity') || 'Hattingen';
-
 const isRu = document.documentElement.lang === 'ru';
-
 const weatherMessages = {
     cityPrompt: isRu ? 'Пожалуйста, введите название города:' : 'Bitte den Namen der Stadt eingeben:',
     errorCity:   isRu ? 'Город не найден:'           : 'Stadt nicht gefunden:',

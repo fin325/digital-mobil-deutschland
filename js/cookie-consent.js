@@ -16,8 +16,6 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
       required: false,
       onAccept: function() {
-        // ИСПРАВЛЕНИЕ: Ждем загрузки HTML перед вызовом loadNews, 
-        // чтобы скрипт точно нашел элементы на странице
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadNews, { once: true });
         } else {
@@ -27,11 +25,10 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       onReject: function() {
         const placeholder = document.getElementById('news-placeholder');
         const container = document.getElementById('news-container');
-        
         if (placeholder) placeholder.style.display = "block";
         if (container) {
             container.style.display = "none";
-            container.innerHTML = ""; // Очищаем старые новости при отказе
+            container.innerHTML = "";
         }
       }
     },
@@ -57,25 +54,22 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         }
       },
       onReject: function() {
-        // YouTube
         document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
           const num = ph.id.replace('video-placeholder-', '');
           const iframe = document.getElementById('video-iframe-' + num);
           ph.style.display = "flex";
-          if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
+          if (iframe) { iframe.style.display = "none"; iframe.src = ""; delete iframe.dataset.loaded; }
         });
 
-        // PDF компрессор
         const pdfPh = document.getElementById('pdf-placeholder');
         const pdfIframe = document.getElementById('pdf-iframe');
         if (pdfPh) pdfPh.style.display = "block";
-        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
+        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; delete pdfIframe.dataset.loaded; }
 
-        // Фото в PDF
         const photoPh = document.getElementById('photo-placeholder');
         const photoIframe = document.getElementById('photo-iframe');
         if (photoPh) photoPh.style.display = "block";
-        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; }
+        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; delete photoIframe.dataset.loaded; }
       }
     }
   ],
@@ -115,9 +109,10 @@ function loadNews() {
 function loadPhotoToPdf() {
     const ph = document.getElementById('photo-placeholder');
     const iframe = document.getElementById('photo-iframe');
-    if (ph && iframe) {
+    if (ph && iframe && !iframe.dataset.loaded) {
         iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
         iframe.style.display = "block";
+        iframe.dataset.loaded = 'true';
         ph.style.display = "none";
     }
 }
@@ -125,11 +120,12 @@ function loadPhotoToPdf() {
 function loadPdfCompressor() {
     const ph = document.getElementById('pdf-placeholder');
     const iframe = document.getElementById('pdf-iframe');
-    if (ph && iframe) {
+    if (ph && iframe && !iframe.dataset.loaded) {
         fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
             .catch(() => {});
         iframe.src = "https://pdf-compressor-web.onrender.com";
         iframe.style.display = "block";
+        iframe.dataset.loaded = 'true';
         ph.style.display = "none";
     }
 }

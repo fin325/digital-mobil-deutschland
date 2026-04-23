@@ -54,6 +54,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         }
       },
       onReject: function() {
+        // YouTube
         document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
           const num = ph.id.replace('video-placeholder-', '');
           const iframe = document.getElementById('video-iframe-' + num);
@@ -61,14 +62,16 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; delete iframe.dataset.loaded; }
         });
 
+        // PDF компрессор
         const pdfPh = document.getElementById('pdf-placeholder');
         const pdfIframe = document.getElementById('pdf-iframe');
-        if (pdfPh) pdfPh.style.display = "block";
+        if (pdfPh) pdfPh.style.display = "flex";
         if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; delete pdfIframe.dataset.loaded; }
 
+        // Фото в PDF
         const photoPh = document.getElementById('photo-placeholder');
         const photoIframe = document.getElementById('photo-iframe');
-        if (photoPh) photoPh.style.display = "block";
+        if (photoPh) photoPh.style.display = "flex";
         if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; delete photoIframe.dataset.loaded; }
       }
     }

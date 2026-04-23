@@ -51,7 +51,7 @@ function showTab(tabId, event) {
         targetTab.querySelectorAll('iframe').forEach(iframe => {
             const src = iframe.src;
             if (src && src !== 'about:blank' && src !== '') {
-                iframe.src = '';
+                iframe.src = 'about:blank';
                 setTimeout(() => iframe.src = src, 50);
             }
         });
@@ -217,10 +217,7 @@ function showInnerTab(id, event) {
   if (!isActive) {
     content.classList.add('active');
     btn.classList.add('active');
-
-    const hasConsent = silktideCookieBannerManager.isCookieTypeAccepted('advertising');
-
-    if (id === 'pdf-kompressor' && hasConsent) loadPdfCompressor();
-    if (id === 'pdf-foto' && hasConsent) loadPhotoToPdf();
+    if (id === 'pdf-kompressor') loadPdfCompressor();
+    if (id === 'pdf-foto') loadPhotoToPdf();
   }
 }

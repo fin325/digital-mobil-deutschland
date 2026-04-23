@@ -6,7 +6,7 @@ function hideSwipeHint() {
         const hint = document.querySelector('.scroll-hint-left');
         if (hint) hint.classList.add('hidden');
     }
-}
+} 
 
 function scrollTabs(direction) {
     hideSwipeHint();

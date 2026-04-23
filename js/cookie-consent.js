@@ -43,8 +43,10 @@ silktideCookieBannerManager.updateCookieBannerConfig({
             const btn = ph.querySelector('button');
             if (btn) btn.click();
           });
-          if (document.getElementById('tool-placeholder-pdf')) loadPdfCompressor();
-          if (document.getElementById('tool-placeholder-photo')) loadPhotoToPdf();
+          document.querySelectorAll('[id^="tool-placeholder-"]').forEach(function(ph) {
+            const btn = ph.querySelector('button');
+            if (btn) btn.click();
+          });
         }
 
         if (document.readyState === 'loading') {
@@ -65,7 +67,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         // PDF инструменты — точно как у видео
         document.querySelectorAll('[id^="tool-placeholder-"]').forEach(function(ph) {
           const key = ph.id.replace('tool-placeholder-', '');
-          const iframe = document.getElementById(key + '-iframe');
+          const iframe = document.getElementById('tool-iframe-' + key);
           const content = document.getElementById(key === 'pdf' ? 'pdf-kompressor' : 'pdf-foto');
           ph.style.display = "flex";
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; delete iframe.dataset.loaded; }
@@ -109,7 +111,7 @@ function loadNews() {
 
 function loadPhotoToPdf() {
     const ph = document.getElementById('tool-placeholder-photo');
-    const iframe = document.getElementById('photo-iframe');
+    const iframe = document.getElementById('tool-iframe-photo');
     if (ph && iframe && !iframe.dataset.loaded) {
         iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
         iframe.style.display = "block";
@@ -120,7 +122,7 @@ function loadPhotoToPdf() {
 
 function loadPdfCompressor() {
     const ph = document.getElementById('tool-placeholder-pdf');
-    const iframe = document.getElementById('pdf-iframe');
+    const iframe = document.getElementById('tool-iframe-pdf');
     if (ph && iframe && !iframe.dataset.loaded) {
         fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
             .catch(() => {});

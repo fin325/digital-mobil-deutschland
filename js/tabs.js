@@ -45,6 +45,7 @@ function showTab(tabId, event) {
         targetTab.style.webkitAnimation = '';
 
         targetTab.classList.add('active');
+        window.dispatchEvent(new Event('resize'));
     }
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');

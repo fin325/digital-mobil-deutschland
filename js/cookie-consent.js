@@ -1,5 +1,7 @@
 // js/cookie-consent.js
 
+const _isRu = document.documentElement.lang === 'ru';
+
 silktideCookieBannerManager.updateCookieBannerConfig({
   background: { showBackground: true },
   cookieIcon: { position: "bottomLeft" },
@@ -7,15 +9,19 @@ silktideCookieBannerManager.updateCookieBannerConfig({
   cookieTypes: [
     {
       id: "necessary",
-      name: "Notwendig",
-      description: "<p>Diese Cookies sind technisch erforderlich und können nicht deaktiviert werden.</p>",
+      name: _isRu ? "Необходимые" : "Notwendig",
+      description: _isRu
+        ? "<p>Эти файлы cookie технически необходимы и не могут быть отключены.</p>"
+        : "<p>Diese Cookies sind technisch erforderlich und können nicht deaktiviert werden.</p>",
       required: true
     },
 
     {
       id: "analytics",
-      name: "Statistik",
-      description: "<p>Hilft uns zu verstehen, wie Besucher die Website nutzen.</p>",
+      name: _isRu ? "Статистика" : "Statistik",
+      description: _isRu
+        ? "<p>Помогает нам понять, как посетители используют сайт.</p>"
+        : "<p>Hilft uns zu verstehen, wie Besucher die Website nutzen.</p>",
       required: false,
 
       onAccept: function () {
@@ -40,14 +46,16 @@ silktideCookieBannerManager.updateCookieBannerConfig({
 
     {
       id: "advertising",
-      name: "Werbung & externe Inhalte",
-      description: "<p>YouTube, PDF-Kompressor und Foto-zu-PDF Tools.</p>",
+      name: _isRu ? "Реклама и внешний контент" : "Werbung & externe Inhalte",
+      description: _isRu
+        ? "<p>YouTube, PDF-компрессор и инструмент «Фото в PDF».</p>"
+        : "<p>YouTube, PDF-Kompressor und Foto-zu-PDF Tools.</p>",
       required: false,
 
       onAccept: function () {
         function loadAllExternal() {
 
-          // ▶️ Видео (как было)
+          // ▶️ Видео
           document.querySelectorAll('[id^="video-placeholder-"] button')
             .forEach(btn => btn.click());
 
@@ -84,19 +92,27 @@ silktideCookieBannerManager.updateCookieBannerConfig({
 
   text: {
     banner: {
-      description: `<p>
+      description: _isRu
+        ? `<p>
+        Мы используем файлы cookie для улучшения сайта, YouTube-видео и внешних инструментов.
+        <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click();">Конфиденциальность</a> |
+        <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click();">Импрессум</a>
+      </p>`
+        : `<p>
         Wir verwenden Cookies zur Verbesserung der Website, für YouTube-Videos und externe Tools.
         <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click();">Datenschutz</a> |
         <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click();">Impressum</a>
       </p>`,
-      acceptAllButtonText: "Alle akzeptieren",
-      rejectNonEssentialButtonText: "Nur notwendige",
-      preferencesButtonText: "Einstellungen"
+      acceptAllButtonText: _isRu ? "Принять все" : "Alle akzeptieren",
+      rejectNonEssentialButtonText: _isRu ? "Только необходимые" : "Nur notwendige",
+      preferencesButtonText: _isRu ? "Настройки" : "Einstellungen"
     },
 
     preferences: {
-      title: "Cookie-Einstellungen",
-      description: "<p>Wählen Sie, welche Cookies Sie zulassen möchten.</p>"
+      title: _isRu ? "Настройка параметров cookie" : "Cookie-Einstellungen",
+      description: _isRu
+        ? "<p>Выберите, какие файлы cookie вы хотите разрешить.</p>"
+        : "<p>Wählen Sie, welche Cookies Sie zulassen möchten.</p>"
     }
   },
 

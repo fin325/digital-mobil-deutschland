@@ -47,20 +47,21 @@ function showTab(tabId, event) {
         targetTab.classList.add('active');
         window.dispatchEvent(new Event('resize'));
 
-        // перезапуск только незагруженных iframe
+        // перезапуск iframe только один раз при первом открытии вкладки
         targetTab.querySelectorAll('iframe').forEach(iframe => {
-    const src = iframe.src;
-    if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none' && !iframe.dataset.loaded) {
-        iframe.style.visibility = 'hidden';
-        iframe.src = 'about:blank';
-        iframe.dataset.loaded = 'true'; // ставим флаг сразу
-        setTimeout(() => {
-            iframe.src = src;
-            iframe.style.visibility = '';
-        }, 50);
-       }
-     });
-
+            const src = iframe.src;
+            if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none') {
+                if (!targetTab.dataset.iframeReloaded) {
+                    iframe.style.visibility = 'hidden';
+                    iframe.src = 'about:blank';
+                    setTimeout(() => {
+                        iframe.src = src;
+                        iframe.style.visibility = '';
+                    }, 50);
+                }
+            }
+        });
+        targetTab.dataset.iframeReloaded = 'true';
     }
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');

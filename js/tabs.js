@@ -105,3 +105,15 @@ function showInnerTab(id, event) {
         btn.classList.add('active');
     }
 }
+
+// Touch fix: анимация для button.btn-main
+document.querySelectorAll('button.btn-main').forEach(btn => {
+    btn.addEventListener('touchstart', function() {
+        this.classList.add('is-active');
+    }, { passive: true });
+
+    btn.addEventListener('touchend', function() {
+        setTimeout(() => this.classList.remove('is-active'), 180);
+    }, { passive: true });
+});
+

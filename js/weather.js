@@ -243,3 +243,4 @@ function toggleWeatherScroll() {
 }
 
 getWeather();
+

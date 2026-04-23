@@ -49,16 +49,18 @@ function showTab(tabId, event) {
 
         // перезапуск только незагруженных iframe
         targetTab.querySelectorAll('iframe').forEach(iframe => {
-            const src = iframe.src;
-            if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none' && !iframe.dataset.loaded) {
-                iframe.style.visibility = 'hidden';
-                iframe.src = 'about:blank';
-                setTimeout(() => {
-                    iframe.src = src;
-                    iframe.style.visibility = '';
-                }, 50);
-            }
-        });
+    const src = iframe.src;
+    if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none' && !iframe.dataset.loaded) {
+        iframe.style.visibility = 'hidden';
+        iframe.src = 'about:blank';
+        iframe.dataset.loaded = 'true'; // ставим флаг сразу
+        setTimeout(() => {
+            iframe.src = src;
+            iframe.style.visibility = '';
+        }, 50);
+       }
+     });
+
     }
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');

@@ -1,11 +1,7 @@
-/* === weather.js — Wetter OpenWeatherMap + Luftqualität === */
+/* === weather.js — Wetter über eigenen Proxy + Luftqualität === */
 
-const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
 let currentCity = localStorage.getItem('userCity') || 'Hattingen';
-
-const CACHE_TTL = 10 * 60 * 1000;
 const isRu = document.documentElement.lang === 'ru';
-
 const weatherMessages = {
     cityPrompt: isRu ? 'Пожалуйста, введите название города:' : 'Bitte den Namen der Stadt eingeben:',
     errorCity:   isRu ? 'Город не найден:'           : 'Stadt nicht gefunden:',
@@ -22,14 +18,12 @@ function windDirection(deg) {
 
 // ── Фаза луны (локальный расчёт, синодический цикл 29.53 дня) ──
 function getMoonPhase() {
-    // Известное новолуние: 6 января 2000, 18:14 UTC
     const known = new Date(Date.UTC(2000, 0, 6, 18, 14));
     const cycle = 29.530588853;
     const now   = new Date();
-    const diff  = (now - known) / (1000 * 60 * 60 * 24); // дней
-    const phase = ((diff % cycle) + cycle) % cycle;       // 0..29.53
+    const diff  = (now - known) / (1000 * 60 * 60 * 24);
+    const phase = ((diff % cycle) + cycle) % cycle;
 
-    // 8 фаз + иконки SVG emoji
     if (phase < 1.85)  return { name: isRu ? 'Новолуние'           : 'Neumond',            icon: 'icon-1f311' };
     if (phase < 5.54)  return { name: isRu ? 'Молодой серп'        : 'Zunehmende Sichel',  icon: 'icon-1f312' };
     if (phase < 9.22)  return { name: isRu ? 'Первая четверть'     : 'Erstes Viertel',     icon: 'icon-1f313' };
@@ -49,22 +43,11 @@ function formatTime(unixTs) {
     return `${h}:${m}`;
 }
 
-// ── Основной запрос погоды ─────────────────────────────────────
+// ── Основной запрос погоды через собственный прокси ────────────
 async function getWeather() {
     try {
-        const cached = localStorage.getItem('weatherCache');
-        if (cached) {
-            const parsed = JSON.parse(cached);
-            if (Date.now() - parsed.timestamp < CACHE_TTL && parsed.city === currentCity) {
-                applyWeatherData(parsed.data);
-                return;
-            }
-        }
-    } catch (e) {}
-
-    try {
         const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${WEATHER_API_KEY}&units=metric&lang=${isRu ? 'ru' : 'de'}`
+            `/api/weather?city=${encodeURIComponent(currentCity)}&lang=${isRu ? 'ru' : 'de'}`
         );
         const d = await res.json();
 
@@ -72,12 +55,6 @@ async function getWeather() {
             console.error(weatherMessages.errorCity, d.message);
             return;
         }
-
-        try {
-            localStorage.setItem('weatherCache', JSON.stringify({
-                data: d, timestamp: Date.now(), city: currentCity
-            }));
-        } catch (e) {}
 
         applyWeatherData(d);
 
@@ -116,8 +93,6 @@ function applyWeatherData(d) {
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
-                    localStorage.removeItem('weatherCache');
-                    localStorage.removeItem('aqiCache');
                     getWeather();
                 }
             };
@@ -159,7 +134,6 @@ function applyWeatherData(d) {
             const moon = getMoonPhase();
             moonEl.className   = `icon-emoji ${moon.icon}`;
             moonEl.title       = moon.name;
-            // текст фазы рядом
             const moonLabelEl = document.getElementById('moon-label');
             if (moonLabelEl) moonLabelEl.innerText = moon.name;
         }
@@ -171,32 +145,19 @@ function applyWeatherData(d) {
     }
 }
 
-// ── Качество воздуха ───────────────────────────────────────────
+// ── Качество воздуха через собственный прокси ──────────────────
 async function getAirPollution(lat, lon) {
     try {
-        const cached = localStorage.getItem('aqiCache');
-        if (cached) {
-            const parsed = JSON.parse(cached);
-            if (Date.now() - parsed.timestamp < CACHE_TTL) {
-                updateAQIUI(parsed.index, parsed.components);
-                return;
-            }
-        }
-    } catch (e) {}
-
-    try {
-        const res  = await fetch(
-            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
-        );
+        const res  = await fetch(`/api/air?lat=${lat}&lon=${lon}`);
         const data = await res.json();
+
+        if (!data.list || !data.list[0]) {
+            console.error(weatherMessages.errorAir, data);
+            return;
+        }
+
         const aqiIndex   = data.list[0].main.aqi;
         const components = data.list[0].components;
-
-        try {
-            localStorage.setItem('aqiCache', JSON.stringify({
-                index: aqiIndex, components, timestamp: Date.now()
-            }));
-        } catch (e) {}
 
         updateAQIUI(aqiIndex, components);
 
@@ -206,7 +167,6 @@ async function getAirPollution(lat, lon) {
 }
 
 function updateAQIUI(index, components) {
-    // AQI индекс
     const valEl = document.getElementById('aqi-value');
     const icoEl = document.getElementById('aqi-icon');
 
@@ -226,7 +186,6 @@ function updateAQIUI(index, components) {
         icoEl.style.filter  = `drop-shadow(0 0 4px ${color})`;
     }
 
-    // Загрязнители — NO₂, CO, O₃
     if (!components) return;
 
     const no2El = document.getElementById('no2-value');
@@ -282,3 +241,4 @@ function toggleWeatherScroll() {
 }
 
 getWeather();
+

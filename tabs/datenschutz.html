@@ -50,11 +50,21 @@
     Eine Verarbeitung personenbezogener Daten erfolgt nur mit Einwilligung des Nutzers oder aufgrund berechtigter Interessen (Art. 6 Abs. 1 lit. f DSGVO).
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">3. Hosting</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">3. Hosting (Vercel)</h3>
 <p style="margin-bottom: 14px;">
-    Diese Website wird bei einem externen Hosting-Anbieter gehostet.
+    Diese Website wird bei Vercel Inc. gehostet.<br>
+    Anbieter: Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
+</p>
+<p style="margin-bottom: 14px;">
     Beim Aufruf der Website werden automatisch Verbindungsdaten (z.&nbsp;B. IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp, Betriebssystem) vom Webserver protokolliert (Server-Log-Files).
+    Vercel betreibt ein weltweites Content Delivery Network (CDN); Auslieferung der Inhalte erfolgt über den jeweils nächstgelegenen Serverstandort, bevorzugt in der EU (Frankfurt).
+</p>
+<p style="margin-bottom: 14px;">
     Die Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und stabilen Bereitstellung der Website).
+    Vercel Inc. hat mit uns einen Auftragsverarbeitungsvertrag (Data Processing Addendum) gemäß Art. 28 DSGVO geschlossen. Die Übermittlung in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln sowie des EU-US Data Privacy Framework, unter dem Vercel Inc. zertifiziert ist.
+</p>
+<p style="margin-bottom: 14px;">
+    Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://vercel.com/legal/privacy-policy</a>
 </p>
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">4. Cookies &amp; Einwilligungsverwaltung (Cookie-Banner)</h3>
@@ -63,7 +73,7 @@
 </p>
 <p style="margin-bottom: 6px;"><strong>a) Technisch notwendige Cookies</strong></p>
 <p style="margin-bottom: 14px;">
-    Bestimmte Cookies sind erforderlich, damit die Website korrekt funktioniert (z.&nbsp;B. zur Speicherung Ihrer Cookie-Einstellungen im Local Storage).
+    Bestimmte Cookies sind erforderlich, damit die Website korrekt funktioniert (z.&nbsp;B. zur Speicherung Ihrer Cookie-Einstellungen im Local Storage sowie der von Ihnen gewählten Stadt für die Wetteranzeige).
     Diese Cookies können nicht deaktiviert werden.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO, § 25 Abs. 2 Nr. 2 TDDDG.
 </p>
@@ -100,37 +110,44 @@
     Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://policies.google.com/privacy</a>
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">6. Wetterdaten — OpenWeatherMap</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">6. Wetterdaten — OpenWeatherMap (Server-Proxy)</h3>
 <p style="margin-bottom: 14px;">
     Zur Anzeige aktueller Wetterdaten verwenden wir die API von OpenWeatherMap.
     Anbieter: Openweather Ltd., 4 Queens Road, Wimbledon, London, SW19 8YB, Vereinigtes Königreich.
 </p>
 <p style="margin-bottom: 14px;">
-    Bei der Abfrage werden die IP-Adresse des Nutzers, der Stadtname sowie Koordinaten an Server von OpenWeatherMap (USA, UK oder Lettland) übertragen.
-    Die Ergebnisse werden lokal im Browser (Local Storage) für ca. 10 Minuten zwischengespeichert, um unnötige Anfragen zu vermeiden.
-    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Wetterdaten).
+    <strong>Die Abfrage der Wetterdaten erfolgt ausschließlich serverseitig über unseren eigenen Proxy-Endpoint</strong> (Vercel Serverless Function <code>/api/weather</code>).
+    Der Browser des Nutzers verbindet sich <strong>nicht direkt</strong> mit Servern von OpenWeatherMap.
+    An OpenWeatherMap werden lediglich der Stadtname sowie die IP-Adresse unseres Server-Proxys (nicht die IP-Adresse des Nutzers) übertragen.
+    Der Nutzer selbst bleibt für OpenWeatherMap anonym.
+</p>
+<p style="margin-bottom: 14px;">
+    Zur Verringerung von API-Anfragen werden die Ergebnisse serverseitig für ca. 10 Minuten zwischengespeichert (Server-Cache).
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Wetterdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
 </p>
 <p style="margin-bottom: 14px;">
     Datenschutzerklärung von OpenWeatherMap: <a href="https://openweathermap.org/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://openweathermap.org/privacy-policy</a>
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">7. Luftqualitätsdaten — OpenWeatherMap Air Pollution API</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">7. Luftqualitätsdaten — OpenWeatherMap Air Pollution API (Server-Proxy)</h3>
 <p style="margin-bottom: 14px;">
     Ergänzend zu den Wetterdaten rufen wir über die OpenWeatherMap Air Pollution API den aktuellen Luftqualitätsindex (AQI) ab.
-    Hierzu werden die Koordinaten des gewählten Ortes und die IP-Adresse an OpenWeatherMap übertragen.
-    Es gelten die gleichen Angaben wie unter Abschnitt 6.
+    Auch diese Abfrage erfolgt <strong>ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/air</code>).
+    An OpenWeatherMap werden lediglich die Koordinaten des gewählten Ortes sowie die IP-Adresse unseres Server-Proxys übertragen; die IP-Adresse des Nutzers wird nicht weitergegeben.
+    Es gelten im Übrigen die gleichen Angaben wie unter Abschnitt 6.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">8. Geomagnetische Aktivität — NOAA SWPC</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">8. Geomagnetische Aktivität — NOAA SWPC (Server-Proxy)</h3>
 <p style="margin-bottom: 14px;">
     Zur Anzeige der aktuellen geomagnetischen Aktivität (Kp-Index) verwenden wir die öffentliche API des Space Weather Prediction Center (SWPC) der US-Behörde NOAA (National Oceanic and Atmospheric Administration).
     URL: <a href="https://services.swpc.noaa.gov" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://services.swpc.noaa.gov</a>
 </p>
 <p style="margin-bottom: 14px;">
-    Bei der Abfrage wird die IP-Adresse des Nutzers an Server der NOAA (USA) übertragen.
-    Die Ergebnisse werden lokal im Browser (Local Storage) für 30 Minuten zwischengespeichert, um unnötige Anfragen zu vermeiden.
+    <strong>Die Abfrage erfolgt ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/magnet</code>).
+    An die NOAA wird lediglich die IP-Adresse unseres Server-Proxys übertragen; eine direkte Verbindung zwischen dem Browser des Nutzers und Servern der NOAA (USA) findet nicht statt.
+    Zur Verringerung von Anfragen werden die Ergebnisse serverseitig für ca. 30 Minuten zwischengespeichert.
     Es handelt sich um eine öffentlich zugängliche Behörden-API ohne Authentifizierung oder kommerzielle Nutzung.
-    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Wetterdaten).
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Umweltdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
 </p>
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">9. Nachrichten (RSS-Feed via rss2json)</h3>
@@ -221,9 +238,7 @@
     Diese Website nutzt den Local Storage Ihres Browsers zur Speicherung folgender Daten:
 </p>
 <p style="margin-bottom: 6px;">• Cookie-Einwilligungen (Silktide Consent Manager)</p>
-<p style="margin-bottom: 6px;">• Zwischengespeicherte Wetterdaten (max. 10 Minuten)</p>
-<p style="margin-bottom: 6px;">• Zwischengespeicherte Luftqualitätsdaten (max. 10 Minuten)</p>
-<p style="margin-bottom: 14px;">• Zwischengespeicherte geomagnetische Daten (max. 30 Minuten)</p>
+<p style="margin-bottom: 14px;">• Die von Ihnen zuletzt gewählte Stadt für die Wetteranzeige (Schlüssel <code>userCity</code>)</p>
 <p style="margin-bottom: 14px;">
     Alle im Local Storage gespeicherten Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
     Sie können den Local Storage jederzeit über die Browser-Einstellungen löschen.

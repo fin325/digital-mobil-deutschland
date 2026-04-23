@@ -47,12 +47,16 @@ function showTab(tabId, event) {
         targetTab.classList.add('active');
         window.dispatchEvent(new Event('resize'));
 
-        // перезапуск iframe если вкладка была скрыта
+        // перезапуск iframe без мигания
         targetTab.querySelectorAll('iframe').forEach(iframe => {
             const src = iframe.src;
-            if (src && src !== 'about:blank' && src !== '') {
+            if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none') {
+                iframe.style.visibility = 'hidden';
                 iframe.src = 'about:blank';
-                setTimeout(() => iframe.src = src, 50);
+                setTimeout(() => {
+                    iframe.src = src;
+                    iframe.style.visibility = '';
+                }, 50);
             }
         });
     }

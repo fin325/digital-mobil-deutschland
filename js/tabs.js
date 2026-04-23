@@ -46,6 +46,15 @@ function showTab(tabId, event) {
 
         targetTab.classList.add('active');
         window.dispatchEvent(new Event('resize'));
+
+        // перезапуск iframe если вкладка была скрыта
+        targetTab.querySelectorAll('iframe').forEach(iframe => {
+            const src = iframe.src;
+            if (src && src !== 'about:blank' && src !== '') {
+                iframe.src = '';
+                setTimeout(() => iframe.src = src, 50);
+            }
+        });
     }
 
     if (event && event.currentTarget) event.currentTarget.classList.add('active');

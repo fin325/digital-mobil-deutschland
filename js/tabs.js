@@ -217,7 +217,10 @@ function showInnerTab(id, event) {
   if (!isActive) {
     content.classList.add('active');
     btn.classList.add('active');
-    if (id === 'pdf-kompressor') loadPdfCompressor();
-    if (id === 'pdf-foto') loadPhotoToPdf();
+
+    const hasConsent = silktideCookieBannerManager.isCookieTypeAccepted('advertising');
+
+    if (id === 'pdf-kompressor' && hasConsent) loadPdfCompressor();
+    if (id === 'pdf-foto' && hasConsent) loadPhotoToPdf();
   }
 }

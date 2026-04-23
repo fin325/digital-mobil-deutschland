@@ -27,6 +27,7 @@ function applyMagnetData(kp) {
     let color;
     if (kp <= 2)      color = '#2ecc71';
     else if (kp <= 4) color = '#f1c40f';
+    else if (kp <= 6) color = '#e67e22';
     else              color = '#e74c3c';
 
     el.style.color = color;

@@ -1,6 +1,6 @@
 /* === weather.js — Wetter OpenWeatherMap + Luftqualität === */
 
-const WEATHER_API_KEY = '9057c4b98fd893160015f5d4bc3696cc';
+const WEATHER_API_KEY = '1714fbf931d50a0ed7d12fe9f0383060';
 let currentCity = localStorage.getItem('userCity') || 'Hattingen';
 
 const CACHE_TTL = 10 * 60 * 1000;

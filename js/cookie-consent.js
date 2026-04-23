@@ -3,133 +3,170 @@
 silktideCookieBannerManager.updateCookieBannerConfig({
   background: { showBackground: true },
   cookieIcon: { position: "bottomLeft" },
+
   cookieTypes: [
     {
       id: "necessary",
       name: "Notwendig",
-      description: "<p>Diese Cookies sind technisch erforderlich, damit die Website richtig funktioniert. Sie können nicht deaktiviert werden.</p>",
+      description: "<p>Diese Cookies sind technisch erforderlich und können nicht deaktiviert werden.</p>",
       required: true
     },
+
     {
       id: "analytics",
       name: "Statistik",
-      description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
+      description: "<p>Hilft uns zu verstehen, wie Besucher die Website nutzen.</p>",
       required: false,
-      onAccept: function() {
-        // ИСПРАВЛЕНИЕ: Ждем загрузки HTML перед вызовом loadNews, 
-        // чтобы скрипт точно нашел элементы на странице
+
+      onAccept: function () {
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadNews, { once: true });
         } else {
           loadNews();
         }
       },
-      onReject: function() {
+
+      onReject: function () {
         const placeholder = document.getElementById('news-placeholder');
         const container = document.getElementById('news-container');
-        
+
         if (placeholder) placeholder.style.display = "block";
         if (container) {
-            container.style.display = "none";
-            container.innerHTML = ""; // Очищаем старые новости при отказе
+          container.style.display = "none";
+          container.innerHTML = "";
         }
       }
     },
+
     {
       id: "advertising",
       name: "Werbung & externe Inhalte",
-      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und das Laden externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
+      description: "<p>YouTube, PDF-Kompressor und Foto-zu-PDF Tools.</p>",
       required: false,
-      onAccept: function() {
-        function loadVideos() {
-          document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
-            const btn = ph.querySelector('button');
-            if (btn) btn.click();
-          });
-          if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
-          if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+
+      onAccept: function () {
+        function loadAllExternal() {
+
+          // ▶️ Видео (как было)
+          document.querySelectorAll('[id^="video-placeholder-"] button')
+            .forEach(btn => btn.click());
+
+          // 📄 PDF
+          const pdfBtn = document.querySelector('#pdf-placeholder button');
+          if (pdfBtn) pdfBtn.click();
+
+          // 🖼 Photo
+          const photoBtn = document.querySelector('#photo-placeholder button');
+          if (photoBtn) photoBtn.click();
         }
 
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', loadVideos, { once: true });
+          document.addEventListener('DOMContentLoaded', loadAllExternal, { once: true });
         } else {
-          loadVideos();
+          loadAllExternal();
         }
       },
-      onReject: function() {
-        // YouTube
-        document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
+
+      onReject: function () {
+
+        // Видео
+        document.querySelectorAll('[id^="video-placeholder-"]').forEach(function (ph) {
           const num = ph.id.replace('video-placeholder-', '');
-          const iframe = document.getElementById('video-iframe-' + num);
-          ph.style.display = "flex";
-          if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
+          resetIframe(ph.id, 'video-iframe-' + num);
         });
 
-        // PDF компрессор
-        const pdfPh = document.getElementById('pdf-placeholder');
-        const pdfIframe = document.getElementById('pdf-iframe');
-        if (pdfPh) pdfPh.style.display = "block";
-        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
-
-        // Фото в PDF
-        const photoPh = document.getElementById('photo-placeholder');
-        const photoIframe = document.getElementById('photo-iframe');
-        if (photoPh) photoPh.style.display = "block";
-        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; }
+        // PDF + Photo
+        resetIframe('pdf-placeholder', 'pdf-iframe');
+        resetIframe('photo-placeholder', 'photo-iframe');
       }
     }
   ],
+
   text: {
     banner: {
-      description: `<p>Wir verwenden Cookies, um die Nutzung zu verbessern, personalisierte Inhalte (YouTube) anzubieten und unsere Website zu analysieren. 
-      <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click(); return false;">Datenschutzerklärung</a> 
-      und <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click(); return false;">Impressum</a> 
-      finden Sie über die entsprechenden Buttons auf dieser Seite.</p>`,
+      description: `<p>
+        Wir verwenden Cookies zur Verbesserung der Website, für YouTube-Videos und externe Tools.
+        <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click();">Datenschutz</a> |
+        <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click();">Impressum</a>
+      </p>`,
       acceptAllButtonText: "Alle akzeptieren",
       rejectNonEssentialButtonText: "Nur notwendige",
       preferencesButtonText: "Einstellungen"
     },
+
     preferences: {
-      title: "Cookie-Einstellungen anpassen",
-      description: "<p>Wir respektieren Ihr Recht auf Privatsphäre. Sie können auswählen, welche Cookies Sie zulassen möchten.</p>"
+      title: "Cookie-Einstellungen",
+      description: "<p>Wählen Sie, welche Cookies Sie zulassen möchten.</p>"
     }
   },
+
   position: { banner: "bottomCenter" }
 });
 
-// ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
+
+// ====================== ОБЩИЕ ФУНКЦИИ ======================
+
+function loadIframe(placeholderId, iframeId, src, wakeupUrl = null) {
+  const ph = document.getElementById(placeholderId);
+  const iframe = document.getElementById(iframeId);
+
+  if (!ph || !iframe || iframe.dataset.loaded) return;
+
+  if (wakeupUrl) {
+    fetch(wakeupUrl, { mode: 'no-cors' }).catch(() => {});
+  }
+
+  iframe.src = src;
+  iframe.style.display = "block";
+  iframe.dataset.loaded = 'true';
+  ph.style.display = "none";
+}
+
+function resetIframe(phId, iframeId) {
+  const ph = document.getElementById(phId);
+  const iframe = document.getElementById(iframeId);
+
+  if (ph) ph.style.display = "block";
+
+  if (iframe) {
+    iframe.style.display = "none";
+    iframe.src = "";
+    delete iframe.dataset.loaded;
+  }
+}
+
+
+// ====================== ЗАГРУЗКИ ======================
 
 function loadNews() {
-    const placeholder = document.getElementById('news-placeholder');
-    const container = document.getElementById('news-container');
-    if (placeholder) placeholder.style.display = "none";
-    if (container) container.style.display = "block";
+  const placeholder = document.getElementById('news-placeholder');
+  const container = document.getElementById('news-container');
 
-    if (typeof window.loadTagesschauNews === 'function') {
-        window.loadTagesschauNews();
-    } else {
-        console.error("Функция loadTagesschauNews не найдена!");
-    }
+  if (placeholder) placeholder.style.display = "none";
+  if (container) container.style.display = "block";
+
+  if (typeof window.loadTagesschauNews === 'function') {
+    window.loadTagesschauNews();
+  }
 }
 
-function loadPhotoToPdf() {
-    const ph = document.getElementById('photo-placeholder');
-    const iframe = document.getElementById('photo-iframe');
-    if (ph && iframe) {
-        iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
-        iframe.style.display = "block";
-        ph.style.display = "none";
-    }
-}
 
+// 📄 PDF
 function loadPdfCompressor() {
-    const ph = document.getElementById('pdf-placeholder');
-    const iframe = document.getElementById('pdf-iframe');
-    if (ph && iframe) {
-        fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
-            .catch(() => {});
-        iframe.src = "https://pdf-compressor-web.onrender.com";
-        iframe.style.display = "block";
-        ph.style.display = "none";
-    }
+  loadIframe(
+    'pdf-placeholder',
+    'pdf-iframe',
+    'https://pdf-compressor-web.onrender.com',
+    'https://pdf-compressor-web.onrender.com/wakeup'
+  );
+}
+
+
+// 🖼 Photo → PDF
+function loadPhotoToPdf() {
+  loadIframe(
+    'photo-placeholder',
+    'photo-iframe',
+    'https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true'
+  );
 }

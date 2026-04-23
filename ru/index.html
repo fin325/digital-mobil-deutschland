@@ -57,14 +57,14 @@
 <div class="nav-row">
 <button class="nav-btn active" onclick="showTab('home', event)"><span class="icon-emoji icon-1f3db"></span>Главная</button>
 <button class="nav-btn" onclick="showTab('pdf', event)"><span class="icon-emoji icon-1f4c9"></span>PDF для почты</button>
-<button class="nav-btn" onclick="showTab('mobile', event)"><span class="icon-emoji icon-1f686"></span>DB</button>
+<button class="nav-btn" onclick="showTab('mobile', event)"><span class="icon-emoji icon-1f686"></span>DB&nbsp;&nbsp;<span class="icon-emoji icon-1f689"></span></button>
 <button class="nav-btn" onclick="showTab('maps', event)"><span class="icon-emoji icon-1f6e3"></span>Карты</button>
 </div>
 
 <div class="nav-row">
-<button class="nav-btn" onclick="showTab('news', event)"><span class="icon-emoji icon-1f4f0"></span>Новости</button>
-<button class="nav-btn" onclick="showTab('news-hattingen', event)"><span class="icon-emoji icon-1f3d9"></span>Хаттинген</button>
-<button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Законы</button>
+<button class="nav-btn" onclick="showTab('news', event)"><span class="icon-emoji icon-1f4f0"></span>Новости DE</button>
+<button class="nav-btn" onclick="showTab('news-hattingen', event)"><span class="icon-emoji icon-1f3d9"></span>Хаттинген </button>
+<button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Законы </button>
 <button class="nav-btn" onclick="showTab('translate', event)"><span class="icon-emoji icon-1f310"></span>Переводчик</button>
 </div>
 
@@ -85,8 +85,8 @@
 
 <section id="home" class="tab-content active">
     <div class="card hero-card">
-        <h1 style="margin-bottom: 10px; display: flex; font-size: 1.2rem; align-items: center;">Добро пожаловать! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
-        <p style="text-align: center;">В Хаттингене находится Интеркультурный центр Магнет для мигрантов. Узнайте больше о центре — нажмите на Магнет</p>
+        <h1 style="margin-bottom: 10px; display: flex; font-size: 1.3rem; align-items: center;">Добро пожаловать! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
+        <p style="text-align: center;">В Хаттингене находится Интеркультурный центр Magnet для мигрантов. Узнайте больше о центре— просто нажмите на Magnet</p>
         <a href="magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
             <img src="../img/IMG_2784.jpeg" alt="Интеркультурный центр Магнет" style="width: 100%; height: auto; display: block; border-radius: 8px;">
         </a>
@@ -151,7 +151,7 @@
       </div>
     <div class="inner-info">
       <p>Используйте бесплатную расширенную версию PDF-редактора — включая подпись PDF, объединение файлов и многое другое.</p>
-      <a href="https://tools.pdf24.org/de/" target="_blank" class="btn-main">PDF24 Tools</a>
+      <a href="https://tools.pdf24.org/ru/" target="_blank" class="btn-main">PDF24 Tools</a>
     </div>
     </div>
   </div>
@@ -162,13 +162,13 @@
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
             <h2 style="margin-bottom: 5px;"><span class="icon-emoji icon-1f5de"></span> Последние новости</h2>
         </div>
-        <div class="video-wrapper horizontal" style="margin-top: -5px;">
-            <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-                <p style="margin:0 0 8px;"><strong>YouTube-плейлист</strong></p>
-                <p style="margin:0 0 16px; font-size:0.9rem;">Нажимая «Смотреть», вы принимаете политику конфиденциальности YouTube/Google.</p>
-                <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Смотреть плейлист</button>
-            </div>
-            <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        <div class="video-wrapper horizontal">
+        <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+        <p style="margin:0 0 8px;"><strong>YouTube-Playlist</strong></p>
+        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
+        <button onclick="loadPlaylist('video-placeholder-3', 'video-iframe-3', 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" class="load-tool-btn">▶ Playlist ansehen</button>
+        </div>
+        <iframe id="video-iframe-3" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
         </div>
         <span id="news-source" style="font-size: 0.85rem; color: #666;">Источник: <a href="https://ru.euronews.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">ru.euronews.com</a></span>
         <div id="news-wrapper" style="margin-top: 12px;">

@@ -3,11 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initClock();   // clock.js
     getWeather();  // weather.js
-    
-    // ВАЖНО: Мы убрали отсюда loadNews();
-    // Теперь новости загружаются только после согласия в куки или по клику на заглушку!
 
-    // === Автоматическое открытие вкладки по ссылке (Hash) ===
     const hash = window.location.hash.replace('#', ''); 
     if (hash) {
         const targetButton = document.querySelector(`button[onclick*="'${hash}'"]`);
@@ -29,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadVideo(placeholderId, iframeId, videoId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
-    if (placeholder && iframe) {
-        // Убрали autoplay=1. Плеер просто загрузится в режиме паузы.
+    if (placeholder && iframe && !iframe.dataset.loaded) {
         iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
         iframe.style.display = "block";
+        iframe.dataset.loaded = 'true';
         placeholder.style.display = "none";
     }
 }
@@ -40,10 +36,10 @@ function loadVideo(placeholderId, iframeId, videoId) {
 function loadPlaylist(placeholderId, iframeId, listId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
-    if (placeholder && iframe) {
-        // Убрали autoplay=1. Плейлист просто загрузится в режиме паузы.
+    if (placeholder && iframe && !iframe.dataset.loaded) {
         iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&rel=0`;
         iframe.style.display = "block";
+        iframe.dataset.loaded = 'true';
         placeholder.style.display = "none";
     }
 }

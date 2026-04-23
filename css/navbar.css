@@ -344,3 +344,16 @@ a.nav-btn:hover {
         -moz-osx-font-smoothing: grayscale;
     }
 }
+
+@media (min-width: 768px) {
+  .nav-rows-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-row {
+    justify-content: center;
+  }
+}
+

@@ -1,4 +1,4 @@
-// js/cookie-consent.js
+// js/cookie-consent.js 
 
 silktideCookieBannerManager.updateCookieBannerConfig({
 background: { showBackground: true },

@@ -8,12 +8,16 @@ scroll-hint {
     display: block;
 }
 
+.navbar .nav-btn .icon-emoji {
+  margin-left: -4px; /* отрицательный — двигает влево */
+}
+
 .navbar {
     background: rgba(0, 20, 60, 0.3);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 12px 0 14px 0;
+    padding: 4px 0 4px 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
@@ -46,8 +50,8 @@ scroll-hint {
 /* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
     display: flex;
-    gap: 10px;
-    justify-content: space-between;
+    gap: 9px;
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -60,7 +64,7 @@ a {
 .nav-btn {
     background: rgba(0, 30, 80, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 9px 16px;
+    padding: 8px 12px;
     border-radius: 14px;
     white-space: nowrap;
     color: #d0eaff;
@@ -340,3 +344,16 @@ a.nav-btn:hover {
         -moz-osx-font-smoothing: grayscale;
     }
 }
+
+@media (min-width: 768px) {
+  .nav-rows-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-row {
+    justify-content: center;
+  }
+}
+

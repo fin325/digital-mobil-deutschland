@@ -195,3 +195,19 @@ document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link =>
         setTimeout(() => this.classList.remove('is-active'), 150);
     }, { passive: true });
 });
+
+function showInnerTab(id, event) {
+  const content = document.getElementById(id);
+  const btn = event.currentTarget;
+  const isActive = content.classList.contains('active');
+
+  document.querySelectorAll('.inner-tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn[onclick*="showInnerTab"]').forEach(el => el.classList.remove('active'));
+
+  if (!isActive) {
+    content.classList.add('active');
+    btn.classList.add('active');
+    if (id === 'pdf-kompressor') loadPdfCompressor();
+    if (id === 'pdf-foto') loadPhotoToPdf();
+  }
+}

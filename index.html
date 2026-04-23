@@ -51,71 +51,44 @@
 <scroll-hint></scroll-hint>
 
 <nav class="navbar">
-    <div class="nav-scroll-viewport">
+  <div class="nav-scroll-viewport">
     <div class="nav-rows-wrapper">
-    <div class="nav-row">
-    <button class="nav-btn active" onclick="showTab('home', event)"><span class="icon-emoji icon-1f3db"></span>Startseite</button>
-    <button class="nav-btn" onclick="showTab('img2pdf', event)"><span class="icon-emoji icon-1f320"></span>Foto zu PDF</button>
-    <button class="nav-btn" onclick="showTab('pdf', event)"><span class="icon-emoji icon-1f4c9"></span>PDF Kompressor</button>
-    <button class="nav-btn" onclick="showTab('maps', event)"><span class="icon-emoji icon-1f6e3"></span>Karten</button>
-    <button class="nav-btn" onclick="showTab('mobile', event)"><span class="icon-emoji icon-1f686"></span>Transport</button>
-    <button class="nav-btn" onclick="showTab('contacts', event)"><span class="icon-emoji icon-1f4de"></span>Kontakt</button>
-    <button class="nav-btn" onclick="showTab('translate', event)"><span class="icon-emoji icon-1f310"></span>Übersetzer</button>
-    <button class="nav-btn" onclick="showTab('project', event)"><span class="icon-emoji icon-2139"></span>Projekt Info</button>
-    </div>
-    <div class="nav-row">
-    <button class="nav-btn" onclick="showTab('news-hattingen', event)"><span class="icon-emoji icon-1f3d9"></span>Hattingen News</button>
-    <button class="nav-btn" onclick="showTab('news', event)"><span class="icon-emoji icon-1f4f0"></span>Nachrichten-Welt</button>
-    <button class="nav-btn" onclick="showTab('docs', event)"><span class="icon-emoji icon-1f4bb"></span>KI-Assistenten</button>
-    <button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Gesetze</button>
-    <button class="nav-btn" onclick="showTab('jobs', event)"><span class="icon-emoji icon-1f4bc"></span>Arbeit</button>
-    <button class="nav-btn" onclick="showTab('health', event)"><span class="icon-emoji icon-1f3e5"></span>Gesundheit</button>     
-    <button class="nav-btn" onclick="showTab('housing', event)"><span class="icon-emoji icon-1f3e0"></span> Wohnungssuche</button>
+
+<div class="nav-row">
+<button class="nav-btn active" onclick="showTab('home', event)"><span class="icon-emoji icon-1f3db"></span>Home</button>
+<button class="nav-btn" onclick="showTab('pdf', event)"><span class="icon-emoji icon-1f4c9"></span>PDF für Mail</button>
+<button class="nav-btn" onclick="showTab('mobile', event)"><span class="icon-emoji icon-1f686"></span>DB</button>
+<button class="nav-btn" onclick="showTab('maps', event)"><span class="icon-emoji icon-1f6e3"></span>Karten</button>
+<button class="nav-btn" onclick="showTab('contacts', event)"><span class="icon-emoji icon-1f4de"></span>Kontakt</button>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="showTab('news', event)"><span class="icon-emoji icon-1f4f0"></span>Nachrichten</button>
+<button class="nav-btn" onclick="showTab('news-hattingen', event)"><span class="icon-emoji icon-1f3d9"></span>Hattingen</button>
+<button class="nav-btn" onclick="showTab('laws', event)"><span class="icon-emoji icon-2696"></span>Gesetze</button>
+<button class="nav-btn" onclick="showTab('translate', event)"><span class="icon-emoji icon-1f310"></span>Übersetzer</button>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="showTab('jobs', event)"><span class="icon-emoji icon-1f4bc"></span>Arbeit</button>
+<button class="nav-btn" onclick="showTab('health', event)"><span class="icon-emoji icon-1f3e5"></span>Arzten</button>
+<button class="nav-btn" onclick="showTab('housing', event)"><span class="icon-emoji icon-1f3e0"></span>Miete</button>
+<button class="nav-btn" onclick="showTab('docs', event)"><span class="icon-emoji icon-1f4bb"></span>KI</button>
+<button class="nav-btn" onclick="showTab('project', event)"><span class="icon-emoji icon-2139"></span>Projekt Info</button>
+</div>
+
     </div>
   </div>
-</div>
 </nav>
+
 <main class="container">
 <section id="home" class="tab-content active">
     <div class="card hero-card">    
-        <h1 style="margin-top: 0; margin-bottom: 10px; display: flex; align-items: center;">Willkommen! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
-        <p>In Hattingen gibt es das Interkulturelle Zentrum Magnet, das sich mit der Integration von Migranten durch Bildungs- und Sozialprojekte beschäftigt.</p>
-        <p>Klicken Sie einfach auf Magnet.</p>
+        <h1 style="margin-bottom: 10px; display: flex; align-items: center;">Willkommen! <span class="icon-emoji icon-1f1e9-1f1ea" style="margin-left: 6px;"></span></h1>
+            <p style="text-align: center;">In Hattingen gibt es das Interkulturelle Zentrum Magnet für Migranten. Mehr über das Zentrum - Klicken Sie einfach auf Magnet</p>
         <a href="tabs/magnet.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; padding: 0; overflow: hidden; border: none; max-width: 380px; margin-left: auto; margin-right: auto;">
            <img src="img/IMG_2784.jpeg" alt="Interkulturelles Zentrum Magnet" style="width: 100%; height: auto; display: block; border-radius: 8px;">
         </a>
-        <div class="video-wrapper horizontal">
-    <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-Video</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Video ansehen</button>
-    </div>
-    <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-Video</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Video ansehen</button>
-    </div>
-    <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-3" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-Playlist</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <button onclick="loadPlaylist('video-placeholder-3', 'video-iframe-3', 'PLs7RMMiKF96E7dn3nlkyiSZAkaN7lDctZ')" class="load-tool-btn">▶ Playlist ansehen</button>
-    </div>
-    <iframe id="video-iframe-3" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-<div class="video-wrapper horizontal">
-    <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
-        <p style="margin:0 0 8px;"><strong>YouTube-Playlist</strong></p>
-        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
-        <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Playlist ansehen</button>
-    </div>
-    <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
     <div style="display: grid; gap: 8px; margin-top: 15px;">
     <a href="tabs/jobs.html" class="btn-main" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
         <span class="icon-emoji icon-1f4bc"></span> Arbeit finden
@@ -132,52 +105,71 @@
 </div>
     </div>
     </section>
-<section id="img2pdf" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f320"></span> Foto zu PDF</h2>
-        <div class="iframe-wrapper"> 
-            <div id="photo-placeholder" class="consent-placeholder">
-                <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
-                <p style="margin: 15px 0;">Um den Foto-zu-PDF Converter zu nutzen, gib bitte deine Einwilligung.</p>  
-                <button onclick="loadPhotoToPdf()" class="load-tool-btn">
-                    Converter laden
-                </button>
-            </div>
-            <iframe id="photo-iframe" 
-                    src="" 
-                    style="display: none; width: 100%; height: 950px; border: none;"
-                    allowfullscreen>
-            </iframe>
-        </div>
+    
+    <section id="pdf" class="tab-content">
+  <div class="card card--pdf">
+    <h2><span class="icon-emoji icon-1f4c9"></span> PDF für Mail</h2>
+    <div class="nav-rows-wrapper">
+      <div class="nav-row">
+        <button class="nav-btn" onclick="showInnerTab('pdf-kompressor', event)">
+          <span class="icon-emoji icon-1f4c9"></span>PDF Kompressor
+        </button>
+        <button class="nav-btn" onclick="showInnerTab('pdf-foto', event)">
+          <span class="icon-emoji icon-1f320"></span>Foto zu PDF
+        </button>
+      </div>
     </div>
-</section>
 
-<section id="pdf" class="tab-content">
-    <div class="card">
-        <h2><span class="icon-emoji icon-1f4f0"></span> PDF-Kompressor</h2>
+    <div class="inner-content-area">
+
+      <div id="pdf-kompressor" class="inner-tab-content">
         <div class="iframe-wrapper">
-            <div id="pdf-placeholder" class="consent-placeholder">
-                <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
-                <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>         
-                <button onclick="loadPdfCompressor()" class="load-tool-btn">
-                    PDF-Kompressor laden
-                </button>
-            </div>
-            <iframe id="pdf-iframe" 
-                    src="" 
-                    style="display: none; width: 100%; height: 820px; border: none;"
-                    allow="downloads" 
-                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-                    allowfullscreen>
-            </iframe>
+          <div id="pdf-placeholder" class="consent-placeholder">
+            <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
+            <p style="margin: 15px 0;">Um den PDF-Kompressor zu nutzen, gib bitte deine Einwilligung.</p>
+            <button onclick="loadPdfCompressor()" class="load-tool-btn">PDF-Kompressor laden</button>
+          </div>
+          <iframe id="pdf-iframe" src=""
+            style="display: none; width: 100%; height: 820px; border: none;"
+            allow="downloads"
+            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+            allowfullscreen></iframe>
         </div>
+      </div>
+
+      <div id="pdf-foto" class="inner-tab-content">
+        <div class="iframe-wrapper">
+          <div id="photo-placeholder" class="consent-placeholder">
+            <p><strong>Dieses Tool kann technische Cookies setzen.</strong></p>
+            <p style="margin: 15px 0;">Um den Foto-zu-PDF Converter zu nutzen, gib bitte deine Einwilligung.</p>
+            <button onclick="loadPhotoToPdf()" class="load-tool-btn">Converter laden</button>
+          </div>
+          <iframe id="photo-iframe" src=""
+            style="display: none; width: 100%; height: 950px; border: none;"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="inner-info">
+          <p>Kostenlose erweiterte Version des PDF-Editors nutzen – einschließlich PDF signieren, PDFs zusammenführen und vieles mehr.</p>
+          <a href="https://tools.pdf24.org/de/" target="_blank" class="btn-main">PDF24 Tools</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section id="news" class="tab-content">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-            <h2 style="margin: 0;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости"><span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten</h2>
+            <h2 style="margin-bottom: 5px;" data-de="🗞️ Aktuelle Nachrichten" data-ru="🗞️ Последние новости"><span class="icon-emoji icon-1f5de"></span> Aktuelle Nachrichten</h2>
+<div class="video-wrapper horizontal" style="margin-top: -5px;">
+    <div id="video-placeholder-4" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+        <p style="margin:0 0 8px;"><strong>YouTube-Playlist</strong></p>
+        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
+        <button onclick="loadPlaylist('video-placeholder-4', 'video-iframe-4', 'PLkKDSXRppVa6K-fN-J_8GkSWilIKH2UEO')" class="load-tool-btn">▶ Playlist ansehen</button>
+    </div>
+    <iframe id="video-iframe-4" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</div>
             <span id="news-source" style="font-size: 0.85rem; color: #666;">Quelle: <a href="https://www.tagesschau.de" target="_blank" rel="noopener noreferrer" style="color: inherit;">tagesschau.de</a></span>
         </div> 
         <div id="news-wrapper">
@@ -200,6 +192,22 @@
     <div class="card">
         <h2 style="text-align: center; margin-bottom: 10px;"><span class="icon-emoji icon-1f3d9"></span> Leben in Hattingen</h2>
         <p style="text-align: center;">Offizielle Stadtbereiche für Einwohner und Besucher:</p>
+        <div class="video-wrapper horizontal">
+    <div id="video-placeholder-1" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+        <p style="margin:0 0 8px;"><strong>YouTube-Video</strong></p>
+        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
+        <button onclick="loadVideo('video-placeholder-1', 'video-iframe-1', 'j7wLBpAhn_g')" class="load-tool-btn">▶ Video ansehen</button>
+</div>
+    <iframe id="video-iframe-1" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</div>
+<div class="video-wrapper horizontal">
+    <div id="video-placeholder-2" class="consent-placeholder" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; box-sizing:border-box;">
+        <p style="margin:0 0 8px;"><strong>YouTube-Video</strong></p>
+        <p style="margin:0 0 16px; font-size:0.9rem;">Mit dem Laden akzeptieren Sie die Datenschutzerklärung von YouTube/Google.</p>
+        <button onclick="loadVideo('video-placeholder-2', 'video-iframe-2', 'tIxvgYC0K44')" class="load-tool-btn">▶ Video ansehen</button>
+    </div>
+    <iframe id="video-iframe-2" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</div>
         <div style="display: grid; gap: 12px; margin-top: 20px;">
             <a href="https://www.hattingen.de/stadt_hattingen/Rathaus/Verwaltung/News/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(0, 82, 155, 0.8) !important;"><span class="icon-emoji icon-1f4f0"></span> Alle Stadtnachrichten</a>
             <a href="https://www.hattingen.de/stadt_hattingen/Tourismus/" target="_blank" class="btn-main" style="text-decoration: none; text-align: center; background: rgba(40, 167, 69, 0.7) !important;"><span class="icon-emoji icon-1f3f0"></span> Tourismus & Freizeit</a>

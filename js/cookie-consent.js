@@ -1,136 +1,223 @@
-// js/cookie-consent.js
+let swipeHintDone = false;
 
-silktideCookieBannerManager.updateCookieBannerConfig({
-  background: { showBackground: true },
-  cookieIcon: { position: "bottomLeft" },
-  cookieTypes: [
-    {
-      id: "necessary",
-      name: "Notwendig",
-      description: "<p>Diese Cookies sind technisch erforderlich, damit die Website richtig funktioniert. Sie können nicht deaktiviert werden.</p>",
-      required: true
-    },
-    {
-      id: "analytics",
-      name: "Statistik",
-      description: "<p>Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen. Dazu gehört das Laden von Nachrichten über RSS-Feeds (z. B. tagesschau.de).</p>",
-      required: false,
-      onAccept: function() {
-        // ИСПРАВЛЕНИЕ: Ждем загрузки HTML перед вызовом loadNews, 
-        // чтобы скрипт точно нашел элементы на странице
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', loadNews, { once: true });
-        } else {
-          loadNews();
-        }
-      },
-      onReject: function() {
-        const placeholder = document.getElementById('news-placeholder');
-        const container = document.getElementById('news-container');
-        
-        if (placeholder) placeholder.style.display = "block";
-        if (container) {
-            container.style.display = "none";
-            container.innerHTML = ""; // Очищаем старые новости при отказе
-        }
-      }
-    },
-    {
-      id: "advertising",
-      name: "Werbung & externe Inhalte",
-      description: "<p>Diese Cookies ermöglichen das Abspielen von YouTube-Videos und das Laden externer Tools (PDF-Kompressor, Foto zu PDF).</p>",
-      required: false,
-      onAccept: function() {
-        function loadVideos() {
-          document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
-            const btn = ph.querySelector('button');
-            if (btn) btn.click();
-          });
-          if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
-          if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
-        }
+function hideSwipeHint() {
+    if (!swipeHintDone) {
+        swipeHintDone = true;
+        const hint = document.querySelector('.scroll-hint-left');
+        if (hint) hint.classList.add('hidden');
+    }
+}
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', loadVideos, { once: true });
+function scrollTabs(direction) {
+    hideSwipeHint();
+    
+    const viewport = document.querySelector('.nav-scroll-viewport');
+    
+    if (viewport) {
+        if (direction === 1) {
+            viewport.scrollTo({
+                left: viewport.scrollWidth,
+                behavior: 'smooth'
+            });
         } else {
-          loadVideos();
+            viewport.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+            });
         }
-      },
-      onReject: function() {
-        // YouTube
-        document.querySelectorAll('[id^="video-placeholder-"]').forEach(function(ph) {
-          const num = ph.id.replace('video-placeholder-', '');
-          const iframe = document.getElementById('video-iframe-' + num);
-          ph.style.display = "flex";
-          if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
+    }
+}
+
+function showTab(tabId, event) {
+    hideSwipeHint();
+
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.style.animation = 'none';
+        targetTab.style.webkitAnimation = 'none';
+
+        void targetTab.offsetHeight;
+
+        targetTab.style.animation = '';
+        targetTab.style.webkitAnimation = '';
+
+        targetTab.classList.add('active');
+        window.dispatchEvent(new Event('resize'));
+
+        // перезапуск iframe если вкладка была скрыта
+        targetTab.querySelectorAll('iframe').forEach(iframe => {
+            const src = iframe.src;
+            if (src && src !== 'about:blank' && src !== '') {
+                iframe.src = '';
+                setTimeout(() => iframe.src = src, 50);
+            }
         });
-
-        // PDF компрессор
-        const pdfPh = document.getElementById('pdf-placeholder');
-        const pdfIframe = document.getElementById('pdf-iframe');
-        if (pdfPh) pdfPh.style.display = "block";
-        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
-
-        // Фото в PDF
-        const photoPh = document.getElementById('photo-placeholder');
-        const photoIframe = document.getElementById('photo-iframe');
-        if (photoPh) photoPh.style.display = "block";
-        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; }
-      }
     }
-  ],
-  text: {
-    banner: {
-      description: `<p>Wir verwenden Cookies, um die Nutzung zu verbessern, personalisierte Inhalte (YouTube) anzubieten und unsere Website zu analysieren. 
-      <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click(); return false;">Datenschutzerklärung</a> 
-      und <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click(); return false;">Impressum</a> 
-      finden Sie über die entsprechenden Buttons auf dieser Seite.</p>`,
-      acceptAllButtonText: "Alle akzeptieren",
-      rejectNonEssentialButtonText: "Nur notwendige",
-      preferencesButtonText: "Einstellungen"
-    },
-    preferences: {
-      title: "Cookie-Einstellungen anpassen",
-      description: "<p>Wir respektieren Ihr Recht auf Privatsphäre. Sie können auswählen, welche Cookies Sie zulassen möchten.</p>"
-    }
-  },
-  position: { banner: "bottomCenter" }
+
+    if (event && event.currentTarget) event.currentTarget.classList.add('active');
+
+    history.pushState({ tab: tabId }, '', `#${tabId}`);
+
+    window.scrollTo(0, 0);
+}
+
+function showTabSilent(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) targetTab.classList.add('active');
+
+    const btn = document.querySelector(`[onclick="showTab('${tabId}', event)"]`);
+    if (btn) btn.classList.add('active');
+}
+
+window.addEventListener('popstate', (e) => {
+    const tabId = e.state?.tab || 'home';
+    showTabSilent(tabId);
 });
 
-// ====================== ФУНКЦИИ ЗАГРУЗКИ ======================
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) showTabSilent(hash);
+});
 
-function loadNews() {
-    const placeholder = document.getElementById('news-placeholder');
-    const container = document.getElementById('news-container');
-    if (placeholder) placeholder.style.display = "none";
-    if (container) container.style.display = "block";
+const menuScroll = document.querySelector('.nav-scroll-viewport');
+if (menuScroll) {
+    menuScroll.addEventListener('scroll', hideSwipeHint, { passive: true });
+}
 
-    if (typeof window.loadTagesschauNews === 'function') {
-        window.loadTagesschauNews();
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+let scrollTimer;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        scrollTopBtn?.classList.add('visible');
+        scrollTopBtn?.classList.add('scrolling');
     } else {
-        console.error("Функция loadTagesschauNews не найдена!");
+        scrollTopBtn?.classList.remove('visible');
+        scrollTopBtn?.classList.remove('scrolling');
     }
-}
 
-function loadPhotoToPdf() {
-    const ph = document.getElementById('photo-placeholder');
-    const iframe = document.getElementById('photo-iframe');
-    if (ph && iframe) {
-        iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
-        iframe.style.display = "block";
-        ph.style.display = "none";
-    }
-}
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        scrollTopBtn?.classList.remove('scrolling');
+    }, 150);
+}, { passive: true });
 
-function loadPdfCompressor() {
-    const ph = document.getElementById('pdf-placeholder');
-    const iframe = document.getElementById('pdf-iframe');
-    if (ph && iframe) {
-        fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
-            .catch(() => {});
-        iframe.src = "https://pdf-compressor-web.onrender.com";
-        iframe.style.display = "block";
-        ph.style.display = "none";
-    }
-}
+scrollTopBtn?.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
+(function () {
+    const vp = document.querySelector('.nav-scroll-viewport');
+    if (!vp) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasDragged = false;
+
+    vp.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - vp.offsetLeft;
+        scrollLeft = vp.scrollLeft;
+        vp.style.cursor = 'grabbing';
+        vp.style.userSelect = 'none';
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - vp.offsetLeft;
+        const walk = x - startX;
+        if (Math.abs(walk) > 4) hasDragged = true;
+        vp.scrollLeft = scrollLeft - walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        vp.style.cursor = '';
+        vp.style.userSelect = '';
+    });
+
+    vp.addEventListener('click', (e) => {
+        if (hasDragged) e.stopPropagation();
+    }, true);
+})();
+
+// Touch fix: анимация + навигация для a.btn-main
+document.querySelectorAll('a.btn-main').forEach(link => {
+    let startY = 0;
+    let moved = false;
+
+    link.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        moved = false;
+        this.classList.add('is-active');
+    }, { passive: true });
+
+    link.addEventListener('touchmove', function() {
+        moved = true;
+        this.classList.remove('is-active');
+    }, { passive: true });
+
+    link.addEventListener('touchend', function(e) {
+        if (moved) {
+            this.classList.remove('is-active');
+            return;
+        }
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        const el = this;
+        setTimeout(() => {
+            el.classList.remove('is-active');
+            if (href) window.location.href = href;
+        }, 180);
+    }, { passive: false });
+});
+
+// Touch fix: анимация для btn-link, text-link, lang-btn
+document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link => {
+    let moved = false;
+    let startY = 0;
+
+    link.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        moved = false;
+        this.classList.add('is-active');
+    }, { passive: true });
+
+    link.addEventListener('touchmove', function(e) {
+        if (Math.abs(e.touches[0].clientY - startY) > 8) {
+            moved = true;
+            this.classList.remove('is-active');
+        }
+    }, { passive: true });
+
+    link.addEventListener('touchend', function() {
+        setTimeout(() => this.classList.remove('is-active'), 150);
+    }, { passive: true });
+});
+
+function showInnerTab(id, event) {
+  const content = document.getElementById(id);
+  const btn = event.currentTarget;
+  const isActive = content.classList.contains('active');
+
+  document.querySelectorAll('.inner-tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn[onclick*="showInnerTab"]').forEach(el => el.classList.remove('active'));
+
+  if (!isActive) {
+    content.classList.add('active');
+    btn.classList.add('active');
+    if (id === 'pdf-kompressor') loadPdfCompressor();
+    if (id === 'pdf-foto') loadPhotoToPdf();
+  }
+}

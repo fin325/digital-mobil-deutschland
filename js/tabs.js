@@ -47,10 +47,10 @@ function showTab(tabId, event) {
         targetTab.classList.add('active');
         window.dispatchEvent(new Event('resize'));
 
-        // перезапуск iframe без мигания
+        // перезапуск только незагруженных iframe
         targetTab.querySelectorAll('iframe').forEach(iframe => {
             const src = iframe.src;
-            if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none') {
+            if (src && src !== 'about:blank' && src !== '' && iframe.style.display !== 'none' && !iframe.dataset.loaded) {
                 iframe.style.visibility = 'hidden';
                 iframe.src = 'about:blank';
                 setTimeout(() => {
@@ -221,7 +221,13 @@ function showInnerTab(id, event) {
   if (!isActive) {
     content.classList.add('active');
     btn.classList.add('active');
-    if (id === 'pdf-kompressor') loadPdfCompressor();
-    if (id === 'pdf-foto') loadPhotoToPdf();
+    if (id === 'pdf-kompressor' && !content.dataset.loaded) {
+      loadPdfCompressor();
+      content.dataset.loaded = 'true';
+    }
+    if (id === 'pdf-foto' && !content.dataset.loaded) {
+      loadPhotoToPdf();
+      content.dataset.loaded = 'true';
+    }
   }
 }

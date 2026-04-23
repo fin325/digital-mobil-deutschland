@@ -63,17 +63,21 @@ silktideCookieBannerManager.updateCookieBannerConfig({
         });
 
         // PDF компрессор
-        const pdfPh = document.getElementById('pdf-placeholder');
-        const pdfIframe = document.getElementById('pdf-iframe');
-        if (pdfPh) pdfPh.style.display = "flex";
-        if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; delete pdfIframe.dataset.loaded; }
+    const pdfIframe = document.getElementById('pdf-iframe');
+    const pdfContent = document.getElementById('pdf-kompressor');
+    const pdfPh = document.getElementById('pdf-placeholder');
+    if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; delete pdfIframe.dataset.loaded; }
+    if (pdfPh) pdfPh.style.removeProperty('display');
+    if (pdfContent) delete pdfContent.dataset.loaded;
 
-        // Фото в PDF
-        const photoPh = document.getElementById('photo-placeholder');
-        const photoIframe = document.getElementById('photo-iframe');
-        if (photoPh) photoPh.style.display = "flex";
-        if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; delete photoIframe.dataset.loaded; }
-      }
+    // Фото в PDF
+    const photoIframe = document.getElementById('photo-iframe');
+    const photoContent = document.getElementById('pdf-foto');
+    const photoPh = document.getElementById('photo-placeholder');
+    if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; delete photoIframe.dataset.loaded; }
+    if (photoPh) photoPh.style.removeProperty('display');
+    if (photoContent) delete photoContent.dataset.loaded;
+}
     }
   ],
   text: {

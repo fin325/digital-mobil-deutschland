@@ -43,8 +43,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
             const btn = ph.querySelector('button');
             if (btn) btn.click();
           });
-          if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
-          if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+          if (document.getElementById('tool-placeholder-pdf')) loadPdfCompressor();
+          if (document.getElementById('tool-placeholder-photo')) loadPhotoToPdf();
         }
 
         if (document.readyState === 'loading') {
@@ -62,22 +62,16 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; delete iframe.dataset.loaded; }
         });
 
-        // PDF компрессор
-    const pdfIframe = document.getElementById('pdf-iframe');
-    const pdfContent = document.getElementById('pdf-kompressor');
-    const pdfPh = document.getElementById('pdf-placeholder');
-    if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; delete pdfIframe.dataset.loaded; }
-    if (pdfPh) pdfPh.style.removeProperty('display');
-    if (pdfContent) delete pdfContent.dataset.loaded;
-
-    // Фото в PDF
-    const photoIframe = document.getElementById('photo-iframe');
-    const photoContent = document.getElementById('pdf-foto');
-    const photoPh = document.getElementById('photo-placeholder');
-    if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; delete photoIframe.dataset.loaded; }
-    if (photoPh) photoPh.style.removeProperty('display');
-    if (photoContent) delete photoContent.dataset.loaded;
-}
+        // PDF инструменты — точно как у видео
+        document.querySelectorAll('[id^="tool-placeholder-"]').forEach(function(ph) {
+          const key = ph.id.replace('tool-placeholder-', '');
+          const iframe = document.getElementById(key + '-iframe');
+          const content = document.getElementById(key === 'pdf' ? 'pdf-kompressor' : 'pdf-foto');
+          ph.style.display = "flex";
+          if (iframe) { iframe.style.display = "none"; iframe.src = ""; delete iframe.dataset.loaded; }
+          if (content) delete content.dataset.loaded;
+        });
+      }
     }
   ],
   text: {
@@ -114,7 +108,7 @@ function loadNews() {
 }
 
 function loadPhotoToPdf() {
-    const ph = document.getElementById('photo-placeholder');
+    const ph = document.getElementById('tool-placeholder-photo');
     const iframe = document.getElementById('photo-iframe');
     if (ph && iframe && !iframe.dataset.loaded) {
         iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
@@ -125,7 +119,7 @@ function loadPhotoToPdf() {
 }
 
 function loadPdfCompressor() {
-    const ph = document.getElementById('pdf-placeholder');
+    const ph = document.getElementById('tool-placeholder-pdf');
     const iframe = document.getElementById('pdf-iframe');
     if (ph && iframe && !iframe.dataset.loaded) {
         fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })

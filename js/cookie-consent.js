@@ -86,8 +86,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
             const btn = ph.querySelector('button');
             if (btn) btn.click();
           });
-          if (document.getElementById('pdf-placeholder')) loadPdfCompressor();
-          if (document.getElementById('photo-placeholder')) loadPhotoToPdf();
+          // PDF-инструменты НЕ грузим здесь — они загрузятся когда пользователь
+          // откроет вкладку через showInnerTab
         }
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadVideos, { once: true });
@@ -102,14 +102,18 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           ph.style.display = "flex";
           if (iframe) { iframe.style.display = "none"; iframe.src = ""; }
         });
+        // Сбрасываем PDF-инструменты и флаги загрузки
         const pdfPh = document.getElementById('pdf-placeholder');
         const pdfIframe = document.getElementById('pdf-iframe');
         if (pdfPh) pdfPh.style.display = "block";
         if (pdfIframe) { pdfIframe.style.display = "none"; pdfIframe.src = ""; }
+        window._pdfLoaded = false;
+
         const photoPh = document.getElementById('photo-placeholder');
         const photoIframe = document.getElementById('photo-iframe');
         if (photoPh) photoPh.style.display = "block";
         if (photoIframe) { photoIframe.style.display = "none"; photoIframe.src = ""; }
+        window._photoLoaded = false;
       }
     }
   ],
@@ -143,22 +147,24 @@ function loadNews() {
 }
 
 function loadPhotoToPdf() {
+  if (window._photoLoaded) return;
   const ph = document.getElementById('photo-placeholder');
   const iframe = document.getElementById('photo-iframe');
-  if (ph && iframe) {
-    iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
-    iframe.style.display = "block";
-    ph.style.display = "none";
-  }
+  if (!ph || !iframe) return;
+  window._photoLoaded = true;
+  iframe.src = "https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app/?embed=true";
+  iframe.style.display = "block";
+  ph.style.display = "none";
 }
 
 function loadPdfCompressor() {
+  if (window._pdfLoaded) return;
   const ph = document.getElementById('pdf-placeholder');
   const iframe = document.getElementById('pdf-iframe');
-  if (ph && iframe) {
-    fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' }).catch(() => {});
-    iframe.src = "https://pdf-compressor-web.onrender.com";
-    iframe.style.display = "block";
-    ph.style.display = "none";
-  }
+  if (!ph || !iframe) return;
+  window._pdfLoaded = true;
+  fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' }).catch(() => {});
+  iframe.src = "https://pdf-compressor-web.onrender.com";
+  iframe.style.display = "block";
+  ph.style.display = "none";
 }

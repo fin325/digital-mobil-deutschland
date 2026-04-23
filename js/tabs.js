@@ -213,6 +213,9 @@ document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link =>
     }, { passive: true });
 });
 
+// Глобальный флаг для проверки куки рекламы
+window.advertisingCookiesAccepted = false;
+
 function showInnerTab(id, event) {
   const content = document.getElementById(id);
   const btn = event.currentTarget;
@@ -224,12 +227,20 @@ function showInnerTab(id, event) {
   if (!isActive) {
     content.classList.add('active');
     btn.classList.add('active');
+    
+    // Проверка куки перед загрузкой PDF
     if (id === 'pdf-kompressor' && !content.dataset.loaded) {
-      loadPdfCompressor();
+      if (window.advertisingCookiesAccepted) {
+          loadPdfCompressor();
+      }
       content.dataset.loaded = 'true';
     }
+    
+    // Проверка куки перед загрузкой фото в PDF
     if (id === 'pdf-foto' && !content.dataset.loaded) {
-      loadPhotoToPdf();
+      if (window.advertisingCookiesAccepted) {
+          loadPhotoToPdf();
+      }
       content.dataset.loaded = 'true';
     }
   }

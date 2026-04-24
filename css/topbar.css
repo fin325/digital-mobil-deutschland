@@ -347,9 +347,10 @@
 }
 
 .eur-rate-widget .icon-1f1ea-1f1fa {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
     flex-shrink: 0;
+    line-height: 1;
 }
 
 .eur-label {

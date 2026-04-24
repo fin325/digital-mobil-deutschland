@@ -149,7 +149,7 @@ class AppHeader extends HTMLElement {
                     <div class="site-subtitle">${texts.city}</div>
                 </div>
                 <div id="eur-widget" class="eur-rate-widget" title="Офіційний курс НБУ">
-        <span class="eur-flag">🇪🇺</span>
+        <span class="eur-flag"><span class="eur-flag icon-1f1ea-1f1fa"></span></span>
         <span class="eur-label">EUR / UAH</span>
         <span class="eur-value" id="eur-value">…</span>
                 </div>

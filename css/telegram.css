@@ -1,0 +1,106 @@
+/* ===============================================
+   TELEGRAM.CSS
+   Стили только для Telegram (IAB и Mini App)
+   В обычных браузерах не применяются
+   =============================================== */
+
+
+/* ===============================================
+   1. Telegram In-App Browser (IAB)
+   Класс .tg-browser навешивается, если userAgent
+   содержит "Telegram" (обычная ссылка в чате)
+   =============================================== */
+
+/* Непрозрачная заглушка под шапкой Telegram —
+   чтобы через полупрозрачную шапку браузера
+   не просвечивал предыдущий чат */
+html.tg-browser body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: #1a3a5c;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+
+/* ===============================================
+   2. Telegram Mini App (через кнопку бота)
+   Класс .telegram навешивается, если
+   window.Telegram.WebApp существует
+   =============================================== */
+
+/* GPU-ускорение для зафиксированных/сложных элементов — убирает дёргания на iOS */
+html.telegram app-header,
+html.telegram .navbar,
+html.telegram scroll-hint,
+html.telegram .scroll-top-btn {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Отключаем выделение текста при долгом тапе (нативное поведение приложений) */
+html.telegram {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* В контенте, полях ввода и ссылках выделение оставляем */
+html.telegram .container,
+html.telegram .card,
+html.telegram input,
+html.telegram textarea,
+html.telegram p,
+html.telegram h1,
+html.telegram h2,
+html.telegram h3,
+html.telegram a {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Убираем синюю подсветку при тапе */
+html.telegram * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Плавный инерционный скролл на iOS */
+html.telegram body {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Убираем автоматическое увеличение текста при повороте экрана */
+html.telegram {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+
+/* ===============================================
+   3. Общие правила для IAB + Mini App
+   (если нужно — применяется в обоих случаях)
+   =============================================== */
+
+/* GPU-ускорение в IAB для тех же элементов, что и в Mini App */
+html.tg-browser app-header,
+html.tg-browser .navbar,
+html.tg-browser scroll-hint,
+html.tg-browser .scroll-top-btn {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Убираем синюю подсветку при тапе в IAB */
+html.tg-browser * {
+  -webkit-tap-highlight-color: transparent;
+}

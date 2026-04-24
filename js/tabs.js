@@ -58,7 +58,11 @@ function showTab(tabId, event) {
     if (event?.currentTarget) event.currentTarget.classList.add('active');
 
     history.pushState({ tab: tabId }, '', `#${tabId}`);
-    window.scrollTo(0, 0);
+
+    // Прокрутка наверх (мгновенная при переключении вкладок)
+    document.documentElement.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
+    document.querySelector('main.container')?.scrollTo(0, 0);
 }
 
 function showTabSilent(tabId) {
@@ -117,3 +121,132 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
     }, { passive: true });
 });
 
+
+// ===== Telegram In-App Browser detect (для обычных ссылок) =====
+if (/Telegram/i.test(navigator.userAgent)) {
+    document.documentElement.classList.add("tg-browser");
+}
+
+// ===== Telegram WebApp init (только для Mini App через бота) =====
+(function () {
+    if (!window.Telegram?.WebApp) return;
+
+    // Помечаем html классом — для CSS-правил только в Telegram Mini App
+    document.documentElement.classList.add("telegram");
+
+    const tg = window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+    tg.disableVerticalSwipes?.();
+
+    // Цвет совпадает с meta theme-color в head — #1a3a5c
+    tg.setHeaderColor("#1a3a5c");
+    tg.setBackgroundColor("#1a3a5c");
+})();
+
+
+// ====================== КНОПКА "НАВЕРХ" ======================
+
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+let scrollTimer;
+
+function getScrollTop() {
+    return (
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        document.querySelector('main.container')?.scrollTop ||
+        0
+    );
+}
+
+function handleScroll() {
+    const scrollY = getScrollTop();
+
+    if (scrollY > 200) {
+        scrollTopBtn?.classList.add('visible');
+        scrollTopBtn?.classList.add('scrolling');
+    } else {
+        scrollTopBtn?.classList.remove('visible');
+        scrollTopBtn?.classList.remove('scrolling');
+    }
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        scrollTopBtn?.classList.remove('scrolling');
+    }, 150);
+}
+
+// Слушаем скролл на всех возможных контейнерах
+window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+document.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+
+const mainContainer = document.querySelector('main.container');
+if (mainContainer) {
+    mainContainer.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+// Клик по кнопке — плавная прокрутка наверх
+function scrollToTop() {
+    const options = { top: 0, behavior: 'smooth' };
+    document.documentElement.scrollTo(options);
+    document.body.scrollTo(options);
+    document.querySelector('main.container')?.scrollTo(options);
+    window.scrollTo(options);
+}
+
+scrollTopBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToTop();
+});
+
+scrollTopBtn?.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    scrollToTop();
+}, { passive: false });
+
+
+// ====================== DRAG-TO-SCROLL ДЛЯ МЕНЮ ======================
+
+(function () {
+    const vp = document.querySelector('.nav-scroll-viewport');
+    if (!vp) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasDragged = false;
+
+    vp.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - vp.offsetLeft;
+        scrollLeft = vp.scrollLeft;
+        vp.style.cursor = 'grabbing';
+        vp.style.userSelect = 'none';
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - vp.offsetLeft;
+        const walk = x - startX;
+
+        // Считаем перетаскиванием, только если мышь сдвинулась больше чем на 4 пикселя
+        if (Math.abs(walk) > 4) hasDragged = true;
+
+        vp.scrollLeft = scrollLeft - walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        vp.style.cursor = '';
+        vp.style.userSelect = '';
+    });
+
+    // Блокируем клик по вкладке, если меню перетаскивали, а не просто кликнули
+    vp.addEventListener('click', (e) => {
+        if (hasDragged) e.stopPropagation();
+    }, true);
+})();

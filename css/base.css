@@ -7,9 +7,16 @@
     --text-dark: #1d1d1f;
 }
 
-html {
-    overflow-y: scroll;
+html, body {
     scrollbar-gutter: stable;
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+}
+
+main.container {
+  padding-bottom: 150px;
 }
 
 body {

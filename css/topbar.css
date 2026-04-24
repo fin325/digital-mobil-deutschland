@@ -1,13 +1,14 @@
 /* === TOPBAR & HEADER CSS === */
 
-/* --- ВЕРХНЯЯ ПАНЕЛЬ (TOP BAR) --- */
 .top-bar {
     background: rgba(0, 30, 80, 0.35);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 9999 !important;
     padding: 0;
     overflow: visible !important;
@@ -32,8 +33,10 @@
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-    position: sticky;
+    position: fixed;
     top: 30px;
+    left: 0;
+    right: 0;
     z-index: 9998;
     padding: 0;
     width: 100%;

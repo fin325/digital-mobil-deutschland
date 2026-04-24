@@ -19,6 +19,9 @@ body {
     min-height: 100vh;
     padding: 0;
     background-size: cover;
+    padding-top: constant(safe-area-inset-top); /* Для старых iOS */
+    padding-top: env(safe-area-inset-top); /* Для новых iOS */
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 body::before {

@@ -15,6 +15,16 @@
     box-shadow: 0 2px 20px rgba(0, 20, 60, 0.18);
 }
 
+/* ===== iOS fix: убираем прыгание app-header при скролле ===== */
+app-header,
+.topbar {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
 .top-bar-content {
     display: flex;
     align-items: flex-start;

@@ -20,6 +20,7 @@ body {
     padding: 0;
     background-size: cover;
     top: 0 !important;
+    padding-top: 120px; /* 30px top-bar + 90px site-header */
 }
 
 body::before {
@@ -30,6 +31,18 @@ body::before {
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
                 url('../img/654f7c1a-6e79-4c0e-be34-b7254616a776.jpeg') no-repeat center center;
     background-size: cover;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top);
+  background: #1a3a5c;
+  z-index: 10000;
+  pointer-events: none;
 }
 
 p {

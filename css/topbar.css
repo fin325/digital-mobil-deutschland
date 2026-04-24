@@ -1,5 +1,6 @@
 /* === TOPBAR & HEADER CSS === */
 /* --- ВЕРХНЯЯ ПАНЕЛЬ (TOP BAR) --- */
+
 .top-bar {
     background: rgba(0, 30, 80, 0.35);
     backdrop-filter: blur(20px) saturate(160%);

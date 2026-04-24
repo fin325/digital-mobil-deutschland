@@ -16,13 +16,25 @@
 }
 
 /* ===== iOS fix: убираем прыгание app-header при скролле ===== */
-app-header,
-.topbar {
+/* ===== iOS fix: убираем прыгание sticky-шапки при скролле ===== */
+.app-header {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   will-change: transform;
+}
+
+.top-bar,
+.site-header {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .top-bar-content {

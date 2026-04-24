@@ -1,6 +1,6 @@
 /* === TOPBAR & HEADER CSS === */
-/* --- ВЕРХНЯЯ ПАНЕЛЬ (TOP BAR) --- */
 
+/* --- ВЕРХНЯЯ ПАНЕЛЬ (TOP BAR) --- */
 .top-bar {
     background: rgba(0, 30, 80, 0.35);
     backdrop-filter: blur(20px) saturate(160%);
@@ -13,14 +13,6 @@
     overflow: visible !important;
     height: 30px;
     box-shadow: 0 2px 20px rgba(0, 20, 60, 0.18);
-}
-
-.top-bar,
-.site-header {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .top-bar-content {

@@ -8,7 +8,6 @@
 }
 
 html, body {
-    scrollbar-gutter: stable;
     height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;

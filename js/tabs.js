@@ -117,3 +117,17 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
     }, { passive: true });
 });
 
+
+
+// ===== Telegram WebApp init =====
+(function () {
+  if (!window.Telegram?.WebApp) return;
+
+  const tg = window.Telegram.WebApp;
+
+  tg.ready();
+  tg.expand();
+  tg.disableVerticalSwipes?.();
+  tg.setHeaderColor("#0b1d3a");
+  tg.setBackgroundColor("#0b1d3a");
+})();

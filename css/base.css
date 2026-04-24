@@ -23,6 +23,7 @@ body {
     background-size: cover;
     top: 0 !important;
     padding-top: env(safe-area-inset-top);
+    height: 100vh;
 }
 
 body::before {

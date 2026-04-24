@@ -381,6 +381,7 @@ iframe {
 
 .video-wrapper.horizontal .consent-placeholder p {
     margin: 0;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .video-wrapper.horizontal .load-tool-btn {

@@ -131,7 +131,7 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
   tg.expand();
   tg.disableVerticalSwipes?.();
 
-  // Цвет совпадает с meta theme-color в head — #1a3a5c
+  // Цвет совпадает с meta theme-color in head — #1a3a5c
   tg.setHeaderColor("#1a3a5c");
   tg.setBackgroundColor("#1a3a5c");
 })();

@@ -178,3 +178,47 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
   const container = getScrollContainer();
   container.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// Скрипт для перетаскивания навигационного меню мышью (Drag-to-scroll)
+(function () {
+    const vp = document.querySelector('.nav-scroll-viewport');
+    if (!vp) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasDragged = false;
+
+    vp.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - vp.offsetLeft;
+        scrollLeft = vp.scrollLeft;
+        vp.style.cursor = 'grabbing'; // Меняем курсор при захвате
+        vp.style.userSelect = 'none'; // Отключаем выделение текста
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - vp.offsetLeft;
+        const walk = x - startX;
+        
+        // Считаем перетаскиванием, только если мышь сдвинулась больше чем на 4 пикселя
+        if (Math.abs(walk) > 4) hasDragged = true; 
+        
+        vp.scrollLeft = scrollLeft - walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        vp.style.cursor = ''; // Возвращаем стандартный курсор
+        vp.style.userSelect = ''; 
+    });
+
+    // Блокируем клик по вкладке, если меню перетаскивали, а не просто кликнули
+    vp.addEventListener('click', (e) => {
+        if (hasDragged) e.stopPropagation();
+    }, true);
+})();

@@ -58,7 +58,9 @@ function showTab(tabId, event) {
     if (event?.currentTarget) event.currentTarget.classList.add('active');
 
     history.pushState({ tab: tabId }, '', `#${tabId}`);
-    window.scrollTo(0, 0);
+    
+    // Прокрутка наверх — используем scrollingElement для совместимости
+    (document.scrollingElement || document.documentElement).scrollTo(0, 0);
 }
 
 function showTabSilent(tabId) {
@@ -120,66 +122,79 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
 
 // ===== Telegram In-App Browser detect (для обычных ссылок) =====
 if (/Telegram/i.test(navigator.userAgent)) {
-  document.documentElement.classList.add("tg-browser");
+    document.documentElement.classList.add("tg-browser");
 }
 
 // ===== Telegram WebApp init (только для Mini App через бота) =====
 (function () {
-  if (!window.Telegram?.WebApp) return;
+    if (!window.Telegram?.WebApp) return;
 
-  // Помечаем html классом — для CSS-правил только в Telegram Mini App
-  document.documentElement.classList.add("telegram");
+    // Помечаем html классом — для CSS-правил только в Telegram Mini App
+    document.documentElement.classList.add("telegram");
 
-  const tg = window.Telegram.WebApp;
+    const tg = window.Telegram.WebApp;
 
-  tg.ready();
-  tg.expand();
-  tg.disableVerticalSwipes?.();
+    tg.ready();
+    tg.expand();
+    tg.disableVerticalSwipes?.();
 
-  // Цвет совпадает с meta theme-color в head — #1a3a5c
-  tg.setHeaderColor("#1a3a5c");
-  tg.setBackgroundColor("#1a3a5c");
+    // Цвет совпадает с meta theme-color в head — #1a3a5c
+    tg.setHeaderColor("#1a3a5c");
+    tg.setBackgroundColor("#1a3a5c");
 })();
+
+
+// ====================== КНОПКА "НАВЕРХ" ======================
 
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 let scrollTimer;
 
-// Определяем реальный скролл-контейнер (html или body)
-function getScrollTop() {
-  return document.documentElement.scrollTop || document.body.scrollTop || 0;
-}
-
 function getScrollContainer() {
-  // В большинстве случаев это scrollingElement
-  return document.scrollingElement || document.documentElement;
+    return document.scrollingElement || document.documentElement;
 }
 
-// Слушаем скролл на документе
-document.addEventListener('scroll', () => {
-  const scrollY = getScrollTop();
-  
-  if (scrollY > 200) {
-    scrollTopBtn?.classList.add('visible');
-    scrollTopBtn?.classList.add('scrolling');
-  } else {
-    scrollTopBtn?.classList.remove('visible');
-    scrollTopBtn?.classList.remove('scrolling');
-  }
+function getScrollTop() {
+    return getScrollContainer().scrollTop || 0;
+}
 
-  clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(() => {
-    scrollTopBtn?.classList.remove('scrolling');
-  }, 150);
-}, { passive: true });
+function handleScroll() {
+    const scrollY = getScrollTop();
 
-// Прокрутка наверх
-scrollTopBtn?.addEventListener('pointerdown', (e) => {
-  e.preventDefault();
-  const container = getScrollContainer();
-  container.scrollTo({ top: 0, behavior: 'smooth' });
+    if (scrollY > 200) {
+        scrollTopBtn?.classList.add('visible');
+        scrollTopBtn?.classList.add('scrolling');
+    } else {
+        scrollTopBtn?.classList.remove('visible');
+        scrollTopBtn?.classList.remove('scrolling');
+    }
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        scrollTopBtn?.classList.remove('scrolling');
+    }, 150);
+}
+
+// Слушаем скролл на окне
+window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+
+// Резервный слушатель на документе (на случай iOS Safari)
+document.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+
+// Клик по кнопке — прокрутка наверх
+scrollTopBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    getScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Скрипт для перетаскивания навигационного меню мышью (Drag-to-scroll)
+// Дубль для iOS — на случай если click не срабатывает
+scrollTopBtn?.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    getScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
+}, { passive: false });
+
+
+// ====================== DRAG-TO-SCROLL ДЛЯ МЕНЮ ======================
+
 (function () {
     const vp = document.querySelector('.nav-scroll-viewport');
     if (!vp) return;
@@ -194,8 +209,8 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
         hasDragged = false;
         startX = e.pageX - vp.offsetLeft;
         scrollLeft = vp.scrollLeft;
-        vp.style.cursor = 'grabbing'; // Меняем курсор при захвате
-        vp.style.userSelect = 'none'; // Отключаем выделение текста
+        vp.style.cursor = 'grabbing';
+        vp.style.userSelect = 'none';
         e.preventDefault();
     });
 
@@ -203,18 +218,18 @@ scrollTopBtn?.addEventListener('pointerdown', (e) => {
         if (!isDown) return;
         const x = e.pageX - vp.offsetLeft;
         const walk = x - startX;
-        
+
         // Считаем перетаскиванием, только если мышь сдвинулась больше чем на 4 пикселя
-        if (Math.abs(walk) > 4) hasDragged = true; 
-        
+        if (Math.abs(walk) > 4) hasDragged = true;
+
         vp.scrollLeft = scrollLeft - walk;
     });
 
     window.addEventListener('mouseup', () => {
         if (!isDown) return;
         isDown = false;
-        vp.style.cursor = ''; // Возвращаем стандартный курсор
-        vp.style.userSelect = ''; 
+        vp.style.cursor = '';
+        vp.style.userSelect = '';
     });
 
     // Блокируем клик по вкладке, если меню перетаскивали, а не просто кликнули

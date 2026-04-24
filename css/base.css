@@ -7,11 +7,15 @@
     --text-dark: #1d1d1f;
 }
 
-html {
+html,body {
     scrollbar-gutter: stable;
     height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+}
+
+main.container {
+  padding-bottom: 150px;
 }
 
 body {
@@ -23,7 +27,6 @@ body {
     background-size: cover;
     top: 0 !important;
     padding-top: env(safe-area-inset-top);
-    overflow-y: auto;
 }
 
 body::before {

@@ -15,20 +15,6 @@
     box-shadow: 0 2px 20px rgba(0, 20, 60, 0.18);
 }
 
-/* ===== iOS fix: убираем прыгание app-header при скролле ===== */
-/* ===== iOS fix: убираем прыгание sticky-шапки при скролле ===== */
-.app-header {
-  display: block;
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
 .top-bar,
 .site-header {
   -webkit-transform: translateZ(0);

@@ -321,7 +321,7 @@
 /* EUR Rate Widget */
 .eur-rate-widget {
     position: fixed;
-    top: 60px;
+    top: 65px;
     left: 6px;
     z-index: 9997;
     background: rgba(255, 255, 255, 0.18);
@@ -329,7 +329,7 @@
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50px;
-    padding: 4px 10px 4px 10px;
+    padding: 3px 3px 3px 3px;
     font-size: 0.7rem;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
     font-weight: 700;
@@ -351,6 +351,7 @@
     height: 14px;
     flex-shrink: 0;
     line-height: 1;
+    margin-bottom: 1px;
 }
 
 .eur-label {
@@ -358,6 +359,7 @@
     font-weight: 600;
     color: #d0eaff;
     line-height: 1;
+    margin-top: 2px;
 }
 
 .eur-value {
@@ -365,6 +367,7 @@
     font-weight: 600;
     color: #d0eaff;
     line-height: 1;
+    margin-top: 2px;
 }
 
 /* === PC font rendering fix === */

@@ -58,9 +58,11 @@ function showTab(tabId, event) {
     if (event?.currentTarget) event.currentTarget.classList.add('active');
 
     history.pushState({ tab: tabId }, '', `#${tabId}`);
-    
-    // Прокрутка наверх — используем scrollingElement для совместимости
-    (document.scrollingElement || document.documentElement).scrollTo(0, 0);
+
+    // Прокрутка наверх (мгновенная при переключении вкладок)
+    document.documentElement.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
+    document.querySelector('main.container')?.scrollTo(0, 0);
 }
 
 function showTabSilent(tabId) {
@@ -143,6 +145,7 @@ if (/Telegram/i.test(navigator.userAgent)) {
     tg.setBackgroundColor("#1a3a5c");
 })();
 
+
 // ====================== КНОПКА "НАВЕРХ" ======================
 
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
@@ -187,6 +190,7 @@ if (mainContainer) {
 function scrollToTop() {
     const options = { top: 0, behavior: 'smooth' };
     document.documentElement.scrollTo(options);
+    document.body.scrollTo(options);
     document.querySelector('main.container')?.scrollTo(options);
     window.scrollTo(options);
 }
@@ -200,6 +204,7 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     e.preventDefault();
     scrollToTop();
 }, { passive: false });
+
 
 // ====================== DRAG-TO-SCROLL ДЛЯ МЕНЮ ======================
 

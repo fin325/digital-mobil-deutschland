@@ -144,23 +144,37 @@ if (/Telegram/i.test(navigator.userAgent)) {
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 let scrollTimer;
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-        scrollTopBtn?.classList.add('visible');
-        scrollTopBtn?.classList.add('scrolling');
-    } else {
-        scrollTopBtn?.classList.remove('visible');
-        scrollTopBtn?.classList.remove('scrolling');
-    }
+// Определяем реальный скролл-контейнер (html или body)
+function getScrollTop() {
+  return document.documentElement.scrollTop || document.body.scrollTop || 0;
+}
 
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-        scrollTopBtn?.classList.remove('scrolling');
-    }, 150);
+function getScrollContainer() {
+  // В большинстве случаев это scrollingElement
+  return document.scrollingElement || document.documentElement;
+}
+
+// Слушаем скролл на документе
+document.addEventListener('scroll', () => {
+  const scrollY = getScrollTop();
+  
+  if (scrollY > 200) {
+    scrollTopBtn?.classList.add('visible');
+    scrollTopBtn?.classList.add('scrolling');
+  } else {
+    scrollTopBtn?.classList.remove('visible');
+    scrollTopBtn?.classList.remove('scrolling');
+  }
+
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => {
+    scrollTopBtn?.classList.remove('scrolling');
+  }, 150);
 }, { passive: true });
 
+// Прокрутка наверх
 scrollTopBtn?.addEventListener('pointerdown', (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  e.preventDefault();
+  const container = getScrollContainer();
+  container.scrollTo({ top: 0, behavior: 'smooth' });
 });
-

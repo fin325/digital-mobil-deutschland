@@ -140,3 +140,27 @@ if (/Telegram/i.test(navigator.userAgent)) {
   tg.setHeaderColor("#1a3a5c");
   tg.setBackgroundColor("#1a3a5c");
 })();
+
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+let scrollTimer;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+        scrollTopBtn?.classList.add('visible');
+        scrollTopBtn?.classList.add('scrolling');
+    } else {
+        scrollTopBtn?.classList.remove('visible');
+        scrollTopBtn?.classList.remove('scrolling');
+    }
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        scrollTopBtn?.classList.remove('scrolling');
+    }, 150);
+}, { passive: true });
+
+scrollTopBtn?.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+

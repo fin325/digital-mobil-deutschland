@@ -262,7 +262,7 @@
 }
 
 .lang-btn {
-    position: fixed;
+    position: absolute;
     top: 55px;
     right: 15px;
     z-index: 9997;
@@ -320,7 +320,7 @@
 
 /* EUR Rate Widget */
 .eur-rate-widget {
-    position: fixed;
+    position: absolute;
     top: 64px;
     left: 6px;
     z-index: 9997;

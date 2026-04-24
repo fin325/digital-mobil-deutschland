@@ -7,7 +7,7 @@
     --text-dark: #1d1d1f;
 }
 
-html, body {
+html {
     overflow-y: scroll;
     scrollbar-gutter: stable;
 }
@@ -122,4 +122,5 @@ h1, h2, h3 {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
 

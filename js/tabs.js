@@ -118,11 +118,16 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
 });
 
 
-// ===== Telegram WebApp init =====
+// ===== Telegram In-App Browser detect (для обычных ссылок) =====
+if (/Telegram/i.test(navigator.userAgent)) {
+  document.documentElement.classList.add("tg-browser");
+}
+
+// ===== Telegram WebApp init (только для Mini App через бота) =====
 (function () {
   if (!window.Telegram?.WebApp) return;
 
-  // Помечаем html классом — для CSS-правил только в Telegram
+  // Помечаем html классом — для CSS-правил только в Telegram Mini App
   document.documentElement.classList.add("telegram");
 
   const tg = window.Telegram.WebApp;
@@ -131,8 +136,7 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
   tg.expand();
   tg.disableVerticalSwipes?.();
 
-  // Цвет совпадает с meta theme-color in head — #1a3a5c
+  // Цвет совпадает с meta theme-color в head — #1a3a5c
   tg.setHeaderColor("#1a3a5c");
   tg.setBackgroundColor("#1a3a5c");
 })();
-

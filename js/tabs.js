@@ -143,18 +143,36 @@ if (/Telegram/i.test(navigator.userAgent)) {
     tg.setBackgroundColor("#1a3a5c");
 })();
 
-
 // ====================== КНОПКА "НАВЕРХ" ======================
 
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 let scrollTimer;
 
+// Находим реальный скролл-контейнер
 function getScrollContainer() {
+    // Ищем элемент, который реально скроллится
+    const candidates = [
+        document.documentElement,
+        document.body,
+        document.querySelector('main.container'),
+        document.querySelector('.container')
+    ];
+    
+    for (const el of candidates) {
+        if (el && el.scrollTop > 0) return el;
+    }
+    
+    // Если никто ещё не скроллился — возвращаем html по умолчанию
     return document.scrollingElement || document.documentElement;
 }
 
 function getScrollTop() {
-    return getScrollContainer().scrollTop || 0;
+    return (
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        document.querySelector('main.container')?.scrollTop ||
+        0
+    );
 }
 
 function handleScroll() {
@@ -174,24 +192,34 @@ function handleScroll() {
     }, 150);
 }
 
-// Слушаем скролл на окне
+// Слушаем скролл на всех возможных контейнерах
 window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
-
-// Резервный слушатель на документе (на случай iOS Safari)
 document.addEventListener('scroll', handleScroll, { passive: true, capture: true });
 
-// Клик по кнопке — прокрутка наверх
+// Дополнительно слушаем скролл на main.container
+const mainContainer = document.querySelector('main.container');
+if (mainContainer) {
+    mainContainer.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+// Клик по кнопке — прокрутка наверх всех контейнеров сразу
+function scrollToTop() {
+    const options = { top: 0, behavior: 'smooth' };
+    document.documentElement.scrollTo(options);
+    document.body.scrollTop = 0;
+    document.querySelector('main.container')?.scrollTo(options);
+    window.scrollTo(options);
+}
+
 scrollTopBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    getScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
 });
 
-// Дубль для iOS — на случай если click не срабатывает
 scrollTopBtn?.addEventListener('touchend', (e) => {
     e.preventDefault();
-    getScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
 }, { passive: false });
-
 
 // ====================== DRAG-TO-SCROLL ДЛЯ МЕНЮ ======================
 

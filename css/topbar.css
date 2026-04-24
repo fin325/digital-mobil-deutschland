@@ -59,7 +59,7 @@
 .site-subtitle {
     text-align: center;
     color: rgba(200, 225, 255, 0.85);
-    font-size: 0.95rem;
+    font-size: 0.80rem;
     font-weight: 500;
     margin: 0 0 8px 0;
     letter-spacing: 0.08em;
@@ -263,7 +263,7 @@
 
 .lang-btn {
     position: fixed;
-    top: 50px;
+    top: 55px;
     right: 15px;
     z-index: 9997;
     background: rgba(255, 255, 255, 0.18);
@@ -316,6 +316,58 @@
 .icon-emoji {
     width: 22px;
     height: 22px;
+}
+
+/* EUR Rate Widget */
+.eur-rate-widget {
+    position: fixed;
+    top: 64px;
+    left: 6px;
+    z-index: 9997;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    padding: 2px 3px 1px 3px;
+    font-size: 0.7rem;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    color: #d0eaff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    overflow: hidden;
+    cursor: default;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.eur-rate-widget .icon-1f1ea-1f1fa {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-bottom: 1px;
+}
+
+.eur-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #d0eaff;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.eur-value {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #d0eaff;
+    line-height: 1;
+    margin-top: 2px;
 }
 
 /* === PC font rendering fix === */

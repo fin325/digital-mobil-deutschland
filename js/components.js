@@ -148,6 +148,11 @@ class AppHeader extends HTMLElement {
                     <div class="site-title">Digital & Mobil in Deutschland</div>
                     <div class="site-subtitle">${texts.city}</div>
                 </div>
+                <div id="eur-widget" class="eur-rate-widget" title="Офіційний курс НБУ">
+        <span class="icon-1f1ea-1f1fa"></span>
+        <span class="eur-label">EUR / UAH</span>
+        <span class="eur-value" id="eur-value">…</span>
+                </div>
                 <a href="${langHref}" class="lang-btn">${langLabel}</a>
             </div>
         `;

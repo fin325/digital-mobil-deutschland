@@ -148,24 +148,6 @@ if (/Telegram/i.test(navigator.userAgent)) {
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 let scrollTimer;
 
-// Находим реальный скролл-контейнер
-function getScrollContainer() {
-    // Ищем элемент, который реально скроллится
-    const candidates = [
-        document.documentElement,
-        document.body,
-        document.querySelector('main.container'),
-        document.querySelector('.container')
-    ];
-    
-    for (const el of candidates) {
-        if (el && el.scrollTop > 0) return el;
-    }
-    
-    // Если никто ещё не скроллился — возвращаем html по умолчанию
-    return document.scrollingElement || document.documentElement;
-}
-
 function getScrollTop() {
     return (
         document.documentElement.scrollTop ||
@@ -196,17 +178,15 @@ function handleScroll() {
 window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
 document.addEventListener('scroll', handleScroll, { passive: true, capture: true });
 
-// Дополнительно слушаем скролл на main.container
 const mainContainer = document.querySelector('main.container');
 if (mainContainer) {
     mainContainer.addEventListener('scroll', handleScroll, { passive: true });
 }
 
-// Клик по кнопке — прокрутка наверх всех контейнеров сразу
+// Клик по кнопке — плавная прокрутка наверх
 function scrollToTop() {
     const options = { top: 0, behavior: 'smooth' };
     document.documentElement.scrollTo(options);
-    document.body.scrollTop = 0;
     document.querySelector('main.container')?.scrollTo(options);
     window.scrollTo(options);
 }

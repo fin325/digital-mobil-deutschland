@@ -375,7 +375,8 @@ iframe {
     gap: 6px;
     margin-bottom: 0;
     border-radius: 18px;
-    border: none;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .video-wrapper.horizontal .consent-placeholder p {
@@ -383,7 +384,7 @@ iframe {
 }
 
 .video-wrapper.horizontal .load-tool-btn {
-    margin-top: 4px;
+    margin-top: 2px;
     max-width: calc(100% - 40px);
 }
 

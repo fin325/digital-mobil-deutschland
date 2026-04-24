@@ -118,16 +118,21 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
 });
 
 
-
 // ===== Telegram WebApp init =====
 (function () {
   if (!window.Telegram?.WebApp) return;
+
+  // Помечаем html классом — для CSS-правил только в Telegram
+  document.documentElement.classList.add("telegram");
 
   const tg = window.Telegram.WebApp;
 
   tg.ready();
   tg.expand();
   tg.disableVerticalSwipes?.();
-  tg.setHeaderColor("#0b1d3a");
-  tg.setBackgroundColor("#0b1d3a");
+
+  // Цвет совпадает с meta theme-color в head — #1a3a5c
+  tg.setHeaderColor("#1a3a5c");
+  tg.setBackgroundColor("#1a3a5c");
 })();
+

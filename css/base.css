@@ -7,11 +7,11 @@
     --text-dark: #1d1d1f;
 }
 
-html {
-    overflow-y: auto;
+html, body {
     scrollbar-gutter: stable;
-    -webkit-overflow-scrolling: touch;
     height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {

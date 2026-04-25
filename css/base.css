@@ -20,6 +20,11 @@ main.container {
 }
 
 body {
+    background-image: url('../img/IMG_2899.JPG');
+    background-position: center;  /* Картинка будет отцентрирована */
+    background-repeat: no-repeat; /* Картинка не будет размножаться плиткой */
+    /* Если это для верхней панели iPhone, чтобы картинка залезла под часы: */
+    padding-top: env(safe-area-inset-top);
     font-family: 'Aldrich', 'Montserrat', 'Tektur', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     margin: 0;
     color: var(--text-dark);

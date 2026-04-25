@@ -118,37 +118,6 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
     }, { passive: true });
 });
 
-// Touch fix: анимация + навигация для a.btn-main
-document.querySelectorAll('a.btn-main').forEach(link => {
-    let startY = 0;
-    let moved = false;
-
-    link.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-        moved = false;
-        this.classList.add('is-active');
-    }, { passive: true });
-
-    link.addEventListener('touchmove', function() {
-        moved = true;
-        this.classList.remove('is-active');
-    }, { passive: true });
-
-    link.addEventListener('touchend', function(e) {
-        if (moved) {
-            this.classList.remove('is-active');
-            return;
-        }
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        const el = this;
-        setTimeout(() => {
-            el.classList.remove('is-active');
-            if (href) window.location.href = href;
-        }, 180);
-    }, { passive: false });
-});
-
 // Touch fix: анимация для btn-link, text-link, lang-btn
 document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link => {
     let moved = false;

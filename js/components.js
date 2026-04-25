@@ -160,20 +160,23 @@ class AppHeader extends HTMLElement {
 }
 customElements.define('app-header', AppHeader);
 
-customElements.define('app-header', AppHeader);
-
 // === Автоподгрузка скриптов погоды/геомагнитки в зависимости от страницы ===
 (function() {
     const path = window.location.pathname;
-    const filename = path.split('/').pop() || 'index.html';
 
-    // Главная: index.html, или путь '/', или '/ru/'
+    // Главная — это index.html в корне ('/') или в '/ru/'
     const isHomePage = (
-        filename === 'index.html' ||
-        filename === '' ||
         path === '/' ||
-        path === '/ru/'
+        path === '/index.html' ||
+        path === '/ru/' ||
+        path === '/ru/index.html'
     );
+
+    // Префикс пути к скриптам:
+    // - Только немецкая главная в корне → 'js/'
+    // - Все остальные страницы (на 1 уровень глубже: tabs/, ru/) → '../js/'
+    const isInRoot = (path === '/' || path === '/index.html');
+    const prefix = isInRoot ? 'js/' : '../js/';
 
     function loadScript(src) {
         const s = document.createElement('script');
@@ -181,10 +184,6 @@ customElements.define('app-header', AppHeader);
         s.defer = true;
         document.head.appendChild(s);
     }
-
-    // Определяем префикс пути относительно корня
-    // На главной: js/weather.js, на вкладках: ../js/weather.js
-    const prefix = path.includes('/tabs/') || path.includes('/ru/tabs/') ? '../js/' : 'js/';
 
     if (isHomePage) {
         loadScript(prefix + 'weather.js');

@@ -10,6 +10,11 @@ async function getGeomagneticActivity() {
             return;
         }
 
+        // NEW: Сохраняем для других вкладок в рамках сессии
+        try {
+            sessionStorage.setItem('magnetData', JSON.stringify({ kp_index: data.kp_index }));
+        } catch (e) {}
+
         applyMagnetData(data.kp_index);
 
     } catch (e) {

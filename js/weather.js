@@ -56,6 +56,11 @@ async function getWeather() {
             return;
         }
 
+        // NEW: Сохраняем для других вкладок в рамках сессии
+        try {
+            sessionStorage.setItem('weatherData', JSON.stringify(d));
+        } catch (e) {}
+
         applyWeatherData(d);
 
     } catch (e) {
@@ -93,6 +98,9 @@ function applyWeatherData(d) {
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
+                    // NEW: чистим sessionStorage при смене города
+                    sessionStorage.removeItem('weatherData');
+                    sessionStorage.removeItem('aqiData');
                     getWeather();
                 }
             };
@@ -158,6 +166,11 @@ async function getAirPollution(lat, lon) {
 
         const aqiIndex   = data.list[0].main.aqi;
         const components = data.list[0].components;
+
+        // NEW: Сохраняем для других вкладок в рамках сессии
+        try {
+            sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components }));
+        } catch (e) {}
 
         updateAQIUI(aqiIndex, components);
 
@@ -241,4 +254,3 @@ function toggleWeatherScroll() {
 }
 
 getWeather();
-

@@ -56,19 +56,38 @@ function showTab(tabId, event) {
 
     if (event?.currentTarget) event.currentTarget.classList.add('active');
 
+    history.pushState({ tab: tabId }, '', `#${tabId}`);
+
     document.documentElement.scrollTo(0, 0);
     document.body.scrollTo(0, 0);
     document.querySelector('main.container')?.scrollTo(0, 0);
 }
 
+function showTabSilent(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) targetTab.classList.add('active');
+
+    const btn = document.querySelector(`[onclick="showTab('${tabId}', event)"]`);
+    if (btn) btn.classList.add('active');
+}
+
+window.addEventListener('popstate', (e) => {
+    showTabSilent(e.state?.tab || 'home');
+});
+
 window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) showTabSilent(hash);
+
     const viewport = document.querySelector('.nav-scroll-viewport');
     if (viewport) {
         viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });
         viewport.addEventListener('touchstart', hideSwipeHint, { passive: true, once: true });
     }
 });
-
 
 // ====================== INNER TABS ======================
 
@@ -86,8 +105,18 @@ function showInnerTab(id, event) {
     }
 }
 
-
 // ====================== TOUCH АНИМАЦИИ ======================
+
+// Touch fix: анимация для button.btn-main
+document.querySelectorAll('button.btn-main').forEach(btn => {
+    btn.addEventListener('touchstart', function() {
+        this.classList.add('is-active');
+    }, { passive: true });
+
+    btn.addEventListener('touchend', function() {
+        setTimeout(() => this.classList.remove('is-active'), 180);
+    }, { passive: true });
+});
 
 // Touch fix: анимация + навигация для a.btn-main
 document.querySelectorAll('a.btn-main').forEach(link => {
@@ -120,17 +149,6 @@ document.querySelectorAll('a.btn-main').forEach(link => {
     }, { passive: false });
 });
 
-// Touch fix: анимация для button.btn-main
-document.querySelectorAll('button.btn-main').forEach(btn => {
-    btn.addEventListener('touchstart', function() {
-        this.classList.add('is-active');
-    }, { passive: true });
-
-    btn.addEventListener('touchend', function() {
-        setTimeout(() => this.classList.remove('is-active'), 180);
-    }, { passive: true });
-});
-
 // Touch fix: анимация для btn-link, text-link, lang-btn
 document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link => {
     let moved = false;
@@ -154,7 +172,6 @@ document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link =>
     }, { passive: true });
 });
 
-
 // ===== Telegram In-App Browser detect =====
 if (/Telegram/i.test(navigator.userAgent)) {
     document.documentElement.classList.add("tg-browser");
@@ -175,7 +192,6 @@ if (/Telegram/i.test(navigator.userAgent)) {
     tg.setHeaderColor("#1a3a5c");
     tg.setBackgroundColor("#1a3a5c");
 })();
-
 
 // ====================== КНОПКА "НАВЕРХ" ======================
 
@@ -233,7 +249,6 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     e.preventDefault();
     scrollToTop();
 }, { passive: false });
-
 
 // ====================== DRAG-TO-SCROLL ДЛЯ МЕНЮ ======================
 

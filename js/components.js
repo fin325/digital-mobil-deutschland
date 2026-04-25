@@ -160,6 +160,39 @@ class AppHeader extends HTMLElement {
 }
 customElements.define('app-header', AppHeader);
 
+// === Автоподгрузка скриптов погоды/геомагнитки в зависимости от страницы ===
+(function() {
+    const path = window.location.pathname;
+
+    // Главная — это index.html в корне ('/') или в '/ru/'
+    const isHomePage = (
+        path === '/' ||
+        path === '/index.html' ||
+        path === '/ru/' ||
+        path === '/ru/index.html'
+    );
+
+    // Префикс пути к скриптам:
+    // - Только немецкая главная в корне → 'js/'
+    // - Все остальные страницы (на 1 уровень глубже: tabs/, ru/) → '../js/'
+    const isInRoot = (path === '/' || path === '/index.html');
+    const prefix = isInRoot ? 'js/' : '../js/';
+
+    function loadScript(src) {
+        const s = document.createElement('script');
+        s.src = src;
+        s.defer = true;
+        document.head.appendChild(s);
+    }
+
+    if (isHomePage) {
+        loadScript(prefix + 'weather.js');
+        loadScript(prefix + 'magnet.js');
+    } else {
+        loadScript(prefix + 'weather-display.js');
+    }
+})();
+
 class ScrollHint extends HTMLElement {
     connectedCallback() {
         const isRu = document.documentElement.lang === 'ru';

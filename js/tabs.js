@@ -37,7 +37,6 @@ function showTab(tabId, event) {
         targetTab.classList.add('active');
         window.dispatchEvent(new Event('resize'));
 
-        // iframe reload только если уже загружен
         targetTab.querySelectorAll('iframe').forEach(iframe => {
             const src = iframe.src;
 
@@ -59,7 +58,6 @@ function showTab(tabId, event) {
 
     history.pushState({ tab: tabId }, '', `#${tabId}`);
 
-    // Прокрутка наверх (мгновенная при переключении вкладок)
     document.documentElement.scrollTo(0, 0);
     document.body.scrollTo(0, 0);
     document.querySelector('main.container')?.scrollTo(0, 0);
@@ -84,15 +82,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash.replace('#', '');
     if (hash) showTabSilent(hash);
 
-    // Скрываем подсказку при скролле меню
     const viewport = document.querySelector('.nav-scroll-viewport');
     if (viewport) {
         viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });
-        // Скрываем подсказку при касании меню на мобильном
         viewport.addEventListener('touchstart', hideSwipeHint, { passive: true, once: true });
     }
 });
-
 
 // ====================== INNER TABS ======================
 
@@ -110,6 +105,8 @@ function showInnerTab(id, event) {
     }
 }
 
+// ====================== TOUCH АНИМАЦИИ ======================
+
 // Touch fix: анимация для button.btn-main
 document.querySelectorAll('button.btn-main').forEach(btn => {
     btn.addEventListener('touchstart', function() {
@@ -121,17 +118,38 @@ document.querySelectorAll('button.btn-main').forEach(btn => {
     }, { passive: true });
 });
 
+// Touch fix: анимация для btn-link, text-link, lang-btn
+document.querySelectorAll('a.btn-link, a.text-link, a.lang-btn').forEach(link => {
+    let moved = false;
+    let startY = 0;
 
-// ===== Telegram In-App Browser detect (для обычных ссылок) =====
+    link.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        moved = false;
+        this.classList.add('is-active');
+    }, { passive: true });
+
+    link.addEventListener('touchmove', function(e) {
+        if (Math.abs(e.touches[0].clientY - startY) > 8) {
+            moved = true;
+            this.classList.remove('is-active');
+        }
+    }, { passive: true });
+
+    link.addEventListener('touchend', function() {
+        setTimeout(() => this.classList.remove('is-active'), 150);
+    }, { passive: true });
+});
+
+// ===== Telegram In-App Browser detect =====
 if (/Telegram/i.test(navigator.userAgent)) {
     document.documentElement.classList.add("tg-browser");
 }
 
-// ===== Telegram WebApp init (только для Mini App через бота) =====
+// ===== Telegram WebApp init =====
 (function () {
     if (!window.Telegram?.WebApp) return;
 
-    // Помечаем html классом — для CSS-правил только в Telegram Mini App
     document.documentElement.classList.add("telegram");
 
     const tg = window.Telegram.WebApp;
@@ -140,11 +158,9 @@ if (/Telegram/i.test(navigator.userAgent)) {
     tg.expand();
     tg.disableVerticalSwipes?.();
 
-    // Цвет совпадает с meta theme-color в head — #1a3a5c
     tg.setHeaderColor("#1a3a5c");
     tg.setBackgroundColor("#1a3a5c");
 })();
-
 
 // ====================== КНОПКА "НАВЕРХ" ======================
 
@@ -177,7 +193,6 @@ function handleScroll() {
     }, 150);
 }
 
-// Слушаем скролл на всех возможных контейнерах
 window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
 document.addEventListener('scroll', handleScroll, { passive: true, capture: true });
 
@@ -186,7 +201,6 @@ if (mainContainer) {
     mainContainer.addEventListener('scroll', handleScroll, { passive: true });
 }
 
-// Клик по кнопке — плавная прокрутка наверх
 function scrollToTop() {
     const options = { top: 0, behavior: 'smooth' };
     document.documentElement.scrollTo(options);
@@ -204,7 +218,6 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     e.preventDefault();
     scrollToTop();
 }, { passive: false });
-
 
 // ====================== DRAG-TO-SCROLL ДЛЯ МЕНЮ ======================
 
@@ -231,10 +244,7 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
         if (!isDown) return;
         const x = e.pageX - vp.offsetLeft;
         const walk = x - startX;
-
-        // Считаем перетаскиванием, только если мышь сдвинулась больше чем на 4 пикселя
         if (Math.abs(walk) > 4) hasDragged = true;
-
         vp.scrollLeft = scrollLeft - walk;
     });
 
@@ -245,7 +255,6 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
         vp.style.userSelect = '';
     });
 
-    // Блокируем клик по вкладке, если меню перетаскивали, а не просто кликнули
     vp.addEventListener('click', (e) => {
         if (hasDragged) e.stopPropagation();
     }, true);

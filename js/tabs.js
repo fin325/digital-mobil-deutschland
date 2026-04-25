@@ -56,37 +56,12 @@ function showTab(tabId, event) {
 
     if (event?.currentTarget) event.currentTarget.classList.add('active');
 
-    history.pushState({ tab: tabId }, '', `#${tabId}`);
-
     document.documentElement.scrollTo(0, 0);
     document.body.scrollTo(0, 0);
     document.querySelector('main.container')?.scrollTo(0, 0);
 }
 
-function showTabSilent(tabId) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-    const targetTab = document.getElementById(tabId);
-    if (targetTab) targetTab.classList.add('active');
-
-    const btn = document.querySelector(`[onclick="showTab('${tabId}', event)"]`);
-    if (btn) btn.classList.add('active');
-}
-
-window.addEventListener('popstate', (e) => {
-    showTabSilent(e.state?.tab || 'home');
-});
-
 window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-        showTabSilent(hash);
-        history.replaceState({ tab: hash }, '', `#${hash}`);
-    } else {
-        history.replaceState({ tab: 'home' }, '', window.location.href);
-    }
-
     const viewport = document.querySelector('.nav-scroll-viewport');
     if (viewport) {
         viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });

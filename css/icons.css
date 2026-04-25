@@ -28,6 +28,14 @@
     transform: translateY(-5px);
 }
 
+/* Увеличенный размер для иконки 🏩 */
+.card h1 .icon-emoji.icon-1f3e9 {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+}
+
 /* В кнопках внутри карточек */
 .card .btn-main .icon-emoji {
     width: 22px;

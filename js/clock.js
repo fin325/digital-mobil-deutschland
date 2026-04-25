@@ -16,3 +16,10 @@ function initClock() {
     updateClock();
     setInterval(updateClock, 1000);
 }
+
+// Авто-запуск
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initClock);
+} else {
+    initClock();
+}

@@ -7,21 +7,23 @@ silktideCookieBannerManager.updateCookieBannerConfig({
   cookieIcon: { position: "bottomLeft" },
 
   cookieTypes: [
+    // ── 1. NOTWENDIG / НЕОБХОДИМЫЕ ─────────────────────────
     {
       id: "necessary",
       name: _isRu ? "Необходимые" : "Notwendig",
       description: _isRu
-        ? "<p>Эти файлы cookie технически необходимы и не могут быть отключены.</p>"
-        : "<p>Diese Cookies sind technisch erforderlich und können nicht deaktiviert werden.</p>",
+        ? "<p>Технически необходимые файлы для работы сайта. Сюда входят: сохранение ваших cookie-настроек и выбранного города для виджета погоды. Эти файлы не могут быть отключены.</p>"
+        : "<p>Technisch erforderliche Dateien für den Betrieb der Website. Dazu gehören: Speicherung Ihrer Cookie-Einstellungen sowie der von Ihnen gewählten Stadt für die Wetteranzeige. Diese Dateien können nicht deaktiviert werden.</p>",
       required: true
     },
 
+    // ── 2. FUNKTIONAL / ФУНКЦИОНАЛЬНЫЕ (новости) ───────────
     {
-      id: "analytics",
-      name: _isRu ? "Статистика" : "Statistik",
+      id: "functional",
+      name: _isRu ? "Функциональные" : "Funktional",
       description: _isRu
-        ? "<p>Помогает нам понять, как посетители используют сайт.</p>"
-        : "<p>Hilft uns zu verstehen, wie Besucher die Website nutzen.</p>",
+        ? "<p>Расширенный функционал сайта, требующий передачи данных внешним сервисам:</p><ul><li><strong>Новости через rss2json</strong> — RSS-каналы tagesschau.de или ru.euronews.com. При загрузке ваш IP-адрес передаётся на серверы rss2json.</li></ul><p>Без вашего согласия эти функции не активируются.</p>"
+        : "<p>Erweiterte Funktionen der Website, die eine Datenübermittlung an externe Dienste erfordern:</p><ul><li><strong>Nachrichten über rss2json</strong> — RSS-Feeds von tagesschau.de oder ru.euronews.com. Beim Laden wird Ihre IP-Adresse an die Server von rss2json übermittelt.</li></ul><p>Ohne Ihre Einwilligung werden diese Funktionen nicht aktiviert.</p>",
       required: false,
 
       onAccept: function () {
@@ -44,15 +46,22 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       }
     },
 
+    // ── 3. EXTERNE MEDIEN / ВНЕШНИЕ МЕДИА ─────────────────
     {
-      id: "advertising",
-      name: _isRu ? "Реклама и внешний контент" : "Werbung & externe Inhalte",
+      id: "external_media",
+      name: _isRu ? "Внешние медиа" : "Externe Medien",
       description: _isRu
-        ? "<p>YouTube, PDF-компрессор и инструмент «Фото в PDF».</p>"
-        : "<p>YouTube, PDF-Kompressor und Foto-zu-PDF Tools.</p>",
+        ? "<p>Загрузка встроенного контента и инструментов от внешних провайдеров:</p><ul><li><strong>YouTube-видео</strong> (Google Ireland Ltd. / США) — в режиме расширенной защиты данных.</li><li><strong>PDF-компрессор</strong> (Render Services Inc., США).</li><li><strong>Фото в PDF</strong> (Streamlit / Snowflake Inc., США).</li></ul><p>При загрузке ваш IP-адрес и данные браузера передаются соответствующим провайдерам. Дополнительно отправляется фоновый ping для пробуждения сервера PDF-компрессора (избегание Cold-Start).</p>"
+        : "<p>Laden eingebetteter Inhalte und Tools von externen Anbietern:</p><ul><li><strong>YouTube-Videos</strong> (Google Ireland Ltd. / USA) — im erweiterten Datenschutzmodus.</li><li><strong>PDF-Kompressor</strong> (Render Services Inc., USA).</li><li><strong>Foto zu PDF</strong> (Streamlit / Snowflake Inc., USA).</li></ul><p>Beim Laden werden Ihre IP-Adresse und Browserdaten an die jeweiligen Anbieter übertragen. Zusätzlich wird ein Hintergrund-Ping zum Aufwecken des PDF-Kompressor-Servers gesendet (Cold-Start-Vermeidung).</p>",
       required: false,
 
       onAccept: function () {
+        // 🔥 Фоновое пробуждение Render-сервера
+        // 🔥 Background wake-up of Render server
+        // 🔥 Hintergrund-Aufwecken des Render-Servers
+        fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
+          .catch(() => {});
+
         function loadAllExternal() {
 
           // ▶️ Видео
@@ -94,25 +103,25 @@ silktideCookieBannerManager.updateCookieBannerConfig({
     banner: {
       description: _isRu
         ? `<p>
-        Мы используем файлы cookie для улучшения сайта, YouTube-видео и внешних инструментов.
+        Мы используем cookies для работы сайта и можем загружать внешний контент (новости, видео, онлайн-инструменты), что требует передачи вашего IP-адреса третьим сторонам.
         <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click();">Конфиденциальность</a> |
         <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click();">Импрессум</a>
       </p>`
         : `<p>
-        Wir verwenden Cookies zur Verbesserung der Website, für YouTube-Videos und externe Tools.
+        Wir verwenden Cookies für den Betrieb der Website und können externe Inhalte laden (Nachrichten, Videos, Online-Tools), was die Übermittlung Ihrer IP-Adresse an Drittanbieter erfordert.
         <a href="#" onclick="event.preventDefault(); document.querySelector('.datenschutz-button').click();">Datenschutz</a> |
         <a href="#" onclick="event.preventDefault(); document.querySelector('.impressum-button').click();">Impressum</a>
       </p>`,
-      acceptAllButtonText: _isRu ? "Принять все" : "Alle akzeptieren",
+      acceptAllButtonText: _isRu ? "Все принять" : "Alle akzeptieren",
       rejectNonEssentialButtonText: _isRu ? "Только необходимые" : "Nur notwendige",
       preferencesButtonText: _isRu ? "Настройки" : "Einstellungen"
     },
 
     preferences: {
-      title: _isRu ? "Настройка параметров cookie" : "Cookie-Einstellungen",
+      title: _isRu ? "Настройка cookie-параметров" : "Cookie-Einstellungen",
       description: _isRu
-        ? "<p>Выберите, какие файлы cookie вы хотите разрешить.</p>"
-        : "<p>Wählen Sie, welche Cookies Sie zulassen möchten.</p>"
+        ? "<p>Выберите, какие категории cookies и внешнего содержимого вы хотите разрешить. Подробное описание каждой категории — ниже. Вы можете изменить выбор в любое время через иконку cookies в левом нижнем углу.</p>"
+        : "<p>Wählen Sie, welche Kategorien von Cookies und externen Inhalten Sie zulassen möchten. Eine detaillierte Beschreibung jeder Kategorie finden Sie unten. Sie können Ihre Auswahl jederzeit über das Cookie-Symbol unten links ändern.</p>"
     }
   },
 

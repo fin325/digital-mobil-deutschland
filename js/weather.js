@@ -45,6 +45,18 @@ function formatTime(unixTs) {
 
 // ── Основной запрос погоды через собственный прокси ────────────
 async function getWeather() {
+    // Если данные уже есть в sessionStorage — используем их без запроса
+    try {
+        const cached = sessionStorage.getItem('weatherData');
+        if (cached) {
+            const d = JSON.parse(cached);
+            if (d && d.main) {
+                applyWeatherData(d);
+                return;
+            }
+        }
+    } catch (e) {}
+
     try {
         const res = await fetch(
             `/api/weather?city=${encodeURIComponent(currentCity)}&lang=${isRu ? 'ru' : 'de'}`
@@ -56,7 +68,7 @@ async function getWeather() {
             return;
         }
 
-        // NEW: Сохраняем для других вкладок в рамках сессии
+        // Сохраняем для других вкладок в рамках сессии
         try {
             sessionStorage.setItem('weatherData', JSON.stringify(d));
         } catch (e) {}
@@ -98,7 +110,7 @@ function applyWeatherData(d) {
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
                     localStorage.setItem('userCity', currentCity);
-                    // NEW: чистим sessionStorage при смене города
+                    // Чистим sessionStorage при смене города
                     sessionStorage.removeItem('weatherData');
                     sessionStorage.removeItem('aqiData');
                     getWeather();
@@ -155,6 +167,18 @@ function applyWeatherData(d) {
 
 // ── Качество воздуха через собственный прокси ──────────────────
 async function getAirPollution(lat, lon) {
+    // Если данные уже есть в sessionStorage — используем их без запроса
+    try {
+        const cached = sessionStorage.getItem('aqiData');
+        if (cached) {
+            const { aqiIndex, components } = JSON.parse(cached);
+            if (typeof aqiIndex === 'number') {
+                updateAQIUI(aqiIndex, components);
+                return;
+            }
+        }
+    } catch (e) {}
+
     try {
         const res  = await fetch(`/api/air?lat=${lat}&lon=${lon}`);
         const data = await res.json();
@@ -167,7 +191,7 @@ async function getAirPollution(lat, lon) {
         const aqiIndex   = data.list[0].main.aqi;
         const components = data.list[0].components;
 
-        // NEW: Сохраняем для других вкладок в рамках сессии
+        // Сохраняем для других вкладок в рамках сессии
         try {
             sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components }));
         } catch (e) {}

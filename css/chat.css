@@ -42,8 +42,9 @@
 /* === Chat Window === */
 .chat-window {
   position: fixed;
-  top: 0;
-  height: 60vh;
+  top: 10px;
+  height: 85vh;
+  max-height: 85vh;
   min-height: 400px;
   bottom: auto;
   right: 20px;
@@ -62,10 +63,17 @@
   font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
   padding-top: env(safe-area-inset-top, 0);
   padding-bottom: env(safe-area-inset-bottom, 0);
+  transition: height 0.25s ease;
 }
 
 .chat-window.open {
   display: flex;
+}
+
+/* Компактный режим — когда открыта клавиатура */
+.chat-window.open.compact {
+  height: 60vh;
+  max-height: 60vh;
 }
 
 .chat-header {
@@ -407,31 +415,26 @@
   color: white !important;
 }
 
-/* === Расширенное окно во время ответа ассистента === */
-.chat-window.expanded {
-  height: 85vh;
-  max-height: 85vh;
-  transition: height 0.25s ease;
-}
-
 /* === Mobile adjustments === */
 @media (max-width: 480px) {
   .chat-window {
-    top: 0;
+    top: 10px;
     bottom: auto;
     right: 10px;
     left: 10px;
     width: auto;
     max-width: none;
-    height: 60vh;
+    height: 85vh;
+    max-height: 85vh;
     min-height: 400px;
     border-radius: 20px;
   }
   
-  .chat-window.expanded {
-    height: 85vh;
-    max-height: 85vh;
+  .chat-window.open.compact {
+    height: 60vh;
+    max-height: 60vh;
   }
+  
   .chat-fab {
     bottom: 16px;
     right: 16px;

@@ -42,29 +42,23 @@
 /* === Chat Window === */
 .chat-window {
   position: fixed;
-  /* ИЗМЕНЕНО: Небольшой отступ сверху */
   top: 5px;
-  /* ИЗМЕНЕНО: Высота чуть больше половины экрана (55%) */
-  height: 55vh; 
-  min-height: 400px; 
-  bottom: auto; 
+  bottom: 85px; /* над FAB кнопкой */
   right: 20px;
   width: calc(100vw - 40px);
-  max-width: 380px;
+  max-width: 420px;
+  height: auto; /* растягивается между top и bottom */
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  /* ИЗМЕНЕНО: Возвращаем скругление со всех сторон */
-  border-radius: 20px; 
+  border-radius: 20px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   z-index: 9999;
   display: none;
   flex-direction: column;
   overflow: hidden;
   font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
-  padding-top: env(safe-area-inset-top, 0);
-  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .chat-window.open {
@@ -195,7 +189,7 @@
   30%           { transform: translateY(-5px); opacity: 1; }
 }
 
-/* === Persistent Quick Suggestions (2 rows, horizontal scroll together) === */
+/* === Persistent Quick Suggestions === */
 .chat-suggestions-viewport {
   background: rgba(255, 255, 255, 0.55);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -274,7 +268,7 @@
   padding: 10px 14px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 20px;
-  font-size: 16px; /* Защита от авто-зума */
+  font-size: 16px;
   font-family: inherit;
   outline: none;
   background: white;
@@ -319,7 +313,7 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* === Tab links inside assistant messages (green) === */
+/* === Tab / Page / URL links === */
 .chat-tab-link {
   display: inline-block;
   margin: 4px 2px;
@@ -342,7 +336,6 @@
   box-shadow: 0 4px 10px rgba(40, 167, 69, 0.35);
 }
 
-/* === Page links inside assistant messages (dark blue, internal pages) === */
 .chat-page-link {
   display: inline-block;
   margin: 4px 2px;
@@ -366,7 +359,6 @@
   color: white !important;
 }
 
-/* === External URL links (orange/amber, like PDF24) === */
 .chat-url-link {
   display: inline-block;
   margin: 4px 2px;
@@ -390,18 +382,16 @@
   color: white !important;
 }
 
-/* === Mobile adjustments === */
+/* === Mobile === */
 @media (max-width: 480px) {
   .chat-window {
-    /* ИЗМЕНЕНО: top: 5px, высота 55vh, скругление возвращено */
     top: 5px;
-    bottom: auto;
+    bottom: 85px;
     right: 10px;
     left: 10px;
     width: auto;
     max-width: none;
-    height: 55vh; 
-    min-height: 400px;
+    height: auto;
     border-radius: 20px;
   }
   .chat-fab {

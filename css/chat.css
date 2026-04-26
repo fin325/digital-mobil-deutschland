@@ -391,8 +391,8 @@
 /* === Mobile adjustments === */
 @media (max-width: 480px) {
   .chat-window {
-    top: 60px;
-    bottom: 80px;
+    top: 40px;
+    bottom: 60px;
     right: 10px;
     left: 10px;
     width: auto;

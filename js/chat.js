@@ -19,7 +19,7 @@
       headerTitle:    'DMD Assistent',
       closeAria:      'Chat schließen',
       clearAria:      'Verlauf löschen',
-      placeholder:    'Frage stellen…',
+      placeholder:    'Frage stellen...',
       sendAria:       'Senden',
       disclaimer:     'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
       welcome:        `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Wie kann ich helfen?`,
@@ -34,7 +34,7 @@
       headerTitle:    'Ассистент DMD',
       closeAria:      'Закрыть чат',
       clearAria:      'Очистить историю',
-      placeholder:    'Задайте вопрос…',
+      placeholder:    'Задайте вопрос...',
       sendAria:       'Отправить',
       disclaimer:     'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
       welcome:        `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Чем могу помочь?`,
@@ -46,7 +46,6 @@
     }
   };
 
-  // === Quick suggestion chips (always visible, 2 rows) ===
   const SUGGESTIONS = {
     de: [
       { label: '📄 PDF 24 Tools',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
@@ -74,7 +73,6 @@
 
   let fab, windowEl, messagesEl, inputEl, sendBtn, closeBtn, suggestionsEl;
 
-  // === iOS keyboard scroll lock state ===
   let savedScrollY = 0;
   let pageScrollLocked = false;
 
@@ -117,8 +115,6 @@
     suggestionsEl = windowEl.querySelector('.chat-suggestions-rows');
 
     windowEl.querySelector('.chat-clear').addEventListener('click', clearHistory);
-
-    // Render suggestions ONCE on init — they stay visible forever
     renderSuggestions();
   }
 
@@ -139,58 +135,29 @@
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
 
-    // === iOS keyboard fix ===
     inputEl.addEventListener('focus', preventPageScrollOnFocus);
     inputEl.addEventListener('blur', restorePageScroll);
-
-    // Слушатели изменения видимой области для iOS
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleVisualViewport);
-      window.visualViewport.addEventListener('scroll', handleVisualViewport);
-    }
   }
 
-  // === iOS keyboard scroll lock & viewport fix ===
   function preventPageScrollOnFocus() {
-    // Lock page in place so iOS Safari doesn’t auto-scroll when keyboard opens
     savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
+    document.body.style.top      = `-${savedScrollY}px`;
+    document.body.style.left     = '0';
+    document.body.style.right    = '0';
+    document.body.style.width    = '100%';
     pageScrollLocked = true;
-    
-    // Принудительно пересчитываем позицию окна
-    handleVisualViewport();
   }
 
   function restorePageScroll() {
     if (!pageScrollLocked) return;
     document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
+    document.body.style.top      = '';
+    document.body.style.left     = '';
+    document.body.style.right    = '';
+    document.body.style.width    = '';
     window.scrollTo(0, savedScrollY);
     pageScrollLocked = false;
-
-    // Сбрасываем динамический отступ снизу
-    windowEl.style.bottom = '';
-  }
-
-  function handleVisualViewport() {
-    if (!windowEl.classList.contains('open')) return;
-    
-    if (window.visualViewport) {
-      const vv = window.visualViewport;
-      // Вычисляем расстояние от низа физического окна до низа видимой области
-      const offsetBottom = window.innerHeight - (vv.offsetTop + vv.height);
-      
-      // Сдвигаем окно чата ровно на высоту клавиатуры
-      windowEl.style.bottom = `${Math.max(0, offsetBottom)}px`;
-      scrollToBottom();
-    }
   }
 
   function openChat() {
@@ -207,12 +174,7 @@
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
-    
-    // Restore page scroll if keyboard was still open when chat was closed
     if (pageScrollLocked) restorePageScroll();
-    
-    // Сбрасываем позицию, если чат закрыли при открытой клавиатуре
-    windowEl.style.bottom = '';
   }
 
   function clearHistory() {
@@ -225,8 +187,6 @@
 
   function renderSuggestions() {
     suggestionsEl.innerHTML = '';
-
-    // Split suggestions into 2 rows
     const half = Math.ceil(suggestionList.length / 2);
     const rows = [suggestionList.slice(0, half), suggestionList.slice(half)];
 
@@ -256,7 +216,6 @@
     scrollToBottom();
   }
 
-  // === Render assistant message: parse [TAB:id|text], [PAGE:path|text], [URL:url|text] ===
   function renderMessage(msg) {
     const div = document.createElement('div');
     div.className = 'chat-msg ' + msg.role;
@@ -295,7 +254,6 @@
         link.textContent = '🔗 ' + label;
         div.appendChild(link);
       } else if (kind === 'URL') {
-        // External URL — only allow http(s)://
         if (/^https?:\/\//i.test(target)) {
           const link = document.createElement('a');
           link.className = 'chat-url-link';
@@ -305,26 +263,20 @@
           link.textContent = '🌐 ' + label;
           div.appendChild(link);
         } else {
-          // Invalid URL — render as plain text fallback
           div.appendChild(document.createTextNode(label));
         }
       }
-
       lastIndex = regex.lastIndex;
     }
     if (lastIndex < text.length) {
       div.appendChild(document.createTextNode(text.slice(lastIndex)));
     }
-
     messagesEl.appendChild(div);
   }
 
   function openTab(tabId) {
-    // Close chat FIRST so the tab content is fully visible
     closeChat();
-
     if (typeof window.showTab === 'function') {
-      // showTab() already scrolls to top of page (see tabs.js)
       window.showTab(tabId);
     } else {
       const btn = document.querySelector(`.nav-btn[onclick*="'${tabId}'"]`);
@@ -335,9 +287,6 @@
         return;
       }
     }
-
-    // Force scroll to the very top of the page (above the top-bar with weather/clock)
-    // This guarantees the user sees the tab from its beginning, including any video at the top
     requestAnimationFrame(() => {
       const opts = { top: 0, behavior: 'smooth' };
       window.scrollTo(opts);
@@ -379,7 +328,6 @@
     isLoading = loading;
     sendBtn.disabled = loading;
     inputEl.disabled = loading;
-    // Disable suggestion buttons while loading (search whole window)
     windowEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
   }
 
@@ -420,7 +368,7 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      inputEl.focus();
+      inputEl.blur(); // ИЗМЕНЕНО: было inputEl.focus() — закрываем клавиатуру после отправки
     }
   }
 
@@ -447,7 +395,7 @@
   }
 
   function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) => ({'&':'&','<':'<','>':'>','"':'"','\'':'\''}[c]));
+    return String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
   function escapeAttr(s) { return escapeHtml(s); }
 

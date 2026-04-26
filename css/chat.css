@@ -42,25 +42,33 @@
 /* === Chat Window === */
 .chat-window {
   position: fixed;
-  /* Anchor by TOP, not bottom — prevents going off-screen on tall content */
-  top: 40px;
-  bottom: 60px;
+  /* ИЗМЕНЕНО: Чат прижат к самому верху */
+  top: 0;
   right: 20px;
+  
+  /* ИЗМЕНЕНО: Динамическая высота подстраивается под клавиатуру */
+  height: 100dvh; 
+  bottom: auto;
+  
   width: calc(100vw - 40px);
   max-width: 380px;
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
+  
+  /* ИЗМЕНЕНО: Убраны верхние скругления, так как окно упирается в потолок */
+  border-radius: 0 0 20px 20px; 
+  
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   z-index: 9999;
   display: none;
   flex-direction: column;
   overflow: hidden;
   font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
+  
+  /* Учет безопасной зоны сверху (челка iPhone) */
   padding-top: env(safe-area-inset-top, 0);
-  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .chat-window.open {
@@ -191,8 +199,7 @@
   30%           { transform: translateY(-5px); opacity: 1; }
 }
 
-/* === Persistent Quick Suggestions (2 rows, horizontal scroll together) === */
-/* Mirrors the .nav-scroll-viewport / .nav-rows-wrapper / .nav-row pattern from navbar.css */
+/* === Persistent Quick Suggestions === */
 .chat-suggestions-viewport {
   background: rgba(255, 255, 255, 0.55);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -211,16 +218,12 @@
   background: rgba(0, 51, 153, 0.25);
   border-radius: 2px;
 }
-.chat-suggestions-viewport::-webkit-scrollbar-track {
-  background: transparent;
-}
 
 .chat-suggestions-rows {
   display: flex;
   flex-direction: column;
   gap: 6px;
   padding: 8px 10px;
-  /* width: max-content makes both rows scroll horizontally as one unit */
   width: max-content;
   min-width: 100%;
 }
@@ -247,16 +250,6 @@
   white-space: nowrap;
 }
 
-.chat-suggestion:hover,
-.chat-suggestion:active {
-  background: rgba(0, 51, 153, 0.18);
-}
-
-.chat-suggestion:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* === Input area === */
 .chat-input-area {
   padding: 10px;
@@ -265,16 +258,8 @@
   gap: 8px;
   background: rgba(255, 255, 255, 0.5);
   flex-shrink: 0;
-}
-
-/* === Input area === */
-.chat-input-area {
-  padding: 10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  display: flex;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.5);
-  flex-shrink: 0;
+  /* Учет безопасной зоны снизу (для iPhone без кнопок) */
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0));
 }
 
 .chat-input {
@@ -282,7 +267,7 @@
   padding: 10px 14px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 20px;
-  /* ИЗМЕНЕНО: 16px предотвращает авто-зум на iOS */
+  /* ИЗМЕНЕНО: 16px предотвращает авто-зум на мобильных */
   font-size: 16px; 
   font-family: inherit;
   outline: none;
@@ -291,7 +276,6 @@
   max-height: 100px;
   min-height: 40px;
   line-height: 1.3;
-  /* ДОБАВЛЕНО: предотвращает смещение внутреннего текста */
   box-sizing: border-box;
 }
 
@@ -325,87 +309,36 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* === Tab links inside assistant messages (green) === */
-.chat-tab-link {
+/* === Links inside messages === */
+.chat-tab-link, .chat-page-link, .chat-url-link {
   display: inline-block;
   margin: 4px 2px;
   padding: 6px 12px;
-  background: linear-gradient(135deg, #28a745, #1e7e34);
-  color: white;
-  border: none;
   border-radius: 14px;
   font-size: 0.85rem;
   font-family: inherit;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.25);
+  text-decoration: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   -webkit-tap-highlight-color: transparent;
-}
-.chat-tab-link:hover,
-.chat-tab-link:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.35);
 }
 
-/* === Page links inside assistant messages (dark blue, internal pages) === */
-.chat-page-link {
-  display: inline-block;
-  margin: 4px 2px;
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #003399, #1a3a5c);
-  color: white !important;
-  border: none;
-  border-radius: 14px;
-  font-size: 0.85rem;
-  font-family: inherit;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0, 51, 153, 0.25);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.chat-page-link:hover,
-.chat-page-link:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 51, 153, 0.4);
-  color: white !important;
-}
-
-/* === External URL links (orange/amber, like PDF24) === */
-.chat-url-link {
-  display: inline-block;
-  margin: 4px 2px;
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #ff9800, #f57c00);
-  color: white !important;
-  border: none;
-  border-radius: 14px;
-  font-size: 0.85rem;
-  font-family: inherit;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(245, 124, 0, 0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.chat-url-link:hover,
-.chat-url-link:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(245, 124, 0, 0.45);
-  color: white !important;
-}
+.chat-tab-link { background: linear-gradient(135deg, #28a745, #1e7e34); color: white; border: none; }
+.chat-page-link { background: linear-gradient(135deg, #003399, #1a3a5c); color: white !important; border: none; }
+.chat-url-link { background: linear-gradient(135deg, #ff9800, #f57c00); color: white !important; border: none; }
 
 /* === Mobile adjustments === */
 @media (max-width: 480px) {
   .chat-window {
-    top: 40px;
-    bottom: 60px;
-    right: 10px;
-    left: 10px;
-    width: auto;
+    /* ИЗМЕНЕНО: На мобильных чат строго от верха до клавиатуры, на весь экран */
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
     max-width: none;
-    /* No height — fills space between top and bottom */
+    height: 100dvh; 
+    border-radius: 0;
   }
   .chat-fab {
     bottom: 16px;
@@ -415,4 +348,3 @@
     font-size: 26px;
   }
 }
-

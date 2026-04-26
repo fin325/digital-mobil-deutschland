@@ -139,31 +139,58 @@
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
 
-    // === iOS keyboard fix: prevent page from scrolling when keyboard opens ===
-    inputEl.addEventListener('focus', preventPageScrollOnFocus);
-    inputEl.addEventListener('blur', restorePageScroll);
+    // === iOS keyboard fix ===
+    // Lock the page BEFORE focus happens. touchstart and pointerdown fire before focus on iOS.
+    inputEl.addEventListener('touchstart', preventPageScrollOnFocus, { passive: true });
+    inputEl.addEventListener('pointerdown', preventPageScrollOnFocus);
+    inputEl.addEventListener('mousedown',   preventPageScrollOnFocus);
+    // Also handle programmatic focus (just in case)
+    inputEl.addEventListener('focus',       preventPageScrollOnFocus);
+    // Restore scroll when input loses focus
+    inputEl.addEventListener('blur',        restorePageScroll);
   }
 
   // === iOS keyboard scroll lock ===
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  }
+
   function preventPageScrollOnFocus() {
+    // Already locked? Do nothing — touchstart can fire multiple times
+    if (pageScrollLocked) return;
+
     // Lock page in place so iOS Safari doesn't auto-scroll when keyboard opens
-    savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    savedScrollY = window.scrollY || document.documentElement.scrollTop || window.pageYOffset || 0;
+
+    // Apply lock to BOTH html and body — iOS sometimes scrolls one or the other
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
     document.body.style.top = `-${savedScrollY}px`;
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
     pageScrollLocked = true;
   }
 
   function restorePageScroll() {
     if (!pageScrollLocked) return;
+    document.documentElement.style.overflow = '';
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.left = '';
     document.body.style.right = '';
     document.body.style.width = '';
-    window.scrollTo(0, savedScrollY);
+    document.body.style.overflow = '';
+
+    // Restore scroll in next frame — iOS needs a tick after unlocking
+    requestAnimationFrame(() => {
+      window.scrollTo(0, savedScrollY);
+      document.documentElement.scrollTop = savedScrollY;
+      document.body.scrollTop = savedScrollY;
+    });
+
     pageScrollLocked = false;
   }
 
@@ -171,7 +198,11 @@
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
     windowEl.classList.add('open');
-    setTimeout(() => inputEl.focus(), 100);
+    // Don't auto-focus input on iOS — it triggers keyboard scroll-jump.
+    // User will tap into input themselves when ready.
+    if (!isIOS()) {
+      setTimeout(() => inputEl.focus(), 100);
+    }
 
     if (messages.length === 0) {
       addMessage('assistant', t.welcome);

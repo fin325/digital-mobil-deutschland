@@ -15,34 +15,34 @@
 
   const UI = {
     de: {
-      fabAria:        'Chat öffnen',
-      headerTitle:    'DMD Assistent',
-      closeAria:      'Chat schließen',
-      clearAria:      'Verlauf löschen',
-      placeholder:    'Frage stellen...',
-      sendAria:       'Senden',
-      disclaimer:     'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
-      welcome:        `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Wie kann ich helfen?`,
-      clearConfirm:   'Verlauf löschen?',
-      cleared:        'Verlauf gelöscht. Wie kann ich helfen?',
-      errorPrefix:    'Fehler: ',
-      errorRetry:     '. Bitte später erneut versuchen.',
-      emptyReply:     'Leere Antwort vom Server',
+      fabAria:     'Chat öffnen',
+      headerTitle: 'DMD Assistent',
+      closeAria:   'Chat schließen',
+      clearAria:   'Verlauf löschen',
+      placeholder: 'Frage stellen...',
+      sendAria:    'Senden',
+      disclaimer:  'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
+      welcome:     `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Wie kann ich helfen?`,
+      clearConfirm:'Verlauf löschen?',
+      cleared:     'Verlauf gelöscht. Wie kann ich helfen?',
+      errorPrefix: 'Fehler: ',
+      errorRetry:  '. Bitte später erneut versuchen.',
+      emptyReply:  'Leere Antwort vom Server',
     },
     ru: {
-      fabAria:        'Открыть чат',
-      headerTitle:    'Ассистент DMD',
-      closeAria:      'Закрыть чат',
-      clearAria:      'Очистить историю',
-      placeholder:    'Задайте вопрос...',
-      sendAria:       'Отправить',
-      disclaimer:     'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
-      welcome:        `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Чем могу помочь?`,
-      clearConfirm:   'Очистить историю?',
-      cleared:        'История очищена. Чем могу помочь?',
-      errorPrefix:    'Ошибка: ',
-      errorRetry:     '. Попробуйте позже.',
-      emptyReply:     'Пустой ответ сервера',
+      fabAria:     'Открыть чат',
+      headerTitle: 'Ассистент DMD',
+      closeAria:   'Закрыть чат',
+      clearAria:   'Очистить историю',
+      placeholder: 'Задайте вопрос...',
+      sendAria:    'Отправить',
+      disclaimer:  'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
+      welcome:     `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Чем могу помочь?`,
+      clearConfirm:'Очистить историю?',
+      cleared:     'История очищена. Чем могу помочь?',
+      errorPrefix: 'Ошибка: ',
+      errorRetry:  '. Попробуйте позже.',
+      emptyReply:  'Пустой ответ сервера',
     }
   };
 
@@ -56,11 +56,11 @@
       { label: '🎬 News-Videos',    q: 'Wo finde ich Video-Nachrichten der Tagesschau?' },
     ],
     ru: [
-      { label: '📄 PDF 24 Tools',           q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
-      { label: '🏥 Найти врача',            q: 'Как найти русскоязычного врача в NRW?' },
-      { label: '🏠 Найти квартиру',         q: 'Где можно снять квартиру в Хаттингене?' },
-      { label: '💼 Найти работу',           q: 'Где найти вакансии?' },
-      { label: '📰 Новости текстом',        q: 'Где почитать текстовые новости из Германии?' },
+      { label: '📄 PDF 24 Tools',             q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
+      { label: '🏥 Найти врача',              q: 'Как найти русскоязычного врача в NRW?' },
+      { label: '🏠 Найти квартиру',           q: 'Где можно снять квартиру в Хаттингене?' },
+      { label: '💼 Найти работу',             q: 'Где найти вакансии?' },
+      { label: '📰 Новости текстом',          q: 'Где почитать текстовые новости из Германии?' },
       { label: '🎬 Видео-новости — Миша Бур', q: 'Где посмотреть видео-новости Германии от Миши Бура?' },
     ]
   };
@@ -72,6 +72,14 @@
   let isLoading = false;
 
   let fab, windowEl, messagesEl, inputEl, sendBtn, closeBtn, suggestionsEl;
+
+  // Определяем iOS один раз
+  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  // === iOS: сохранённый scroll и lock-флаг ===
+  let savedScrollY = 0;
+  let pageScrollLocked = false;
 
   function createUI() {
     fab = document.createElement('button');
@@ -131,14 +139,65 @@
       inputEl.style.height = 'auto';
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
+
+    // iOS: фиксируем страницу + слушаем visualViewport
+    // Android: ничего не делаем — браузер сам двигает окно
+    if (isIOS) {
+      inputEl.addEventListener('focus', onFocusIOS);
+      inputEl.addEventListener('blur', onBlurIOS);
+    }
+  }
+
+  // === iOS: блокируем скролл страницы и компенсируем сдвиг окна ===
+  function onFocusIOS() {
+    savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top      = `-${savedScrollY}px`;
+    document.body.style.left     = '0';
+    document.body.style.right    = '0';
+    document.body.style.width    = '100%';
+    pageScrollLocked = true;
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', onViewportResizeIOS);
+      window.visualViewport.addEventListener('scroll', onViewportResizeIOS);
+    }
+  }
+
+  function onBlurIOS() {
+    if (!pageScrollLocked) return;
+    document.body.style.position = '';
+    document.body.style.top      = '';
+    document.body.style.left     = '';
+    document.body.style.right    = '';
+    document.body.style.width    = '';
+    window.scrollTo(0, savedScrollY);
+    pageScrollLocked = false;
+
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener('resize', onViewportResizeIOS);
+      window.visualViewport.removeEventListener('scroll', onViewportResizeIOS);
+    }
+
+    windowEl.style.transform = '';
+    windowEl.style.top       = '';
+  }
+
+  function onViewportResizeIOS() {
+    if (!window.visualViewport) return;
+    const vv = window.visualViewport;
+    // Смещаем окно вниз на величину смещения viewport (адресная строка Safari)
+    // и вверх на высоту клавиатуры
+    const keyboardHeight = window.innerHeight - vv.height - vv.offsetTop;
+    const shift = vv.offsetTop - Math.max(0, keyboardHeight);
+    windowEl.style.transform = `translateY(${Math.max(0, vv.offsetTop)}px)`;
   }
 
   function openChat() {
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
     windowEl.classList.add('open');
-    setTimeout(() => inputEl.focus(), 100);
-
+    // НЕ фокусируем автоматически — пользователь сам тапает
     if (messages.length === 0) {
       addMessage('assistant', t.welcome);
     }
@@ -147,8 +206,8 @@
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
-    // Убираем фокус с инпута — клавиатура закроется
-    inputEl.blur();
+    inputEl.blur(); // закрываем клавиатуру если была открыта
+    if (isIOS && pageScrollLocked) onBlurIOS();
   }
 
   function clearHistory() {
@@ -240,13 +299,11 @@
           div.appendChild(document.createTextNode(label));
         }
       }
-
       lastIndex = regex.lastIndex;
     }
     if (lastIndex < text.length) {
       div.appendChild(document.createTextNode(text.slice(lastIndex)));
     }
-
     messagesEl.appendChild(div);
   }
 
@@ -314,7 +371,7 @@
     inputEl.value = '';
     inputEl.style.height = 'auto';
 
-    // Убираем фокус — клавиатура закрывается после отправки
+    // Закрываем клавиатуру на обоих платформах после отправки
     inputEl.blur();
 
     addMessage('user', text);
@@ -347,7 +404,7 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      // НЕ возвращаем фокус — пользователь сам нажмёт когда захочет писать
+      // НЕ возвращаем фокус — пользователь сам тапает когда хочет писать
     }
   }
 

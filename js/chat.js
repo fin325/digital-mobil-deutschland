@@ -137,8 +137,31 @@
 
     inputEl.addEventListener('focus', preventPageScrollOnFocus);
     inputEl.addEventListener('blur', restorePageScroll);
+
+    // iOS: двигаем окно вниз к клавиатуре через visualViewport
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', onViewportResize);
+    }
   }
 
+  // === iOS: сдвигаем окно так чтобы поле ввода было над клавиатурой ===
+  function onViewportResize() {
+    if (!window.visualViewport) return;
+    const vv = window.visualViewport;
+    // Нижняя граница видимого viewport (над клавиатурой)
+    const visibleBottom = vv.offsetTop + vv.height;
+    // Текущая нижняя граница окна чата (top + высота)
+    const windowBottom = 5 + windowEl.offsetHeight;
+    const diff = visibleBottom - windowBottom;
+    if (diff < 0) {
+      // Клавиатура перекрывает окно — сдвигаем top вверх
+      windowEl.style.top = Math.max(0, 5 + diff) + 'px';
+    } else {
+      windowEl.style.top = '5px';
+    }
+  }
+
+  // === Блокируем скролл страницы когда открывается клавиатура ===
   function preventPageScrollOnFocus() {
     savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.body.style.position = 'fixed';
@@ -158,6 +181,8 @@
     document.body.style.width    = '';
     window.scrollTo(0, savedScrollY);
     pageScrollLocked = false;
+    // Сбрасываем позицию окна обратно на исходную
+    windowEl.style.top = '5px';
   }
 
   function openChat() {
@@ -368,7 +393,7 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      inputEl.blur(); // ИЗМЕНЕНО: было inputEl.focus() — закрываем клавиатуру после отправки
+      inputEl.blur(); // закрываем клавиатуру после отправки
     }
   }
 

@@ -72,8 +72,8 @@
 
 /* Компактный режим — когда открыта клавиатура */
 .chat-window.open.compact {
-  height: 49vh;
-  max-height: 49vh;
+  height: 52vh;
+  max-height: 52vh;
 }
 
 .chat-header {
@@ -431,8 +431,8 @@
   }
   
   .chat-window.open.compact {
-    height: 49vh;
-    max-height: 49vh;
+    height: 52vh;
+    max-height: 52vh;
   }
   
   .chat-fab {

@@ -43,10 +43,10 @@
 .chat-window {
   position: fixed;
   /* ИЗМЕНЕНО: Небольшой отступ сверху */
-  top: 55px;
+  top: 45px;
   
   /* ИЗМЕНЕНО: Высота чуть больше половины экрана (55%) */
-  height: 65vh; 
+  height: 70vh; 
   min-height: 400px; 
   bottom: auto; 
   

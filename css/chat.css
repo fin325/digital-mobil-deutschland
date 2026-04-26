@@ -43,8 +43,8 @@
 .chat-window {
   position: fixed;
   /* Anchor by TOP, not bottom — prevents going off-screen on tall content */
-  top: 60px;
-  bottom: 80px;
+  top: 40px;
+  bottom: 60px;
   right: 20px;
   width: calc(100vw - 40px);
   max-width: 380px;

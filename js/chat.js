@@ -135,7 +135,11 @@
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
 
-    inputEl.addEventListener('focus', preventPageScrollOnFocus);
+    inputEl.addEventListener('focus', () => {
+      // Когда пользователь снова тапает в input — окно сжимается до стандартного размера
+      windowEl.classList.remove('expanded');
+      preventPageScrollOnFocus();
+    });
     inputEl.addEventListener('blur', restorePageScroll);
   }
 
@@ -160,6 +164,16 @@
     pageScrollLocked = false;
   }
 
+  // === НОВОЕ: надёжное скрытие клавиатуры (iOS + Android) ===
+  function dismissKeyboard() {
+    // Снимаем фокус с input
+    if (inputEl) inputEl.blur();
+    // Подстраховка: снимаем фокус с активного элемента вообще
+    if (document.activeElement && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur();
+    }
+  }
+
   function openChat() {
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
@@ -173,6 +187,7 @@
 
   function closeChat() {
     windowEl.classList.remove('open');
+    windowEl.classList.remove('expanded');
     fab.classList.remove('hidden');
     if (pageScrollLocked) restorePageScroll();
   }
@@ -339,6 +354,12 @@
     inputEl.style.height = 'auto';
     addMessage('user', text);
 
+    // НОВОЕ: сразу скрываем клавиатуру (надёжно для iOS и Android)
+    dismissKeyboard();
+
+    // НОВОЕ: расширяем окно на время ответа ассистента
+    windowEl.classList.add('expanded');
+
     setLoading(true);
     showTyping();
 
@@ -368,7 +389,8 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      inputEl.blur(); // ИЗМЕНЕНО: было inputEl.focus() — закрываем клавиатуру после отправки
+      // НОВОЕ: финальная подстраховка после снятия disabled
+      dismissKeyboard();
     }
   }
 

@@ -46,7 +46,7 @@
     }
   };
 
-  // === Quick suggestion chips (always visible) ===
+  // === Quick suggestion chips (always visible, 2 rows) ===
   const SUGGESTIONS = {
     de: [
       { label: '📄 PDF 24 Tools',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
@@ -95,7 +95,9 @@
         </div>
       </div>
       <div class="chat-messages" role="log" aria-live="polite"></div>
-      <div class="chat-suggestions chat-suggestions--persistent"></div>
+      <div class="chat-suggestions-viewport">
+        <div class="chat-suggestions-rows"></div>
+      </div>
       <div class="chat-input-area">
         <textarea class="chat-input" rows="1" placeholder="${escapeAttr(t.placeholder)}" aria-label="${escapeAttr(t.placeholder)}"></textarea>
         <button class="chat-send" aria-label="${escapeAttr(t.sendAria)}">➤</button>
@@ -108,7 +110,7 @@
     inputEl       = windowEl.querySelector('.chat-input');
     sendBtn       = windowEl.querySelector('.chat-send');
     closeBtn      = windowEl.querySelector('.chat-close');
-    suggestionsEl = windowEl.querySelector('.chat-suggestions');
+    suggestionsEl = windowEl.querySelector('.chat-suggestions-rows');
 
     windowEl.querySelector('.chat-clear').addEventListener('click', clearHistory);
 
@@ -160,16 +162,26 @@
 
   function renderSuggestions() {
     suggestionsEl.innerHTML = '';
-    suggestionList.forEach((s) => {
-      const btn = document.createElement('button');
-      btn.className = 'chat-suggestion';
-      btn.textContent = s.label;
-      btn.addEventListener('click', () => {
-        if (isLoading) return;
-        inputEl.value = s.q;
-        sendMessage();
+
+    // Split suggestions into 2 rows
+    const half = Math.ceil(suggestionList.length / 2);
+    const rows = [suggestionList.slice(0, half), suggestionList.slice(half)];
+
+    rows.forEach((rowItems) => {
+      const row = document.createElement('div');
+      row.className = 'chat-suggestion-row';
+      rowItems.forEach((s) => {
+        const btn = document.createElement('button');
+        btn.className = 'chat-suggestion';
+        btn.textContent = s.label;
+        btn.addEventListener('click', () => {
+          if (isLoading) return;
+          inputEl.value = s.q;
+          sendMessage();
+        });
+        row.appendChild(btn);
       });
-      suggestionsEl.appendChild(btn);
+      suggestionsEl.appendChild(row);
     });
   }
 
@@ -244,7 +256,7 @@
     messagesEl.appendChild(div);
   }
 
-    function openTab(tabId) {
+  function openTab(tabId) {
     // Close chat FIRST so the tab content is fully visible
     closeChat();
 
@@ -304,8 +316,8 @@
     isLoading = loading;
     sendBtn.disabled = loading;
     inputEl.disabled = loading;
-    // Disable suggestion buttons while loading
-    suggestionsEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
+    // Disable suggestion buttons while loading (search whole window)
+    windowEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
   }
 
   async function sendMessage() {

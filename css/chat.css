@@ -244,3 +244,102 @@
     font-size: 26px;
   }
 }
+
+/* === Header actions container === */
+.chat-header-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* === Clear history button === */
+.chat-clear {
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+  line-height: 1;
+}
+.chat-clear:hover,
+.chat-clear:active {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* === Tab links inside assistant messages === */
+.chat-tab-link {
+  display: inline-block;
+  margin: 4px 2px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.chat-tab-link:hover,
+.chat-tab-link:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.35);
+}
+
+/* === Page links inside assistant messages === */
+.chat-page-link {
+  display: inline-block;
+  margin: 4px 2px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #003399, #1a3a5c);
+  color: white !important;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 51, 153, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.chat-page-link:hover,
+.chat-page-link:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 51, 153, 0.4);
+  color: white !important;
+}
+
+/* === Quick suggestion chips === */
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.4);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.chat-suggestion {
+  background: rgba(0, 51, 153, 0.08);
+  border: 1px solid rgba(0, 51, 153, 0.2);
+  color: #003399;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.chat-suggestion:hover,
+.chat-suggestion:active {
+  background: rgba(0, 51, 153, 0.18);
+}

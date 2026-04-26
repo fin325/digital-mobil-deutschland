@@ -145,10 +145,13 @@
   // === iOS keyboard fix via visualViewport API ===
   function onViewportResize() {
     if (!window.visualViewport) return;
-    // Вычисляем насколько клавиатура подняла viewport снизу
-    const offsetY = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
-    windowEl.style.transform = `translateY(${offsetY}px)`;
-  }
+    // offsetTop учитывает Safe Area и адресную строку Safari
+    const offsetY = window.innerHeight 
+                  - window.visualViewport.height 
+                  - window.visualViewport.offsetTop;
+    // Сдвигаем только вниз (не вверх — на случай если offsetY отрицательный)
+    windowEl.style.transform = `translateY(${Math.max(0, offsetY)}px)`;
+}
 
   function preventPageScrollOnFocus() {
     savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;

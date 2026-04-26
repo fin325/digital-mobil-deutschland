@@ -41,6 +41,7 @@
 
 /* === Chat Window === */
 .chat-window {
+  clip-path: inset(var(--safe-top, 0px) 0% 0% 0%);
   position: fixed;
   top: 0px;
   height: 60vh; /* ИЗМЕНЕНО: было 55vh */
@@ -55,7 +56,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  z-index: 100;
+  z-index: 9999;
   display: none;
   flex-direction: column;
   overflow: hidden;
@@ -390,6 +391,7 @@
 /* === Mobile adjustments === */
 @media (max-width: 480px) {
   .chat-window {
+    --safe-top: 45px;
     top: 5px;
     bottom: auto;
     right: 10px;

@@ -138,29 +138,30 @@
     inputEl.addEventListener('focus', preventPageScrollOnFocus);
     inputEl.addEventListener('blur', restorePageScroll);
 
-    // iOS: двигаем окно вниз к клавиатуре через visualViewport
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', onViewportResize);
-    }
+    // visualViewport listener НЕ вешаем здесь глобально —
+    // только при открытии чата (см. openChat / closeChat)
   }
 
-  // === iOS: сдвигаем окно так чтобы поле ввода было над клавиатурой ===
+  // === iOS: двигаем окно к клавиатуре ===
   function onViewportResize() {
-  if (!window.visualViewport) return;
-  const vv = window.visualViewport;
-  const visibleBottom = vv.offsetTop + vv.height;
-  const chatHeight = windowEl.offsetHeight;
-  const newTop = visibleBottom - chatHeight - 50; // 50px учитывает toolbar Safari
-  windowEl.style.top = Math.max(5, newTop) + 'px';
-}
-      // Клавиатура перекрывает окно — сдвигаем top вверх
-      windowEl.style.top = Math.max(0, 5 + diff) + 'px';
-    } else {
+    if (!window.visualViewport) return;
+    const vv = window.visualViewport;
+
+    // Если клавиатура не открыта — ничего не делаем
+    const keyboardHeight = window.innerHeight - vv.height;
+    if (keyboardHeight < 100) {
       windowEl.style.top = '5px';
+      return;
     }
+
+    // Верх клавиатуры (с учётом toolbar Safari ~44px)
+    const visibleBottom = vv.offsetTop + vv.height;
+    const chatHeight = windowEl.offsetHeight;
+    // Позиционируем так чтобы низ окна был прямо над клавиатурой
+    const newTop = visibleBottom - chatHeight;
+    windowEl.style.top = Math.max(5, newTop) + 'px';
   }
 
-  // === Блокируем скролл страницы когда открывается клавиатура ===
   function preventPageScrollOnFocus() {
     savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.body.style.position = 'fixed';
@@ -180,7 +181,6 @@
     document.body.style.width    = '';
     window.scrollTo(0, savedScrollY);
     pageScrollLocked = false;
-    // Сбрасываем позицию окна обратно на исходную
     windowEl.style.top = '5px';
   }
 
@@ -188,6 +188,13 @@
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
     windowEl.classList.add('open');
+    windowEl.style.top = '5px'; // сброс на старте
+
+    // Вешаем visualViewport только когда чат открыт
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', onViewportResize);
+    }
+
     setTimeout(() => inputEl.focus(), 100);
 
     if (messages.length === 0) {
@@ -198,6 +205,13 @@
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
+    windowEl.style.top = '5px'; // сброс позиции
+
+    // Снимаем listener чтобы не влиял когда чат закрыт
+    if (window.visualViewport) {
+      window.visualViewport.removeEventListener('resize', onViewportResize);
+    }
+
     if (pageScrollLocked) restorePageScroll();
   }
 

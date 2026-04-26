@@ -56,3 +56,22 @@ window.addEventListener('scroll', () => {
         icon.style.setProperty('pointer-events', 'auto', 'important');
     }
 });
+
+// Фикс прыгающего вьюпорта в Telegram на iOS
+const fixIosViewport = () => {
+  if (window.visualViewport) {
+    const scrollHandler = () => {
+      // Если вьюпорт сместился (offsetTop > 0), принудительно возвращаем
+      if (window.visualViewport.offsetTop > 0) {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    window.visualViewport.addEventListener('scroll', scrollHandler);
+    window.visualViewport.addEventListener('resize', scrollHandler);
+  }
+};
+
+// Запускаем, когда DOM готов
+document.addEventListener('DOMContentLoaded', fixIosViewport);
+

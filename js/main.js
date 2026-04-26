@@ -56,3 +56,14 @@ window.addEventListener('scroll', () => {
         icon.style.setProperty('pointer-events', 'auto', 'important');
     }
 });
+
+const viewport = window.visualViewport;
+
+function fixViewport() {
+  document.documentElement.style.height = viewport.height + 'px';
+}
+
+viewport.addEventListener('resize', fixViewport);
+viewport.addEventListener('scroll', fixViewport);
+
+fixViewport();

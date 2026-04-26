@@ -244,23 +244,32 @@
     messagesEl.appendChild(div);
   }
 
-  function openTab(tabId) {
+    function openTab(tabId) {
+    // Close chat FIRST so the tab content is fully visible
+    closeChat();
+
     if (typeof window.showTab === 'function') {
+      // showTab() already scrolls to top of page (see tabs.js)
       window.showTab(tabId);
-      closeChat();
-      setTimeout(() => {
-        const section = document.getElementById(tabId);
-        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
     } else {
       const btn = document.querySelector(`.nav-btn[onclick*="'${tabId}'"]`);
       if (btn) {
         btn.click();
-        closeChat();
       } else {
         console.warn('chat.js: showTab() not available and no matching nav button for', tabId);
+        return;
       }
     }
+
+    // Force scroll to the very top of the page (above the top-bar with weather/clock)
+    // This guarantees the user sees the tab from its beginning, including any video at the top
+    requestAnimationFrame(() => {
+      const opts = { top: 0, behavior: 'smooth' };
+      window.scrollTo(opts);
+      document.documentElement.scrollTo(opts);
+      document.body.scrollTo(opts);
+      document.querySelector('main.container')?.scrollTo(opts);
+    });
   }
 
   function showError(text) {

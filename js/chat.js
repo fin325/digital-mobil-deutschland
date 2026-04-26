@@ -136,11 +136,15 @@
     });
 
     inputEl.addEventListener('focus', () => {
-      // Когда пользователь снова тапает в input — окно сжимается до стандартного размера
-      windowEl.classList.remove('expanded');
+      // Пользователь тапнул в поле — сжимаем окно до 60vh
+      windowEl.classList.add('compact');
       preventPageScrollOnFocus();
     });
-    inputEl.addEventListener('blur', restorePageScroll);
+    inputEl.addEventListener('blur', () => {
+      // Клавиатура скрылась — окно снова большое
+      windowEl.classList.remove('compact');
+      restorePageScroll();
+    });
   }
 
   function preventPageScrollOnFocus() {
@@ -164,11 +168,9 @@
     pageScrollLocked = false;
   }
 
-  // === НОВОЕ: надёжное скрытие клавиатуры (iOS + Android) ===
+  // Надёжное скрытие клавиатуры (iOS + Android)
   function dismissKeyboard() {
-    // Снимаем фокус с input
     if (inputEl) inputEl.blur();
-    // Подстраховка: снимаем фокус с активного элемента вообще
     if (document.activeElement && typeof document.activeElement.blur === 'function') {
       document.activeElement.blur();
     }
@@ -178,7 +180,7 @@
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
     windowEl.classList.add('open');
-    setTimeout(() => inputEl.focus(), 100);
+    // Клавиатура НЕ появляется автоматически — фокус НЕ выставляем
 
     if (messages.length === 0) {
       addMessage('assistant', t.welcome);
@@ -187,7 +189,7 @@
 
   function closeChat() {
     windowEl.classList.remove('open');
-    windowEl.classList.remove('expanded');
+    windowEl.classList.remove('compact');
     fab.classList.remove('hidden');
     if (pageScrollLocked) restorePageScroll();
   }
@@ -354,11 +356,8 @@
     inputEl.style.height = 'auto';
     addMessage('user', text);
 
-    // НОВОЕ: сразу скрываем клавиатуру (надёжно для iOS и Android)
+    // Скрываем клавиатуру + расширяем окно (compact снимется через blur-listener)
     dismissKeyboard();
-
-    // НОВОЕ: расширяем окно на время ответа ассистента
-    windowEl.classList.add('expanded');
 
     setLoading(true);
     showTyping();
@@ -389,7 +388,7 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      // НОВОЕ: финальная подстраховка после снятия disabled
+      // Финальная подстраховка после снятия disabled
       dismissKeyboard();
     }
   }

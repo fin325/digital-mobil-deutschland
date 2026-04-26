@@ -146,14 +146,13 @@
 
   // === iOS: сдвигаем окно так чтобы поле ввода было над клавиатурой ===
   function onViewportResize() {
-    if (!window.visualViewport) return;
-    const vv = window.visualViewport;
-    // Нижняя граница видимого viewport (над клавиатурой)
-    const visibleBottom = vv.offsetTop + vv.height;
-    // Текущая нижняя граница окна чата (top + высота)
-    const windowBottom = 5 + windowEl.offsetHeight;
-    const diff = visibleBottom - windowBottom;
-    if (diff < 0) {
+  if (!window.visualViewport) return;
+  const vv = window.visualViewport;
+  const visibleBottom = vv.offsetTop + vv.height;
+  const chatHeight = windowEl.offsetHeight;
+  const newTop = visibleBottom - chatHeight - 50; // 50px учитывает toolbar Safari
+  windowEl.style.top = Math.max(5, newTop) + 'px';
+}
       // Клавиатура перекрывает окно — сдвигаем top вверх
       windowEl.style.top = Math.max(0, 5 + diff) + 'px';
     } else {

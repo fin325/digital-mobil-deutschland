@@ -46,6 +46,7 @@
     }
   };
 
+  // === Quick suggestion chips (always visible, 2 rows) ===
   const SUGGESTIONS = {
     de: [
       { label: '📄 PDF 24 Tools',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
@@ -117,6 +118,7 @@
 
     windowEl.querySelector('.chat-clear').addEventListener('click', clearHistory);
 
+    // Render suggestions ONCE on init — they stay visible forever
     renderSuggestions();
   }
 
@@ -137,64 +139,31 @@
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
 
-    // === iOS keyboard fix ===
-    // Lock the scroll BEFORE focus happens. touchstart and pointerdown fire before focus on iOS.
-    inputEl.addEventListener('touchstart', preventPageScrollOnFocus, { passive: true });
-    inputEl.addEventListener('pointerdown', preventPageScrollOnFocus);
-    inputEl.addEventListener('mousedown',   preventPageScrollOnFocus);
-    inputEl.addEventListener('focus',       preventPageScrollOnFocus);
-    inputEl.addEventListener('blur',        restorePageScroll);
+    // === iOS keyboard fix: prevent page from scrolling when keyboard opens ===
+    inputEl.addEventListener('focus', preventPageScrollOnFocus);
+    inputEl.addEventListener('blur', restorePageScroll);
   }
 
   // === iOS keyboard scroll lock ===
-  function isIOS() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  }
-
   function preventPageScrollOnFocus() {
-    if (pageScrollLocked) return;
-
-    // Save scroll positions of all possible scroll containers
-    savedScrollY = window.scrollY
-                || document.documentElement.scrollTop
-                || document.body.scrollTop
-                || window.pageYOffset
-                || 0;
-
-    // The site uses html, body { overflow-y: auto } pattern.
-    // Lock overflow-y on both — that's what iOS scrolls when keyboard opens.
-    document.documentElement.style.overflowY = 'hidden';
-    document.body.style.overflowY = 'hidden';
-
-    // Also lock main.container if it's a scroll container (per tabs.js logic)
-    const mainContainer = document.querySelector('main.container');
-    if (mainContainer) {
-      mainContainer.dataset.savedOverflow = mainContainer.style.overflowY || '';
-      mainContainer.style.overflowY = 'hidden';
-    }
-
+    // Lock page in place so iOS Safari doesn't auto-scroll when keyboard opens
+    savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
     pageScrollLocked = true;
   }
 
   function restorePageScroll() {
     if (!pageScrollLocked) return;
-
-    document.documentElement.style.overflowY = '';
-    document.body.style.overflowY = '';
-
-    const mainContainer = document.querySelector('main.container');
-    if (mainContainer) {
-      mainContainer.style.overflowY = mainContainer.dataset.savedOverflow || '';
-      delete mainContainer.dataset.savedOverflow;
-    }
-
-    // Restore scroll position in next frame
-    requestAnimationFrame(() => {
-      window.scrollTo(0, savedScrollY);
-      document.documentElement.scrollTop = savedScrollY;
-      document.body.scrollTop = savedScrollY;
-    });
-
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, savedScrollY);
     pageScrollLocked = false;
   }
 
@@ -202,10 +171,7 @@
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
     windowEl.classList.add('open');
-    // Don't auto-focus on iOS — user taps input themselves
-    if (!isIOS()) {
-      setTimeout(() => inputEl.focus(), 100);
-    }
+    setTimeout(() => inputEl.focus(), 100);
 
     if (messages.length === 0) {
       addMessage('assistant', t.welcome);
@@ -215,6 +181,7 @@
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
+    // Restore page scroll if keyboard was still open when chat was closed
     if (pageScrollLocked) restorePageScroll();
   }
 
@@ -229,6 +196,7 @@
   function renderSuggestions() {
     suggestionsEl.innerHTML = '';
 
+    // Split suggestions into 2 rows
     const half = Math.ceil(suggestionList.length / 2);
     const rows = [suggestionList.slice(0, half), suggestionList.slice(half)];
 
@@ -258,6 +226,7 @@
     scrollToBottom();
   }
 
+  // === Render assistant message: parse [TAB:id|text], [PAGE:path|text], [URL:url|text] ===
   function renderMessage(msg) {
     const div = document.createElement('div');
     div.className = 'chat-msg ' + msg.role;
@@ -296,6 +265,7 @@
         link.textContent = '🔗 ' + label;
         div.appendChild(link);
       } else if (kind === 'URL') {
+        // External URL — only allow http(s)://
         if (/^https?:\/\//i.test(target)) {
           const link = document.createElement('a');
           link.className = 'chat-url-link';
@@ -305,6 +275,7 @@
           link.textContent = '🌐 ' + label;
           div.appendChild(link);
         } else {
+          // Invalid URL — render as plain text fallback
           div.appendChild(document.createTextNode(label));
         }
       }
@@ -319,9 +290,11 @@
   }
 
   function openTab(tabId) {
+    // Close chat FIRST so the tab content is fully visible
     closeChat();
 
     if (typeof window.showTab === 'function') {
+      // showTab() already scrolls to top of page (see tabs.js)
       window.showTab(tabId);
     } else {
       const btn = document.querySelector(`.nav-btn[onclick*="'${tabId}'"]`);
@@ -333,6 +306,8 @@
       }
     }
 
+    // Force scroll to the very top of the page (above the top-bar with weather/clock)
+    // This guarantees the user sees the tab from its beginning, including any video at the top
     requestAnimationFrame(() => {
       const opts = { top: 0, behavior: 'smooth' };
       window.scrollTo(opts);
@@ -374,6 +349,7 @@
     isLoading = loading;
     sendBtn.disabled = loading;
     inputEl.disabled = loading;
+    // Disable suggestion buttons while loading (search whole window)
     windowEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
   }
 

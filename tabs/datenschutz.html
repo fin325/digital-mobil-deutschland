@@ -71,23 +71,24 @@
 <p style="margin-bottom: 14px;">
     Diese Website verwendet Cookies. Cookies sind kleine Textdateien, die vom Browser auf dem Endgerät des Nutzers gespeichert werden.
 </p>
-<p style="margin-bottom: 6px;"><strong>a) Technisch notwendige Cookies</strong></p>
+<p style="margin-bottom: 6px;"><strong>a) Notwendig</strong></p>
 <p style="margin-bottom: 14px;">
     Bestimmte Cookies sind erforderlich, damit die Website korrekt funktioniert (z.&nbsp;B. zur Speicherung Ihrer Cookie-Einstellungen im Local Storage sowie der von Ihnen gewählten Stadt für die Wetteranzeige).
     Diese Cookies können nicht deaktiviert werden.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO, § 25 Abs. 2 Nr. 2 TDDDG.
 </p>
-<p style="margin-bottom: 6px;"><strong>b) Statistik-Cookies</strong></p>
+<p style="margin-bottom: 6px;"><strong>b) Funktional</strong></p>
 <p style="margin-bottom: 14px;">
-    Mit Ihrer Einwilligung werden Cookies gesetzt, die das Laden von Nachrichten über RSS-Feeds ermöglichen (tagesschau.de / ru.euronews.com — je nach gewählter Sprache der Website).
+    Mit Ihrer Einwilligung werden Funktionen aktiviert, die das Laden externer Daten erfordern (z.&nbsp;B. Nachrichten über rss2json — siehe Abschnitt 10).
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.
 </p>
-<p style="margin-bottom: 6px;"><strong>c) Cookies für externe Inhalte (Werbung &amp; externe Inhalte)</strong></p>
+<p style="margin-bottom: 6px;"><strong>c) Externe Medien</strong></p>
 <p style="margin-bottom: 14px;">
-    Mit Ihrer Einwilligung werden YouTube-Videos geladen sowie externe Tools (PDF-Kompressor, Foto zu PDF) eingebunden.
+    Mit Ihrer Einwilligung werden eingebettete externe Inhalte und Tools geladen (YouTube-Videos, PDF-Kompressor, Foto-zu-PDF — siehe Abschnitte 5, 11, 12 und 13).
     Diese Dienste können eigene Cookies setzen.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.
 </p>
+
 <p style="margin-bottom: 14px;">
     <strong>Cookie-Banner:</strong> Wir verwenden den <em>Silktide Consent Manager</em> zur Einwilligungsverwaltung.
     Ihre Cookie-Einstellungen werden im Local Storage Ihres Browsers gespeichert.
@@ -122,7 +123,7 @@
     Der Nutzer selbst bleibt für OpenWeatherMap anonym.
 </p>
 <p style="margin-bottom: 14px;">
-    Zur Verringerung von API-Anfragen werden die Ergebnisse serverseitig für ca. 10 Minuten zwischengespeichert (Server-Cache).
+    Zur Verringerung von API-Anfragen werden die Ergebnisse serverseitig für ca. 10 Minuten zwischengespeichert (Server-Cache). Zusätzlich werden die Daten innerhalb derselben Browser-Sitzung im Session Storage des Nutzers vorgehalten, um wiederholte Serveranfragen während des Besuchs der Website zu vermeiden.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Wetterdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
 </p>
 <p style="margin-bottom: 14px;">
@@ -150,7 +151,20 @@
     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Umweltdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">9. Nachrichten (RSS-Feed via rss2json)</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">9. Wechselkurs EUR/UAH — Nationalbank der Ukraine (Server-Proxy)</h3>
+<p style="margin-bottom: 14px;">
+    Zur Anzeige des aktuellen Wechselkurses EUR/UAH verwenden wir die öffentliche API der Nationalbank der Ukraine (NBU).
+    URL: <a href="https://bank.gov.ua" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://bank.gov.ua</a>
+</p>
+<p style="margin-bottom: 14px;">
+    <strong>Die Abfrage erfolgt ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/eur-rate</code>).
+    An die NBU wird lediglich die IP-Adresse unseres Server-Proxys übertragen; eine direkte Verbindung zwischen dem Browser des Nutzers und Servern der NBU findet nicht statt.
+    Zur Verringerung von Anfragen werden die Ergebnisse serverseitig für ca. 3 Stunden zwischengespeichert.
+    Es handelt sich um eine öffentlich zugängliche Behörden-API ohne Authentifizierung oder kommerzielle Nutzung.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung aktueller Wechselkursinformationen ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
+</p>
+
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">10. Nachrichten (RSS-Feed via rss2json)</h3>
 <p style="margin-bottom: 14px;">
     Zum Laden von Nachrichten nutzen wir den Dienst <strong>rss2json</strong> (<a href="https://rss2json.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">rss2json.com</a>).
     Je nach gewählter Sprache der Website wird der RSS-Feed von <em>tagesschau.de</em> (deutsche Version) oder <em>ru.euronews.com</em> (russische Version) über die rss2json-API im JSON-Format abgerufen.
@@ -165,32 +179,61 @@
     Datenschutzerklärung von Euronews: <a href="https://www.euronews.com/terms-and-conditions" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://www.euronews.com/terms-and-conditions</a>
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">10. Foto zu PDF — Streamlit-Anwendung</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">11. Foto zu PDF — Streamlit-Anwendung</h3>
 <p style="margin-bottom: 14px;">
     Das Tool „Foto zu PDF" wird als eingebettete Streamlit-Anwendung in einem iframe geladen.
     Anbieter des Hostings: Streamlit (Snowflake Inc.), 106 E 6th St, Suite 700, Austin, TX 78701, USA.
     URL: <a href="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; word-break: break-all;">https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app</a>
 </p>
 <p style="margin-bottom: 14px;">
-    Das Laden erfolgt erst nach Einwilligung im Cookie-Banner oder durch manuelles Klicken auf „Converter laden".
-    Beim Laden werden IP-Adresse und Browserdaten an Streamlit/Snowflake übertragen.
-    Hochgeladene Fotos werden ausschließlich im Browser des Nutzers verarbeitet und nicht gespeichert.
-    Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
+    Das Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Werbung &amp; externe Inhalte") oder durch manuelles Klicken auf „Converter laden". Ohne Ihre Einwilligung findet keine Verbindung zu Streamlit statt.
+</p>
+<p style="margin-bottom: 14px;">
+    Beim Laden des iframes werden IP-Adresse, Browser- und Geräteinformationen an Streamlit/Snowflake in den USA übertragen.
+    Von Ihnen hochgeladene Fotos werden zur Verarbeitung (Konvertierung in eine PDF-Datei) an die Streamlit-Server in den USA übertragen und dort ausschließlich im Arbeitsspeicher temporär verarbeitet. Eine Speicherung der Fotos auf Festplatten oder in Datenbanken findet nicht statt. Nach Abschluss Ihrer Sitzung werden die Daten automatisch aus dem Arbeitsspeicher entfernt.
+</p>
+<p style="margin-bottom: 14px;">
+    Snowflake Inc. hat Standardvertragsklauseln (SCCs) für Datenübertragungen in die USA implementiert.
+    Datenschutzerklärung von Snowflake: <a href="https://www.snowflake.com/privacy-notice/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://www.snowflake.com/privacy-notice/</a>
+    <br>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">11. PDF-Kompressor — Render</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">12. PDF-Kompressor — Render</h3>
 <p style="margin-bottom: 14px;">
     Der PDF-Kompressor wird als iframe eingebunden und bei Render gehostet.
-    Anbieter: Render Services, Inc., San Francisco, CA, USA.
+    Anbieter: Render Services, Inc., 525 Brannan St, San Francisco, CA 94107, USA.
     URL: <a href="https://pdf-compressor-web.onrender.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://pdf-compressor-web.onrender.com</a>
 </p>
+
 <p style="margin-bottom: 14px;">
-    Das Laden erfolgt erst nach Einwilligung im Cookie-Banner oder durch manuelles Klicken auf „PDF-Kompressor laden".
-    Beim Laden werden IP-Adresse und Browserdaten an Render übertragen.
+    <strong>a) Laden des iframes</strong><br>
+    Das Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Werbung &amp; externe Inhalte") oder durch manuelles Klicken auf „PDF-Kompressor laden". Ohne Ihre Einwilligung findet keine Verbindung zu Render statt.
+    Beim Laden des iframes werden IP-Adresse, Browser- und Geräteinformationen an Render in den USA übertragen.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">12. Hintergrund-Ping (Render Wake-Up)</h3>
+<p style="margin-bottom: 14px;">
+    <strong>b) PDF-Komprimierung</strong><br>
+    Von Ihnen hochgeladene PDF-Dateien werden zur Komprimierung an Render übertragen, dort ausschließlich im Arbeitsspeicher verarbeitet und nach Abschluss der Komprimierung automatisch entfernt. Eine dauerhafte Speicherung Ihrer PDF-Dateien findet nicht statt.
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>c) Bewertungsfunktion (Like/Dislike)</strong><br>
+    Wenn Sie die Bewertungsfunktion im PDF-Kompressor nutzen, wird Ihre IP-Adresse zusammen mit Ihrer Bewertung in einer PostgreSQL-Datenbank (Anbieter: Supabase Inc., USA) gespeichert. Anonymisierte aggregierte Zählerstände (Gesamtanzahl der Like- und Dislike-Stimmen) werden separat und dauerhaft gespeichert; diese enthalten keine personenbezogenen Daten.
+</p>
+<p style="margin-bottom: 6px;"><strong>Zweck der Speicherung der IP-Adresse:</strong> Die Speicherung der IP-Adresse dient ausschließlich der Vermeidung von Mehrfachbewertungen durch dieselbe Person. Eine bestehende Bewertung kann durch erneutes Klicken auf dieselbe Schaltfläche zurückgenommen oder durch Klicken auf die gegenteilige Schaltfläche geändert werden.</p>
+<p style="margin-bottom: 6px;"><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Unser berechtigtes Interesse besteht in der Sicherstellung einer aussagekräftigen, nicht durch Mehrfachbewertungen verfälschten Bewertungsstatistik. Eine Identifizierung Ihrer Person erfolgt nicht; die IP-Adresse wird ausschließlich zur Erkennung wiederholter Bewertungen verwendet.</p>
+<p style="margin-bottom: 6px;"><strong>Speicherdauer:</strong> IP-Adressen werden für maximal 7 Tage gespeichert und anschließend automatisch durch eine täglich ausgeführte Löschroutine entfernt. Auf Anfrage per E-Mail an <a href="mailto:hattingen325@gmail.com" style="color: inherit; text-decoration: underline;">hattingen325@gmail.com</a> erfolgt die Löschung Ihrer IP-Adresse aus der Datenbank unverzüglich.</p>
+<p style="margin-bottom: 14px;"><strong>Widerspruchsrecht:</strong> Sie haben jederzeit das Recht, der Speicherung Ihrer IP-Adresse zu widersprechen (Art. 21 DSGVO). In diesem Fall können Sie die Bewertungsfunktion nicht nutzen, der PDF-Kompressor selbst bleibt jedoch uneingeschränkt verfügbar.</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>d) Datenübertragung in die USA</strong><br>
+    Render Services, Inc. und Supabase Inc. haben Standardvertragsklauseln (SCCs) gemäß Art. 46 DSGVO für Datenübertragungen in die USA implementiert.<br>
+    Datenschutzerklärung von Render: <a href="https://render.com/privacy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://render.com/privacy</a><br>
+    Datenschutzerklärung von Supabase: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://supabase.com/privacy</a>
+</p>
+
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">13. Hintergrund-Ping (Render Wake-Up)</h3>
 <p style="margin-bottom: 14px;">
     Nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Werbung &amp; externe Inhalte") oder nach manuellem Klicken auf „PDF-Kompressor laden" wird ein einmaliger Hintergrund-Ping an den Render-Server gesendet, um die Anwendung „aufzuwecken" (Cold-Start-Vermeidung).
     Dabei wird die IP-Adresse des Nutzers an Render übertragen.
@@ -199,14 +242,14 @@
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">13. Schriftarten (lokal eingebunden)</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">14. Schriftarten (lokal eingebunden)</h3>
 <p style="margin-bottom: 14px;">
     Diese Website verwendet die Schriftart „Montserrat", die lokal auf dem eigenen Server gehostet wird.
     Es findet keine Verbindung zu externen Servern (z.&nbsp;B. Google) statt.
     Es werden keine personenbezogenen Daten an Dritte übertragen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">14. Externe Links</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">15. Externe Links</h3>
 <p style="margin-bottom: 14px;">
     Diese Website enthält Links zu externen Websites (u.&nbsp;a. Google Maps, Apple Maps, DB Navigator, Arbeitsagentur, Indeed, StepStone, XING, Doctolib, Jameda, Interkulturelles Zentrum Magnet <a href="https://iz-magnet.de" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">iz-magnet.de</a>, DeepL, Reverso Context, Google Translate, Claude AI, ChatGPT, Gemini, Grok).
     Beim Klick auf einen externen Link verlassen Sie unsere Website.
@@ -214,37 +257,40 @@
     Wir empfehlen, die Datenschutzerklärungen der jeweiligen Dienste zu lesen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">15. Bereitgestelltes PDF-Dokument</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">16. Bereitgestelltes PDF-Dokument</h3>
 <p style="margin-bottom: 14px;">
     Im Bereich „Gesetze" steht ein PDF-Dokument (Übergangsregelung zum Aufenthalt für ukrainische Staatsangehörige) zum Download bereit.
     Das Dokument wird direkt von unserem Server bereitgestellt.
     Beim Download werden die üblichen Server-Log-Daten (IP-Adresse, Zeitpunkt, Dateiname) erfasst.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">16. Uhrzeit und Datum</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">17. Uhrzeit und Datum</h3>
 <p style="margin-bottom: 14px;">
     Die Anzeige von Datum und Uhrzeit erfolgt ausschließlich clientseitig im Browser des Nutzers mittels JavaScript.
     Es werden keine Daten an externe Server übertragen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">17. Sprachumschaltung</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">18. Sprachumschaltung</h3>
 <p style="margin-bottom: 14px;">
     Die Sprachumschaltung (z.&nbsp;B. Deutsch/Russisch) erfolgt durch einen einfachen Link auf eine gleichartige Seite in einem anderen Sprachverzeichnis.
     Es werden dabei keine zusätzlichen personenbezogenen Daten verarbeitet.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">18. Nutzung von Local Storage</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">19. Nutzung von Local Storage und Session Storage</h3>
 <p style="margin-bottom: 14px;">
-    Diese Website nutzt den Local Storage Ihres Browsers zur Speicherung folgender Daten:
+    Diese Website nutzt den Local Storage Ihres Browsers zur dauerhaften Speicherung folgender Daten:
 </p>
 <p style="margin-bottom: 6px;">• Cookie-Einwilligungen (Silktide Consent Manager)</p>
 <p style="margin-bottom: 14px;">• Die von Ihnen zuletzt gewählte Stadt für die Wetteranzeige (Schlüssel <code>userCity</code>)</p>
 <p style="margin-bottom: 14px;">
-    Alle im Local Storage gespeicherten Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
-    Sie können den Local Storage jederzeit über die Browser-Einstellungen löschen.
+    Zusätzlich nutzen wir den Session Storage Ihres Browsers, um Wetter-, Luftqualitäts-, Geomagnetik- und Wechselkursdaten innerhalb derselben Browser-Sitzung zwischen einzelnen Unterseiten der Website zu übertragen. Die Daten im Session Storage werden automatisch gelöscht, sobald Sie den Browser-Tab schließen.
+</p>
+<p style="margin-bottom: 14px;">
+    Alle im Local Storage und Session Storage gespeicherten Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
+    Sie können diese Speicher jederzeit über die Browser-Einstellungen löschen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">19. Ihre Rechte als betroffene Person</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">20. Ihre Rechte als betroffene Person</h3>
 <p style="margin-bottom: 14px;">
     Ihnen stehen gemäß der DSGVO folgende Rechte zu:
 </p>
@@ -256,7 +302,7 @@
 <p style="margin-bottom: 6px;">• <strong>Widerspruchsrecht</strong> (Art. 21 DSGVO): Sie können der Datenverarbeitung widersprechen, sofern diese auf berechtigtem Interesse basiert.</p>
 <p style="margin-bottom: 14px;">• <strong>Widerruf der Einwilligung</strong> (Art. 7 Abs. 3 DSGVO): Erteilte Einwilligungen können Sie jederzeit mit Wirkung für die Zukunft widerrufen (z.&nbsp;B. über das Cookie-Symbol unten links auf der Hauptseite).</p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">20. Beschwerderecht bei einer Aufsichtsbehörde</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">21. Beschwerderecht bei einer Aufsichtsbehörde</h3>
 <p style="margin-bottom: 14px;">
     Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren (Art. 77 DSGVO).
     Die zuständige Aufsichtsbehörde für Nordrhein-Westfalen ist:
@@ -270,21 +316,11 @@
     Website: <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://www.ldi.nrw.de</a>
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">21. Aktualität und Änderungen dieser Datenschutzerklärung</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">22. Aktualität und Änderungen dieser Datenschutzerklärung</h3>
 <p style="margin-bottom: 14px;">
     Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026.
     Aufgrund von Änderungen an der Website oder geänderter gesetzlicher Anforderungen kann es notwendig werden, diese Datenschutzerklärung anzupassen.
     Die jeweils aktuelle Fassung kann jederzeit auf dieser Seite abgerufen werden.
-</p>
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">22. Wechselkurs-Widget (Nationalbank der Ukraine)</h3>
-<p style="margin-bottom: 14px;">
-    Auf dieser Website wird der aktuelle Wechselkurs der ukrainischen Hrywnja (UAH)
-    zu verschiedenen Währungen angezeigt. Die Kursdaten werden über einen eigenen
-    Server (Vercel) von der öffentlichen API der Nationalbank der Ukraine
-    (bank.gov.ua) abgerufen. Dabei werden keine personenbezogenen Daten der Nutzer
-    an die Nationalbank der Ukraine übermittelt. Die Verarbeitung erfolgt auf
-    Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der
-    Bereitstellung aktueller Wechselkursinformationen).
 </p>
 
 <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0,51,153,0.15); border-left: 3px solid var(--primary-blue);">
@@ -302,14 +338,7 @@
 <script src="../js/components.js"></script>
 <script src="../js/tabs.js"></script>
 <script src="../js/clock.js"></script>
-<script src="../js/eur-rate.js"></script>
 <script src="../js/main.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        if (typeof initClock === 'function') initClock();
-        if (typeof getWeather === 'function') getWeather();
-    });
-</script>
 
 </body>
 </html>

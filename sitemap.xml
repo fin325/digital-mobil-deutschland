@@ -61,4 +61,10 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://digital-mobil-deutschland.vercel.app/ru/doctors.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

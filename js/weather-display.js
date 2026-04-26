@@ -150,6 +150,13 @@
             const { kp_index } = JSON.parse(magnetCached);
             displayMagnet(kp_index);
         }
+
+        // Курс EUR/UAH
+        const eurCached = sessionStorage.getItem('eurRate');
+        const eurEl = document.getElementById('eur-value');
+        if (eurCached && eurEl) {
+            eurEl.textContent = eurCached + ' ₴';
+        }
     } catch (e) {
         console.error('weather-display error:', e);
     }

@@ -188,6 +188,7 @@ customElements.define('app-header', AppHeader);
     if (isHomePage) {
         loadScript(prefix + 'weather.js');
         loadScript(prefix + 'magnet.js');
+        loadScript(prefix + 'eur-rate.js');
     } else {
         loadScript(prefix + 'weather-display.js');
     }

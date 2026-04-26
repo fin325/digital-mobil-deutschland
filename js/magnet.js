@@ -1,6 +1,18 @@
 /* === magnet.js — Geomagnetische Aktivität via eigenen Proxy === */
 
 async function getGeomagneticActivity() {
+    // Если данные уже есть в sessionStorage — используем их без запроса
+    try {
+        const cached = sessionStorage.getItem('magnetData');
+        if (cached) {
+            const { kp_index } = JSON.parse(cached);
+            if (typeof kp_index === 'number') {
+                applyMagnetData(kp_index);
+                return;
+            }
+        }
+    } catch (e) {}
+
     try {
         const res = await fetch('/api/magnet');
         const data = await res.json();
@@ -10,7 +22,7 @@ async function getGeomagneticActivity() {
             return;
         }
 
-        // NEW: Сохраняем для других вкладок в рамках сессии
+        // Сохраняем для других вкладок в рамках сессии
         try {
             sessionStorage.setItem('magnetData', JSON.stringify({ kp_index: data.kp_index }));
         } catch (e) {}

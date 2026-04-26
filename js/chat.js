@@ -8,11 +8,11 @@
   const STORAGE_KEY_PREFIX = 'dmd_chat_history_';
   const MAX_HISTORY = 20;
 
-  // Detect page language from <html lang="...">
   const PAGE_LANG = (document.documentElement.lang || 'de').toLowerCase().startsWith('ru') ? 'ru' : 'de';
   const STORAGE_KEY = STORAGE_KEY_PREFIX + PAGE_LANG;
 
-  // === UI strings per language ===
+  const SITE_NAME = 'Digital & Mobil in Deutschland';
+
   const UI = {
     de: {
       fabAria:        'Chat öffnen',
@@ -22,7 +22,7 @@
       placeholder:    'Frage stellen...',
       sendAria:       'Senden',
       disclaimer:     'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
-      welcome:        'Hallo! 👋 Ich bin der Assistent dieser Website. Wie kann ich helfen?',
+      welcome:        `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Wie kann ich helfen?`,
       clearConfirm:   'Verlauf löschen?',
       cleared:        'Verlauf gelöscht. Wie kann ich helfen?',
       errorPrefix:    'Fehler: ',
@@ -37,7 +37,7 @@
       placeholder:    'Задайте вопрос...',
       sendAria:       'Отправить',
       disclaimer:     'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
-      welcome:        'Здравствуйте! 👋 Я ассистент этого сайта. Чем могу помочь?',
+      welcome:        `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Чем могу помочь?`,
       clearConfirm:   'Очистить историю?',
       cleared:        'История очищена. Чем могу помочь?',
       errorPrefix:    'Ошибка: ',
@@ -46,19 +46,23 @@
     }
   };
 
-  // === Quick suggestion chips ===
+  // === Quick suggestion chips (always visible) ===
   const SUGGESTIONS = {
     de: [
-      { label: '📄 PDF komprimieren', q: 'Wie kann ich eine PDF-Datei komprimieren?' },
-      { label: '🏥 Arzt finden',      q: 'Wo finde ich einen Arzt in Hattingen?' },
-      { label: '🏠 Wohnung suchen',   q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
-      { label: '💼 Arbeit finden',    q: 'Wo finde ich Jobangebote?' },
+      { label: '📄 PDF 24 Tools',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
+      { label: '🏥 Arzt finden',    q: 'Wo finde ich einen Arzt in Hattingen?' },
+      { label: '🏠 Wohnung suchen', q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
+      { label: '💼 Arbeit finden',  q: 'Wo finde ich Jobangebote?' },
+      { label: '📰 Tagesschau',     q: 'Wo finde ich aktuelle Text-Nachrichten von der Tagesschau?' },
+      { label: '🎬 News-Videos',    q: 'Wo finde ich Video-Nachrichten der Tagesschau?' },
     ],
     ru: [
-      { label: '📄 Сжать PDF',           q: 'Как сжать PDF-файл?' },
-      { label: '🏥 Найти врача',         q: 'Как найти русскоязычного врача в NRW?' },
-      { label: '🏠 Найти квартиру',      q: 'Где можно снять квартиру в Хаттингене?' },
-      { label: '💼 Найти работу',        q: 'Где найти вакансии?' },
+      { label: '📄 PDF 24 Tools',           q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
+      { label: '🏥 Найти врача',            q: 'Как найти русскоязычного врача в NRW?' },
+      { label: '🏠 Найти квартиру',         q: 'Где можно снять квартиру в Хаттингене?' },
+      { label: '💼 Найти работу',           q: 'Где найти вакансии?' },
+      { label: '📰 Новости текстом',        q: 'Где почитать текстовые новости из Германии?' },
+      { label: '🎬 Видео-новости — Миша Бур', q: 'Где посмотреть видео-новости Германии от Миши Бура?' },
     ]
   };
 
@@ -91,7 +95,7 @@
         </div>
       </div>
       <div class="chat-messages" role="log" aria-live="polite"></div>
-      <div class="chat-suggestions"></div>
+      <div class="chat-suggestions chat-suggestions--persistent"></div>
       <div class="chat-input-area">
         <textarea class="chat-input" rows="1" placeholder="${escapeAttr(t.placeholder)}" aria-label="${escapeAttr(t.placeholder)}"></textarea>
         <button class="chat-send" aria-label="${escapeAttr(t.sendAria)}">➤</button>
@@ -107,6 +111,9 @@
     suggestionsEl = windowEl.querySelector('.chat-suggestions');
 
     windowEl.querySelector('.chat-clear').addEventListener('click', clearHistory);
+
+    // Render suggestions ONCE on init — they stay visible forever
+    renderSuggestions();
   }
 
   function bindEvents() {
@@ -135,7 +142,6 @@
 
     if (messages.length === 0) {
       addMessage('assistant', t.welcome);
-      renderSuggestions();
     }
   }
 
@@ -150,7 +156,6 @@
     messagesEl.innerHTML = '';
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
     addMessage('assistant', t.cleared);
-    renderSuggestions();
   }
 
   function renderSuggestions() {
@@ -160,17 +165,12 @@
       btn.className = 'chat-suggestion';
       btn.textContent = s.label;
       btn.addEventListener('click', () => {
-        hideSuggestions();
+        if (isLoading) return;
         inputEl.value = s.q;
         sendMessage();
       });
       suggestionsEl.appendChild(btn);
     });
-    suggestionsEl.style.display = 'flex';
-  }
-
-  function hideSuggestions() {
-    suggestionsEl.style.display = 'none';
   }
 
   function addMessage(role, content) {
@@ -181,7 +181,7 @@
     scrollToBottom();
   }
 
-  // === Render assistant message: parse [TAB:id|text] and [PAGE:path|text] ===
+  // === Render assistant message: parse [TAB:id|text], [PAGE:path|text], [URL:url|text] ===
   function renderMessage(msg) {
     const div = document.createElement('div');
     div.className = 'chat-msg ' + msg.role;
@@ -193,8 +193,7 @@
     }
 
     const text = msg.content;
-    // Single regex matching either [TAB:id|text] or [PAGE:path|text]
-    const regex = /\[(TAB|PAGE):([^\]|]+)\|([^\]]+)\]/g;
+    const regex = /\[(TAB|PAGE|URL):([^\]|]+)\|([^\]]+)\]/g;
     let lastIndex = 0;
     let match;
 
@@ -202,7 +201,7 @@
       if (match.index > lastIndex) {
         div.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
       }
-      const kind   = match[1]; // 'TAB' or 'PAGE'
+      const kind   = match[1];
       const target = match[2].trim();
       const label  = match[3].trim();
 
@@ -212,7 +211,7 @@
         btn.textContent = '👉 ' + label;
         btn.addEventListener('click', () => openTab(target));
         div.appendChild(btn);
-      } else { // PAGE
+      } else if (kind === 'PAGE') {
         const link = document.createElement('a');
         link.className = 'chat-page-link';
         link.href = '/' + target.replace(/^\/+/, '');
@@ -220,6 +219,20 @@
         link.rel = 'noopener noreferrer';
         link.textContent = '🔗 ' + label;
         div.appendChild(link);
+      } else if (kind === 'URL') {
+        // External URL — only allow http(s)://
+        if (/^https?:\/\//i.test(target)) {
+          const link = document.createElement('a');
+          link.className = 'chat-url-link';
+          link.href = target;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = '🌐 ' + label;
+          div.appendChild(link);
+        } else {
+          // Invalid URL — render as plain text fallback
+          div.appendChild(document.createTextNode(label));
+        }
       }
 
       lastIndex = regex.lastIndex;
@@ -240,7 +253,6 @@
         if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     } else {
-      // Fallback: try clicking the matching nav button
       const btn = document.querySelector(`.nav-btn[onclick*="'${tabId}'"]`);
       if (btn) {
         btn.click();
@@ -283,6 +295,8 @@
     isLoading = loading;
     sendBtn.disabled = loading;
     inputEl.disabled = loading;
+    // Disable suggestion buttons while loading
+    suggestionsEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
   }
 
   async function sendMessage() {
@@ -291,7 +305,6 @@
 
     inputEl.value = '';
     inputEl.style.height = 'auto';
-    hideSuggestions();
     addMessage('user', text);
 
     setLoading(true);

@@ -42,12 +42,13 @@
 /* === Chat Window === */
 .chat-window {
   position: fixed;
+  /* Anchor by TOP, not bottom — prevents going off-screen on tall content */
+  top: 70px;
   bottom: 90px;
   right: 20px;
   width: calc(100vw - 40px);
   max-width: 380px;
-  height: 75vh;
-  max-height: 640px;
+  /* No fixed height — flex stretches between top and bottom */
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
@@ -59,6 +60,9 @@
   flex-direction: column;
   overflow: hidden;
   font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
+  /* Respect iOS safe areas (notch, home indicator) */
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .chat-window.open {
@@ -375,12 +379,13 @@
 /* === Mobile adjustments === */
 @media (max-width: 480px) {
   .chat-window {
+    top: 60px;
     bottom: 80px;
     right: 10px;
     left: 10px;
     width: auto;
     max-width: none;
-    height: 80vh;
+    /* No height — fills space between top and bottom */
   }
   .chat-fab {
     bottom: 16px;
@@ -390,3 +395,4 @@
     font-size: 26px;
   }
 }
+

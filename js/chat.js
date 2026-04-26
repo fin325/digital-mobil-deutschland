@@ -1,50 +1,112 @@
 // js/chat.js — Floating chat widget for Digital & Mobil in Deutschland
+// Bilingual (DE/RU), reads page language from <html lang="..."> attribute
 
 (function () {
   'use strict';
 
   const ENDPOINT = '/api/chat';
-  const STORAGE_KEY = 'dmd_chat_history';
-  const MAX_HISTORY = 20; // last N messages sent to API
+  const STORAGE_KEY_PREFIX = 'dmd_chat_history_';
+  const MAX_HISTORY = 20;
 
-  let messages = []; // {role: 'user'|'assistant', content: string}
+  // Detect page language from <html lang="...">
+  const PAGE_LANG = (document.documentElement.lang || 'de').toLowerCase().startsWith('ru') ? 'ru' : 'de';
+  const STORAGE_KEY = STORAGE_KEY_PREFIX + PAGE_LANG;
+
+  // === UI strings per language ===
+  const UI = {
+    de: {
+      fabAria:        'Chat öffnen',
+      headerTitle:    'DMD Assistent',
+      closeAria:      'Chat schließen',
+      clearAria:      'Verlauf löschen',
+      placeholder:    'Frage stellen...',
+      sendAria:       'Senden',
+      disclaimer:     'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
+      welcome:        'Hallo! 👋 Ich bin der Assistent dieser Website. Wie kann ich helfen?',
+      clearConfirm:   'Verlauf löschen?',
+      cleared:        'Verlauf gelöscht. Wie kann ich helfen?',
+      errorPrefix:    'Fehler: ',
+      errorRetry:     '. Bitte später erneut versuchen.',
+      emptyReply:     'Leere Antwort vom Server',
+    },
+    ru: {
+      fabAria:        'Открыть чат',
+      headerTitle:    'Ассистент DMD',
+      closeAria:      'Закрыть чат',
+      clearAria:      'Очистить историю',
+      placeholder:    'Задайте вопрос...',
+      sendAria:       'Отправить',
+      disclaimer:     'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
+      welcome:        'Здравствуйте! 👋 Я ассистент этого сайта. Чем могу помочь?',
+      clearConfirm:   'Очистить историю?',
+      cleared:        'История очищена. Чем могу помочь?',
+      errorPrefix:    'Ошибка: ',
+      errorRetry:     '. Попробуйте позже.',
+      emptyReply:     'Пустой ответ сервера',
+    }
+  };
+
+  // === Quick suggestion chips ===
+  const SUGGESTIONS = {
+    de: [
+      { label: '📄 PDF komprimieren', q: 'Wie kann ich eine PDF-Datei komprimieren?' },
+      { label: '🏥 Arzt finden',      q: 'Wo finde ich einen Arzt in Hattingen?' },
+      { label: '🏠 Wohnung suchen',   q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
+      { label: '💼 Arbeit finden',    q: 'Wo finde ich Jobangebote?' },
+    ],
+    ru: [
+      { label: '📄 Сжать PDF',           q: 'Как сжать PDF-файл?' },
+      { label: '🏥 Найти врача',         q: 'Как найти русскоязычного врача в NRW?' },
+      { label: '🏠 Найти квартиру',      q: 'Где можно снять квартиру в Хаттингене?' },
+      { label: '💼 Найти работу',        q: 'Где найти вакансии?' },
+    ]
+  };
+
+  const t = UI[PAGE_LANG];
+  const suggestionList = SUGGESTIONS[PAGE_LANG];
+
+  let messages = [];
   let isLoading = false;
 
-  // === DOM elements (created on init) ===
-  let fab, windowEl, messagesEl, inputEl, sendBtn, closeBtn;
+  let fab, windowEl, messagesEl, inputEl, sendBtn, closeBtn, suggestionsEl;
 
   function createUI() {
-    // Floating Action Button
     fab = document.createElement('button');
     fab.className = 'chat-fab pulse';
-    fab.setAttribute('aria-label', 'Chat öffnen');
+    fab.setAttribute('aria-label', t.fabAria);
     fab.innerHTML = '💬';
     document.body.appendChild(fab);
 
-    // Chat window
     windowEl = document.createElement('div');
     windowEl.className = 'chat-window';
     windowEl.innerHTML = `
       <div class="chat-header">
         <div class="chat-header-title">
           <span>🤖</span>
-          <span>DMD Assistent</span>
+          <span>${escapeHtml(t.headerTitle)}</span>
         </div>
-        <button class="chat-close" aria-label="Chat schließen">×</button>
+        <div class="chat-header-actions">
+          <button class="chat-clear" aria-label="${escapeAttr(t.clearAria)}" title="${escapeAttr(t.clearAria)}">🗑</button>
+          <button class="chat-close" aria-label="${escapeAttr(t.closeAria)}">×</button>
+        </div>
       </div>
       <div class="chat-messages" role="log" aria-live="polite"></div>
+      <div class="chat-suggestions"></div>
       <div class="chat-input-area">
-        <textarea class="chat-input" rows="1" placeholder="Frage stellen..." aria-label="Nachricht eingeben"></textarea>
-        <button class="chat-send" aria-label="Senden">➤</button>
+        <textarea class="chat-input" rows="1" placeholder="${escapeAttr(t.placeholder)}" aria-label="${escapeAttr(t.placeholder)}"></textarea>
+        <button class="chat-send" aria-label="${escapeAttr(t.sendAria)}">➤</button>
       </div>
-      <div class="chat-disclaimer">KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.</div>
+      <div class="chat-disclaimer">${escapeHtml(t.disclaimer)}</div>
     `;
     document.body.appendChild(windowEl);
 
-    messagesEl = windowEl.querySelector('.chat-messages');
-    inputEl = windowEl.querySelector('.chat-input');
-    sendBtn = windowEl.querySelector('.chat-send');
-    closeBtn = windowEl.querySelector('.chat-close');
+    messagesEl    = windowEl.querySelector('.chat-messages');
+    inputEl       = windowEl.querySelector('.chat-input');
+    sendBtn       = windowEl.querySelector('.chat-send');
+    closeBtn      = windowEl.querySelector('.chat-close');
+    suggestionsEl = windowEl.querySelector('.chat-suggestions');
+
+    windowEl.querySelector('.chat-clear').addEventListener('click', clearHistory);
   }
 
   function bindEvents() {
@@ -72,13 +134,43 @@
     setTimeout(() => inputEl.focus(), 100);
 
     if (messages.length === 0) {
-      addMessage('assistant', 'Hallo! 👋 Ich bin der Assistent der Website "Digital & Mobil in Deutschland". Wie kann ich helfen? Sie können auf Deutsch oder Russisch fragen.');
+      addMessage('assistant', t.welcome);
+      renderSuggestions();
     }
   }
 
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
+  }
+
+  function clearHistory() {
+    if (!confirm(t.clearConfirm)) return;
+    messages = [];
+    messagesEl.innerHTML = '';
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    addMessage('assistant', t.cleared);
+    renderSuggestions();
+  }
+
+  function renderSuggestions() {
+    suggestionsEl.innerHTML = '';
+    suggestionList.forEach((s) => {
+      const btn = document.createElement('button');
+      btn.className = 'chat-suggestion';
+      btn.textContent = s.label;
+      btn.addEventListener('click', () => {
+        hideSuggestions();
+        inputEl.value = s.q;
+        sendMessage();
+      });
+      suggestionsEl.appendChild(btn);
+    });
+    suggestionsEl.style.display = 'flex';
+  }
+
+  function hideSuggestions() {
+    suggestionsEl.style.display = 'none';
   }
 
   function addMessage(role, content) {
@@ -89,11 +181,74 @@
     scrollToBottom();
   }
 
+  // === Render assistant message: parse [TAB:id|text] and [PAGE:path|text] ===
   function renderMessage(msg) {
     const div = document.createElement('div');
     div.className = 'chat-msg ' + msg.role;
-    div.textContent = msg.content;
+
+    if (msg.role !== 'assistant') {
+      div.textContent = msg.content;
+      messagesEl.appendChild(div);
+      return;
+    }
+
+    const text = msg.content;
+    // Single regex matching either [TAB:id|text] or [PAGE:path|text]
+    const regex = /\[(TAB|PAGE):([^\]|]+)\|([^\]]+)\]/g;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        div.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const kind   = match[1]; // 'TAB' or 'PAGE'
+      const target = match[2].trim();
+      const label  = match[3].trim();
+
+      if (kind === 'TAB') {
+        const btn = document.createElement('button');
+        btn.className = 'chat-tab-link';
+        btn.textContent = '👉 ' + label;
+        btn.addEventListener('click', () => openTab(target));
+        div.appendChild(btn);
+      } else { // PAGE
+        const link = document.createElement('a');
+        link.className = 'chat-page-link';
+        link.href = '/' + target.replace(/^\/+/, '');
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = '🔗 ' + label;
+        div.appendChild(link);
+      }
+
+      lastIndex = regex.lastIndex;
+    }
+    if (lastIndex < text.length) {
+      div.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+
     messagesEl.appendChild(div);
+  }
+
+  function openTab(tabId) {
+    if (typeof window.showTab === 'function') {
+      window.showTab(tabId);
+      closeChat();
+      setTimeout(() => {
+        const section = document.getElementById(tabId);
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      // Fallback: try clicking the matching nav button
+      const btn = document.querySelector(`.nav-btn[onclick*="'${tabId}'"]`);
+      if (btn) {
+        btn.click();
+        closeChat();
+      } else {
+        console.warn('chat.js: showTab() not available and no matching nav button for', tabId);
+      }
+    }
   }
 
   function showError(text) {
@@ -136,19 +291,18 @@
 
     inputEl.value = '';
     inputEl.style.height = 'auto';
+    hideSuggestions();
     addMessage('user', text);
 
     setLoading(true);
     showTyping();
 
     try {
-      // Send only last MAX_HISTORY messages to keep context small
       const recentMessages = messages.slice(-MAX_HISTORY);
-
       const response = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: recentMessages }),
+        body: JSON.stringify({ messages: recentMessages, lang: PAGE_LANG }),
       });
 
       hideTyping();
@@ -160,16 +314,13 @@
 
       const data = await response.json();
       const reply = (data.reply || '').trim();
-
-      if (!reply) {
-        throw new Error('Leere Antwort vom Server');
-      }
+      if (!reply) throw new Error(t.emptyReply);
 
       addMessage('assistant', reply);
     } catch (err) {
       hideTyping();
       console.error('Chat error:', err);
-      showError('Fehler: ' + err.message + '. Bitte später erneut versuchen.');
+      showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
       inputEl.focus();
@@ -179,9 +330,7 @@
   function saveHistory() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_HISTORY)));
-    } catch (e) {
-      // Storage full or disabled — ignore
-    }
+    } catch (e) {}
   }
 
   function loadHistory() {
@@ -199,6 +348,11 @@
       messages = [];
     }
   }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function escapeAttr(s) { return escapeHtml(s); }
 
   function init() {
     createUI();

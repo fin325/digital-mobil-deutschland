@@ -74,6 +74,10 @@
 
   let fab, windowEl, messagesEl, inputEl, sendBtn, closeBtn, suggestionsEl;
 
+  // === iOS keyboard scroll lock state ===
+  let savedScrollY = 0;
+  let pageScrollLocked = false;
+
   function createUI() {
     fab = document.createElement('button');
     fab.className = 'chat-fab pulse';
@@ -134,6 +138,33 @@
       inputEl.style.height = 'auto';
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
+
+    // === iOS keyboard fix: prevent page from scrolling when keyboard opens ===
+    inputEl.addEventListener('focus', preventPageScrollOnFocus);
+    inputEl.addEventListener('blur', restorePageScroll);
+  }
+
+  // === iOS keyboard scroll lock ===
+  function preventPageScrollOnFocus() {
+    // Lock page in place so iOS Safari doesn't auto-scroll when keyboard opens
+    savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    pageScrollLocked = true;
+  }
+
+  function restorePageScroll() {
+    if (!pageScrollLocked) return;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, savedScrollY);
+    pageScrollLocked = false;
   }
 
   function openChat() {
@@ -150,6 +181,8 @@
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
+    // Restore page scroll if keyboard was still open when chat was closed
+    if (pageScrollLocked) restorePageScroll();
   }
 
   function clearHistory() {

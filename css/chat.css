@@ -274,12 +274,13 @@
 
 /* === Input area === */
 .chat-input-area {
-  padding: 10px;
+  padding: 7px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
-  gap: 8px;
+  gap: 7px;
   background: rgba(255, 255, 255, 0.5);
   flex-shrink: 0;
+  margin-bottom: 45px
 }
 
 /* Уменьшенное поле ввода */

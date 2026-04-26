@@ -242,14 +242,77 @@
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">14. Schriftarten (lokal eingebunden)</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">14. KI-Chat-Assistent (Groq, Server-Proxy)</h3>
+<p style="margin-bottom: 14px;">
+    Auf dieser Website wird ein KI-Chat-Assistent („DMD Assistent") angeboten, der Fragen zur Website und zu allgemeinen Themen für Einwohner und Migranten in Hattingen und NRW beantwortet.
+    Die KI-Antworten werden vom Sprachmodell <strong>llama-3.3-70b-versatile</strong> über die API von Groq Inc. generiert.<br>
+    Anbieter: Groq, Inc., 130 Castro Street, Mountain View, CA 94041, USA. URL: <a href="https://groq.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://groq.com</a>
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>a) Aktivierung des Chats</strong><br>
+    Der Chat-Button („💬") ist auf jeder Seite sichtbar, ohne dass dabei Daten an Dritte übertragen werden.
+    Eine Datenübertragung an Groq erfolgt erst, wenn Sie aktiv eine Nachricht eingeben und absenden.
+    Mit dem Absenden einer Nachricht erteilen Sie konkludent Ihre Einwilligung zur Verarbeitung Ihrer Anfrage durch Groq Inc.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>b) Technische Verarbeitung über Server-Proxy</strong><br>
+    Die Anfragen an die Groq-API erfolgen <strong>ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/chat</code>).
+    An Groq werden lediglich der Inhalt Ihrer Nachricht, die letzten bis zu 20 vorhergehenden Nachrichten der aktuellen Konversation (zur Aufrechterhaltung des Kontexts), die Sprachversion der Website (de/ru) sowie die IP-Adresse unseres Server-Proxys übertragen.
+    <strong>Die IP-Adresse des Nutzers wird nicht an Groq weitergegeben.</strong> Der Nutzer selbst bleibt für Groq anonym.
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>c) Inhalt der Nachrichten — Hinweis</strong><br>
+    Wir empfehlen ausdrücklich, im Chat <strong>keine personenbezogenen Daten</strong> (z.&nbsp;B. vollständigen Namen, Adresse, Telefonnummer, Geburtsdatum, Gesundheitsdaten, Bankverbindung) und keine vertraulichen Informationen einzugeben.
+    Sollten Sie dennoch personenbezogene Daten in den Chat eingeben, werden diese an Groq Inc. in den USA übertragen.
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>d) Speicherung und Verwendung der Daten durch Groq</strong><br>
+    Nach den aktuellen Bedingungen von Groq werden API-Anfragen über die Standard-API <strong>nicht zum Training von KI-Modellen verwendet</strong>.
+    Anfragen können von Groq für eine begrenzte Zeit (z.&nbsp;B. zur Missbrauchserkennung und Sicherheit) gespeichert werden.
+    Wir selbst speichern den Inhalt Ihrer Chat-Nachrichten <strong>nicht</strong> auf unseren Servern.
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>e) Lokale Speicherung des Chat-Verlaufs im Browser</strong><br>
+    Damit Ihr Chat-Verlauf bei einem erneuten Besuch der Website verfügbar bleibt, werden die letzten bis zu 20 Nachrichten Ihrer Konversation im <strong>Local Storage</strong> Ihres Browsers gespeichert (Schlüssel: <code>dmd_chat_history_de</code> bzw. <code>dmd_chat_history_ru</code>, je nach Sprachversion).
+    Diese Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
+    Sie können den Chat-Verlauf jederzeit über die Schaltfläche „🗑" im Chat-Fenster oder über die Browser-Einstellungen löschen.
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>f) Datenübertragung in die USA</strong><br>
+    Groq, Inc. ist in den USA ansässig. Die Übermittlung erfolgt auf Grundlage der EU-Standardvertragsklauseln (SCCs) gemäß Art. 46 Abs. 2 lit. c DSGVO.
+    Datenschutzerklärung von Groq: <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://groq.com/privacy-policy/</a><br>
+    Nutzungsbedingungen von Groq: <a href="https://groq.com/terms-of-use/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://groq.com/terms-of-use/</a>
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>g) Keine Rechts-, Medizin- oder Finanzberatung</strong><br>
+    Die KI-generierten Antworten dienen ausschließlich zu Informationszwecken und können Fehler enthalten („Halluzinationen").
+    Sie stellen keine Rechts-, Medizin-, Steuer- oder Finanzberatung dar und ersetzen keine Beratung durch qualifizierte Fachpersonen.
+    Bei verbindlichen Auskünften wenden Sie sich bitte an die zuständigen Stellen.
+</p>
+
+<p style="margin-bottom: 14px;">
+    <strong>h) Widerruf der Einwilligung</strong><br>
+    Sie können die Nutzung des Chats jederzeit beenden, indem Sie das Chat-Fenster schließen und keine weiteren Nachrichten senden.
+    Bereits an Groq übertragene Nachrichten können wir nicht zurückrufen, da sie auf Servern eines Drittanbieters in den USA verarbeitet wurden.
+    Die im Local Storage gespeicherten Verläufe können Sie jederzeit selbst löschen (siehe Buchstabe e).
+</p>
+
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">15. Schriftarten (lokal eingebunden)</h3>
 <p style="margin-bottom: 14px;">
     Diese Website verwendet die Schriftart „Montserrat", die lokal auf dem eigenen Server gehostet wird.
     Es findet keine Verbindung zu externen Servern (z.&nbsp;B. Google) statt.
     Es werden keine personenbezogenen Daten an Dritte übertragen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">15. Externe Links</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">16. Externe Links</h3>
 <p style="margin-bottom: 14px;">
     Diese Website enthält Links zu externen Websites (u.&nbsp;a. Google Maps, Apple Maps, DB Navigator, Arbeitsagentur, Indeed, StepStone, XING, Doctolib, Jameda, Interkulturelles Zentrum Magnet <a href="https://iz-magnet.de" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">iz-magnet.de</a>, DeepL, Reverso Context, Google Translate, Claude AI, ChatGPT, Gemini, Grok).
     Beim Klick auf einen externen Link verlassen Sie unsere Website.
@@ -257,31 +320,32 @@
     Wir empfehlen, die Datenschutzerklärungen der jeweiligen Dienste zu lesen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">16. Bereitgestelltes PDF-Dokument</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">17. Bereitgestelltes PDF-Dokument</h3>
 <p style="margin-bottom: 14px;">
     Im Bereich „Gesetze" steht ein PDF-Dokument (Übergangsregelung zum Aufenthalt für ukrainische Staatsangehörige) zum Download bereit.
     Das Dokument wird direkt von unserem Server bereitgestellt.
     Beim Download werden die üblichen Server-Log-Daten (IP-Adresse, Zeitpunkt, Dateiname) erfasst.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">17. Uhrzeit und Datum</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">18. Uhrzeit und Datum</h3>
 <p style="margin-bottom: 14px;">
     Die Anzeige von Datum und Uhrzeit erfolgt ausschließlich clientseitig im Browser des Nutzers mittels JavaScript.
     Es werden keine Daten an externe Server übertragen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">18. Sprachumschaltung</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">19. Sprachumschaltung</h3>
 <p style="margin-bottom: 14px;">
     Die Sprachumschaltung (z.&nbsp;B. Deutsch/Russisch) erfolgt durch einen einfachen Link auf eine gleichartige Seite in einem anderen Sprachverzeichnis.
     Es werden dabei keine zusätzlichen personenbezogenen Daten verarbeitet.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">19. Nutzung von Local Storage und Session Storage</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">20. Nutzung von Local Storage und Session Storage</h3>
 <p style="margin-bottom: 14px;">
     Diese Website nutzt den Local Storage Ihres Browsers zur dauerhaften Speicherung folgender Daten:
 </p>
 <p style="margin-bottom: 6px;">• Cookie-Einwilligungen (Silktide Consent Manager)</p>
-<p style="margin-bottom: 14px;">• Die von Ihnen zuletzt gewählte Stadt für die Wetteranzeige (Schlüssel <code>userCity</code>)</p>
+<p style="margin-bottom: 6px;">• Die von Ihnen zuletzt gewählte Stadt für die Wetteranzeige (Schlüssel <code>userCity</code>)</p>
+<p style="margin-bottom: 14px;">• Verlauf des KI-Chats (Schlüssel <code>dmd_chat_history_de</code> bzw. <code>dmd_chat_history_ru</code>) — siehe Abschnitt 14</p>
 <p style="margin-bottom: 14px;">
     Zusätzlich nutzen wir den Session Storage Ihres Browsers, um Wetter-, Luftqualitäts-, Geomagnetik- und Wechselkursdaten innerhalb derselben Browser-Sitzung zwischen einzelnen Unterseiten der Website zu übertragen. Die Daten im Session Storage werden automatisch gelöscht, sobald Sie den Browser-Tab schließen.
 </p>
@@ -290,7 +354,7 @@
     Sie können diese Speicher jederzeit über die Browser-Einstellungen löschen.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">20. Ihre Rechte als betroffene Person</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">21. Ihre Rechte als betroffene Person</h3>
 <p style="margin-bottom: 14px;">
     Ihnen stehen gemäß der DSGVO folgende Rechte zu:
 </p>
@@ -302,7 +366,7 @@
 <p style="margin-bottom: 6px;">• <strong>Widerspruchsrecht</strong> (Art. 21 DSGVO): Sie können der Datenverarbeitung widersprechen, sofern diese auf berechtigtem Interesse basiert.</p>
 <p style="margin-bottom: 14px;">• <strong>Widerruf der Einwilligung</strong> (Art. 7 Abs. 3 DSGVO): Erteilte Einwilligungen können Sie jederzeit mit Wirkung für die Zukunft widerrufen (z.&nbsp;B. über das Cookie-Symbol unten links auf der Hauptseite).</p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">21. Beschwerderecht bei einer Aufsichtsbehörde</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">22. Beschwerderecht bei einer Aufsichtsbehörde</h3>
 <p style="margin-bottom: 14px;">
     Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren (Art. 77 DSGVO).
     Die zuständige Aufsichtsbehörde für Nordrhein-Westfalen ist:
@@ -316,9 +380,9 @@
     Website: <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://www.ldi.nrw.de</a>
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">22. Aktualität und Änderungen dieser Datenschutzerklärung</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">23. Aktualität und Änderungen dieser Datenschutzerklärung</h3>
 <p style="margin-bottom: 14px;">
-    Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026.
+    Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026 (Version 2 — Ergänzung um Abschnitt 14 „KI-Chat-Assistent").
     Aufgrund von Änderungen an der Website oder geänderter gesetzlicher Anforderungen kann es notwendig werden, diese Datenschutzerklärung anzupassen.
     Die jeweils aktuelle Fassung kann jederzeit auf dieser Seite abgerufen werden.
 </p>

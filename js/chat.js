@@ -22,7 +22,7 @@
       placeholder:    'Frage stellen...',
       sendAria:       'Senden',
       disclaimer:     'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
-      welcome:        `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Wie kann ich helfen?`,
+      welcome:        `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Ich kann Ihnen sagen, was es auf der Website gibt, und helfe Ihnen, das zu finden, was Sie brauchen 🙂.`,
       clearConfirm:   'Verlauf löschen?',
       cleared:        'Verlauf gelöscht. Wie kann ich helfen?',
       errorPrefix:    'Fehler: ',
@@ -37,7 +37,7 @@
       placeholder:    'Задайте вопрос...',
       sendAria:       'Отправить',
       disclaimer:     'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
-      welcome:        `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Чем могу помочь?`,
+      welcome:        `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Я могу рассказать что есть на сайте и помогу вам найти что нужно 🙂.`,
       clearConfirm:   'Очистить историю?',
       cleared:        'История очищена. Чем могу помочь?',
       errorPrefix:    'Ошибка: ',
@@ -48,7 +48,7 @@
 
   const SUGGESTIONS = {
     de: [
-      { label: '📄 PDF 24 Tools',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
+      { label: '📄 Alles für PDF',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
       { label: '🏥 Arzt finden',    q: 'Wo finde ich einen Arzt in Hattingen?' },
       { label: '🏠 Wohnung suchen', q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
       { label: '💼 Arbeit finden',  q: 'Wo finde ich Jobangebote?' },
@@ -56,7 +56,7 @@
       { label: '🎬 News-Videos',    q: 'Wo finde ich Video-Nachrichten der Tagesschau?' },
     ],
     ru: [
-      { label: '📄 PDF 24 Tools',           q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
+      { label: '📄 Все для PDF',           q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
       { label: '🏥 Найти врача',            q: 'Как найти русскоязычного врача в NRW?' },
       { label: '🏠 Найти квартиру',         q: 'Где можно снять квартиру в Хаттингене?' },
       { label: '💼 Найти работу',           q: 'Где найти вакансии?' },
@@ -88,7 +88,7 @@
     windowEl.innerHTML = `
       <div class="chat-header">
         <div class="chat-header-title">
-          <span>🤖</span>
+          <span>🛸</span>
           <span>${escapeHtml(t.headerTitle)}</span>
         </div>
         <div class="chat-header-actions">

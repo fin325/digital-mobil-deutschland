@@ -46,7 +46,6 @@
     }
   };
 
-  // === Quick suggestion chips (always visible, 2 rows) ===
   const SUGGESTIONS = {
     de: [
       { label: '📄 PDF 24 Tools',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
@@ -73,10 +72,6 @@
   let isLoading = false;
 
   let fab, windowEl, messagesEl, inputEl, sendBtn, closeBtn, suggestionsEl;
-
-  // === iOS keyboard scroll lock state ===
-  let savedScrollY = 0;
-  let pageScrollLocked = false;
 
   function createUI() {
     fab = document.createElement('button');
@@ -117,7 +112,6 @@
     suggestionsEl = windowEl.querySelector('.chat-suggestions-rows');
 
     windowEl.querySelector('.chat-clear').addEventListener('click', clearHistory);
-
     renderSuggestions();
   }
 
@@ -137,54 +131,6 @@
       inputEl.style.height = 'auto';
       inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     });
-
-    inputEl.addEventListener('focus', preventPageScrollOnFocus);
-    inputEl.addEventListener('blur', restorePageScroll);
-  }
-
-  // === iOS keyboard fix via visualViewport API ===
-  function onViewportResize() {
-    if (!window.visualViewport) return;
-    // offsetTop учитывает Safe Area и адресную строку Safari
-    const offsetY = window.innerHeight 
-                  - window.visualViewport.height 
-                  - window.visualViewport.offsetTop;
-    // Сдвигаем только вниз (не вверх — на случай если offsetY отрицательный)
-    windowEl.style.transform = `translateY(${Math.max(0, offsetY)}px)`;
-}
-
-  function preventPageScrollOnFocus() {
-    savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    pageScrollLocked = true;
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', onViewportResize);
-      window.visualViewport.addEventListener('scroll', onViewportResize);
-    }
-  }
-
-  function restorePageScroll() {
-    if (!pageScrollLocked) return;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
-    window.scrollTo(0, savedScrollY);
-    pageScrollLocked = false;
-
-    if (window.visualViewport) {
-      window.visualViewport.removeEventListener('resize', onViewportResize);
-      window.visualViewport.removeEventListener('scroll', onViewportResize);
-    }
-
-    // Сбрасываем смещение окна
-    windowEl.style.transform = '';
   }
 
   function openChat() {
@@ -201,7 +147,8 @@
   function closeChat() {
     windowEl.classList.remove('open');
     fab.classList.remove('hidden');
-    if (pageScrollLocked) restorePageScroll();
+    // Убираем фокус с инпута — клавиатура закроется
+    inputEl.blur();
   }
 
   function clearHistory() {
@@ -214,7 +161,6 @@
 
   function renderSuggestions() {
     suggestionsEl.innerHTML = '';
-
     const half = Math.ceil(suggestionList.length / 2);
     const rows = [suggestionList.slice(0, half), suggestionList.slice(half)];
 
@@ -306,7 +252,6 @@
 
   function openTab(tabId) {
     closeChat();
-
     if (typeof window.showTab === 'function') {
       window.showTab(tabId);
     } else {
@@ -318,7 +263,6 @@
         return;
       }
     }
-
     requestAnimationFrame(() => {
       const opts = { top: 0, behavior: 'smooth' };
       window.scrollTo(opts);
@@ -369,8 +313,11 @@
 
     inputEl.value = '';
     inputEl.style.height = 'auto';
-    addMessage('user', text);
 
+    // Убираем фокус — клавиатура закрывается после отправки
+    inputEl.blur();
+
+    addMessage('user', text);
     setLoading(true);
     showTyping();
 
@@ -400,7 +347,7 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      inputEl.focus();
+      // НЕ возвращаем фокус — пользователь сам нажмёт когда захочет писать
     }
   }
 

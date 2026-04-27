@@ -443,3 +443,49 @@
     font-size: 26px;
   }
 }
+
+/* ============================================ */
+/* === PC (мышь) + Smart TV (пульт-указка) === */
+/* === Применяется если: большой экран ИЛИ точный указатель === */
+/* ============================================ */
+@media (min-width: 1024px), (pointer: fine) {
+  .chat-window {
+    width: 440px;
+    max-width: 440px;
+    height: 75vh;
+    max-height: 720px;
+    min-height: 500px;
+    top: 80px;
+    right: 30px;
+  }
+
+  /* На PC/TV нет программной клавиатуры — компактный режим не нужен */
+  .chat-window.open.compact {
+    height: 75vh;
+    max-height: 720px;
+  }
+
+  .chat-fab {
+    width: 64px;
+    height: 64px;
+    font-size: 30px;
+    bottom: 30px;
+    right: 30px;
+  }
+
+  .chat-input {
+    font-size: 14px;
+    padding: 8px 16px;
+    min-height: 38px;
+    max-height: 100px;
+  }
+
+  .chat-msg {
+    font-size: 0.95rem;
+  }
+
+  .chat-suggestion {
+    font-size: 0.85rem;
+    padding: 7px 14px;
+  }
+}

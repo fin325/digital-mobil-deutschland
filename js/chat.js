@@ -22,7 +22,7 @@
       placeholder:    'Frage stellen...',
       sendAria:       'Senden',
       disclaimer:     'KI-Antworten können Fehler enthalten. Keine Rechts- oder Medizinberatung.',
-      welcome:        `Hallo! 👋 Ich bin der Assistent der Website "${SITE_NAME}". Ich kann Ihnen sagen, was es auf der Website gibt, und helfe Ihnen, das zu finden, was Sie brauchen 🙂`,
+      welcome:        `Hallo! <span class="icon-emoji icon-1f44b"></span> Ich bin der Assistent der Website "${SITE_NAME}". Ich kann Ihnen sagen, was es auf der Website gibt, und helfe Ihnen, das zu finden, was Sie brauchen <span class="icon-emoji icon-1f642"></span>`,
       clearConfirm:   'Verlauf löschen?',
       cleared:        'Verlauf gelöscht. Wie kann ich helfen?',
       errorPrefix:    'Fehler: ',
@@ -37,7 +37,7 @@
       placeholder:    'Задайте вопрос...',
       sendAria:       'Отправить',
       disclaimer:     'Ответы ИИ могут содержать ошибки. Не является юридической или медицинской консультацией.',
-      welcome:        `Здравствуйте! 👋 Я ассистент сайта "${SITE_NAME}". Я могу рассказать вам что есть на сайте и помогу с навигацией по контенту 🙂`,
+      welcome:        `Здравствуйте! <span class="icon-emoji icon-1f44b"></span> Я ассистент сайта "${SITE_NAME}". Я могу рассказать вам что есть на сайте и помогу с навигацией по контенту <span class="icon-emoji icon-1f642"></span>`,
       clearConfirm:   'Очистить историю?',
       cleared:        'История очищена. Чем могу помочь?',
       errorPrefix:    'Ошибка: ',
@@ -48,20 +48,20 @@
 
   const SUGGESTIONS = {
     de: [
-      { label: '📄 Alles für PDF',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
-      { label: '🏥 Arzt finden',    q: 'Wo finde ich einen Arzt in Hattingen?' },
-      { label: '🏠 Wohnung suchen', q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
-      { label: '💼 Arbeit finden',  q: 'Wo finde ich Jobangebote?' },
-      { label: '📰 Tagesschau',     q: 'Wo finde ich aktuelle Text-Nachrichten von der Tagesschau?' },
-      { label: '🎬 News-Videos',    q: 'Wo finde ich Video-Nachrichten der Tagesschau?' },
+      { label: '<span class="icon-emoji icon-1f4c4"></span> Alles für PDF',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
+      { label: '<span class="icon-emoji icon-1f3e5"></span> Arzt finden',    q: 'Wo finde ich einen Arzt in Hattingen?' },
+      { label: '<span class="icon-emoji icon-1f3e0"></span> Wohnung suchen', q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
+      { label: '<span class="icon-emoji icon-1f4bc"></span> Arbeit finden',  q: 'Wo finde ich Jobangebote?' },
+      { label: '<span class="icon-emoji icon-1f4f0"></span> Tagesschau',     q: 'Wo finde ich aktuelle Text-Nachrichten von der Tagesschau?' },
+      { label: '<span class="icon-emoji icon-1f3ac"></span> News-Videos',    q: 'Wo finde ich Video-Nachrichten der Tagesschau?' },
     ],
     ru: [
-      { label: '📄 Все для PDF',           q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
-      { label: '🏥 Найти врача',            q: 'Как найти русскоязычного врача в NRW?' },
-      { label: '🏠 Найти квартиру',         q: 'Где можно снять квартиру в Хаттингене?' },
-      { label: '💼 Найти работу',           q: 'Где найти вакансии?' },
-      { label: '📰 Новости текстом',        q: 'Где почитать текстовые новости из Германии?' },
-      { label: '🎬 Видео-новости — Миша Бур', q: 'Где посмотреть видео-новости Германии от Миши Бура?' },
+      { label: '<span class="icon-emoji icon-1f4c4"></span> Все для PDF',           q: 'Что я могу сделать с помощью PDF24 Tools? Мне нужно подготовить PDF для email.' },
+      { label: '<span class="icon-emoji icon-1f3e5"></span> Найти врача',            q: 'Как найти русскоязычного врача в NRW?' },
+      { label: '<span class="icon-emoji icon-1f3e0"></span> Найти квартиру',         q: 'Где можно снять квартиру в Хаттингене?' },
+      { label: '<span class="icon-emoji icon-1f4bc"></span> Найти работу',           q: 'Где найти вакансии?' },
+      { label: '<span class="icon-emoji icon-1f4f0"></span> Новости текстом',        q: 'Где почитать текстовые новости из Германии?' },
+      { label: '<span class="icon-emoji icon-1f3ac"></span> Видео-новости — Миша Бур', q: 'Где посмотреть видео-новости Германии от Миши Бура?' },
     ]
   };
 
@@ -80,7 +80,7 @@
     fab = document.createElement('button');
     fab.className = 'chat-fab pulse';
     fab.setAttribute('aria-label', t.fabAria);
-    fab.innerHTML = '💬';
+    fab.innerHTML = '<span class="icon-emoji icon-1f4ac"></span>';
     document.body.appendChild(fab);
 
     windowEl = document.createElement('div');
@@ -88,11 +88,13 @@
     windowEl.innerHTML = `
       <div class="chat-header">
         <div class="chat-header-title">
-          <span>🛸</span>
+          <span class="icon-emoji icon-1f6f8"></span>
           <span>${escapeHtml(t.headerTitle)}</span>
         </div>
         <div class="chat-header-actions">
-          <button class="chat-clear" aria-label="${escapeAttr(t.clearAria)}" title="${escapeAttr(t.clearAria)}">🗑</button>
+          <button class="chat-clear" aria-label="${escapeAttr(t.clearAria)}" title="${escapeAttr(t.clearAria)}">
+            <span class="icon-emoji icon-1f5d1"></span>
+          </button>
           <button class="chat-close" aria-label="${escapeAttr(t.closeAria)}">×</button>
         </div>
       </div>
@@ -136,12 +138,10 @@
     });
 
     inputEl.addEventListener('focus', () => {
-      // Пользователь тапнул в поле — сжимаем окно до 60vh
       windowEl.classList.add('compact');
       preventPageScrollOnFocus();
     });
     inputEl.addEventListener('blur', () => {
-      // Клавиатура скрылась — окно снова большое
       windowEl.classList.remove('compact');
       restorePageScroll();
     });
@@ -168,7 +168,6 @@
     pageScrollLocked = false;
   }
 
-  // Надёжное скрытие клавиатуры (iOS + Android)
   function dismissKeyboard() {
     if (inputEl) inputEl.blur();
     if (document.activeElement && typeof document.activeElement.blur === 'function') {
@@ -180,7 +179,6 @@
     fab.classList.add('hidden');
     fab.classList.remove('pulse');
     windowEl.classList.add('open');
-    // Клавиатура НЕ появляется автоматически — фокус НЕ выставляем
 
     if (messages.length === 0) {
       addMessage('assistant', t.welcome);
@@ -213,7 +211,7 @@
       rowItems.forEach((s) => {
         const btn = document.createElement('button');
         btn.className = 'chat-suggestion';
-        btn.textContent = s.label;
+        btn.innerHTML = s.label;
         btn.addEventListener('click', () => {
           if (isLoading) return;
           inputEl.value = s.q;
@@ -250,7 +248,9 @@
 
     while ((match = regex.exec(text)) !== null) {
       if (match.index > lastIndex) {
-        div.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+        const textSpan = document.createElement('span');
+        textSpan.innerHTML = text.slice(lastIndex, match.index);
+        div.appendChild(textSpan);
       }
       const kind   = match[1];
       const target = match[2].trim();
@@ -259,7 +259,7 @@
       if (kind === 'TAB') {
         const btn = document.createElement('button');
         btn.className = 'chat-tab-link';
-        btn.textContent = '👉 ' + label;
+        btn.innerHTML = `<span class="icon-emoji icon-1f449"></span> ${escapeHtml(label)}`;
         btn.addEventListener('click', () => openTab(target));
         div.appendChild(btn);
       } else if (kind === 'PAGE') {
@@ -268,7 +268,7 @@
         link.href = '/' + target.replace(/^\/+/, '');
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.textContent = '🔗 ' + label;
+        link.innerHTML = `<span class="icon-emoji icon-1f517"></span> ${escapeHtml(label)}`;
         div.appendChild(link);
       } else if (kind === 'URL') {
         if (/^https?:\/\//i.test(target)) {
@@ -277,7 +277,7 @@
           link.href = target;
           link.target = '_blank';
           link.rel = 'noopener noreferrer';
-          link.textContent = '🌐 ' + label;
+          link.innerHTML = `<span class="icon-emoji icon-1f310"></span> ${escapeHtml(label)}`;
           div.appendChild(link);
         } else {
           div.appendChild(document.createTextNode(label));
@@ -286,7 +286,9 @@
       lastIndex = regex.lastIndex;
     }
     if (lastIndex < text.length) {
-      div.appendChild(document.createTextNode(text.slice(lastIndex)));
+      const textSpan = document.createElement('span');
+      textSpan.innerHTML = text.slice(lastIndex);
+      div.appendChild(textSpan);
     }
     messagesEl.appendChild(div);
   }
@@ -356,7 +358,6 @@
     inputEl.style.height = 'auto';
     addMessage('user', text);
 
-    // Скрываем клавиатуру + расширяем окно (compact снимется через blur-listener)
     dismissKeyboard();
 
     setLoading(true);
@@ -388,7 +389,6 @@
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {
       setLoading(false);
-      // Финальная подстраховка после снятия disabled
       dismissKeyboard();
     }
   }

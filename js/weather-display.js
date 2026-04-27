@@ -1,5 +1,5 @@
 /* === weather-display.js — отображение погоды из sessionStorage === */
-/* === Только чтение, без запросов к API                          === */
+/* === С fallback: при пустом кэше делает запросы к /api/*       === */
 
 (function() {
     const isRu = document.documentElement.lang === 'ru';
@@ -134,34 +134,113 @@
         el.style.fontWeight = 'bold';
     }
 
-    // ── Чтение из sessionStorage и отрисовка ───────────────
-    try {
-        const weatherCached = sessionStorage.getItem('weatherData');
-        if (weatherCached) displayWeather(JSON.parse(weatherCached));
-
-        const aqiCached = sessionStorage.getItem('aqiData');
-        if (aqiCached) {
-            const { aqiIndex, components } = JSON.parse(aqiCached);
-            displayAQI(aqiIndex, components);
-        }
-
-        const magnetCached = sessionStorage.getItem('magnetData');
-        if (magnetCached) {
-            const { kp_index } = JSON.parse(magnetCached);
-            displayMagnet(kp_index);
-        }
-
-        // Курс EUR/UAH
-        const eurCached = sessionStorage.getItem('eurRate');
+    // ── Применить курс EUR ─────────────────────────────────
+    function displayEur(rate) {
         const eurEl = document.getElementById('eur-value');
-        if (eurCached && eurEl) {
-            eurEl.textContent = eurCached + ' ₴';
-        }
-    } catch (e) {
-        console.error('weather-display error:', e);
+        if (eurEl && rate) eurEl.textContent = rate + ' ₴';
     }
 
-    // ── UI: тогл меток (как в weather.js) ──────────────────
+    // ── Fallback-загрузчики (если в sessionStorage пусто) ──
+    async function fetchWeatherFallback() {
+        const city = localStorage.getItem('userCity') || 'Hattingen';
+        try {
+            const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}&lang=${isRu ? 'ru' : 'de'}`);
+            const d = await res.json();
+            if (!d.main) return null;
+            try { sessionStorage.setItem('weatherData', JSON.stringify(d)); } catch (e) {}
+            displayWeather(d);
+            return d;
+        } catch (e) {
+            console.error('weather-display fallback weather error:', e);
+            return null;
+        }
+    }
+
+    async function fetchAqiFallback(lat, lon) {
+        try {
+            const res = await fetch(`/api/air?lat=${lat}&lon=${lon}`);
+            const data = await res.json();
+            if (!data.list || !data.list[0]) return;
+            const aqiIndex   = data.list[0].main.aqi;
+            const components = data.list[0].components;
+            try { sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components })); } catch (e) {}
+            displayAQI(aqiIndex, components);
+        } catch (e) {
+            console.error('weather-display fallback aqi error:', e);
+        }
+    }
+
+    async function fetchEurFallback() {
+        try {
+            const res = await fetch('/api/eur-rate');
+            const data = await res.json();
+            const rate = data.rate?.toFixed(2);
+            if (rate) {
+                try { sessionStorage.setItem('eurRate', rate); } catch (e) {}
+                displayEur(rate);
+            }
+        } catch (e) {
+            console.error('weather-display fallback eur error:', e);
+        }
+    }
+
+    // ── Чтение из sessionStorage и отрисовка + fallback ────
+    (async function init() {
+        // 1. Погода
+        let weatherData = null;
+        try {
+            const cached = sessionStorage.getItem('weatherData');
+            if (cached) {
+                weatherData = JSON.parse(cached);
+                if (weatherData && weatherData.main) {
+                    displayWeather(weatherData);
+                } else {
+                    weatherData = null;
+                }
+            }
+        } catch (e) {}
+        if (!weatherData) {
+            weatherData = await fetchWeatherFallback();
+        }
+
+        // 2. Качество воздуха
+        let aqiCached = null;
+        try {
+            const raw = sessionStorage.getItem('aqiData');
+            if (raw) {
+                aqiCached = JSON.parse(raw);
+                if (aqiCached && typeof aqiCached.aqiIndex === 'number') {
+                    displayAQI(aqiCached.aqiIndex, aqiCached.components);
+                } else {
+                    aqiCached = null;
+                }
+            }
+        } catch (e) {}
+        if (!aqiCached && weatherData?.coord) {
+            await fetchAqiFallback(weatherData.coord.lat, weatherData.coord.lon);
+        }
+
+        // 3. Геомагнитка (только из кэша, без fallback)
+        try {
+            const magnetCached = sessionStorage.getItem('magnetData');
+            if (magnetCached) {
+                const { kp_index } = JSON.parse(magnetCached);
+                if (typeof kp_index === 'number') displayMagnet(kp_index);
+            }
+        } catch (e) {}
+
+        // 4. Курс EUR
+        let eurCached = null;
+        try {
+            eurCached = sessionStorage.getItem('eurRate');
+            if (eurCached) displayEur(eurCached);
+        } catch (e) {}
+        if (!eurCached) {
+            await fetchEurFallback();
+        }
+    })();
+
+    // ── UI: тогл меток ─────────────────────────────────────
     window.toggleLabel = function(element) {
         if (!element) return;
         const isShown = element.classList.contains('show-text');

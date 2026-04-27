@@ -1,6 +1,6 @@
 // js/chat.js — Floating chat widget for Digital & Mobil in Deutschland
 // Bilingual (DE/RU), reads page language from <html lang="..."> attribute
-// Supports streaming responses + anchor scrolling + SVG icon-emoji
+// Streaming responses with smooth typing animation (humanlike pace)
 
 (function () {
   'use strict';
@@ -76,6 +76,12 @@
 
   let savedScrollY = 0;
   let pageScrollLocked = false;
+
+  // === Typing animation tuning ===
+  // Lower TYPING_SPEED_MS = faster. Higher TYPING_BURST = more chars per tick.
+  // Defaults (12ms / 2 chars) ≈ ~167 chars/sec — comfortable reading pace.
+  const TYPING_SPEED_MS = 12;
+  const TYPING_BURST = 2;
 
   function createUI() {
     fab = document.createElement('button');
@@ -224,7 +230,6 @@
     });
   }
 
-  // Add message to history + render. Returns the rendered DOM element.
   function addMessage(role, content) {
     const msg = { role, content };
     messages.push(msg);
@@ -249,8 +254,7 @@
     return div;
   }
 
-  // Renders/updates the assistant message content. Used by both
-  // renderMessage() (one-shot) and the streaming loop (incremental).
+  // Renders/updates the assistant message content.
   // Supports markers: [TAB:id|text], [TAB:id#anchor|text], [PAGE:path|text], [URL:url|text].
   function renderAssistantContent(div, text) {
     div.innerHTML = '';
@@ -270,7 +274,6 @@
       const label  = match[3].trim();
 
       if (kind === 'TAB') {
-        // Support optional anchor: tabId#anchorId
         const [tabId, anchorId] = target.split('#');
         const btn = document.createElement('button');
         btn.className = 'chat-tab-link';
@@ -323,7 +326,6 @@
     }
 
     if (anchorId) {
-      // Wait two frames so showTab() finishes rendering before we measure positions
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           const anchor = document.getElementById(anchorId);
@@ -381,7 +383,9 @@
     windowEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
   }
 
-  // === Streaming send — text appears word by word ===
+  // === Streaming send with smoothed typing animation ===
+  // Groq sends the full reply very fast. We render it slowly via a typing
+  // loop so the user can read along comfortably (like ChatGPT/Claude UX).
   async function sendMessage() {
     const text = inputEl.value.trim();
     if (!text || isLoading) return;
@@ -395,10 +399,52 @@
     setLoading(true);
     showTyping();
 
-    // State that we need outside try/catch
     let assistantDiv = null;
-    let assistantBuffer = '';
     let assistantMsg = null;
+
+    // Typing-animation queue
+    let pendingText = '';   // full buffer received from API so far
+    let visibleText = '';   // what is currently rendered on screen
+    let typingTimer = null;
+    let streamingDone = false;
+
+    function startTypingLoop() {
+      if (typingTimer) return;
+      typingTimer = setInterval(() => {
+        if (visibleText.length >= pendingText.length) {
+          // Caught up. If stream is finished — stop the timer.
+          if (streamingDone) {
+            clearInterval(typingTimer);
+            typingTimer = null;
+          }
+          return;
+        }
+        const nextLen = Math.min(visibleText.length + TYPING_BURST, pendingText.length);
+        visibleText = pendingText.slice(0, nextLen);
+        renderAssistantContent(assistantDiv, visibleText);
+        scrollToBottom();
+      }, TYPING_SPEED_MS);
+    }
+
+    function stopTypingLoop() {
+      streamingDone = true;
+      // Don't clear immediately — let the loop drain remaining buffered chars
+    }
+
+    function waitForTypingFinish() {
+      return new Promise((resolve) => {
+        const check = setInterval(() => {
+          if (visibleText.length >= pendingText.length) {
+            clearInterval(check);
+            if (typingTimer) {
+              clearInterval(typingTimer);
+              typingTimer = null;
+            }
+            resolve();
+          }
+        }, 30);
+      });
+    }
 
     try {
       const recentMessages = messages.slice(-MAX_HISTORY);
@@ -415,13 +461,26 @@
 
       const contentType = response.headers.get('content-type') || '';
 
-      // === Non-streaming fallback ===
+      // === Non-streaming fallback (still animated for consistent UX) ===
       if (!contentType.includes('text/event-stream') || !response.body) {
         const data = await response.json();
         const reply = (data.reply || '').trim();
         hideTyping();
         if (!reply) throw new Error(t.emptyReply);
-        addMessage('assistant', reply);
+
+        assistantMsg = { role: 'assistant', content: '' };
+        messages.push(assistantMsg);
+        assistantDiv = document.createElement('div');
+        assistantDiv.className = 'chat-msg assistant';
+        messagesEl.appendChild(assistantDiv);
+
+        pendingText = reply;
+        startTypingLoop();
+        stopTypingLoop();
+        await waitForTypingFinish();
+
+        assistantMsg.content = reply;
+        saveHistory();
         return;
       }
 
@@ -433,6 +492,9 @@
       assistantDiv.className = 'chat-msg assistant';
       messagesEl.appendChild(assistantDiv);
 
+      // Start typing animation now — it consumes pendingText as it grows
+      startTypingLoop();
+
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
       let sseBuffer = '';
@@ -443,7 +505,7 @@
 
         sseBuffer += decoder.decode(value, { stream: true });
         const lines = sseBuffer.split('\n');
-        sseBuffer = lines.pop() || ''; // keep incomplete line for next chunk
+        sseBuffer = lines.pop() || '';
 
         for (const line of lines) {
           const trimmed = line.trim();
@@ -452,21 +514,22 @@
           if (payload === '[DONE]') continue;
           try {
             const json = JSON.parse(payload);
-            // Standard OpenAI/Groq streaming format: choices[0].delta.content
             const delta = json.choices?.[0]?.delta?.content;
             if (delta) {
-              assistantBuffer += delta;
-              renderAssistantContent(assistantDiv, assistantBuffer);
-              scrollToBottom();
+              pendingText += delta;
+              // Don't render directly — typing loop handles it
             }
           } catch (e) {
-            // Partial JSON or non-JSON line — ignore, will be processed next chunk
+            // Partial JSON — ignore, will be processed next chunk
           }
         }
       }
 
-      // Save final content
-      assistantMsg.content = assistantBuffer.trim();
+      // Stream finished. Tell typing loop it can stop after draining.
+      stopTypingLoop();
+      await waitForTypingFinish();
+
+      assistantMsg.content = pendingText.trim();
       if (!assistantMsg.content) {
         assistantDiv.remove();
         const idx = messages.indexOf(assistantMsg);
@@ -476,8 +539,11 @@
       saveHistory();
     } catch (err) {
       hideTyping();
-      // Remove streaming placeholder if it's empty (no text was streamed)
-      if (assistantDiv && !assistantBuffer) {
+      if (typingTimer) {
+        clearInterval(typingTimer);
+        typingTimer = null;
+      }
+      if (assistantDiv && !pendingText) {
         assistantDiv.remove();
         if (assistantMsg) {
           const idx = messages.indexOf(assistantMsg);

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Artem Finevych">
+    <meta name="copyright" content="© 2026 Artem Finevych">
+    <meta name="robots" content="index, follow">
+    <title>Ärzte aus Osteuropa in NRW</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/topbar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/icons.css">
+    <link rel="stylesheet" href="../css/chat.css">
+
+    <style>
+    .lang-btn { display: none !important; }
+        /* Arztkarte */
+        .doctor-card {
+            background: #f9f9ff;
+            border-left: 4px solid #000080;
+            border-radius: 10px;
+            padding: 13px 15px;
+            margin-bottom: 10px;
+        }
+        .doctor-card .city-badge {
+            display: inline-block;
+            background: #000080;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 20px;
+            padding: 2px 10px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .doctor-card .doctor-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        .doctor-card .spec-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #555;
+            background: #e8e8f8;
+            border-radius: 6px;
+            padding: 2px 8px;
+            margin-bottom: 6px;
+        }
+        .doctor-card .info-row {
+            font-size: 0.85rem;
+            color: #444;
+            margin: 3px 0;
+            line-height: 1.4;
+        }
+        .doctor-card .info-row a {
+            color: #000080;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .maps-btn {
+            display: inline-block;
+            margin-top: 7px;
+            background: #4CAF50;
+            color: #fff;
+            border-radius: 8px;
+            padding: 5px 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .maps-btn:hover { background: #388E3C; }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #000080;
+            margin: 18px 0 10px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #e0e0f0;
+        }
+
+        .feedback-form { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+        .feedback-form input, .feedback-form textarea {
+            width: 100%; box-sizing: border-box;
+            border: 1.5px solid #ccc; border-radius: 10px;
+            padding: 10px 13px; font-size: 0.9rem; font-family: inherit;
+            outline: none;
+        }
+        .feedback-form input:focus, .feedback-form textarea:focus { border-color: #000080; }
+        .feedback-form textarea { min-height: 100px; resize: vertical; }
+        .send-btn {
+            background: #000080; color: #fff;
+            border: none; border-radius: 10px;
+            padding: 12px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; font-family: inherit;
+        }
+        .send-btn:hover { background: #0000b3; }
+
+        .notice-box {
+            background: #e8f0ff;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #1a1a4e;
+            margin-top: 12px;
+        }
+        .disclaimer {
+            background: #fff8e1;
+            border-left: 4px solid #ffa000;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: #555;
+            margin-top: 14px;
+        }
+        .resource-link {
+            display: block;
+            background: #f0f0ff;
+            border: 1.5px solid #b0b8e8;
+            border-radius: 10px;
+            padding: 11px 14px;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #000080;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .resource-link:hover { background: #000080; color: #fff; }
+    </style>
+</head>
+<body>
+
+<app-header></app-header>
+<scroll-hint></scroll-hint>
+
+<nav class="navbar">
+    <div class="nav-scroll-viewport">
+        <div class="nav-rows-wrapper">
+
+            <div class="nav-row">
+                <button class="nav-btn active" onclick="showTab('home', event)"><span class="icon-emoji icon-1f3e0"></span> Startseite</button>
+                <button class="nav-btn" onclick="showTab('feedback', event)"><span class="icon-emoji icon-2709"></span> Arzt hinzufügen</button>
+                 <button class="nav-btn" onclick="showTab('lor', event)"><span class="icon-emoji icon-1f442"></span> HNO</button>
+                <button class="nav-btn" onclick="showTab('pediatr', event)"><span class="icon-emoji icon-1f476"></span> Kinderärzte</button>
+                <button class="nav-btn" onclick="showTab('stomatolog', event)"><span class="icon-emoji icon-1f9b7"></span> Zahnärzte</button>
+            </div>
+
+            <div class="nav-row">
+                <button class="nav-btn" onclick="showTab('nevrologiya', event)"><span class="icon-emoji icon-1f9e0"></span> Neurologen</button>
+                <button class="nav-btn" onclick="showTab('kardiolog', event)"><span class="icon-emoji icon-2764"></span> Kardiologen</button>
+                 <button class="nav-btn" onclick="showTab('ortoped', event)"><span class="icon-emoji icon-1f9b4"></span> Orthopäden</button>
+                <button class="nav-btn" onclick="showTab('dermatolog', event)"><span class="icon-emoji icon-1f52c"></span> Dermatologen</button>
+                 <button class="nav-btn" onclick="showTab('psiholog', event)"><span class="icon-emoji icon-1f4ac"></span> Psychotherapeuten</button>
+            </div>
+
+            <div class="nav-row">
+                <button class="nav-btn" onclick="showTab('okulist', event)"><span class="icon-emoji icon-1f441"></span> Augenärzte</button>
+                 <button class="nav-btn" onclick="showTab('terapevt', event)"><span class="icon-emoji icon-1fa7a"></span> Hausärzte</button>
+                <button class="nav-btn" onclick="showTab('urolog', event)"><span class="icon-emoji icon-1f535"></span> Urologen</button>
+                <button class="nav-btn" onclick="showTab('ginekolog', event)"><span class="icon-emoji icon-1f930"></span> Frauenärzte</button>
+                <button class="nav-btn" onclick="showTab('resursy', event)"><span class="icon-emoji icon-1f517"></span> Ressourcen</button>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+
+<section id="home" class="tab-content active">
+    <div class="card">
+
+        <div style="display:flex;justify-content:center;margin-top:8px;">
+            <a href="../index.html" class="text-link" style="color:#000080;margin:0 0 14px;text-decoration:none;font-size:0.9rem;font-weight:bold;">
+                ← Zurück zur Startseite
+            </a>
+        </div>
+
+        <div style="text-align:center;padding:7px 0 7px;">
+            <h1><span class="icon-emoji icon-1f3e9"></span></h1>
+            <h2 style="margin:6px 0 0;font-size:1.4rem;color:#1a1a2e;">
+                Ärzte aus Osteuropa in NRW
+            </h2>
+            <p style="font-size:0.82rem;color:#000080;margin:4px 0 0;">Hattingen · Bochum · Essen · Dortmund · Düsseldorf und Umgebung</p>
+        </div>
+
+        <div class="notice-box">
+            <span class="icon-emoji icon-1f1f7-1f1fa"></span><span class="icon-emoji icon-1f1fa-1f1e6"></span> Hier finden Sie Ärzte aus <strong>Osteuropa</strong> (hauptsächlich russisch- und ukrainischsprachig) in Nordrhein-Westfalen.
+            Die Liste ist nach Fachgebieten unterteilt. Wenn Sie weitere Ärzte kennen, die noch nicht in unserer Liste stehen, oder wenn Einträge veraltet sind —
+            schreiben Sie uns bitte über den Abschnitt <strong>„Arzt hinzufügen“</strong>.
+            Wir ergänzen die Liste, damit so viele Menschen wie möglich einen guten Spezialisten in ihrer Muttersprache finden können.
+        </div>
+
+        <div class="disclaimer">
+            <span class="icon-emoji icon-26a0"></span> <strong>Achtung:</strong> Die Daten können veralten. Bitte erkundigen Sie sich vor einem Besuch telefonisch, ob der Arzt neue Patienten aufnimmt und Ihre Versicherung (GKV/PKV) akzeptiert. Diese Liste basiert auf öffentlichen Quellen und stellt keine offizielle medizinische Empfehlung dar.
+        </div>
+
+        <div style="margin-top:16px;">
+            <p style="font-weight:700;color:#333;margin-bottom:8px;"><span class="icon-emoji icon-1f50e"></span> Schnellsuche für ganz Deutschland:</p>
+            <a href="https://www.jameda.de/ukraine/" target="_blank" rel="noopener" class="resource-link">
+                jameda.de — Suche nach Sprache (Russisch / Ukrainisch)
+            </a>
+            <a href="https://www.116117.de/de/russisch.php" target="_blank" rel="noopener" class="resource-link">
+                116117.de — Ärztlicher Bereitschaftsdienst (Russisch)
+            </a>
+            <a href="https://rusorg.de/c/7/9/" target="_blank" rel="noopener" class="resource-link">
+                rusorg.de — Katalog russischsprachiger Ärzte in NRW
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="terapevt" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1fa7a"></span> Hausärzte / Allgemeinmedizin</h2>
+        <p style="color:#555;margin-bottom:4px;">Allgemeinmediziner, die Russisch und/oder Ukrainisch sprechen</p>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. Andreas Bengel</div>
+            <div class="spec-badge">Hausarzt / Allgemeinmedizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Alte Bahnhofstr. 121–123, 44892 Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023429317200">0234 / 29 31 72</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Alte+Bahnhofstr.+121,+44892+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. W. Fomin</div>
+            <div class="spec-badge">Hausarzt / Allgemeinmedizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Castroper Hellweg 426, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023489080008">0234 / 890 80 08</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Castroper+Hellweg+426,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. Irina Spivak</div>
+            <div class="spec-badge">Hausarzt / Allgemeinmedizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Werner Hellweg 516, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0234265051">0234 / 265 051</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Werner+Hellweg+516,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Herne</div>
+        <div class="doctor-card">
+            <div class="city-badge">Herne</div>
+            <div class="doctor-name">Dr. med. Zerr</div>
+            <div class="spec-badge">Hausarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Koenigsstr. 27, Herne</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0232533134">02325 / 331 34</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Koenigsstr.+27,+Herne" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Herne</div>
+            <div class="doctor-name">Dr. med. V. Dridger</div>
+            <div class="spec-badge">Hausarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Unser-Fritz-Straße 156, Herne</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0232551226">02325 / 51226</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Unser-Fritz-Straße+156,+Herne" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Dr. med. Olga Kopylova</div>
+            <div class="spec-badge">Hausarzt / Allgemeinmedizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Freiheitstraße 2, 58119 Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0233442002">02334 / 420 02</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Freiheitstraße+2,+58119+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Dortmund</div>
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Dr. med. Eduard Torbin</div>
+            <div class="spec-badge">Hausarzt / Allgemeinmedizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Wittener Str. 3, 44149 Dortmund</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Wittener+Str.+3,+44149+Dortmund" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Svetlana Masson — Hausarztpraxis</div>
+            <div class="spec-badge">Fachärztin für Innere Medizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Hagener Str. 376, 44229 Dortmund</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Hagener+Str.+376,+44229+Dortmund" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Herzquartier — Hausarzt & Allgemeinmedizin</div>
+            <div class="spec-badge">Allgemeinmedizin / Innere Medizin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Düsseldorf (Zentrum) — Bitte telefonisch erfragen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://rusorg.de/c/7/469/" target="_blank">rusorg.de — Düsseldorf</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Düsseldorf+Arzt+russischsprachig" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="ginekolog" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f930"></span> Frauenärzte / Gynäkologie</h2>
+
+        <div class="section-title">Herne</div>
+        <div class="doctor-card">
+            <div class="city-badge">Herne</div>
+            <div class="doctor-name">Arztpraxis Ludmila Bagmanean</div>
+            <div class="spec-badge">Frauenarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Bahnhofstr. 7a, Herne</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0232312300">02323 / 12300</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Bahnhofstr.+7a,+Herne" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Julia Feldbusch</div>
+            <div class="spec-badge">Frauenarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Voerder Str. 22, 58135 Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0233144425">02331 / 44425</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Voerder+Str.+22,+58135+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Herten</div>
+        <div class="doctor-card">
+            <div class="city-badge">Herten</div>
+            <div class="doctor-name">Frauenarztpraxis Herten</div>
+            <div class="spec-badge">Frauenarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Bahnhofstr. 61, 45701 Herten-Westerholt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0209611811">0209 / 611811</a></div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://www.frauenarztpraxis-herten.de/" target="_blank">frauenarztpraxis-herten.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Bahnhofstr.+61,+45701+Herten-Westerholt" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Frauenarzt — Russischsprachige Praxis</div>
+            <div class="spec-badge">Frauenheilkunde & Geburtshilfe</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Westfalenstr. 26, 40472 Düsseldorf</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://rusorg.de/c/7/469/" target="_blank">Mehr Infos → rusorg.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Westfalenstr.+26,+40472+Düsseldorf" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Neuss (in der Nähe von Düsseldorf)</div>
+        <div class="doctor-card">
+            <div class="city-badge">Neuss</div>
+            <div class="doctor-name">Alexander Hecht</div>
+            <div class="spec-badge">Gynäkologe — spricht Russisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Neuss (Adresse bei Terminvereinbarung erfragen)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://www.jameda.de" target="_blank">Suche auf jameda.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Gynäkologe+Neuss+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="pediatr" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f476"></span> Kinderärzte / Pädiatrie</h2>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Arztpraxis Thomas Beck / Ärztin Marianna Bruckmann</div>
+            <div class="spec-badge">Kinderarzt — sprechen Russisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Marienstr. 2, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0232782524">02327 / 82524</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Marienstr.+2,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Snezhana Lozhenitsyna</div>
+            <div class="spec-badge">Kinder- und Jugendlichenpsychotherapeutin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Brenscheder Str. 41, 44799 Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023497337470">0234 / 973 374 70</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Brenscheder+Str.+41,+44799+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Dr. Tatiana Tregubova</div>
+            <div class="spec-badge">Kinderärztin (Pädiatrie)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Martinstraße 2, 58135 Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0233140937100">02331 / 40 93 71</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Martinstraße+2,+58135+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Dortmund</div>
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Gemeinschaftspraxis Marina Hubert & Stanislaus Dick</div>
+            <div class="spec-badge">Kinderärzte — sprechen Russisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Roßbachstr. 12, 44369 Dortmund</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Roßbachstr.+12,+44369+Dortmund" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Kinderarztpraxis (russischsprachig)</div>
+            <div class="spec-badge">Pädiatrie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Westfalenstr. 26, 40472 Düsseldorf</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://rusorg.de/c/7/469/" target="_blank">Mehr Infos → rusorg.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Westfalenstr.+26,+40472+Düsseldorf" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="stomatolog" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f9b7"></span> Zahnärzte</h2>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. med. Naum Kreitschmann</div>
+            <div class="spec-badge">Zahnarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Hernerstr. 335–343, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:02349554990">0234 / 955 49 90</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Hernerstr.+335,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. med. Lenz Ludmila</div>
+            <div class="spec-badge">Zahnarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Hernerstr. 289, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0234531628">0234 / 53 16 28</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Hernerstr.+289,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. Kamil Nugmanov</div>
+            <div class="spec-badge">Zahnarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Südring 8, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023413726">0234 / 13726</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Südring+8,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Zahnarzt Igor Miroschnik</div>
+            <div class="spec-badge">Zahnarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Werner Hellweg 477, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0234233514">0234 / 233 514</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Werner+Hellweg+477,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hattingen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hattingen</div>
+            <div class="doctor-name">Zahnarztpraxis Dr. Kratofiel</div>
+            <div class="spec-badge">Zahnarzt — spricht Russisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Kleine Weilstr. 27, Hattingen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0232452600">02324 / 526 00</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Kleine+Weilstr.+27,+Hattingen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Zahnarztpraxis Lilia Gitt</div>
+            <div class="spec-badge">Zahnarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Hagener Str. 8, 58099 Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0233163249000">02331 / 632 490</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Hagener+Str.+8,+58099+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Dortmund</div>
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Igor & Eduard Solotarevski</div>
+            <div class="spec-badge">Zahnarzt — Russischsprachige Praxis</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Rheinische Str. 36, 44137 Dortmund</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Rheinische+Str.+36,+44137+Dortmund" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Dr. med. dent. Irina Bertram-Weise</div>
+            <div class="spec-badge">Zahnarzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Börchemstr. 5, 40597 Düsseldorf</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Börchemstr.+5,+40597+Düsseldorf" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Dr. Jewgeni Ravik</div>
+            <div class="spec-badge">Zahnarzt / Implantologie — spricht Russisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Düsseldorf</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://rusorg.de/c/7/469/" target="_blank">Mehr Infos → rusorg.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Zahnarzt+Düsseldorf+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="nevrologiya" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f9e0"></span> Neurologen</h2>
+
+        <div class="section-title">Gelsenkirchen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Gelsenkirchen</div>
+            <div class="doctor-name">Dr. Spivak</div>
+            <div class="spec-badge">Neurologie / Psychiatrie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Mühlenstraße 5–9, Gelsenkirchen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:020945021200">0209 / 450 21 25</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Mühlenstraße+5,+Gelsenkirchen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Dortmund</div>
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Privatpraxis Dr. Pastushenko</div>
+            <div class="spec-badge">Neurologe & Psychotherapeut</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Dortmund (Adresse bei Terminvereinbarung erfragen)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://www.partner-inform.de/firm/aerzt/17//Dortmund" target="_blank">partner-inform.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Neurologe+Dortmund+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Dr. (UA) Efim Dats</div>
+            <div class="spec-badge">Neurologe — spricht Russisch und Ukrainisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> NEUROÄRZTE in Düsseldorf</div>
+            <div class="info-row"><span class="icon-emoji icon-2139"></span> Terminvergabe mit mehrmonatiger Wartezeit. Von Patienten empfohlen.</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Neurologe+Düsseldorf+Efim+Dats" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="kardiolog" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-2764"></span> Kardiologen</h2>
+
+        <div class="section-title">Gelsenkirchen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Gelsenkirchen</div>
+            <div class="doctor-name">Arztpraxis Felix Pres-Gurwitz</div>
+            <div class="spec-badge">Kardiologie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Springestr. 29, Gelsenkirchen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:020938627200">0209 / 386 27 27</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Springestr.+29,+Gelsenkirchen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Herzquartier Düsseldorf — Dr. Alexander Krapivsky</div>
+            <div class="spec-badge">Kardiologie — Russischsprachige Praxis</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Düsseldorf (Zentrum) — Adresse erfragen</div>
+            <div class="info-row"><span class="icon-emoji icon-2139"></span> Sprechzeiten montags und mittwochs</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://rusorg.de/c/7/469/" target="_blank">rusorg.de / Düsseldorf</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Herzquartier+Düsseldorf+Krapivsky" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Mülheim / Mönchengladbach</div>
+        <div class="doctor-card">
+            <div class="city-badge">Mülheim / Mönchengladbach</div>
+            <div class="doctor-name">Herzquartier — Dr. Alexander Krapivsky</div>
+            <div class="spec-badge">Kardiologie — praktiziert auch in Mülheim und Mönchengladbach</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://www.partner-inform.de/firm/5/17" target="_blank">partner-inform.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Kardiologie+Mülheim+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="lor" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f442"></span> HNO-Ärzte (Hals-Nasen-Ohren)</h2>
+
+        <div class="section-title">Gelsenkirchen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Gelsenkirchen</div>
+            <div class="doctor-name">Alexander Tarakanoff</div>
+            <div class="spec-badge">HNO-Arzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Kalthofstr. 8, Gelsenkirchen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0209772888">0209 / 772 888</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Kalthofstr.+8,+Gelsenkirchen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Dr. med. Slava Timtschenko</div>
+            <div class="spec-badge">HNO-Arzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Rathausstr. 18, Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0233124488">02331 / 244 88</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Rathausstr.+18,+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Dr. Andre Generalov</div>
+            <div class="spec-badge">HNO-Arzt</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Badstraße 4, 58095 Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0233124488">02331 / 244 88</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Badstraße+4,+58095+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">HNO-Arzt — Russischsprachiger Spezialist</div>
+            <div class="spec-badge">HNO — Mandelentzündung, Nasennebenhöhlenentzündung, Schnupfen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Düsseldorf (Adresse erfragen)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://duesseldorf24.ru/ru/firm/vraci-v-dusseldorfe/1-0.html" target="_blank">duesseldorf24.ru</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=HNO+Arzt+Düsseldorf+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="ortoped" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f9b4"></span> Orthopäden</h2>
+
+        <div class="section-title">Gelsenkirchen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Gelsenkirchen</div>
+            <div class="doctor-name">Arztpraxis Dr. Hubert</div>
+            <div class="spec-badge">Orthopädie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Burgstraße 4, Gelsenkirchen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:020955966">0209 / 559 66</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Burgstraße+4,+Gelsenkirchen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Fachärztin Olga Gorelik</div>
+            <div class="spec-badge">Orthopädie und Unfallchirurgie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Eppenhauser Str. 92, 58093 Hagen</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Eppenhauser+Str.+92,+58093+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Dortmund</div>
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Facharzt Georg J. Wojanowski</div>
+            <div class="spec-badge">Orthopädie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Beguinenstr. 6, 44388 Dortmund</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Beguinenstr.+6,+44388+Dortmund" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Essen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Essen</div>
+            <div class="doctor-name">Hanna Libera</div>
+            <div class="spec-badge">Spricht Russisch (Muttersprache: Polnisch)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Huyssenallee 5, 45128 Essen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0201232317">0201 / 232317</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Huyssenallee+5,+45128+Essen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="dermatolog" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f52c"></span> Hautärzte / Dermatologie</h2>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. Renata Checcucci</div>
+            <div class="spec-badge">Hautarzt (Dermatologie)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Hochstr. 14, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0232781728">02327 / 81728</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Hochstr.+14,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Essen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Essen</div>
+            <div class="doctor-name">Iraida Klundt</div>
+            <div class="spec-badge">Fachärztin für Hautkrankheiten</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Gelsenkirchener Str. 247, 45327 Essen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0201300998">0201 / 300998</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Gelsenkirchener+Str.+247,+45327+Essen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Hagen</div>
+        <div class="doctor-card">
+            <div class="city-badge">Hagen</div>
+            <div class="doctor-name">Oleksiy Lyakh</div>
+            <div class="spec-badge">Hautarzt — spricht Ukrainisch und Russisch</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Hohenzollernstraße 5, 58095 Hagen</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023313060414">02331 / 3060414</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Hohenzollernstraße+5,+58095+Hagen" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="okulist" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f441"></span> Augenärzte / Ophthalmologie</h2>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. med. Violetta Ulrich</div>
+            <div class="spec-badge">Augenarzt (Ophthalmologie)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Kurt-Schumacher-Platz 10, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023412488">0234 / 12488</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Kurt-Schumacher-Platz+10,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Dr. med. Susanne Frese</div>
+            <div class="spec-badge">Augenheilkunde</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Düsseldorf</div>
+            <div class="info-row"><span class="icon-emoji icon-2139"></span> Von russischsprachigen Patienten empfohlen</div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Augenarzt+Düsseldorf+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="urolog" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f535"></span> Urologen</h2>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Dr. Markus Graf</div>
+            <div class="spec-badge">Urologie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Busheyplatz 15, Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:0234701008">0234 / 701008</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Busheyplatz+15,+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Düsseldorf</div>
+        <div class="doctor-card">
+            <div class="city-badge">Düsseldorf</div>
+            <div class="doctor-name">Urologe — Russischsprachige Praxis</div>
+            <div class="spec-badge">Urologie</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://duesseldorf24.ru/ru/firm/vraci-v-dusseldorfe/1-0.html" target="_blank">duesseldorf24.ru — Düsseldorf</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Urologe+Düsseldorf+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+    </div>
+</section>
+
+<section id="psiholog" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f4ac"></span> Psychotherapeuten / Psychologen</h2>
+        <p style="color:#555;margin-bottom:4px;">Russischsprachige psychotherapeutische Hilfe in NRW</p>
+
+        <div class="section-title">Bochum</div>
+        <div class="doctor-card">
+            <div class="city-badge">Bochum</div>
+            <div class="doctor-name">Snezhana Lozhenitsyna</div>
+            <div class="spec-badge">Kinder- und Jugendlichenpsychotherapeutin</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Brenscheder Str. 41, 44799 Bochum</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4de"></span> <a href="tel:023497337470">0234 / 973 374 70</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Brenscheder+Str.+41,+44799+Bochum" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Dortmund</div>
+        <div class="doctor-card">
+            <div class="city-badge">Dortmund</div>
+            <div class="doctor-name">Privatpraxis Dr. Pastushenko</div>
+            <div class="spec-badge">Neurologe & Psychotherapeut</div>
+            <div class="info-row"><span class="icon-emoji icon-1f4cd"></span> Dortmund (Adresse bei Terminvereinbarung erfragen)</div>
+            <div class="info-row"><span class="icon-emoji icon-1f310"></span> <a href="https://www.partner-inform.de/firm/aerzt/17//Dortmund" target="_blank">partner-inform.de</a></div>
+            <a class="maps-btn" href="https://maps.google.com/?q=Psychotherapeut+Dortmund+russisch" target="_blank"><span class="icon-emoji icon-1f4cd"></span> Google Maps</a>
+        </div>
+
+        <div class="section-title">Nützliche Ressourcen</div>
+        <div class="notice-box" style="margin-top:0;">
+            <span class="icon-emoji icon-1f9e9"></span> Wenn Sie psychologische Unterstützung suchen, können Sie sich auch wenden an:<br><br>
+            <span class="icon-emoji icon-1f310"></span> <a href="https://www.jameda.de/ukraine/" target="_blank" style="color:#000080;font-weight:700;">jameda.de/ukraine</a> — Suche nach russisch-/ukrainischsprachigen Spezialisten<br>
+            <span class="icon-emoji icon-1f310"></span> <a href="https://rusorg.de/c/7/9/" target="_blank" style="color:#000080;font-weight:700;">rusorg.de</a> — Katalog NRW
+        </div>
+    </div>
+</section>
+
+<section id="resursy" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-1f517"></span> Nützliche Ressourcen zur Arztsuche</h2>
+        <p style="color:#555;margin-bottom:12px;">Online-Portale zur selbstständigen Suche nach russisch- und ukrainischsprachigen Ärzten in Deutschland:</p>
+
+        <a href="https://www.jameda.de/ukraine/" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1fa7a"></span> jameda.de/ukraine — Suche nach Sprache (Russisch / Ukrainisch)</a>
+        <a href="https://www.116117.de/de/russisch.php" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f6a8"></span> 116117.de — Bereitschaftsdienst auf Russisch (abends/Wochenende)</a>
+        <a href="https://rusorg.de/c/7/9/" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f4cb"></span> rusorg.de — Katalog der Ärzte in NRW</a>
+        <a href="https://rusorg.de/c/7/469/" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f4cb"></span> rusorg.de — Ärzte in Düsseldorf</a>
+        <a href="https://rusorg.de/c/7/212/" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f4cb"></span> rusorg.de — Ärzte in Dortmund</a>
+        <a href="https://spravo4nik.de/rus-vrachi/russkogovorjashhie-vrachi-nrvw-1/" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f4d6"></span> spravo4nik.de — Ärzteverzeichnis Bochum/Hattingen/Hagen</a>
+        <a href="https://www.partner-inform.de/firm/5/17" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f4f0"></span> partner-inform.de — Katalog russischsprachiger Ärzte in Deutschland</a>
+        <a href="https://uahelp.wiki/maps#d7a06fb6154c4b26b0937c25711fe64f" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f5fa"></span> uahelp.wiki — Karte russischsprachiger Ärzte in Deutschland</a>
+        <a href="https://www.arzt-russisch.de" target="_blank" rel="noopener" class="resource-link"><span class="icon-emoji icon-1f50d"></span> arzt-russisch.de — Arztsuche (Russisch/Ukrainisch)</a>
+
+        <div class="notice-box" style="margin-top:16px;">
+            <span class="icon-emoji icon-1f4a1"></span> <strong>Tipp:</strong> Auf jameda.de können Sie Fachgebiet, Stadt und Sprache (Russisch / Ukrainisch) auswählen – sehr praktisch für die Suche nach einem bestimmten Spezialisten in Ihrer Nähe.
+        </div>
+    </div>
+</section>
+
+<section id="feedback" class="tab-content">
+    <div class="card">
+        <h2><span class="icon-emoji icon-2709"></span> Arzt hinzufügen</h2>
+        <p style="color:#444;line-height:1.6;margin-bottom:16px;">
+            Kennen Sie einen Arzt aus Osteuropa, der noch nicht in unserer Liste steht? Oder ist ein Arzt aus unserer Liste nicht mehr verfügbar? Schreiben Sie uns (am besten mit Google Maps-Link) – wir fügen ihn hinzu oder entfernen veraltete Einträge! <span class="icon-emoji icon-1f64f"></span>
+        </p>
+        <a href="mailto:hattingen325@gmail.com?subject=Neuer Arzt für die NRW-Liste&body=Name des Arztes / Praxis:%0D%0A%0D%0AStadt:%0D%0A%0D%0AFachrichtung:%0D%0A%0D%0AAdresse:%0D%0A%0D%0ATelefon:%0D%0A%0D%0AGoogle Maps Link:%0D%0A%0D%0AZusätzlich:"
+   class="btn-main"
+   style="text-decoration:none;display:block;text-align:center;">
+    <span class="icon-emoji icon-1f4e9"></span> Uns schreiben
+        </a>
+        <p style="font-size:0.82rem;color:#777;text-align:center;margin-top:10px;">
+            hattingen325@gmail.com
+        </p>
+    </div>
+</section>
+
+</main>
+
+<button class="scroll-top-btn" touch-action="none">↑</button>
+<script src="../js/components.js"></script>
+<script src="../js/tabs.js"></script>
+<script src="../js/clock.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/chat.js" defer></script>
+
+</body>
+</html>

@@ -183,14 +183,24 @@
   }
 
   function openChat() {
-    fab.classList.add('hidden');
-    fab.classList.remove('pulse');
-    windowEl.classList.add('open');
+  fab.classList.add('hidden');
+  fab.classList.remove('pulse');
+  windowEl.classList.add('open');
 
-    if (messages.length === 0) {
-      addMessage('assistant', t.welcome);
-    }
+  if (messages.length === 0) {
+    addMessage('assistant', t.welcome);
+  } else {
+    // Always show the latest messages first when reopening chat.
+    // Two frames to ensure the window is rendered (display: none → flex)
+    // before we measure scrollHeight.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      });
+    });
   }
+}
+
 
   function closeChat() {
     windowEl.classList.remove('open');

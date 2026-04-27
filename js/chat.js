@@ -1,5 +1,6 @@
 // js/chat.js — Floating chat widget for Digital & Mobil in Deutschland
 // Bilingual (DE/RU), reads page language from <html lang="..."> attribute
+// Supports streaming responses + anchor scrolling + SVG icon-emoji
 
 (function () {
   'use strict';
@@ -49,7 +50,7 @@
   const SUGGESTIONS = {
     de: [
       { label: '<span class="icon-emoji icon-1f4c4"></span> Alles für PDF',   q: 'Was kann ich mit PDF24 Tools machen? Ich möchte eine PDF für E-Mail vorbereiten.' },
-      { label: '<span class="icon-emoji icon-1f3e5"></span> Arzt finden',    q: 'Wo finde ich einen Arzt in Hattingen?' },
+      { label: '<span class="icon-emoji icon-1f3e5"></span> Arzt finden',    q: 'Wo finde ich einen Arzt aus Osteuropa in NRW?' },
       { label: '<span class="icon-emoji icon-1f3e0"></span> Wohnung suchen', q: 'Wo kann ich eine Wohnung in Hattingen mieten?' },
       { label: '<span class="icon-emoji icon-1f4bc"></span> Arbeit finden',  q: 'Wo finde ich Jobangebote?' },
       { label: '<span class="icon-emoji icon-1f4f0"></span> Tagesschau',     q: 'Wo finde ich aktuelle Text-Nachrichten von der Tagesschau?' },
@@ -223,12 +224,14 @@
     });
   }
 
+  // Add message to history + render. Returns the rendered DOM element.
   function addMessage(role, content) {
     const msg = { role, content };
     messages.push(msg);
-    renderMessage(msg);
+    const div = renderMessage(msg);
     saveHistory();
     scrollToBottom();
+    return div;
   }
 
   function renderMessage(msg) {
@@ -238,10 +241,20 @@
     if (msg.role !== 'assistant') {
       div.textContent = msg.content;
       messagesEl.appendChild(div);
-      return;
+      return div;
     }
 
-    const text = msg.content;
+    renderAssistantContent(div, msg.content);
+    messagesEl.appendChild(div);
+    return div;
+  }
+
+  // Renders/updates the assistant message content. Used by both
+  // renderMessage() (one-shot) and the streaming loop (incremental).
+  // Supports markers: [TAB:id|text], [TAB:id#anchor|text], [PAGE:path|text], [URL:url|text].
+  function renderAssistantContent(div, text) {
+    div.innerHTML = '';
+
     const regex = /\[(TAB|PAGE|URL):([^\]|]+)\|([^\]]+)\]/g;
     let lastIndex = 0;
     let match;
@@ -257,10 +270,12 @@
       const label  = match[3].trim();
 
       if (kind === 'TAB') {
+        // Support optional anchor: tabId#anchorId
+        const [tabId, anchorId] = target.split('#');
         const btn = document.createElement('button');
         btn.className = 'chat-tab-link';
         btn.innerHTML = `<span class="icon-emoji icon-1f449"></span> ${escapeHtml(label)}`;
-        btn.addEventListener('click', () => openTab(target));
+        btn.addEventListener('click', () => openTab(tabId, anchorId));
         div.appendChild(btn);
       } else if (kind === 'PAGE') {
         const link = document.createElement('a');
@@ -290,11 +305,11 @@
       textSpan.innerHTML = text.slice(lastIndex);
       div.appendChild(textSpan);
     }
-    messagesEl.appendChild(div);
   }
 
-  function openTab(tabId) {
+  function openTab(tabId, anchorId) {
     closeChat();
+
     if (typeof window.showTab === 'function') {
       window.showTab(tabId);
     } else {
@@ -306,13 +321,29 @@
         return;
       }
     }
-    requestAnimationFrame(() => {
-      const opts = { top: 0, behavior: 'smooth' };
-      window.scrollTo(opts);
-      document.documentElement.scrollTo(opts);
-      document.body.scrollTo(opts);
-      document.querySelector('main.container')?.scrollTo(opts);
-    });
+
+    if (anchorId) {
+      // Wait two frames so showTab() finishes rendering before we measure positions
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const anchor = document.getElementById(anchorId);
+          if (anchor) {
+            anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            console.warn('chat.js: anchor #' + anchorId + ' not found, scrolling to top');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+    } else {
+      requestAnimationFrame(() => {
+        const opts = { top: 0, behavior: 'smooth' };
+        window.scrollTo(opts);
+        document.documentElement.scrollTo(opts);
+        document.body.scrollTo(opts);
+        document.querySelector('main.container')?.scrollTo(opts);
+      });
+    }
   }
 
   function showError(text) {
@@ -350,6 +381,7 @@
     windowEl.querySelectorAll('.chat-suggestion').forEach(b => b.disabled = loading);
   }
 
+  // === Streaming send — text appears word by word ===
   async function sendMessage() {
     const text = inputEl.value.trim();
     if (!text || isLoading) return;
@@ -363,28 +395,95 @@
     setLoading(true);
     showTyping();
 
+    // State that we need outside try/catch
+    let assistantDiv = null;
+    let assistantBuffer = '';
+    let assistantMsg = null;
+
     try {
       const recentMessages = messages.slice(-MAX_HISTORY);
       const response = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: recentMessages, lang: PAGE_LANG }),
+        body: JSON.stringify({ messages: recentMessages, lang: PAGE_LANG, stream: true }),
       });
-
-      hideTyping();
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
         throw new Error(errData.error || `HTTP ${response.status}`);
       }
 
-      const data = await response.json();
-      const reply = (data.reply || '').trim();
-      if (!reply) throw new Error(t.emptyReply);
+      const contentType = response.headers.get('content-type') || '';
 
-      addMessage('assistant', reply);
+      // === Non-streaming fallback ===
+      if (!contentType.includes('text/event-stream') || !response.body) {
+        const data = await response.json();
+        const reply = (data.reply || '').trim();
+        hideTyping();
+        if (!reply) throw new Error(t.emptyReply);
+        addMessage('assistant', reply);
+        return;
+      }
+
+      // === Streaming path ===
+      hideTyping();
+      assistantMsg = { role: 'assistant', content: '' };
+      messages.push(assistantMsg);
+      assistantDiv = document.createElement('div');
+      assistantDiv.className = 'chat-msg assistant';
+      messagesEl.appendChild(assistantDiv);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let sseBuffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        sseBuffer += decoder.decode(value, { stream: true });
+        const lines = sseBuffer.split('\n');
+        sseBuffer = lines.pop() || ''; // keep incomplete line for next chunk
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith('data:')) continue;
+          const payload = trimmed.slice(5).trim();
+          if (payload === '[DONE]') continue;
+          try {
+            const json = JSON.parse(payload);
+            // Standard OpenAI/Groq streaming format: choices[0].delta.content
+            const delta = json.choices?.[0]?.delta?.content;
+            if (delta) {
+              assistantBuffer += delta;
+              renderAssistantContent(assistantDiv, assistantBuffer);
+              scrollToBottom();
+            }
+          } catch (e) {
+            // Partial JSON or non-JSON line — ignore, will be processed next chunk
+          }
+        }
+      }
+
+      // Save final content
+      assistantMsg.content = assistantBuffer.trim();
+      if (!assistantMsg.content) {
+        assistantDiv.remove();
+        const idx = messages.indexOf(assistantMsg);
+        if (idx !== -1) messages.splice(idx, 1);
+        throw new Error(t.emptyReply);
+      }
+      saveHistory();
     } catch (err) {
       hideTyping();
+      // Remove streaming placeholder if it's empty (no text was streamed)
+      if (assistantDiv && !assistantBuffer) {
+        assistantDiv.remove();
+        if (assistantMsg) {
+          const idx = messages.indexOf(assistantMsg);
+          if (idx !== -1) messages.splice(idx, 1);
+        }
+      }
       console.error('Chat error:', err);
       showError(t.errorPrefix + err.message + t.errorRetry);
     } finally {

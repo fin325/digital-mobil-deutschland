@@ -452,7 +452,7 @@
   .chat-window {
     width: 440px;
     max-width: 440px;
-    height: 75vh;
+    height: 73vh;
     max-height: 720px;
     min-height: 500px;
     top: 30px;
@@ -461,7 +461,7 @@
 
   /* На PC/TV нет программной клавиатуры — компактный режим не нужен */
   .chat-window.open.compact {
-    height: 75vh;
+    height: 73vh;
     max-height: 720px;
   }
 

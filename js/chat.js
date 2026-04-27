@@ -80,8 +80,8 @@
   // === Typing animation tuning ===
   // Lower TYPING_SPEED_MS = faster. Higher TYPING_BURST = more chars per tick.
   // Defaults (12ms / 2 chars) ≈ ~167 chars/sec — comfortable reading pace.
-  const TYPING_SPEED_MS = 12;
-  const TYPING_BURST = 2;
+  const TYPING_SPEED_MS = 20;
+  const TYPING_BURST = 1;
 
   function createUI() {
     fab = document.createElement('button');

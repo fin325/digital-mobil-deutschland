@@ -38,25 +38,28 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
 
       onAccept: function () {
-        // 1) Ставим собственный флаг согласия для Storage Guard
-        try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {}
+    // 1) Ставим собственный флаг согласия для Storage Guard
+    try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {}
 
-        // 2) Загружаем новости
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', loadNews, { once: true });
-        } else {
-          loadNews();
-        }
+    // 2) Загружаем новости
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadNews, { once: true });
+    } else {
+      loadNews();
+    }
 
-        // 3) Перерисовываем виджеты — теперь setItem() уже разрешён,
-        //    и кэш заполнится свежими данными
-        if (typeof window.getWeather === 'function') {
-          try { window.getWeather(); } catch (e) {}
-        }
-        if (typeof window.getGeomagneticActivity === 'function') {
-          try { window.getGeomagneticActivity(); } catch (e) {}
-        }
-      },
+    // 3) Перерисовываем виджеты — теперь setItem() уже разрешён,
+    //    и кэш заполнится свежими данными
+    if (typeof window.getWeather === 'function') {
+      try { window.getWeather(); } catch (e) {}
+    }
+    if (typeof window.getGeomagneticActivity === 'function') {
+      try { window.getGeomagneticActivity(); } catch (e) {}
+    }
+    if (typeof window.loadEurRate === 'function') {
+      try { window.loadEurRate(); } catch (e) {}
+    }
+},
 
       onReject: function () {
         // 1) Снимаем флаг согласия

@@ -19,10 +19,12 @@
         const rate = data.rate?.toFixed(2);
         if (rate) {
             el.textContent = rate + ' ₴';
-            // Сохраняем для других вкладок в рамках сессии
-            try {
-                sessionStorage.setItem('eurRate', rate);
-            } catch (e) {}
+            // Сохраняем для других вкладок в рамках сессии — только при согласии
+            if (window.canSaveToStorage && window.canSaveToStorage()) {
+                try {
+                    sessionStorage.setItem('eurRate', rate);
+                } catch (e) {}
+            }
         }
     } catch (e) {
         el.textContent = '—';

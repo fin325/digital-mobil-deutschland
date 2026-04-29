@@ -92,7 +92,10 @@ function applyWeatherData(d) {
 
         if (currentCity !== city) {
             currentCity = city;
-            localStorage.setItem('userCity', city);
+            // Сохраняем выбранный город — только при согласии
+            if (window.canSaveToStorage && window.canSaveToStorage()) {
+                try { localStorage.setItem('userCity', city); } catch (e) {}
+            }
         }
 
         // Иконка погоды
@@ -111,7 +114,10 @@ function applyWeatherData(d) {
                 const newCity = prompt(weatherMessages.cityPrompt, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
-                    localStorage.setItem('userCity', currentCity);
+                    // Сохраняем выбранный город — только при согласии
+                    if (window.canSaveToStorage && window.canSaveToStorage()) {
+                        try { localStorage.setItem('userCity', currentCity); } catch (e) {}
+                    }
                     // Чистим sessionStorage при смене города
                     sessionStorage.removeItem('weatherData');
                     sessionStorage.removeItem('aqiData');

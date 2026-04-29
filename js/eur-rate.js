@@ -1,6 +1,6 @@
 /* === eur-rate.js — Курс EUR/UAH через прокси с sessionStorage === */
 
-(async function loadEurRate() {
+async function loadEurRate() {
     const el = document.getElementById('eur-value');
     if (!el) return;
 
@@ -29,4 +29,10 @@
     } catch (e) {
         el.textContent = '—';
     }
-})();
+}
+
+// Экспорт в глобал — чтобы cookie-consent.js мог перезапустить запрос после согласия
+window.loadEurRate = loadEurRate;
+
+// Start
+loadEurRate();

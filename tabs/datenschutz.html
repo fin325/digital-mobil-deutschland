@@ -67,22 +67,39 @@
     Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://vercel.com/legal/privacy-policy</a>
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">4. Cookies &amp; Einwilligungsverwaltung (Cookie-Banner)</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">4. Cookies, Local Storage &amp; Einwilligungsverwaltung (Cookie-Banner)</h3>
 <p style="margin-bottom: 14px;">
-    Diese Website verwendet Cookies. Cookies sind kleine Textdateien, die vom Browser auf dem Endgerät des Nutzers gespeichert werden.
+    Diese Website verwendet keine klassischen HTTP-Cookies, sondern ausschließlich den <em>Local Storage</em> und <em>Session Storage</em> Ihres Browsers zur lokalen Speicherung technischer Daten. Beide Speicher unterliegen denselben rechtlichen Anforderungen wie Cookies (§ 25 TDDDG).
 </p>
-<p style="margin-bottom: 6px;"><strong>a) Notwendig</strong></p>
+<p style="margin-bottom: 6px;"><strong>a) Notwendig (immer aktiv)</strong></p>
 <p style="margin-bottom: 14px;">
-    Bestimmte Cookies sind erforderlich, damit die Website korrekt funktioniert (z.&nbsp;B. zur Speicherung Ihrer Cookie-Einstellungen im Local Storage sowie der von Ihnen gewählten Stadt für die Wetteranzeige).
-    Diese Cookies können nicht deaktiviert werden.
-    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO, § 25 Abs. 2 Nr. 2 TDDDG.
+    Folgende Daten werden technisch zwingend benötigt und unterliegen keiner Einwilligungspflicht:
 </p>
-<p style="margin-bottom: 6px;"><strong>b) Funktional</strong></p>
+<p style="margin-bottom: 6px;">• Cookie-Einwilligungseinstellungen des Silktide Consent Managers (Local Storage, z.&nbsp;B. <code>silktideCookieChoice_functional</code>)</p>
+<p style="margin-bottom: 6px;">• Eigener Einwilligungs-Status (Local Storage, Schlüssel <code>cookieConsent</code> mit Wert <code>accepted</code> oder <code>rejected</code>) — dient als sog. „Storage Guard", der entscheidet, ob funktionale Daten lokal gespeichert werden dürfen.</p>
+<p style="margin-bottom: 14px;">• Verlauf des KI-Chats während der laufenden Browser-Sitzung (Session Storage, Schlüssel <code>dmd_chat_history</code>) — siehe Abschnitt 14. Wird beim Schließen des Browser-Tabs automatisch gelöscht.</p>
 <p style="margin-bottom: 14px;">
-    Mit Ihrer Einwilligung werden Funktionen aktiviert, die das Laden externer Daten erfordern (z.&nbsp;B. Nachrichten über rss2json — siehe Abschnitt 10).
-    Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO, § 25 Abs. 2 Nr. 2 TDDDG (technisch notwendig zur Bereitstellung der vom Nutzer ausdrücklich gewünschten Funktion).
 </p>
-<p style="margin-bottom: 6px;"><strong>c) Externe Medien</strong></p>
+
+<p style="margin-bottom: 6px;"><strong>b) Funktional (mit Einwilligung)</strong></p>
+<p style="margin-bottom: 14px;">
+    Mit Ihrer Einwilligung („Funktional" oder „Alle akzeptieren" im Banner) werden folgende Daten lokal gespeichert, um wiederholte Serveranfragen während Ihres Besuchs zu vermeiden:
+</p>
+<p style="margin-bottom: 6px;">• Wetterdaten für Hattingen oder die von Ihnen gewählte Stadt (Session Storage, <code>weatherData</code>)</p>
+<p style="margin-bottom: 6px;">• Luftqualitätsdaten / AQI (Session Storage, <code>aqiData</code>)</p>
+<p style="margin-bottom: 6px;">• Geomagnetische Aktivität / Kp-Index (Session Storage, <code>magnetData</code>)</p>
+<p style="margin-bottom: 6px;">• Wechselkurs EUR/UAH (Session Storage, <code>eurRate</code>)</p>
+<p style="margin-bottom: 6px;">• Die von Ihnen zuletzt manuell ausgewählte Stadt für die Wetteranzeige (Local Storage, <code>userCity</code>)</p>
+<p style="margin-bottom: 14px;">• Laden von Nachrichten über rss2json (siehe Abschnitt 10) — IP-Übermittlung an Drittanbieter.</p>
+<p style="margin-bottom: 14px;">
+    <strong>Ohne Ihre Einwilligung werden diese Daten nicht im Speicher Ihres Browsers abgelegt.</strong> Die Inhalte (Wetter, Kurs etc.) werden zwar in der laufenden Sitzung angezeigt, aber nicht zwischengespeichert. Beim Wechsel zwischen Unterseiten werden die Daten erneut über unsere serverseitigen Proxies abgerufen.
+</p>
+<p style="margin-bottom: 14px;">
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG (Einwilligung).
+</p>
+
+<p style="margin-bottom: 6px;"><strong>c) Externe Medien (mit Einwilligung)</strong></p>
 <p style="margin-bottom: 14px;">
     Mit Ihrer Einwilligung werden eingebettete externe Inhalte und Tools geladen (YouTube-Videos, PDF-Kompressor, Foto-zu-PDF — siehe Abschnitte 5, 11, 12 und 13).
     Diese Dienste können eigene Cookies setzen.
@@ -91,8 +108,8 @@
 
 <p style="margin-bottom: 14px;">
     <strong>Cookie-Banner:</strong> Wir verwenden den <em>Silktide Consent Manager</em> zur Einwilligungsverwaltung.
-    Ihre Cookie-Einstellungen werden im Local Storage Ihres Browsers gespeichert.
-    Sie können Ihre Einwilligung jederzeit über das Cookie-Symbol (unten links) widerrufen oder ändern.
+    Ihre Einwilligungseinstellungen werden im Local Storage Ihres Browsers gespeichert.
+    Sie können Ihre Einwilligung jederzeit über das Cookie-Symbol (unten links) widerrufen oder ändern. Beim Widerruf werden bereits gespeicherte funktionale Daten aus dem Session Storage automatisch entfernt.
 </p>
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">5. YouTube (erweiterter Datenschutzmodus)</h3>
@@ -123,8 +140,10 @@
     Der Nutzer selbst bleibt für OpenWeatherMap anonym.
 </p>
 <p style="margin-bottom: 14px;">
-    Zur Verringerung von API-Anfragen werden die Ergebnisse serverseitig für ca. 10 Minuten zwischengespeichert (Server-Cache). Zusätzlich werden die Daten innerhalb derselben Browser-Sitzung im Session Storage des Nutzers vorgehalten, um wiederholte Serveranfragen während des Besuchs der Website zu vermeiden.
-    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Wetterdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
+    Zur Verringerung von API-Anfragen werden die Ergebnisse serverseitig für ca. 10 Minuten zwischengespeichert (Server-Cache). Eine zusätzliche Zwischenspeicherung im Session Storage Ihres Browsers (Schlüssel <code>weatherData</code>) erfolgt <strong>nur nach Ihrer Einwilligung</strong> in der Cookie-Kategorie „Funktional" (siehe Abschnitt 4b). Ohne Einwilligung werden die Daten in der Sitzung lediglich angezeigt, aber nicht im Browser zwischengespeichert.
+</p>
+<p style="margin-bottom: 14px;">
+    Rechtsgrundlage für den serverseitigen Abruf: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Wetterdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte). Rechtsgrundlage für die lokale Zwischenspeicherung: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
 <p style="margin-bottom: 14px;">
     Datenschutzerklärung von OpenWeatherMap: <a href="https://openweathermap.org/privacy-policy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">https://openweathermap.org/privacy-policy</a>
@@ -135,7 +154,7 @@
     Ergänzend zu den Wetterdaten rufen wir über die OpenWeatherMap Air Pollution API den aktuellen Luftqualitätsindex (AQI) ab.
     Auch diese Abfrage erfolgt <strong>ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/air</code>).
     An OpenWeatherMap werden lediglich die Koordinaten des gewählten Ortes sowie die IP-Adresse unseres Server-Proxys übertragen; die IP-Adresse des Nutzers wird nicht weitergegeben.
-    Es gelten im Übrigen die gleichen Angaben wie unter Abschnitt 6.
+    Eine zusätzliche Zwischenspeicherung im Session Storage Ihres Browsers (Schlüssel <code>aqiData</code>) erfolgt nur nach Ihrer Einwilligung. Es gelten im Übrigen die gleichen Angaben wie unter Abschnitt 6.
 </p>
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">8. Geomagnetische Aktivität — NOAA SWPC (Server-Proxy)</h3>
@@ -146,7 +165,7 @@
 <p style="margin-bottom: 14px;">
     <strong>Die Abfrage erfolgt ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/magnet</code>).
     An die NOAA wird lediglich die IP-Adresse unseres Server-Proxys übertragen; eine direkte Verbindung zwischen dem Browser des Nutzers und Servern der NOAA (USA) findet nicht statt.
-    Zur Verringerung von Anfragen werden die Ergebnisse serverseitig für ca. 30 Minuten zwischengespeichert.
+    Zur Verringerung von Anfragen werden die Ergebnisse serverseitig für ca. 30 Minuten zwischengespeichert. Eine zusätzliche Zwischenspeicherung im Session Storage Ihres Browsers (Schlüssel <code>magnetData</code>) erfolgt nur nach Ihrer Einwilligung in der Cookie-Kategorie „Funktional".
     Es handelt sich um eine öffentlich zugängliche Behörden-API ohne Authentifizierung oder kommerzielle Nutzung.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung nützlicher Umweltdaten ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
 </p>
@@ -159,7 +178,7 @@
 <p style="margin-bottom: 14px;">
     <strong>Die Abfrage erfolgt ausschließlich serverseitig</strong> über unseren eigenen Proxy-Endpoint (Vercel Serverless Function <code>/api/eur-rate</code>).
     An die NBU wird lediglich die IP-Adresse unseres Server-Proxys übertragen; eine direkte Verbindung zwischen dem Browser des Nutzers und Servern der NBU findet nicht statt.
-    Zur Verringerung von Anfragen werden die Ergebnisse serverseitig für ca. 3 Stunden zwischengespeichert.
+    Zur Verringerung von Anfragen werden die Ergebnisse serverseitig für ca. 3 Stunden zwischengespeichert. Eine zusätzliche Zwischenspeicherung im Session Storage Ihres Browsers (Schlüssel <code>eurRate</code>) erfolgt nur nach Ihrer Einwilligung in der Cookie-Kategorie „Funktional".
     Es handelt sich um eine öffentlich zugängliche Behörden-API ohne Authentifizierung oder kommerzielle Nutzung.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bereitstellung aktueller Wechselkursinformationen ohne Übermittlung von Nutzer-IP-Adressen an Dritte).
 </p>
@@ -171,7 +190,7 @@
 </p>
 <p style="margin-bottom: 14px;">
     Beim Abruf wird die IP-Adresse des Nutzers an den Server von rss2json übertragen.
-    Dieses Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Statistik") oder durch manuelles Klicken auf „Nachrichten laden".
+    Dieses Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Funktional") oder durch manuelles Klicken auf „Nachrichten laden".
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
 <p style="margin-bottom: 14px;">
@@ -186,7 +205,7 @@
     URL: <a href="https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; word-break: break-all;">https://photo-to-pdf-converter-efhy6yri2rkf4g5wnhbwqm.streamlit.app</a>
 </p>
 <p style="margin-bottom: 14px;">
-    Das Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Werbung &amp; externe Inhalte") oder durch manuelles Klicken auf „Converter laden". Ohne Ihre Einwilligung findet keine Verbindung zu Streamlit statt.
+    Das Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Externe Medien") oder durch manuelles Klicken auf „Converter laden". Ohne Ihre Einwilligung findet keine Verbindung zu Streamlit statt.
 </p>
 <p style="margin-bottom: 14px;">
     Beim Laden des iframes werden IP-Adresse, Browser- und Geräteinformationen an Streamlit/Snowflake in den USA übertragen.
@@ -207,7 +226,7 @@
 
 <p style="margin-bottom: 14px;">
     <strong>a) Laden des iframes</strong><br>
-    Das Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Werbung &amp; externe Inhalte") oder durch manuelles Klicken auf „PDF-Kompressor laden". Ohne Ihre Einwilligung findet keine Verbindung zu Render statt.
+    Das Laden erfolgt erst nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Externe Medien") oder durch manuelles Klicken auf „PDF-Kompressor laden". Ohne Ihre Einwilligung findet keine Verbindung zu Render statt.
     Beim Laden des iframes werden IP-Adresse, Browser- und Geräteinformationen an Render in den USA übertragen.
     Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 </p>
@@ -235,7 +254,7 @@
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">13. Hintergrund-Ping (Render Wake-Up)</h3>
 <p style="margin-bottom: 14px;">
-    Nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Werbung &amp; externe Inhalte") oder nach manuellem Klicken auf „PDF-Kompressor laden" wird ein einmaliger Hintergrund-Ping an den Render-Server gesendet, um die Anwendung „aufzuwecken" (Cold-Start-Vermeidung).
+    Nach Ihrer Einwilligung im Cookie-Banner (Kategorie „Externe Medien") oder nach manuellem Klicken auf „PDF-Kompressor laden" wird ein einmaliger Hintergrund-Ping an den Render-Server gesendet, um die Anwendung „aufzuwecken" (Cold-Start-Vermeidung).
     Dabei wird die IP-Adresse des Nutzers an Render übertragen.
     Es werden keine personenbezogenen Daten gespeichert.
     Ohne Ihre Einwilligung findet keine Verbindung zum Render-Server statt.
@@ -278,10 +297,14 @@
 </p>
 
 <p style="margin-bottom: 14px;">
-    <strong>e) Lokale Speicherung des Chat-Verlaufs im Browser</strong><br>
-    Damit Ihr Chat-Verlauf bei einem erneuten Besuch der Website verfügbar bleibt, werden die letzten bis zu 20 Nachrichten Ihrer Konversation im <strong>Local Storage</strong> Ihres Browsers gespeichert (Schlüssel: <code>dmd_chat_history_de</code> bzw. <code>dmd_chat_history_ru</code>, je nach Sprachversion).
+    <strong>e) Lokale Speicherung des Chat-Verlaufs im Browser (Session Storage)</strong><br>
+    Damit Ihr Chat-Verlauf beim Wechsel zwischen einzelnen Unterseiten der Website während Ihrer aktuellen Browser-Sitzung erhalten bleibt, werden die letzten bis zu 20 Nachrichten Ihrer Konversation im <strong>Session Storage</strong> Ihres Browsers gespeichert (Schlüssel: <code>dmd_chat_history</code>).
+    Beim Schließen des Browser-Tabs werden diese Daten <strong>automatisch und vollständig gelöscht</strong>; eine Übernahme in eine spätere Sitzung findet nicht statt.
     Diese Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
-    Sie können den Chat-Verlauf jederzeit über die Schaltfläche „🗑" im Chat-Fenster oder über die Browser-Einstellungen löschen.
+    Sie können den Chat-Verlauf jederzeit über die Schaltfläche „🗑" im Chat-Fenster oder über die Browser-Einstellungen vorzeitig löschen.
+</p>
+<p style="margin-bottom: 14px;">
+    Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO, § 25 Abs. 2 Nr. 2 TDDDG (technisch notwendig zur Bereitstellung der vom Nutzer aktiv aufgerufenen Chat-Funktion innerhalb der laufenden Sitzung).
 </p>
 
 <p style="margin-bottom: 14px;">
@@ -302,7 +325,7 @@
     <strong>h) Widerruf der Einwilligung</strong><br>
     Sie können die Nutzung des Chats jederzeit beenden, indem Sie das Chat-Fenster schließen und keine weiteren Nachrichten senden.
     Bereits an Groq übertragene Nachrichten können wir nicht zurückrufen, da sie auf Servern eines Drittanbieters in den USA verarbeitet wurden.
-    Die im Local Storage gespeicherten Verläufe können Sie jederzeit selbst löschen (siehe Buchstabe e).
+    Den im Session Storage gespeicherten Verlauf können Sie jederzeit selbst löschen (siehe Buchstabe e); spätestens beim Schließen des Browser-Tabs wird er automatisch entfernt.
 </p>
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">15. Schriftarten (lokal eingebunden)</h3>
@@ -339,19 +362,25 @@
     Es werden dabei keine zusätzlichen personenbezogenen Daten verarbeitet.
 </p>
 
-<h3 style="margin-bottom: 8px; color: var(--primary-blue);">20. Nutzung von Local Storage und Session Storage</h3>
+<h3 style="margin-bottom: 8px; color: var(--primary-blue);">20. Übersicht der lokal gespeicherten Daten (Local Storage / Session Storage)</h3>
 <p style="margin-bottom: 14px;">
-    Diese Website nutzt den Local Storage Ihres Browsers zur dauerhaften Speicherung folgender Daten:
+    Diese Website verwendet keine klassischen HTTP-Cookies. Stattdessen werden die folgenden Daten — abhängig von Ihrer Einwilligung — im Speicher Ihres Browsers abgelegt:
 </p>
-<p style="margin-bottom: 6px;">• Cookie-Einwilligungen (Silktide Consent Manager)</p>
-<p style="margin-bottom: 6px;">• Die von Ihnen zuletzt gewählte Stadt für die Wetteranzeige (Schlüssel <code>userCity</code>)</p>
-<p style="margin-bottom: 14px;">• Verlauf des KI-Chats (Schlüssel <code>dmd_chat_history_de</code> bzw. <code>dmd_chat_history_ru</code>) — siehe Abschnitt 14</p>
+<p style="margin-bottom: 6px;"><strong>Local Storage (dauerhaft, bis zum manuellen Löschen):</strong></p>
+<p style="margin-bottom: 6px;">• <code>silktideCookieChoice_*</code>, <code>silktideCookieBanner_InitialChoice</code> — Einwilligungseinstellungen des Cookie-Banners (Silktide). <strong>Notwendig.</strong></p>
+<p style="margin-bottom: 6px;">• <code>cookieConsent</code> (Wert: <code>accepted</code> oder <code>rejected</code>) — eigener Einwilligungs-Status (Storage Guard). <strong>Notwendig.</strong></p>
+<p style="margin-bottom: 14px;">• <code>userCity</code> — die von Ihnen zuletzt manuell gewählte Stadt für die Wetteranzeige. <strong>Nur bei Einwilligung „Funktional".</strong></p>
+
+<p style="margin-bottom: 6px;"><strong>Session Storage (nur in der laufenden Browser-Sitzung; wird beim Schließen des Tabs gelöscht):</strong></p>
+<p style="margin-bottom: 6px;">• <code>dmd_chat_history</code> — Verlauf des KI-Chats. <strong>Notwendig (siehe Abschnitt 14e).</strong></p>
+<p style="margin-bottom: 6px;">• <code>weatherData</code>, <code>aqiData</code>, <code>magnetData</code>, <code>eurRate</code> — Cache von Wetter, Luftqualität, Geomagnetik und EUR/UAH-Kurs. <strong>Nur bei Einwilligung „Funktional".</strong></p>
 <p style="margin-bottom: 14px;">
-    Zusätzlich nutzen wir den Session Storage Ihres Browsers, um Wetter-, Luftqualitäts-, Geomagnetik- und Wechselkursdaten innerhalb derselben Browser-Sitzung zwischen einzelnen Unterseiten der Website zu übertragen. Die Daten im Session Storage werden automatisch gelöscht, sobald Sie den Browser-Tab schließen.
+    <em>Hinweis:</em> Beim Widerruf der Einwilligung werden bereits gespeicherte Daten der Kategorie „Funktional" automatisch aus dem Session Storage entfernt.
 </p>
+
 <p style="margin-bottom: 14px;">
-    Alle im Local Storage und Session Storage gespeicherten Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
-    Sie können diese Speicher jederzeit über die Browser-Einstellungen löschen.
+    Alle hier aufgeführten Daten verbleiben ausschließlich auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen.
+    Sie können diese Speicher jederzeit über die Browser-Einstellungen löschen oder Ihre Einwilligung über das Cookie-Symbol (unten links) widerrufen.
 </p>
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">21. Ihre Rechte als betroffene Person</h3>
@@ -382,7 +411,7 @@
 
 <h3 style="margin-bottom: 8px; color: var(--primary-blue);">23. Aktualität und Änderungen dieser Datenschutzerklärung</h3>
 <p style="margin-bottom: 14px;">
-    Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026 (Version 2 — Ergänzung um Abschnitt 14 „KI-Chat-Assistent").
+    Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026 (Version 3 — Einführung des Storage Guard, Umstellung des Chat-Verlaufs auf Session Storage, präzisierte Trennung zwischen technisch notwendiger und einwilligungsbedürftiger lokaler Speicherung).
     Aufgrund von Änderungen an der Website oder geänderter gesetzlicher Anforderungen kann es notwendig werden, diese Datenschutzerklärung anzupassen.
     Die jeweils aktuelle Fassung kann jederzeit auf dieser Seite abgerufen werden.
 </p>

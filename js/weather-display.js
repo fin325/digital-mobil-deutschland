@@ -147,7 +147,9 @@
             const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}&lang=${isRu ? 'ru' : 'de'}`);
             const d = await res.json();
             if (!d.main) return null;
-            try { sessionStorage.setItem('weatherData', JSON.stringify(d)); } catch (e) {}
+            if (window.canSaveToStorage && window.canSaveToStorage()) {
+                try { sessionStorage.setItem('weatherData', JSON.stringify(d)); } catch (e) {}
+            }
             displayWeather(d);
             return d;
         } catch (e) {
@@ -163,7 +165,9 @@
             if (!data.list || !data.list[0]) return;
             const aqiIndex   = data.list[0].main.aqi;
             const components = data.list[0].components;
-            try { sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components })); } catch (e) {}
+            if (window.canSaveToStorage && window.canSaveToStorage()) {
+                try { sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components })); } catch (e) {}
+            }
             displayAQI(aqiIndex, components);
         } catch (e) {
             console.error('weather-display fallback aqi error:', e);
@@ -176,7 +180,9 @@
             const data = await res.json();
             const rate = data.rate?.toFixed(2);
             if (rate) {
-                try { sessionStorage.setItem('eurRate', rate); } catch (e) {}
+                if (window.canSaveToStorage && window.canSaveToStorage()) {
+                    try { sessionStorage.setItem('eurRate', rate); } catch (e) {}
+                }
                 displayEur(rate);
             }
         } catch (e) {

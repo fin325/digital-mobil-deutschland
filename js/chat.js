@@ -6,11 +6,10 @@
   'use strict';
 
   const ENDPOINT = '/api/chat';
-  const STORAGE_KEY_PREFIX = 'dmd_chat_history_';
+  const STORAGE_KEY = 'dmd_chat_history';
   const MAX_HISTORY = 20;
 
   const PAGE_LANG = (document.documentElement.lang || 'de').toLowerCase().startsWith('ru') ? 'ru' : 'de';
-  const STORAGE_KEY = STORAGE_KEY_PREFIX + PAGE_LANG;
 
   const SITE_NAME = 'Digital & Mobil in Deutschland';
 
@@ -213,7 +212,7 @@
     if (!confirm(t.clearConfirm)) return;
     messages = [];
     messagesEl.innerHTML = '';
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     addMessage('assistant', t.cleared);
   }
 
@@ -294,8 +293,7 @@
         const link = document.createElement('a');
         link.className = 'chat-page-link';
         link.href = '/' + target.replace(/^\/+/, '');
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
+        // Открываем в той же вкладке — чтобы sessionStorage чата сохранился
         link.innerHTML = `<span class="icon-emoji icon-1f517"></span> ${escapeHtml(label)}`;
         div.appendChild(link);
       } else if (kind === 'URL') {
@@ -569,14 +567,17 @@
   }
 
   function saveHistory() {
+    // sessionStorage — технически необходимо для сохранения чата
+    // при навигации между страницами в рамках одной сессии браузера.
+    // Автоматически стирается при закрытии вкладки.
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_HISTORY)));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_HISTORY)));
     } catch (e) {}
   }
 
   function loadHistory() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = sessionStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {

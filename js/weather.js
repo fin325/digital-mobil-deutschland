@@ -68,10 +68,12 @@ async function getWeather() {
             return;
         }
 
-        // Сохраняем для других вкладок в рамках сессии
-        try {
-            sessionStorage.setItem('weatherData', JSON.stringify(d));
-        } catch (e) {}
+        // Сохраняем для других вкладок в рамках сессии — только при согласии
+        if (window.canSaveToStorage && window.canSaveToStorage()) {
+            try {
+                sessionStorage.setItem('weatherData', JSON.stringify(d));
+            } catch (e) {}
+        }
 
         applyWeatherData(d);
 
@@ -90,7 +92,10 @@ function applyWeatherData(d) {
 
         if (currentCity !== city) {
             currentCity = city;
-            localStorage.setItem('userCity', city);
+            // Сохраняем выбранный город — только при согласии
+            if (window.canSaveToStorage && window.canSaveToStorage()) {
+                try { localStorage.setItem('userCity', city); } catch (e) {}
+            }
         }
 
         // Иконка погоды
@@ -109,7 +114,10 @@ function applyWeatherData(d) {
                 const newCity = prompt(weatherMessages.cityPrompt, currentCity);
                 if (newCity && newCity.trim() !== '') {
                     currentCity = newCity.trim();
-                    localStorage.setItem('userCity', currentCity);
+                    // Сохраняем выбранный город — только при согласии
+                    if (window.canSaveToStorage && window.canSaveToStorage()) {
+                        try { localStorage.setItem('userCity', currentCity); } catch (e) {}
+                    }
                     // Чистим sessionStorage при смене города
                     sessionStorage.removeItem('weatherData');
                     sessionStorage.removeItem('aqiData');
@@ -191,10 +199,12 @@ async function getAirPollution(lat, lon) {
         const aqiIndex   = data.list[0].main.aqi;
         const components = data.list[0].components;
 
-        // Сохраняем для других вкладок в рамках сессии
-        try {
-            sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components }));
-        } catch (e) {}
+        // Сохраняем для других вкладок в рамках сессии — только при согласии
+        if (window.canSaveToStorage && window.canSaveToStorage()) {
+            try {
+                sessionStorage.setItem('aqiData', JSON.stringify({ aqiIndex, components }));
+            } catch (e) {}
+        }
 
         updateAQIUI(aqiIndex, components);
 
@@ -276,5 +286,8 @@ function toggleWeatherScroll() {
         });
     }
 }
+
+// Экспорт в глобал — чтобы cookie-consent.js мог перезапустить запрос после согласия
+window.getWeather = getWeather;
 
 getWeather();

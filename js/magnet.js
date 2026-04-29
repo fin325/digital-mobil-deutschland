@@ -22,10 +22,12 @@ async function getGeomagneticActivity() {
             return;
         }
 
-        // Сохраняем для других вкладок в рамках сессии
-        try {
-            sessionStorage.setItem('magnetData', JSON.stringify({ kp_index: data.kp_index }));
-        } catch (e) {}
+        // Сохраняем для других вкладок в рамках сессии — только при согласии
+        if (window.canSaveToStorage && window.canSaveToStorage()) {
+            try {
+                sessionStorage.setItem('magnetData', JSON.stringify({ kp_index: data.kp_index }));
+            } catch (e) {}
+        }
 
         applyMagnetData(data.kp_index);
 
@@ -50,6 +52,9 @@ function applyMagnetData(kp) {
     el.style.color = color;
     el.style.fontWeight = 'bold';
 }
+
+// Экспорт в глобал — чтобы cookie-consent.js мог перезапустить запрос после согласия
+window.getGeomagneticActivity = getGeomagneticActivity;
 
 // Start
 getGeomagneticActivity();

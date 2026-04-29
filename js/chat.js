@@ -213,7 +213,7 @@
     if (!confirm(t.clearConfirm)) return;
     messages = [];
     messagesEl.innerHTML = '';
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     addMessage('assistant', t.cleared);
   }
 
@@ -569,14 +569,17 @@
   }
 
   function saveHistory() {
+    // sessionStorage — технически необходимо для сохранения чата
+    // при навигации между страницами в рамках одной сессии браузера.
+    // Автоматически стирается при закрытии вкладки.
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_HISTORY)));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_HISTORY)));
     } catch (e) {}
   }
 
   function loadHistory() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = sessionStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {

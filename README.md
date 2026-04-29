@@ -126,15 +126,6 @@ Die vollständige technische Dokumentation ist direkt auf der Website verfügbar
 
 👉 https://digital-mobil-deutschland.vercel.app (Tab: **„Projekt Info“**)
 
-**Enthaltene Dokumente:**
-- 📄 Development.pdf  
-- 📄 HTML.pdf  
-- 📄 STYLES.pdf  
-- 📄 SCRIPTS.pdf  
-
-Diese Dokumentation beschreibt die Architektur, den Codeaufbau sowie die verwendeten Technologien im Detail.
-
-Auf dem 
 ⸻
 
 📜 Rechtliches

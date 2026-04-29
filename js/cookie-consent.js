@@ -2,6 +2,17 @@
 
 const _isRu = document.documentElement.lang === 'ru';
 
+// ── Storage Guard ─────────────────────────────────────────────
+// Возвращает true, если пользователь согласился на функциональные cookies.
+// Используется во всех скриптах перед sessionStorage.setItem(...).
+window.canSaveToStorage = function () {
+    try {
+        return localStorage.getItem('cookieConsent') === 'accepted';
+    } catch (e) {
+        return false;
+    }
+};
+
 silktideCookieBannerManager.updateCookieBannerConfig({
   background: { showBackground: true },
   cookieIcon: { position: "bottomLeft" },
@@ -12,29 +23,55 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       id: "necessary",
       name: _isRu ? "Необходимые" : "Notwendig",
       description: _isRu
-        ? "<p>Технически необходимые файлы для работы сайта. Сюда входят: сохранение ваших cookie-настроек и выбранного города для виджета погоды. Эти файлы не могут быть отключены.</p>"
-        : "<p>Technisch erforderliche Dateien für den Betrieb der Website. Dazu gehören: Speicherung Ihrer Cookie-Einstellungen sowie der von Ihnen gewählten Stadt für die Wetteranzeige. Diese Dateien können nicht deaktiviert werden.</p>",
+        ? "<p>Технически необходимые файлы для работы сайта. Сохраняется только ваш выбор cookie-настроек. Эти файлы не могут быть отключены.</p>"
+        : "<p>Technisch erforderliche Dateien für den Betrieb der Website. Gespeichert wird ausschließlich Ihre Cookie-Auswahl. Diese Dateien können nicht deaktiviert werden.</p>",
       required: true
     },
 
-    // ── 2. FUNKTIONAL / ФУНКЦИОНАЛЬНЫЕ (новости) ───────────
+    // ── 2. FUNKTIONAL / ФУНКЦИОНАЛЬНЫЕ ─────────────────────
     {
       id: "functional",
       name: _isRu ? "Функциональные" : "Funktional",
       description: _isRu
-        ? "<p>Расширенный функционал сайта, требующий передачи данных внешним сервисам:</p><ul><li><strong>Новости через rss2json</strong> — RSS-каналы tagesschau.de или ru.euronews.com. При загрузке ваш IP-адрес передаётся на серверы rss2json.</li></ul><p>Без вашего согласия эти функции не активируются.</p>"
-        : "<p>Erweiterte Funktionen der Website, die eine Datenübermittlung an externe Dienste erfordern:</p><ul><li><strong>Nachrichten über rss2json</strong> — RSS-Feeds von tagesschau.de oder ru.euronews.com. Beim Laden wird Ihre IP-Adresse an die Server von rss2json übermittelt.</li></ul><p>Ohne Ihre Einwilligung werden diese Funktionen nicht aktiviert.</p>",
+        ? "<p>Функциональные данные, которые сохраняются в памяти браузера (sessionStorage) для ускорения работы сайта при переключении между вкладками:</p><ul><li><strong>Выбранный город</strong> для виджета погоды (localStorage).</li><li><strong>Кэш погоды, качества воздуха, геомагнитной активности и курса EUR/UAH</strong> (sessionStorage — удаляется при закрытии вкладки).</li><li><strong>Новости через rss2json</strong> — RSS-каналы tagesschau.de или ru.euronews.com. При загрузке ваш IP-адрес передаётся на серверы rss2json.</li></ul><p>Без вашего согласия эти данные не сохраняются.</p>"
+        : "<p>Funktionale Daten, die im Browser-Speicher (sessionStorage) zwischengespeichert werden, um die Website beim Wechsel zwischen Tabs zu beschleunigen:</p><ul><li><strong>Ausgewählte Stadt</strong> für die Wetteranzeige (localStorage).</li><li><strong>Cache von Wetter, Luftqualität, Geomagnetik und EUR/UAH-Kurs</strong> (sessionStorage — wird beim Schließen des Tabs gelöscht).</li><li><strong>Nachrichten über rss2json</strong> — RSS-Feeds von tagesschau.de oder ru.euronews.com. Beim Laden wird Ihre IP-Adresse an die Server von rss2json übermittelt.</li></ul><p>Ohne Ihre Einwilligung werden diese Daten nicht gespeichert.</p>",
       required: false,
 
       onAccept: function () {
+        // 1) Ставим собственный флаг согласия для Storage Guard
+        try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {}
+
+        // 2) Загружаем новости
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadNews, { once: true });
         } else {
           loadNews();
         }
+
+        // 3) Перерисовываем виджеты — теперь setItem() уже разрешён,
+        //    и кэш заполнится свежими данными
+        if (typeof window.getWeather === 'function') {
+          try { window.getWeather(); } catch (e) {}
+        }
+        if (typeof window.getGeomagneticActivity === 'function') {
+          try { window.getGeomagneticActivity(); } catch (e) {}
+        }
       },
 
       onReject: function () {
+        // 1) Снимаем флаг согласия
+        try { localStorage.setItem('cookieConsent', 'rejected'); } catch (e) {}
+
+        // 2) Чистим уже накопленный кэш (на случай, если пользователь
+        //    раньше нажимал «Принять», а теперь передумал)
+        try {
+          sessionStorage.removeItem('weatherData');
+          sessionStorage.removeItem('aqiData');
+          sessionStorage.removeItem('magnetData');
+          sessionStorage.removeItem('eurRate');
+        } catch (e) {}
+
+        // 3) Прячем новости
         const placeholder = document.getElementById('news-placeholder');
         const container = document.getElementById('news-container');
 
@@ -56,23 +93,16 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
 
       onAccept: function () {
-        // 🔥 Фоновое пробуждение Render-сервера
-        // 🔥 Background wake-up of Render server
-        // 🔥 Hintergrund-Aufwecken des Render-Servers
         fetch('https://pdf-compressor-web.onrender.com/wakeup', { mode: 'no-cors' })
           .catch(() => {});
 
         function loadAllExternal() {
-
-          // ▶️ Видео
           document.querySelectorAll('[id^="video-placeholder-"] button')
             .forEach(btn => btn.click());
 
-          // 📄 PDF
           const pdfBtn = document.querySelector('#pdf-placeholder button');
           if (pdfBtn) pdfBtn.click();
 
-          // 🖼 Photo
           const photoBtn = document.querySelector('#photo-placeholder button');
           if (photoBtn) photoBtn.click();
         }
@@ -85,14 +115,11 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       },
 
       onReject: function () {
-
-        // Видео
         document.querySelectorAll('[id^="video-placeholder-"]').forEach(function (ph) {
           const num = ph.id.replace('video-placeholder-', '');
           resetIframe(ph.id, 'video-iframe-' + num);
         });
 
-        // PDF + Photo
         resetIframe('pdf-placeholder', 'pdf-iframe');
         resetIframe('photo-placeholder', 'photo-iframe');
       }

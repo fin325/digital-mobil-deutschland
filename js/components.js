@@ -307,3 +307,62 @@ class LegalDisclaimer extends HTMLElement {
 if (!customElements.get('legal-disclaimer')) {
   customElements.define('legal-disclaimer', LegalDisclaimer);
 }
+
+// ====================== <legal-footer> ======================
+// Подвал с юридическими ссылками: Impressum | Datenschutz | Barrierefreiheit
+// Автоматически определяет язык по <html lang="..."> и относительный путь.
+//
+// Использование (одинаково на любой странице):
+//   <legal-footer></legal-footer>
+
+class LegalFooter extends HTMLElement {
+  connectedCallback() {
+    const isRu = (document.documentElement.lang || 'de').toLowerCase().startsWith('ru');
+
+    // Определяем относительный путь до целевого языкового каталога.
+    // Структура проекта:
+    //   /index.html             → DE-главная,  prefix = ''
+    //   /tabs/<page>.html       → DE-страницы, prefix = '../tabs/'
+    //   /ru/index.html          → RU-главная,  prefix = ''  (мы уже в /ru/)
+    //   /ru/<page>.html         → RU-страницы, prefix = ''
+    const path = window.location.pathname;
+    const inTabs = path.includes('/tabs/');
+    const inRu   = path.includes('/ru/');
+
+    let prefix = '';
+    if (isRu) {
+      // Все RU-страницы лежат в /ru/, поэтому ссылки относительные внутри той же папки
+      prefix = inRu ? '' : 'ru/';
+    } else {
+      // DE-страницы могут быть в корне (index.html) или в /tabs/
+      prefix = inTabs ? '' : 'tabs/';
+    }
+
+    const TXT = isRu ? {
+      label: 'Ссылки:',
+      impressum: 'Impressum',
+      datenschutz: 'Конфиденциальность',
+      barrierefreiheit: 'Доступность'
+    } : {
+      label: 'Links zum',
+      impressum: 'Impressum',
+      datenschutz: 'Datenschutz',
+      barrierefreiheit: 'Barrierefreiheit'
+    };
+
+    this.innerHTML = `
+      <p class="legal-footer" style="margin: 24px 0 12px 0; padding: 0 8px; font-size: 0.85rem; line-height: 1.5; text-align: center; opacity: 0.85;">
+        ${TXT.label}
+        <a href="${prefix}impressum.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline;">${TXT.impressum}→</a>
+        <span style="margin: 0 6px; opacity: 0.5;">|</span>
+        <a href="${prefix}datenschutz.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline;">${TXT.datenschutz}→</a>
+        <span style="margin: 0 6px; opacity: 0.5;">|</span>
+        <a href="${prefix}barrierefreiheit.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline;">${TXT.barrierefreiheit}→</a>
+      </p>
+    `;
+  }
+}
+
+if (!customElements.get('legal-footer')) {
+  customElements.define('legal-footer', LegalFooter);
+}

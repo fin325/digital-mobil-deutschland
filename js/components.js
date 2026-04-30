@@ -314,27 +314,18 @@ if (!customElements.get('legal-disclaimer')) {
 //
 // Использование (одинаково на любой странице):
 //   <legal-footer></legal-footer>
-
 class LegalFooter extends HTMLElement {
   connectedCallback() {
     const isRu = (document.documentElement.lang || 'de').toLowerCase().startsWith('ru');
 
-    // Определяем относительный путь до целевого языкового каталога.
-    // Структура проекта:
-    //   /index.html             → DE-главная,  prefix = ''
-    //   /tabs/<page>.html       → DE-страницы, prefix = '../tabs/'
-    //   /ru/index.html          → RU-главная,  prefix = ''  (мы уже в /ru/)
-    //   /ru/<page>.html         → RU-страницы, prefix = ''
     const path = window.location.pathname;
     const inTabs = path.includes('/tabs/');
     const inRu   = path.includes('/ru/');
 
     let prefix = '';
     if (isRu) {
-      // Все RU-страницы лежат в /ru/, поэтому ссылки относительные внутри той же папки
       prefix = inRu ? '' : 'ru/';
     } else {
-      // DE-страницы могут быть в корне (index.html) или в /tabs/
       prefix = inTabs ? '' : 'tabs/';
     }
 
@@ -351,14 +342,28 @@ class LegalFooter extends HTMLElement {
     };
 
     this.innerHTML = `
-      <p class="legal-footer" style="margin: 24px 0 12px 0; padding: 0 8px; font-size: 0.85rem; line-height: 1.5; text-align: center; opacity: 0.85;">
-        ${TXT.label}
-        <a href="${prefix}impressum.html" class="text-link" style="color:#003399;font-weight:700;text-decoration:underline;">${TXT.impressum}→</a>
-        <span style="margin: 0 6px; opacity: 0.5;">|</span>
-        <a href="${prefix}datenschutz.html" class="text-link" style="color:#003399;font-weight:700;text-decoration:underline;">${TXT.datenschutz}→</a>
-        <span style="margin: 0 6px; opacity: 0.5;">|</span>
-        <a href="${prefix}barrierefreiheit.html" class="text-link" style="color:#003399;font-weight:700;text-decoration:underline;">${TXT.barrierefreiheit}→</a>
-      </p>
+      <div class="legal-footer-card" style="
+        margin: 28px auto 16px auto;
+        max-width: 560px;
+        padding: 12px 18px;
+        background: rgba(10, 25, 60, 0.55);
+        backdrop-filter: blur(12px) saturate(140%);
+        -webkit-backdrop-filter: blur(12px) saturate(140%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: #fff;
+      ">
+        <span style="opacity: 0.75; margin-right: 4px;">${TXT.label}</span>
+        <a href="${prefix}impressum.html" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.impressum}&nbsp;→</a>
+        <span style="margin: 0 6px; opacity: 0.4;">|</span>
+        <a href="${prefix}datenschutz.html" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.datenschutz}&nbsp;→</a>
+        <span style="margin: 0 6px; opacity: 0.4;">|</span>
+        <a href="${prefix}barrierefreiheit.html" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.barrierefreiheit}&nbsp;→</a>
+      </div>
     `;
   }
 }

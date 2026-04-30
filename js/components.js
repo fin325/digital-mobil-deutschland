@@ -236,15 +236,15 @@ class LegalDisclaimer extends HTMLElement {
     const isRu = (document.documentElement.lang || 'de').toLowerCase().startsWith('ru');
 
     const TEXTS = {
-      medical: {
+     medical: {
         de: {
           title: 'Wichtiger medizinischer Hinweis',
-          body: 'Die hier bereitgestellten Informationen zu Ärzten, Praxen und medizinischen Themen dienen ausschließlich der allgemeinen Orientierung und stellen <strong>keine medizinische Beratung, Diagnose oder Behandlungsempfehlung</strong> dar. Sie ersetzen nicht den Besuch bei einer qualifizierten Ärztin oder einem qualifizierten Arzt. Bei gesundheitlichen Beschwerden wenden Sie sich bitte an Ihre Hausärztin/Ihren Hausarzt oder im Notfall an den Notruf <strong>112</strong> bzw. den ärztlichen Bereitschaftsdienst <strong>116 117</strong>.'
-        },
-        ru: {
+          body: 'Diese Informationen ersetzen <strong>keine ärztliche Beratung</strong>. Im Notfall: <strong>112</strong> oder <strong>116 117</strong>.'
+          },
+         ru: {
           title: 'Важное медицинское уведомление',
-          body: 'Информация о врачах, практиках и медицинских темах, представленная здесь, служит исключительно для общей ориентации и <strong>не является медицинской консультацией, диагнозом или рекомендацией по лечению</strong>. Она не заменяет посещение квалифицированного врача. При проблемах со здоровьем обращайтесь к своему семейному врачу, а в экстренных случаях — по телефону экстренной помощи <strong>112</strong> или дежурной медицинской службы <strong>116 117</strong>.'
-        }
+          body: 'Эта информация <strong>не заменяет консультацию врача</strong>. В экстренных случаях: <strong>112</strong> или <strong>116 117</strong>.'
+       }
       },
       legal: {
         de: {

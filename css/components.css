@@ -424,6 +424,58 @@ iframe {
     transform: scale(0.95);
 }
 
+.info-card {
+    background: #f9f9ff;
+    border-left: 4px solid #000080;
+    border-radius: 10px;
+    padding: 13px 15px;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+}
+
+.info-card h3 {
+    /* заголовок внутри карточки */
+    display: block;
+    text-align: left;
+    width: auto;
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #000080 !important;
+    line-height: 1.3;
+}
+
+.info-card p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #333;
+    margin: 0 0 8px 0;
+}
+
+.info-card p:last-child {
+    margin-bottom: 0;
+}
+
+.info-card a {
+    color: #000080;
+    font-weight: 600;
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.info-card strong {
+    color: #1a1a2e;
+}
+
+.info-card code {
+    background: #e8e8f8;
+    color: #000080;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    word-break: break-word;
+}
+
 /* === PC font rendering fix === */
 @media (hover: hover) and (pointer: fine) {
     .btn-main,
@@ -482,7 +534,7 @@ iframe {
         transition: all 0.1s ease;
     }
 
-.text-link:hover {
+    .text-link:hover {
         opacity: 0.7;
     }
 
@@ -491,5 +543,22 @@ iframe {
         opacity: 0.6;
         transform: scale(0.95);
         transition: all 0.1s ease;
+    }
+    
+    .card .info-card h3,
+    .card .info-card p,
+    .card .info-card span,
+    .card .info-card div,
+    .card .info-card li,
+    .card .info-card strong,
+    .card .info-card em {
+        color: #1a1a2e !important;
+        text-shadow: none !important;
+    }
+    .card .info-card h3 {
+        color: #000080 !important;
+    }
+    .card .info-card a {
+        color: #000080 !important;
     }
 }

@@ -353,11 +353,11 @@ class LegalFooter extends HTMLElement {
     this.innerHTML = `
       <p class="legal-footer" style="margin: 24px 0 12px 0; padding: 0 8px; font-size: 0.85rem; line-height: 1.5; text-align: center; opacity: 0.85;">
         ${TXT.label}
-        <a href="${prefix}impressum.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline;">${TXT.impressum}→</a>
+        <a href="${prefix}impressum.html" class="text-link" style="color:#003399;font-weight:700;text-decoration:underline;">${TXT.impressum}→</a>
         <span style="margin: 0 6px; opacity: 0.5;">|</span>
-        <a href="${prefix}datenschutz.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline;">${TXT.datenschutz}→</a>
+        <a href="${prefix}datenschutz.html" class="text-link" style="color:#003399;font-weight:700;text-decoration:underline;">${TXT.datenschutz}→</a>
         <span style="margin: 0 6px; opacity: 0.5;">|</span>
-        <a href="${prefix}barrierefreiheit.html" class="text-link" style="color:inherit;font-weight:700;text-decoration:underline;">${TXT.barrierefreiheit}→</a>
+        <a href="${prefix}barrierefreiheit.html" class="text-link" style="color:#003399;font-weight:700;text-decoration:underline;">${TXT.barrierefreiheit}→</a>
       </p>
     `;
   }

@@ -428,7 +428,7 @@ iframe {
         margin: 28px auto 16px auto;
         max-width: 560px;
         padding: 12px 18px;
-        background: rgba(10, 25, 60, 0.55);
+        background: rgba(10, 25, 60, 0.35);
         backdrop-filter: blur(12px) saturate(140%);
         -webkit-backdrop-filter: blur(12px) saturate(140%);
         border: 1px solid rgba(255, 255, 255, 0.12);

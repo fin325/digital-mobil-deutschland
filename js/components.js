@@ -322,6 +322,7 @@ class LegalFooter extends HTMLElement {
     const inTabs = path.includes('/tabs/');
     const inRu   = path.includes('/ru/');
 
+    // Префикс для служебных страниц (Impressum, Datenschutz и т.д.)
     let prefix = '';
     if (isRu) {
       prefix = inRu ? '' : 'ru/';
@@ -329,13 +330,23 @@ class LegalFooter extends HTMLElement {
       prefix = inTabs ? '' : 'tabs/';
     }
 
+    // Определяем правильный путь для главной страницы (index.html)
+    let homeUrl = '';
+    if (isRu) {
+      homeUrl = inRu ? 'index.html' : (inTabs ? '../ru/index.html' : 'ru/index.html');
+    } else {
+      homeUrl = (inTabs || inRu) ? '../index.html' : 'index.html';
+    }
+
     const TXT = isRu ? {
       label: 'Ссылки:',
+      home: 'На главную',
       impressum: 'Impressum',
       datenschutz: 'Конфиденциальность',
       barrierefreiheit: 'Доступность'
     } : {
       label: 'Links zum',
+      home: 'Hauptseite',
       impressum: 'Impressum',
       datenschutz: 'Datenschutz',
       barrierefreiheit: 'Barrierefreiheit'
@@ -358,11 +369,18 @@ class LegalFooter extends HTMLElement {
         color: #fff;
       ">
         <span style="opacity: 0.75; margin-right: 4px;">${TXT.label}</span>
+        
         <a href="${prefix}impressum.html" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.impressum}&nbsp;→</a>
         <span style="margin: 0 6px; opacity: 0.4;">|</span>
+        
         <a href="${prefix}datenschutz.html" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.datenschutz}&nbsp;→</a>
         <span style="margin: 0 6px; opacity: 0.4;">|</span>
+        
         <a href="${prefix}barrierefreiheit.html" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.barrierefreiheit}&nbsp;→</a>
+        <span style="margin: 0 6px; opacity: 0.4;">|</span>
+
+        <!-- Ссылка на главную теперь последняя -->
+        <a href="${homeUrl}" class="text-link" style="color:#fff;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;">${TXT.home}&nbsp;→</a>
       </div>
     `;
   }

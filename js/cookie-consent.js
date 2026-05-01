@@ -23,8 +23,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       id: "necessary",
       name: _isRu ? "Необходимые" : "Notwendig",
       description: _isRu
-        ? "<p>Технически необходимые файлы для работы сайта. Сохраняется только ваш выбор cookie-настроек. Эти файлы не могут быть отключены.</p>"
-        : "<p>Technisch erforderliche Dateien für den Betrieb der Website. Gespeichert wird ausschließlich Ihre Cookie-Auswahl. Diese Dateien können nicht deaktiviert werden.</p>",
+        ? "<p>Технически необходимые данные для работы сайта (хранятся в Local Storage / Session Storage браузера, не в классических cookies):</p><ul><li><strong>Ваш выбор cookie-настроек</strong> (Silktide Consent Manager).</li><li><strong>Собственный статус согласия</strong> (ключ <code>cookieConsent</code>) — определяет, разрешено ли сохранять функциональные данные.</li><li><strong>История ИИ-чата в текущем сеансе</strong> (ключ <code>dmd_chat_history</code> в Session Storage) — автоматически удаляется при закрытии вкладки браузера.</li></ul><p>Эти данные не могут быть отключены, так как необходимы для базовой работы сайта.</p>"
+        : "<p>Technisch erforderliche Daten für den Betrieb der Website (gespeichert im Local Storage / Session Storage des Browsers, nicht in klassischen Cookies):</p><ul><li><strong>Ihre Cookie-Auswahl</strong> (Silktide Consent Manager).</li><li><strong>Eigener Einwilligungs-Status</strong> (Schlüssel <code>cookieConsent</code>) — entscheidet, ob funktionale Daten gespeichert werden dürfen.</li><li><strong>KI-Chat-Verlauf der aktuellen Sitzung</strong> (Schlüssel <code>dmd_chat_history</code> im Session Storage) — wird beim Schließen des Browser-Tabs automatisch gelöscht.</li></ul><p>Diese Daten können nicht deaktiviert werden, da sie für die Grundfunktion der Website erforderlich sind.</p>",
       required: true
     },
 
@@ -33,33 +33,33 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       id: "functional",
       name: _isRu ? "Функциональные" : "Funktional",
       description: _isRu
-        ? "<p>Функциональные данные, которые сохраняются в памяти браузера (sessionStorage) для ускорения работы сайта при переключении между вкладками:</p><ul><li><strong>Выбранный город</strong> для виджета погоды (localStorage).</li><li><strong>Кэш погоды, качества воздуха, геомагнитной активности и курса EUR/UAH</strong> (sessionStorage — удаляется при закрытии вкладки).</li><li><strong>Новости через rss2json</strong> — RSS-каналы tagesschau.de или ru.euronews.com. При загрузке ваш IP-адрес передаётся на серверы rss2json.</li></ul><p>Без вашего согласия эти данные не сохраняются.</p>"
-        : "<p>Funktionale Daten, die im Browser-Speicher (sessionStorage) zwischengespeichert werden, um die Website beim Wechsel zwischen Tabs zu beschleunigen:</p><ul><li><strong>Ausgewählte Stadt</strong> für die Wetteranzeige (localStorage).</li><li><strong>Cache von Wetter, Luftqualität, Geomagnetik und EUR/UAH-Kurs</strong> (sessionStorage — wird beim Schließen des Tabs gelöscht).</li><li><strong>Nachrichten über rss2json</strong> — RSS-Feeds von tagesschau.de oder ru.euronews.com. Beim Laden wird Ihre IP-Adresse an die Server von rss2json übermittelt.</li></ul><p>Ohne Ihre Einwilligung werden diese Daten nicht gespeichert.</p>",
+        ? "<p>С вашего согласия сайт сохраняет следующие функциональные данные локально в вашем браузере, чтобы избежать повторных серверных запросов и ускорить навигацию:</p><ul><li><strong>Выбранный вручную город</strong> для виджета погоды (Local Storage, ключ <code>userCity</code>).</li><li><strong>Кэш погоды, качества воздуха, геомагнитной активности и курса EUR/UAH</strong> (Session Storage — удаляется при закрытии вкладки).</li><li><strong>Загрузка новостей через rss2json</strong> — RSS-каналы tagesschau.de или ru.euronews.com. При загрузке ваш IP-адрес передаётся на серверы rss2json.com.</li></ul><p><strong>Без вашего согласия эти данные не сохраняются в памяти вашего браузера.</strong> Виджеты погоды, AQI и курса работают и без согласия — данные отображаются, но при переходе между страницами загружаются заново.</p>"
+        : "<p>Mit Ihrer Einwilligung speichert die Website folgende funktionale Daten lokal in Ihrem Browser, um wiederholte Serveranfragen zu vermeiden und die Navigation zu beschleunigen:</p><ul><li><strong>Manuell gewählte Stadt</strong> für die Wetteranzeige (Local Storage, Schlüssel <code>userCity</code>).</li><li><strong>Cache von Wetter, Luftqualität, Geomagnetik und EUR/UAH-Kurs</strong> (Session Storage — wird beim Schließen des Tabs gelöscht).</li><li><strong>Laden von Nachrichten über rss2json</strong> — RSS-Feeds von tagesschau.de oder ru.euronews.com. Beim Laden wird Ihre IP-Adresse an die Server von rss2json.com übermittelt.</li></ul><p><strong>Ohne Ihre Einwilligung werden diese Daten nicht im Browser gespeichert.</strong> Die Widgets für Wetter, AQI und Wechselkurs funktionieren auch ohne Einwilligung — die Daten werden angezeigt, beim Wechsel zwischen Seiten jedoch erneut geladen.</p>",
       required: false,
 
       onAccept: function () {
-    // 1) Ставим собственный флаг согласия для Storage Guard
-    try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {}
+        // 1) Ставим собственный флаг согласия для Storage Guard
+        try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {}
 
-    // 2) Загружаем новости
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadNews, { once: true });
-    } else {
-      loadNews();
-    }
+        // 2) Загружаем новости
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', loadNews, { once: true });
+        } else {
+          loadNews();
+        }
 
-    // 3) Перерисовываем виджеты — теперь setItem() уже разрешён,
-    //    и кэш заполнится свежими данными
-    if (typeof window.getWeather === 'function') {
-      try { window.getWeather(); } catch (e) {}
-    }
-    if (typeof window.getGeomagneticActivity === 'function') {
-      try { window.getGeomagneticActivity(); } catch (e) {}
-    }
-    if (typeof window.loadEurRate === 'function') {
-      try { window.loadEurRate(); } catch (e) {}
-    }
-},
+        // 3) Перерисовываем виджеты — теперь setItem() уже разрешён,
+        //    и кэш заполнится свежими данными
+        if (typeof window.getWeather === 'function') {
+          try { window.getWeather(); } catch (e) {}
+        }
+        if (typeof window.getGeomagneticActivity === 'function') {
+          try { window.getGeomagneticActivity(); } catch (e) {}
+        }
+        if (typeof window.loadEurRate === 'function') {
+          try { window.loadEurRate(); } catch (e) {}
+        }
+      },
 
       onReject: function () {
         // 1) Снимаем флаг согласия
@@ -72,6 +72,7 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           sessionStorage.removeItem('aqiData');
           sessionStorage.removeItem('magnetData');
           sessionStorage.removeItem('eurRate');
+          localStorage.removeItem('userCity');
         } catch (e) {}
 
         // 3) Прячем новости
@@ -91,8 +92,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       id: "external_media",
       name: _isRu ? "Внешние медиа" : "Externe Medien",
       description: _isRu
-        ? "<p>Загрузка встроенного контента и инструментов от внешних провайдеров:</p><ul><li><strong>YouTube-видео</strong> (Google Ireland Ltd. / США) — в режиме расширенной защиты данных.</li><li><strong>PDF-компрессор</strong> (Render Services Inc., США).</li><li><strong>Фото в PDF</strong> (Streamlit / Snowflake Inc., США).</li></ul><p>При загрузке ваш IP-адрес и данные браузера передаются соответствующим провайдерам. Дополнительно отправляется фоновый ping для пробуждения сервера PDF-компрессора (избегание Cold-Start).</p>"
-        : "<p>Laden eingebetteter Inhalte und Tools von externen Anbietern:</p><ul><li><strong>YouTube-Videos</strong> (Google Ireland Ltd. / USA) — im erweiterten Datenschutzmodus.</li><li><strong>PDF-Kompressor</strong> (Render Services Inc., USA).</li><li><strong>Foto zu PDF</strong> (Streamlit / Snowflake Inc., USA).</li></ul><p>Beim Laden werden Ihre IP-Adresse und Browserdaten an die jeweiligen Anbieter übertragen. Zusätzlich wird ein Hintergrund-Ping zum Aufwecken des PDF-Kompressor-Servers gesendet (Cold-Start-Vermeidung).</p>",
+        ? "<p>Загрузка встроенного контента и инструментов от внешних провайдеров:</p><ul><li><strong>YouTube-видео</strong> (Google Ireland Ltd., Ирландия / Google LLC, США) — в режиме расширенной защиты данных (youtube-nocookie.com).</li><li><strong>PDF-компрессор</strong> (Render Services Inc., США).</li><li><strong>Фото в PDF</strong> (Streamlit / Snowflake Inc., США).</li></ul><p>При загрузке ваш IP-адрес и данные браузера передаются соответствующим провайдерам в США / ЕС. Дополнительно отправляется фоновый ping для пробуждения сервера PDF-компрессора (избегание Cold-Start).</p><p>Без вашего согласия эти сервисы не загружаются.</p>"
+        : "<p>Laden eingebetteter Inhalte und Tools von externen Anbietern:</p><ul><li><strong>YouTube-Videos</strong> (Google Ireland Ltd., Irland / Google LLC, USA) — im erweiterten Datenschutzmodus (youtube-nocookie.com).</li><li><strong>PDF-Kompressor</strong> (Render Services Inc., USA).</li><li><strong>Foto zu PDF</strong> (Streamlit / Snowflake Inc., USA).</li></ul><p>Beim Laden werden Ihre IP-Adresse und Browserdaten an die jeweiligen Anbieter in den USA / EU übertragen. Zusätzlich wird ein Hintergrund-Ping zum Aufwecken des PDF-Kompressor-Servers gesendet (Cold-Start-Vermeidung).</p><p>Ohne Ihre Einwilligung werden diese Dienste nicht geladen.</p>",
       required: false,
 
       onAccept: function () {

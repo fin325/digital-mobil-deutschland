@@ -298,7 +298,7 @@ a.nav-btn:hover {
     }
 
     .nav-btn {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.98rem;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
@@ -308,7 +308,7 @@ a.nav-btn:hover {
     }
 
     .nav-btn.active {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.98rem;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;
@@ -316,7 +316,7 @@ a.nav-btn:hover {
     }
 
     a.nav-btn {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.98rem;
         text-shadow: none;
         -webkit-font-smoothing: antialiased;

@@ -293,7 +293,7 @@ class LegalDisclaimer extends HTMLElement {
     const stand = isRu ? 'Состояние информации: апрель 2026 г.' : 'Stand der Informationen: April 2026.';
 
     this.innerHTML = `
-      <div class="legal-disclaimer" style="margin: 18px 0; padding: 14px 16px; border-radius: 10px; background: rgba(230, 126, 34, 0.10); border-left: 3px solid #e67e22; font-size: 0.85rem; line-height: 1.55;">
+      <div class="legal-disclaimer" style="margin: 18px 0; padding: 14px 16px; border-radius: 10px; background: rgba(255,255,255,0.2); border-left: 3px solid #e67e22; font-size: 0.85rem; line-height: 1.55;">
         <p style="margin: 0 0 6px 0; font-weight: 700; color: #e67e22;">
           <span class="icon-emoji icon-26a0"></span> ${txt.title}
         </p>

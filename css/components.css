@@ -515,7 +515,7 @@ iframe {
 .info-card a {
     color: #000080;
     font-weight: 600;
-    text-decoration: underline;
+    text-decoration: none;
     word-break: break-word;
 }
 

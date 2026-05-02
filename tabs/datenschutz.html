@@ -57,7 +57,8 @@
 </p>
 <p style="margin-bottom: 14px;">
     Beim Aufruf der Website werden automatisch Verbindungsdaten (z.&nbsp;B. IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp, Betriebssystem) vom Webserver protokolliert (Server-Log-Files).
-    Vercel betreibt ein weltweites Content Delivery Network (CDN); Auslieferung der Inhalte erfolgt über den jeweils nächstgelegenen Serverstandort, bevorzugt in der EU (Frankfurt).
+    Vercel betreibt ein weltweites Content Delivery Network (CDN); Auslieferung der Inhalte erfolgt über den jeweils nächstgelegenen Serverstandort, bevorzugt in der EU (Frankfurt).<br>
+    <strong>Die Server-Log-Files werden bei Vercel gespeichert und nach maximal 30 Tagen automatisch gelöscht.</strong>
 </p>
 <p style="margin-bottom: 14px;">
     Die Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und stabilen Bereitstellung der Website).
@@ -282,7 +283,10 @@
     An Groq werden lediglich der Inhalt Ihrer Nachricht, die letzten bis zu 20 vorhergehenden Nachrichten der aktuellen Konversation (zur Aufrechterhaltung des Kontexts), die Sprachversion der Website (de/ru) sowie die IP-Adresse unseres Server-Proxys übertragen.
     <strong>Die IP-Adresse des Nutzers wird nicht an Groq weitergegeben.</strong> Der Nutzer selbst bleibt für Groq anonym.
 </p>
-
+<p style="margin-bottom: 14px;">
+    <strong>Auf unserem Server (Vercel) werden Chat-Nachrichten und der Chat-Verlauf nicht gespeichert.</strong> 
+    Der Server fungiert ausschließlich als temporärer Proxy: die Anfrage wird verarbeitet und direkt an Groq weitergeleitet. Keine Chat-Daten werden auf unseren Servern gespeichert.
+</p>
 <p style="margin-bottom: 14px;">
     <strong>c) Inhalt der Nachrichten — Hinweis</strong><br>
     Wir empfehlen ausdrücklich, im Chat <strong>keine personenbezogenen Daten</strong> (z.&nbsp;B. vollständigen Namen, Adresse, Telefonnummer, Geburtsdatum, Gesundheitsdaten, Bankverbindung) und keine vertraulichen Informationen einzugeben.

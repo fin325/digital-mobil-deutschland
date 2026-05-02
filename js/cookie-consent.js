@@ -3,8 +3,6 @@
 const _isRu = document.documentElement.lang === 'ru';
 
 // ── Storage Guard ─────────────────────────────────────────────
-// Возвращает true, если пользователь согласился на функциональные cookies.
-// Используется во всех скриптах перед sessionStorage.setItem(...).
 window.canSaveToStorage = function () {
     try {
         return localStorage.getItem('cookieConsent') === 'accepted';
@@ -38,18 +36,14 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       required: false,
 
       onAccept: function () {
-        // 1) Ставим собственный флаг согласия для Storage Guard
         try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {}
 
-        // 2) Загружаем новости
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadNews, { once: true });
         } else {
           loadNews();
         }
 
-        // 3) Перерисовываем виджеты — теперь setItem() уже разрешён,
-        //    и кэш заполнится свежими данными
         if (typeof window.getWeather === 'function') {
           try { window.getWeather(); } catch (e) {}
         }
@@ -62,11 +56,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
       },
 
       onReject: function () {
-        // 1) Снимаем флаг согласия
         try { localStorage.setItem('cookieConsent', 'rejected'); } catch (e) {}
 
-        // 2) Чистим уже накопленный кэш (на случай, если пользователь
-        //    раньше нажимал «Принять», а теперь передумал)
         try {
           sessionStorage.removeItem('weatherData');
           sessionStorage.removeItem('aqiData');
@@ -75,15 +66,8 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           localStorage.removeItem('userCity');
         } catch (e) {}
 
-        // 3) Прячем новости
-        const placeholder = document.getElementById('news-placeholder');
-        const container = document.getElementById('news-container');
-
-        if (placeholder) placeholder.style.display = "block";
-        if (container) {
-          container.style.display = "none";
-          container.innerHTML = "";
-        }
+        // ←←← ИЗМЕНЕНИЕ ЗДЕСЬ (остальное без изменений)
+        resetNews();
       }
     },
 
@@ -159,7 +143,6 @@ silktideCookieBannerManager.updateCookieBannerConfig({
   position: { banner: "bottomCenter" }
 });
 
-
 // ====================== ОБЩИЕ ФУНКЦИИ ======================
 
 function loadIframe(placeholderId, iframeId, src, wakeupUrl = null) {
@@ -191,7 +174,6 @@ function resetIframe(phId, iframeId) {
   }
 }
 
-
 // ====================== ЗАГРУЗКИ ======================
 
 function loadNews() {
@@ -206,6 +188,19 @@ function loadNews() {
   }
 }
 
+// ── НОВАЯ ФУНКЦИЯ: сброс новостей (полный аналог resetIframe) ─────
+function resetNews() {
+  const placeholder = document.getElementById('news-placeholder');
+  const container   = document.getElementById('news-container');
+
+  if (placeholder) {
+    placeholder.style.setProperty('display', 'block', 'important');
+  }
+  if (container) {
+    container.style.setProperty('display', 'none', 'important');
+    container.innerHTML = '';
+  }
+}
 
 // 📄 PDF
 function loadPdfCompressor() {
@@ -216,7 +211,6 @@ function loadPdfCompressor() {
     'https://pdf-compressor-web.onrender.com/wakeup'
   );
 }
-
 
 // 🖼 Photo → PDF
 function loadPhotoToPdf() {

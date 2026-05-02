@@ -75,8 +75,15 @@ silktideCookieBannerManager.updateCookieBannerConfig({
           localStorage.removeItem('userCity');
         } catch (e) {}
 
-        // 3) Прячем новости (теперь точно как у iframe)
-        resetNews();
+        // 3) Прячем новости
+        const placeholder = document.getElementById('news-placeholder');
+        const container = document.getElementById('news-container');
+
+        if (placeholder) placeholder.style.display = "block";
+        if (container) {
+          container.style.display = "none";
+          container.innerHTML = "";
+        }
       }
     },
 
@@ -181,19 +188,6 @@ function resetIframe(phId, iframeId) {
     iframe.style.display = "none";
     iframe.src = "";
     delete iframe.dataset.loaded;
-  }
-}
-
-// ── Сброс новостей (полный аналог resetIframe) ─────
-function resetNews() {
-  const placeholder = document.getElementById('news-placeholder');
-  const container = document.getElementById('news-container');
-
-  if (placeholder) placeholder.style.display = "block";
-
-  if (container) {
-    container.style.display = "none";
-    container.innerHTML = "";
   }
 }
 

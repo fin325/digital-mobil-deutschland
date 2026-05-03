@@ -1,3 +1,8 @@
+// Отключаем авто-восстановление позиции скролла браузером при перезагрузке
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
 let swipeHintDone = false;
 
 function hideSwipeHint() {
@@ -81,6 +86,26 @@ window.addEventListener('popstate', (e) => {
 window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash.replace('#', '');
     if (hash) showTabSilent(hash);
+
+    const scrollAllToTop = () => {
+        document.documentElement.scrollTo(0, 0);
+        document.body.scrollTo(0, 0);
+        document.querySelector('main.container')?.scrollTo(0, 0);
+        window.scrollTo(0, 0);
+    };
+
+    // Многократный сброс скролла, чтобы перебить попытки браузера прокрутить вниз
+    scrollAllToTop();
+    requestAnimationFrame(scrollAllToTop);
+    setTimeout(scrollAllToTop, 0);
+    setTimeout(scrollAllToTop, 100);
+    setTimeout(scrollAllToTop, 300);
+
+    // И ещё раз после полной загрузки (когда картинки догрузились)
+    window.addEventListener('load', () => {
+        scrollAllToTop();
+        setTimeout(scrollAllToTop, 50);
+    });
 
     const viewport = document.querySelector('.nav-scroll-viewport');
     if (viewport) {

@@ -75,3 +75,4 @@ const fixIosViewport = () => {
 // Запускаем, когда DOM готов
 document.addEventListener('DOMContentLoaded', fixIosViewport);
 
+

@@ -17,7 +17,7 @@ scroll-hint {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 4px 0 4px 0;
+    padding: 4px 0 2px 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
@@ -27,7 +27,7 @@ scroll-hint {
 .nav-scroll-viewport {
     overflow-x: auto;
     overflow-y: visible;
-    padding: 0 15px 4px 15px;
+    padding: 0 10px 4px 10px;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     cursor: grab;
@@ -42,7 +42,7 @@ scroll-hint {
     display: flex;
     flex-direction: column;
     width: max-content;
-    gap: 8px;
+    gap: 7px;
     padding-top: 2px;
     min-width: 100%;
 }
@@ -50,7 +50,7 @@ scroll-hint {
 /* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
     display: flex;
-    gap: 9px;
+    gap: 11px;
     justify-content: flex-start;
     width: 100%;
 }
@@ -59,7 +59,46 @@ a {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }
-   
+
+/* ============================================== */
+/* === КНОПКИ С КАРТИНКАМИ (только index.html) === */
+/* ============================================== */
+
+/* Переопределяем размер и убираем фон/рамку — картинка сама всё показывает */
+.nav-btn--img {
+    background: rgba(0, 30, 80, 0) !important;
+    border: 1px solid rgba(255, 255, 255, 0) !important;
+    padding: 0 !important;
+    border-radius: 20px !important;
+    width: 82px !important;
+    height: 82px !important;
+    min-width: 82px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Картинки внутри — заполняют кнопку */
+.nav-btn--img img {
+    width: 120% !important;
+    height: 120% !important;
+    object-fit: contain !important;
+    transition: transform 0.25s ease;
+    pointer-events: none; /* клик идёт по кнопке, не по img */
+}
+
+.nav-btn--img:hover img,
+.nav-btn--img:active img {
+    transform: scale(1.09);
+}
+
+
+/* Активная кнопка с картинкой — возвращаем синий градиент поверх */
+.nav-btn--img.active {
+    background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 /* === КНОПКИ === */
 .nav-btn {
     background: rgba(0, 30, 80, 0.35);
@@ -315,6 +354,11 @@ a.nav-btn:hover {
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .nav-btn--img {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    
     a.nav-btn {
         font-weight: 600;
         font-size: 0.98rem;
@@ -342,6 +386,10 @@ a.nav-btn:hover {
         -webkit-backdrop-filter: none;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .scroll-hint-left {
+        display: none !important;
     }
 }
 

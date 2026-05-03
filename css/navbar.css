@@ -387,6 +387,10 @@ a.nav-btn:hover {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    
+    .scroll-hint-left {
+        display: none !important;
+    }
 }
 
 @media (min-width: 768px) {

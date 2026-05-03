@@ -409,7 +409,7 @@
 
     .site-title img {
         opacity: 1;
-        margin-top: -54px;
+        margin-top: -54px; !important;
     }
 
     .site-subtitle {

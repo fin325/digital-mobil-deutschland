@@ -67,7 +67,7 @@ a {
     height: 95px !important;
     padding: 0 !important;
     border-radius: 15px !important;
-    background: rgba(0, 30, 80, 0.01) !important;
+    background: rgba(0, 0, 0, 0) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     overflow: hidden;
     display: flex;
@@ -105,7 +105,7 @@ a {
 .nav-btn--start {
     background: transparent !important;
     border: none !important;
-    box-shadow: 0 8px 25px rgba(0, 140, 255, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(0, 140, 255, 0) !important;
 }
 
 .nav-btn--start:hover {

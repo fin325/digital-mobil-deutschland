@@ -63,10 +63,10 @@ a {
 /* === КНОПКИ === */
 /* === КНОПКИ С КАРТИНКАМИ — ВСЕ ОДИНАКОВЫЕ === */
 .nav-btn {
-    width: 85px !important;           /* ← размер всех кнопок */
-    height: 85px !important;
+    width: 75px !important;           /* ← размер всех кнопок */
+    height: 75px !important;
     padding: 0 !important;
-    border-radius: 8px !important;
+    border-radius: 15px !important;
     background: rgba(0, 30, 80, 0.35) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
     overflow: hidden;
@@ -79,8 +79,8 @@ a {
 }
 
 .nav-btn img {
-    width: 125% !important;            /* картинка чуть меньше кнопки */
-    height: 125% !important;
+    width: 155% !important;            /* картинка чуть меньше кнопки */
+    height: 155% !important;
     object-fit: contain !important;
     transition: transform 0.25s ease;
 }

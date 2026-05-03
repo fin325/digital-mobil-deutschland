@@ -37,22 +37,31 @@
     z-index: 9998;
     padding: 0;
     width: 100%;
-    height: auto;
-    min-height: 90px;
+    height: 90px;
     overflow: visible;
 }
 
-.site-title {
-    text-align: center;
-    margin: 4px 0 0 0;
+/* Контейнер для текста — не растягивается */
+.site-header-text {
     position: relative;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+    height: 100%;
+}
+
+/* Картинка — абсолютно позиционируется, не двигает соседей */
+.site-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
     padding: 0 5px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .site-title img {
@@ -61,19 +70,24 @@
     max-width: 600px;
     display: block;
     object-fit: contain;
+    margin-top: 0;
 }
 
+/* Subtitle — прибит к низу хедера */
 .site-subtitle {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
     text-align: center;
     color: rgba(200, 225, 255, 0.85);
     font-size: 0.80rem;
     font-weight: 500;
-    margin: 4px 0 8px 0;
+    margin: 0;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-    position: relative;
-    top: 0;
+    z-index: 2;
 }
 
 /* --- ЭЛЕМЕНТЫ ВНУТРИ TOP BAR --- */

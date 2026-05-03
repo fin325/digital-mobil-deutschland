@@ -65,7 +65,6 @@ a {
 .nav-btn {
     width: 55px !important;           /* ← размер всех кнопок */
     height: 55px !important;
-    min-width: 84px !important;
     padding: 0 !important;
     border-radius: 22px !important;
     background: rgba(0, 30, 80, 0.35) !important;
@@ -80,8 +79,8 @@ a {
 }
 
 .nav-btn img {
-    width: 100% !important;            /* картинка чуть меньше кнопки */
-    height: 100% !important;
+    width: 105% !important;            /* картинка чуть меньше кнопки */
+    height: 105% !important;
     object-fit: contain !important;
     transition: transform 0.25s ease;
 }

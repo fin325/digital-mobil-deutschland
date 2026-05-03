@@ -43,17 +43,19 @@
 
 .site-title {
     text-align: center;
-    color: #ffffff;
-    text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(100, 180, 255, 0.4),
-        0 0 60px rgba(60, 140, 255, 0.2);
     margin: 8px 5px 4px 5px;
-    font-size: 1.45rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
     position: relative;
     top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-title img {
+    height: 40px;        /* подбери под нужный размер */
+    width: auto;
+    max-width: 100%;
+    display: block;
 }
 
 .site-subtitle {

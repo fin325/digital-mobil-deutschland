@@ -79,8 +79,8 @@ a {
 }
 
 .nav-btn img {
-    width: 155% !important;            /* картинка чуть меньше кнопки */
-    height: 155% !important;
+    width: 90% !important;            /* картинка чуть меньше кнопки */
+    height: 90% !important;
     object-fit: contain !important;
     transition: transform 0.25s ease;
 }

@@ -17,7 +17,7 @@ scroll-hint {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 4px 0 4px 0;
+    padding: 0 0 0 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
@@ -63,8 +63,8 @@ a {
 /* === КНОПКИ === */
 /* === КНОПКИ С КАРТИНКАМИ — ВСЕ ОДИНАКОВЫЕ === */
 .nav-btn {
-    width: 65px !important;           /* ← размер всех кнопок */
-    height: 65px !important;
+    width: 85px !important;           /* ← размер всех кнопок */
+    height: 85px !important;
     padding: 0 !important;
     border-radius: 8px !important;
     background: rgba(0, 30, 80, 0.35) !important;

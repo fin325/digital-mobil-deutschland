@@ -53,55 +53,49 @@
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/chat.css">
     <style>
-    /* === ОБНОВЛЁННЫЕ СТИЛИ ДЛЯ КНОПОК (квадратные + картинки) === */
     .nav-btn {
-        background: rgba(0, 30, 80, 0);
-        border: 1px solid rgba(255, 255, 255, 0);
-        padding: 0 !important;
-        border-radius: 20px !important;
-        white-space: nowrap;
-        color: #d0eaff;
-        font-weight: 600;
-        font-size: 0.88rem;
-        cursor: pointer;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        letter-spacing: 0.01em;
-        font-family: 'Montserrat', 'Tektur', -apple-system, sans-serif;
-        position: relative;
-        overflow: hidden;
-        isolation: isolate;
-        -webkit-mask-image: -webkit-radial-gradient(white, black);
-        transform: translateZ(0);
-        -webkit-tap-highlight-color: transparent;
+    background: rgba(0, 30, 80, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
+    padding: 0 !important;
+    border-radius: 20px !important;
+    white-space: nowrap;
+    color: #d0eaff;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.01em;
+    font-family: 'Montserrat', 'Tektur', -apple-system, sans-serif;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    transform: translateZ(0);
+    -webkit-tap-highlight-color: transparent;
 
-        /* КВАДРАТНЫЙ РАЗМЕР ДЛЯ ВСЕХ КНОПОК */
-        width: 82px !important;
-        height: 82px !important;
-        min-width: 82px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
+    /* КВАДРАТНЫЙ РАЗМЕР ДЛЯ ВСЕХ КНОПОК */
+    width: 82px !important;
+    height: 82px !important;
+    min-width: 82px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
-    /* Картинки внутри кнопок — не растягиваются */
-    .nav-btn img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain !important;
-        transition: transform 0.25s ease;
-    }
+/* Картинки внутри кнопок — не растягиваются */
+.nav-btn img {
+    width: 120% !important;
+    height: 120% !important;
+    object-fit: contain !important;
+    transition: transform 0.25s ease;
+}
 
-    /* Кнопка Startseite тоже квадратная и одинаковая */
-    .nav-btn--start {
-        border-radius: 22px !important;
-    }
+/* Красивое увеличение картинки при наведении */
+.nav-btn:hover img {
+    transform: scale(1.08);
+}
 
-    /* Красивое увеличение картинки при наведении */
-    .nav-btn:hover img {
-        transform: scale(1.08);
-    }
-    
-    .nav-btn::after {
+.nav-btn::after {
     content: '';
     position: absolute;
     top: 0;
@@ -163,40 +157,30 @@
 <scroll-hint></scroll-hint>
 
 <nav class="navbar">
-  <div class="nav-rows-wrapper">
+  <div class="nav-scroll-viewport">
+    <div class="nav-rows-wrapper">
 
-            <!-- Первый (и единственный) ряд кнопок -->
-            <div class="nav-row">
+      <div class="nav-row">
+        <button class="nav-btn active" onclick="showTab('home', event)"><img src="img/buttons/startseite.png" alt="Startseite"></button>
+        <button class="nav-btn" onclick="showTab('pdf', event)"><img src="img/buttons/pdf.png" alt="PDF für Mail"></button>
+        <button class="nav-btn" onclick="showTab('mobile', event)"><img src="img/buttons/db.png" alt="DB"></button>
+        <button class="nav-btn" onclick="showTab('maps', event)"><img src="img/buttons/karten.png" alt="Karten"></button>
+        <button class="nav-btn" onclick="showTab('contacts', event)"><img src="img/buttons/kontakt.png" alt="Kontakt"></button>
+        <button class="nav-btn" onclick="showTab('news', event)"><img src="img/buttons/nachrichten.png" alt="Nachrichten"></button>
+        <button class="nav-btn" onclick="showTab('news-hattingen', event)"><img src="img/buttons/hattingen.png" alt="Hattingen"></button>
+      </div>
 
-                <!-- Кнопка Miete -->
-                <button class="nav-btn" onclick="showTab('miete', event)">
-                    <img src="img/buttons/nachrichten-3d.png" alt="Miete">
-                </button>
-
-                <!-- Кнопка KI -->
-                <button class="nav-btn" onclick="showTab('ki', event)">
-                    <img src="img/buttons/ki.png" alt="KI">
-                </button>
-
-                <!-- Главная кнопка Startseite -->
-                <button class="nav-btn nav-btn--start" onclick="showTab('maps', event)">
-                    <img src="img/buttons/start.png" alt="Startseite">
-                </button>
-
-                <!-- Кнопка Projekt Info -->
-                <button class="nav-btn" onclick="showTab('info', event)">
-                    <img src="img/buttons/projekt-info.png" alt="Projekt Info">
-                </button>
-
-                <!-- Дополнительная кнопка (можно добавить сколько угодно) -->
-                <button class="nav-btn" onclick="showTab('chat', event)">
-                    <img src="img/buttons/chat.png" alt="Chat">
-                </button>
-
-            </div>
-        </div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="showTab('laws', event)"><img src="img/buttons/gesetze.png" alt="Gesetze"></button>
+        <button class="nav-btn" onclick="showTab('translate', event)"><img src="img/buttons/uebersetzer.png" alt="Übersetzer"></button>
+        <button class="nav-btn" onclick="showTab('jobs', event)"><img src="img/buttons/arbeit.png" alt="Arbeit"></button>
+        <button class="nav-btn" onclick="showTab('health', event)"><img src="img/buttons/arzten.png" alt="Ärzten"></button>
+        <button class="nav-btn" onclick="showTab('housing', event)"><img src="img/buttons/miete.png" alt="Miete"></button>
+        <button class="nav-btn" onclick="showTab('docs', event)"><img src="img/buttons/ki.png" alt="KI"></button>
+        <button class="nav-btn" onclick="showTab('project', event)"><img src="img/buttons/projekt.png" alt="Projekt Info"></button>
+      </div>
     </div>
-</div>
+  </div>
 </nav>
 
 <main class="container">

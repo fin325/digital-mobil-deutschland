@@ -63,8 +63,8 @@ a {
 /* === КНОПКИ === */
 /* === КНОПКИ С КАРТИНКАМИ — ВСЕ ОДИНАКОВЫЕ === */
 .nav-btn {
-    width: 75px !important;           /* ← размер всех кнопок */
-    height: 75px !important;
+    width: 95px !important;           /* ← размер всех кнопок */
+    height: 95px !important;
     padding: 0 !important;
     border-radius: 15px !important;
     background: rgba(0, 30, 80, 0.35) !important;

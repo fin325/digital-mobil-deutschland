@@ -408,7 +408,7 @@
     }
     
     .site-title {
-        top: -54px !important;     /* двигаем весь блок картинки вверх */
+        top: -45px !important;     /* двигаем весь блок картинки вверх */
     }
 
     .site-title img {
@@ -420,6 +420,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         opacity: 0.88;
+        bottom: 20px;
     }
 
     .site-header {

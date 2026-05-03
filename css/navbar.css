@@ -63,7 +63,7 @@ a {
 /* === КНОПКИ === */
 .nav-btn {
     background: rgba(0, 30, 80, 0);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.0);
     padding: 0 !important;                    /* важно для квадратных кнопок */
     border-radius: 20px !important;
     white-space: nowrap;

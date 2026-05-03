@@ -52,7 +52,7 @@
 }
 
 .site-title img {
-    height: 40px;        /* подбери под нужный размер */
+    height: 100px;        /* подбери под нужный размер */
     width: auto;
     max-width: 100%;
     display: block;

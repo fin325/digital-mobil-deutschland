@@ -145,7 +145,9 @@ class AppHeader extends HTMLElement {
             </div>
             <div class="site-header">
                 <div class="site-header-text">
-                    <div class="site-title">Digital & Mobil in Deutschland</div>
+                    <div class="site-title">
+    <img src="img/dmd-title.png" alt="Digital & Mobil in Deutschland">
+                     </div>
                     <div class="site-subtitle">${texts.city}</div>
                 </div>
                 <div id="eur-widget" class="eur-rate-widget" title="Офіційний курс НБУ">

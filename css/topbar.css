@@ -406,10 +406,13 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    
+    .site-title {
+        top: -54px !important;     /* двигаем весь блок картинки вверх */
+    }
 
     .site-title img {
         opacity: 1;
-        margin-top: -54px; !important;
     }
 
     .site-subtitle {

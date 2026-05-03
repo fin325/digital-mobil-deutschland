@@ -64,8 +64,8 @@ a {
 .nav-btn {
     background: rgba(0, 30, 80, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 25px 25px;
-    border-radius: 14px;
+    padding: 0 !important;                    /* важно для квадратных кнопок */
+    border-radius: 20px !important;
     white-space: nowrap;
     color: #d0eaff;
     font-weight: 600;
@@ -79,8 +79,41 @@ a {
     isolation: isolate;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     transform: translateZ(0);
-    /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
+
+    /* === КВАДРАТНЫЙ РАЗМЕР ДЛЯ ВСЕХ КНОПОК === */
+    width: 82px !important;
+    height: 82px !important;
+    min-width: 82px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Картинки внутри кнопок — не растягиваются */
+.nav-btn img {
+    width: 68% !important;
+    height: 68% !important;
+    object-fit: contain !important;
+    transition: transform 0.25s ease;
+}
+
+/* Кнопка Startseite тоже становится одинаковой */
+.nav-btn--start {
+    width: 82px !important;
+    height: 82px !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+}
+
+.nav-btn--start img {
+    width: 72% !important;
+    height: 72% !important;
+}
+
+/* Лёгкое увеличение картинки при наведении */
+.nav-btn:hover img {
+    transform: scale(1.08);
 }
 
 .nav-btn::after {

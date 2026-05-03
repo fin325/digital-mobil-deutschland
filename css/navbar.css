@@ -340,6 +340,25 @@ a.nav-btn:hover {
     filter: brightness(1.1);
 }
 
+.nav-btn--start {
+  width: 110px;           /* ← поменяй размер под свой дизайн */
+  height: 110px;
+  background: url('start.png') center / contain no-repeat;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  /* Если хочешь усилить свечение или тень: */
+  filter: drop-shadow(0 8px 20px rgba(0, 180, 255, 0.6));
+  transition: all 0.2s ease;
+}
+
+.nav-btn--start:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 12px 30px rgba(0, 180, 255, 0.9));
+}
+
 @media (hover: hover) and (pointer: fine) {
     .navbar {
         backdrop-filter: blur(12px) saturate(160%);

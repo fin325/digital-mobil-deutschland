@@ -9,11 +9,9 @@
 
 html, body {
     scrollbar-gutter: stable;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-}
-
-body {
     overscroll-behavior-y: contain;
 }
 

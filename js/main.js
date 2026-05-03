@@ -75,3 +75,13 @@ const fixIosViewport = () => {
 // Запускаем, когда DOM готов
 document.addEventListener('DOMContentLoaded', fixIosViewport);
 
+// Отключаем восстановление скролла браузером при перезагрузке
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Принудительно скроллим наверх при загрузке
+window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+});
+

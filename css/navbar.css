@@ -17,7 +17,7 @@ scroll-hint {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 4px 0 4px 0;
+    padding: 4px 0 2px 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
@@ -27,7 +27,7 @@ scroll-hint {
 .nav-scroll-viewport {
     overflow-x: auto;
     overflow-y: visible;
-    padding: 0 15px 4px 15px;
+    padding: 0 10px 4px 10px;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     cursor: grab;
@@ -42,7 +42,7 @@ scroll-hint {
     display: flex;
     flex-direction: column;
     width: max-content;
-    gap: 8px;
+    gap: 7px;
     padding-top: 2px;
     min-width: 100%;
 }
@@ -50,7 +50,7 @@ scroll-hint {
 /* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
     display: flex;
-    gap: 8px;
+    gap: 11px;
     justify-content: flex-start;
     width: 100%;
 }
@@ -87,12 +87,11 @@ a {
     pointer-events: none; /* клик идёт по кнопке, не по img */
 }
 
-/* Увеличение картинки при наведении (только PC/Smart TV) */
-@media (hover: hover) {
-    .nav-btn--img:hover img {
-        transform: scale(1.08);
-    }
+.nav-btn--img:hover img,
+.nav-btn--img:active img {
+    transform: scale(1.09);
 }
+
 
 /* Активная кнопка с картинкой — возвращаем синий градиент поверх */
 .nav-btn--img.active {

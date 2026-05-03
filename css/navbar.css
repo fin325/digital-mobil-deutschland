@@ -63,8 +63,8 @@ a {
 /* === КНОПКИ === */
 /* === КНОПКИ С КАРТИНКАМИ — ВСЕ ОДИНАКОВЫЕ === */
 .nav-btn {
-    width: 84px !important;           /* ← размер всех кнопок */
-    height: 84px !important;
+    width: 55px !important;           /* ← размер всех кнопок */
+    height: 55px !important;
     min-width: 84px !important;
     padding: 0 !important;
     border-radius: 22px !important;
@@ -80,8 +80,8 @@ a {
 }
 
 .nav-btn img {
-    width: 76% !important;            /* картинка чуть меньше кнопки */
-    height: 76% !important;
+    width: 100% !important;            /* картинка чуть меньше кнопки */
+    height: 100% !important;
     object-fit: contain !important;
     transition: transform 0.25s ease;
 }

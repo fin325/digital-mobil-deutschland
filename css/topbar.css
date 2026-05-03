@@ -70,15 +70,15 @@
     max-width: 600px;
     display: block;
     object-fit: contain;
-    margin-top: -40px;
+    margin-top: -50px;
 }
 
 /* Subtitle — прибит к низу хедера */
 .site-subtitle {
     position: absolute;
     bottom: 8px;
-    left: 0;
-    right: 0;
+    left: 90px;            /* отступ слева, чтобы не наезжать на EUR-виджет */
+    right: 75px;           /* отступ справа, чтобы не наезжать на lang-btn */
     text-align: center;
     color: rgba(200, 225, 255, 0.85);
     font-size: 0.80rem;

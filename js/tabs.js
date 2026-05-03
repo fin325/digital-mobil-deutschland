@@ -85,26 +85,21 @@ window.addEventListener('popstate', (e) => {
 
 window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash.replace('#', '');
+
+    // СНАЧАЛА сбрасываем скролл, ПОТОМ переключаем вкладку
+    document.documentElement.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
+    document.querySelector('main.container')?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+
     if (hash) showTabSilent(hash);
 
-    const scrollAllToTop = () => {
+    // Ещё раз после следующего кадра (вкладка уже активна)
+    requestAnimationFrame(() => {
         document.documentElement.scrollTo(0, 0);
         document.body.scrollTo(0, 0);
         document.querySelector('main.container')?.scrollTo(0, 0);
         window.scrollTo(0, 0);
-    };
-
-    // Двойной сброс — после рендера и после полной загрузки
-    requestAnimationFrame(scrollAllToTop);
-    window.addEventListener('load', () => {
-        scrollAllToTop();
-        // iOS Safari fix: пнуть скролл на 1px и обратно, чтобы sticky пересчитался
-        setTimeout(() => {
-            document.body.scrollTop = 1;
-            requestAnimationFrame(() => {
-                document.body.scrollTop = 0;
-            });
-        }, 50);
     });
 
     const viewport = document.querySelector('.nav-scroll-viewport');

@@ -285,7 +285,7 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     }, true);
 })();
 
-/* === Hattingen-кнопка с видео-анимацией === */
+/* === Hattingen-кнопка с WebP-анимацией === */
 window.showTabHattingen = function(event) {
   if (typeof showTab === 'function') {
     showTab('news-hattingen', event);
@@ -293,68 +293,29 @@ window.showTabHattingen = function(event) {
 
   const btn = event.currentTarget;
   if (!btn) return;
-
-  const video = btn.querySelector('.hattingen-video');
-  const source = video && video.querySelector('source');
-  if (!video || !source) return;
-
   if (btn.classList.contains('video-active')) return;
 
-  // Lazy-load: подгружаем src только при первом клике
-  if (!source.getAttribute('src')) {
-    const realSrc = source.getAttribute('data-src');
-    if (realSrc) {
-      source.setAttribute('src', realSrc);
-      video.load();
-    }
+  const animated = btn.querySelector('.hattingen-animated');
+  if (!animated) return;
+
+  // Lazy-load: подгружаем WebP только при первом клике
+  if (!animated.getAttribute('src')) {
+    const realSrc = animated.getAttribute('data-src');
+    if (realSrc) animated.setAttribute('src', realSrc);
+  } else {
+    // Перезапускаем анимацию с начала (форсируем reload)
+    const src = animated.src;
+    animated.src = '';
+    animated.src = src;
   }
 
-  // Запускаем видео — но показываем только когда реально играет
-  video.currentTime = 0;
-  const playPromise = video.play();
-  
-  if (playPromise && playPromise.then) {
-    playPromise.then(function() {
-      // Видео реально начало играть — теперь показываем
-      btn.classList.add('video-active');
-      
-      // Авто-возврат через 6 секунд
-      clearTimeout(btn._hattingenTimer);
-      btn._hattingenTimer = setTimeout(function() {
-        btn.classList.remove('video-active');
-        video.pause();
-        video.currentTime = 0;
-      }, 6000);
-    }).catch(function(err) {
-      console.warn('Video play failed:', err);
-    });
-  }
+  btn.classList.add('video-active');
+
+  // Авто-возврат через 6 секунд
+  clearTimeout(btn._hattingenTimer);
+  btn._hattingenTimer = setTimeout(function() {
+    btn.classList.remove('video-active');
+  }, 6000);
 };
 
-// === Сброс видео в кнопке Hattingen при скролле — возврат к картинке (только ПК) ===
-(function() {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-  function resetHattingenVideo() {
-    const btn = document.querySelector('.nav-btn--hattingen');
-    if (!btn || !btn.classList.contains('video-active')) return;
-
-    const video = btn.querySelector('.hattingen-video');
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-    }
-
-    btn.classList.remove('video-active');
-    clearTimeout(btn._hattingenTimer);
-  }
-
-  window.addEventListener('scroll', resetHattingenVideo, { passive: true, capture: true });
-  document.addEventListener('scroll', resetHattingenVideo, { passive: true, capture: true });
-
-  const mainContainer = document.querySelector('main.container');
-  if (mainContainer) {
-    mainContainer.addEventListener('scroll', resetHattingenVideo, { passive: true });
-  }
-})();
 

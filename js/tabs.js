@@ -331,32 +331,30 @@ window.showTabHattingen = function(event) {
   }
 };
 
-// === Пауза видео в кнопке Hattingen во время скролла страницы (только ПК) ===
+// === Сброс видео в кнопке Hattingen при скролле — возврат к картинке (только ПК) ===
 (function() {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-  const video = document.querySelector('.nav-btn--hattingen .hattingen-video');
-  if (!video) return;
+  function resetHattingenVideo() {
+    const btn = document.querySelector('.nav-btn--hattingen');
+    if (!btn || !btn.classList.contains('video-active')) return;
 
-  let scrollTimer = null;
-  let wasPlaying = false;
-
-  window.addEventListener('scroll', function() {
-    if (!scrollTimer && !video.paused) {
-      wasPlaying = true;
+    const video = btn.querySelector('.hattingen-video');
+    if (video) {
       video.pause();
+      video.currentTime = 0;
     }
 
-    clearTimeout(scrollTimer);
+    btn.classList.remove('video-active');
+    clearTimeout(btn._hattingenTimer);
+  }
 
-    scrollTimer = setTimeout(function() {
-      scrollTimer = null;
-      if (wasPlaying) {
-        video.play().catch(function() {});
-        wasPlaying = false;
-      }
-    }, 150);
-  }, { passive: true });
+  window.addEventListener('scroll', resetHattingenVideo, { passive: true, capture: true });
+  document.addEventListener('scroll', resetHattingenVideo, { passive: true, capture: true });
+
+  const mainContainer = document.querySelector('main.container');
+  if (mainContainer) {
+    mainContainer.addEventListener('scroll', resetHattingenVideo, { passive: true });
+  }
 })();
-
 

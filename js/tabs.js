@@ -331,4 +331,32 @@ window.showTabHattingen = function(event) {
   }
 };
 
+// === Пауза видео в кнопке Hattingen во время скролла страницы (только ПК) ===
+(function() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const video = document.querySelector('.nav-btn--hattingen .hattingen-video');
+  if (!video) return;
+
+  let scrollTimer = null;
+  let wasPlaying = false;
+
+  window.addEventListener('scroll', function() {
+    if (!scrollTimer && !video.paused) {
+      wasPlaying = true;
+      video.pause();
+    }
+
+    clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(function() {
+      scrollTimer = null;
+      if (wasPlaying) {
+        video.play().catch(function() {});
+        wasPlaying = false;
+      }
+    }, 150);
+  }, { passive: true });
+})();
+
 

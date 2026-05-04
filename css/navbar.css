@@ -468,14 +468,18 @@ a.nav-btn:hover {
 }
 
 /* === Анимированная кнопка Hattingen с видео === */
-.nav-btn--hattingen {
-  position: relative;
-  overflow: hidden;
-}
-
 /* Убираем синий фон активного состояния — оставляем картинку */
 .nav-btn--img.nav-btn--hattingen.active {
   background: transparent !important;
+}
+
+/* === Анимированная кнопка Hattingen с видео === */
+.nav-btn--hattingen {
+  position: relative;
+  overflow: hidden;
+  /* GPU-композитинг чтобы видео не съезжало при скролле */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .nav-btn--hattingen .hattingen-video {
@@ -491,12 +495,15 @@ a.nav-btn:hover {
   pointer-events: none;
   z-index: 2;
   background: transparent;
-  /* Фиксируем позицию через GPU-композитинг */
+  /* Видео сразу масштабируется как активная картинка (scale 1.09) */
+  transform: scale(1.09) translateZ(0);
+  -webkit-transform: scale(1.09) translateZ(0);
+  transform-origin: center center;
+  /* GPU-фиксация позиции */
   will-change: opacity;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  contain: layout style paint;
 }
 
 .nav-btn--hattingen.video-active .hattingen-video {

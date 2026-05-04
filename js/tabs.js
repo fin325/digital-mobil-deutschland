@@ -284,3 +284,51 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
         if (hasDragged) e.stopPropagation();
     }, true);
 })();
+
+/* === Hattingen-кнопка с видео-анимацией === */
+window.showTabHattingen = function(event) {
+  // Стандартное поведение: открываем вкладку
+  if (typeof showTab === 'function') {
+    showTab('news-hattingen', event);
+  }
+
+  // Анимация видео внутри иконки
+  const btn = event.currentTarget;
+  if (!btn || !btn.classList.contains('nav-btn-hattingen')) return;
+
+  const video = btn.querySelector('.hattingen-icon-video');
+  const source = video && video.querySelector('source');
+  if (!video || !source) return;
+
+  // Если уже играет — не запускаем повторно
+  if (btn.classList.contains('video-active')) return;
+
+  // Lazy-load: подгружаем src только при первом клике
+  if (!source.getAttribute('src')) {
+    const realSrc = source.getAttribute('data-src');
+    if (realSrc) {
+      source.setAttribute('src', realSrc);
+      video.load();
+    }
+  }
+
+  // Запуск
+  btn.classList.add('video-active');
+  video.currentTime = 0;
+  const playPromise = video.play();
+  if (playPromise && playPromise.catch) {
+    playPromise.catch(function(err) {
+      console.warn('Hattingen video play failed:', err);
+      btn.classList.remove('video-active');
+    });
+  }
+
+  // Авто-возврат через 6 секунд
+  clearTimeout(btn._hattingenTimer);
+  btn._hattingenTimer = setTimeout(function() {
+    btn.classList.remove('video-active');
+    video.pause();
+    video.currentTime = 0;
+  }, 6000);
+};
+

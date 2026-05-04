@@ -211,7 +211,6 @@ a.nav-btn:hover {
   overflow: hidden;
 }
 
-/* ----- ГЛАЗА (красное свечение) ----- */
 /* ----- ГЛАЗА (чёткие красные точки) ----- */
 .nav-btn--ki::before,
 .nav-btn--ki::after {
@@ -238,7 +237,6 @@ a.nav-btn:hover {
   left: 73%;
 }
 
-/* Анимация глаз — только при активной кнопке */
 /* Анимация глаз — только при активной кнопке */
 .nav-btn--ki.active::before,
 .nav-btn--ki.active::after {
@@ -474,6 +472,7 @@ a.nav-btn:hover {
   position: relative;
   overflow: hidden;
 }
+
 /* Убираем синий фон активного состояния — оставляем картинку */
 .nav-btn--img.nav-btn--hattingen.active {
   background: transparent !important;
@@ -481,17 +480,23 @@ a.nav-btn:hover {
 
 .nav-btn--hattingen .hattingen-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 20px;
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
   z-index: 2;
+  background: transparent;
+  /* Фиксируем позицию через GPU-композитинг */
+  will-change: opacity;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .nav-btn--hattingen.video-active .hattingen-video {
@@ -509,6 +514,9 @@ a.nav-btn:hover {
   }
 }
 
+/* ============================================== */
+/* === ДЕСКТОП: hover-эффекты + активные кнопки === */
+/* ============================================== */
 @media (hover: hover) and (pointer: fine) {
     .navbar {
         backdrop-filter: blur(12px) saturate(160%);
@@ -570,48 +578,65 @@ a.nav-btn:hover {
     .scroll-hint-left {
         display: none !important;
     }
+
+    /* === KI-кнопка: анимация при hover на десктопе === */
+    .nav-btn--ki:hover::before,
+    .nav-btn--ki:hover::after {
+        animation: ki-eye-breathe-red 3s ease-in-out infinite;
+    }
+    
+    .nav-btn--ki:hover .ki-steam::before {
+        animation: ki-steam-rise 3s ease-in-out infinite;
+    }
+    
+    .nav-btn--ki:hover .ki-steam::after {
+        animation: ki-steam-rise 3s ease-in-out infinite;
+        animation-delay: 1.5s;
+    }
+    
+    /* Глаза увеличиваются вместе с картинкой при hover */
+    .nav-btn--ki:hover::before,
+    .nav-btn--ki:hover::after,
+    .nav-btn--ki:active::before,
+    .nav-btn--ki:active::after {
+        transform: scale(1.09);
+        transform-origin: center;
+    }
+    
+    .nav-btn--ki:hover .ki-steam {
+        transform: scale(1.09);
+        transform-origin: center;
+    }
+
+    /* === Активная кнопка остаётся "поднятой" на десктопе === */
+    .nav-btn.active,
+    .nav-btn--img.active,
+    a.nav-btn.active {
+        transform: translateY(-2px) !important;
+        box-shadow: 
+            0 6px 20px rgba(0, 82, 155, 0.45),
+            0 0 0 1px rgba(255, 255, 255, 0.2) inset !important;
+    }
+    
+    .nav-btn.active:hover,
+    .nav-btn--img.active:hover,
+    a.nav-btn.active:hover {
+        transform: translateY(-2px) !important;
+    }
+    
+    .nav-btn--img.active img {
+        transform: scale(1.09);
+    }
 }
 
-/* Глаза мигают при hover (как при .active) */
-  .nav-btn--ki:hover::before,
-  .nav-btn--ki:hover::after {
-    animation: ki-eye-breathe-red 3s ease-in-out infinite;
-  }
-  
-  /* Пар идёт при hover (как при .active) */
-  .nav-btn--ki:hover .ki-steam::before {
-    animation: ki-steam-rise 3s ease-in-out infinite;
-  }
-  
-  .nav-btn--ki:hover .ki-steam::after {
-    animation: ki-steam-rise 3s ease-in-out infinite;
-    animation-delay: 1.5s;
-  }
-  
-  /* Глаза увеличиваются вместе с картинкой при hover */
-  .nav-btn--ki:hover::before,
-  .nav-btn--ki:hover::after,
-  .nav-btn--ki:active::before,
-  .nav-btn--ki:active::after {
-    transform: scale(1.09);
-    transform-origin: center;
-  }
-  
-  /* Контейнер пара тоже увеличивается, чтобы пар шёл из правильной точки */
-  .nav-btn--ki:hover .ki-steam {
-    transform: scale(1.09);
-    transform-origin: center;
-  }
-  
 @media (min-width: 768px) {
-  .nav-rows-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    .nav-rows-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .nav-row {
-    justify-content: center;
-  }
+    .nav-row {
+        justify-content: center;
+    }
 }
-

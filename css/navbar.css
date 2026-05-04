@@ -622,25 +622,6 @@ a.nav-btn:hover {
     .nav-btn--img.active img {
         transform: scale(1.09);
     }
-
-.nav-btn--hattingen {
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-btn--hattingen .hattingen-video {
-  position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
-  object-fit: cover;
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 1;
-}
 }
 @media (min-width: 768px) {
     .nav-rows-wrapper {

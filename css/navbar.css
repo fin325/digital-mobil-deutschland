@@ -622,6 +622,29 @@ a.nav-btn:hover {
     .nav-btn--img.active img {
         transform: scale(1.09);
     }
+    
+    .nav-btn--hattingen .hattingen-video {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.navbar:has(.nav-btn--hattingen.video-active) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 @media (min-width: 768px) {
     .nav-rows-wrapper {

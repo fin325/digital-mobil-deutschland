@@ -469,55 +469,39 @@ a.nav-btn:hover {
     pointer-events: none;
 }
 
-/* === Анимированная иконка Hattingen === */
-.nav-btn-hattingen {
+/* === Анимированная кнопка Hattingen с видео === */
+.nav-btn--hattingen {
   position: relative;
-}
-
-.hattingen-icon-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
-  vertical-align: middle;
-  margin-right: 4px;
-  border-radius: 4px;
   overflow: hidden;
 }
 
-.hattingen-icon-static,
-.hattingen-icon-video {
+.nav-btn--hattingen .hattingen-video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  transition: opacity 0.3s ease;
-}
-
-.hattingen-icon-static {
-  opacity: 1;
-  margin-right: 0 !important;
-}
-
-.hattingen-icon-video {
-  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
   object-fit: cover;
-  pointer-events: none;
-  border-radius: 4px;
-}
-
-.nav-btn-hattingen.video-active .hattingen-icon-static {
+  border-radius: 20px;
   opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
 }
 
-.nav-btn-hattingen.video-active .hattingen-icon-video {
+.nav-btn--hattingen.video-active .hattingen-video {
   opacity: 1;
+}
+
+.nav-btn--hattingen.video-active img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hattingen-icon-video {
-    display: none;
+  .nav-btn--hattingen .hattingen-video {
+    display: none !important;
   }
 }
 

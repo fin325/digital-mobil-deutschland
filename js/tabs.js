@@ -292,26 +292,28 @@ window.showTabHattingen = function(event) {
   }
 
   const btn = event.currentTarget;
-  if (!btn) return;
-  if (btn.classList.contains('video-active')) return;
+  if (!btn) { alert('btn не найден'); return; }
+  if (btn.classList.contains('video-active')) { alert('уже active'); return; }
 
   const animated = btn.querySelector('.hattingen-animated');
-  if (!animated) return;
+  if (!animated) { alert('animated элемент не найден'); return; }
 
-  // Lazy-load: подгружаем WebP только при первом клике
+  alert('animated найден. src=' + animated.getAttribute('src') + ' | data-src=' + animated.getAttribute('data-src'));
+
   if (!animated.getAttribute('src')) {
     const realSrc = animated.getAttribute('data-src');
     if (realSrc) animated.setAttribute('src', realSrc);
+    alert('src установлен: ' + animated.src);
   } else {
-    // Перезапускаем анимацию с начала (форсируем reload)
     const src = animated.src;
     animated.src = '';
     animated.src = src;
+    alert('перезапуск, src: ' + animated.src);
   }
 
   btn.classList.add('video-active');
+  alert('класс video-active добавлен. classList=' + btn.className);
 
-  // Авто-возврат через 6 секунд
   clearTimeout(btn._hattingenTimer);
   btn._hattingenTimer = setTimeout(function() {
     btn.classList.remove('video-active');

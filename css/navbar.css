@@ -211,6 +211,7 @@ a.nav-btn:hover {
   overflow: hidden;
 }
 
+/* ----- ГЛАЗА (красное свечение) ----- */
 /* ----- ГЛАЗА (чёткие красные точки) ----- */
 .nav-btn--ki::before,
 .nav-btn--ki::after {
@@ -237,6 +238,7 @@ a.nav-btn:hover {
   left: 73%;
 }
 
+/* Анимация глаз — только при активной кнопке */
 /* Анимация глаз — только при активной кнопке */
 .nav-btn--ki.active::before,
 .nav-btn--ki.active::after {
@@ -468,42 +470,28 @@ a.nav-btn:hover {
 }
 
 /* === Анимированная кнопка Hattingen с видео === */
+.nav-btn--hattingen {
+  position: relative;
+  overflow: hidden;
+}
 /* Убираем синий фон активного состояния — оставляем картинку */
 .nav-btn--img.nav-btn--hattingen.active {
   background: transparent !important;
 }
 
-/* === Анимированная кнопка Hattingen с видео === */
-.nav-btn--hattingen {
-  position: relative;
-  overflow: hidden;
-  /* GPU-композитинг чтобы видео не съезжало при скролле */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
 .nav-btn--hattingen .hattingen-video {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
   object-fit: cover;
   border-radius: 20px;
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
   z-index: 2;
-  background: transparent;
-  /* Видео сразу масштабируется как активная картинка (scale 1.09) */
-  transform: scale(1.09) translateZ(0);
-  -webkit-transform: scale(1.09) translateZ(0);
-  transform-origin: center center;
-  /* GPU-фиксация позиции */
-  will-change: opacity;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  contain: layout style paint;
 }
 
 .nav-btn--hattingen.video-active .hattingen-video {

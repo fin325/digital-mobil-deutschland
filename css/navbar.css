@@ -626,9 +626,6 @@ a.nav-btn:hover {
 .nav-btn--hattingen {
   position: relative;
   overflow: hidden;
-  transform: translateZ(0);
-  will-change: transform;
-  contain: paint;
 }
 
 .nav-btn--hattingen .hattingen-video {
@@ -642,7 +639,7 @@ a.nav-btn:hover {
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
 }
 }
 @media (min-width: 768px) {

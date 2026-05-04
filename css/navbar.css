@@ -572,6 +572,37 @@ a.nav-btn:hover {
     }
 }
 
+/* Глаза мигают при hover (как при .active) */
+  .nav-btn--ki:hover::before,
+  .nav-btn--ki:hover::after {
+    animation: ki-eye-breathe-red 3s ease-in-out infinite;
+  }
+  
+  /* Пар идёт при hover (как при .active) */
+  .nav-btn--ki:hover .ki-steam::before {
+    animation: ki-steam-rise 3s ease-in-out infinite;
+  }
+  
+  .nav-btn--ki:hover .ki-steam::after {
+    animation: ki-steam-rise 3s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+  
+  /* Глаза увеличиваются вместе с картинкой при hover */
+  .nav-btn--ki:hover::before,
+  .nav-btn--ki:hover::after,
+  .nav-btn--ki:active::before,
+  .nav-btn--ki:active::after {
+    transform: scale(1.09);
+    transform-origin: center;
+  }
+  
+  /* Контейнер пара тоже увеличивается, чтобы пар шёл из правильной точки */
+  .nav-btn--ki:hover .ki-steam {
+    transform: scale(1.09);
+    transform-origin: center;
+  }
+  
 @media (min-width: 768px) {
   .nav-rows-wrapper {
     display: flex;

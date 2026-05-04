@@ -204,6 +204,77 @@ a.nav-btn:hover {
     color: #ffffff !important;
 }
 
+/* ===== KI-Assistenten кнопка с пульсирующими глазами ===== */
+
+/* Контейнер кнопки с картинкой робота */
+.btn-ki-assistenten {
+  position: relative;
+  overflow: hidden;
+  /* остальные твои стили кнопки сохраняются */
+}
+
+/* Левый глаз робота */
+.btn-ki-assistenten::before,
+.btn-ki-assistenten::after {
+  content: '';
+  position: absolute;
+  width: 7%;
+  height: 5%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(0, 229, 255, 0.85) 35%,
+    rgba(0, 229, 255, 0) 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(1px);
+  transition: opacity 0.3s ease;
+  /* отключаем анимацию по умолчанию */
+}
+
+/* Левый глаз — позиция */
+.btn-ki-assistenten::before {
+  top: 42%;
+  left: 51%;
+}
+
+/* Правый глаз — позиция */
+.btn-ki-assistenten::after {
+  top: 42%;
+  left: 64%;
+}
+
+/* Когда вкладка активна — глаза включаются и дышат */
+.btn-ki-assistenten.active::before,
+.btn-ki-assistenten.active::after {
+  animation: ki-eye-breathe 3s ease-in-out infinite;
+}
+
+/* Анимация дыхания: яркость + лёгкое масштабирование */
+@keyframes ki-eye-breathe {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: blur(0.5px);
+  }
+}
+
+/* Уважаем предпочтение пользователя по уменьшению движения */
+@media (prefers-reduced-motion: reduce) {
+  .btn-ki-assistenten.active::before,
+  .btn-ki-assistenten.active::after {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
 /* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
 .scroll-hint-container {
     display: flex;

@@ -469,21 +469,21 @@ a.nav-btn:hover {
     pointer-events: none;
 }
 
-/* === Анимированная кнопка Hattingen с видео === */
+/* === Анимированная кнопка Hattingen с WebP === */
 .nav-btn--hattingen {
   position: relative;
   overflow: hidden;
 }
+
 /* Убираем синий фон активного состояния — оставляем картинку */
 .nav-btn--img.nav-btn--hattingen.active {
   background: transparent !important;
 }
 
-.nav-btn--hattingen .hattingen-video {
+.nav-btn--hattingen .hattingen-animated {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: -10%;
+  left: -10%;
   width: 120%;
   height: 120%;
   object-fit: cover;
@@ -494,17 +494,17 @@ a.nav-btn:hover {
   z-index: 2;
 }
 
-.nav-btn--hattingen.video-active .hattingen-video {
+.nav-btn--hattingen.video-active .hattingen-animated {
   opacity: 1;
 }
 
-.nav-btn--hattingen.video-active img {
+.nav-btn--hattingen.video-active .hattingen-static {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-btn--hattingen .hattingen-video {
+  .nav-btn--hattingen .hattingen-animated {
     display: none !important;
   }
 }

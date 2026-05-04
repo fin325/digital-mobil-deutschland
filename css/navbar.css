@@ -474,6 +474,10 @@ a.nav-btn:hover {
   position: relative;
   overflow: hidden;
 }
+/* Убираем синий фон активного состояния — оставляем картинку */
+.nav-btn--img.nav-btn--hattingen.active {
+  background: transparent !important;
+}
 
 .nav-btn--hattingen .hattingen-video {
   position: absolute;

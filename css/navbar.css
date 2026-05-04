@@ -212,22 +212,17 @@ a.nav-btn:hover {
 }
 
 /* ----- ГЛАЗА (красное свечение) ----- */
+/* ----- ГЛАЗА (чёткие красные точки) ----- */
 .nav-btn--ki::before,
 .nav-btn--ki::after {
   content: '';
   position: absolute;
-  width: 7%;
-  height: 5%;
+  width: 4%;
+  height: 4%;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 230, 230, 0.95) 0%,
-    rgba(255, 40, 40, 0.9) 35%,
-    rgba(255, 0, 0, 0) 70%
-  );
+  background: #ff1a1a;
   opacity: 0;
   pointer-events: none;
-  filter: blur(1px);
   z-index: 2;
 }
 
@@ -240,15 +235,16 @@ a.nav-btn:hover {
 /* Правый глаз — сдвинут правее и выше */
 .nav-btn--ki::after {
   top: 39%;
-  left: 70%;
+  left: 73%;
 }
 
+/* Анимация глаз — только при активной кнопке */
 /* Анимация глаз — только при активной кнопке */
 .nav-btn--ki.active::before,
 .nav-btn--ki.active::after {
   animation: ki-eye-breathe-red 3s ease-in-out infinite;
-  box-shadow: 0 0 12px 4px rgba(255, 30, 30, 0.6);
 }
+
 
 @keyframes ki-eye-breathe-red {
   0%, 100% {
@@ -294,13 +290,13 @@ a.nav-btn:hover {
 /* Стартовая позиция пара над левым глазом */
 .ki-steam::before {
   top: 56%;
-  left: 52%;
+  left: 62%;
 }
 
 /* Стартовая позиция пара над правым глазом */
 .ki-steam::after {
   top: 56%;
-  left: 65%;
+  left: 75%;
 }
 
 /* Анимация пара — только при активной кнопке */

@@ -206,16 +206,16 @@ a.nav-btn:hover {
 
 /* ===== KI-Assistenten кнопка с пульсирующими глазами ===== */
 
-/* Контейнер кнопки с картинкой робота */
-.btn-ki-assistenten {
+/* ===== KI-Button: пульсирующие глаза робота при активной вкладке ===== */
+
+.nav-btn--ki {
   position: relative;
   overflow: hidden;
-  /* остальные твои стили кнопки сохраняются */
 }
 
-/* Левый глаз робота */
-.btn-ki-assistenten::before,
-.btn-ki-assistenten::after {
+/* Левый и правый глаз — два светящихся круга поверх картинки */
+.nav-btn--ki::before,
+.nav-btn--ki::after {
   content: '';
   position: absolute;
   width: 7%;
@@ -230,25 +230,24 @@ a.nav-btn:hover {
   opacity: 0;
   pointer-events: none;
   filter: blur(1px);
-  transition: opacity 0.3s ease;
-  /* отключаем анимацию по умолчанию */
+  z-index: 2;
 }
 
-/* Левый глаз — позиция */
-.btn-ki-assistenten::before {
+/* Левый глаз */
+.nav-btn--ki::before {
   top: 42%;
   left: 51%;
 }
 
-/* Правый глаз — позиция */
-.btn-ki-assistenten::after {
+/* Правый глаз */
+.nav-btn--ki::after {
   top: 42%;
   left: 64%;
 }
 
 /* Когда вкладка активна — глаза включаются и дышат */
-.btn-ki-assistenten.active::before,
-.btn-ki-assistenten.active::after {
+.nav-btn--ki.active::before,
+.nav-btn--ki.active::after {
   animation: ki-eye-breathe 3s ease-in-out infinite;
 }
 
@@ -266,10 +265,10 @@ a.nav-btn:hover {
   }
 }
 
-/* Уважаем предпочтение пользователя по уменьшению движения */
+/* Для пользователей с prefers-reduced-motion — без анимации, но с подсветкой */
 @media (prefers-reduced-motion: reduce) {
-  .btn-ki-assistenten.active::before,
-  .btn-ki-assistenten.active::after {
+  .nav-btn--ki.active::before,
+  .nav-btn--ki.active::after {
     animation: none;
     opacity: 0.85;
   }

@@ -8,6 +8,15 @@ scroll-hint {
     display: block;
 }
 
+/* По умолчанию (мобильные) — показываем видео, скрываем картинку */
+.nav-btn--meinung .meinung-img {
+  display: none;
+}
+
+.nav-btn--meinung .meinung-video {
+  display: block;
+}
+
 .nav-btn--meinung {
   position: relative;
   overflow: hidden;

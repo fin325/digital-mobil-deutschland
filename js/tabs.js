@@ -389,12 +389,51 @@ window.showTabHattingen = function(event) {
     }
 })();
 
+// ============================================
+// Видео-кнопка Meinung: воспроизведение по клику
+// ============================================
+
 function playMeinungVideo(event) {
-  const video = event.currentTarget.querySelector('.meinung-video');
+  const button = event.currentTarget;
+  const video = button.querySelector('.meinung-video');
+  
   if (video) {
-    video.currentTime = 0; // начать с первого кадра
-    video.play();
+    // Сбрасываем на начало и запускаем
+    video.currentTime = 0;
+    video.play().catch(err => console.log('Video play blocked:', err));
+    
+    // Через 3 секунды останавливаем и возвращаем на первый кадр
+    setTimeout(() => {
+      video.pause();
+      video.currentTime = 0;
+    }, 3000);
   }
-  showTab('meinung', event); // переключение таба
+  
+  // Переключаем таб как обычно
+  showTab('meinung', event);
 }
+
+// Сброс видео при переключении на другую вкладку
+function resetMeinungVideo() {
+  const video = document.querySelector('.meinung-video');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
+}
+
+// Показать первый кадр сразу при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('.meinung-video');
+  if (video) {
+    // Принудительно загружаем первый кадр для отображения
+    video.currentTime = 0.01;
+    video.pause();
+  }
+});
+
+// Экспорт в window для совместимости с твоей архитектурой
+window.playMeinungVideo = playMeinungVideo;
+window.resetMeinungVideo = resetMeinungVideo;
+
 

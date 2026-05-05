@@ -388,3 +388,13 @@ window.showTabHattingen = function(event) {
         });
     }
 })();
+
+function playMeinungVideo(event) {
+  const video = event.currentTarget.querySelector('.meinung-video');
+  if (video) {
+    video.currentTime = 0; // начать с первого кадра
+    video.play();
+  }
+  showTab('meinung', event); // переключение таба
+}
+

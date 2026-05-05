@@ -397,10 +397,8 @@ window.showTabHattingen = function(event) {
   }
 };
 
-/* === Стоп видео Hattingen при скролле и переключении вкладок (только ПК) === */
+/* === Управление видео Hattingen === */
 (function() {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
     function stopHattingenVideo() {
         const btn = document.querySelector('.nav-btn--hattingen.video-active');
         if (!btn) return;
@@ -415,13 +413,18 @@ window.showTabHattingen = function(event) {
         }
     }
 
-    window.addEventListener('wheel', stopHattingenVideo, { passive: true });
-    window.addEventListener('scroll', stopHattingenVideo, { passive: true });
-
+    // Останавливаем видео при клике на любую другую вкладку навбара
+    // (работает на всех устройствах — и ПК, и мобильных)
     document.addEventListener('click', function(e) {
         const clickedBtn = e.target.closest('.nav-btn');
         if (clickedBtn && !clickedBtn.classList.contains('nav-btn--hattingen')) {
             stopHattingenVideo();
         }
     });
+
+    // Останавливаем видео при скролле — только на ПК
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        window.addEventListener('wheel', stopHattingenVideo, { passive: true });
+        window.addEventListener('scroll', stopHattingenVideo, { passive: true });
+    }
 })();

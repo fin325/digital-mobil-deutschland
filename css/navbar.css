@@ -92,6 +92,9 @@ a {
     transform: scale(1.09);
 }
 
+.nav-btn--img.active img {
+    transform: scale(1.09) !important;
+}
 
 /* Активная кнопка с картинкой — возвращаем синий градиент поверх */
 .nav-btn--img.active {

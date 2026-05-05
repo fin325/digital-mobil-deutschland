@@ -285,39 +285,49 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     }, true);
 })();
 
-/* === Hattingen-кнопка с WebP-анимацией === */
+/* === Hattingen-кнопка с видео-анимацией === */
 window.showTabHattingen = function(event) {
   if (typeof showTab === 'function') {
     showTab('news-hattingen', event);
   }
 
   const btn = event.currentTarget;
-  if (!btn) { alert('btn не найден'); return; }
-  if (btn.classList.contains('video-active')) { alert('уже active'); return; }
+  if (!btn) return;
 
-  const animated = btn.querySelector('.hattingen-animated');
-  if (!animated) { alert('animated элемент не найден'); return; }
+  const video = btn.querySelector('.hattingen-video');
+  const source = video && video.querySelector('source');
+  if (!video || !source) return;
 
-  alert('animated найден. src=' + animated.getAttribute('src') + ' | data-src=' + animated.getAttribute('data-src'));
+  if (btn.classList.contains('video-active')) return;
 
-  if (!animated.getAttribute('src')) {
-    const realSrc = animated.getAttribute('data-src');
-    if (realSrc) animated.setAttribute('src', realSrc);
-    alert('src установлен: ' + animated.src);
-  } else {
-    const src = animated.src;
-    animated.src = '';
-    animated.src = src;
-    alert('перезапуск, src: ' + animated.src);
+  // Lazy-load: подгружаем src только при первом клике
+  if (!source.getAttribute('src')) {
+    const realSrc = source.getAttribute('data-src');
+    if (realSrc) {
+      source.setAttribute('src', realSrc);
+      video.load();
+    }
   }
 
-  btn.classList.add('video-active');
-  alert('класс video-active добавлен. classList=' + btn.className);
-
-  clearTimeout(btn._hattingenTimer);
-  btn._hattingenTimer = setTimeout(function() {
-    btn.classList.remove('video-active');
-  }, 6000);
+  // Запускаем видео — но показываем только когда реально играет
+  video.currentTime = 0;
+  const playPromise = video.play();
+  
+  if (playPromise && playPromise.then) {
+    playPromise.then(function() {
+      // Видео реально начало играть — теперь показываем
+      btn.classList.add('video-active');
+      
+      // Авто-возврат через 6 секунд
+      clearTimeout(btn._hattingenTimer);
+      btn._hattingenTimer = setTimeout(function() {
+        btn.classList.remove('video-active');
+        video.pause();
+        video.currentTime = 0;
+      }, 6000);
+    }).catch(function(err) {
+      console.warn('Video play failed:', err);
+    });
+  }
 };
-
 

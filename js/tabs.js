@@ -300,35 +300,43 @@ window.showTabHattingen = function(event) {
 
   if (btn.classList.contains('video-active')) return;
 
+  // Принудительно ставим атрибуты, нужные для надёжного play() на десктопе
+  video.muted = true;
+  video.playsInline = true;
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
+
   // Lazy-load: подгружаем src только при первом клике
   if (!source.getAttribute('src')) {
     const realSrc = source.getAttribute('data-src');
     if (realSrc) {
       source.setAttribute('src', realSrc);
-      video.load();
     }
   }
 
-  // Запускаем видео — но показываем только когда реально играет
+  // Принудительная перезагрузка декодера каждый раз — лечит чёрный экран после YouTube
+  video.load();
   video.currentTime = 0;
+
+  // Показываем сразу, не ждём promise
+  btn.classList.add('video-active');
+
   const playPromise = video.play();
-  
+
   if (playPromise && playPromise.then) {
-    playPromise.then(function() {
-      // Видео реально начало играть — теперь показываем
-      btn.classList.add('video-active');
-      
-      // Авто-возврат через 6 секунд
-      clearTimeout(btn._hattingenTimer);
-      btn._hattingenTimer = setTimeout(function() {
-        btn.classList.remove('video-active');
-        video.pause();
-        video.currentTime = 0;
-      }, 6000);
-    }).catch(function(err) {
+    playPromise.catch(function(err) {
       console.warn('Video play failed:', err);
+      // Если play() упал — возвращаем картинку
+      btn.classList.remove('video-active');
     });
   }
+
+  // Авто-возврат через 6 секунд (запускается всегда, даже если play() ещё висит)
+  clearTimeout(btn._hattingenTimer);
+  btn._hattingenTimer = setTimeout(function() {
+    btn.classList.remove('video-active');
+    video.pause();
+  }, 6000);
 };
 
 /* === Стоп видео Hattingen при скролле и переключении вкладок (только ПК) === */
@@ -346,7 +354,7 @@ window.showTabHattingen = function(event) {
 
         if (video) {
             video.pause();
-            video.currentTime = 0;
+            // currentTime НЕ сбрасываем — позиция сохранится для следующего запуска
         }
     }
 

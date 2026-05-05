@@ -295,48 +295,58 @@ window.showTabHattingen = function(event) {
   if (!btn) return;
 
   const video = btn.querySelector('.hattingen-video');
-  const source = video && video.querySelector('source');
+  let source = video && video.querySelector('source');
   if (!video || !source) return;
 
   if (btn.classList.contains('video-active')) return;
 
-  // Принудительно ставим атрибуты, нужные для надёжного play() на десктопе
-  video.muted = true;
-  video.playsInline = true;
-  video.setAttribute('playsinline', '');
-  video.setAttribute('webkit-playsinline', '');
+  // Определяем, ПК или мобильное устройство
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  // Lazy-load: подгружаем src только при первом клике
-  if (!source.getAttribute('src')) {
-    const realSrc = source.getAttribute('data-src');
-    if (realSrc) {
-      source.setAttribute('src', realSrc);
+  if (isDesktop) {
+    // === ВЕТКА ДЛЯ ПК: пересоздаём <source> каждый раз ===
+    // Это лечит "пустоту" в кнопке после воспроизведения YouTube во вкладке
+    const realSrc = source.getAttribute('src') || source.getAttribute('data-src');
+    const sourceType = source.getAttribute('type') || 'video/mp4';
+    if (!realSrc) return;
+
+    const newSource = document.createElement('source');
+    newSource.setAttribute('src', realSrc);
+    newSource.setAttribute('type', sourceType);
+    video.removeChild(source);
+    video.appendChild(newSource);
+    video.load();
+  } else {
+    // === ВЕТКА ДЛЯ МОБИЛЬНЫХ: оригинальная логика lazy-load (не трогаем) ===
+    if (!source.getAttribute('src')) {
+      const realSrc = source.getAttribute('data-src');
+      if (realSrc) {
+        source.setAttribute('src', realSrc);
+        video.load();
+      }
     }
   }
 
-  // Принудительная перезагрузка декодера каждый раз — лечит чёрный экран после YouTube
-  video.load();
+  // Запускаем видео — но показываем только когда реально играет
   video.currentTime = 0;
-
-  // Показываем сразу, не ждём promise
-  btn.classList.add('video-active');
-
   const playPromise = video.play();
-
+  
   if (playPromise && playPromise.then) {
-    playPromise.catch(function(err) {
+    playPromise.then(function() {
+      // Видео реально начало играть — теперь показываем
+      btn.classList.add('video-active');
+      
+      // Авто-возврат через 6 секунд
+      clearTimeout(btn._hattingenTimer);
+      btn._hattingenTimer = setTimeout(function() {
+        btn.classList.remove('video-active');
+        video.pause();
+        video.currentTime = 0;
+      }, 6000);
+    }).catch(function(err) {
       console.warn('Video play failed:', err);
-      // Если play() упал — возвращаем картинку
-      btn.classList.remove('video-active');
     });
   }
-
-  // Авто-возврат через 6 секунд (запускается всегда, даже если play() ещё висит)
-  clearTimeout(btn._hattingenTimer);
-  btn._hattingenTimer = setTimeout(function() {
-    btn.classList.remove('video-active');
-    video.pause();
-  }, 6000);
 };
 
 /* === Стоп видео Hattingen при скролле и переключении вкладок (только ПК) === */
@@ -354,7 +364,7 @@ window.showTabHattingen = function(event) {
 
         if (video) {
             video.pause();
-            // currentTime НЕ сбрасываем — позиция сохранится для следующего запуска
+            video.currentTime = 0;
         }
     }
 

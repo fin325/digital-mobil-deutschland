@@ -668,16 +668,15 @@ a.nav-btn:hover {
         transform: scale(1.09); !important;
     }
     
+        /* === Meinung на ПК: статичная картинка как у других иконок === */
     .nav-btn--meinung .meinung-img {
-    display: block;
-    width: 120%;
-    height: 120%;
-    object-fit: cover;
-  }
-  
-  .nav-btn--meinung .meinung-video {
-    display: none;
-  }
+        display: block;
+    }
+    
+    .nav-btn--meinung .meinung-video {
+        display: none;
+    }
+
 }
 @media (min-width: 768px) {
     .nav-rows-wrapper {

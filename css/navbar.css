@@ -520,14 +520,19 @@ a.nav-btn:hover {
 
     /* Фикс прыжка видео Hattingen при скролле */
     .nav-btn--hattingen .hattingen-video {
-        top: -10%;
-        left: -10%;
-        transform: translateZ(0);
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        will-change: opacity;
+        /* Центрирование без transform — через геометрию */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: none;
+        
+        /* Никаких GPU-слоёв и will-change — рисуемся вместе с родителем */
+        backface-visibility: visible;
+        -webkit-backface-visibility: visible;
+        will-change: auto;
     }
-
+    
     .nav-btn {
         font-weight: 600;
         font-size: 0.98rem;

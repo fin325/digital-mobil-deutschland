@@ -300,67 +300,11 @@ window.showTabHattingen = function(event) {
 
   if (btn.classList.contains('video-active')) return;
 
-  // Lazy-load: подгружаем src только при первом клике
-  if (!source.getAttribute('src')) {
-    const realSrc = source.getAttribute('data-src');
-    if (realSrc) {
-      source.setAttribute('src', realSrc);
-      video.load();
-    }
-  }
-
-  // Функция показа видео + запуска таймера авто-возврата
-  function startPlayback() {
-    btn.classList.add('video-active');
-    clearTimeout(btn._hattingenTimer);
-    btn._hattingenTimer = setTimeout(function() {
-      btn.classList.remove('video-active');
-      video.pause();
-      video.currentTime = 0;
-    }, 6000);
-  }
-
-  video.currentTime = 0;
-
-  // Слушаем событие 'playing' — оно срабатывает, когда видео реально начало рисовать кадры,
-  // даже если play() promise завис (Chrome autoplay-policy после YouTube)
-  const onPlaying = function() {
-    video.removeEventListener('playing', onPlaying);
-    startPlayback();
-  };
-  video.addEventListener('playing', onPlaying);
-
-  // Запускаем видео
-  const playPromise = video.play();
-  
-  if (playPromise && playPromise.then) {
-    playPromise.catch(function(err) {
-      console.warn('Video play failed:', err);
-      video.removeEventListener('playing', onPlaying);
-    });
-  }
-};
-
-/* === Hattingen-кнопка с видео-анимацией === */
-window.showTabHattingen = function(event) {
-  if (typeof showTab === 'function') {
-    showTab('news-hattingen', event);
-  }
-
-  const btn = event.currentTarget;
-  if (!btn) return;
-
-  const video = btn.querySelector('.hattingen-video');
-  const source = video && video.querySelector('source');
-  if (!video || !source) return;
-
-  if (btn.classList.contains('video-active')) return;
-
-  // На ПК видео проигрывается только один раз за сессию
-  // (после взаимодействия с YouTube/iframe оно всё равно не отображается до перезагрузки)
+  // На ПК: если юзер уже запускал любой iframe — видео не воспроизводим
+  // (после iframe видео всё равно не отображается до перезагрузки страницы)
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (isDesktop && window._hattingenVideoPlayed) {
-    return; // Видео уже было показано — просто переключаемся на вкладку без анимации
+  if (isDesktop && window._hattingenIframeUsed) {
+    return; // Просто переключаемся на вкладку, без анимации
   }
 
   // Lazy-load: подгружаем src только при первом клике
@@ -379,12 +323,7 @@ window.showTabHattingen = function(event) {
   if (playPromise && playPromise.then) {
     playPromise.then(function() {
       btn.classList.add('video-active');
-
-      // На ПК помечаем, что видео уже было показано — больше не запускаем
-      if (isDesktop) {
-        window._hattingenVideoPlayed = true;
-      }
-
+      
       clearTimeout(btn._hattingenTimer);
       btn._hattingenTimer = setTimeout(function() {
         btn.classList.remove('video-active');
@@ -413,8 +352,7 @@ window.showTabHattingen = function(event) {
         }
     }
 
-    // Останавливаем видео при клике на любую другую вкладку навбара
-    // (работает на всех устройствах — и ПК, и мобильных)
+    // Останавливаем видео при клике на любую другую вкладку навбара (все устройства)
     document.addEventListener('click', function(e) {
         const clickedBtn = e.target.closest('.nav-btn');
         if (clickedBtn && !clickedBtn.classList.contains('nav-btn--hattingen')) {
@@ -422,9 +360,31 @@ window.showTabHattingen = function(event) {
         }
     });
 
-    // Останавливаем видео при скролле — только на ПК
+    // Только для ПК: скролл-стоп + блокировка после iframe
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        // Стоп при скролле
         window.addEventListener('wheel', stopHattingenVideo, { passive: true });
         window.addEventListener('scroll', stopHattingenVideo, { passive: true });
+
+        // Детектим взаимодействие с iframe — после этого видео в кнопке отключается
+        function markIframeInteracted() {
+            window._hattingenIframeUsed = true;
+        }
+
+        // Способ 1: клик по самому элементу iframe
+        document.addEventListener('click', function(e) {
+            const iframe = e.target.closest('iframe') ||
+                           (e.target.tagName === 'IFRAME' ? e.target : null);
+            if (iframe) {
+                markIframeInteracted();
+            }
+        });
+
+        // Способ 2: страховка — потеря фокуса с переходом на iframe
+        window.addEventListener('blur', function() {
+            if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
+                markIframeInteracted();
+            }
+        });
     }
 })();

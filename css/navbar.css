@@ -96,6 +96,12 @@ a {
     transform: scale(1.09) !important;
 }
 
+.nav-btn.active,
+.nav-btn--img.active,
+a.nav-btn.active {
+    transform: translateY(-2px) !important;
+}
+
 /* Активная кнопка с картинкой — возвращаем синий градиент поверх */
 .nav-btn--img.active {
     background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%) !important;

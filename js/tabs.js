@@ -341,9 +341,64 @@ window.showTabHattingen = function(event) {
   }
 };
 
-/* === Управление видео Hattingen на ПК: стоп при скролле + перезагрузка декодера === */
+/* === Hattingen-кнопка с видео-анимацией === */
+window.showTabHattingen = function(event) {
+  if (typeof showTab === 'function') {
+    showTab('news-hattingen', event);
+  }
+
+  const btn = event.currentTarget;
+  if (!btn) return;
+
+  const video = btn.querySelector('.hattingen-video');
+  const source = video && video.querySelector('source');
+  if (!video || !source) return;
+
+  if (btn.classList.contains('video-active')) return;
+
+  // На ПК видео проигрывается только один раз за сессию
+  // (после взаимодействия с YouTube/iframe оно всё равно не отображается до перезагрузки)
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (isDesktop && window._hattingenVideoPlayed) {
+    return; // Видео уже было показано — просто переключаемся на вкладку без анимации
+  }
+
+  // Lazy-load: подгружаем src только при первом клике
+  if (!source.getAttribute('src')) {
+    const realSrc = source.getAttribute('data-src');
+    if (realSrc) {
+      source.setAttribute('src', realSrc);
+      video.load();
+    }
+  }
+
+  // Запускаем видео — но показываем только когда реально играет
+  video.currentTime = 0;
+  const playPromise = video.play();
+  
+  if (playPromise && playPromise.then) {
+    playPromise.then(function() {
+      btn.classList.add('video-active');
+
+      // На ПК помечаем, что видео уже было показано — больше не запускаем
+      if (isDesktop) {
+        window._hattingenVideoPlayed = true;
+      }
+
+      clearTimeout(btn._hattingenTimer);
+      btn._hattingenTimer = setTimeout(function() {
+        btn.classList.remove('video-active');
+        video.pause();
+        video.currentTime = 0;
+      }, 6000);
+    }).catch(function(err) {
+      console.warn('Video play failed:', err);
+    });
+  }
+};
+
+/* === Стоп видео Hattingen при скролле и переключении вкладок (только ПК) === */
 (function() {
-    // Только для ПК
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     function stopHattingenVideo() {
@@ -360,55 +415,13 @@ window.showTabHattingen = function(event) {
         }
     }
 
-    // Принудительная перезагрузка декодера видео в кнопке
-    // (лечит "пустоту" после взаимодействия с YouTube/iframe)
-    function reloadHattingenVideo() {
-        const btn = document.querySelector('.nav-btn--hattingen');
-        if (!btn) return;
-
-        const video = btn.querySelector('.hattingen-video');
-        const source = video && video.querySelector('source');
-        if (!video || !source) return;
-
-        const realSrc = source.getAttribute('src') || source.getAttribute('data-src');
-        const sourceType = source.getAttribute('type') || 'video/mp4';
-        if (!realSrc) return;
-
-        // Пересоздаём <source>, чтобы декодер заново выделил visual surface
-        const newSource = document.createElement('source');
-        newSource.setAttribute('src', realSrc);
-        newSource.setAttribute('type', sourceType);
-        video.removeChild(source);
-        video.appendChild(newSource);
-        video.load();
-    }
-
-    // 1. Останавливаем видео при скролле колесом/трекпадом
     window.addEventListener('wheel', stopHattingenVideo, { passive: true });
     window.addEventListener('scroll', stopHattingenVideo, { passive: true });
 
-    // 2. Останавливаем при клике на любую другую вкладку навбара
     document.addEventListener('click', function(e) {
         const clickedBtn = e.target.closest('.nav-btn');
         if (clickedBtn && !clickedBtn.classList.contains('nav-btn--hattingen')) {
             stopHattingenVideo();
         }
     });
-
-    // 3. Перезагружаем декодер при клике на iframe (YouTube и т.п.)
-    document.addEventListener('click', function(e) {
-        const iframe = e.target.closest('iframe') ||
-                       (e.target.tagName === 'IFRAME' ? e.target : null);
-        if (iframe) {
-            setTimeout(reloadHattingenVideo, 1000);
-        }
-    });
-
-    // 4. Перезагружаем декодер ПЕРЕД запуском видео (capture-фаза, до showTabHattingen)
-    document.addEventListener('click', function(e) {
-        const hattingenBtn = e.target.closest('.nav-btn--hattingen');
-        if (hattingenBtn) {
-            reloadHattingenVideo();
-        }
-    }, true);
 })();

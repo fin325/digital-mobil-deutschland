@@ -392,9 +392,14 @@ window.showTabHattingen = function(event) {
 // ============================================
 // Видео-кнопка Meinung: воспроизведение по клику
 // Останавливается на последнем кадре, сброс при переключении вкладок
+// На ПК — статичная картинка вместо видео (через CSS)
 // ============================================
 
 (function() {
+  // На ПК видео не нужно — используется статичная картинка
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (isDesktop) return;
+  
   const video = document.querySelector('.meinung-video');
   if (!video) return;
 

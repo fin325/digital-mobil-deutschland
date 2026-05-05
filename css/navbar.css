@@ -8,6 +8,20 @@ scroll-hint {
     display: block;
 }
 
+.nav-btn--meinung {
+  position: relative;
+  overflow: hidden;
+  padding: 0; /* убрать внутренние отступы кнопки */
+}
+
+.meinung-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* или 'contain' если хочешь видеть всё видео целиком */
+  display: block;
+  pointer-events: none; /* клик проходит через видео на кнопку */
+}
+
 .navbar .nav-btn .icon-emoji {
   margin-left: -4px; /* отрицательный — двигает влево */
 }

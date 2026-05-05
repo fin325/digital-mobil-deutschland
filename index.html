@@ -81,9 +81,8 @@
         </button>
         <button class="nav-btn nav-btn--img" onclick="showTab('news', event)"><img src="img/buttons/nachrichten.png" alt="Nachrichten"></button>
         <button class="nav-btn nav-btn--img" onclick="showTab('jobs', event)"><img src="img/buttons/arbeit.png" alt="Arbeit"></button>
-        <button class="nav-btn nav-btn--img nav-btn--meinung" onclick="showTab('meinung', event)">
         <button class="nav-btn nav-btn--img nav-btn--meinung" onclick="playMeinungVideo(event)">
-  <video class="meinung-video" muted loop playsinline preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback">
+  <video class="meinung-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
     <source src="/videos/meinung-video1.mp4" type="video/mp4">
   </video>
         </button>

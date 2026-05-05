@@ -395,21 +395,48 @@ window.showTabHattingen = function(event) {
 // На ПК — статичная картинка вместо видео (через CSS)
 // ============================================
 
+// Универсальный обработчик клика — работает и на ПК, и на мобильных
+window.playMeinungVideo = function(event) {
+  const button = event.currentTarget;
+  const v = button.querySelector('.meinung-video');
+  
+  // На ПК видео скрыто через CSS — не запускаем
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  
+  if (v && !isDesktop && !v._isPlaying) {
+    v._isPlaying = true;
+    v._hasPlayed = true;
+    v.currentTime = 0;
+    
+    const playPromise = v.play();
+    if (playPromise && playPromise.then) {
+      playPromise.catch(err => {
+        console.warn('Meinung video play failed:', err);
+        v._isPlaying = false;
+      });
+    }
+  }
+  
+  // Переключаем таб (работает и на ПК, и на мобильных)
+  if (typeof showTab === 'function') {
+    showTab('meinung', event);
+  }
+};
+
+// Логика подготовки первого кадра — только для мобильных
 (function() {
-  // На ПК видео не нужно — используется статичная картинка
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (isDesktop) return;
   
   const video = document.querySelector('.meinung-video');
   if (!video) return;
 
-  let isPlaying = false;
-  let hasPlayed = false; // флаг: видео уже проигрывалось хотя бы раз
+  video._isPlaying = false;
+  video._hasPlayed = false;
 
   // Принудительная загрузка первого кадра как "превью"
   function showFirstFrame() {
-    if (hasPlayed) return; // не сбрасывать, если уже проигрывалось
-    
+    if (video._hasPlayed) return;
     video.pause();
     
     if (video.readyState >= 2) {
@@ -425,51 +452,22 @@ window.showTabHattingen = function(event) {
   // Запуск загрузки видео
   video.load();
   showFirstFrame();
-  
-  // Многократные попытки для iOS
   setTimeout(showFirstFrame, 500);
   setTimeout(showFirstFrame, 1500);
 
   // Обработчик окончания видео — остаемся на последнем кадре
   video.addEventListener('ended', function() {
-    isPlaying = false;
-    // Видео автоматически останавливается на последнем кадре
-    // Ничего не делаем — currentTime уже равен длительности
+    video._isPlaying = false;
   });
-
-  // Воспроизведение по клику на кнопку
-  window.playMeinungVideo = function(event) {
-    const button = event.currentTarget;
-    const v = button.querySelector('.meinung-video');
-    
-    if (v && !isPlaying) {
-      isPlaying = true;
-      hasPlayed = true;
-      v.currentTime = 0;
-      
-      const playPromise = v.play();
-      if (playPromise && playPromise.then) {
-        playPromise.catch(err => {
-          console.warn('Meinung video play failed:', err);
-          isPlaying = false;
-        });
-      }
-    }
-    
-    // Переключаем таб
-    if (typeof showTab === 'function') {
-      showTab('meinung', event);
-    }
-  };
 
   // Сброс на первый кадр при клике на любую другую кнопку навбара
   document.addEventListener('click', function(e) {
     const clickedBtn = e.target.closest('.nav-btn');
     if (clickedBtn && !clickedBtn.classList.contains('nav-btn--meinung')) {
       video.pause();
-      video.currentTime = 0.1; // возврат к первому кадру
-      isPlaying = false;
-      hasPlayed = false; // разрешаем повторный показ первого кадра
+      video.currentTime = 0.1;
+      video._isPlaying = false;
+      video._hasPlayed = false;
     }
   });
 })();

@@ -327,24 +327,34 @@ window.showTabHattingen = function(event) {
     }
   }
 
-  // Запускаем видео — но показываем только когда реально играет
+  // Функция показа видео + запуска таймера авто-возврата
+  function startPlayback() {
+    btn.classList.add('video-active');
+    clearTimeout(btn._hattingenTimer);
+    btn._hattingenTimer = setTimeout(function() {
+      btn.classList.remove('video-active');
+      video.pause();
+      video.currentTime = 0;
+    }, 6000);
+  }
+
   video.currentTime = 0;
+
+  // Слушаем событие 'playing' — оно срабатывает, когда видео реально начало рисовать кадры,
+  // даже если play() promise завис (Chrome autoplay-policy после YouTube)
+  const onPlaying = function() {
+    video.removeEventListener('playing', onPlaying);
+    startPlayback();
+  };
+  video.addEventListener('playing', onPlaying);
+
+  // Запускаем видео
   const playPromise = video.play();
   
   if (playPromise && playPromise.then) {
-    playPromise.then(function() {
-      // Видео реально начало играть — теперь показываем
-      btn.classList.add('video-active');
-      
-      // Авто-возврат через 6 секунд
-      clearTimeout(btn._hattingenTimer);
-      btn._hattingenTimer = setTimeout(function() {
-        btn.classList.remove('video-active');
-        video.pause();
-        video.currentTime = 0;
-      }, 6000);
-    }).catch(function(err) {
+    playPromise.catch(function(err) {
       console.warn('Video play failed:', err);
+      video.removeEventListener('playing', onPlaying);
     });
   }
 };

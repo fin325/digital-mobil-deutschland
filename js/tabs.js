@@ -305,7 +305,6 @@ window.showTabHattingen = function(event) {
 
   if (isDesktop) {
     // === ВЕТКА ДЛЯ ПК: пересоздаём <source> каждый раз ===
-    // Это лечит "пустоту" в кнопке после воспроизведения YouTube во вкладке
     const realSrc = source.getAttribute('src') || source.getAttribute('data-src');
     const sourceType = source.getAttribute('type') || 'video/mp4';
     if (!realSrc) return;
@@ -317,7 +316,7 @@ window.showTabHattingen = function(event) {
     video.appendChild(newSource);
     video.load();
   } else {
-    // === ВЕТКА ДЛЯ МОБИЛЬНЫХ: оригинальная логика lazy-load (не трогаем) ===
+    // === ВЕТКА ДЛЯ МОБИЛЬНЫХ: оригинальная логика lazy-load ===
     if (!source.getAttribute('src')) {
       const realSrc = source.getAttribute('data-src');
       if (realSrc) {
@@ -330,25 +329,39 @@ window.showTabHattingen = function(event) {
   // Функция показа видео + запуска таймера авто-возврата
   function startPlayback() {
     btn.classList.add('video-active');
+
+    // === ТЕСТОВЫЕ СТИЛИ — принудительно делаем видео видимым на ПК ===
+    if (isDesktop) {
+      video.style.opacity = '1';
+      video.style.visibility = 'visible';
+      video.style.zIndex = '999';
+      video.style.display = 'block';
+    }
+
     clearTimeout(btn._hattingenTimer);
     btn._hattingenTimer = setTimeout(function() {
       btn.classList.remove('video-active');
       video.pause();
       video.currentTime = 0;
+
+      // Чистим тестовые стили после остановки
+      if (isDesktop) {
+        video.style.opacity = '';
+        video.style.visibility = '';
+        video.style.zIndex = '';
+        video.style.display = '';
+      }
     }, 6000);
   }
 
   video.currentTime = 0;
 
-  // Слушаем событие 'playing' — оно срабатывает, когда видео реально начало рисовать кадры,
-  // даже если play() promise завис (Chrome autoplay-policy после YouTube)
   const onPlaying = function() {
     video.removeEventListener('playing', onPlaying);
     startPlayback();
   };
   video.addEventListener('playing', onPlaying);
 
-  // Запускаем видео
   const playPromise = video.play();
   
   if (playPromise && playPromise.then) {

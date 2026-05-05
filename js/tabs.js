@@ -391,21 +391,22 @@ window.showTabHattingen = function(event) {
 
 // ============================================
 // Видео-кнопка Meinung: воспроизведение по клику
+// Останавливается на последнем кадре, сброс при переключении вкладок
 // ============================================
 
 (function() {
   const video = document.querySelector('.meinung-video');
   if (!video) return;
 
-  let meinungTimer = null;
   let isPlaying = false;
+  let hasPlayed = false; // флаг: видео уже проигрывалось хотя бы раз
 
   // Принудительная загрузка первого кадра как "превью"
   function showFirstFrame() {
+    if (hasPlayed) return; // не сбрасывать, если уже проигрывалось
+    
     video.pause();
     
-    // Хитрость для iOS Safari: после загрузки метаданных
-    // переходим на 0.1 сек, чтобы декодировался первый кадр
     if (video.readyState >= 2) {
       video.currentTime = 0.1;
     } else {
@@ -419,10 +420,17 @@ window.showTabHattingen = function(event) {
   // Запуск загрузки видео
   video.load();
   showFirstFrame();
-
-  // Если первый кадр всё ещё не показывается — повторяем через 500мс
+  
+  // Многократные попытки для iOS
   setTimeout(showFirstFrame, 500);
   setTimeout(showFirstFrame, 1500);
+
+  // Обработчик окончания видео — остаемся на последнем кадре
+  video.addEventListener('ended', function() {
+    isPlaying = false;
+    // Видео автоматически останавливается на последнем кадре
+    // Ничего не делаем — currentTime уже равен длительности
+  });
 
   // Воспроизведение по клику на кнопку
   window.playMeinungVideo = function(event) {
@@ -431,6 +439,7 @@ window.showTabHattingen = function(event) {
     
     if (v && !isPlaying) {
       isPlaying = true;
+      hasPlayed = true;
       v.currentTime = 0;
       
       const playPromise = v.play();
@@ -440,14 +449,6 @@ window.showTabHattingen = function(event) {
           isPlaying = false;
         });
       }
-      
-      // Сброс через 3 секунды
-      clearTimeout(meinungTimer);
-      meinungTimer = setTimeout(() => {
-        v.pause();
-        v.currentTime = 0.1; // возврат к первому кадру (не 0!)
-        isPlaying = false;
-      }, 3000);
     }
     
     // Переключаем таб
@@ -456,15 +457,14 @@ window.showTabHattingen = function(event) {
     }
   };
 
-  // Сброс при клике на любую другую кнопку навбара
+  // Сброс на первый кадр при клике на любую другую кнопку навбара
   document.addEventListener('click', function(e) {
     const clickedBtn = e.target.closest('.nav-btn');
     if (clickedBtn && !clickedBtn.classList.contains('nav-btn--meinung')) {
-      clearTimeout(meinungTimer);
       video.pause();
-      video.currentTime = 0.1;
+      video.currentTime = 0.1; // возврат к первому кадру
       isPlaying = false;
+      hasPlayed = false; // разрешаем повторный показ первого кадра
     }
   });
 })();
-

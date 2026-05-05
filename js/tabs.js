@@ -393,47 +393,78 @@ window.showTabHattingen = function(event) {
 // Видео-кнопка Meinung: воспроизведение по клику
 // ============================================
 
-function playMeinungVideo(event) {
-  const button = event.currentTarget;
-  const video = button.querySelector('.meinung-video');
-  
-  if (video) {
-    // Сбрасываем на начало и запускаем
-    video.currentTime = 0;
-    video.play().catch(err => console.log('Video play blocked:', err));
+(function() {
+  const video = document.querySelector('.meinung-video');
+  if (!video) return;
+
+  let meinungTimer = null;
+  let isPlaying = false;
+
+  // Принудительная загрузка первого кадра как "превью"
+  function showFirstFrame() {
+    video.pause();
     
-    // Через 3 секунды останавливаем и возвращаем на первый кадр
-    setTimeout(() => {
+    // Хитрость для iOS Safari: после загрузки метаданных
+    // переходим на 0.1 сек, чтобы декодировался первый кадр
+    if (video.readyState >= 2) {
+      video.currentTime = 0.1;
+    } else {
+      video.addEventListener('loadeddata', function onLoaded() {
+        video.currentTime = 0.1;
+        video.removeEventListener('loadeddata', onLoaded);
+      });
+    }
+  }
+
+  // Запуск загрузки видео
+  video.load();
+  showFirstFrame();
+
+  // Если первый кадр всё ещё не показывается — повторяем через 500мс
+  setTimeout(showFirstFrame, 500);
+  setTimeout(showFirstFrame, 1500);
+
+  // Воспроизведение по клику на кнопку
+  window.playMeinungVideo = function(event) {
+    const button = event.currentTarget;
+    const v = button.querySelector('.meinung-video');
+    
+    if (v && !isPlaying) {
+      isPlaying = true;
+      v.currentTime = 0;
+      
+      const playPromise = v.play();
+      if (playPromise && playPromise.then) {
+        playPromise.catch(err => {
+          console.warn('Meinung video play failed:', err);
+          isPlaying = false;
+        });
+      }
+      
+      // Сброс через 3 секунды
+      clearTimeout(meinungTimer);
+      meinungTimer = setTimeout(() => {
+        v.pause();
+        v.currentTime = 0.1; // возврат к первому кадру (не 0!)
+        isPlaying = false;
+      }, 3000);
+    }
+    
+    // Переключаем таб
+    if (typeof showTab === 'function') {
+      showTab('meinung', event);
+    }
+  };
+
+  // Сброс при клике на любую другую кнопку навбара
+  document.addEventListener('click', function(e) {
+    const clickedBtn = e.target.closest('.nav-btn');
+    if (clickedBtn && !clickedBtn.classList.contains('nav-btn--meinung')) {
+      clearTimeout(meinungTimer);
       video.pause();
-      video.currentTime = 0;
-    }, 3000);
-  }
-  
-  // Переключаем таб как обычно
-  showTab('meinung', event);
-}
-
-// Сброс видео при переключении на другую вкладку
-function resetMeinungVideo() {
-  const video = document.querySelector('.meinung-video');
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
-  }
-}
-
-// Показать первый кадр сразу при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  const video = document.querySelector('.meinung-video');
-  if (video) {
-    // Принудительно загружаем первый кадр для отображения
-    video.currentTime = 0.01;
-    video.pause();
-  }
-});
-
-// Экспорт в window для совместимости с твоей архитектурой
-window.playMeinungVideo = playMeinungVideo;
-window.resetMeinungVideo = resetMeinungVideo;
-
+      video.currentTime = 0.1;
+      isPlaying = false;
+    }
+  });
+})();
 

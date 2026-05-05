@@ -330,3 +330,37 @@ window.showTabHattingen = function(event) {
     });
   }
 };
+
+/* === Стоп видео Hattingen при скролле и переключении вкладок (только ПК) === */
+(function() {
+    // Только для ПК
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    function stopHattingenVideo() {
+        const btn = document.querySelector('.nav-btn--hattingen.video-active');
+        if (!btn) return;
+
+        const video = btn.querySelector('.hattingen-video');
+        btn.classList.remove('video-active');
+        clearTimeout(btn._hattingenTimer);
+
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+    }
+
+    // 1. Останавливаем при первом движении колеса/трекпада (мгновенно)
+    window.addEventListener('wheel', stopHattingenVideo, { passive: true });
+
+    // 2. Страховка — на случай скролла клавиатурой (PageDown, стрелки) или клика по скроллбару
+    window.addEventListener('scroll', stopHattingenVideo, { passive: true });
+
+    // 3. Останавливаем при клике на любую другую вкладку навбара
+    document.addEventListener('click', function(e) {
+        const clickedBtn = e.target.closest('.nav-btn');
+        if (clickedBtn && !clickedBtn.classList.contains('nav-btn--hattingen')) {
+            stopHattingenVideo();
+        }
+    });
+})();

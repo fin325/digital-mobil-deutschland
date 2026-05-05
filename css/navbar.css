@@ -629,7 +629,7 @@ a.nav-btn:hover {
     }
     
     .nav-btn--img.active img {
-        transform: scale(1.09);
+        transform: scale(1.09); !important;
     }
 }
 @media (min-width: 768px) {

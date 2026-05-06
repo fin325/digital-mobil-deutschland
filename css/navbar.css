@@ -33,7 +33,7 @@ scroll-hint {
   background: transparent;
 }
 
-.nav-btn--video.active img {
+.nav-btn--video.active video {
     transform: scale(1.06) !important;
 }
 

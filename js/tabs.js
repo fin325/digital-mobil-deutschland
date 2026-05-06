@@ -392,15 +392,23 @@ window.showTabHattingen = function(event) {
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА видео-кнопок навбара
 // Работает для любой кнопки из конфига VIDEO_BUTTONS
+// HTML-шаблон кнопки:
+//   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--ИМЯ" 
+//           onclick="playVideoButton(event)">
+//     <img class="nav-btn-img" src="..." alt="...">
+//     <video class="nav-btn-video" muted playsinline preload="auto" ...>
+//       <source src="/videos/ИМЯ-video1.mp4" type="video/mp4">
+//     </video>
+//   </button>
 // На ПК — статичная картинка вместо видео (через CSS)
 // ============================================
 
 // Конфигурация всех видео-кнопок: класс кнопки → ID вкладки
+// Для добавления новой кнопки достаточно одной строки здесь
 const VIDEO_BUTTONS = {
-  'nav-btn--meinung':     { videoClass: 'meinung-video',     tabId: 'meinung' },
-  'nav-btn--nachrichten': { videoClass: 'nachrichten-video', tabId: 'news'    },
-  // Добавляй сюда новые кнопки одной строкой:
-  // 'nav-btn--ubersetzer': { videoClass: 'ubersetzer-video', tabId: 'translate' },
+  'nav-btn--meinung':     { tabId: 'meinung' },
+  'nav-btn--nachrichten': { tabId: 'news'    },
+  // 'nav-btn--ubersetzer': { tabId: 'translate' },
 };
 
 // Универсальный обработчик клика — работает на всех устройствах
@@ -409,15 +417,17 @@ window.playVideoButton = function(event) {
   
   // Находим конфиг для этой кнопки по классу
   let config = null;
+  let buttonClass = null;
   for (const className in VIDEO_BUTTONS) {
     if (button.classList.contains(className)) {
       config = VIDEO_BUTTONS[className];
+      buttonClass = className;
       break;
     }
   }
   if (!config) return;
 
-  const v = button.querySelector('.' + config.videoClass);
+  const v = button.querySelector('.nav-btn-video');
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   
   // Воспроизводим видео только на мобильных
@@ -429,7 +439,7 @@ window.playVideoButton = function(event) {
     const playPromise = v.play();
     if (playPromise && playPromise.then) {
       playPromise.catch(err => {
-        console.warn(config.videoClass + ' play failed:', err);
+        console.warn(buttonClass + ' play failed:', err);
         v._isPlaying = false;
       });
     }
@@ -448,15 +458,17 @@ window.playVideoButton = function(event) {
 
   // Инициализируем все видео из конфига
   Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
-    const config = VIDEO_BUTTONS[buttonClass];
-    const video = document.querySelector('.' + config.videoClass);
+    const button = document.querySelector('.' + buttonClass);
+    if (!button) return;
+    
+    const video = button.querySelector('.nav-btn-video');
     if (!video) return;
 
     video._isPlaying = false;
     video._hasPlayed = false;
     video._buttonClass = buttonClass;
 
-    // Принудительная загрузка первого кадра
+    // Принудительная загрузка первого кадра как "превью"
     function showFirstFrame() {
       if (video._hasPlayed) return;
       video.pause();
@@ -487,12 +499,15 @@ window.playVideoButton = function(event) {
     const clickedBtn = e.target.closest('.nav-btn');
     if (!clickedBtn) return;
 
-    Object.values(VIDEO_BUTTONS).forEach(config => {
-      const video = document.querySelector('.' + config.videoClass);
+    Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
+      const button = document.querySelector('.' + buttonClass);
+      if (!button) return;
+      
+      const video = button.querySelector('.nav-btn-video');
       if (!video) return;
       
-      // Сбросить это видео если кликнули НЕ на его кнопку
-      if (!clickedBtn.classList.contains(video._buttonClass)) {
+      // Сбросить это видео, если кликнули НЕ на его кнопку
+      if (!clickedBtn.classList.contains(buttonClass)) {
         video.pause();
         video.currentTime = 0.1;
         video._isPlaying = false;
@@ -501,4 +516,5 @@ window.playVideoButton = function(event) {
     });
   });
 })();
+
 

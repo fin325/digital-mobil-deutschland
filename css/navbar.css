@@ -34,7 +34,7 @@ scroll-hint {
 }
 
 .nav-btn--video.active video {
-    transform: scale(0.9) !important;
+    transform: scale(1.01) !important;
 }
 
 /* Видео-элемент внутри кнопки */

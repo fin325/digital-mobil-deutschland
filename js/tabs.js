@@ -392,7 +392,7 @@ window.showTabHattingen = function(event) {
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА видео-кнопок навбара
 // Работает для любой кнопки из конфига VIDEO_BUTTONS
-// HTML-шаблон кнопки:
+// HTML-шаблон для кнопки:
 //   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--ИМЯ" 
 //           onclick="playVideoButton(event)">
 //     <img class="nav-btn-img" src="..." alt="...">

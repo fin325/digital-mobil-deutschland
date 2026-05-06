@@ -1,4 +1,6 @@
 /* === main.js — Инициализация === */
+alert('SW поддерживается: ' + ('serviceWorker' in navigator) + 
+      '\nSW зарегистрирован: ' + (navigator.serviceWorker?.controller ? 'да' : 'нет'));
 
 document.addEventListener('DOMContentLoaded', () => {
     initClock();   // clock.js

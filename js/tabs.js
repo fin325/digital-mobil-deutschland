@@ -400,7 +400,9 @@ window.showTabHattingen = function(event) {
 //       <source src="/videos/ИМЯ-video1.mp4" type="video/mp4">
 //     </video>
 //   </button>
-// На ПК — статичная картинка вместо видео (через CSS)
+// CSS:
+//   По умолчанию: видна PNG, видео скрыто
+//   .is-playing на кнопке → видео видно, PNG скрыта
 // ============================================
 
 // Конфигурация всех видео-кнопок: класс кнопки → ID вкладки
@@ -447,11 +449,15 @@ window.playVideoButton = function(event) {
     v._hasPlayed = true;
     v.currentTime = 0;
     
+    // Включаем режим "видео играет" — CSS сам скроет PNG и покажет видео
+    button.classList.add('is-playing');
+    
     const playPromise = v.play();
     if (playPromise && playPromise.then) {
       playPromise.catch(err => {
         console.warn(buttonClass + ' play failed:', err);
         v._isPlaying = false;
+        button.classList.remove('is-playing');
       });
     }
   }
@@ -499,9 +505,10 @@ window.playVideoButton = function(event) {
     setTimeout(showFirstFrame, 500);
     setTimeout(showFirstFrame, 1500);
 
-    // Видео доиграло — остаёмся на последнем кадре
+    // Видео доиграло — остаёмся на последнем кадре (НЕ возвращаем PNG здесь)
     video.addEventListener('ended', function() {
       video._isPlaying = false;
+      // is-playing остаётся — видео остаётся на последнем кадре
     });
   });
 
@@ -520,12 +527,12 @@ window.playVideoButton = function(event) {
       // Сбросить это видео, если кликнули НЕ на его кнопку
       if (!clickedBtn.classList.contains(buttonClass)) {
         video.pause();
-        video.currentTime = 0.1;
+        video.currentTime = 0;
         video._isPlaying = false;
         video._hasPlayed = false;
+        // Снимаем класс is-playing — CSS вернёт PNG мгновенно
+        button.classList.remove('is-playing');
       }
     });
   });
 })();
-
-

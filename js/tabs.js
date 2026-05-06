@@ -408,6 +408,7 @@ window.showTabHattingen = function(event) {
 const VIDEO_BUTTONS = {
   'nav-btn--meinung':     { tabId: 'meinung' },
   'nav-btn--nachrichten': { tabId: 'news'    },
+  'nav-btn--pdf':         { tabId: 'pdf'     },
   // 'nav-btn--ubersetzer': { tabId: 'translate' },
 };
 

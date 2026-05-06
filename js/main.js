@@ -75,12 +75,26 @@ const fixIosViewport = () => {
 // Запускаем, когда DOM готов
 document.addEventListener('DOMContentLoaded', fixIosViewport);
 
-// Service Worker для кэширования видео
+// === Service Worker — кэширование видео (с диагностикой) ===
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
-      .then((reg) => console.log('SW зарегистрирован:', reg.scope))
-      .catch((err) => console.log('SW ошибка:', err));
+      .then((reg) => {
+        console.log('SW зарегистрирован:', reg.scope);
+        setTimeout(() => {
+          alert(
+            'Регистрация: УСПЕХ ✅\n' +
+            'Scope: ' + reg.scope + '\n' +
+            'Active: ' + (reg.active ? 'да' : 'нет') + '\n' +
+            'Installing: ' + (reg.installing ? 'да' : 'нет') + '\n' +
+            'Waiting: ' + (reg.waiting ? 'да' : 'нет') + '\n' +
+            'Controller: ' + (navigator.serviceWorker.controller ? 'ДА' : 'нет')
+          );
+        }, 3000);
+      })
+      .catch((err) => {
+        alert('SW ОШИБКА ❌\n' + err.message);
+        console.log('SW ошибка:', err);
+      });
   });
 }
-

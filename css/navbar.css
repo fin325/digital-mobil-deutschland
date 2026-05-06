@@ -8,37 +8,46 @@ scroll-hint {
     display: block;
 }
 
+/* ============================================== */
+/* === УНИВЕРСАЛЬНЫЕ ВИДЕО-КНОПКИ НАВБАРА ===    */
+/* === Используются классы:                  === */
+/* ===   .nav-btn--video — общий класс       === */
+/* ===   .nav-btn-img    — картинка (фолбэк) === */
+/* ===   .nav-btn-video  — видео-элемент     === */
+/* ============================================== */
+
 /* По умолчанию (мобильные) — показываем видео, скрываем картинку */
-.nav-btn--meinung .meinung-img {
+.nav-btn--video .nav-btn-img {
   display: none;
 }
 
-.nav-btn--meinung .meinung-video {
+.nav-btn--video .nav-btn-video {
   display: block;
 }
 
-.nav-btn--meinung {
+/* Базовые стили для видео-кнопки */
+.nav-btn--video {
   position: relative;
   overflow: hidden;
   padding: 0;
   background: transparent;
 }
 
-.meinung-video {
+/* Видео-элемент внутри кнопки */
+.nav-btn--video .nav-btn-video {
   width: 120%;
   height: 120%;
   object-fit: cover;
-  display: block;
   pointer-events: none;
   background: transparent;
 }
 
-/* Скрыть значок play на iOS Safari */
-.meinung-video::-webkit-media-controls,
-.meinung-video::-webkit-media-controls-start-playback-button,
-.meinung-video::-webkit-media-controls-panel,
-.meinung-video::-webkit-media-controls-overlay-play-button,
-.meinung-video::-webkit-media-controls-play-button {
+/* Скрыть значок play на iOS Safari для всех видео-кнопок */
+.nav-btn--video .nav-btn-video::-webkit-media-controls,
+.nav-btn--video .nav-btn-video::-webkit-media-controls-start-playback-button,
+.nav-btn--video .nav-btn-video::-webkit-media-controls-panel,
+.nav-btn--video .nav-btn-video::-webkit-media-controls-overlay-play-button,
+.nav-btn--video .nav-btn-video::-webkit-media-controls-play-button {
   display: none !important;
   -webkit-appearance: none !important;
   opacity: 0 !important;
@@ -386,6 +395,13 @@ a.nav-btn:hover {
     animation: none;
     opacity: 0;
   }
+  /* Универсальный фолбэк: видео-кнопки на устройствах с reduced-motion */
+  .nav-btn--video .nav-btn-video {
+    display: none !important;
+  }
+  .nav-btn--video .nav-btn-img {
+    display: block !important;
+  }
 }
 
 /* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
@@ -668,12 +684,12 @@ a.nav-btn:hover {
         transform: scale(1.09); !important;
     }
     
-        /* === Meinung на ПК: статичная картинка как у других иконок === */
-    .nav-btn--meinung .meinung-img {
+    /* === Видео-кнопки на ПК: статичная картинка как у других иконок === */
+    .nav-btn--video .nav-btn-img {
         display: block;
     }
     
-    .nav-btn--meinung .meinung-video {
+    .nav-btn--video .nav-btn-video {
         display: none;
     }
 

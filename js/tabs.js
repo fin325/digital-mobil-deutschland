@@ -406,10 +406,16 @@ window.showTabHattingen = function(event) {
 // Конфигурация всех видео-кнопок: класс кнопки → ID вкладки
 // Для добавления новой кнопки достаточно одной строки здесь
 const VIDEO_BUTTONS = {
-  'nav-btn--meinung':     { tabId: 'meinung' },
-  'nav-btn--nachrichten': { tabId: 'news'    },
+  'nav-btn--startseite':  { tabId: 'home'    },
   'nav-btn--pdf':         { tabId: 'pdf'     },
-  // 'nav-btn--ubersetzer': { tabId: 'translate' },
+  'nav-btn--arzten':      { tabId: 'health'  },
+  'nav-btn--auto':        { tabId: 'auto'    },
+  'nav-btn--kontakt':     { tabId: 'contacts'},
+  'nav-btn--nachrichten': { tabId: 'news'    },
+  'nav-btn--arbeit':      { tabId: 'jobs'    },
+  'nav-btn--meinung':     { tabId: 'meinung' },
+  'nav-btn--db':          { tabId: 'mobile'  },
+  'nav-btn--projekt':     { tabId: 'project' },
 };
 
 // Универсальный обработчик клика — работает на всех устройствах

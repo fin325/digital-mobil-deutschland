@@ -390,19 +390,37 @@ window.showTabHattingen = function(event) {
 })();
 
 // ============================================
-// Видео-кнопка Meinung: воспроизведение по клику
-// Останавливается на последнем кадре, сброс при переключении вкладок
+// УНИВЕРСАЛЬНАЯ СИСТЕМА видео-кнопок навбара
+// Работает для любой кнопки из конфига VIDEO_BUTTONS
 // На ПК — статичная картинка вместо видео (через CSS)
 // ============================================
 
-// Универсальный обработчик клика — работает и на ПК, и на мобильных
-window.playMeinungVideo = function(event) {
+// Конфигурация всех видео-кнопок: класс кнопки → ID вкладки
+const VIDEO_BUTTONS = {
+  'nav-btn--meinung':     { videoClass: 'meinung-video',     tabId: 'meinung' },
+  'nav-btn--nachrichten': { videoClass: 'nachrichten-video', tabId: 'news'    },
+  // Добавляй сюда новые кнопки одной строкой:
+  // 'nav-btn--ubersetzer': { videoClass: 'ubersetzer-video', tabId: 'translate' },
+};
+
+// Универсальный обработчик клика — работает на всех устройствах
+window.playVideoButton = function(event) {
   const button = event.currentTarget;
-  const v = button.querySelector('.meinung-video');
   
-  // На ПК видео скрыто через CSS — не запускаем
+  // Находим конфиг для этой кнопки по классу
+  let config = null;
+  for (const className in VIDEO_BUTTONS) {
+    if (button.classList.contains(className)) {
+      config = VIDEO_BUTTONS[className];
+      break;
+    }
+  }
+  if (!config) return;
+
+  const v = button.querySelector('.' + config.videoClass);
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   
+  // Воспроизводим видео только на мобильных
   if (v && !isDesktop && !v._isPlaying) {
     v._isPlaying = true;
     v._hasPlayed = true;
@@ -411,63 +429,76 @@ window.playMeinungVideo = function(event) {
     const playPromise = v.play();
     if (playPromise && playPromise.then) {
       playPromise.catch(err => {
-        console.warn('Meinung video play failed:', err);
+        console.warn(config.videoClass + ' play failed:', err);
         v._isPlaying = false;
       });
     }
   }
   
-  // Переключаем таб (работает и на ПК, и на мобильных)
+  // Переключаем таб
   if (typeof showTab === 'function') {
-    showTab('meinung', event);
+    showTab(config.tabId, event);
   }
 };
 
-// Логика подготовки первого кадра — только для мобильных
+// Подготовка первых кадров и обработчики — только для мобильных
 (function() {
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (isDesktop) return;
-  
-  const video = document.querySelector('.meinung-video');
-  if (!video) return;
 
-  video._isPlaying = false;
-  video._hasPlayed = false;
+  // Инициализируем все видео из конфига
+  Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
+    const config = VIDEO_BUTTONS[buttonClass];
+    const video = document.querySelector('.' + config.videoClass);
+    if (!video) return;
 
-  // Принудительная загрузка первого кадра как "превью"
-  function showFirstFrame() {
-    if (video._hasPlayed) return;
-    video.pause();
-    
-    if (video.readyState >= 2) {
-      video.currentTime = 0.1;
-    } else {
-      video.addEventListener('loadeddata', function onLoaded() {
-        video.currentTime = 0.1;
-        video.removeEventListener('loadeddata', onLoaded);
-      });
-    }
-  }
-
-  // Запуск загрузки видео
-  video.load();
-  showFirstFrame();
-  setTimeout(showFirstFrame, 500);
-  setTimeout(showFirstFrame, 1500);
-
-  // Обработчик окончания видео — остаемся на последнем кадре
-  video.addEventListener('ended', function() {
     video._isPlaying = false;
+    video._hasPlayed = false;
+    video._buttonClass = buttonClass;
+
+    // Принудительная загрузка первого кадра
+    function showFirstFrame() {
+      if (video._hasPlayed) return;
+      video.pause();
+      
+      if (video.readyState >= 2) {
+        video.currentTime = 0.1;
+      } else {
+        video.addEventListener('loadeddata', function onLoaded() {
+          video.currentTime = 0.1;
+          video.removeEventListener('loadeddata', onLoaded);
+        });
+      }
+    }
+
+    video.load();
+    showFirstFrame();
+    setTimeout(showFirstFrame, 500);
+    setTimeout(showFirstFrame, 1500);
+
+    // Видео доиграло — остаёмся на последнем кадре
+    video.addEventListener('ended', function() {
+      video._isPlaying = false;
+    });
   });
 
-  // Сброс на первый кадр при клике на любую другую кнопку навбара
+  // Один общий обработчик клика — сбрасывает чужие видео при переключении
   document.addEventListener('click', function(e) {
     const clickedBtn = e.target.closest('.nav-btn');
-    if (clickedBtn && !clickedBtn.classList.contains('nav-btn--meinung')) {
-      video.pause();
-      video.currentTime = 0.1;
-      video._isPlaying = false;
-      video._hasPlayed = false;
-    }
+    if (!clickedBtn) return;
+
+    Object.values(VIDEO_BUTTONS).forEach(config => {
+      const video = document.querySelector('.' + config.videoClass);
+      if (!video) return;
+      
+      // Сбросить это видео если кликнули НЕ на его кнопку
+      if (!clickedBtn.classList.contains(video._buttonClass)) {
+        video.pause();
+        video.currentTime = 0.1;
+        video._isPlaying = false;
+        video._hasPlayed = false;
+      }
+    });
   });
 })();
+

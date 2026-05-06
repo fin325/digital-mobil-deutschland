@@ -64,7 +64,12 @@
 
       <div class="nav-row">
         <button class="nav-btn nav-btn--img active" onclick="showTab('home', event)"><img src="img/buttons/startseite.png" alt="Startseite"></button>
-        <button class="nav-btn nav-btn--img" onclick="showTab('pdf', event)"><img src="img/buttons/pdf.png" alt="PDF für Mail"></button>
+        <button class="nav-btn nav-btn--img nav-btn--video nav-btn--pdf" onclick="playVideoButton(event)">
+  <img class="nav-btn-img" src="img/buttons/pdf.png" alt="PDF für Mail">
+  <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+    <source src="/videos/pdf-video1.mp4" type="video/mp4">
+  </video>
+        </button>
         <button class="nav-btn nav-btn--img nav-btn--ki" onclick="showTab('docs', event)"><img src="img/buttons/ki.png" alt="KI"><span class="ki-steam" aria-hidden="true"></span></button>
         <button class="nav-btn nav-btn--img" onclick="showTab('health', event)"><img src="img/buttons/arzten.png" alt="Ärzten"></button>
         <button class="nav-btn nav-btn--img" onclick="showTab('auto', event)"><img src="img/buttons/auto.png" alt="Auto"></button>

@@ -17,11 +17,21 @@ scroll-hint {
 /* ============================================== */
 
 /* По умолчанию (мобильные) — показываем видео, скрываем картинку */
+/* По умолчанию: видна PNG, видео скрыто */
 .nav-btn--video .nav-btn-img {
-  display: none;
+  display: block;
 }
 
 .nav-btn--video .nav-btn-video {
+  display: none;
+}
+
+/* Когда видео играет — наоборот */
+.nav-btn--video.is-playing .nav-btn-img {
+  display: none;
+}
+
+.nav-btn--video.is-playing .nav-btn-video {
   display: block;
 }
 

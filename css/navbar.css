@@ -39,8 +39,8 @@ scroll-hint {
 
 /* Видео-элемент внутри кнопки */
 .nav-btn--video .nav-btn-video {
-  width: 115%;
-  height: 115%;
+  width: 120%;
+  height: 120%;
   object-fit: cover;
   pointer-events: none;
   background: transparent;

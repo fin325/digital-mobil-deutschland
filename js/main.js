@@ -1,6 +1,4 @@
 /* === main.js — Инициализация === */
-alert('SW поддерживается: ' + ('serviceWorker' in navigator) + 
-      '\nSW зарегистрирован: ' + (navigator.serviceWorker?.controller ? 'да' : 'нет'));
 
 document.addEventListener('DOMContentLoaded', () => {
     initClock();   // clock.js
@@ -77,4 +75,12 @@ const fixIosViewport = () => {
 // Запускаем, когда DOM готов
 document.addEventListener('DOMContentLoaded', fixIosViewport);
 
+// Service Worker для кэширования видео
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .then((reg) => console.log('SW зарегистрирован:', reg.scope))
+      .catch((err) => console.log('SW ошибка:', err));
+  });
+}
 

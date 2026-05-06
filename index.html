@@ -64,115 +64,85 @@
 
       <div class="nav-row">
   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--startseite active" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/startseite-ru.png" alt="Главная">
+    <img class="nav-btn-img" src="img/buttons/startseite.png" alt="Startseite">
     <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
       <source src="/videos/startseite-video1.mp4" type="video/mp4">
     </video>
   </button>
 
   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--pdf" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/pdf-ru.png" alt="PDF для почты">
+    <img class="nav-btn-img" src="img/buttons/pdf.png" alt="PDF für Mail">
     <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/pdf-video-ru.mp4" type="video/mp4">
+      <source src="/videos/pdf-video1.mp4" type="video/mp4">
     </video>
   </button>
 
   <button class="nav-btn nav-btn--img nav-btn--ki" onclick="showTab('docs', event)">
-    <img src="/img/buttons/ki-ru.png" alt="ИИ">
+    <img src="img/buttons/ki.png" alt="KI">
     <span class="ki-steam" aria-hidden="true"></span>
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--arzten" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/arzten-ru.png" alt="Врачи">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/arzten-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('health', event)">
+    <img src="img/buttons/arzten.png" alt="Ärzten">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--auto" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/auto-ru.png" alt="Авто">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/auto-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('auto', event)">
+    <img src="img/buttons/auto.png" alt="Auto">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--maps" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/karten-ru.png" alt="Карты">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/karten-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('maps', event)">
+    <img src="img/buttons/karten.png" alt="Karten">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--translate" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/ubersetzer-ru.png" alt="Переводчик">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/translate-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('translate', event)">
+    <img src="img/buttons/ubersetzer.png" alt="Übersetzer">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--kontakt" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/kontakt-ru.png" alt="Контакт">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/kontakt-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('contacts', event)">
+    <img src="img/buttons/kontakt.png" alt="Kontakt">
   </button>
 </div>
 
 <div class="nav-row">
   <button class="nav-btn nav-btn--img nav-btn--hattingen" onclick="showTabHattingen(event)">
-    <img src="/img/buttons/hattingen.png" alt="Хаттинген">
+    <img src="../img/buttons/hattingen.png" alt="Hattingen">
     <video class="hattingen-video" muted loop playsinline preload="none" aria-hidden="true">
-      <source data-src="/videos/hattingen-video-ru.mp4" type="video/mp4">
+      <source data-src="/videos/hattingen-video1.mp4" type="video/mp4">
     </video>
   </button>
 
   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--nachrichten" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/nachrichten-ru.png" alt="Новости DE">
+    <img class="nav-btn-img" src="img/buttons/nachrichten.png" alt="Nachrichten">
     <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/nachrichten-video-ru.mp4" type="video/mp4">
+      <source src="/videos/nachrichten-video1.mp4" type="video/mp4">
     </video>
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--arbeit" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/arbeit-ru.png" alt="Работа">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/arbeit-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('jobs', event)">
+    <img src="img/buttons/arbeit.png" alt="Arbeit">
   </button>
 
   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--meinung" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/meinung-ru.png" alt="Ваше мнение">
+    <img class="nav-btn-img" src="img/buttons/meinung.png" alt="Meinung">
     <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/meinung-video-ru.mp4" type="video/mp4">
+      <source src="/videos/meinung-video1.mp4" type="video/mp4">
     </video>
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--housing" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/miete-ru.png" alt="Жильё">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/miete-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('housing', event)">
+    <img src="img/buttons/miete.png" alt="Miete">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--laws" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/gesetze-ru.png" alt="Законы">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/geserze-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('laws', event)">
+    <img src="img/buttons/gesetze.png" alt="Gesetze">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--db" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/db-ru.png" alt="DB">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/db-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('mobile', event)">
+    <img src="img/buttons/db.png" alt="DB">
   </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--projekt" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="/img/buttons/projekt-ru.png" alt="О проекте">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/projekt-video-ru.mp4" type="video/mp4">
-    </video>
+  <button class="nav-btn nav-btn--img" onclick="showTab('project', event)">
+    <img src="img/buttons/projekt.png" alt="Projekt Info">
   </button>
 </div>
 

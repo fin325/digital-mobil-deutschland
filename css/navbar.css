@@ -33,10 +33,14 @@ scroll-hint {
   background: transparent;
 }
 
+.nav-btn--video.active img {
+    transform: scale(1.06) !important;
+}
+
 /* Видео-элемент внутри кнопки */
 .nav-btn--video .nav-btn-video {
-  width: 110%;
-  height: 110%;
+  width: 115%;
+  height: 115%;
   object-fit: cover;
   pointer-events: none;
   background: transparent;

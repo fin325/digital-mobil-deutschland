@@ -285,110 +285,6 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     }, true);
 })();
 
-/* === Hattingen-кнопка с видео-анимацией === */
-window.showTabHattingen = function(event) {
-  if (typeof showTab === 'function') {
-    showTab('news-hattingen', event);
-  }
-
-  const btn = event.currentTarget;
-  if (!btn) return;
-
-  const video = btn.querySelector('.hattingen-video');
-  const source = video && video.querySelector('source');
-  if (!video || !source) return;
-
-  if (btn.classList.contains('video-active')) return;
-
-  // На ПК: если юзер уже запускал любой iframe — видео не воспроизводим
-  // (после iframe видео всё равно не отображается до перезагрузки страницы)
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (isDesktop && window._hattingenIframeUsed) {
-    return; // Просто переключаемся на вкладку, без анимации
-  }
-
-  // Lazy-load: подгружаем src только при первом клике
-  if (!source.getAttribute('src')) {
-    const realSrc = source.getAttribute('data-src');
-    if (realSrc) {
-      source.setAttribute('src', realSrc);
-      video.load();
-    }
-  }
-
-  // Запускаем видео — но показываем только когда реально играет
-  video.currentTime = 0;
-  const playPromise = video.play();
-  
-  if (playPromise && playPromise.then) {
-    playPromise.then(function() {
-      btn.classList.add('video-active');
-      
-      clearTimeout(btn._hattingenTimer);
-      btn._hattingenTimer = setTimeout(function() {
-        btn.classList.remove('video-active');
-        video.pause();
-        video.currentTime = 0;
-      }, 6000);
-    }).catch(function(err) {
-      console.warn('Video play failed:', err);
-    });
-  }
-};
-
-/* === Управление видео Hattingen === */
-(function() {
-    function stopHattingenVideo() {
-        const btn = document.querySelector('.nav-btn--hattingen.video-active');
-        if (!btn) return;
-
-        const video = btn.querySelector('.hattingen-video');
-        btn.classList.remove('video-active');
-        clearTimeout(btn._hattingenTimer);
-
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-        }
-    }
-
-    // Останавливаем видео при клике на любую другую вкладку навбара (все устройства)
-    document.addEventListener('click', function(e) {
-        const clickedBtn = e.target.closest('.nav-btn');
-        if (clickedBtn && !clickedBtn.classList.contains('nav-btn--hattingen')) {
-            stopHattingenVideo();
-        }
-    });
-
-    // Только для ПК: скролл-стоп + блокировка после iframe
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        // Стоп при скролле
-        window.addEventListener('wheel', stopHattingenVideo, { passive: true });
-        window.addEventListener('scroll', stopHattingenVideo, { passive: true });
-
-        // Детектим взаимодействие с iframe — после этого видео в кнопке отключается
-        function markIframeInteracted() {
-            window._hattingenIframeUsed = true;
-        }
-
-        // Способ 1: клик по самому элементу iframe
-        document.addEventListener('click', function(e) {
-            const iframe = e.target.closest('iframe') ||
-                           (e.target.tagName === 'IFRAME' ? e.target : null);
-            if (iframe) {
-                markIframeInteracted();
-            }
-        });
-
-        // Способ 2: страховка — потеря фокуса с переходом на iframe
-        window.addEventListener('blur', function() {
-            if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
-                markIframeInteracted();
-            }
-        });
-    }
-})();
-
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА видео-кнопок навбара
 // Работает для любой кнопки из конфига VIDEO_BUTTONS
@@ -415,6 +311,7 @@ const VIDEO_BUTTONS = {
   'nav-btn--maps':        { tabId: 'maps'    },
   'nav-btn--translate':   { tabId: 'translate' },
   'nav-btn--kontakt':     { tabId: 'contacts' },
+  'nav-btn--hattingen':   { tabId: 'news-hattingen' },
   'nav-btn--nachrichten': { tabId: 'news'    },
   'nav-btn--arbeit':      { tabId: 'jobs'    },
   'nav-btn--meinung':     { tabId: 'meinung' },
@@ -441,10 +338,9 @@ window.playVideoButton = function(event) {
   if (!config) return;
 
   const v = button.querySelector('.nav-btn-video');
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   
-  // Воспроизводим видео только на мобильных
-  if (v && !isDesktop && !v._isPlaying) {
+  // Воспроизводим видео на всех устройствах (ПК + мобильных)
+  if (v && !v._isPlaying) {
     v._isPlaying = true;
     v._hasPlayed = true;
     v.currentTime = 0;
@@ -463,76 +359,4 @@ window.playVideoButton = function(event) {
   }
   
   // Переключаем таб
-  if (typeof showTab === 'function') {
-    showTab(config.tabId, event);
-  }
-};
-
-// Подготовка первых кадров и обработчики — только для мобильных
-(function() {
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (isDesktop) return;
-
-  // Инициализируем все видео из конфига
-  Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
-    const button = document.querySelector('.' + buttonClass);
-    if (!button) return;
-    
-    const video = button.querySelector('.nav-btn-video');
-    if (!video) return;
-
-    video._isPlaying = false;
-    video._hasPlayed = false;
-    video._buttonClass = buttonClass;
-
-    // Принудительная загрузка первого кадра как "превью"
-    function showFirstFrame() {
-      if (video._hasPlayed) return;
-      video.pause();
-      
-      if (video.readyState >= 2) {
-        video.currentTime = 0.1;
-      } else {
-        video.addEventListener('loadeddata', function onLoaded() {
-          video.currentTime = 0.1;
-          video.removeEventListener('loadeddata', onLoaded);
-        });
-      }
-    }
-
-    video.load();
-    showFirstFrame();
-    setTimeout(showFirstFrame, 500);
-    setTimeout(showFirstFrame, 1500);
-
-    // Видео доиграло — остаёмся на последнем кадре (НЕ возвращаем PNG здесь)
-    video.addEventListener('ended', function() {
-      video._isPlaying = false;
-      // is-playing остаётся — видео остаётся на последнем кадре
-    });
-  });
-
-  // Один общий обработчик клика — сбрасывает чужие видео при переключении
-  document.addEventListener('click', function(e) {
-    const clickedBtn = e.target.closest('.nav-btn');
-    if (!clickedBtn) return;
-
-    Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
-      const button = document.querySelector('.' + buttonClass);
-      if (!button) return;
-      
-      const video = button.querySelector('.nav-btn-video');
-      if (!video) return;
-      
-      // Сбросить это видео, если кликнули НЕ на его кнопку
-      if (!clickedBtn.classList.contains(buttonClass)) {
-        video.pause();
-        video.currentTime = 0;
-        video._isPlaying = false;
-        video._hasPlayed = false;
-        // Снимаем класс is-playing — CSS вернёт PNG мгновенно
-        button.classList.remove('is-playing');
-      }
-    });
-  });
-})();
+  if (typeof showTab === 'function') {​​​​​​​​​​​​​​​​

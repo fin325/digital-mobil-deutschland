@@ -544,40 +544,6 @@ a.nav-btn:hover {
     pointer-events: none;
 }
 
-/* === Анимированная кнопка Hattingen с видео === */
-.nav-btn--hattingen {
-  position: relative;
-  overflow: hidden;
-}
-/* Убираем синий фон активного состояния — оставляем картинку */
-.nav-btn--img.nav-btn--hattingen.active {
-  background: transparent !important;
-}
-
-.nav-btn--hattingen .hattingen-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  object-fit: cover;
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.nav-btn--hattingen.video-active .hattingen-video {
-  opacity: 1;
-}
-
-.nav-btn--hattingen.video-active img {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .nav-btn--hattingen .hattingen-video {
     display: none !important;
@@ -698,7 +664,7 @@ a.nav-btn:hover {
         transform: scale(1.09); !important;
     }
     
-    /* === Видео-кнопки на ПК: статичная картинка как у других иконок === */
+    /* === Видео-кнопки на ПК: статичная картинка как у других иконок === 
     .nav-btn--video .nav-btn-img {
         display: block;
     }
@@ -706,7 +672,7 @@ a.nav-btn:hover {
     .nav-btn--video .nav-btn-video {
         display: none;
     }
-
+*/
 }
 @media (min-width: 768px) {
     .nav-rows-wrapper {

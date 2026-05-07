@@ -104,12 +104,12 @@
 </div>
 
 <div class="nav-row">
-  <button class="nav-btn nav-btn--img nav-btn--hattingen" onclick="showTabHattingen(event)">
-    <img src="../img/buttons/hattingen.png" alt="Hattingen">
-    <video class="hattingen-video" muted loop playsinline preload="none" aria-hidden="true">
-      <source data-src="/videos/hattingen-video1.mp4" type="video/mp4">
-    </video>
-  </button>
+  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--hattingen" onclick="playVideoButton(event)">
+  <img class="nav-btn-img" src="img/buttons/hattingen.png" alt="Hattingen">
+  <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+    <source src="/videos/hattingen-video1.mp4" type="video/mp4">
+  </video>
+</button>
 
   <button class="nav-btn nav-btn--img nav-btn--video nav-btn--nachrichten" onclick="playVideoButton(event)">
     <img class="nav-btn-img" src="img/buttons/nachrichten.png" alt="Nachrichten">

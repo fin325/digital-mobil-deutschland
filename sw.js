@@ -26,6 +26,7 @@ const VIDEO_FILES = [
 ];
 
 const ICON_FILES = [
+  // Немецкая версия
   '/img/buttons/startseite.png',
   '/img/buttons/pdf.png',
   '/img/buttons/ki.png',
@@ -41,7 +42,25 @@ const ICON_FILES = [
   '/img/buttons/miete.png',
   '/img/buttons/gesetze.png',
   '/img/buttons/db.png',
-  '/img/buttons/projekt.png'
+  '/img/buttons/projekt.png',
+  
+  // Русская версия
+  '/img/buttons/startseite-ru.png',
+  '/img/buttons/pdf-ru.png',
+  '/img/buttons/ki-ru.png',
+  '/img/buttons/arzten-ru.png',
+  '/img/buttons/auto-ru.png',
+  '/img/buttons/karten-ru.png',
+  '/img/buttons/ubersetzer-ru.png',
+  '/img/buttons/kontakt-ru.png',
+  '/img/buttons/hattingen-ru.png',
+  '/img/buttons/nachrichten-ru.png',
+  '/img/buttons/arbeit-ru.png',
+  '/img/buttons/meinung-ru.png',
+  '/img/buttons/miete-ru.png',
+  '/img/buttons/gesetze-ru.png',
+  '/img/buttons/db-ru.png',
+  '/img/buttons/projekt-ru.png'
 ];
 
 // Установка: скачать все видео + иконки в кэш

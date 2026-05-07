@@ -444,7 +444,7 @@ window.playVideoButton = function(event) {
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   
   // Воспроизводим видео только на мобильных
-  if (v && !isDesktop && !v._isPlaying) {
+  if (v && !v._isPlaying) {
     v._isPlaying = true;
     v._hasPlayed = true;
     v.currentTime = 0;
@@ -470,8 +470,8 @@ window.playVideoButton = function(event) {
 
 // Подготовка первых кадров и обработчики — только для мобильных
 (function() {
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (isDesktop) return;
+  // const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // if (isDesktop) return;
 
   // Инициализируем все видео из конфига
   Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {

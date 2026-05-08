@@ -42,22 +42,6 @@ scroll-hint {
   background: transparent;
 }
 
-/* WebP-картинка — заполняет кнопку как видео */
-/* WebP-кнопка */
-.nav-btn--webp {
-    overflow: hidden;
-}
-
-.nav-btn--webp .nav-btn-webp {
-    width: 100% !important;
-    height: 100% !important;
-
-    object-fit: contain !important;
-    object-position: center !important;
-
-    pointer-events: none;
-}
-
 /* ============================================== */
 /* === УНИВЕРСАЛЬНЫЕ ВИДЕО-КНОПКИ НАВБАРА ===    */
 /* === Используются классы:                  === */

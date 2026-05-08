@@ -570,9 +570,28 @@ window.playWebpButton = function(event) {
   }
   if (!config) return;
   
-  // Просто убираем PNG — под ней уже играет/доиграла анимация WebP
-  // Никакой смены src — никакой "второй анимации"
-  button.classList.add('is-playing');
+  const webpImg = button.querySelector('.nav-btn-webp');
+  
+  if (webpImg) {
+    if (!button._wasShown) {
+      // ПЕРВЫЙ тап — просто показываем что под PNG (анимация уже доиграла)
+      button._wasShown = true;
+      button.classList.add('is-playing');
+    } else {
+      // ПОВТОРНЫЙ тап — перезапускаем анимацию через onload
+      // PNG не исчезает пока новый WebP не загрузится — без вспышки
+      const baseSrc = webpImg.dataset.src;
+      if (baseSrc) {
+        // Ждём загрузки нового WebP, потом убираем PNG
+        webpImg.onload = function() {
+          button.classList.add('is-playing');
+          webpImg.onload = null; // очищаем
+        };
+        // Запускаем загрузку нового WebP с timestamp
+        webpImg.src = baseSrc + '?t=' + Date.now();
+      }
+    }
+  }
   
   // Переключаем таб
   if (typeof showTab === 'function') {

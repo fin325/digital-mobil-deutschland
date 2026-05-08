@@ -9,6 +9,48 @@ scroll-hint {
 }
 
 /* ============================================== */
+/* === УНИВЕРСАЛЬНЫЕ WEBP-КНОПКИ НАВБАРА ===     */
+/* === Используются классы:                  ===  */
+/* ===   .nav-btn--webp  — общий класс       ===  */
+/* ===   .nav-btn-img    — статичный фолбэк ===   */
+/* ===   .nav-btn-webp   — анимированный WebP===  */
+/* ============================================== */
+
+/* По умолчанию: видна PNG, WebP скрыт */
+.nav-btn--webp .nav-btn-img {
+  display: block;
+}
+
+.nav-btn--webp .nav-btn-webp {
+  display: none;
+}
+
+/* Когда анимация играет — наоборот */
+.nav-btn--webp.is-playing .nav-btn-img {
+  display: none;
+}
+
+.nav-btn--webp.is-playing .nav-btn-webp {
+  display: block;
+}
+
+/* Базовые стили для WebP-кнопки */
+.nav-btn--webp {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
+}
+
+/* WebP-картинка — заполняет кнопку как видео */
+.nav-btn--webp .nav-btn-webp {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ============================================== */
 /* === УНИВЕРСАЛЬНЫЕ ВИДЕО-КНОПКИ НАВБАРА ===    */
 /* === Используются классы:                  === */
 /* ===   .nav-btn--video — общий класс       === */

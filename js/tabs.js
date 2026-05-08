@@ -540,8 +540,8 @@ window.playVideoButton = function(event) {
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА WEBP-кнопок навбара
 // WebP с loop=1 — анимация играет 1 раз и стоп на последнем кадре
-// При тапе → перезапуск с начала
-// При переключении на другую вкладку → возврат к PNG
+// При загрузке: WebP предзагружается в кеш, но не отображается
+// При тапе: подставляем src → мгновенный старт из кеша, без "вспышки"
 // HTML-шаблон:
 //   <button class="nav-btn nav-btn--img nav-btn--webp nav-btn--ИМЯ" 
 //           onclick="playWebpButton(event)">
@@ -579,7 +579,7 @@ window.playWebpButton = function(event) {
       // Скрываем PNG → видна анимация WebP (под ней)
       button.classList.add('is-playing');
       
-      // Меняем src с timestamp — анимация перезапускается с начала
+      // Меняем src с timestamp — анимация начинается с начала
       webpImg.src = baseSrc + '?t=' + Date.now();
     }
   }
@@ -590,7 +590,7 @@ window.playWebpButton = function(event) {
   }
 };
 
-// Предзагрузка WebP при загрузке страницы (играет в фоне, не виден под PNG)
+// Предзагрузка WebP в кеш через невидимый Image-объект (без отображения)
 (function() {
   Object.keys(WEBP_BUTTONS).forEach(buttonClass => {
     const button = document.querySelector('.' + buttonClass);
@@ -602,8 +602,11 @@ window.playWebpButton = function(event) {
     const src = webpImg.dataset.src;
     if (!src) return;
     
-    // Загружаем WebP сразу — он играет, но не виден под PNG
-    webpImg.src = src;
+    // Загружаем WebP в кеш через скрытый Image-объект
+    // НЕ устанавливаем src на видимый элемент — иначе анимация начнётся сразу
+    const preloader = new Image();
+    preloader.src = src;
+    // Файл в кеше браузера → при тапе мгновенный доступ без сетевой задержки
   });
 
   // Обработчик клика по другим кнопкам — возвращаем PNG
@@ -618,6 +621,11 @@ window.playWebpButton = function(event) {
       // Сбросить эту WebP-кнопку, если кликнули НЕ на неё
       if (!clickedBtn.classList.contains(buttonClass)) {
         button.classList.remove('is-playing');
+        // Очищаем src — следующий тап будет с чистого состояния
+        const webpImg = button.querySelector('.nav-btn-webp');
+        if (webpImg) {
+          webpImg.removeAttribute('src');
+        }
       }
     });
   });

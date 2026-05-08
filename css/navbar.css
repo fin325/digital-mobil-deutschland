@@ -48,14 +48,17 @@ scroll-hint {
     overflow: hidden;
 }
 
-/* animated webp */
+.nav-btn--img img,
 .nav-btn--webp .nav-btn-webp {
-    width: 130% !important;
-    height: 130% !important;
+    width: 100% !important;
+    height: 100% !important;
 
     object-fit: contain !important;
+    object-position: center !important;
 
+    transform: scale(1.3);
     transition: transform 0.25s ease;
+
     pointer-events: none;
 }
 

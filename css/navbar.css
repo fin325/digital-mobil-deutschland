@@ -55,8 +55,6 @@ scroll-hint {
     object-fit: contain !important;
     object-position: center !important;
 
-    transition: transform 0.25s ease;
-
     pointer-events: none;
 }
 

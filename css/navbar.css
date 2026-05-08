@@ -44,8 +44,15 @@ scroll-hint {
 
 /* WebP-картинка — заполняет кнопку как видео */
 .nav-btn--webp .nav-btn-webp {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.nav-btn--webp .nav-btn-webp active webp {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   pointer-events: none;
 }

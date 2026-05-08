@@ -48,7 +48,6 @@ scroll-hint {
     overflow: hidden;
 }
 
-.nav-btn--img img,
 .nav-btn--webp .nav-btn-webp {
     width: 100% !important;
     height: 100% !important;

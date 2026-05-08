@@ -539,9 +539,8 @@ window.playVideoButton = function(event) {
 
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА WEBP-кнопок навбара
-// WebP с loop=1 — анимация играет 1 раз и стоп на последнем кадре
-// При загрузке: WebP предзагружается в кеш, но не отображается
-// При тапе: подставляем src → мгновенный старт из кеша, без "вспышки"
+// WebP с loop=1 — играет в фоне под PNG, останавливается на последнем кадре
+// При тапе — синхронный перезапуск + скрытие PNG (без "двойной анимации")
 // HTML-шаблон:
 //   <button class="nav-btn nav-btn--img nav-btn--webp nav-btn--ИМЯ" 
 //           onclick="playWebpButton(event)">
@@ -572,15 +571,18 @@ window.playWebpButton = function(event) {
   
   const webpImg = button.querySelector('.nav-btn-webp');
   
-  // Запуск/перезапуск анимации
   if (webpImg) {
     const baseSrc = webpImg.dataset.src;
     if (baseSrc) {
-      // Скрываем PNG → видна анимация WebP (под ней)
-      button.classList.add('is-playing');
-      
-      // Меняем src с timestamp — анимация начинается с начала
+      // СИНХРОННО: сначала меняем src, потом показываем
+      // Браузер обновит изображение к моменту следующей отрисовки кадра
       webpImg.src = baseSrc + '?t=' + Date.now();
+      
+      // В следующем кадре — показываем анимацию (PNG исчезает)
+      // requestAnimationFrame гарантирует что src уже применился
+      requestAnimationFrame(() => {
+        button.classList.add('is-playing');
+      });
     }
   }
   
@@ -590,7 +592,7 @@ window.playWebpButton = function(event) {
   }
 };
 
-// Предзагрузка WebP в кеш через невидимый Image-объект (без отображения)
+// Предзагрузка WebP при загрузке страницы (играет в фоне под PNG)
 (function() {
   Object.keys(WEBP_BUTTONS).forEach(buttonClass => {
     const button = document.querySelector('.' + buttonClass);
@@ -602,11 +604,9 @@ window.playWebpButton = function(event) {
     const src = webpImg.dataset.src;
     if (!src) return;
     
-    // Загружаем WebP в кеш через скрытый Image-объект
-    // НЕ устанавливаем src на видимый элемент — иначе анимация начнётся сразу
-    const preloader = new Image();
-    preloader.src = src;
-    // Файл в кеше браузера → при тапе мгновенный доступ без сетевой задержки
+    // WebP грузится сразу и проигрывается под PNG (не виден пользователю)
+    // К моменту первого тапа анимация уже завершилась → loop=1 → стоп на последнем кадре
+    webpImg.src = src;
   });
 
   // Обработчик клика по другим кнопкам — возвращаем PNG
@@ -621,14 +621,10 @@ window.playWebpButton = function(event) {
       // Сбросить эту WebP-кнопку, если кликнули НЕ на неё
       if (!clickedBtn.classList.contains(buttonClass)) {
         button.classList.remove('is-playing');
-        // Очищаем src — следующий тап будет с чистого состояния
-        const webpImg = button.querySelector('.nav-btn-webp');
-        if (webpImg) {
-          webpImg.removeAttribute('src');
-        }
       }
     });
   });
 })();
+
 
 

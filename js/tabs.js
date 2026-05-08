@@ -540,7 +540,7 @@ window.playVideoButton = function(event) {
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА WEBP-кнопок навбара
 // Animated WebP с loop=1 → перезапуск анимации при каждом тапе
-// БЕЗ автозапуска при загрузке страницы — пользователь видит PNG до первого тапа
+// Предзагрузка в кеш для мгновенного запуска без "синей вспышки"
 // HTML-шаблон:
 //   <button class="nav-btn nav-btn--img nav-btn--webp nav-btn--ИМЯ" 
 //           onclick="playWebpButton(event)">
@@ -574,10 +574,10 @@ window.playWebpButton = function(event) {
   if (webpImg) {
     const baseSrc = webpImg.dataset.src;
     if (baseSrc) {
-      // Включаем режим "анимация играет" — CSS покажет WebP вместо PNG
+      // Включаем режим "анимация играет"
       button.classList.add('is-playing');
       
-      // Меняем src с timestamp — браузер видит новый URL и играет с начала
+      // Меняем src с timestamp — браузер берёт из кеша (предзагружен!) и играет с начала
       webpImg.src = baseSrc + '?t=' + Date.now();
     }
   }
@@ -588,8 +588,26 @@ window.playWebpButton = function(event) {
   }
 };
 
-// Обработчик клика по другим кнопкам — сбрасываем чужие WebP
+// Предзагрузка WebP в кеш при загрузке страницы — без отображения
 (function() {
+  Object.keys(WEBP_BUTTONS).forEach(buttonClass => {
+    const button = document.querySelector('.' + buttonClass);
+    if (!button) return;
+    
+    const webpImg = button.querySelector('.nav-btn-webp');
+    if (!webpImg) return;
+    
+    const src = webpImg.dataset.src;
+    if (!src) return;
+    
+    // Создаём невидимый Image-объект — браузер скачает WebP в кеш,
+    // но не будет его отображать на странице
+    const preloader = new Image();
+    preloader.src = src;
+    // Файл попадёт в кеш браузера и будет мгновенно доступен при тапе
+  });
+
+  // Обработчик клика по другим кнопкам — сбрасываем чужие WebP
   document.addEventListener('click', function(e) {
     const clickedBtn = e.target.closest('.nav-btn');
     if (!clickedBtn) return;
@@ -601,7 +619,6 @@ window.playWebpButton = function(event) {
       // Сбросить эту WebP-кнопку, если кликнули НЕ на неё
       if (!clickedBtn.classList.contains(buttonClass)) {
         button.classList.remove('is-playing');
-        // Очищаем src чтобы при следующем тапе анимация точно перезапустилась
         const webpImg = button.querySelector('.nav-btn-webp');
         if (webpImg) {
           webpImg.removeAttribute('src');
@@ -610,3 +627,4 @@ window.playWebpButton = function(event) {
     });
   });
 })();
+

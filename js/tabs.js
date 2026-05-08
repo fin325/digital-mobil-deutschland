@@ -540,6 +540,7 @@ window.playVideoButton = function(event) {
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА WEBP-кнопок навбара
 // Animated WebP с loop=1 → перезапуск анимации при каждом тапе
+// БЕЗ автозапуска при загрузке страницы — пользователь видит PNG до первого тапа
 // HTML-шаблон:
 //   <button class="nav-btn nav-btn--img nav-btn--webp nav-btn--ИМЯ" 
 //           onclick="playWebpButton(event)">
@@ -551,7 +552,6 @@ window.playVideoButton = function(event) {
 // Конфигурация всех WebP-кнопок: класс кнопки → ID вкладки
 const WEBP_BUTTONS = {
   'nav-btn--nachrichten': { tabId: 'news' },
-  // Добавляй сюда новые WebP-кнопки одной строкой:
   // 'nav-btn--db': { tabId: 'mobile' },
 };
 
@@ -570,19 +570,15 @@ window.playWebpButton = function(event) {
   
   const webpImg = button.querySelector('.nav-btn-webp');
   
-  // Перезапуск анимации
+  // Запуск/перезапуск анимации
   if (webpImg) {
-    const src = webpImg.dataset.src;
-    if (src) {
-      // Включаем режим "анимация играет"
+    const baseSrc = webpImg.dataset.src;
+    if (baseSrc) {
+      // Включаем режим "анимация играет" — CSS покажет WebP вместо PNG
       button.classList.add('is-playing');
       
-      // Хитрость: убираем src → в следующем кадре ставим обратно
-      // Браузер использует кеш, но запускает анимацию с нуля
-      webpImg.removeAttribute('src');
-      requestAnimationFrame(() => {
-        webpImg.src = src;
-      });
+      // Меняем src с timestamp — браузер видит новый URL и играет с начала
+      webpImg.src = baseSrc + '?t=' + Date.now();
     }
   }
   
@@ -592,25 +588,8 @@ window.playWebpButton = function(event) {
   }
 };
 
-// Инициализация: загрузить WebP при первом показе
+// Обработчик клика по другим кнопкам — сбрасываем чужие WebP
 (function() {
-  Object.keys(WEBP_BUTTONS).forEach(buttonClass => {
-    const button = document.querySelector('.' + buttonClass);
-    if (!button) return;
-    
-    const webpImg = button.querySelector('.nav-btn-webp');
-    if (!webpImg) return;
-    
-    // Загружаем WebP сразу — при загрузке страницы анимация проиграется один раз
-    // Класс is-playing включаем, чтобы пользователь увидел стартовую анимацию
-    const src = webpImg.dataset.src;
-    if (src) {
-      button.classList.add('is-playing');
-      webpImg.src = src;
-    }
-  });
-
-  // Обработчик клика — снимаем is-playing с других кнопок при переключении
   document.addEventListener('click', function(e) {
     const clickedBtn = e.target.closest('.nav-btn');
     if (!clickedBtn) return;
@@ -622,6 +601,11 @@ window.playWebpButton = function(event) {
       // Сбросить эту WebP-кнопку, если кликнули НЕ на неё
       if (!clickedBtn.classList.contains(buttonClass)) {
         button.classList.remove('is-playing');
+        // Очищаем src чтобы при следующем тапе анимация точно перезапустилась
+        const webpImg = button.querySelector('.nav-btn-webp');
+        if (webpImg) {
+          webpImg.removeAttribute('src');
+        }
       }
     });
   });

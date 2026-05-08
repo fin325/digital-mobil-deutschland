@@ -540,7 +540,8 @@ window.playVideoButton = function(event) {
 // ============================================
 // УНИВЕРСАЛЬНАЯ СИСТЕМА WEBP-кнопок навбара
 // WebP с loop=1 — играет в фоне под PNG, останавливается на последнем кадре
-// При тапе — синхронный перезапуск + скрытие PNG (без "двойной анимации")
+// При тапе — просто плавно убираем PNG, под ней та же анимация
+// При переключении вкладок — PNG возвращается
 // HTML-шаблон:
 //   <button class="nav-btn nav-btn--img nav-btn--webp nav-btn--ИМЯ" 
 //           onclick="playWebpButton(event)">
@@ -569,22 +570,9 @@ window.playWebpButton = function(event) {
   }
   if (!config) return;
   
-  const webpImg = button.querySelector('.nav-btn-webp');
-  
-  if (webpImg) {
-    const baseSrc = webpImg.dataset.src;
-    if (baseSrc) {
-      // СИНХРОННО: сначала меняем src, потом показываем
-      // Браузер обновит изображение к моменту следующей отрисовки кадра
-      webpImg.src = baseSrc + '?t=' + Date.now();
-      
-      // В следующем кадре — показываем анимацию (PNG исчезает)
-      // requestAnimationFrame гарантирует что src уже применился
-      requestAnimationFrame(() => {
-        button.classList.add('is-playing');
-      });
-    }
-  }
+  // Просто убираем PNG — под ней уже играет/доиграла анимация WebP
+  // Никакой смены src — никакой "второй анимации"
+  button.classList.add('is-playing');
   
   // Переключаем таб
   if (typeof showTab === 'function') {

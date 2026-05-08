@@ -181,8 +181,8 @@ a {
 
 /* Картинки внутри — заполняют кнопку */
 .nav-btn--img img {
-    width: 120% !important;
-    height: 120% !important;
+    width: 130% !important;
+    height: 130% !important;
     object-fit: contain !important;
     transition: transform 0.25s ease;
     pointer-events: none; /* клик идёт по кнопке, не по img */

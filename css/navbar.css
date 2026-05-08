@@ -43,26 +43,20 @@ scroll-hint {
 }
 
 /* WebP-картинка — заполняет кнопку как видео */
-/* Animated WebP */
+/* WebP-кнопка */
+.nav-btn--webp {
+    overflow: hidden;
+}
+
+/* animated webp */
 .nav-btn--webp .nav-btn-webp {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
     width: 130% !important;
     height: 130% !important;
 
     object-fit: contain !important;
 
-    transform: translate(-50%, -50%);
-
+    transition: transform 0.25s ease;
     pointer-events: none;
-}
-
-.nav-btn--webp {
-    position: relative;
-    overflow: hidden;
 }
 
 /* ============================================== */

@@ -705,17 +705,20 @@ a.nav-btn:hover {
     .nav-btn--img.active img {
         transform: scale(1.09); !important;
     }
-    
-    /* === Видео-кнопки на ПК: статичная картинка как у других иконок === 
-    .nav-btn--video .nav-btn-img {
-        display: block;
-    }
-    
-    .nav-btn--video .nav-btn-video {
-        display: none;
-    }
-*/
 }
+    @media (prefers-reduced-motion: reduce) {
+  /* ... другие правила ... */
+  /* Универсальный фолбэк для видео и WebP кнопок */
+  .nav-btn--video .nav-btn-video,
+  .nav-btn--webp .nav-btn-webp {
+    display: none !important;
+  }
+  .nav-btn--video .nav-btn-img,
+  .nav-btn--webp .nav-btn-img {
+    display: block !important;
+  }
+}
+
 @media (min-width: 768px) {
     .nav-rows-wrapper {
         display: flex;

@@ -44,7 +44,7 @@ scroll-hint {
 }
 
 .nav-btn--video.active video {
-    transform: scale(1.01) !important;
+    transform: scale(1.0) !important;
 }
 
 /* Видео-элемент внутри кнопки */
@@ -158,7 +158,7 @@ a {
 .nav-btn.active,
 .nav-btn--img.active,
 a.nav-btn.active {
-    transform: translateY(-2px) !important;
+    transform: translateY(-5px) !important;
 }
 
 /* Активная кнопка с картинкой — возвращаем синий градиент поверх */

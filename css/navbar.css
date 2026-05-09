@@ -148,11 +148,11 @@ a {
 
 .nav-btn--img:hover img,
 .nav-btn--img:active img {
-    transform: scale(1.09);
+    transform: scale(1.0);
 }
 
 .nav-btn--img.active img {
-    transform: scale(1.09) !important;
+    transform: scale(1.0) !important;
 }
 
 .nav-btn.active,

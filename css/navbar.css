@@ -30,24 +30,24 @@ scroll-hint {
 }
 
 /* WebP-элемент — позиционирован точно как PNG (центр кнопки) */
-.nav-btn--webp .nav-btn-webp {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  object-fit: contain;
+.nav-btn--img.nav-btn--webp .nav-btn-webp {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 120% !important;
+  height: 120% !important;
+  object-fit: contain !important;
   pointer-events: none;
   z-index: 1;
   display: block;
 }
 
-/* WebP сохраняет центрирование при hover/active/playing */
+/* WebP сохраняет центрирование при hover/active */
 .nav-btn--img.nav-btn--webp:hover .nav-btn-webp,
 .nav-btn--img.nav-btn--webp:active .nav-btn-webp,
 .nav-btn--img.nav-btn--webp.active .nav-btn-webp {
-  transform: translate(-50%, -50%) scale(1.09);
+  transform: translate(-50%, -50%) scale(1.09) !important;
 }
 
 /* PNG-элемент — поверх WebP, виден по умолчанию */
@@ -62,6 +62,7 @@ scroll-hint {
 .nav-btn--webp.is-playing .nav-btn-img {
   opacity: 0;
 }
+
 
 /* ============================================== */
 /* === УНИВЕРСАЛЬНЫЕ ВИДЕО-КНОПКИ НАВБАРА ===    */

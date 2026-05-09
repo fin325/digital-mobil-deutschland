@@ -9,78 +9,6 @@ scroll-hint {
 }
 
 /* ============================================== */
-/* === УНИВЕРСАЛЬНЫЕ WEBP-КНОПКИ НАВБАРА ===     */
-/* === Используются классы:                  ===  */
-/* ===   .nav-btn--webp  — общий класс       ===  */
-/* ===   .nav-btn-img    — статичный фолбэк ===   */
-/* ===   .nav-btn-webp   — анимированный WebP===  */
-/* ============================================== */
-
-/* Базовые стили для WebP-кнопки */
-.nav-btn--webp {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  background: transparent !important;
-  transition: transform 0.25s ease !important; /* плавный transform для самой кнопки */
-}
-
-/* Активная WebP-кнопка — без синего градиента */
-.nav-btn--img.nav-btn--webp.active {
-  background: transparent !important;
-}
-
-/* WebP-элемент — позиционирован точно как PNG (центр кнопки) */
-.nav-btn--img.nav-btn--webp .nav-btn-webp {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: 120% !important;
-  height: 120% !important;
-  object-fit: contain !important;
-  pointer-events: none;
-  z-index: 1;
-  display: block;
-  transition: transform 0.25s ease !important; /* плавный transform для WebP */
-}
-
-/* WebP всегда остаётся центрированным БЕЗ scale (масштаб даёт сама кнопка) */
-.nav-btn--img.nav-btn--webp:hover .nav-btn-webp,
-.nav-btn--img.nav-btn--webp:active .nav-btn-webp,
-.nav-btn--img.nav-btn--webp.active .nav-btn-webp {
-  transform: translate(-50%, -50%) !important;
-}
-
-/* Масштабируется сама КНОПКА — и PNG и WebP внутри едут вместе */
-.nav-btn--img.nav-btn--webp:hover,
-.nav-btn--img.nav-btn--webp:active,
-.nav-btn--img.nav-btn--webp.active {
-  transform: translateY(-2px) !important;
-}
-
-/* Отменяем масштаб PNG внутри WebP-кнопки — масштаб берётся от родителя */
-.nav-btn--img.nav-btn--webp:hover .nav-btn-img,
-.nav-btn--img.nav-btn--webp:active .nav-btn-img,
-.nav-btn--img.nav-btn--webp.active .nav-btn-img {
-  transform: none !important;
-}
-
-/* PNG-элемент — поверх WebP, виден по умолчанию */
-.nav-btn--webp .nav-btn-img {
-  position: relative;
-  z-index: 2;
-  display: block;
-  transition: opacity 0.2s ease, transform 0.25s ease; /* плавность для opacity и transform */
-}
-
-/* Когда анимация играет — скрываем PNG, виден WebP под ней */
-.nav-btn--webp.is-playing .nav-btn-img {
-  opacity: 0;
-}
-
-
-/* ============================================== */
 /* === УНИВЕРСАЛЬНЫЕ ВИДЕО-КНОПКИ НАВБАРА ===    */
 /* === Используются классы:                  === */
 /* ===   .nav-btn--video — общий класс       === */
@@ -116,7 +44,7 @@ scroll-hint {
 }
 
 .nav-btn--video.active video {
-    transform: scale(1.0) !important;
+    transform: scale(1.01) !important;
 }
 
 /* Видео-элемент внутри кнопки */
@@ -616,6 +544,40 @@ a.nav-btn:hover {
     pointer-events: none;
 }
 
+/* === Анимированная кнопка Hattingen с видео === */
+.nav-btn--hattingen {
+  position: relative;
+  overflow: hidden;
+}
+/* Убираем синий фон активного состояния — оставляем картинку */
+.nav-btn--img.nav-btn--hattingen.active {
+  background: transparent !important;
+}
+
+.nav-btn--hattingen .hattingen-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nav-btn--hattingen.video-active .hattingen-video {
+  opacity: 1;
+}
+
+.nav-btn--hattingen.video-active img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-btn--hattingen .hattingen-video {
     display: none !important;
@@ -735,20 +697,17 @@ a.nav-btn:hover {
     .nav-btn--img.active img {
         transform: scale(1.09); !important;
     }
-}
-    @media (prefers-reduced-motion: reduce) {
-  /* ... другие правила ... */
-  /* Универсальный фолбэк для видео и WebP кнопок */
-  .nav-btn--video .nav-btn-video,
-  .nav-btn--webp .nav-btn-webp {
-    display: none !important;
-  }
-  .nav-btn--video .nav-btn-img,
-  .nav-btn--webp .nav-btn-img {
-    display: block !important;
-  }
-}
+    
+    /* === Видео-кнопки на ПК: статичная картинка как у других иконок === */
+    .nav-btn--video .nav-btn-img {
+        display: block;
+    }
+    
+    .nav-btn--video .nav-btn-video {
+        display: none;
+    }
 
+}
 @media (min-width: 768px) {
     .nav-rows-wrapper {
         display: flex;

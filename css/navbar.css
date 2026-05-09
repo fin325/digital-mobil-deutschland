@@ -16,9 +16,51 @@ scroll-hint {
 /* ===   .nav-btn-webp   — анимированный WebP===  */
 /* ============================================== */
 
-/* По умолчанию: видна PNG, WebP скрыт */
-.nav-btn--webp .nav-btn-img {
+/* Базовые стили для WebP-кнопки */
+.nav-btn--webp {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: transparent !important;
+}
+
+/* Активная WebP-кнопка — БЕЗ синего фона никогда */
+.nav-btn--img.nav-btn--webp.active,
+.nav-btn--img.nav-btn--webp:hover,
+.nav-btn--img.nav-btn--webp.is-playing {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+/* PNG и WebP — идентичные позиционирование и размеры (для совпадения слоёв) */
+.nav-btn--webp .nav-btn-img,
+.nav-btn--webp .nav-btn-webp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  object-fit: contain;
+  pointer-events: none;
   display: block;
+}
+
+/* PNG — верхний слой (поверх WebP) */
+.nav-btn--webp .nav-btn-img {
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+/* WebP — нижний слой */
+.nav-btn--webp .nav-btn-webp {
+  z-index: 1;
+}
+
+/* Когда анимация играет — скрываем PNG, виден WebP под ней */
+.nav-btn--webp.is-playing .nav-btn-img {
+  opacity: 0;
 }
 
 /* ============================================== */
@@ -29,7 +71,6 @@ scroll-hint {
 /* ===   .nav-btn-video  — видео-элемент     === */
 /* ============================================== */
 
-/* По умолчанию (мобильные) — показываем видео, скрываем картинку */
 /* По умолчанию: видна PNG, видео скрыто */
 .nav-btn--video .nav-btn-img {
   display: block;
@@ -81,7 +122,7 @@ scroll-hint {
 }
 
 .navbar .nav-btn .icon-emoji {
-  margin-left: -4px; /* отрицательный — двигает влево */
+  margin-left: -4px;
 }
 
 .navbar {
@@ -136,48 +177,48 @@ a {
 /* === КНОПКИ С КАРТИНКАМИ (только index.html) === */
 /* ============================================== */
 
-/* Переопределяем размер и убираем фон/рамку — картинка сама всё показывает */
+/* Размер кнопки — без !important, чтобы WebP-кнопки могли переопределять */
 .nav-btn--img {
-    background: rgba(0, 30, 80, 0) !important;
-    border: 1px solid rgba(255, 255, 255, 0) !important;
-    padding: 0 !important;
-    border-radius: 20px !important;
-    width: 82px !important;
-    height: 82px !important;
-    min-width: 82px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    background: rgba(0, 30, 80, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
+    padding: 0;
+    border-radius: 20px;
+    width: 82px;
+    height: 82px;
+    min-width: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Картинки внутри — заполняют кнопку */
+/* Картинки внутри — заполняют кнопку. БЕЗ !important чтобы WebP-кнопки могли переопределять */
 .nav-btn--img img {
-    width: 130% !important;
-    height: 130% !important;
-    object-fit: contain !important;
+    width: 120%;
+    height: 120%;
+    object-fit: contain;
     transition: transform 0.25s ease;
-    pointer-events: none; /* клик идёт по кнопке, не по img */
+    pointer-events: none;
 }
 
 .nav-btn--img:hover img,
 .nav-btn--img:active img {
-    transform: scale(1.0);
+    transform: scale(1.09);
 }
 
 .nav-btn--img.active img {
-    transform: scale(1.0) !important;
+    transform: scale(1.09);
 }
 
 .nav-btn.active,
 .nav-btn--img.active,
 a.nav-btn.active {
-    transform: translateY(-2px) !important;
+    transform: translateY(-2px);
 }
 
-/* Активная кнопка с картинкой — возвращаем синий градиент поверх */
+/* Активная кнопка с картинкой — синий градиент */
 .nav-btn--img.active {
-    background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
+    background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* === КНОПКИ === */
@@ -199,7 +240,6 @@ a.nav-btn.active {
     isolation: isolate;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     transform: translateZ(0);
-    /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -264,25 +304,25 @@ a.nav-btn {
     box-sizing: border-box;
     font-size: 0.88rem;
     font-family: 'Aldrich', 'Montserrat', system-ui, -apple-system, sans-serif;
-    color: #d0eaff !important;
-    background: rgba(0, 30, 80, 0.35) !important;
+    color: #d0eaff;
+    background: rgba(0, 30, 80, 0.35);
 }
 
 a.nav-btn.active {
-    background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%) !important;
-    color: white !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
     box-shadow:
         0 4px 16px rgba(0, 82, 155, 0.35),
-        0 0 0 1px rgba(255, 255, 255, 0.15) inset !important;
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
 }
 
 a.nav-btn:hover {
-    background: rgba(0, 30, 80, 0.50) !important;
-    border-color: rgba(255, 255, 255, 0.40) !important;
+    background: rgba(0, 30, 80, 0.50);
+    border-color: rgba(255, 255, 255, 0.40);
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25) !important;
-    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(0, 20, 60, 0.25);
+    color: #ffffff;
 }
 
 /* ===== KI-Button: красные глаза робота + белый пар при активной вкладке ===== */
@@ -292,7 +332,6 @@ a.nav-btn:hover {
   overflow: hidden;
 }
 
-/* ----- ГЛАЗА (красное свечение) ----- */
 /* ----- ГЛАЗА (чёткие красные точки) ----- */
 .nav-btn--ki::before,
 .nav-btn--ki::after {
@@ -307,25 +346,23 @@ a.nav-btn:hover {
   z-index: 2;
 }
 
-/* Левый глаз — сдвинут правее и выше */
+/* Левый глаз */
 .nav-btn--ki::before {
   top: 39.5%;
   left: 54.5%;
 }
 
-/* Правый глаз — сдвинут правее и выше */
+/* Правый глаз */
 .nav-btn--ki::after {
   top: 39%;
   left: 73%;
 }
 
 /* Анимация глаз — только при активной кнопке */
-/* Анимация глаз — только при активной кнопке */
 .nav-btn--ki.active::before,
 .nav-btn--ki.active::after {
   animation: ki-eye-breathe-red 3s ease-in-out infinite;
 }
-
 
 @keyframes ki-eye-breathe-red {
   0%, 100% {
@@ -368,19 +405,16 @@ a.nav-btn:hover {
   filter: blur(3px);
 }
 
-/* Стартовая позиция пара над левым глазом */
 .ki-steam::before {
   top: 56%;
   left: 62%;
 }
 
-/* Стартовая позиция пара над правым глазом */
 .ki-steam::after {
   top: 56%;
   left: 72%;
 }
 
-/* Анимация пара — только при активной кнопке */
 .nav-btn--ki.active .ki-steam::before {
   animation: ki-steam-rise 3s ease-in-out infinite;
 }
@@ -390,7 +424,6 @@ a.nav-btn:hover {
   animation-delay: 1.5s;
 }
 
-/* Пар поднимается ВВЕРХ и ВПРАВО, увеличиваясь и растворяясь */
 @keyframes ki-steam-rise {
   0% {
     opacity: 0;
@@ -428,6 +461,13 @@ a.nav-btn:hover {
   }
   .nav-btn--video .nav-btn-img {
     display: block !important;
+  }
+  /* Универсальный фолбэк для WebP-кнопок */
+  .nav-btn--webp .nav-btn-webp {
+    display: none !important;
+  }
+  .nav-btn--webp .nav-btn-img {
+    opacity: 1 !important;
   }
 }
 
@@ -470,7 +510,6 @@ a.nav-btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -661,33 +700,21 @@ a.nav-btn:hover {
     .nav-btn.active,
     .nav-btn--img.active,
     a.nav-btn.active {
-        transform: translateY(-2px) !important;
+        transform: translateY(-2px);
         box-shadow: 
             0 6px 20px rgba(0, 82, 155, 0.45),
-            0 0 0 1px rgba(255, 255, 255, 0.2) inset !important;
+            0 0 0 1px rgba(255, 255, 255, 0.2) inset;
     }
     
     .nav-btn.active:hover,
     .nav-btn--img.active:hover,
     a.nav-btn.active:hover {
-        transform: translateY(-2px) !important;
+        transform: translateY(-2px);
     }
     
     .nav-btn--img.active img {
-        transform: scale(1.0); !important;
+        transform: scale(1.09);
     }
-}
-    @media (prefers-reduced-motion: reduce) {
-  /* ... другие правила ... */
-  /* Универсальный фолбэк для видео и WebP кнопок */
-  .nav-btn--video .nav-btn-video,
-  .nav-btn--webp .nav-btn-webp {
-    display: none !important;
-  }
-  .nav-btn--video .nav-btn-img,
-  .nav-btn--webp .nav-btn-img {
-    display: block !important;
-  }
 }
 
 @media (min-width: 768px) {

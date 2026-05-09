@@ -86,7 +86,7 @@ scroll-hint {
 .nav-scroll-viewport {
     overflow-x: auto;
     overflow-y: visible;
-    padding: 0 10px 4px 10px;
+    padding: 0 10px 5px 10px;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     cursor: grab;
@@ -158,7 +158,7 @@ a {
 .nav-btn.active,
 .nav-btn--img.active,
 a.nav-btn.active {
-    transform: translateY(-5px) !important;
+    transform: translateY(-4px) !important;
 }
 
 /* Активная кнопка с картинкой — возвращаем синий градиент поверх */

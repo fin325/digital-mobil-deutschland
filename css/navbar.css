@@ -116,7 +116,7 @@ scroll-hint {
 }
 
 .nav-btn--video.active video {
-    transform: scale(1.01) !important;
+    transform: scale(1.0) !important;
 }
 
 /* Видео-элемент внутри кнопки */

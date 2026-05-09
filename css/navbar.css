@@ -43,11 +43,25 @@ scroll-hint {
   display: block;
 }
 
-/* WebP сохраняет центрирование при hover/active */
+/* WebP всегда остаётся центрированным БЕЗ scale (масштаб даёт сама кнопка) */
 .nav-btn--img.nav-btn--webp:hover .nav-btn-webp,
 .nav-btn--img.nav-btn--webp:active .nav-btn-webp,
 .nav-btn--img.nav-btn--webp.active .nav-btn-webp {
-  transform: translate(-50%, -50%) scale(1.09) !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Масштабируется сама КНОПКА — и PNG и WebP внутри едут вместе */
+.nav-btn--img.nav-btn--webp:hover,
+.nav-btn--img.nav-btn--webp:active,
+.nav-btn--img.nav-btn--webp.active {
+  transform: translateY(-2px) scale(1.09) !important;
+}
+
+/* Отменяем масштаб PNG внутри WebP-кнопки — масштаб берётся от родителя */
+.nav-btn--img.nav-btn--webp:hover .nav-btn-img,
+.nav-btn--img.nav-btn--webp:active .nav-btn-img,
+.nav-btn--img.nav-btn--webp.active .nav-btn-img {
+  transform: none !important;
 }
 
 /* PNG-элемент — поверх WebP, виден по умолчанию */

@@ -146,7 +146,7 @@ class AppHeader extends HTMLElement {
             <div class="site-header">
                 <div class="site-header-text">
                     <div class="site-title">
-    <img src="/img/dmd-title.png" alt="Digital & Mobil in Deutschland">
+    <img src="/img/dmd-title.webp" alt="Digital & Mobil in Deutschland">
                      </div>
                     <div class="site-subtitle">${texts.city}</div>
                 </div>

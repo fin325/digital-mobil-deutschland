@@ -141,4 +141,29 @@ h1, h2, h3 {
     to   { opacity: 1; }
 }
 
+/* === ФИКС СИНЕЙ ПОЛОСЫ ПРИ ТАПЕ НА ВКЛАДКИ === */
 
+html, body, main.container, .tab-content, .card {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    outline: none !important;
+}
+
+.tab-content.active {
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+}
+
+/* Дополнительно убираем focus-visible */
+main.container:focus,
+.tab-content:focus,
+.tab-content:focus-visible,
+.card:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Страховка для всего, что может ловить фокус */
+* {
+    -webkit-tap-highlight-color: transparent;
+}

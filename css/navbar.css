@@ -29,15 +29,25 @@ scroll-hint {
   background: transparent !important;
 }
 
-/* WebP-элемент — играет в фоне постоянно (под PNG) */
+/* WebP-элемент — позиционирован точно как PNG (центр кнопки) */
 .nav-btn--webp .nav-btn-webp {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 120%;
   height: 120%;
-  object-fit: contain; /* ← ЕДИНСТВЕННОЕ ИЗМЕНЕНИЕ: было cover, стало contain (как у PNG) */
+  object-fit: contain;
   pointer-events: none;
   z-index: 1;
   display: block;
+}
+
+/* WebP сохраняет центрирование при hover/active/playing */
+.nav-btn--img.nav-btn--webp:hover .nav-btn-webp,
+.nav-btn--img.nav-btn--webp:active .nav-btn-webp,
+.nav-btn--img.nav-btn--webp.active .nav-btn-webp {
+  transform: translate(-50%, -50%) scale(1.09);
 }
 
 /* PNG-элемент — поверх WebP, виден по умолчанию */

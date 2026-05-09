@@ -36,8 +36,8 @@ scroll-hint {
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
-  width: 120% !important;
-  height: 120% !important;
+  width: 110% !important;
+  height: 110% !important;
   object-fit: contain !important;
   pointer-events: none;
   z-index: 1;

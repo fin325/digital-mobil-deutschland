@@ -22,6 +22,7 @@ scroll-hint {
   overflow: hidden;
   padding: 0;
   background: transparent !important;
+  transition: transform 0.25s ease !important; /* плавный transform для самой кнопки */
 }
 
 /* Активная WebP-кнопка — без синего градиента */
@@ -41,6 +42,7 @@ scroll-hint {
   pointer-events: none;
   z-index: 1;
   display: block;
+  transition: transform 0.25s ease !important; /* плавный transform для WebP */
 }
 
 /* WebP всегда остаётся центрированным БЕЗ scale (масштаб даёт сама кнопка) */
@@ -69,7 +71,7 @@ scroll-hint {
   position: relative;
   z-index: 2;
   display: block;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.25s ease; /* плавность для opacity и transform */
 }
 
 /* Когда анимация играет — скрываем PNG, виден WebP под ней */

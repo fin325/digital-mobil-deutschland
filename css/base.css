@@ -141,29 +141,23 @@ h1, h2, h3 {
     to   { opacity: 1; }
 }
 
-/* === ФИКС СИНЕЙ ПОЛОСЫ ПРИ ТАПЕ НА ВКЛАДКИ === */
-
-html, body, main.container, .tab-content, .card {
+/* === ЖЁСТКИЙ ФИКС СИНЕЙ ПОЛОСЫ ВВЕРХУ ВКЛАДКИ === */
+html, body, main.container, .tab-content, .card, .container {
     -webkit-tap-highlight-color: transparent !important;
-    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    tap-highlight-color: transparent !important;
     outline: none !important;
+    -webkit-focus-ring-color: transparent !important;
 }
 
-.tab-content.active {
-    -webkit-tap-highlight-color: transparent !important;
-    outline: none !important;
-}
-
-/* Дополнительно убираем focus-visible */
 main.container:focus,
 .tab-content:focus,
-.tab-content:focus-visible,
-.card:focus-visible {
-    outline: none !important;
+.tab-content.active:focus,
+.card:focus {
+    outline: 0 !important;
     box-shadow: none !important;
 }
 
-/* Страховка для всего, что может ловить фокус */
+/* Страховка от :active / :focus-visible */
 * {
     -webkit-tap-highlight-color: transparent;
 }

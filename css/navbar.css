@@ -76,7 +76,7 @@ scroll-hint {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 8px 0 2px 0;
+    padding: 4px 0 2px 0;
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
@@ -86,7 +86,7 @@ scroll-hint {
 .nav-scroll-viewport {
     overflow-x: auto;
     overflow-y: visible;
-    padding: 0 10px 4px 10px;
+    padding: 6px 10px 4px 10px;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     cursor: grab;

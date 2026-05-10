@@ -663,92 +663,68 @@ a.nav-btn:hover {
         display: none !important;
     }
     
-    .nav-btn--media .nav-btn-img {
-        display: block;
-    }
-    
-    .nav-btn--media .nav-btn-anim {
-        display: block;
-    }
-    
-    /* Когда играет анимация WebP — скрываем картинку, показываем анимацию */
-    .nav-btn--media.is-animating .nav-btn-img {
-    display: none;
-    }
+    /* ==================== NAV-BTN MEDIA ==================== */
 
-    .nav-btn--media.is-animating .nav-btn-anim {
-    display: flex;
+.nav-btn--media {
+    position: relative;
+    overflow: hidden;
 }
-    
-    /* ============================================== */
-/* === УНИВЕРСАЛЬНЫЕ WEBP-КНОПКИ НАВБАРА ===     */
-/* === Используются классы:                  ===  */
-/* ===   .nav-btn--webp  — общий класс       ===  */
-/* ===   .nav-btn-img    — статичный фолбэк ===   */
-/* ===   .nav-btn-webp   — анимированный WebP===  */
-/* ============================================== */
 
-/* Базовые стили для WebP-кнопки */
+/* Все три слоя лежат точно друг на друге */
+.nav-btn-img,
+.nav-btn-video,
 .nav-btn-anim {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  background: transparent !important;
-  transition: transform 0.25s ease !important; /* плавный transform для самой кнопки */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    object-fit: contain;
+    pointer-events: none;
 }
 
-/* Активная WebP-кнопка — без синего градиента */
-.nav-btn--img.nav-btn-anim.active {
-  background: transparent !important;
+/* Статичная картинка — по умолчанию видна */
+.nav-btn-img {
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.4s ease;
 }
 
-/* WebP-элемент — позиционирован точно как PNG (центр кнопки) */
-.nav-btn--img.nav-btn-anim {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: 120% !important;
-  height: 120% !important;
-  object-fit: contain !important;
-  pointer-events: none;
-  z-index: 1;
-  display: block;
-  transition: transform 0.25s ease !important; /* плавный transform для WebP */
+/* WebP анимация — под картинкой */
+.nav-btn-anim {
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
-/* WebP всегда остаётся центрированным БЕЗ scale (масштаб даёт сама кнопка) */
-.nav-btn--img.nav-btn-anim:hover .nav-btn-anim,
-.nav-btn--img.nav-btn-anim:active .nav-btn-anim,
-.nav-btn--img.nav-btn-anim.active .nav-btn-anim {
-  transform: translate(-50%, -50%) !important;
+/* Видео — самый нижний слой */
+.nav-btn-video {
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
-/* Масштабируется сама КНОПКА — и PNG и WebP внутри едут вместе */
-.nav-btn--img.nav-btn-anim:hover,
-.nav-btn--img.nav-btn-anim:active,
-.nav-btn--img.nav-btn-anim.active {
-  transform: translateY(-2px) !important;
+/* ====================== СОСТОЯНИЯ ====================== */
+
+/* Когда запускаем анимацию */
+.nav-btn--media.is-animating .nav-btn-img {
+    opacity: 0;
 }
 
-/* Отменяем масштаб PNG внутри WebP-кнопки — масштаб берётся от родителя */
-.nav-btn--img.nav-btn-anim:hover .nav-btn-img,
-.nav-btn--img.nav-btn-anim:active .nav-btn-img,
-.nav-btn--img.nav-btn-anim.active .nav-btn-img {
-  transform: none !important;
+.nav-btn--media.is-animating .nav-btn-anim,
+.nav-btn--media.is-animating .nav-btn-video {
+    opacity: 1;
 }
 
-/* PNG-элемент — поверх WebP, виден по умолчанию */
-.nav-btn-anim .nav-btn-img {
-  position: relative;
-  z-index: 2;
-  display: block;
-  transition: opacity 0.2s ease, transform 0.25s ease; /* плавность для opacity и transform */
+/* Дополнительный класс для точного контроля */
+.nav-btn--media.is-playing .nav-btn-img {
+    opacity: 0;
 }
 
-/* Когда анимация играет — скрываем PNG, виден WebP под ней */
-.nav-btn-anim.is-playing .nav-btn-img {
-  opacity: 0;
+.nav-btn--media.is-playing .nav-btn-anim,
+.nav-btn--media.is-playing .nav-btn-video {
+    opacity: 1;
 }
 }
 

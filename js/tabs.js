@@ -83,6 +83,20 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         scrollAllToTop();
         setTimeout(scrollAllToTop, 50);
+
+        // После загрузки страницы — тихо догружаем все видео в фоне
+        // Картинки уже видны, видео весят мало (100-150кб) — грузим всё
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            // Только мобильные — на ПК видео не нужны
+            setTimeout(() => {
+                document.querySelectorAll('.nav-btn-video').forEach(video => {
+                    if (video.preload !== 'auto') {
+                        video.preload = 'auto';
+                        video.load();
+                    }
+                });
+            }, 1000); // задержка 1 сек — даём странице полностью отрисоваться
+        }
     });
 
     const viewport = document.querySelector('.nav-scroll-viewport');
@@ -240,12 +254,15 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
 
 // ============================================
 // МЕДИА-КНОПКИ НАВБАРА
-// Мобильные: MP4 (.nav-btn-video) — играет один раз,
-//            замирает на последнем кадре до смены вкладки
-// ПК:        анимированный WebP (.nav-btn-anim, loop=1) —
-//            играет один раз, замирает на последнем кадре
+// Мобильные: MP4 (.nav-btn-video)
+//   - preload="metadata" в HTML (быстрый старт страницы)
+//   - после load() все видео догружаются в фоне через 1 сек
+//   - при клике видео уже готово → мгновенное переключение без пустоты
+//   - играет один раз, замирает на последнем кадре до смены кнопки
+// ПК: анимированный WebP (.nav-btn-anim, loop=1)
+//   - грузится только по клику через data-src
+//   - играет один раз, замирает на последнем кадре
 // При клике на другую кнопку — сброс к статичной WebP-картинке
-// Пустота при загрузке исключена: картинка держится до canplay
 // ============================================
 
 const VIDEO_BUTTONS = {
@@ -311,7 +328,6 @@ window.playMediaButton = function(event) {
 
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  // Сбрасываем все остальные кнопки
   resetAllMediaExcept(button);
 
   if (isDesktop) {
@@ -331,22 +347,10 @@ window.playMediaButton = function(event) {
     // === Мобильные: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');
     if (v && !v._isPlaying) {
-      // Lazy-load: подгружаем src только при первом клике
-      const source = v.querySelector('source');
-      if (source && !source.getAttribute('src')) {
-        const realSrc = source.dataset.src;
-        if (realSrc) {
-          source.setAttribute('src', realSrc);
-          v.load();
-        }
-      }
-
       v._isPlaying = true;
       v._hasPlayed = true;
       v.currentTime = 0;
 
-      // Картинка держится пока видео не готово показывать кадры.
-      // is-playing добавляем только в startPlay — тогда CSS скроет картинку
       const startPlay = () => {
         button.classList.add('is-playing');
         v.play().catch(err => {
@@ -357,16 +361,14 @@ window.playMediaButton = function(event) {
       };
 
       if (v.readyState >= 3) {
-        // Видео уже в кэше SW — запускаем мгновенно без пустоты
+        // Видео уже загружено (фоновая загрузка или SW-кэш) — мгновенно
         startPlay();
       } else {
-        // Первый клик — ждём canplay, картинка держится всё это время
+        // Ещё не загружено — картинка держится, ждём готовности
         v.addEventListener('canplay', startPlay, { once: true });
-        // Страховка: если canplay не пришёл за 800мс — запускаем всё равно
+        // Страховка 800мс
         setTimeout(() => {
-          if (!button.classList.contains('is-playing')) {
-            startPlay();
-          }
+          if (!button.classList.contains('is-playing')) startPlay();
         }, 800);
       }
     }
@@ -394,7 +396,7 @@ window.playMediaButton = function(event) {
       video._buttonClass = buttonClass;
 
       // Видео доиграло — флаг сбрасываем, is-playing НЕ снимаем
-      // (остаётся на последнем кадре до клика на другую кнопку)
+      // (замирает на последнем кадре до клика на другую кнопку)
       video.addEventListener('ended', function() {
         video._isPlaying = false;
       });

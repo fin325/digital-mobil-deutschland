@@ -277,10 +277,7 @@ function resetMediaButton(button) {
   }
   button.classList.remove('is-playing');
 
-  const anim = button.querySelector('.nav-btn-anim');
-  if (anim) {
-    anim.removeAttribute('src');
-  }
+  // WebP — просто скрываем через CSS, src не трогаем
   button.classList.remove('is-animating');
 }
 
@@ -314,18 +311,21 @@ window.playMediaButton = function(event) {
   resetAllMediaExcept(button);
 
   if (isDesktop) {
-    // === ПК: запускаем анимированный WebP ===
+    // === ПК: показываем анимированный WebP ===
+    // src уже вставлен в HTML — анимация грузится заранее
+    // При клике просто показываем элемент через CSS-класс
     const anim = button.querySelector('.nav-btn-anim');
     if (anim && !button.classList.contains('is-animating')) {
-      const realSrc = anim.dataset.src;
-      if (realSrc) {
         button.classList.add('is-animating');
+        // Перезапуск анимации: убираем и возвращаем src
+        // чтобы WebP начал с первого кадра при повторном клике
+        const currentSrc = anim.src;
         anim.removeAttribute('src');
         requestAnimationFrame(() => {
-          anim.src = realSrc;
+            anim.src = currentSrc;
         });
-      }
     }
+}
   } else {
     // === Мобильные: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');

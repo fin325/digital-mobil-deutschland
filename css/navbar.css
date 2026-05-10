@@ -664,7 +664,7 @@ a.nav-btn:hover {
     }
     
     .nav-btn--media .nav-btn-img {
-        display: block;
+        display: none;
     }
     
     .nav-btn--media .nav-btn-anim {

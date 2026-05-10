@@ -663,6 +663,23 @@ a.nav-btn:hover {
         display: none !important;
     }
     
+    .nav-btn--media .nav-btn-img {
+        display: block;
+    }
+    
+    .nav-btn--media .nav-btn-anim {
+        display: block;
+    }
+    
+    /* Когда играет анимация WebP — скрываем картинку, показываем анимацию */
+    .nav-btn--media.is-animating .nav-btn-img {
+    display: none;
+    }
+
+    .nav-btn--media.is-animating .nav-btn-anim {
+    display: flex;
+}
+    
     /* ============================================== */
 /* === УНИВЕРСАЛЬНЫЕ WEBP-КНОПКИ НАВБАРА ===     */
 /* === Используются классы:                  ===  */

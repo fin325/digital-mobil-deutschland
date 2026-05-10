@@ -672,7 +672,7 @@ a.nav-btn:hover {
 /* ============================================== */
 
 /* Базовые стили для WebP-кнопки */
-.nav-btn--anim {
+.nav-btn-anim {
   position: relative;
   overflow: hidden;
   padding: 0;
@@ -681,12 +681,12 @@ a.nav-btn:hover {
 }
 
 /* Активная WebP-кнопка — без синего градиента */
-.nav-btn--img.nav-btn--anim.active {
+.nav-btn--img.nav-btn-anim.active {
   background: transparent !important;
 }
 
 /* WebP-элемент — позиционирован точно как PNG (центр кнопки) */
-.nav-btn--img.nav-btn--anim .nav-btn-anim {
+.nav-btn--img.nav-btn-anim {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
@@ -701,28 +701,28 @@ a.nav-btn:hover {
 }
 
 /* WebP всегда остаётся центрированным БЕЗ scale (масштаб даёт сама кнопка) */
-.nav-btn--img.nav-btn--anim:hover .nav-btn-anim,
-.nav-btn--img.nav-btn--anim:active .nav-btn-anim,
-.nav-btn--img.nav-btn--anim.active .nav-btn-anim {
+.nav-btn--img.nav-btn-anim:hover .nav-btn-anim,
+.nav-btn--img.nav-btn-anim:active .nav-btn-anim,
+.nav-btn--img.nav-btn-anim.active .nav-btn-anim {
   transform: translate(-50%, -50%) !important;
 }
 
 /* Масштабируется сама КНОПКА — и PNG и WebP внутри едут вместе */
-.nav-btn--img.nav-btn--anim:hover,
-.nav-btn--img.nav-btn--anim:active,
-.nav-btn--img.nav-btn--anim.active {
+.nav-btn--img.nav-btn-anim:hover,
+.nav-btn--img.nav-btn-anim:active,
+.nav-btn--img.nav-btn-anim.active {
   transform: translateY(-2px) !important;
 }
 
 /* Отменяем масштаб PNG внутри WebP-кнопки — масштаб берётся от родителя */
-.nav-btn--img.nav-btn--anim:hover .nav-btn-img,
-.nav-btn--img.nav-btn--anim:active .nav-btn-img,
-.nav-btn--img.nav-btn--anim.active .nav-btn-img {
+.nav-btn--img.nav-btn-anim:hover .nav-btn-img,
+.nav-btn--img.nav-btn-anim:active .nav-btn-img,
+.nav-btn--img.nav-btn-anim.active .nav-btn-img {
   transform: none !important;
 }
 
 /* PNG-элемент — поверх WebP, виден по умолчанию */
-.nav-btn--anim .nav-btn-img {
+.nav-btn-anim .nav-btn-img {
   position: relative;
   z-index: 2;
   display: block;
@@ -730,7 +730,7 @@ a.nav-btn:hover {
 }
 
 /* Когда анимация играет — скрываем PNG, виден WebP под ней */
-.nav-btn--anim.is-playing .nav-btn-img {
+.nav-btn-anim.is-playing .nav-btn-img {
   opacity: 0;
 }
 }

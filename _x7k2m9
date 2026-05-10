@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>404 — Not Found</title>
+<style>
+body { font-family: -apple-system, sans-serif; padding: 20px; line-height: 1.6; font-size: 14px; max-width: 600px; margin: 0 auto; background: #fff; color: #333; }
+button { padding: 12px 20px; margin: 5px 0; font-size: 16px; width: 100%; border-radius: 8px; border: 1px solid #007aff; background: white; color: #007aff; cursor: pointer; }
+button.danger { border-color: #ff3b30; color: #ff3b30; }
+button:active { opacity: 0.6; }
+input[type="password"] { width: 100%; padding: 14px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; margin-bottom: 10px; }
+pre { background: #f0f0f0; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+h2 { margin-top: 0; }
+.hint { font-size: 12px; color: #666; margin-bottom: 15px; }
+.hidden { display: none; }
+.error { color: #ff3b30; font-size: 13px; margin-bottom: 10px; min-height: 18px; }
+.fake-404 { text-align: center; color: #999; padding: 40px 0; }
+.fake-404 h1 { color: #999; font-size: 60px; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- Видно по умолчанию: маскировка под 404 -->
+<div id="lock" class="fake-404">
+  <h1>404</h1>
+  <p>The page you requested could not be found.</p>
+  <input type="password" id="pwd" placeholder="" autocomplete="off" style="margin-top: 30px; max-width: 300px;">
+  <div class="error" id="err">&nbsp;</div>
+  <button onclick="tryUnlock()" style="max-width: 300px;">→</button>
+</div>
+
+<!-- Скрыто до ввода пароля -->
+<div id="panel" class="hidden">
+  <h2>🔧 SW Diagnostics</h2>
+  <div class="hint">Internal page — not indexed. For developer use only.</div>
+
+  <button onclick="checkAll()">📊 Полная диагностика</button>
+  <button onclick="checkSW()">⚙️ Только SW и кэши</button>
+  <button onclick="checkDevice()">📱 Тип устройства</button>
+  <button onclick="forceUpdate()">🔄 Force update SW</button>
+  <button class="danger" onclick="unregisterSW()">🗑 Полный сброс</button>
+  <button onclick="lockAgain()" style="margin-top: 20px; border-color:#666; color:#666;">🔒 Заблокировать</button>
+
+  <pre id="output">Готов к проверке.</pre>
+</div>
+
+<script>
+// === Защита паролем ===
+// Хэш пароля. Заменить на свой через генератор ниже (см. инструкцию).
+const PASSWORD_HASH = 'ЗАМЕНИ_МЕНЯ_НА_ХЭШ';
+
+// SHA-256 через Web Crypto API
+async function sha256(text) {
+  const buf = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+async function tryUnlock() {
+  const pwd = document.getElementById('pwd').value;
+  const err = document.getElementById('err');
+  
+  if (!pwd) {
+    err.textContent = 'Empty';
+    return;
+  }
+  
+  const hash = await sha256(pwd);
+  
+  if (hash === PASSWORD_HASH) {
+    document.getElementById('lock').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    sessionStorage.setItem('diag_unlocked', '1');
+    document.getElementById('pwd').value = '';
+    err.textContent = '\u00A0';
+  } else {
+    err.textContent = 'Wrong';
+    document.getElementById('pwd').value = '';
+    // Анти-брутфорс: пауза после ошибки
+    document.getElementById('pwd').disabled = true;
+    setTimeout(() => {
+      document.getElementById('pwd').disabled = false;
+      err.textContent = '\u00A0';
+    }, 2000);
+  }
+}
+
+function lockAgain() {
+  sessionStorage.removeItem('diag_unlocked');
+  document.getElementById('lock').classList.remove('hidden');
+  document.getElementById('panel').classList.add('hidden');
+}
+
+// Auto-unlock в этой же сессии
+if (sessionStorage.getItem('diag_unlocked') === '1') {
+  document.getElementById('lock').classList.add('hidden');
+  document.getElementById('panel').classList.remove('hidden');
+}
+
+// Enter для ввода пароля
+document.getElementById('pwd').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') tryUnlock();
+});
+
+// === Функции диагностики ===
+const out = document.getElementById('output');
+const log = (msg) => { out.textContent += '\n' + msg; };
+const reset = () => { out.textContent = ''; };
+
+async function checkSW() {
+  reset();
+  if (!('serviceWorker' in navigator)) {
+    log('❌ Service Worker не поддерживается');
+    return;
+  }
+  
+  const regs = await navigator.serviceWorker.getRegistrations();
+  log('=== Service Workers ===');
+  log('Зарегистрировано: ' + regs.length);
+  regs.forEach((r, i) => {
+    log(`#${i+1} scope: ${r.scope}`);
+    log(`     active: ${r.active?.scriptURL?.split('/').pop() || 'нет'}`);
+    log(`     state: ${r.active?.state || 'нет'}`);
+    if (r.waiting) log(`     ⚠️ waiting: ${r.waiting.scriptURL?.split('/').pop()}`);
+    if (r.installing) log(`     🔄 installing: ${r.installing.scriptURL?.split('/').pop()}`);
+  });
+  
+  log('\n=== Cache Storage ===');
+  const keys = await caches.keys();
+  log('Найдено кэшей: ' + keys.length);
+  for (const key of keys) {
+    const cache = await caches.open(key);
+    const items = await cache.keys();
+    log(`📦 ${key}: ${items.length} файлов`);
+  }
+}
+
+function checkDevice() {
+  reset();
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches;
+  
+  log('=== Устройство ===');
+  log('isDesktop: ' + isDesktop);
+  log('Standalone (PWA): ' + isPWA);
+  log('Online: ' + navigator.onLine);
+  log('\n=== Ожидаемые кэши ===');
+  log(isDesktop 
+    ? '✓ dmd-webp-v3 (анимации)\n✓ dmd-icons-v3\n✓ dmd-static-v3'
+    : '✓ dmd-videos-v3 (MP4)\n✓ dmd-icons-v3\n✓ dmd-static-v3');
+  log('\n=== Browser ===');
+  log('UA: ' + navigator.userAgent);
+}
+
+async function checkAll() {
+  await checkSW();
+  log('\n');
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  log('=== Устройство ===');
+  log('isDesktop: ' + isDesktop);
+  log('Online: ' + navigator.onLine);
+}
+
+async function forceUpdate() {
+  reset();
+  const regs = await navigator.serviceWorker.getRegistrations();
+  if (regs.length === 0) {
+    log('Нет зарегистрированных SW.');
+    return;
+  }
+  for (const r of regs) {
+    await r.update();
+    log('✓ Triggered update: ' + r.scope);
+  }
+  log('\nПодожди пару секунд и нажми "Только SW и кэши" — увидишь waiting SW.');
+}
+
+async function unregisterSW() {
+  if (!confirm('Удалить все SW и кэши? Сайт временно загрузится медленнее.')) return;
+  reset();
+  
+  const regs = await navigator.serviceWorker.getRegistrations();
+  for (const r of regs) {
+    await r.unregister();
+    log('✓ SW unregistered: ' + r.scope);
+  }
+  
+  const keys = await caches.keys();
+  for (const key of keys) {
+    await caches.delete(key);
+    log('✓ Cache deleted: ' + key);
+  }
+  
+  log('\n✅ Готово!');
+  log('Закрой эту вкладку и открой dmd-nrw.de заново.');
+}
+</script>
+</body>
+</html>

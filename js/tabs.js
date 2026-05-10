@@ -240,12 +240,11 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
 
 // ============================================
 // МЕДИА-КНОПКИ НАВБАРА
-// Мобильные: MP4 (.nav-btn-video) — играет один раз,
-//            замирает на последнем кадре до смены вкладки
-// ПК:        анимированный WebP (.nav-btn-anim, loop=1) —
+// Мобильные: MP4 (.nav-btn-video) — preload="auto" в HTML,
 //            играет один раз, замирает на последнем кадре
+// ПК:        анимированный WebP (.nav-btn-anim) — src в HTML,
+//            грузится заранее, при клике мгновенно без задержки
 // При клике на другую кнопку — сброс к статичной WebP-картинке
-// Пустота при загрузке исключена: картинка держится до canplay
 // ============================================
 
 const VIDEO_BUTTONS = {
@@ -268,6 +267,7 @@ const VIDEO_BUTTONS = {
 
 // Сброс медиа одной кнопки — возврат к статичной WebP
 function resetMediaButton(button) {
+  // Сброс MP4 (мобильные)
   const video = button.querySelector('.nav-btn-video');
   if (video) {
     video.pause();
@@ -277,7 +277,8 @@ function resetMediaButton(button) {
   }
   button.classList.remove('is-playing');
 
-  // WebP — просто скрываем через CSS, src не трогаем
+  // WebP (ПК) — src не трогаем, только убираем класс
+  // CSS скроет анимацию через display:none
   button.classList.remove('is-animating');
 }
 
@@ -312,20 +313,21 @@ window.playMediaButton = function(event) {
 
   if (isDesktop) {
     // === ПК: показываем анимированный WebP ===
-    // src уже вставлен в HTML — анимация грузится заранее
-    // При клике просто показываем элемент через CSS-класс
+    // src уже в HTML — файл загружен заранее, задержки нет
     const anim = button.querySelector('.nav-btn-anim');
     if (anim && !button.classList.contains('is-animating')) {
+      const currentSrc = anim.getAttribute('src');
+      if (currentSrc) {
         button.classList.add('is-animating');
-        // Перезапуск анимации: убираем и возвращаем src
-        // чтобы WebP начал с первого кадра при повторном клике
-        const currentSrc = anim.src;
+        // Двойной rAF перезапускает анимацию с первого кадра
         anim.removeAttribute('src');
         requestAnimationFrame(() => {
-            anim.src = currentSrc;
+          requestAnimationFrame(() => {
+            anim.setAttribute('src', currentSrc);
+          });
         });
+      }
     }
-}
   } else {
     // === Мобильные: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');
@@ -352,7 +354,7 @@ window.playMediaButton = function(event) {
 (function() {
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  // На ПК видео не нужны вообще
+  // На ПК видео не нужны — WebP грузится через src в HTML
   if (isDesktop) return;
 
   Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
@@ -366,7 +368,7 @@ window.playMediaButton = function(event) {
     video._hasPlayed = false;
     video._buttonClass = buttonClass;
 
-    // Показываем первый кадр как превью — точно как в старом коде
+    // Показываем первый кадр как превью
     function showFirstFrame() {
       if (video._hasPlayed) return;
       video.pause();
@@ -380,16 +382,14 @@ window.playMediaButton = function(event) {
       }
     }
 
-    // preload="auto" уже в HTML — браузер грузит сам
-    // Мы только устанавливаем первый кадр как превью
     showFirstFrame();
     setTimeout(showFirstFrame, 500);
     setTimeout(showFirstFrame, 1500);
 
     // Видео доиграло — замираем на последнем кадре
+    // is-playing НЕ снимаем до клика на другую кнопку
     video.addEventListener('ended', function() {
       video._isPlaying = false;
-      // is-playing НЕ снимаем — последний кадр виден до смены кнопки
     });
   });
 })();

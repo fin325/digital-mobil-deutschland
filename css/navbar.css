@@ -10,76 +10,70 @@ scroll-hint {
 
 /* ============================================== */
 /* === УНИВЕРСАЛЬНЫЕ МЕДИА-КНОПКИ НАВБАРА ===    */
+/* === Используются классы:                  === */
+/* ===   .nav-btn--media — общий класс       === */
+/* ===   .nav-btn-img    — статичная картинка === */
+/* ===   .nav-btn-video  — MP4 (мобильные)   === */
+/* ===   .nav-btn-anim   — WebP анимация (ПК)=== */
 /* ============================================== */
 
+/* По умолчанию: видна PNG/WebP, видео и анимация скрыты */
+.nav-btn--media .nav-btn-img {
+  display: block;
+}
+
+.nav-btn--media .nav-btn-video {
+  display: none;
+}
+
+.nav-btn--media .nav-btn-anim {
+  display: none;
+}
+
+/* Когда играет видео (мобильные) — наоборот */
+.nav-btn--media.is-playing .nav-btn-img {
+  display: none;
+}
+
+.nav-btn--media.is-playing .nav-btn-video {
+  display: block;
+}
+
+/* Базовые стили для медиа-кнопки */
 .nav-btn--media {
   position: relative;
   overflow: hidden;
+  padding: 0;
   background: transparent;
 }
 
-/* Статичная картинка — всегда на месте */
-.nav-btn--media .nav-btn-img {
-  position: relative;
-  z-index: 1;
-  width: 120%;
-  height: 120%;
-  object-fit: cover;
-  transition: opacity 0.3s ease;
+.nav-btn--media.active video {
+    transform: scale(1.0) !important;
 }
 
-/* Видео — поверх картинки, но по умолчанию прозрачное */
+/* Видео-элемент внутри кнопки */
 .nav-btn--media .nav-btn-video {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 120%;
   height: 120%;
   object-fit: cover;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 0.25s ease;
   pointer-events: none;
   background: transparent;
 }
 
-/* Плавное появление видео */
-.nav-btn--media.is-playing .nav-btn-video {
-  opacity: 1;
-}
-
-/* Когда видео играет — можно слегка скрыть статичную картинку (опционально) */
-.nav-btn--media.is-playing .nav-btn-img {
-  opacity: 0;
-}
-
-/* WebP анимация для ПК */
+/* Анимированный WebP — позиционирование как у видео */
 .nav-btn--media .nav-btn-anim {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 120%;
   height: 120%;
   object-fit: cover;
-  z-index: 3;
-  opacity: 0;
   pointer-events: none;
+  background: transparent;
 }
 
-.nav-btn--media.is-animating .nav-btn-anim {
-  opacity: 1;
-}
-
-.nav-btn--media.is-animating .nav-btn-img {
-  opacity: 0;
-}
-
-/* Poster должен показываться пока видео грузится */
-.nav-btn--media video[poster] {
-  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)); /* лёгкая тень при необходимости */
-}
-
-/* Скрываем контролы воспроизведения */
+/* Скрыть значок play на iOS Safari для всех видео-кнопок */
 .nav-btn--media .nav-btn-video::-webkit-media-controls,
 .nav-btn--media .nav-btn-video::-webkit-media-controls-start-playback-button,
 .nav-btn--media .nav-btn-video::-webkit-media-controls-panel,

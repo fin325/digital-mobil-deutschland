@@ -83,20 +83,6 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         scrollAllToTop();
         setTimeout(scrollAllToTop, 50);
-
-        // После загрузки страницы — тихо догружаем все видео в фоне
-        // Картинки уже видны, видео весят мало (100-150кб) — грузим всё
-        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            // Только мобильные — на ПК видео не нужны
-            setTimeout(() => {
-                document.querySelectorAll('.nav-btn-video').forEach(video => {
-                    if (video.preload !== 'auto') {
-                        video.preload = 'auto';
-                        video.load();
-                    }
-                });
-            }, 1000); // задержка 1 сек — даём странице полностью отрисоваться
-        }
     });
 
     const viewport = document.querySelector('.nav-scroll-viewport');
@@ -253,7 +239,13 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
 })();
 
 // ============================================
-// МЕДИА-КНОПКИ НАВБАРА (обновлённая версия)
+// МЕДИА-КНОПКИ НАВБАРА
+// Мобильные: MP4 (.nav-btn-video) — играет один раз,
+//            замирает на последнем кадре до смены вкладки
+// ПК:        анимированный WebP (.nav-btn-anim, loop=1) —
+//            играет один раз, замирает на последнем кадре
+// При клике на другую кнопку — сброс к статичной WebP-картинке
+// Пустота при загрузке исключена: картинка держится до canplay
 // ============================================
 
 const VIDEO_BUTTONS = {
@@ -274,44 +266,7 @@ const VIDEO_BUTTONS = {
   'nav-btn--projekt':     { tabId: 'project'        },
 };
 
-// ====================== АВТОЗАПУСК АКТИВНОЙ КНОПКИ ======================
-
-function autoPlayActiveMedia() {
-  const activeBtn = document.querySelector('.nav-btn.active.nav-btn--media');
-  if (!activeBtn) return;
-
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (isDesktop) return; // на ПК WebP-анимация остаётся по клику
-
-  const v = activeBtn.querySelector('.nav-btn-video');
-  if (!v || v._isPlaying) return;
-
-  resetAllMediaExcept(activeBtn);
-
-  v._isPlaying = true;
-  v._hasPlayed = true;
-  v.currentTime = 0;
-
-  const startPlay = () => {
-    activeBtn.classList.add('is-playing');
-    v.play().catch(err => {
-      console.warn('AutoPlay failed:', err);
-      activeBtn.classList.remove('is-playing');
-      v._isPlaying = false;
-    });
-  };
-
-  if (v.readyState >= 3) {
-    startPlay();
-  } else {
-    v.addEventListener('canplay', startPlay, { once: true });
-    setTimeout(() => {
-      if (!activeBtn.classList.contains('is-playing')) startPlay();
-    }, 700);
-  }
-}
-
-// Сброс медиа одной кнопки
+// Сброс медиа одной кнопки — возврат к статичной WebP
 function resetMediaButton(button) {
   const video = button.querySelector('.nav-btn-video');
   if (video) {
@@ -339,8 +294,7 @@ function resetAllMediaExcept(exceptButton) {
   });
 }
 
-// ====================== ОСНОВНОЙ ОБРАБОТЧИК КЛИКА ======================
-
+// Универсальный обработчик клика по медиа-кнопке
 window.playMediaButton = function(event) {
   const button = event.currentTarget;
 
@@ -360,7 +314,7 @@ window.playMediaButton = function(event) {
   resetAllMediaExcept(button);
 
   if (isDesktop) {
-    // === ПК: WebP анимация ===
+    // === ПК: запускаем анимированный WebP ===
     const anim = button.querySelector('.nav-btn-anim');
     if (anim && !button.classList.contains('is-animating')) {
       const realSrc = anim.dataset.src;
@@ -373,30 +327,19 @@ window.playMediaButton = function(event) {
       }
     }
   } else {
-    // === МОБИЛЬНЫЕ: MP4 ===
+    // === Мобильные: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');
     if (v && !v._isPlaying) {
       v._isPlaying = true;
       v._hasPlayed = true;
       v.currentTime = 0;
+      button.classList.add('is-playing');
 
-      const startPlay = () => {
-        button.classList.add('is-playing');
-        v.play().catch(err => {
-          console.warn(buttonClass + ' play failed:', err);
-          v._isPlaying = false;
-          button.classList.remove('is-playing');
-        });
-      };
-
-      if (v.readyState >= 3) {
-        startPlay();
-      } else {
-        v.addEventListener('canplay', startPlay, { once: true });
-        setTimeout(() => {
-          if (!button.classList.contains('is-playing')) startPlay();
-        }, 800);
-      }
+      v.play().catch(err => {
+        console.warn(buttonClass + ' play failed:', err);
+        v._isPlaying = false;
+        button.classList.remove('is-playing');
+      });
     }
   }
 
@@ -409,75 +352,44 @@ window.playMediaButton = function(event) {
 (function() {
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  // На ПК видео не нужны вообще
+  if (isDesktop) return;
+
   Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
     const button = document.querySelector('.' + buttonClass);
     if (!button) return;
 
-    if (!isDesktop) {
-      const video = button.querySelector('.nav-btn-video');
-      if (!video) return;
+    const video = button.querySelector('.nav-btn-video');
+    if (!video) return;
 
-      video._isPlaying = false;
-      video._hasPlayed = false;
-      video._buttonClass = buttonClass;
+    video._isPlaying = false;
+    video._hasPlayed = false;
+    video._buttonClass = buttonClass;
 
-      video.addEventListener('ended', function() {
-        video._isPlaying = false;
-      });
+    // Показываем первый кадр как превью — точно как в старом коде
+    function showFirstFrame() {
+      if (video._hasPlayed) return;
+      video.pause();
+      if (video.readyState >= 2) {
+        video.currentTime = 0.1;
+      } else {
+        video.addEventListener('loadeddata', function onLoaded() {
+          video.currentTime = 0.1;
+          video.removeEventListener('loadeddata', onLoaded);
+        });
+      }
     }
+
+    // preload="auto" уже в HTML — браузер грузит сам
+    // Мы только устанавливаем первый кадр как превью
+    showFirstFrame();
+    setTimeout(showFirstFrame, 500);
+    setTimeout(showFirstFrame, 1500);
+
+    // Видео доиграло — замираем на последнем кадре
+    video.addEventListener('ended', function() {
+      video._isPlaying = false;
+      // is-playing НЕ снимаем — последний кадр виден до смены кнопки
+    });
   });
 })();
-
-// ====================== ОБНОВЛЁННЫЕ ФУНКЦИИ ТАБОВ ======================
-
-function showTabSilent(tabId) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-  const targetTab = document.getElementById(tabId);
-  if (targetTab) targetTab.classList.add('active');
-
-  const btn = document.querySelector(`[onclick*="'${tabId}'"]`);
-  if (btn) {
-    btn.classList.add('active');
-
-    // Автозапуск видео при возврате через историю
-    setTimeout(() => {
-      autoPlayActiveMedia();
-    }, 80);
-  }
-}
-
-// ====================== DOMContentLoaded + LOAD ======================
-
-window.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash.replace('#', '');
-  if (hash) showTabSilent(hash);
-
-  const scrollAllToTop = () => {
-    document.documentElement.scrollTo(0, 0);
-    document.body.scrollTo(0, 0);
-    document.querySelector('main.container')?.scrollTo(0, 0);
-    window.scrollTo(0, 0);
-  };
-
-  scrollAllToTop();
-  requestAnimationFrame(scrollAllToTop);
-  setTimeout(scrollAllToTop, 0);
-  setTimeout(scrollAllToTop, 100);
-  setTimeout(scrollAllToTop, 300);
-
-  window.addEventListener('load', () => {
-    scrollAllToTop();
-    setTimeout(scrollAllToTop, 50);
-
-    // ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: автозапуск активной кнопки
-    setTimeout(autoPlayActiveMedia, 120);
-  });
-
-  const viewport = document.querySelector('.nav-scroll-viewport');
-  if (viewport) {
-    viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });
-    viewport.addEventListener('touchstart', hideSwipeHint, { passive: true, once: true });
-  }
-});

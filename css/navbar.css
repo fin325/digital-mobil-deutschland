@@ -663,78 +663,78 @@ a.nav-btn:hover {
         display: none !important;
     }
     
-    /* ===================== ОСНОВА ===================== */
+    /* ============================================== */
+/*   МЕДИА КНОПКИ ДЛЯ ПК — WebP без пустоты      */
+/* ============================================== */
+
 .nav-btn--media {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
+    padding: 0;
+    background: transparent !important;
+    transition: transform 0.25s ease !important;
 }
 
-/* Оба изображения — абсолютно одинаково позиционированы */
-.nav-btn-img,
-.nav-btn-anim {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 118%;           /* подбери значение под свой дизайн */
-    height: 118%;
-    object-fit: contain;
-    pointer-events: none;
-}
-
-/* Статичная картинка — по умолчанию */
-.nav-btn-img {
+/* Статичная картинка */
+.nav-btn--media .nav-btn-img {
+    position: relative;
     z-index: 3;
-    opacity: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     transition: opacity 0.35s ease;
 }
 
 /* Анимированный WebP */
-.nav-btn-anim {
+.nav-btn--media .nav-btn-anim {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    
+    width: 120% !important;
+    height: 120% !important;
+    object-fit: contain !important;
+    
+    pointer-events: none;
     z-index: 2;
+    display: block;
     opacity: 0;
     transition: opacity 0.35s ease;
-    
-    /* Важно для перезапуска анимации через JS */
-    display: block;
+    will-change: opacity;
 }
 
-/* Скрываем видео на ПК (как у тебя было) */
-.nav-btn-video {
-    display: none !important;
+/* ====================== Hover / Active ====================== */
+
+.nav-btn--media:hover,
+.nav-btn--media:active,
+.nav-btn--media.active {
+    transform: translateY(-2px) !important;
 }
 
-/* ===================== ГЛАВНАЯ МАГИЯ ===================== */
-
-.nav-btn--media.is-animating .nav-btn-img {
-    opacity: 0;
+.nav-btn--media:hover .nav-btn-anim,
+.nav-btn--media:active .nav-btn-anim,
+.nav-btn--media.active .nav-btn-anim {
+    transform: translate(-50%, -50%) !important;
 }
 
-.nav-btn--media.is-animating .nav-btn-anim {
-    opacity: 1;
+.nav-btn--media:hover .nav-btn-img,
+.nav-btn--media:active .nav-btn-img,
+.nav-btn--media.active .nav-btn-img {
+    transform: none !important;
 }
 
-/* Дополнительная страховка */
+/* ====================== ВКЛЮЧЕНИЕ АНИМАЦИИ ====================== */
+
+.nav-btn--media.is-animating .nav-btn-img,
 .nav-btn--media.is-playing .nav-btn-img {
     opacity: 0;
 }
 
+.nav-btn--media.is-animating .nav-btn-anim,
 .nav-btn--media.is-playing .nav-btn-anim {
     opacity: 1;
-}
-
-/* Ускоряет появление WebP */
-.nav-btn-anim {
-    will-change: opacity;
-}
-
-/* Чтобы при перезапуске анимации WebP начинался с первого кадра чище */
-.nav-btn--media.is-animating .nav-btn-anim {
-    animation: none; /* на случай если где-то есть анимация */
 }
 }
 
@@ -747,5 +747,34 @@ a.nav-btn:hover {
 
     .nav-row {
         justify-content: center;
+    }
+}
+
+/* ============================================== */
+/*   ACCESSIBILITY — prefers-reduced-motion      */
+/* ============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nav-btn--media .nav-btn-anim {
+        opacity: 0 !important;           /* всегда скрываем анимацию */
+        transition: none !important;
+    }
+
+    .nav-btn--media .nav-btn-img {
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    .nav-btn--media.is-animating .nav-btn-img,
+    .nav-btn--media.is-playing .nav-btn-img {
+        opacity: 1 !important;
+    }
+
+    /* Отключаем подъём кнопки при hover (по желанию) */
+    .nav-btn--media:hover,
+    .nav-btn--media:active,
+    .nav-btn--media.active {
+        transform: none !important;
     }
 }

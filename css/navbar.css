@@ -668,7 +668,7 @@ a.nav-btn:hover {
     }
     
     .nav-btn--media .nav-btn-anim {
-        display: none;
+        display: block;
     }
     
     /* Когда играет анимация WebP — скрываем картинку, показываем анимацию */

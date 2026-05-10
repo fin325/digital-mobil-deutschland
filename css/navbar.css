@@ -9,46 +9,49 @@ scroll-hint {
 }
 
 /* ============================================== */
-/* === УНИВЕРСАЛЬНЫЕ ВИДЕО-КНОПКИ НАВБАРА ===    */
-/* === Используются классы:                  === */
-/* ===   .nav-btn--video — общий класс       === */
-/* ===   .nav-btn-img    — картинка (фолбэк) === */
-/* ===   .nav-btn-video  — видео-элемент     === */
+/* === УНИВЕРСАЛЬНЫЕ МЕДИА-КНОПКИ НАВБАРА ===    */
+/* ===   .nav-btn--media — общий класс       === */
+/* ===   .nav-btn-img    — статичная WebP    === */
+/* ===   .nav-btn-video  — MP4 (мобильные)  === */
+/* ===   .nav-btn-anim   — WebP анимация ПК === */
 /* ============================================== */
 
-/* По умолчанию (мобильные) — показываем видео, скрываем картинку */
-/* По умолчанию: видна PNG, видео скрыто */
-.nav-btn--video .nav-btn-img {
+/* По умолчанию: видна картинка, видео и анимация скрыты */
+.nav-btn--media .nav-btn-img {
   display: block;
 }
 
-.nav-btn--video .nav-btn-video {
+.nav-btn--media .nav-btn-video {
   display: none;
 }
 
-/* Когда видео играет — наоборот */
-.nav-btn--video.is-playing .nav-btn-img {
+.nav-btn--media .nav-btn-anim {
   display: none;
 }
 
-.nav-btn--video.is-playing .nav-btn-video {
+/* Когда играет видео (мобильные) */
+.nav-btn--media.is-playing .nav-btn-img {
+  display: none;
+}
+
+.nav-btn--media.is-playing .nav-btn-video {
   display: block;
 }
 
-/* Базовые стили для видео-кнопки */
-.nav-btn--video {
+/* Базовые стили медиа-кнопки */
+.nav-btn--media {
   position: relative;
   overflow: hidden;
   padding: 0;
   background: transparent;
 }
 
-.nav-btn--video.active video {
+.nav-btn--media.active video {
     transform: scale(1.0) !important;
 }
 
-/* Видео-элемент внутри кнопки */
-.nav-btn--video .nav-btn-video {
+/* Видео внутри кнопки */
+.nav-btn--media .nav-btn-video {
   width: 120%;
   height: 120%;
   object-fit: cover;
@@ -56,19 +59,32 @@ scroll-hint {
   background: transparent;
 }
 
-/* Скрыть значок play на iOS Safari для всех видео-кнопок */
-.nav-btn--video .nav-btn-video::-webkit-media-controls,
-.nav-btn--video .nav-btn-video::-webkit-media-controls-start-playback-button,
-.nav-btn--video .nav-btn-video::-webkit-media-controls-panel,
-.nav-btn--video .nav-btn-video::-webkit-media-controls-overlay-play-button,
-.nav-btn--video .nav-btn-video::-webkit-media-controls-play-button {
+/* Анимированный WebP — то же позиционирование что и видео */
+.nav-btn--media .nav-btn-anim {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Скрыть значок play на iOS Safari */
+.nav-btn--media .nav-btn-video::-webkit-media-controls,
+.nav-btn--media .nav-btn-video::-webkit-media-controls-start-playback-button,
+.nav-btn--media .nav-btn-video::-webkit-media-controls-panel,
+.nav-btn--media .nav-btn-video::-webkit-media-controls-overlay-play-button,
+.nav-btn--media .nav-btn-video::-webkit-media-controls-play-button {
   display: none !important;
   -webkit-appearance: none !important;
   opacity: 0 !important;
 }
 
 .navbar .nav-btn .icon-emoji {
-  margin-left: -4px; /* отрицательный — двигает влево */
+  margin-left: -4px;
 }
 
 .navbar {
@@ -82,7 +98,6 @@ scroll-hint {
     overflow: visible;
 }
 
-/* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */
 .nav-scroll-viewport {
     overflow-x: auto;
     overflow-y: visible;
@@ -96,7 +111,6 @@ scroll-hint {
     display: none;
 }
 
-/* 2. ОБЕРТКА ДЛЯ РЯДОВ */
 .nav-rows-wrapper {
     display: flex;
     flex-direction: column;
@@ -106,7 +120,6 @@ scroll-hint {
     min-width: 100%;
 }
 
-/* 3. СТИЛИ ДЛЯ РЯДОВ */
 .nav-row {
     display: flex;
     gap: 11px;
@@ -120,10 +133,9 @@ a {
 }
 
 /* ============================================== */
-/* === КНОПКИ С КАРТИНКАМИ (только index.html) === */
+/* === КНОПКИ С КАРТИНКАМИ                    === */
 /* ============================================== */
 
-/* Переопределяем размер и убираем фон/рамку — картинка сама всё показывает */
 .nav-btn--img {
     background: rgba(0, 30, 80, 0) !important;
     border: 1px solid rgba(255, 255, 255, 0) !important;
@@ -137,13 +149,12 @@ a {
     justify-content: center !important;
 }
 
-/* Картинки внутри — заполняют кнопку */
 .nav-btn--img img {
     width: 120% !important;
     height: 120% !important;
     object-fit: contain !important;
     transition: transform 0.25s ease;
-    pointer-events: none; /* клик идёт по кнопке, не по img */
+    pointer-events: none;
 }
 
 .nav-btn--img:hover img,
@@ -161,10 +172,14 @@ a.nav-btn.active {
     transform: translateY(-4px) !important;
 }
 
-/* Активная кнопка с картинкой — возвращаем синий градиент поверх */
 .nav-btn--img.active {
     background: linear-gradient(135deg, rgba(0, 82, 155, 0.88) 0%, rgba(0, 120, 210, 0.88) 100%) !important;
     border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Медиа-кнопка активная — без синего фона, видна картинка */
+.nav-btn--img.nav-btn--media.active {
+  background: transparent !important;
 }
 
 /* === КНОПКИ === */
@@ -186,7 +201,6 @@ a.nav-btn.active {
     isolation: isolate;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     transform: translateZ(0);
-    /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -272,15 +286,12 @@ a.nav-btn:hover {
     color: #ffffff !important;
 }
 
-/* ===== KI-Button: красные глаза робота + белый пар при активной вкладке ===== */
-
+/* ===== KI-Button ===== */
 .nav-btn--ki {
   position: relative;
   overflow: hidden;
 }
 
-/* ----- ГЛАЗА (красное свечение) ----- */
-/* ----- ГЛАЗА (чёткие красные точки) ----- */
 .nav-btn--ki::before,
 .nav-btn--ki::after {
   content: '';
@@ -294,25 +305,20 @@ a.nav-btn:hover {
   z-index: 2;
 }
 
-/* Левый глаз — сдвинут правее и выше */
 .nav-btn--ki::before {
   top: 39.5%;
   left: 54.5%;
 }
 
-/* Правый глаз — сдвинут правее и выше */
 .nav-btn--ki::after {
   top: 39%;
   left: 73%;
 }
 
-/* Анимация глаз — только при активной кнопке */
-/* Анимация глаз — только при активной кнопке */
 .nav-btn--ki.active::before,
 .nav-btn--ki.active::after {
   animation: ki-eye-breathe-red 3s ease-in-out infinite;
 }
-
 
 @keyframes ki-eye-breathe-red {
   0%, 100% {
@@ -327,7 +333,6 @@ a.nav-btn:hover {
   }
 }
 
-/* ----- ПАР (белый, яркий, уходит вбок) ----- */
 .ki-steam {
   position: absolute;
   top: 0;
@@ -355,19 +360,16 @@ a.nav-btn:hover {
   filter: blur(3px);
 }
 
-/* Стартовая позиция пара над левым глазом */
 .ki-steam::before {
   top: 56%;
   left: 62%;
 }
 
-/* Стартовая позиция пара над правым глазом */
 .ki-steam::after {
   top: 56%;
   left: 72%;
 }
 
-/* Анимация пара — только при активной кнопке */
 .nav-btn--ki.active .ki-steam::before {
   animation: ki-steam-rise 3s ease-in-out infinite;
 }
@@ -377,7 +379,6 @@ a.nav-btn:hover {
   animation-delay: 1.5s;
 }
 
-/* Пар поднимается ВВЕРХ и ВПРАВО, увеличиваясь и растворяясь */
 @keyframes ki-steam-rise {
   0% {
     opacity: 0;
@@ -397,28 +398,7 @@ a.nav-btn:hover {
   }
 }
 
-/* Уменьшение движения для accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .nav-btn--ki.active::before,
-  .nav-btn--ki.active::after {
-    animation: none;
-    opacity: 0.85;
-  }
-  .nav-btn--ki.active .ki-steam::before,
-  .nav-btn--ki.active .ki-steam::after {
-    animation: none;
-    opacity: 0;
-  }
-  /* Универсальный фолбэк: видео-кнопки на устройствах с reduced-motion */
-  .nav-btn--video .nav-btn-video {
-    display: none !important;
-  }
-  .nav-btn--video .nav-btn-img {
-    display: block !important;
-  }
-}
-
-/* === СТИЛИ ДЛЯ ПОДСКАЗКИ И СТРЕЛОК === */
+/* === ПОДСКАЗКА И СТРЕЛКИ === */
 .scroll-hint-container {
     display: flex;
     justify-content: space-between;
@@ -457,7 +437,6 @@ a.nav-btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Убираем синий прямоугольник при нажатии на Android */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -544,55 +523,15 @@ a.nav-btn:hover {
     pointer-events: none;
 }
 
-/* === Анимированная кнопка Hattingen с видео === */
-.nav-btn--hattingen {
-  position: relative;
-  overflow: hidden;
-}
-/* Убираем синий фон активного состояния — оставляем картинку */
-.nav-btn--img.nav-btn--hattingen.active {
-  background: transparent !important;
-}
-
-.nav-btn--hattingen .hattingen-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  object-fit: cover;
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.nav-btn--hattingen.video-active .hattingen-video {
-  opacity: 1;
-}
-
-.nav-btn--hattingen.video-active img {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-btn--hattingen .hattingen-video {
-    display: none !important;
-  }
-}
-
 /* ============================================== */
-/* === ДЕСКТОП: hover-эффекты + активные кнопки === */
+/* === ДЕСКТОП                                === */
 /* ============================================== */
 @media (hover: hover) and (pointer: fine) {
     .navbar {
         backdrop-filter: blur(12px) saturate(160%);
         -webkit-backdrop-filter: blur(12px) saturate(160%);
     }
-    
+
     .nav-btn {
         font-weight: 600;
         font-size: 0.98rem;
@@ -615,7 +554,7 @@ a.nav-btn:hover {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
     }
-    
+
     a.nav-btn {
         font-weight: 600;
         font-size: 0.98rem;
@@ -644,27 +583,26 @@ a.nav-btn:hover {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    
+
     .scroll-hint-left {
         display: none !important;
     }
 
-    /* === KI-кнопка: анимация при hover на десктопе === */
+    /* KI hover */
     .nav-btn--ki:hover::before,
     .nav-btn--ki:hover::after {
         animation: ki-eye-breathe-red 3s ease-in-out infinite;
     }
-    
+
     .nav-btn--ki:hover .ki-steam::before {
         animation: ki-steam-rise 3s ease-in-out infinite;
     }
-    
+
     .nav-btn--ki:hover .ki-steam::after {
         animation: ki-steam-rise 3s ease-in-out infinite;
         animation-delay: 1.5s;
     }
-    
-    /* Глаза увеличиваются вместе с картинкой при hover */
+
     .nav-btn--ki:hover::before,
     .nav-btn--ki:hover::after,
     .nav-btn--ki:active::before,
@@ -672,42 +610,76 @@ a.nav-btn:hover {
         transform: scale(1.09);
         transform-origin: center;
     }
-    
+
     .nav-btn--ki:hover .ki-steam {
         transform: scale(1.09);
         transform-origin: center;
     }
 
-    /* === Активная кнопка остаётся "поднятой" на десктопе === */
+    /* Активная кнопка поднята */
     .nav-btn.active,
     .nav-btn--img.active,
     a.nav-btn.active {
         transform: translateY(-2px) !important;
-        box-shadow: 
+        box-shadow:
             0 6px 20px rgba(0, 82, 155, 0.45),
             0 0 0 1px rgba(255, 255, 255, 0.2) inset !important;
     }
-    
+
     .nav-btn.active:hover,
     .nav-btn--img.active:hover,
     a.nav-btn.active:hover {
         transform: translateY(-2px) !important;
     }
-    
+
     .nav-btn--img.active img {
-        transform: scale(1.09); !important;
+        transform: scale(1.09) !important;
     }
-    
-    /* === Видео-кнопки на ПК: статичная картинка как у других иконок === */
-    .nav-btn--video .nav-btn-img {
+
+    /* === ПК: видео скрыто, картинка по умолчанию === */
+    .nav-btn--media .nav-btn-video {
+        display: none !important;
+    }
+
+    .nav-btn--media .nav-btn-img {
         display: block;
     }
-    
-    .nav-btn--video .nav-btn-video {
+
+    .nav-btn--media .nav-btn-anim {
         display: none;
     }
 
+    /* Когда играет WebP-анимация */
+    .nav-btn--media.is-animating .nav-btn-img {
+        display: none;
+    }
+
+    .nav-btn--media.is-animating .nav-btn-anim {
+        display: block;
+    }
 }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .nav-btn--ki.active::before,
+    .nav-btn--ki.active::after {
+        animation: none;
+        opacity: 0.85;
+    }
+    .nav-btn--ki.active .ki-steam::before,
+    .nav-btn--ki.active .ki-steam::after {
+        animation: none;
+        opacity: 0;
+    }
+    .nav-btn--media .nav-btn-video,
+    .nav-btn--media .nav-btn-anim {
+        display: none !important;
+    }
+    .nav-btn--media .nav-btn-img {
+        display: block !important;
+    }
+}
+
 @media (min-width: 768px) {
     .nav-rows-wrapper {
         display: flex;

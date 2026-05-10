@@ -73,6 +73,10 @@ scroll-hint {
   background: transparent;
 }
 
+/* Poster должен показываться пока видео грузится */
+.nav-btn--media video[poster] {
+}
+
 /* Скрыть значок play на iOS Safari для всех видео-кнопок */
 .nav-btn--media .nav-btn-video::-webkit-media-controls,
 .nav-btn--media .nav-btn-video::-webkit-media-controls-start-playback-button,

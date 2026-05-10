@@ -663,68 +663,78 @@ a.nav-btn:hover {
         display: none !important;
     }
     
-    /* ==================== NAV-BTN MEDIA ==================== */
-
+    /* ===================== ОСНОВА ===================== */
 .nav-btn--media {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
-/* Все три слоя лежат точно друг на друге */
+/* Оба изображения — абсолютно одинаково позиционированы */
 .nav-btn-img,
-.nav-btn-video,
 .nav-btn-anim {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
+
+    width: 118%;           /* подбери значение под свой дизайн */
+    height: 118%;
     object-fit: contain;
     pointer-events: none;
 }
 
-/* Статичная картинка — по умолчанию видна */
+/* Статичная картинка — по умолчанию */
 .nav-btn-img {
     z-index: 3;
     opacity: 1;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease;
 }
 
-/* WebP анимация — под картинкой */
+/* Анимированный WebP */
 .nav-btn-anim {
     z-index: 2;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease;
+    
+    /* Важно для перезапуска анимации через JS */
+    display: block;
 }
 
-/* Видео — самый нижний слой */
+/* Скрываем видео на ПК (как у тебя было) */
 .nav-btn-video {
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    display: none !important;
 }
 
-/* ====================== СОСТОЯНИЯ ====================== */
+/* ===================== ГЛАВНАЯ МАГИЯ ===================== */
 
-/* Когда запускаем анимацию */
 .nav-btn--media.is-animating .nav-btn-img {
     opacity: 0;
 }
 
-.nav-btn--media.is-animating .nav-btn-anim,
-.nav-btn--media.is-animating .nav-btn-video {
+.nav-btn--media.is-animating .nav-btn-anim {
     opacity: 1;
 }
 
-/* Дополнительный класс для точного контроля */
+/* Дополнительная страховка */
 .nav-btn--media.is-playing .nav-btn-img {
     opacity: 0;
 }
 
-.nav-btn--media.is-playing .nav-btn-anim,
-.nav-btn--media.is-playing .nav-btn-video {
+.nav-btn--media.is-playing .nav-btn-anim {
     opacity: 1;
+}
+
+/* Ускоряет появление WebP */
+.nav-btn-anim {
+    will-change: opacity;
+}
+
+/* Чтобы при перезапуске анимации WebP начинался с первого кадра чище */
+.nav-btn--media.is-animating .nav-btn-anim {
+    animation: none; /* на случай если где-то есть анимация */
 }
 }
 

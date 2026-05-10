@@ -68,89 +68,133 @@
     <div class="nav-rows-wrapper">
 
       <div class="nav-row">
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--startseite active" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="img/buttons/startseite.png" alt="Startseite">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/startseite-video1.mp4" type="video/mp4">
-    </video>
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--startseite active" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/startseite.webp" alt="Startseite">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/startseite-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/startseite-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--pdf" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="img/buttons/pdf.png" alt="PDF für Mail">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/pdf-video1.mp4" type="video/mp4">
-    </video>
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--pdf" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/pdf.webp" alt="PDF für Mail">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/pdf-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/pdf-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--ki" onclick="showTab('docs', event)">
-    <img src="img/buttons/ki.png" alt="KI">
-    <span class="ki-steam" aria-hidden="true"></span>
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--ki" onclick="showTab('docs', event)">
+          <img src="img/buttons/ki.webp" alt="KI">
+          <span class="ki-steam" aria-hidden="true"></span>
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('health', event)">
-    <img src="img/buttons/arzten.png" alt="Ärzten">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--arzten" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/arzten.webp" alt="Ärzten">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/arzten-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/arzten-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('auto', event)">
-    <img src="img/buttons/auto.png" alt="Auto">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--auto" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/auto.webp" alt="Auto">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/auto-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/auto-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('maps', event)">
-    <img src="img/buttons/karten.png" alt="Karten">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--maps" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/karten.webp" alt="Karten">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/karten-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/karten-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('translate', event)">
-    <img src="img/buttons/ubersetzer.png" alt="Übersetzer">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--translate" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/ubersetzer.webp" alt="Übersetzer">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/translate-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/translate-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('contacts', event)">
-    <img src="img/buttons/kontakt.png" alt="Kontakt">
-  </button>
-</div>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--kontakt" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/kontakt.webp" alt="Kontakt">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/kontakt-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/kontakt-video1.webp" loading="lazy">
+        </button>
+      </div>
 
-<div class="nav-row">
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--hattingen" onclick="playVideoButton(event)">
-  <img class="nav-btn-img" src="img/buttons/hattingen.png" alt="Hattingen">
-  <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-    <source src="/videos/hattingen-video1.mp4" type="video/mp4">
-  </video>
-</button>
+      <div class="nav-row">
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--hattingen" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/hattingen.webp" alt="Hattingen">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/hattingen-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/hattingen-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--nachrichten" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="img/buttons/nachrichten.png" alt="Nachrichten">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/nachrichten-video1.mp4" type="video/mp4">
-    </video>
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--nachrichten" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/nachrichten.webp" alt="Nachrichten">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/nachrichten-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/nachrichten-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('jobs', event)">
-    <img src="img/buttons/arbeit.png" alt="Arbeit">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--arbeit" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/arbeit.webp" alt="Arbeit">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/arbeit-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/arbeit-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img nav-btn--video nav-btn--meinung" onclick="playVideoButton(event)">
-    <img class="nav-btn-img" src="img/buttons/meinung.png" alt="Meinung">
-    <video class="nav-btn-video" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
-      <source src="/videos/meinung-video1.mp4" type="video/mp4">
-    </video>
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--meinung" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/meinung.webp" alt="Meinung">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/meinung-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/meinung-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('housing', event)">
-    <img src="img/buttons/miete.png" alt="Miete">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--housing" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/miete.webp" alt="Miete">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/miete-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/miete-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('laws', event)">
-    <img src="img/buttons/gesetze.png" alt="Gesetze">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--laws" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/gesetze.webp" alt="Gesetze">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/gesetze-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/gesetze-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('mobile', event)">
-    <img src="img/buttons/db.png" alt="DB">
-  </button>
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--db" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/db.webp" alt="DB">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/db-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/db-video1.webp" loading="lazy">
+        </button>
 
-  <button class="nav-btn nav-btn--img" onclick="showTab('project', event)">
-    <img src="img/buttons/projekt.png" alt="Projekt Info">
-  </button>
-</div>
-
+        <button class="nav-btn nav-btn--img nav-btn--media nav-btn--projekt" onclick="playMediaButton(event)">
+          <img class="nav-btn-img" src="img/buttons/projekt.webp" alt="Projekt Info">
+          <video class="nav-btn-video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny" controlslist="nodownload nofullscreen noremoteplayback">
+            <source data-src="/videos/projekt-video1.mp4" type="video/mp4">
+          </video>
+          <img class="nav-btn-anim" alt="" data-src="/videos/projekt-video1.webp" loading="lazy">
+        </button>
+      </div>
     </div>
   </div>
 </nav>

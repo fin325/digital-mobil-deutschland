@@ -252,7 +252,9 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     }, true);
 })();
 
-// ====================== МЕДИА-КНОПКИ НАВБАРА ======================
+// ============================================
+// УНИВЕРСАЛЬНАЯ СИСТЕМА ВИДЕО-КНОПОК НАВБАРА
+// ============================================
 
 const VIDEO_BUTTONS = {
   'nav-btn--startseite':  { tabId: 'home'          },
@@ -272,161 +274,137 @@ const VIDEO_BUTTONS = {
   'nav-btn--projekt':     { tabId: 'project'        },
 };
 
-// ==================== НОВЫЕ ФУНКЦИИ ====================
+// ====================== АВТОЗАПУСК АКТИВНОЙ КНОПКИ ======================
 
-// Автозапуск видео для активной кнопки (при первой загрузке и при возврате)
-function autoPlayActiveMedia() {
+function autoPlayActiveButton() {
   const activeBtn = document.querySelector('.nav-btn.active.nav-btn--media');
   if (!activeBtn) return;
 
   const video = activeBtn.querySelector('.nav-btn-video');
-  if (!video || video._isPlaying) return;
+  if (!video) return;
+
+  // Сбрасываем другие кнопки
+  resetAllOtherVideos(activeBtn);
 
   video._isPlaying = true;
   video._hasPlayed = true;
   video.currentTime = 0;
 
-  const startPlay = () => {
+  const playVideo = () => {
     activeBtn.classList.add('is-playing');
     video.play().catch(err => {
-      console.warn('Auto play failed:', err);
+      console.warn('Autoplay failed:', err);
       activeBtn.classList.remove('is-playing');
-      video._isPlaying = false;
     });
   };
 
-  if (video.readyState >= 3) {
-    startPlay();
+  if (video.readyState >= 2) {
+    playVideo();
   } else {
-    video.addEventListener('canplay', startPlay, { once: true });
+    video.addEventListener('loadeddata', playVideo, { once: true });
+    video.addEventListener('canplay', playVideo, { once: true });
     
     // Страховка
-    setTimeout(() => {
-      if (!activeBtn.classList.contains('is-playing')) startPlay();
-    }, 700);
+    setTimeout(playVideo, 600);
   }
 }
 
-// Сброс медиа одной кнопки
-function resetMediaButton(button) {
-  const video = button.querySelector('.nav-btn-video');
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
-    video._isPlaying = false;
-    video._hasPlayed = false;
-  }
-  button.classList.remove('is-playing');
+// Сброс всех остальных видео
+function resetAllOtherVideos(exceptBtn) {
+  Object.keys(VIDEO_BUTTONS).forEach(cls => {
+    const btn = document.querySelector('.' + cls);
+    if (!btn || btn === exceptBtn) return;
 
-  const anim = button.querySelector('.nav-btn-anim');
-  if (anim) {
-    anim.removeAttribute('src');
-  }
-  button.classList.remove('is-animating');
-}
-
-// Сброс всех кнопок кроме указанной
-function resetAllMediaExcept(exceptButton) {
-  Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
-    const button = document.querySelector('.' + buttonClass);
-    if (button && button !== exceptButton) {
-      resetMediaButton(button);
+    const v = btn.querySelector('.nav-btn-video');
+    if (v) {
+      v.pause();
+      v.currentTime = 0;
+      v._isPlaying = false;
+      v._hasPlayed = false;
     }
+    btn.classList.remove('is-playing');
   });
 }
 
-// ==================== ОСНОВНАЯ ФУНКЦИЯ КЛИКА ====================
+// ====================== ОСНОВНАЯ ФУНКЦИЯ КЛИКА ======================
 
-window.playMediaButton = function(event) {
+window.playVideoButton = function(event) {   // ← можешь оставить playMediaButton, если хочешь
   const button = event.currentTarget;
 
   let config = null;
-  let buttonClass = null;
   for (const cls in VIDEO_BUTTONS) {
     if (button.classList.contains(cls)) {
       config = VIDEO_BUTTONS[cls];
-      buttonClass = cls;
       break;
     }
   }
   if (!config) return;
 
+  const video = button.querySelector('.nav-btn-video');
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  resetAllMediaExcept(button);
+  if (!isDesktop && video) {
+    resetAllOtherVideos(button);
 
-  if (isDesktop) {
-    // === ПК: WebP анимация ===
-    const anim = button.querySelector('.nav-btn-anim');
-    if (anim && !button.classList.contains('is-animating')) {
-      const realSrc = anim.dataset.src;
-      if (realSrc) {
-        button.classList.add('is-animating');
-        anim.removeAttribute('src');
-        requestAnimationFrame(() => {
-          anim.src = realSrc;
-        });
-      }
-    }
-  } else {
-    // === Мобильные: MP4 ===
-    const v = button.querySelector('.nav-btn-video');
-    if (v && !v._isPlaying) {
-      v._isPlaying = true;
-      v._hasPlayed = true;
-      v.currentTime = 0;
+    video._isPlaying = true;
+    video._hasPlayed = true;
+    video.currentTime = 0;
 
-      const startPlay = () => {
-        button.classList.add('is-playing');
-        v.play().catch(err => {
-          console.warn(buttonClass + ' play failed:', err);
-          v._isPlaying = false;
-          button.classList.remove('is-playing');
-        });
-      };
+    button.classList.add('is-playing');
 
-      if (v.readyState >= 3) {
-        startPlay();
-      } else {
-        v.addEventListener('canplay', startPlay, { once: true });
-        setTimeout(() => {
-          if (!button.classList.contains('is-playing')) startPlay();
-        }, 800);
-      }
+    const playPromise = video.play();
+    if (playPromise) {
+      playPromise.catch(err => {
+        console.warn('Play failed:', err);
+        button.classList.remove('is-playing');
+      });
     }
   }
 
+  // Переключаем таб
   if (typeof showTab === 'function') {
     showTab(config.tabId, event);
   }
 };
 
 // ====================== ИНИЦИАЛИЗАЦИЯ ======================
+
 (function() {
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (isDesktop) return; // на ПК видео не используем
 
   Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
     const button = document.querySelector('.' + buttonClass);
     if (!button) return;
 
-    if (!isDesktop) {
-      const video = button.querySelector('.nav-btn-video');
-      if (!video) return;
+    const video = button.querySelector('.nav-btn-video');
+    if (!video) return;
 
-      video._isPlaying = false;
-      video._hasPlayed = false;
-      video._buttonClass = buttonClass;
+    video._isPlaying = false;
+    video._hasPlayed = false;
 
-      video.addEventListener('ended', function() {
-        video._isPlaying = false;
-        // Оставляем .is-playing — видео должно остаться на последнем кадре
-      });
+    // Предзагрузка первого кадра
+    function preloadFirstFrame() {
+      if (video.readyState >= 2) {
+        video.currentTime = 0.05;
+      }
     }
+
+    video.load();
+    preloadFirstFrame();
+    setTimeout(preloadFirstFrame, 400);
+    setTimeout(preloadFirstFrame, 1200);
+
+    video.addEventListener('ended', () => {
+      video._isPlaying = false;
+      // .is-playing оставляем — видео остаётся на последнем кадре
+    });
   });
 })();
 
-// ====================== ОБНОВЛЁННЫЕ ФУНКЦИИ ТАБОВ ======================
+// ====================== ИНТЕГРАЦИЯ С ТАБАМИ ======================
 
+// Обновляем showTabSilent
 function showTabSilent(tabId) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -434,69 +412,35 @@ function showTabSilent(tabId) {
   const targetTab = document.getElementById(tabId);
   if (targetTab) targetTab.classList.add('active');
 
-  // Находим кнопку по tabId
-  let btn = null;
+  // Находим кнопку
+  let activeButton = null;
   Object.keys(VIDEO_BUTTONS).forEach(cls => {
     if (VIDEO_BUTTONS[cls].tabId === tabId) {
-      btn = document.querySelector('.' + cls);
+      activeButton = document.querySelector('.' + cls);
     }
   });
 
-  if (btn) {
-    btn.classList.add('active');
+  if (activeButton) {
+    activeButton.classList.add('active');
     
-    // Автозапуск видео при возврате через историю
-    if (btn.classList.contains('nav-btn--media') && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      setTimeout(() => {
-        resetAllMediaExcept(btn);
-        autoPlayActiveMedia();
-      }, 80);
-    }
+    // Автозапуск видео при возврате
+    setTimeout(() => {
+      autoPlayActiveButton();
+    }, 100);
   }
 }
 
-// ====================== DOMContentLoaded ======================
-
+// В DOMContentLoaded добавляем автозапуск
 window.addEventListener('DOMContentLoaded', () => {
+  // ... твой существующий код ...
+
   const hash = window.location.hash.replace('#', '');
   if (hash) showTabSilent(hash);
 
-  const scrollAllToTop = () => {
-    document.documentElement.scrollTo(0, 0);
-    document.body.scrollTo(0, 0);
-    document.querySelector('main.container')?.scrollTo(0, 0);
-    window.scrollTo(0, 0);
-  };
-
-  scrollAllToTop();
-  requestAnimationFrame(scrollAllToTop);
-  setTimeout(scrollAllToTop, 0);
-  setTimeout(scrollAllToTop, 100);
-  setTimeout(scrollAllToTop, 300);
+  // ... остальной твой код scrollAllToTop и т.д. ...
 
   window.addEventListener('load', () => {
-    scrollAllToTop();
-    setTimeout(scrollAllToTop, 50);
-
-    // Автозапуск активной кнопки после полной загрузки страницы
-    setTimeout(autoPlayActiveMedia, 120);
-
-    // Фоновая предзагрузка остальных видео (только мобильные)
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      setTimeout(() => {
-        document.querySelectorAll('.nav-btn-video').forEach(video => {
-          if (video.preload !== 'auto') {
-            video.preload = 'auto';
-            video.load();
-          }
-        });
-      }, 800);
-    }
+    // Автозапуск активной кнопки после полной загрузки
+    setTimeout(autoPlayActiveButton, 150);
   });
-
-  const viewport = document.querySelector('.nav-scroll-viewport');
-  if (viewport) {
-    viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });
-    viewport.addEventListener('touchstart', hideSwipeHint, { passive: true, once: true });
-  }
 });

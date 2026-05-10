@@ -252,18 +252,7 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
     }, true);
 })();
 
-// ============================================
-// МЕДИА-КНОПКИ НАВБАРА
-// Мобильные: MP4 (.nav-btn-video)
-//   - preload="metadata" в HTML (быстрый старт страницы)
-//   - после load() все видео догружаются в фоне через 1 сек
-//   - при клике видео уже готово → мгновенное переключение без пустоты
-//   - играет один раз, замирает на последнем кадре до смены кнопки
-// ПК: анимированный WebP (.nav-btn-anim, loop=1)
-//   - грузится только по клику через data-src
-//   - играет один раз, замирает на последнем кадре
-// При клике на другую кнопку — сброс к статичной WebP-картинке
-// ============================================
+// ====================== МЕДИА-КНОПКИ НАВБАРА ======================
 
 const VIDEO_BUTTONS = {
   'nav-btn--startseite':  { tabId: 'home'          },
@@ -283,7 +272,42 @@ const VIDEO_BUTTONS = {
   'nav-btn--projekt':     { tabId: 'project'        },
 };
 
-// Сброс медиа одной кнопки — возврат к статичной WebP
+// ==================== НОВЫЕ ФУНКЦИИ ====================
+
+// Автозапуск видео для активной кнопки (при первой загрузке и при возврате)
+function autoPlayActiveMedia() {
+  const activeBtn = document.querySelector('.nav-btn.active.nav-btn--media');
+  if (!activeBtn) return;
+
+  const video = activeBtn.querySelector('.nav-btn-video');
+  if (!video || video._isPlaying) return;
+
+  video._isPlaying = true;
+  video._hasPlayed = true;
+  video.currentTime = 0;
+
+  const startPlay = () => {
+    activeBtn.classList.add('is-playing');
+    video.play().catch(err => {
+      console.warn('Auto play failed:', err);
+      activeBtn.classList.remove('is-playing');
+      video._isPlaying = false;
+    });
+  };
+
+  if (video.readyState >= 3) {
+    startPlay();
+  } else {
+    video.addEventListener('canplay', startPlay, { once: true });
+    
+    // Страховка
+    setTimeout(() => {
+      if (!activeBtn.classList.contains('is-playing')) startPlay();
+    }, 700);
+  }
+}
+
+// Сброс медиа одной кнопки
 function resetMediaButton(button) {
   const video = button.querySelector('.nav-btn-video');
   if (video) {
@@ -311,7 +335,8 @@ function resetAllMediaExcept(exceptButton) {
   });
 }
 
-// Универсальный обработчик клика по медиа-кнопке
+// ==================== ОСНОВНАЯ ФУНКЦИЯ КЛИКА ====================
+
 window.playMediaButton = function(event) {
   const button = event.currentTarget;
 
@@ -331,7 +356,7 @@ window.playMediaButton = function(event) {
   resetAllMediaExcept(button);
 
   if (isDesktop) {
-    // === ПК: запускаем анимированный WebP ===
+    // === ПК: WebP анимация ===
     const anim = button.querySelector('.nav-btn-anim');
     if (anim && !button.classList.contains('is-animating')) {
       const realSrc = anim.dataset.src;
@@ -344,7 +369,7 @@ window.playMediaButton = function(event) {
       }
     }
   } else {
-    // === Мобильные: запускаем MP4 ===
+    // === Мобильные: MP4 ===
     const v = button.querySelector('.nav-btn-video');
     if (v && !v._isPlaying) {
       v._isPlaying = true;
@@ -361,12 +386,9 @@ window.playMediaButton = function(event) {
       };
 
       if (v.readyState >= 3) {
-        // Видео уже загружено (фоновая загрузка или SW-кэш) — мгновенно
         startPlay();
       } else {
-        // Ещё не загружено — картинка держится, ждём готовности
         v.addEventListener('canplay', startPlay, { once: true });
-        // Страховка 800мс
         setTimeout(() => {
           if (!button.classList.contains('is-playing')) startPlay();
         }, 800);
@@ -395,12 +417,86 @@ window.playMediaButton = function(event) {
       video._hasPlayed = false;
       video._buttonClass = buttonClass;
 
-      // Видео доиграло — флаг сбрасываем, is-playing НЕ снимаем
-      // (замирает на последнем кадре до клика на другую кнопку)
       video.addEventListener('ended', function() {
         video._isPlaying = false;
+        // Оставляем .is-playing — видео должно остаться на последнем кадре
       });
     }
-    // На ПК ничего не инициализируем — WebP грузится только по клику
   });
 })();
+
+// ====================== ОБНОВЛЁННЫЕ ФУНКЦИИ ТАБОВ ======================
+
+function showTabSilent(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+  const targetTab = document.getElementById(tabId);
+  if (targetTab) targetTab.classList.add('active');
+
+  // Находим кнопку по tabId
+  let btn = null;
+  Object.keys(VIDEO_BUTTONS).forEach(cls => {
+    if (VIDEO_BUTTONS[cls].tabId === tabId) {
+      btn = document.querySelector('.' + cls);
+    }
+  });
+
+  if (btn) {
+    btn.classList.add('active');
+    
+    // Автозапуск видео при возврате через историю
+    if (btn.classList.contains('nav-btn--media') && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      setTimeout(() => {
+        resetAllMediaExcept(btn);
+        autoPlayActiveMedia();
+      }, 80);
+    }
+  }
+}
+
+// ====================== DOMContentLoaded ======================
+
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) showTabSilent(hash);
+
+  const scrollAllToTop = () => {
+    document.documentElement.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
+    document.querySelector('main.container')?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  };
+
+  scrollAllToTop();
+  requestAnimationFrame(scrollAllToTop);
+  setTimeout(scrollAllToTop, 0);
+  setTimeout(scrollAllToTop, 100);
+  setTimeout(scrollAllToTop, 300);
+
+  window.addEventListener('load', () => {
+    scrollAllToTop();
+    setTimeout(scrollAllToTop, 50);
+
+    // Автозапуск активной кнопки после полной загрузки страницы
+    setTimeout(autoPlayActiveMedia, 120);
+
+    // Фоновая предзагрузка остальных видео (только мобильные)
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      setTimeout(() => {
+        document.querySelectorAll('.nav-btn-video').forEach(video => {
+          if (video.preload !== 'auto') {
+            video.preload = 'auto';
+            video.load();
+          }
+        });
+      }, 800);
+    }
+  });
+
+  const viewport = document.querySelector('.nav-scroll-viewport');
+  if (viewport) {
+    viewport.addEventListener('scroll', hideSwipeHint, { passive: true, once: true });
+    viewport.addEventListener('touchstart', hideSwipeHint, { passive: true, once: true });
+  }
+});

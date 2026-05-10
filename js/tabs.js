@@ -245,29 +245,29 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
 // ПК:        анимированный WebP (.nav-btn-anim, loop=1) —
 //            играет один раз, замирает на последнем кадре
 // При клике на другую кнопку — сброс к статичной WebP-картинке
+// Пустота при загрузке исключена: картинка держится до canplay
 // ============================================
 
 const VIDEO_BUTTONS = {
-  'nav-btn--startseite':  { tabId: 'home'         },
-  'nav-btn--pdf':         { tabId: 'pdf'           },
-  'nav-btn--arzten':      { tabId: 'health'        },
-  'nav-btn--auto':        { tabId: 'auto'          },
-  'nav-btn--maps':        { tabId: 'maps'          },
-  'nav-btn--translate':   { tabId: 'translate'     },
-  'nav-btn--kontakt':     { tabId: 'contacts'      },
-  'nav-btn--hattingen':   { tabId: 'news-hattingen'},
-  'nav-btn--nachrichten': { tabId: 'news'          },
-  'nav-btn--arbeit':      { tabId: 'jobs'          },
-  'nav-btn--meinung':     { tabId: 'meinung'       },
-  'nav-btn--housing':     { tabId: 'housing'       },
-  'nav-btn--laws':        { tabId: 'laws'          },
-  'nav-btn--db':          { tabId: 'mobile'        },
-  'nav-btn--projekt':     { tabId: 'project'       },
+  'nav-btn--startseite':  { tabId: 'home'          },
+  'nav-btn--pdf':         { tabId: 'pdf'            },
+  'nav-btn--arzten':      { tabId: 'health'         },
+  'nav-btn--auto':        { tabId: 'auto'           },
+  'nav-btn--maps':        { tabId: 'maps'           },
+  'nav-btn--translate':   { tabId: 'translate'      },
+  'nav-btn--kontakt':     { tabId: 'contacts'       },
+  'nav-btn--hattingen':   { tabId: 'news-hattingen' },
+  'nav-btn--nachrichten': { tabId: 'news'           },
+  'nav-btn--arbeit':      { tabId: 'jobs'           },
+  'nav-btn--meinung':     { tabId: 'meinung'        },
+  'nav-btn--housing':     { tabId: 'housing'        },
+  'nav-btn--laws':        { tabId: 'laws'           },
+  'nav-btn--db':          { tabId: 'mobile'         },
+  'nav-btn--projekt':     { tabId: 'project'        },
 };
 
 // Сброс медиа одной кнопки — возврат к статичной WebP
 function resetMediaButton(button) {
-  // Сброс MP4 (мобильные)
   const video = button.querySelector('.nav-btn-video');
   if (video) {
     video.pause();
@@ -277,7 +277,6 @@ function resetMediaButton(button) {
   }
   button.classList.remove('is-playing');
 
-  // Сброс WebP-анимации (ПК)
   const anim = button.querySelector('.nav-btn-anim');
   if (anim) {
     anim.removeAttribute('src');
@@ -299,7 +298,6 @@ function resetAllMediaExcept(exceptButton) {
 window.playMediaButton = function(event) {
   const button = event.currentTarget;
 
-  // Ищем конфиг
   let config = null;
   let buttonClass = null;
   for (const cls in VIDEO_BUTTONS) {
@@ -323,7 +321,6 @@ window.playMediaButton = function(event) {
       const realSrc = anim.dataset.src;
       if (realSrc) {
         button.classList.add('is-animating');
-        // Сброс src + rAF гарантирует перезапуск анимации с начала
         anim.removeAttribute('src');
         requestAnimationFrame(() => {
           anim.src = realSrc;
@@ -347,17 +344,34 @@ window.playMediaButton = function(event) {
       v._isPlaying = true;
       v._hasPlayed = true;
       v.currentTime = 0;
-      button.classList.add('is-playing');
 
-      v.play().catch(err => {
-        console.warn(buttonClass + ' play failed:', err);
-        v._isPlaying = false;
-        button.classList.remove('is-playing');
-      });
+      // Картинка держится пока видео не готово показывать кадры.
+      // is-playing добавляем только в startPlay — тогда CSS скроет картинку
+      const startPlay = () => {
+        button.classList.add('is-playing');
+        v.play().catch(err => {
+          console.warn(buttonClass + ' play failed:', err);
+          v._isPlaying = false;
+          button.classList.remove('is-playing');
+        });
+      };
+
+      if (v.readyState >= 3) {
+        // Видео уже в кэше SW — запускаем мгновенно без пустоты
+        startPlay();
+      } else {
+        // Первый клик — ждём canplay, картинка держится всё это время
+        v.addEventListener('canplay', startPlay, { once: true });
+        // Страховка: если canplay не пришёл за 800мс — запускаем всё равно
+        setTimeout(() => {
+          if (!button.classList.contains('is-playing')) {
+            startPlay();
+          }
+        }, 800);
+      }
     }
   }
 
-  // Переключаем таб
   if (typeof showTab === 'function') {
     showTab(config.tabId, event);
   }
@@ -372,7 +386,6 @@ window.playMediaButton = function(event) {
     if (!button) return;
 
     if (!isDesktop) {
-      // Мобильные: инициализируем видео
       const video = button.querySelector('.nav-btn-video');
       if (!video) return;
 
@@ -380,7 +393,7 @@ window.playMediaButton = function(event) {
       video._hasPlayed = false;
       video._buttonClass = buttonClass;
 
-      // Видео доиграло — флаг сбрасываем, но is-playing НЕ снимаем
+      // Видео доиграло — флаг сбрасываем, is-playing НЕ снимаем
       // (остаётся на последнем кадре до клика на другую кнопку)
       video.addEventListener('ended', function() {
         video._isPlaying = false;

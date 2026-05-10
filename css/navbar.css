@@ -60,17 +60,14 @@ scroll-hint {
   background: transparent;
 }
 
-/* Анимированный WebP — позиционирование как у видео */
+/* Анимированный WebP — точно как статичная картинка */
 .nav-btn--media .nav-btn-anim {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 120%;
   height: 120%;
-  object-fit: cover;
+  object-fit: contain;
   pointer-events: none;
   background: transparent;
+  /* Никакого position: absolute — flex сам центрирует */
 }
 
 /* Скрыть значок play на iOS Safari для всех видео-кнопок */
@@ -676,12 +673,12 @@ a.nav-btn:hover {
     
     /* Когда играет анимация WebP — скрываем картинку, показываем анимацию */
     .nav-btn--media.is-animating .nav-btn-img {
-        display: none;
+    display: none;
     }
-    
+
     .nav-btn--media.is-animating .nav-btn-anim {
-        display: block;
-    }
+    display: flex;
+}
 }
 
 @media (min-width: 768px) {

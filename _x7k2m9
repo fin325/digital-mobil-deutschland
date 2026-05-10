@@ -53,7 +53,7 @@ h2 { margin-top: 0; }
 <script>
 // === Защита паролем ===
 // Хэш пароля. Заменить на свой через генератор ниже (см. инструкцию).
-const PASSWORD_HASH = 'ЗАМЕНИ_МЕНЯ_НА_ХЭШ';
+const PASSWORD_HASH = '3cb32464e700491759fbe6eb1fd79681c288f03667e353d78d07190839d06d17';
 
 // SHA-256 через Web Crypto API
 async function sha256(text) {

@@ -266,8 +266,9 @@ const VIDEO_BUTTONS = {
   'nav-btn--projekt':     { tabId: 'project'        },
 };
 
+// Сброс медиа одной кнопки — возврат к статичной WebP
 function resetMediaButton(button) {
-  // Сброс MP4 (мобильные) — не трогаем
+  // Сброс MP4 (мобильные)
   const video = button.querySelector('.nav-btn-video');
   if (video) {
     video.pause();
@@ -277,20 +278,9 @@ function resetMediaButton(button) {
   }
   button.classList.remove('is-playing');
 
-  // ПК: убираем класс → анимация скрыта (opacity: 0)
+  // ПК: убираем класс — CSS вернёт картинку поверх через opacity
+  // src не трогаем — WebP остаётся в памяти браузера
   button.classList.remove('is-animating');
-
-  const anim = button.querySelector('.nav-btn-anim');
-  if (anim) {
-    const src = anim.getAttribute('src');
-    if (src) {
-      // Убираем src — браузер выгружает WebP из памяти
-      anim.removeAttribute('src');
-      // Сбрасываем флаг готовности чтобы следующий клик
-      // снова ждал load события и анимация стартовала с начала
-      anim._animReady = false;
-    }
-  }
 }
 
 // Сброс всех кнопок кроме указанной
@@ -322,32 +312,25 @@ window.playMediaButton = function(event) {
 
   resetAllMediaExcept(button);
 
-    if (isDesktop) {
+  if (isDesktop) {
+    // === ПК: плавный переход картинка → WebP анимация ===
     const anim = button.querySelector('.nav-btn-anim');
     if (anim && !button.classList.contains('is-animating')) {
 
       const activate = () => {
-        anim._animReady = true;
         button.classList.add('is-animating');
       };
 
-      if (anim._animReady) {
-        // Уже загружена и готова — активируем сразу
+      if (anim.complete && anim.naturalWidth > 0) {
+        // WebP уже загружен и декодирован — активируем сразу
+        // Картинка плавно исчезает через CSS transition (0.2s)
+        // WebP уже готов под ней — пустоты нет
         activate();
-      } else if (anim.getAttribute('src')) {
-        // src есть, но _animReady не установлен —
-        // значит была сброшена, ждём повторной загрузки
-        anim.addEventListener('load', activate, { once: true });
       } else {
-        // src убран при сбросе — вставляем заново
-        const originalSrc = anim.dataset.src || anim._originalSrc;
-        if (originalSrc) {
-          anim.addEventListener('load', activate, { once: true });
-          anim.setAttribute('src', originalSrc);
-        }
+        // WebP ещё грузится — держим картинку до полной загрузки
+        anim.addEventListener('load', activate, { once: true });
       }
     }
-   }
   } else {
     // === Мобильные: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');

@@ -674,7 +674,7 @@ a.nav-btn:hover {
     background: transparent !important;
 }
 
-/* Анимированный WebP — под картинкой, всегда в DOM */
+/* WebP анимация — под картинкой (z-index: 1), скрыта до клика */
 .nav-btn--media .nav-btn-anim {
     position: absolute !important;
     top: 50% !important;
@@ -687,9 +687,11 @@ a.nav-btn:hover {
     z-index: 1;
     display: block;
     opacity: 0;
+    transition: opacity 0.2s ease;
+    will-change: opacity;
 }
 
-/* Статичная картинка — поверх анимации, z-index выше */
+/* Картинка — поверх анимации (z-index: 2), видна по умолчанию */
 .nav-btn--media .nav-btn-img {
     position: relative;
     z-index: 2;
@@ -700,38 +702,16 @@ a.nav-btn:hover {
     transition: opacity 0.2s ease;
 }
 
-/* При включении анимации:
-   картинка плавно исчезает ТОЛЬКО после того как WebP готов (контролируется JS) */
+/* При клике: картинка исчезает, анимация появляется */
 .nav-btn--media.is-animating .nav-btn-img {
     opacity: 0;
-    transition: opacity 0.2s ease;
 }
 
 .nav-btn--media.is-animating .nav-btn-anim {
     opacity: 1;
 }
 
-/* Анимированный WebP */
-.nav-btn--media .nav-btn-anim {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    
-    width: 120% !important;
-    height: 120% !important;
-    object-fit: contain !important;
-    
-    pointer-events: none;
-    z-index: 2;
-    display: block;
-    opacity: 0;
-    transition: opacity 0.22s ease;
-    will-change: opacity;
-}
-
-/* ====================== Hover / Active ====================== */
-
+/* Hover/active — подъём кнопки, transform анимации не трогаем */
 .nav-btn--media:hover,
 .nav-btn--media:active,
 .nav-btn--media.active {
@@ -748,18 +728,6 @@ a.nav-btn:hover {
 .nav-btn--media:active .nav-btn-img,
 .nav-btn--media.active .nav-btn-img {
     transform: none !important;
-}
-
-/* ====================== ВКЛЮЧЕНИЕ АНИМАЦИИ ====================== */
-
-.nav-btn--media.is-animating .nav-btn-img,
-.nav-btn--media.is-playing .nav-btn-img {
-    opacity: 0;
-}
-
-.nav-btn--media.is-animating .nav-btn-anim,
-.nav-btn--media.is-playing .nav-btn-anim {
-    opacity: 1;
 }
 }
 

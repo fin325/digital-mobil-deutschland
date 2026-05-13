@@ -268,7 +268,7 @@ const VIDEO_BUTTONS = {
 
 // Сброс медиа одной кнопки — возврат к статичной WebP
 function resetMediaButton(button) {
-  // Сброс MP4 (мобильные)
+  // Сброс MP4 (мобильные) — не трогаем логику
   const video = button.querySelector('.nav-btn-video');
   if (video) {
     video.pause();
@@ -278,9 +278,21 @@ function resetMediaButton(button) {
   }
   button.classList.remove('is-playing');
 
-  // ПК: убираем класс — CSS вернёт картинку поверх через opacity
-  // src не трогаем — WebP остаётся в памяти браузера
+  // ПК: убираем класс → CSS скрывает анимацию (opacity: 0)
+  // Затем сбрасываем src пока анимация невидима — WebP вернётся на первый кадр
+  // При следующем клике анимация стартует с начала без мигания
   button.classList.remove('is-animating');
+
+  const anim = button.querySelector('.nav-btn-anim');
+  if (anim) {
+    const src = anim.getAttribute('src');
+    if (src) {
+      anim.removeAttribute('src');
+      requestAnimationFrame(() => {
+        anim.setAttribute('src', src);
+      });
+    }
+  }
 }
 
 // Сброс всех кнопок кроме указанной

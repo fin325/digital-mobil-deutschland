@@ -347,6 +347,7 @@ window.playMediaButton = function(event) {
         }
       }
     }
+   }
   } else {
     // === Мобильные: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');

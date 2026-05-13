@@ -663,7 +663,7 @@ a.nav-btn:hover {
         display: none !important;
     }
     
-    /* ============================================== */
+/* ============================================== */
 /*   МЕДИА КНОПКИ ДЛЯ ПК — WebP без пустоты      */
 /* ============================================== */
 
@@ -672,18 +672,43 @@ a.nav-btn:hover {
     overflow: hidden;
     padding: 0;
     background: transparent !important;
-    transition: transform 0.25s ease !important;
 }
 
-/* Статичная картинка */
+/* Анимированный WebP — под картинкой, всегда в DOM */
+.nav-btn--media .nav-btn-anim {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 120% !important;
+    height: 120% !important;
+    object-fit: contain !important;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    opacity: 0;
+}
+
+/* Статичная картинка — поверх анимации, z-index выше */
 .nav-btn--media .nav-btn-img {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.2s ease;
+}
+
+/* При включении анимации:
+   картинка плавно исчезает ТОЛЬКО после того как WebP готов (контролируется JS) */
+.nav-btn--media.is-animating .nav-btn-img {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.nav-btn--media.is-animating .nav-btn-anim {
+    opacity: 1;
 }
 
 /* Анимированный WebP */

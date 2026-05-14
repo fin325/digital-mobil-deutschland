@@ -1,5 +1,15 @@
 /* === COMPONENTS.CSS — Карточки, кнопки, вкладки, iframe, новости, законы === */
 
+.tab-content.active > .card:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+main.container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
 .container {
     padding: 15px 17px;
     max-width: 800px;

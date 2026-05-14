@@ -32,12 +32,23 @@ function showTab(tabId, event) {
 
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
-        targetTab.style.animation = 'none';
-        void targetTab.offsetHeight;
-        targetTab.style.animation = '';
-        targetTab.classList.add('active');
-        window.dispatchEvent(new Event('resize'));
-    }
+    targetTab.style.animation = 'none';
+    void targetTab.offsetHeight;
+    targetTab.style.animation = '';
+    targetTab.classList.add('active');
+    window.dispatchEvent(new Event('resize'));
+
+    requestAnimationFrame(() => {
+        targetTab.querySelectorAll('iframe[data-loaded]').forEach(iframe => {
+            const src = iframe.src;
+            if (src && src.includes('youtube') && !iframe.dataset.refreshed) {
+                iframe.dataset.refreshed = 'true';
+                iframe.src = '';
+                iframe.src = src;
+            }
+        });
+    });
+}
 
     if (event?.currentTarget) event.currentTarget.classList.add('active');
 

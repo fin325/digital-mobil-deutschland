@@ -429,9 +429,6 @@ a.nav-btn:hover {
     margin-bottom: 5px;
     margin-top: 5px;
     height: 26px;
-    isolation: isolate;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
 }
 
 .scroll-hint-text {

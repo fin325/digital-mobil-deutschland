@@ -268,21 +268,19 @@ const VIDEO_BUTTONS = {
 
 // Сброс медиа одной кнопки — возврат к статичной WebP
 function resetMediaButton(button) {
-    // Сброс MP4 (мобильные) — ОСТАВЛЯЕМ ТОЧНО КАК БЫЛО
-    const video = button.querySelector('.nav-btn-video');
-    if (video) {
-        video.pause();
-        video.currentTime = 0;
-        video._isPlaying = false;
-        video._hasPlayed = false;
-    }
-    button.classList.remove('is-playing');
+  // Сброс MP4 (мобильные)
+  const video = button.querySelector('.nav-btn-video');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+    video._isPlaying = false;
+    video._hasPlayed = false;
+  }
+  button.classList.remove('is-playing');
 
-    // ПК: сброс WebP анимации (улучшенный вариант)
-    const anim = button.querySelector('.nav-btn-anim');
-    if (anim) {
-        button.classList.remove('is-animating');
-    }
+  // ПК: убираем класс — CSS вернёт картинку поверх через opacity
+  // src не трогаем — WebP остаётся в памяти браузера
+  button.classList.remove('is-animating');
 }
 
 // Сброс всех кнопок кроме указанной
@@ -297,61 +295,60 @@ function resetAllMediaExcept(exceptButton) {
 
 // Универсальный обработчик клика по медиа-кнопке
 window.playMediaButton = function(event) {
-    const button = event.currentTarget;
+  const button = event.currentTarget;
 
-    let config = null;
-    let buttonClass = null;
-    for (const cls in VIDEO_BUTTONS) {
-        if (button.classList.contains(cls)) {
-            config = VIDEO_BUTTONS[cls];
-            buttonClass = cls;
-            break;
-        }
+  let config = null;
+  let buttonClass = null;
+  for (const cls in VIDEO_BUTTONS) {
+    if (button.classList.contains(cls)) {
+      config = VIDEO_BUTTONS[cls];
+      buttonClass = cls;
+      break;
     }
-    if (!config) return;
+  }
+  if (!config) return;
 
-    const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    resetAllMediaExcept(button);
+  resetAllMediaExcept(button);
 
-    if (isDesktop) {
-        // === ПК: сброс + запуск анимации заново (как при первой загрузке) ===
-        const anim = button.querySelector('.nav-btn-anim');
-        if (anim) {
+  if (isDesktop) {
+    // === ПК: плавный переход картинка → WebP анимация ===
+    const anim = button.querySelector('.nav-btn-anim');
+    if (anim) {
 
-            // Сначала полностью сбрасываем анимацию
-            button.classList.remove('is-animating');
-            void button.offsetWidth; // force reflow
+      const activate = () => {
+        button.classList.remove('is-animating');
+        void button.offsetHeight;
+        button.classList.add('is-animating');
+      };
 
-            // Клонируем WebP — это самый надёжный способ перезапустить анимацию
-            const clone = anim.cloneNode(true);
-            anim.parentNode.replaceChild(clone, anim);
-
-            // Плавно включаем анимацию
-            requestAnimationFrame(() => {
-                button.classList.add('is-animating');
-            });
-        }
-    } else {
-        // === Мобильные: запускаем MP4 ===
-        const v = button.querySelector('.nav-btn-video');
-        if (v && !v._isPlaying) {
-            v._isPlaying = true;
-            v._hasPlayed = true;
-            v.currentTime = 0;
-            button.classList.add('is-playing');
-
-            v.play().catch(err => {
-                console.warn(buttonClass + ' play failed:', err);
-                v._isPlaying = false;
-                button.classList.remove('is-playing');
-            });
-        }
+      if (anim.complete && anim.naturalWidth > 0) {
+        activate();
+      } else {
+        anim.addEventListener('load', activate, { once: true });
+      }
     }
+  } else {
+    // === Мобильные: запускаем MP4 ===
+    const v = button.querySelector('.nav-btn-video');
+    if (v && !v._isPlaying) {
+      v._isPlaying = true;
+      v._hasPlayed = true;
+      v.currentTime = 0;
+      button.classList.add('is-playing');
 
-    if (typeof showTab === 'function') {
-        showTab(config.tabId, event);
+      v.play().catch(err => {
+        console.warn(buttonClass + ' play failed:', err);
+        v._isPlaying = false;
+        button.classList.remove('is-playing');
+      });
     }
+  }
+
+  if (typeof showTab === 'function') {
+    showTab(config.tabId, event);
+  }
 };
 
 // ====================== ИНИЦИАЛИЗАЦИЯ ======================

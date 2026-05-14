@@ -58,9 +58,6 @@ scroll-hint {
   object-fit: cover;
   pointer-events: none;
   background: transparent;
-  contain: paint;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 /* Анимированный WebP — точно как статичная картинка */

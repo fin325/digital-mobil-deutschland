@@ -406,10 +406,6 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    
-    .site-title {
-        top: -45px !important;     /* двигаем весь блок картинки вверх */
-    }
 
     .site-title img {
         opacity: 1;

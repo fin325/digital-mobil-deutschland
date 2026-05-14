@@ -1,11 +1,5 @@
 /* === COMPONENTS.CSS — Карточки, кнопки, вкладки, iframe, новости, законы === */
 
-main.container {
-    margin-top: -3px;
-    padding-top: 3px;
-    padding-bottom: 150px;
-}
-
 .container {
     padding: 15px 17px;
     max-width: 800px;

@@ -37,10 +37,10 @@ function loadVideo(placeholderId, iframeId, videoId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe && !iframe.dataset.loaded) {
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&vq=hd720&hd=1`;
-        iframe.style.display = "block";
-        iframe.dataset.loaded = 'true';
         placeholder.style.display = "none";
+        iframe.style.display = "block";      // сначала показываем
+        iframe.dataset.loaded = 'true';
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;  // потом src
     }
 }
 
@@ -48,10 +48,10 @@ function loadPlaylist(placeholderId, iframeId, listId) {
     const placeholder = document.getElementById(placeholderId);
     const iframe = document.getElementById(iframeId);
     if (placeholder && iframe && !iframe.dataset.loaded) {
-        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&rel=0&vq=hd720&hd=1`;
-        iframe.style.display = "block";
-        iframe.dataset.loaded = 'true';
         placeholder.style.display = "none";
+        iframe.style.display = "block";      // сначала показываем
+        iframe.dataset.loaded = 'true';
+        iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${listId}&rel=0`;
     }
 }
 

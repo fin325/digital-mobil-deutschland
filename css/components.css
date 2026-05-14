@@ -5,7 +5,6 @@
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-    z-index: 1;
 }
 
 .card--pdf {
@@ -61,7 +60,6 @@
     margin-bottom: 7px;
     animation: fadeInUp 0.8s ease-out forwards;
     position: relative;
-    z-index: 1;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     hyphens: none;
     -webkit-hyphens: none;

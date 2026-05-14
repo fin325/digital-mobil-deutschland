@@ -6,6 +6,9 @@ app-header {
 
 scroll-hint {
     display: block;
+    height: 36px;
+    min-height: 36px;
+    overflow: hidden;
 }
 
 /* ============================================== */
@@ -434,7 +437,8 @@ a.nav-btn:hover {
     padding: 0 15px;
     margin-bottom: 5px;
     margin-top: 5px;
-    height: 26px;
+    height: 36px;
+    min-height: 36px;
 }
 
 .scroll-hint-text {

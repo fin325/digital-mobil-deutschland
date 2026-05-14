@@ -318,8 +318,11 @@ window.playMediaButton = function(event) {
     if (anim) {
 
       const activate = () => {
+        const src = anim.src;
+        anim.src = '';
         button.classList.remove('is-animating');
         void button.offsetHeight;
+        anim.src = src;
         button.classList.add('is-animating');
       };
 

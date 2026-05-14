@@ -92,7 +92,6 @@ scroll-hint {
     border-bottom: 1px solid rgba(255, 255, 255, 0.22);
     padding: 2px 0 2px 0;
     z-index: 9997;
-    top: 120px;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
 }
@@ -119,6 +118,7 @@ scroll-hint {
     gap: 7px;
     padding-top: 2px;
     min-width: 100%;
+    contain: layout size;
 }
 
 /* 3. СТИЛИ ДЛЯ РЯДОВ */

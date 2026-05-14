@@ -1,3 +1,7 @@
+if (/Android/i.test(navigator.userAgent)) {
+  document.body.classList.add('is-android');
+}
+
 // Отключаем авто-восстановление позиции скролла браузером
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';

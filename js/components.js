@@ -201,6 +201,14 @@ class ScrollHint extends HTMLElement {
         const isRu = document.documentElement.lang === 'ru';
         const hintText = isRu ? 'Свайп меню' : 'Swipe-Menü';
 
+        this.style.display = 'block';
+        this.style.transform = 'translateZ(0)';
+        this.style.webkitTransform = 'translateZ(0)';
+        this.style.willChange = 'transform';
+        this.style.isolation = 'isolate';
+        this.style.position = 'relative';
+        this.style.zIndex = '9996';
+
         this.innerHTML = `
             <div class="scroll-hint-container">
                 <div class="scroll-hint-left">

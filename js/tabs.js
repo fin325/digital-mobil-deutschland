@@ -255,12 +255,8 @@ scrollTopBtn?.addEventListener('touchend', (e) => {
 
 // ============================================
 // МЕДИА-КНОПКИ НАВБАРА
-// Мобильные: MP4 (.nav-btn-video) — preload="auto" в HTML,
-//            играет один раз, замирает на последнем кадре
-// ПК:        анимированный WebP (.nav-btn-anim) — src в HTML,
-//            грузится заранее, картинка держится до load,
-//            плавный переход opacity без пустоты
-// При клике на другую кнопку — сброс к статичной WebP-картинке
+// Мобильные iOS: MP4 (.nav-btn-video)
+// ПК + Android:  анимированный WebP (.nav-btn-anim)
 // ============================================
 
 const VIDEO_BUTTONS = {
@@ -281,9 +277,9 @@ const VIDEO_BUTTONS = {
   'nav-btn--projekt':     { tabId: 'project'        },
 };
 
-// Сброс медиа одной кнопки — возврат к статичной WebP
+// Сброс медиа одной кнопки — возврат к статичной картинке
 function resetMediaButton(button) {
-  // Сброс MP4 (мобильные)
+  // Сброс MP4 (iOS)
   const video = button.querySelector('.nav-btn-video');
   if (video) {
     video.pause();
@@ -293,8 +289,7 @@ function resetMediaButton(button) {
   }
   button.classList.remove('is-playing');
 
-  // ПК: убираем класс — CSS вернёт картинку поверх через opacity
-  // src не трогаем — WebP остаётся в памяти браузера
+  // ПК + Android: убираем класс анимации
   button.classList.remove('is-animating');
 }
 
@@ -324,14 +319,14 @@ window.playMediaButton = function(event) {
   if (!config) return;
 
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isAndroid = document.body.classList.contains('is-android'); // ← добавлено
 
   resetAllMediaExcept(button);
 
-  if (isDesktop) {
-    // === ПК: плавный переход картинка → WebP анимация ===
+  if (isDesktop || isAndroid) { // ← добавлено isAndroid
+    // === ПК + Android: плавный переход картинка → WebP анимация ===
     const anim = button.querySelector('.nav-btn-anim');
     if (anim) {
-
       const activate = () => {
         const src = anim.src;
         anim.src = '';
@@ -348,7 +343,7 @@ window.playMediaButton = function(event) {
       }
     }
   } else {
-    // === Мобильные: запускаем MP4 ===
+    // === iOS: запускаем MP4 ===
     const v = button.querySelector('.nav-btn-video');
     if (v && !v._isPlaying) {
       v._isPlaying = true;
@@ -357,7 +352,6 @@ window.playMediaButton = function(event) {
       button.classList.add('is-playing');
 
       v.play().then(() => {
-        // ← ДОБАВИТЬ СЮДА
         if ('mediaSession' in navigator) {
           navigator.mediaSession.metadata = null;
           navigator.mediaSession.playbackState = 'none';
@@ -378,12 +372,12 @@ window.playMediaButton = function(event) {
 // ====================== ИНИЦИАЛИЗАЦИЯ ======================
 (function() {
   const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isAndroid = document.body.classList.contains('is-android'); // ← добавлено
 
-  // На ПК: WebP грузится через src в HTML автоматически
-  // JS не вмешивается — браузер сам загружает в фоне
-  if (isDesktop) return;
+  // На ПК + Android: WebP грузится через src в HTML автоматически
+  if (isDesktop || isAndroid) return; // ← добавлено isAndroid
 
-  // Мобильные: инициализация MP4
+  // iOS: инициализация MP4
   Object.keys(VIDEO_BUTTONS).forEach(buttonClass => {
     const button = document.querySelector('.' + buttonClass);
     if (!button) return;
@@ -395,7 +389,6 @@ window.playMediaButton = function(event) {
     video._hasPlayed = false;
     video._buttonClass = buttonClass;
 
-    // Показываем первый кадр как превью — как в старом коде
     function showFirstFrame() {
       if (video._hasPlayed) return;
       video.pause();
@@ -409,14 +402,10 @@ window.playMediaButton = function(event) {
       }
     }
 
-    // preload="auto" в HTML — браузер грузит сам
-    // Мы только устанавливаем первый кадр как превью
     showFirstFrame();
     setTimeout(showFirstFrame, 500);
     setTimeout(showFirstFrame, 1500);
 
-    // Видео доиграло — замираем на последнем кадре
-    // is-playing НЕ снимаем до клика на другую кнопку
     video.addEventListener('ended', function() {
       video._isPlaying = false;
     });

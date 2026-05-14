@@ -94,6 +94,7 @@ scroll-hint {
     z-index: 9997;
     box-shadow: 0 4px 24px rgba(0, 20, 60, 0.12);
     overflow: visible;
+    top: 120px;
 }
 
 /* 1. ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ПРОКРУТКИ */

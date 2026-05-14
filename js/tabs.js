@@ -352,7 +352,13 @@ window.playMediaButton = function(event) {
       v.currentTime = 0;
       button.classList.add('is-playing');
 
-      v.play().catch(err => {
+      v.play().then(() => {
+        // ← ДОБАВИТЬ СЮДА
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.metadata = null;
+          navigator.mediaSession.playbackState = 'none';
+        }
+      }).catch(err => {
         console.warn(buttonClass + ' play failed:', err);
         v._isPlaying = false;
         button.classList.remove('is-playing');

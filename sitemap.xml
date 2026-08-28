@@ -2,78 +2,80 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/</loc>
+    <loc>https://dmd-nrw.de/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/</loc>
+    <loc>https://dmd-nrw.de/ru/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/tabs/impressum.html</loc>
+    <loc>https://dmd-nrw.de/tabs/impressum.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/tabs/datenschutz.html</loc>
+    <loc>https://dmd-nrw.de/tabs/datenschutz.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/tabs/jobs.html</loc>
+    <loc>https://dmd-nrw.de/tabs/jobs.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/tabs/magnet.html</loc>
+    <loc>https://dmd-nrw.de/tabs/magnet.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/impressum.html</loc>
+    <loc>https://dmd-nrw.de/ru/impressum.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/datenschutz.html</loc>
+    <loc>https://dmd-nrw.de/ru/datenschutz.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/jobs.html</loc>
+    <loc>https://dmd-nrw.de/ru/jobs.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/magnet.html</loc>
+    <loc>https://dmd-nrw.de/ru/magnet.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/doctors.html</loc>
+    <loc>https://dmd-nrw.de/ru/doctors.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/tabs/barrierefreiheit.html</loc>
+    <loc>https://dmd-nrw.de/tabs/barrierefreiheit.html</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
-    <loc>https://digital-mobil-deutschland.vercel.app/ru/barrierefreiheit.html</loc>
+    <loc>https://dmd-nrw.de/ru/barrierefreiheit.html</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

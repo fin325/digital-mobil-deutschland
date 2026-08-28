@@ -18,3 +18,5 @@ Allow: /
 
 User-agent: Facebot
 Allow: /
+
+Sitemap: https://dmd-nrw.de/sitemap.xml
